@@ -1,0 +1,11 @@
+# IDE & System Related Files #
+.buildpath
+.editorconfig
+.project
+.settings
+.DS_Store
+.idea
+.vscode
+
+node_modules/
+bower_components/
