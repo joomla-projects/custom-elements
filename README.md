@@ -10,7 +10,7 @@ This is a collection of all the components that Joomla is using. They are develo
 
 You can install this package by using NPM:
 ```bash
-$ npm install joomla-custom-elements --save
+$ npm i joomla-ui-custom-elements
 ```
 
 ### Configuration
