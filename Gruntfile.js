@@ -37,14 +37,24 @@ module.exports = function (grunt) {
 			if (grunt.file.exists('dist/js/' + element + '.min.js')) {
 				// Compose the element as .html
 				var tmpOutput = '<element name="' + settings.prefix + '-' + element + '">';
-					tmpJs = grunt.file.read('dist/js/' + element + '.min.js');
-					tmpOutput += '<script>' + tmpJs + '</script>';
-					tmpOutput += '</element>';
+				tmpJs = grunt.file.read('dist/js/' + element + '.min.js');
+				tmpOutput += '<script>' + tmpJs + '</script>';
+				tmpOutput += '</element>';
 
 				// Write the Custom element
 				grunt.file.write('dist/html/' + settings.prefix + '-' + element + '.html', tmpOutput);
 			}
 		});
+	});
+
+	// Patch the loader afterminification
+	grunt.registerTask('minifiedLoaderPatch', 'Create Html version of the elements', function () {
+
+		if (grunt.file.exists('dist/polyfills/wc-loader.min.js')) {
+			var tmpPatch = grunt.file.read('dist/polyfills/wc-loader.min.js');
+			tmpPatch = tmpPatch.replace(/wc-loader.js/g, 'wc-loader.min.js');
+			grunt.file.write('dist/polyfills/wc-loader.min.js', tmpPatch);
+		}
 	});
 
 	grunt.registerTask('default', function () {
@@ -53,7 +63,7 @@ module.exports = function (grunt) {
 		}
 
 		// Compile the css files
-		var compileCss = function(element) {
+		var compileCss = function (element) {
 			grunt.config.set('sass.' + element + '.files', [{
 				src: 'elements/' + element + '/' + element + '.scss',
 				dest: 'dist/css/' + element + '.css'
@@ -86,7 +96,7 @@ module.exports = function (grunt) {
 		};
 
 		// Create the custom element
-		var createElement = function(element, settings) {
+		var createElement = function (element, settings) {
 			var tmpJs = '', tmpJsPlain = '';
 
 			if (grunt.file.exists('elements/' + element + '/' + element + '.js')) {
@@ -186,17 +196,17 @@ module.exports = function (grunt) {
 				grunt.file.write('dist/polyfills/wc-loader.js', polyfill);
 			}
 
-var polyfills = ['webcomponents-hi-ce', 'webcomponents-hi-sd-ce', 'webcomponents-hi', 'webcomponents-lite', 'webcomponents-loader', 'webcomponents-sd-ce'];
+			var polyfills = ['webcomponents-hi-ce', 'webcomponents-hi-sd-ce', 'webcomponents-hi', 'webcomponents-lite', 'webcomponents-loader', 'webcomponents-sd-ce'];
 
-polyfills.forEach(function(polyfill, item) {
-			// Put a copy of webcomponentjs polyfills in the dist folder
-			grunt.config.set('copy.' + item + '.files', [{
-				src: 'node_modules/@webcomponents/webcomponentsjs/' + polyfill + '.js',
-				dest: 'dist/polyfills/' + polyfill + '.js'
-			}]);
+			polyfills.forEach(function (polyfill, item) {
+				// Put a copy of webcomponentjs polyfills in the dist folder
+				grunt.config.set('copy.' + polyfill + '.files', [{
+					src: 'node_modules/@webcomponents/webcomponentsjs/' + polyfill + '.js',
+					dest: 'dist/polyfills/' + polyfill + '.js'
+				}]);
 
-			grunt.task.run('copy:' + item);
-})
+				grunt.task.run('copy:' + polyfill);
+			})
 
 
 			// Uglify the polyfills
@@ -209,6 +219,9 @@ polyfills.forEach(function(polyfill, item) {
 
 			grunt.task.run('uglify:polyfills-js');
 		}
+
+		// Fix the loader script
+		grunt.task.run('minifiedLoaderPatch');
 
 		// Do the clean up
 		grunt.task.run('clearFiles');

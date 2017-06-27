@@ -35,6 +35,9 @@ For each component that you need to have available in your page you need to add 
 Although all the major browsers are **committed** to support custom elements some of the **all green browsers** do need a polyfill. The polyfills can be found in the dist folder and are created by the Polymer team (Polymer is a Google project).
 The repo for the actual polyfill is: https://github.com/webcomponents/webcomponentsjs
 
+### Documentation
+Fully documented [here](https://joomla-projects.github.io/custom-elements/)
+
 ### License
 
 The library is released under the [MIT license](LICENSE)
