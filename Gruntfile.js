@@ -62,6 +62,24 @@ module.exports = function (grunt) {
 			return this.charAt(0).toUpperCase() + this.slice(1);
 		}
 
+		var fs = require('fs');
+		var deleteFolderRecursive = function (path) {
+			if (fs.existsSync(path)) {
+				fs.readdirSync(path).forEach(function (file, index) {
+					var curPath = path + "/" + file;
+					if (fs.lstatSync(curPath).isDirectory()) { // recurse
+						deleteFolderRecursive(curPath);
+					} else { // delete file
+						fs.unlinkSync(curPath);
+					}
+				});
+				fs.rmdirSync(path);
+			}
+		};
+
+		// Clear the polyfills folder
+		deleteFolderRecursive('dist/polyfills');
+
 		// Compile the css files
 		var compileCss = function (element) {
 			grunt.config.set('sass.' + element + '.files', [{

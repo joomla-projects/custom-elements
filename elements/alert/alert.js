@@ -37,7 +37,7 @@ class AlertElement extends HTMLElement {
 		this.removeEventListener('joomla.alert.close', this);
 		this.removeEventListener('joomla.alert.closed', this);
 
-		if (this.firstChild.tagName.toLowerCase() === 'button'){
+		if (this.firstChild.tagName && this.firstChild.tagName.toLowerCase() === 'button'){
 			this.firstChild.removeEventListener('click', this);
 		}
 	}
