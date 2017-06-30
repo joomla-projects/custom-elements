@@ -3,7 +3,7 @@
 It is recommended to install this repo locally so you can customize the css to match your app/theme/template colours. To do so you can use `npm`:
 
 ```bash
-$ npm install joomla-custom-elements --save
+$ npm i joomla-ui-custom-elements
 ```
 
 ## Build
@@ -20,6 +20,11 @@ $ grunt
 ## Using the elements
 
 Due to compatibility issues due to browsers support you need to have a polyfill, so your page will render as expected. The code for this is:
+- A shim so ES5 code can run flawlessly into ES6 Browsers
+```html
+<script src="webcomponents-loader.js"></script>
+```
+- A polyfill so custom elements can be used in older Browsers
 ```html
 <script src="webcomponents-loader.js"></script>
 ```
