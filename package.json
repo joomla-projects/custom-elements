@@ -1,13 +1,13 @@
 {
   "name": "joomla-ui-custom-elements",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "Joomla UI components as custom elements",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/joomla-projects/custom-elements.git"
   },
   "dependencies": {},
-  "license": "MIT",
+  "license": "GPL",
   "bugs": {
     "url": "https://github.com/joomla-projects/custom-elements/issues"
   },

@@ -117,6 +117,7 @@ class AlertElement extends HTMLElement {
 
 		/* Add the required listener */
 		if (this.firstChild && this.firstChild.tagName && this.firstChild.tagName.toLowerCase() === 'button') {
+			this.firstChild.focus();
 			if (!this.href) {
 				this.firstChild.addEventListener('click', function () {
 					self.dispatchCustomEvent('joomla.alert.buttonClicked');

@@ -16,12 +16,20 @@ if (check()) (new Function(es6Shim))();
 /* Load webcomponents async */
 var loadWC = function() {
 	if (Joomla.getOptions && typeof Joomla.getOptions === "function") {
-		var wc = Joomla.getOptions('webcomponents', {});
-		for (var p in wc) {
+		var el, p, wc = Joomla.getOptions('webcomponents', {});
+		for (p in wc) {
 			if (wc.hasOwnProperty(p)) {
-				var el = document.createElement('script');
-				el.src = wc[p];
-				document.head.appendChild(el);
+				if (wc[p].match(/.js/)) {
+					el = document.createElement('script');
+					el.src = wc[p];
+				} else if (wc[p].match(/.html/)) {
+					el = document.createElement('link');
+					el.setAttribute('href', wc[p]);
+					el.setAttribute('rel', 'import');
+				}
+				if (el) {
+					document.head.appendChild(el);
+				}
 			}
 		}
 	}
