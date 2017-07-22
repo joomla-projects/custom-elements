@@ -160,7 +160,8 @@ tempElement1.setAttribute('dismiss', '');
 <button role="button" data-opt1="level" value="success">Make it success</button>
 <button role="button" data-opt1="level" value="warning">Make it warning</button>
 <button role="button" data-opt1="level" value="danger">Make it danger</button>
-<button role="button" data-opt1="button" value="">Add/remove close button</button>
+<button role="button" data-opt1="dismiss" value="true">Add close button</button>
+<button role="button" data-opt1="dismiss" value="false">Remove close button</button>
 </div>
 
 
@@ -184,6 +185,7 @@ tempElement.close();
 <button role="button" id="i-will-close-that-alert">Close the above alert</button>
 </p>
 
+
 <script markdown="0">
 var addNew = function() {
     var tempElement = document.createElement('joomla-alert');
@@ -196,18 +198,7 @@ var addNew = function() {
 
 var changeAlert = function(dataAttr, value) {
     var tempElement = document.getElementById('change-me');
-		switch (dataAttr) {
-			case 'level':
-				tempElement.setAttribute('level', value);
-				break;
-			case 'button':
-					if (tempElement.hasAttribute('dismiss')) {
-						tempElement.removeAttribute('dismiss');
-					} else {
-						tempElement.setAttribute('dismiss', 'true');
-					}
-				break;
-		}
+	tempElement.setAttribute(dataAttr, value);
 }
 var addNewButton = document.getElementById('insertNew'),
     changeButtons = document.querySelectorAll('#replaceble > button');
