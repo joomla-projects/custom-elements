@@ -1,4 +1,8 @@
+
+
 @import "node_modules/bootstrap/scss/variables";
+
+$alert-padding-y: .5rem;
 
 // Alerts
 
@@ -24,7 +28,7 @@ joomla-alert {
   @include border-radius($alert-border-radius);
   display:block;
     // Adjust close link position
-  .close, .button--close{
+  .joomla-alert--close, .joomla-alert-button--close{
     position: relative;
     top: -$alert-padding-y;
     right: -$alert-padding-x;
@@ -32,14 +36,16 @@ joomla-alert {
     color: inherit;
   }
 
-    .close {
+    .joomla-alert--close {
 			font-size: $close-font-size;
 			font-weight: $close-font-weight;
 			line-height: 1;
 			text-shadow: $close-text-shadow;
 		}
 
-    .close, .button--close {
+    .joomla-alert--close, .joomla-alert-button--close {
+			background: transparent;
+			border: 0;
 			float: right;
 			color: $close-color;
 			opacity: .5;
@@ -51,28 +57,29 @@ joomla-alert {
 				opacity: .75;
 			}
 	}
-	// Additional properties for button version
-	// iOS requires the button element instead of an anchor tag.
-	// If you want the anchor version, it requires `href="#"`.
-	// See https://developer.mozilla.org/en-US/docs/Web/Events/click#Safari_Mobile
+		// Additional properties for button version
+		// iOS requires the button element instead of an anchor tag.
+		// If you want the anchor version, it requires `href="#"`.
+		// See https://developer.mozilla.org/en-US/docs/Web/Events/click#Safari_Mobile
 
-	// scss-lint:disable QualifyingElement
-	button.close {
-	padding-right: .5rem;
-	padding-top: .5rem;
-	cursor: pointer;
-	background: transparent;
-	border: 0;
-	-webkit-appearance: none;
-	}
+		// scss-lint:disable QualifyingElement
+		button.joomla-alert-button--close {
+		font-size: 100%;
+		line-height: 1.15;
+		cursor: pointer;
+		padding-top: 0.75rem;
+		background: transparent;
+		border: 0;
+		-webkit-appearance: none;
+		}
 
 
-  opacity: 0;
-  @include transition($transition-fade);
+		opacity: 0;
+		@include transition($transition-fade);
 
-  &.show {
-    opacity: 1;
-  }
+		&.joomla-alert--show {
+			opacity: 1;
+		}
 
 
 }

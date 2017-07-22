@@ -7,7 +7,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Foundation</title>
 	<link rel="stylesheet" href="assets/foundation.min.css">
-	<link rel="stylesheet" href="css/joomla-alert.min.css">
 	<script src="polyfill/ce-loader.js"></script>
 </head>
 
@@ -31,7 +30,11 @@
 			<strong>Advanced!</strong> Let's call a callback function!
 		</joomla-alert>
 	</div>
-	<script src="js/joomla-alert.min.js" defer></script>
+	<script src="js/joomla-alert-es5.min.js" defer></script>
+	<script>
+		window.someCallbackFunction = function() { alert('works'); }
+	</script>
+
 </body>
 
 </html>

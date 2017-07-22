@@ -9,77 +9,49 @@ module.exports = function (grunt) {
 	}
 
 	// Load required modules
+	grunt.loadNpmTasks('grunt-sass');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-babel');
 	grunt.loadNpmTasks('grunt-browserify');
-	grunt.loadNpmTasks('grunt-sass');
+	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-shell');
 	grunt.loadNpmTasks('grunt-contrib-copy');
-	grunt.loadNpmTasks('grunt-contrib-uglify');
 
-	// Cleanup process
-	grunt.registerTask('clearFiles', 'Clean up', function () {
-		settings.elements.forEach(function (element) {
-			// Remove the non minified css
-			if (grunt.file.exists("dist/css/" + element + ".css")) {
-				grunt.file.delete("dist/css/" + element + ".css");
-			}
-			if (grunt.file.exists('elements/' + element + '/' + element + '_es6.js')) {
-				grunt.file.delete('elements/' + element + '/' + element + '_es6.js');
-			}
-		});
-	});
+	var fs = require('fs');
+	var deleteFolderRecursive = function (path) {
+		if (fs.existsSync(path)) {
+			fs.readdirSync(path).forEach(function (file, index) {
+				var curPath = path + "/" + file;
+				if (fs.lstatSync(curPath).isDirectory()) { // recurse
+					deleteFolderRecursive(curPath);
+				} else { // delete file
+					fs.unlinkSync(curPath);
+				}
+			});
+			fs.rmdirSync(path);
+		}
+	};
 
-	// Create WebComponents elements
-	grunt.registerTask('createHtml', 'Create Html version of the elements', function () {
-		settings.elements.forEach(function (element) {
+	// Patch the Custom Element Polyfill to add the WebComponentsReady event
+	grunt.registerTask('patchCE', 'Patch Custom Elements Polyfill', function () {
+		// Patch the Custom Element polyfill
+		if (grunt.file.exists('dist/polyfills/webcomponents-ce.min.js')) {
+			var ce = grunt.file.read('dist/polyfills/webcomponents-ce.min.js');
+			ce = ce +
+`(function(){
+	window.WebComponents = window.WebComponents || {};
+	requestAnimationFrame(function() {
+		window.WebComponents.ready= true;
+		document.dispatchEvent(new CustomEvent("WebComponentsReady", { bubbles:true }) );
+	})
+})();`;
 
-			if (grunt.file.exists('dist/js/' + element + '.min.js')) {
-				// Compose the element as .html
-				var tmpOutput = '<element name="' + settings.prefix + '-' + element + '">';
-				tmpJs = grunt.file.read('dist/js/' + element + '.min.js');
-				tmpOutput += '<script>' + tmpJs + '</script>';
-				tmpOutput += '</element>';
-
-				// Write the Custom element
-				grunt.file.write('dist/html/' + settings.prefix + '-' + element + '.html', tmpOutput);
-			}
-		});
-	});
-
-	// Patch the loader afterminification
-	grunt.registerTask('minifiedLoaderPatch', 'Create Html version of the elements', function () {
-
-		if (grunt.file.exists('dist/polyfills/wc-loader.min.js')) {
-			var tmpPatch = grunt.file.read('dist/polyfills/wc-loader.min.js');
-			tmpPatch = tmpPatch.replace(/wc-loader.js/g, 'wc-loader.min.js');
-			grunt.file.write('dist/polyfills/wc-loader.min.js', tmpPatch);
+			grunt.file.write('dist/polyfills/webcomponents-ce.min.js', ce);
 		}
 	});
 
-	grunt.registerTask('default', function () {
-		String.prototype.capitalizeFirstLetter = function () {
-			return this.charAt(0).toUpperCase() + this.slice(1);
-		}
-
-		var fs = require('fs');
-		var deleteFolderRecursive = function (path) {
-			if (fs.existsSync(path)) {
-				fs.readdirSync(path).forEach(function (file, index) {
-					var curPath = path + "/" + file;
-					if (fs.lstatSync(curPath).isDirectory()) { // recurse
-						deleteFolderRecursive(curPath);
-					} else { // delete file
-						fs.unlinkSync(curPath);
-					}
-				});
-				fs.rmdirSync(path);
-			}
-		};
-
-		// Clear the polyfills folder
-		deleteFolderRecursive('dist/polyfills');
-
+	// Compile the css
+	grunt.registerTask('compile', 'Compile css files', function() {
 		// Compile the css files
 		var compileCss = function (element) {
 			grunt.config.set('sass.' + element + '.files', [{
@@ -95,44 +67,39 @@ module.exports = function (grunt) {
 			}]);
 
 			grunt.task.run('cssmin:' + element);
-
-			// Put a copy in the demo folder
-			grunt.config.set('copy.' + element + '-css-s' + '.files', [{
-				src: 'dist/css/' + settings.prefix + '-' + element + '.min.css',
-				dest: 'demo/css/' + settings.prefix + '-' + element + '.min.css'
-			}]);
-
-			grunt.task.run('copy:' + element + '-css-s');
-
-			// Put a copy in the demo folder
-			grunt.config.set('copy.' + element + '-css' + '.files', [{
-				src: 'dist/css/' + settings.prefix + '-' + element + '.min.css',
-				dest: 'docs/_media/css/' + settings.prefix + '-' + element + '.min.css'
-			}]);
-
-			grunt.task.run('copy:' + element + '-css');
 		};
 
+		console.info('Build the stylesheets')
+		settings.elements.forEach(function (element) {
+			// Create the css for each element
+			compileCss(element);
+		});
+	});
+
+	// Create the Custom Elements
+	grunt.registerTask('createElements', 'Create the Custom Elemets', function() {
 		// Create the custom element
 		var createElement = function (element, settings) {
-			var tmpJs = '', tmpJsPlain = '';
+			var tmpJs = '', tmpJsPlain = '', tmpCss = '';
 
 			if (grunt.file.exists('elements/' + element + '/' + element + '.js')) {
 				tmpJs = grunt.file.read('elements/' + element + '/' + element + '.js');
+
+				// Embed the css in the custom element
+				if (grunt.file.exists('dist/css/' + settings.prefix + '-' + element + '.min.css')) {
+					tmpCss = grunt.file.read('dist/css/' + settings.prefix + '-' + element + '.min.css');
+				}
+				console.info('dist/css/' + settings.prefix + '-' + element + '.min.css')
 
 				// Repeat
 				tmpJs = grunt.file.read('elements/' + element + '/' + element + '.js');
 				tmpJs = tmpJs.replace(/{{REGISTERELEMENT}}/g, settings.prefix + '-' + element);
 				tmpJs = tmpJs.replace(/joomla-/g, settings.prefix + '-');
+				tmpJs = tmpJs.replace(/'{{stylesheet}}'/g, '"' + tmpCss + '"');
+
 				grunt.file.write('elements/' + element + '/' + element + '_es6.js', tmpJs);
 
-				// // As Web components (with shadow dom)
-				// grunt.config.set('shell.' + element, {
-				// 	command: 'browserify elements/' + element + '/' + element + '_a.js -o dist/js/' + element + '.min.js'
-				// });
-
-				// grunt.task.run('shell:' + element);
-
+				// Browserify the ES5 Element
 				grunt.config.set('browserify.options', {
 					"transform": [
 						[
@@ -162,58 +129,51 @@ module.exports = function (grunt) {
 				grunt.config.set('uglify.' + element + '-js' + '.files', [{
 					src: ['dist/js/' + settings.prefix + '-' + element + '.js', '!dist/js/' + settings.prefix + '-' + element + '.min.js'],
 					dest: '',
-					ext: '.min.js',
+					ext: '-es5.min.js',
 					expand: true
 				}]);
 
 				grunt.task.run('uglify:' + element + '-js');
 
+				// Put an ES6 copy in the dist folder
+				grunt.config.set('copy.' + element + '-es6' + '.files', [{
+					src: 'elements/' + element + '/' + element + '_es6.js',
+					dest: 'dist/js/' + settings.prefix + '-' + element + '-es6.js'
+				}]);
+
+				grunt.task.run('copy:' + element + '-es6');
+
+				// Uglify the ES6 script
+				grunt.config.set('uglify.' + element + '-es6' + '.files', [{
+					src: ['dist/js/' + settings.prefix + '-' + element + '-es6.js', '!dist/js/' + settings.prefix + '-' + element + '-es6.min.js'],
+					dest: '',
+					ext: '.min.js',
+					expand: true
+				}]);
+
+				grunt.task.run('uglify:' + element + '-es6');
+
 				// Put a copy in the demo folder
-				grunt.config.set('copy.' + element + '-js-a' + '.files', [{
-					src: 'dist/js/' + settings.prefix + '-' + element + '.min.js',
-					dest: 'demo/js/' + settings.prefix + '-' + element + '.min.js'
+				grunt.config.set('copy.' + element + '-js-es6' + '.files', [{
+					src: 'dist/js/' + settings.prefix + '-' + element + '-es6.min.js',
+					dest: 'dist/js/' + settings.prefix + '-' + element + '.min.js'
 				}]);
 
-				grunt.task.run('copy:' + element + '-js-a');
-
-				// Put a copy in the docs folder
-				grunt.config.set('copy.' + element + '-js' + '.files', [{
-					src: 'dist/js/' + settings.prefix + '-' + element + '.min.js',
-					dest: 'docs/_media/js/' + settings.prefix + '-' + element + '.min.js'
-				}]);
-
-				grunt.task.run('copy:' + element + '-js');
+				grunt.task.run('copy:' + element + '-js-es6');
 			}
 		};
 
-		console.log('Build the custom Elements')
+		console.info('Build the custom Elements')
 		settings.elements.forEach(function (element) {
-			// Create the css for each element
-			compileCss(element);
-
 			// Create elements as html files, compatible with document-register-element polyfill
 			createElement(element, settings);
 
 		});
+	});
 
-		// Create elements as html files
-		// grunt.task.run('createHtml');
-
+	grunt.registerTask('polyfills', 'Create a copy of the polyfills', function() {
 		// Copy polyfills in dist and demo folders
 		if (grunt.file.exists('node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js')) {
-			var tmpPloyfillJs = grunt.file.read('node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js');
-
-			tmpPloyfillJs = tmpPloyfillJs.replace(/\(function \(\) {\n'use strict';\n\n/, '')
-				.replace(/(\n\n\/\*(?:(?!\*\/).|[\n])*\*\/\s\n}\(\)\);\n)/g, '').replace(/\;$/, '');
-
-			if (grunt.file.exists('elements/wc-loader.js')) {
-				var polyfill = grunt.file.read('elements/wc-loader.js');
-
-				polyfill = polyfill.replace('{{POLYFILL_JS}}', tmpPloyfillJs);
-
-				grunt.file.write('dist/polyfills/wc-loader.js', polyfill);
-			}
-
 			var polyfills = ['webcomponents-hi-ce', 'webcomponents-hi-sd-ce', 'webcomponents-hi', 'webcomponents-lite', 'webcomponents-loader', 'webcomponents-sd-ce'];
 
 			polyfills.forEach(function (polyfill, item) {
@@ -224,24 +184,124 @@ module.exports = function (grunt) {
 				}]);
 
 				grunt.task.run('copy:' + polyfill);
+
+				// Put a copy of wc-loader, the Joomla default web components loader
+				grunt.config.set('copy.wc.files', [{
+					src: 'elements/wc-loader.js',
+					dest: 'dist/polyfills/wc-loader.js'
+				}]);
+
+				grunt.task.run('copy:wc');
 			})
 
-
-			// Uglify the polyfills
-			grunt.config.set('uglify.polyfills-js.files', [{
-				src: ['!dist/polyfills/*.min.js', 'dist/polyfills/*.js'],
-				dest: '',
-				ext: '.min.js',
-				expand: true
+			// Copy the Custom Elements polyfill
+			grunt.config.set('copy.ce.files', [{
+				src: 'node_modules/@webcomponents/custom-elements/custom-elements.min.js',
+				dest: 'dist/polyfills/webcomponents-ce.min.js'
 			}]);
 
-			grunt.task.run('uglify:polyfills-js');
+			grunt.task.run('copy:ce');
+
+			grunt.task.run('patchCE');
 		}
+
+		// Uglify the polyfills
+		grunt.config.set('uglify.polyfills-js.files', [{
+			src: ['!dist/polyfills/*.min.js', 'dist/polyfills/*.js'],
+			dest: '',
+			ext: '.min.js',
+			expand: true
+		}]);
+
+		grunt.task.run('uglify:polyfills-js');
+	});
+
+	// Cleanup process
+	grunt.registerTask('clearFiles', 'Clean up', function () {
+
+		// Remove the minified/non minified css
+		deleteFolderRecursive('dist/css')
+
+		settings.elements.forEach(function (element) {
+			// Remove the extracripts
+			if (grunt.file.exists('elements/' + element + '/' + element + '_es6.js')) {
+				grunt.file.delete('elements/' + element + '/' + element + '_es6.js');
+			}
+			if (grunt.file.exists('dist/js/' + settings.prefix + '-' + element + '-es6.js')) {
+				grunt.file.delete('dist/js/' + settings.prefix + '-' + element + '-es6.js');
+			}
+			if (grunt.file.exists('dist/js/' + settings.prefix + '-' + element + '-es6.min.js')) {
+				grunt.file.delete('dist/js/' + settings.prefix + '-' + element + '-es6.min.js');
+			}
+			if (grunt.file.exists('dist/js/' + settings.prefix + '-' + element + '.js')) {
+				grunt.file.delete('dist/js/' + settings.prefix + '-' + element + '.js');
+			}
+		});
+	});
+
+	// Copy files to the docs and demo foders
+	grunt.registerTask('copyDist', 'Copy the distribution files to docs and demo', function() {
+
+		//{ expand: true, cwd: '<%= folder.node_module %>jquery/dist/', src: ['*', '!(core.js)'], dest: 'media/vendor/jquery/js/', filter: 'isFile'},
+		// Put a copy in the demo folder
+		grunt.config.set('copy.dist.files', [{
+			expand: true,
+			filter: 'isFile',
+			cwd: 'dist/js/',
+			src: ['*'],
+			dest: 'demo/js/'
+		}]);
+
+		grunt.task.run('copy:dist');
+
+		// Put a copy in the docs folder
+		grunt.config.set('copy.docs.files', [{
+			expand: true,
+			filter: 'isFile',
+			cwd: 'dist/js/',
+			src: ['*'],
+			dest: 'docs/_media/js/'
+		}]);
+
+		grunt.task.run('copy:docs');
+	});
+
+	// Patch the loader afterminification
+	grunt.registerTask('minifiedLoaderPatch', 'Create Html version of the elements', function () {
+
+		if (grunt.file.exists('dist/polyfills/wc-loader.min.js')) {
+			var tmpPatch = grunt.file.read('dist/polyfills/wc-loader.min.js');
+			tmpPatch = tmpPatch.replace(/wc-loader.js/g, 'wc-loader.min.js');
+			grunt.file.write('dist/polyfills/wc-loader.min.js', tmpPatch);
+		}
+	});
+
+	grunt.registerTask('default', function () {
+		String.prototype.capitalizeFirstLetter = function () {
+			return this.charAt(0).toUpperCase() + this.slice(1);
+		}
+
+		// Clear the polyfills folder
+		deleteFolderRecursive('dist/polyfills');
+		deleteFolderRecursive('dist/js');
+		deleteFolderRecursive('dist/css');
+
+		// Create the css files
+		grunt.task.run('compile');
+
+		// Create the polyfills
+		grunt.task.run('polyfills');
+
+		// Create the elements
+		grunt.task.run('createElements');
 
 		// Fix the loader script
 		grunt.task.run('minifiedLoaderPatch');
 
 		// Do the clean up
 		grunt.task.run('clearFiles');
+
+		// Copy files to docs and demo
+		grunt.task.run('copyDist');
 	});
 };

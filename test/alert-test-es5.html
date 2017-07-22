@@ -5,9 +5,12 @@
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
 		<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
 		<script src="../../web-component-tester/browser.js"></script>
-
+		<!-- IMPORTANT -->
+		<!-- Include the following shim so ES5 code can run on ES6 browsers -->
+		<script src="../../webcomponentsjs/custom-elements-es5-adapter.js"></script>
+		<!-- IMPORTANT END -->
 		<!-- Step 1: import the element to test -->
-		<script src="../dist/js/joomla-alert.min.js"></script>
+		<script src="../dist/js/joomla-alert-es5.min.js"></script>
 	</head>
 
 	<body>

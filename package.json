@@ -1,6 +1,6 @@
 {
   "name": "joomla-ui-custom-elements",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Joomla UI components as custom elements",
   "repository": {
     "type": "git",
@@ -34,11 +34,12 @@
     "grunt-browserify": "latest",
     "grunt-contrib-copy": "latest",
     "grunt-contrib-cssmin": "latest",
+    "grunt-contrib-uglify": "git://github.com/gruntjs/grunt-contrib-uglify.git#harmony",
     "grunt-sass": "latest",
     "grunt-shell": "latest",
-    "grunt-contrib-uglify": "latest",
     "web-component-tester": "6.0.0",
-    "webcomponentsjs": "latest"
+		"webcomponentsjs": "1.0.1",
+		"@webcomponents/custom-elements": "1.0.0"
   },
   "browserify": {
     "transform": [

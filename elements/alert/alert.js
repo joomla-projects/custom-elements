@@ -9,12 +9,19 @@ class AlertElement extends HTMLElement {
 	/* Lifecycle, element created */
 	constructor() {
 		super();
+		const css = '{{stylesheet}}';
+		if (!document.getElementById('joomla-alert-stylesheet')) {
+			const style = document.createElement('style');
+			style.id = 'joomla-alert-stylesheet';
+			style.innerText = css;
+			document.head.appendChild(style);
+		}
 	}
 
 	/* Lifecycle, element appended to the DOM */
 	connectedCallback() {
 		this.setAttribute('role', 'alert');
-		this.classList.add("show");
+		this.classList.add("joomla-alert--show");
 
 		// Default to info
 		if (!this.level || ['info', 'warning', 'danger', 'success'].indexOf(this.level) === -1) {
@@ -24,7 +31,7 @@ class AlertElement extends HTMLElement {
 		if ((this.hasAttribute('dismiss') && this.getAttribute('dismiss') !== '')
 			|| (this.hasAttribute('acknowledge') && this.getAttribute('acknowledge') !== '')
 			|| (this.hasAttribute('href') && this.getAttribute('href') !== '')
-			&& !this.querySelector('button.close') && !this.querySelector('button.button--close')) {
+		&& !this.querySelector('button.joomla-alert--close') && !this.querySelector('button.joomla-alert-button--close')) {
 			this.appendCloseButton();
 		}
 
@@ -52,17 +59,17 @@ class AlertElement extends HTMLElement {
 				break;
 			case 'dismiss':
 			case 'acknowledge':
-				if (newValue === 'true') {
+				if ((!newValue || newValue === "true") || (!newValue || newValue === "true")) {
 					this.appendCloseButton();
 				} else {
 					this.removeCloseButton();
 				}
 				break;
 			case 'href':
-				if (newValue === '') {
+				if (!newValue || newValue === '') {
 					this.removeCloseButton();
 				} else {
-					if (!this.querySelector('button.button--close')) {
+					if (!this.querySelector('button.joomla-alert-button--close')) {
 						this.appendCloseButton();
 					}
 				}
@@ -77,7 +84,7 @@ class AlertElement extends HTMLElement {
 			this.dispatchCustomEvent('joomla.alert.closed');
 			this.parentNode.removeChild(this);
 		}, false);
-		this.classList.remove('show');
+		this.classList.remove('joomla-alert--show');
 	}
 
 	/* Method to dispatch events */
@@ -90,18 +97,18 @@ class AlertElement extends HTMLElement {
 
 	/* Method to create the close button */
 	appendCloseButton() {
-		if (this.querySelector('button.close') || this.querySelector('button.button--close')) {
+		if (this.querySelector('button.joomla-alert--close') || this.querySelector('button.joomla-alert-button--close')) {
 			return;
 		}
 
 		let self = this, closeButton = document.createElement('button');
 
 		if (this.hasAttribute('dismiss')) {
-			closeButton.classList.add('close');
+			closeButton.classList.add('joomla-alert--close');
 			closeButton.innerHTML = '<span aria-hidden="true">&times;</span>';
 			closeButton.setAttribute('aria-label', this.getText('JCLOSE', 'Close'));
 		} else {
-			closeButton.classList.add('button--close');
+			closeButton.classList.add('joomla-alert-button--close');
 			if (this.hasAttribute('acknowledge')) {
 				closeButton.innerHTML = this.getText('JOK', 'ok');
 			} else {

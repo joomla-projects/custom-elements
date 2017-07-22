@@ -1,7 +1,18 @@
 (function (window) {
 'use strict';
+
+window.Joomla = Joomla || {};
+Joomla.WebComponents = Joomla.WebComponents || {};
+var wc, name = 'wc-loader.js', polyfills = [];
+
+/* Get the webcomponents */
+if (Joomla.getOptions && typeof Joomla.getOptions === "function") {
+	wc = Joomla.getOptions('webcomponents', {});
+}
+
+
 /* Check if ES6 then apply the shim */
-var check = function () {
+var checkES6 = function () {
 	try {
 		eval("var foo = (x)=>x+1");
 	} catch (e) {
@@ -9,19 +20,32 @@ var check = function () {
 	}
 	return true;
 };
-var es6Shim = "(()=>{'use strict';if(!window.customElements)return;const a=window.HTMLElement,b=window.customElements.define,c=window.customElements.get,d=new Map,e=new Map;let f=!1,g=!1;window.HTMLElement=function(){if(!f){const j=d.get(this.constructor),k=c.call(window.customElements,j);g=!0;const l=new k;return l}f=!1;},window.HTMLElement.prototype=a.prototype;Object.defineProperty(window,'customElements',{value:window.customElements,configurable:!0,writable:!0}),Object.defineProperty(window.customElements,'define',{value:(j,k)=>{const l=k.prototype,m=class extends a{constructor(){super(),Object.setPrototypeOf(this,l),g||(f=!0,k.call(this)),g=!1;}},n=m.prototype;m.observedAttributes=k.observedAttributes,n.connectedCallback=l.connectedCallback,n.disconnectedCallback=l.disconnectedCallback,n.attributeChangedCallback=l.attributeChangedCallback,n.adoptedCallback=l.adoptedCallback,d.set(k,j),e.set(j,k),b.call(window.customElements,j,m);},configurable:!0,writable:!0}),Object.defineProperty(window.customElements,'get',{value:(j)=>e.get(j),configurable:!0,writable:!0});})()";
-/* Trick so ES5 code won't throw with evergreen browsers */
-if (check()) (new Function(es6Shim))();
+
+/* Check if we need the full polyfill set */
+var checkWC = function (wc) {
+	if (wc.hasOwnProperty('full')) {
+		return true;
+	}
+};
 
 /* Load webcomponents async */
-var loadWC = function() {
-	if (Joomla.getOptions && typeof Joomla.getOptions === "function") {
-		var el, p, wc = Joomla.getOptions('webcomponents', {});
+	var loadWC = function (wc) {
+		var el, p, es5;
 		for (p in wc) {
 			if (wc.hasOwnProperty(p)) {
 				if (wc[p].match(/.js/)) {
 					el = document.createElement('script');
-					el.src = wc[p];
+					if (checkES6()) {
+						// Browser is not ES6!
+						if (/\.min\.js/.match(wc[p])) {
+							es5 = wc[p].replace(/\.min\.js/, '-es5.min.js')
+						} else {
+							es5 = wc[p].replace(/\.js/, '-es5.js')
+						}
+						el.src = es5;
+					} else {
+						el.src = wc[p];
+					}
 				} else if (wc[p].match(/.html/)) {
 					el = document.createElement('link');
 					el.setAttribute('href', wc[p]);
@@ -32,25 +56,28 @@ var loadWC = function() {
 				}
 			}
 		}
-	}
 };
 
-window.Joomla = Joomla || {};
-Joomla.WebComponents = Joomla.WebComponents || {};
-var name = 'wc-loader.js', polyfills = [];
 
-if (!('import' in document.createElement('link'))) {
-	polyfills.push('hi');
+if (checkWC) {
+	if (!('import' in document.createElement('link'))) {
+		polyfills.push('hi');
+	}
+	if (!('attachShadow' in Element.prototype && 'getRootNode' in Element.prototype) || (window.ShadyDOM && window.ShadyDOM.force)) {
+		polyfills.push('sd');
+	}
+	if (!window.customElements || window.customElements.forcePolyfill) {
+		polyfills.push('ce');
+	}
+	if (!('content' in document.createElement('template')) || !window.Promise || !Array.from || !(document.createDocumentFragment().cloneNode() instanceof DocumentFragment)) {
+		polyfills = ['lite'];
+	}
+} else {
+	if (!window.customElements || window.customElements.forcePolyfill) {
+		polyfills.push('ce');
+	}
 }
-if (!('attachShadow' in Element.prototype && 'getRootNode' in Element.prototype) || (window.ShadyDOM && window.ShadyDOM.force)) {
-	polyfills.push('sd');
-}
-if (!window.customElements || window.customElements.forcePolyfill) {
-	polyfills.push('ce');
-}
-if (!('content' in document.createElement('template')) || !window.Promise || !Array.from || !(document.createDocumentFragment().cloneNode() instanceof DocumentFragment)) {
-	polyfills = ['lite'];
-}
+
 
 if (polyfills.length) {
 	var script = document.querySelector('script[src*="' + name +'"]'),
@@ -64,14 +91,14 @@ if (polyfills.length) {
 		document.head.appendChild(newScript);
 	}
 	document.addEventListener('WebComponentsReady', function () {
-		loadWC();
+		loadWC(wc);
 	});
 } else {
 	var fire = function() {
 		requestAnimationFrame(function() {
 			Joomla.WebComponents.ready = true;
 			document.dispatchEvent(new CustomEvent('WebComponentsReady', {bubbles: true}));
-			loadWC();
+			loadWC(wc);
 		});
 	};
 
