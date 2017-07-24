@@ -27,8 +27,16 @@ The folder named `dist` contains all your elements.
 For each component that you need to have available in your page you need to add the custom element in the head of the document:
 ```html
 <script src="joomla-alert.min.js"></script>
-<link rel="stylesheet" href="joomla-alert.min.css">
 ```
+
+### Tests
+
+Once again we are using the great tools from the polymer team here!
+You will need `wct` (web component tester) installed globally. To do so just run `npm install web-component-tester -g`.
+You might need to run that command as sudo!
+After that in the root folder of this project just run `wct` and see the status of the tests...
+
+The default setup is based on MacOS system and looking for Chrome, Firefox and Safari browsers, you can change this by editing line 5 of https://github.com/joomla-projects/custom-elements/blob/master/wct.conf.json#L5
 
 ### Browser support
 
