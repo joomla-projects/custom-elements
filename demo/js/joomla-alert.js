@@ -1,7 +1,8 @@
 class AlertElement extends HTMLElement {
 	/* Attributes to monitor */
 	static get observedAttributes() { return ['level', 'dismiss', 'acknowledge', 'href']; }
-	get level() { return this.getAttribute('level'); }
+	get level() { return this.getAttribute('level') || 'info'; }
+	set level(value) { return this.setAttribute('level', value); }
 	get dismiss() { return this.getAttribute('dismiss'); }
 	get acknowledge() { return this.getAttribute('acknowledge'); }
 	get href() { return this.getAttribute('href'); }
@@ -29,7 +30,7 @@ class AlertElement extends HTMLElement {
 		}
 		// Append button
 		if (this.hasAttribute('dismiss') || this.hasAttribute('acknowledge') || (this.hasAttribute('href') && this.getAttribute('href') !== '')
-		&& !this.querySelector('button.joomla-alert--close') && !this.querySelector('button.joomla-alert-button--close')) {
+			&& !this.querySelector('button.joomla-alert--close') && !this.querySelector('button.joomla-alert-button--close')) {
 			this.appendCloseButton();
 		}
 
@@ -48,7 +49,7 @@ class AlertElement extends HTMLElement {
 		this.removeEventListener('joomla.alert.close', this);
 		this.removeEventListener('joomla.alert.closed', this);
 
-		if (this.firstChild.tagName && this.firstChild.tagName.toLowerCase() === 'button'){
+		if (this.firstChild.tagName && this.firstChild.tagName.toLowerCase() === 'button') {
 			this.firstChild.removeEventListener('click', this);
 		}
 	}
@@ -57,13 +58,13 @@ class AlertElement extends HTMLElement {
 	attributeChangedCallback(attr, oldValue, newValue) {
 		switch (attr) {
 			case 'level':
-				if (['info', 'warning', 'danger', 'success'].indexOf(newValue) === -1) {
-					this.setAttribute('level', oldValue);
+				if (!newValue || (newValue && ['info', 'warning', 'danger', 'success'].indexOf(newValue) === -1)) {
+					this.level = 'info';
 				}
 				break;
 			case 'dismiss':
 			case 'acknowledge':
-				if ((!newValue || newValue === "true") || (!newValue || newValue === "true")) {
+				if (!newValue || newValue === "true") {
 					this.appendCloseButton();
 				} else {
 					this.removeCloseButton();
