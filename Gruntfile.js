@@ -35,18 +35,19 @@ module.exports = function (grunt) {
 	// Patch the Custom Element Polyfill to add the WebComponentsReady event
 	grunt.registerTask('patchCE', 'Patch Custom Elements Polyfill', function () {
 		// Patch the Custom Element polyfill
-		if (grunt.file.exists('dist/polyfills/webcomponents-ce.min.js')) {
-			var ce = grunt.file.read('dist/polyfills/webcomponents-ce.min.js');
-			ce = ce +`
+		if (grunt.file.exists('dist/polyfills/webcomponents-ce.js')) {
+			var ce = grunt.file.read('dist/polyfills/webcomponents-ce.js');
+			ce = ce.replace('//# sourceMappingURL=custom-elements.min.js.map', `
 (function(){
 	window.WebComponents = window.WebComponents || {};
 	requestAnimationFrame(function() {
 		window.WebComponents.ready= true;
 		document.dispatchEvent(new CustomEvent("WebComponentsReady", { bubbles:true }) );
 	})
-})();`;
+})();
+//# sourceMappingURL=custom-elements.js.map`);
 
-			grunt.file.write('dist/polyfills/webcomponents-ce.min.js', ce);
+			grunt.file.write('dist/polyfills/webcomponents-ce.js', ce);
 		}
 	});
 
@@ -118,7 +119,7 @@ module.exports = function (grunt) {
 
 				// As custom elements (plain Js and css)
 				grunt.config.set('browserify.' + element + '.files', [{
-					dest: 'dist/js/' + settings.prefix + '-' + element + '.js',
+					dest: 'dist/js/' + settings.prefix + '-' + element + '-es5.js',
 					src: 'src/js/' + element + '/' + element + '_es6.js',
 				}]);
 
@@ -126,9 +127,9 @@ module.exports = function (grunt) {
 
 				// Uglify the scripts
 				grunt.config.set('uglify.' + element + '-js' + '.files', [{
-					src: ['dist/js/' + settings.prefix + '-' + element + '.js', '!dist/js/' + settings.prefix + '-' + element + '.min.js'],
+					src: ['dist/js/' + settings.prefix + '-' + element + '-es5.js', '!dist/js/' + settings.prefix + '-' + element + '.min.js'],
 					dest: '',
-					ext: '-es5.min.js',
+					ext: '.min.js',
 					expand: true
 				}]);
 
@@ -137,14 +138,14 @@ module.exports = function (grunt) {
 				// Put an ES6 copy in the dist folder
 				grunt.config.set('copy.' + element + '-es6' + '.files', [{
 					src: 'src/js/' + element + '/' + element + '_es6.js',
-					dest: 'dist/js/' + settings.prefix + '-' + element + '-es6.js'
+					dest: 'dist/js/' + settings.prefix + '-' + element + '.js'
 				}]);
 
 				grunt.task.run('copy:' + element + '-es6');
 
 				// Uglify the ES6 script
 				grunt.config.set('uglify.' + element + '-es6' + '.files', [{
-					src: ['dist/js/' + settings.prefix + '-' + element + '-es6.js', '!dist/js/' + settings.prefix + '-' + element + '-es6.min.js'],
+					src: ['dist/js/' + settings.prefix + '-' + element + '.js', '!dist/js/' + settings.prefix + '-' + element + '.min.js'],
 					dest: '',
 					ext: '.min.js',
 					expand: true
@@ -184,6 +185,14 @@ module.exports = function (grunt) {
 
 				grunt.task.run('copy:' + polyfill);
 
+				// Put a copy of webcomponentjs polyfills maps in the dist folder
+				grunt.config.set('copy.' + polyfill + '-map.files', [{
+					src: 'node_modules/@webcomponents/webcomponentsjs/' + polyfill + '.js.map',
+					dest: 'dist/polyfills/' + polyfill + '.js.map'
+				}]);
+
+				grunt.task.run('copy:' + polyfill + '-map');
+
 				// Put a copy of wc-loader, the Joomla default web components loader
 				grunt.config.set('copy.wc.files', [{
 					src: 'src/js/wc-loader.js',
@@ -196,10 +205,18 @@ module.exports = function (grunt) {
 			// Copy the Custom Elements polyfill
 			grunt.config.set('copy.ce.files', [{
 				src: 'node_modules/@webcomponents/custom-elements/custom-elements.min.js',
-				dest: 'dist/polyfills/webcomponents-ce.min.js'
+				dest: 'dist/polyfills/webcomponents-ce.js'
 			}]);
 
 			grunt.task.run('copy:ce');
+
+			// Copy the Custom Elements polyfill map
+			grunt.config.set('copy.ce-map.files', [{
+				src: 'node_modules/@webcomponents/custom-elements/custom-elements.min.js.map',
+				dest: 'dist/polyfills/webcomponents-ce.js.map'
+			}]);
+
+			grunt.task.run('copy:ce-map');
 
 			grunt.task.run('patchCE');
 		}
@@ -226,40 +243,14 @@ module.exports = function (grunt) {
 			if (grunt.file.exists('src/js/' + element + '/' + element + '_es6.js')) {
 				grunt.file.delete('src/js/' + element + '/' + element + '_es6.js');
 			}
-			if (grunt.file.exists('dist/js/' + settings.prefix + '-' + element + '-es6.js')) {
-				grunt.file.delete('dist/js/' + settings.prefix + '-' + element + '-es6.js');
-			}
-			if (grunt.file.exists('dist/js/' + settings.prefix + '-' + element + '-es6.min.js')) {
-				grunt.file.delete('dist/js/' + settings.prefix + '-' + element + '-es6.min.js');
-			}
-			if (grunt.file.exists('dist/js/' + settings.prefix + '-' + element + '.js')) {
-				grunt.file.delete('dist/js/' + settings.prefix + '-' + element + '.js');
-			}
-			if (grunt.file.exists('dist/polyfills/wc-loader.js')) {
-				grunt.file.delete('dist/polyfills/wc-loader.js');
-			}
-			if (grunt.file.exists('dist/polyfills/webcomponents-loader.js')) {
-				grunt.file.delete('dist/polyfills/webcomponents-loader.js');
-			}
-			if (grunt.file.exists('dist/polyfills/webcomponents-loader.min.js')) {
-				grunt.file.delete('dist/polyfills/webcomponents-loader.min.js');
-			}
-			if (grunt.file.exists('dist/polyfills/webcomponents-hi.js')) {
-				grunt.file.delete('dist/polyfills/webcomponents-hi.js');
-			}
-			if (grunt.file.exists('dist/polyfills/webcomponents-hi-ce.js')) {
-				grunt.file.delete('dist/polyfills/webcomponents-hi-ce.js');
-			}
-			if (grunt.file.exists('dist/polyfills/webcomponents-hi-sd-ce.js')) {
-				grunt.file.delete('dist/polyfills/webcomponents-hi-sd-ce.js');
-			}
-			if (grunt.file.exists('dist/polyfills/webcomponents-sd-ce.js')) {
-				grunt.file.delete('dist/polyfills/webcomponents-sd-ce.js');
-			}
-			if (grunt.file.exists('dist/polyfills/webcomponents-lite.js')) {
-				grunt.file.delete('dist/polyfills/webcomponents-lite.js');
-			}
 		});
+
+		if (grunt.file.exists('dist/polyfills/webcomponents-loader.js')) {
+			grunt.file.delete('dist/polyfills/webcomponents-loader.js');
+		}
+		if (grunt.file.exists('dist/polyfills/webcomponents-loader.min.js')) {
+			grunt.file.delete('dist/polyfills/webcomponents-loader.min.js');
+		}
 	});
 
 	// Copy files to the docs and demo foders
