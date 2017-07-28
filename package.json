@@ -1,59 +1,58 @@
 {
-  "name": "joomla-ui-custom-elements",
-  "version": "0.0.6",
-  "description": "Joomla UI components as custom elements",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/joomla-projects/custom-elements.git"
-  },
-  "dependencies": {},
-  "license": "GPL",
-  "bugs": {
-    "url": "https://github.com/joomla-projects/custom-elements/issues"
-  },
-  "homepage": "https://github.com/joomla-projects/custom-elements#readme",
-  "main": "Gruntfile.js",
-  "keywords": [
-    "Joomla",
-    "web-components",
-    "custom-elements",
-    "vanilla-js",
-    "javascript"
-  ],
-  "author": "Dimitrios Grammatikogiannis",
-  "devDependencies": {
-    "@webcomponents/webcomponentsjs": "latest",
-    "babel-plugin-static-fs": "^1.1.0",
-    "babel-preset-es2015": "^6.18.0",
-    "babelify": "^7.3.0",
-    "babili": "^0.1.4",
-    "bootstrap": "4.0.0-alpha.6",
-    "browserify": "*",
-    "grunt": "latest",
-    "grunt-babel": "latest",
-    "grunt-browserify": "latest",
-    "grunt-contrib-copy": "latest",
-    "grunt-contrib-cssmin": "latest",
-    "grunt-contrib-uglify": "git://github.com/gruntjs/grunt-contrib-uglify.git#harmony",
-    "grunt-sass": "latest",
-    "grunt-shell": "latest",
-    "web-component-tester": "6.0.0",
-		"webcomponentsjs": "1.0.1",
-		"@webcomponents/custom-elements": "1.0.0"
-  },
-  "browserify": {
-    "transform": [
-      [
-        "babelify",
-        {
-          "presets": [
-            "es2015"
-          ],
-          "plugins": [
-            "static-fs"
-          ]
-        }
-      ]
-    ]
-  }
+	"name": "joomla-ui-custom-elements",
+	"version": "0.0.7",
+	"description": "Joomla UI components as custom elements",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/joomla-projects/custom-elements.git"
+	},
+	"dependencies": {},
+	"license": "GPL",
+	"bugs": {
+		"url": "https://github.com/joomla-projects/custom-elements/issues"
+	},
+	"homepage": "https://github.com/joomla-projects/custom-elements#readme",
+	"main": "Gruntfile.js",
+	"keywords": [
+		"Joomla",
+		"web-components",
+		"custom-elements",
+		"vanilla-js",
+		"javascript"
+	],
+	"author": "Dimitrios Grammatikogiannis",
+	"devDependencies": {
+		"@webcomponents/webcomponentsjs": "latest",
+		"@webcomponents/custom-elements": "1.0.0",
+		"babel-plugin-static-fs": "^1.1.0",
+		"babel-preset-es2015": "^6.18.0",
+		"babelify": "^7.3.0",
+		"babili": "^0.1.4",
+		"browserify": "*",
+		"grunt": "latest",
+		"grunt-babel": "latest",
+		"grunt-browserify": "latest",
+		"grunt-contrib-copy": "latest",
+		"grunt-contrib-cssmin": "latest",
+		"grunt-contrib-uglify": "git://github.com/gruntjs/grunt-contrib-uglify.git#harmony",
+		"grunt-sass": "latest",
+		"grunt-shell": "latest",
+		"web-component-tester": "6.0.0",
+		"webcomponentsjs": "1.0.1"
+	},
+	"browserify": {
+		"transform": [
+			[
+				"babelify",
+				{
+					"presets": [
+						"es2015"
+					],
+					"plugins": [
+						"static-fs"
+					]
+				}
+			]
+		]
+	}
 }
