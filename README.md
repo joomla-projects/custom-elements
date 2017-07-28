@@ -4,7 +4,7 @@
 
 ### UI components using modern technologies
 
-This is a collection of all the components that Joomla is using. They are developed with the new W3C standard: custom elements. Each component is using plain and optimized javascript for performance. Also the HTML markup (wherever possible) is reduced to offer a great convinience for front end developers).
+This is a collection of all the components that Joomla is using. They are developed with the new W3C standard: custom elements. Each component is using plain and optimized javascript for performance. Also the HTML markup (wherever possible) is reduced to offer a great benefit for front end developers).
 
 ### Using the NPM power
 
@@ -15,7 +15,7 @@ $ npm i joomla-ui-custom-elements
 
 ### Configuration
 
-The prefix of all the elements is configuarable, to do so duplicate the file `settings.yaml` and name the new file as `settings-custom.yaml`. Open the file in your editor and change the prefix to your taste. (it needs to be one word check the W3C speifications for valid custom element naming).
+The prefix of all the elements is configuarable. To do so duplicate the file `settings.yaml` and name the new file as `settings-custom.yaml`. Open the file in your editor and change the prefix to your taste. (It needs to be one word - check the W3C speifications for valid custom element naming).
 Build your custom elements by executing:
 ```bash
 $ grunt
@@ -34,7 +34,7 @@ For each component that you need to have available in your page you need to add 
 Once again we are using the great tools from the polymer team here!
 You will need `wct` (web component tester) installed globally. To do so just run `npm install web-component-tester -g`.
 You might need to run that command as sudo!
-After that in the root folder of this project just run `wct` and see the status of the tests...
+After that, in the root folder of this project just run `wct` and see the status of the tests...
 
 The default setup is based on MacOS system and looking for Chrome, Firefox and Safari browsers, you can change this by editing line 5 of https://github.com/joomla-projects/custom-elements/blob/master/wct.conf.json#L5
 
