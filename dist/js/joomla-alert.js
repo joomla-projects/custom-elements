@@ -1,3 +1,13 @@
+(function () {
+	const css = `joomla-alert{padding:.5rem 1.25rem;margin-bottom:1rem;border:1px solid transparent;border-radius:.25rem;display:block;opacity:0;transition:opacity .15s linear}joomla-alert .joomla-alert--close,joomla-alert .joomla-alert-button--close{position:relative;top:-.5rem;right:-1.25rem;padding:.5rem 1.25rem;color:inherit}joomla-alert .joomla-alert--close{font-size:1.5rem;font-weight:700;line-height:1;text-shadow:0 1px 0 #fff}joomla-alert .joomla-alert--close,joomla-alert .joomla-alert-button--close{background:0 0;border:0;float:right;color:#000;opacity:.5}joomla-alert .joomla-alert--close:focus,joomla-alert .joomla-alert--close:hover,joomla-alert .joomla-alert-button--close:focus,joomla-alert .joomla-alert-button--close:hover{color:#000;text-decoration:none;cursor:pointer;opacity:.75}joomla-alert button.joomla-alert-button--close{font-size:100%;line-height:1.15;cursor:pointer;padding-top:.75rem;background:0 0;border:0;-webkit-appearance:none}joomla-alert.joomla-alert--show{opacity:1}joomla-alert[level=success]{background-color:#dff0d8;border-color:#d0e9c6;color:#3c763d}joomla-alert[level=success] hr{border-top-color:#c1e2b3}joomla-alert[level=success] .alert-link{color:#2b542c}joomla-alert[level=info]{background-color:#d9edf7;border-color:#bcdff1;color:#31708f}joomla-alert[level=info] hr{border-top-color:#a6d5ec}joomla-alert[level=info] .alert-link{color:#245269}joomla-alert[level=warning]{background-color:#fcf8e3;border-color:#faf2cc;color:#8a6d3b}joomla-alert[level=warning] hr{border-top-color:#f7ecb5}joomla-alert[level=warning] .alert-link{color:#66512c}joomla-alert[level=danger]{background-color:#f2dede;border-color:#ebcccc;color:#a94442}joomla-alert[level=danger] hr{border-top-color:#e4b9b9}joomla-alert[level=danger] .alert-link{color:#843534}`;
+	if (!document.getElementById('joomla-alert-stylesheet')) {
+		const style = document.createElement('style');
+		style.id = 'joomla-alert-stylesheet';
+		style.innerHTML = css;
+		document.head.appendChild(style);
+	}
+})();
+
 class AlertElement extends HTMLElement {
 	/* Attributes to monitor */
 	static get observedAttributes() { return ['level', 'dismiss', 'acknowledge', 'href']; }
@@ -10,13 +20,6 @@ class AlertElement extends HTMLElement {
 	/* Lifecycle, element created */
 	constructor() {
 		super();
-		const css = "joomla-alert{padding:.5rem 1.25rem;margin-bottom:1rem;border:1px solid transparent;border-radius:.25rem;display:block;opacity:0;transition:opacity .15s linear}joomla-alert .joomla-alert--close,joomla-alert .joomla-alert-button--close{position:relative;top:-.5rem;right:-1.25rem;padding:.5rem 1.25rem;color:inherit}joomla-alert .joomla-alert--close{font-size:1.5rem;font-weight:700;line-height:1;text-shadow:0 1px 0 #fff}joomla-alert .joomla-alert--close,joomla-alert .joomla-alert-button--close{background:0 0;border:0;float:right;color:#000;opacity:.5}joomla-alert .joomla-alert--close:focus,joomla-alert .joomla-alert--close:hover,joomla-alert .joomla-alert-button--close:focus,joomla-alert .joomla-alert-button--close:hover{color:#000;text-decoration:none;cursor:pointer;opacity:.75}joomla-alert button.joomla-alert-button--close{font-size:100%;line-height:1.15;cursor:pointer;padding-top:.75rem;background:0 0;border:0;-webkit-appearance:none}joomla-alert.joomla-alert--show{opacity:1}joomla-alert[level=success]{background-color:#dff0d8;border-color:#d0e9c6;color:#3c763d}joomla-alert[level=success] hr{border-top-color:#c1e2b3}joomla-alert[level=success] .alert-link{color:#2b542c}joomla-alert[level=info]{background-color:#d9edf7;border-color:#bcdff1;color:#31708f}joomla-alert[level=info] hr{border-top-color:#a6d5ec}joomla-alert[level=info] .alert-link{color:#245269}joomla-alert[level=warning]{background-color:#fcf8e3;border-color:#faf2cc;color:#8a6d3b}joomla-alert[level=warning] hr{border-top-color:#f7ecb5}joomla-alert[level=warning] .alert-link{color:#66512c}joomla-alert[level=danger]{background-color:#f2dede;border-color:#ebcccc;color:#a94442}joomla-alert[level=danger] hr{border-top-color:#e4b9b9}joomla-alert[level=danger] .alert-link{color:#843534}";
-		if (!document.getElementById('joomla-alert-stylesheet')) {
-			const style = document.createElement('style');
-			style.id = 'joomla-alert-stylesheet';
-			style.innerText = css;
-			document.head.appendChild(style);
-		}
 	}
 
 	/* Lifecycle, element appended to the DOM */

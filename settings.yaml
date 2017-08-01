@@ -5,11 +5,11 @@
 'elements':
             # - 'accordion'
             - 'alert'
+            - 'tab'
             # - 'button'
             # - 'collapse'
             # - 'dropdown'
             # - 'modal'
-            # - 'tabs'
 
 ## - 'carousel'
 ## - 'scrollspy'

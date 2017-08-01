@@ -1,0 +1,112 @@
+
+
+@import "../variables";
+
+@import "node_modules/bootstrap/scss/mixins";
+
+joomla-tab {
+  display: flex;
+  flex-direction: column;
+  > ul {
+    display: flex;
+    background-color: #f5f5f5;
+    border-color: #ccc #ccc currentcolor;
+    border-image: none;
+    border-radius: 0.25rem 0.25rem 0 0;
+    border-style: solid solid none;
+    border-width: 1px 1px 0;
+    box-shadow: 0 1px #fff inset, 0 2px 3px -3px rgba(0, 0, 0, 0.15), 0 -4px 0 rgba(0, 0, 0, 0.05) inset, 0 0 3px rgba(0, 0, 0, 0.04);
+    margin: 0;
+    padding: 0;
+    list-style: outside none none;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    a {
+      display: block;
+      color: #0d1321;
+      padding: 0.75em 1em;
+      position: relative;
+      box-shadow: 1px 0 0 rgba(0, 0, 0, 0.05);
+      text-decoration: none;
+      &[active] {
+        background-color: rgba(0, 0, 0, 0.03);
+        background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.05) 100%);
+        border-left: 0 none;
+        border-right: 0 none;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        box-shadow: 2px 0 1px -1px rgba(0, 0, 0, 0.08) inset, -2px 0 1px -1px rgba(0, 0, 0, 0.08) inset, 0 1px 0 rgba(0, 0, 0, 0.02) inset;
+        &:after {
+          background-color: #006898;
+          bottom: -1px;
+          content: "";
+          height: 5px;
+          left: 0;
+          opacity: 0.8;
+          position: absolute;
+          right: 0;
+        }
+      }
+    }
+  }
+  > section {
+    display:none;
+    background-color: #fefefe;
+    border: 1px solid #ccc;
+    border-radius: 0 0 0.25rem 0.25rem;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.04);
+    padding: 15px;
+    &[active] {
+      display: block;
+    }
+  }
+  &[orientation="vertical"] {
+    flex-direction: row;
+    align-items: flex-start;
+    > ul {
+      flex-direction: column;
+      min-width: 30%;
+      height: auto;
+      border: 1px solid #ccc;
+      border-radius: 0.25rem;
+      box-shadow: none;
+      overflow: hidden;
+    }
+    li {
+      &:last-of-type {
+        a {
+          border-bottom: 0;
+        }
+      }
+    }
+    a {
+      display: block;
+      color: #0d1321;
+      padding: 0.75em 1em;
+      position: relative;
+      border-bottom: 1px solid #ddd;
+      box-shadow: none;
+      text-decoration: none;
+      &[active] {
+        border-left: 0 none;
+        border-right: 0 none;
+        background-color: #fff;
+        background-image: none;
+        box-shadow: none;
+        &:after {
+          left: -1px;
+          width: 5px;
+          height: auto;
+          top: 0;
+          bottom: 0;
+        }
+      }
+    }
+    > section {
+      border: 0 none;
+      box-shadow: none;
+      padding: 0 15px;
+    }
+  }
+}

@@ -3,7 +3,8 @@
 
 - Components
  - [Alert](/alert)
+ - [Tabs](/tab)
 
 - Customization
  - [Alert](/alert)
-
+ - [Tabs](/tab)

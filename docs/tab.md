@@ -1,52 +1,54 @@
-# Alert
+# Tabs
 
 In order to use the alert custom element you need to import the element in the document's head:
 ```html
-<script src="joomla-alert.min.js"></script>
+<link rel="stylesheet" href="joomla-tab.min.css">
+<script src="joomla-tab.min.js"></script>
 ```
 
-The simplified version of the custom elements
+Using a very simple HTML markup this element generates a tabbed interface.
+
 ```html
-<joomla-alert>No params passed</joomla-alert>
+<joomla-tab>No params passed</joomla-tab>
 
-<joomla-alert level="info" dismiss="true">
+<joomla-tab level="info" dismiss="true">
     <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
-</joomla-alert>
+</joomla-tab>
 
-<joomla-alert level="success" acknowledge="true">
+<joomla-tab level="success" acknowledge="true">
     <strong>Well done!</strong> You successfully read this important alert message.
-</joomla-alert>
+</joomla-tab>
 
-<joomla-alert level="warning" dismiss="true" auto-dismiss="10000">
+<joomla-tab level="warning" dismiss="true" auto-dismiss="10000">
     <strong>Warning!</strong> This one will self distruct in 10secs.
-</joomla-alert>
+</joomla-tab>
 
-<joomla-alert level="danger" href="https://www.joomla.org/">
+<joomla-tab level="danger" href="https://www.joomla.org/">
     <strong>Oh snap!</strong> Click open to go to Google.com
-</joomla-alert>
+</joomla-tab>
 
-<joomla-alert level="success" acknowledge="true" data-callback="someCallbackFunction">
+<joomla-tab level="success" acknowledge="true" data-callback="someCallbackFunction">
     <strong>Advanced!</strong> Let's call a callback function!
-</joomla-alert>
+</joomla-tab>
 ```
 
 ### Alerts demo:
-<joomla-alert>No params passed</joomla-alert>
-<joomla-alert level="info" dismiss="true">
+<joomla-tab>No params passed</joomla-tab>
+<joomla-tab level="info" dismiss="true">
     <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
-</joomla-alert>
-<joomla-alert level="success" acknowledge="true">
+</joomla-tab>
+<joomla-tab level="success" acknowledge="true">
     <strong>Well done!</strong> You successfully read this important alert message.
-</joomla-alert>
-<joomla-alert level="warning" dismiss="true" auto-dismiss="10000">
+</joomla-tab>
+<joomla-tab level="warning" dismiss="true" auto-dismiss="10000">
     <strong>Warning!</strong> This one will self distruct in 10secs.
-</joomla-alert>
-<joomla-alert level="danger" href="https://www.joomla.org/">
+</joomla-tab>
+<joomla-tab level="danger" href="https://www.joomla.org/">
     <strong>Oh snap!</strong> Click open to go to Google.com
-</joomla-alert>
-<joomla-alert level="success" acknowledge="true" data-callback="someCallbackFunction">
+</joomla-tab>
+<joomla-tab level="success" acknowledge="true" data-callback="someCallbackFunction">
     <strong>Advanced!</strong> Let's call a callback function!
-</joomla-alert>
+</joomla-tab>
 
 ## Attibutes
 Control the design and functionality of the custom element through attributes.
@@ -121,7 +123,7 @@ Use the following script:
 
 
 ```js
-var tempElement = document.createElement('joomla-alert');
+var tempElement = document.createElement('joomla-tab');
 tempElement.setAttribute('level', 'success');
 tempElement.setAttribute('dismiss', 'true');
 tempElement.innerHTML = 'Wow it works!';
@@ -144,7 +146,7 @@ Use the following script:
 
 
 ```js
-var tempElement1 = document.querySelector('joomla-alert');
+var tempElement1 = document.querySelector('joomla-tab');
 tempElement1.setAttribute('level', 'success');
 
 tempElement1.setAttribute('dismiss', '');
@@ -152,7 +154,7 @@ tempElement1.setAttribute('dismiss', '');
 
 
 ### Live example
-<joomla-alert id="change-me" level="info" dismiss="true"><strong>Alert:</strong> text goes here</joomla-alert>
+<joomla-tab id="change-me" level="info" dismiss="true"><strong>Alert:</strong> text goes here</joomla-tab>
 
 <div id="replaceble" markdown="0">
 <button role="button" data-opt1="level" value="info">Make it info</button>
@@ -171,15 +173,15 @@ Use the following script:
 
 
 ```js
-var tempElement = document.querySelector('joomla-alert');
+var tempElement = document.querySelector('joomla-tab');
 tempElement.close();
 ```
 
 
 ### Demo
-<joomla-alert id="close-me-with-a-btn" level="danger" acknowledge="true">
+<joomla-tab id="close-me-with-a-btn" level="danger" acknowledge="true">
 <strong>Alert:</strong> Close me with javascript
-</joomla-alert>
+</joomla-tab>
 <p>
 <button role="button" id="i-will-close-that-alert">Close the above alert</button>
 </p>
@@ -187,7 +189,7 @@ tempElement.close();
 
 <script markdown="0">
 var addNew = function() {
-    var tempElement = document.createElement('joomla-alert');
+    var tempElement = document.createElement('joomla-tab');
     tempElement.setAttribute('level', 'success');
     tempElement.setAttribute('dismiss', 'true');
     tempElement.innerHTML = 'Wow it works!';

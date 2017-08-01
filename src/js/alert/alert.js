@@ -1,3 +1,13 @@
+(function () {
+	const css = '{{stylesheet}}';
+	if (!document.getElementById('joomla-alert-stylesheet')) {
+		const style = document.createElement('style');
+		style.id = 'joomla-alert-stylesheet';
+		style.innerHTML = css;
+		document.head.appendChild(style);
+	}
+})();
+
 class AlertElement extends HTMLElement {
 	/* Attributes to monitor */
 	static get observedAttributes() { return ['level', 'dismiss', 'acknowledge', 'href']; }
@@ -10,13 +20,6 @@ class AlertElement extends HTMLElement {
 	/* Lifecycle, element created */
 	constructor() {
 		super();
-		const css = '{{stylesheet}}';
-		if (!document.getElementById('joomla-alert-stylesheet')) {
-			const style = document.createElement('style');
-			style.id = 'joomla-alert-stylesheet';
-			style.innerText = css;
-			document.head.appendChild(style);
-		}
 	}
 
 	/* Lifecycle, element appended to the DOM */
