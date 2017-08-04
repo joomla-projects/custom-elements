@@ -193,14 +193,6 @@ module.exports = function (grunt) {
 				}]);
 
 				grunt.task.run('copy:' + polyfill + '-map');
-
-				// Put a copy of wc-loader, the Joomla default web components loader
-				grunt.config.set('copy.wc.files', [{
-					src: 'src/js/wc-loader.js',
-					dest: 'dist/polyfills/wc-loader.js'
-				}]);
-
-				grunt.task.run('copy:wc');
 			})
 
 			// Copy the Custom Elements polyfill
@@ -281,16 +273,6 @@ module.exports = function (grunt) {
 		grunt.task.run('copy:docs');
 	});
 
-	// Patch the loader afterminification
-	grunt.registerTask('minifiedLoaderPatch', 'Create Html version of the elements', function () {
-
-		if (grunt.file.exists('dist/polyfills/wc-loader.min.js')) {
-			var tmpPatch = grunt.file.read('dist/polyfills/wc-loader.min.js');
-			tmpPatch = tmpPatch.replace(/wc-loader\.js/g, 'wc-loader.min.js');
-			grunt.file.write('dist/polyfills/wc-loader.min.js', tmpPatch);
-		}
-	});
-
 	grunt.registerTask('default', function () {
 		String.prototype.capitalizeFirstLetter = function () {
 			return this.charAt(0).toUpperCase() + this.slice(1);
@@ -308,9 +290,6 @@ module.exports = function (grunt) {
 
 		// Create the elements
 		grunt.task.run('createElements');
-
-		// Fix the loader script
-		grunt.task.run('minifiedLoaderPatch');
 
 		// Do the clean up
 		grunt.task.run('clearFiles');
