@@ -1,5 +1,5 @@
 (function () {
-	const css = '{{stylesheet}}';
+	const css = `{{stylesheet}}`;
 	if (!document.getElementById('joomla-tab-stylesheet')) {
 		const style = document.createElement('style');
 		style.id = 'joomla-tab-stylesheet';
@@ -255,7 +255,7 @@ class TabElement extends HTMLElement {
 
 	/* Method to dispatch events */
 	dispatchCustomEvent(eventName, element, related) {
-		let OriginalCustomEvent = new CustomEvent(eventName);
+		let OriginalCustomEvent = new CustomEvent(eventName, { "bubbles": true, "cancelable": true });
 		OriginalCustomEvent.relatedTarget = related;
 		element.dispatchEvent(OriginalCustomEvent);
 		element.removeEventListener(eventName, element);

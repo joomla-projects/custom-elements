@@ -1,0 +1,120 @@
+@import "../variables";
+
+@import "node_modules/bootstrap/scss/mixins";
+
+joomla-tooltip {
+  position: relative;
+  display: inline-block;
+  button {
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 50%;
+    border: 0;
+    background: #1C3D5C;
+    font-family: serif;
+    font-weight: bold;
+    font-size: 1.4rem;
+    line-height: 1.4rem;
+    color: #fff;
+  }
+  .toggletip-bubble {
+    display: inline-block;
+    position: absolute;
+    z-index: 1040;
+    width: 14rem;
+    padding: 0.5rem .8rem;
+    background: #222;
+    font-size: .9rem;
+    line-height: 1.2rem;
+    color: #fff;
+    border-radius: .25rem;
+    box-shadow: 0 0 5px rgba(0,0,0,.4);
+    transition: all ease-in;
+    animation-duration: .3s;
+    &:after {
+      position: absolute;
+      top: .6rem;
+      right: 100%;
+      content: '';
+      width: 0;
+      height: 0;
+      border-style: solid;
+    }
+    &.top {
+      bottom: 100%;
+      left: 50%;
+      margin-bottom: .6rem;
+      transform: translate(-50%, 0px);
+      animation-name: toggletip-fadeInTop;
+      &:after {
+        top: 100%;
+        left: 50%;
+        bottom: auto;
+        border-width: 6px 6px 0 6px;
+        border-color: #222 transparent transparent transparent;
+        transform: translateX(-50%);
+      }
+    }
+    &.left {
+      top: 50%;
+      right: 100%;
+      margin-right: .6rem;
+      transform: translate(0px, -50%);
+      animation-name: toggletip-fadeInLeft;
+      &:after {
+        top: 50%;
+        left: 100%;
+        bottom: auto;
+        border-width: 6px 0 6px 6px;
+        border-color: transparent transparent transparent #222;
+        transform: translateY(-50%);
+      }
+    }
+    &.right {
+      top: 50%;
+      left: 100%;
+      margin-left: .6rem;
+      transform: translate(0px, -50%);
+      animation-name: toggletip-fadeInRight;
+      &:after {
+        top: 50%;
+        right: 100%;
+        bottom: auto;
+        border-width: 6px 6px 6px 0;
+        border-color: transparent #222 transparent transparent;
+        transform: translateY(-50%);
+      }
+    }
+    &.bottom {
+      top: 100%;
+      left: 50%;
+      margin-top: .6rem;
+      transform: translate(-50%, 0px);
+      animation-name: toggletip-fadeInBottom;
+      &:after {
+        top: -6px;
+        left: 50%;
+        border-width: 0 6px 6px 6px;
+        border-color: transparent transparent #222 transparent;
+        transform: translateX(-50%);
+      }
+    }
+  }
+}
+
+@keyframes toggletip-fadeInRight {
+    from {transform: translate(-10px, -50%); opacity: 0;}
+    to {transform: translate(0px, -50%); opacity: 1;}
+}
+@keyframes toggletip-fadeInLeft {
+    from {transform: translate(10px, -50%); opacity: 0;}
+    to {transform: translate(0px, -50%); opacity: 1;}
+}
+@keyframes toggletip-fadeInTop {
+    from {transform: translate(-50%, 10px); opacity: 0;}
+    to {transform: translate(-50%, 0px); opacity: 1;}
+}
+@keyframes toggletip-fadeInBottom {
+    from {transform: translate(-50%, -10px); opacity: 0;}
+    to {transform: translate(-50%, 0px); opacity: 1;}
+}

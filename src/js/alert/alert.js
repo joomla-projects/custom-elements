@@ -1,5 +1,5 @@
 (function () {
-	const css = '{{stylesheet}}';
+	const css = `{{stylesheet}}`;
 	if (!document.getElementById('joomla-alert-stylesheet')) {
 		const style = document.createElement('style');
 		style.id = 'joomla-alert-stylesheet';
@@ -97,7 +97,7 @@ class AlertElement extends HTMLElement {
 
 	/* Method to dispatch events */
 	dispatchCustomEvent(eventName) {
-		let OriginalCustomEvent = new CustomEvent(eventName);
+		let OriginalCustomEvent = new CustomEvent(eventName, { "bubbles": true, "cancelable": true });
 		OriginalCustomEvent.relatedTarget = this;
 		this.dispatchEvent(OriginalCustomEvent);
 		this.removeEventListener(eventName, this);

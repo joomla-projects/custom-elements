@@ -47,7 +47,7 @@ var _createClass = function () {
         this.dispatchCustomEvent('joomla.alert.closed'), this.parentNode.removeChild(this);
       }, !1), this.classList.remove('joomla-alert--show');
     } }, { key: 'dispatchCustomEvent', value: function dispatchCustomEvent(a) {
-      var b = new CustomEvent(a);b.relatedTarget = this, this.dispatchEvent(b), this.removeEventListener(a, this);
+      var b = new CustomEvent(a, { bubbles: !0, cancelable: !0 });b.relatedTarget = this, this.dispatchEvent(b), this.removeEventListener(a, this);
     } }, { key: 'appendCloseButton', value: function appendCloseButton() {
       if (!(this.querySelector('button.joomla-alert--close') || this.querySelector('button.joomla-alert-button--close'))) {
         var a = this,

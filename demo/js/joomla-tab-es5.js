@@ -74,7 +74,7 @@ var _createClass = function () {
             'a' === f.tagName.toLowerCase() ? (f.click(), f.focus()) : (f.querySelector('a').click(), f.querySelector('a').focus()), b.preventDefault();break;default:}
       });
     } }, { key: 'restoreState', value: function restoreState() {} }, { key: 'dispatchCustomEvent', value: function dispatchCustomEvent(a, b, c) {
-      var d = new CustomEvent(a);d.relatedTarget = c, b.dispatchEvent(d), b.removeEventListener(a, b);
+      var d = new CustomEvent(a, { bubbles: !0, cancelable: !0 });d.relatedTarget = c, b.dispatchEvent(d), b.removeEventListener(a, b);
     } }]), b;
 }(HTMLElement);customElements.define('joomla-tab', TabElement);
 
