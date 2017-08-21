@@ -25,11 +25,16 @@ var _createClass = function () {
   function b() {
     return _classCallCheck(this, b), _possibleConstructorReturn(this, (b.__proto__ || Object.getPrototypeOf(b)).call(this));
   }return _inherits(b, a), _createClass(b, [{ key: 'connectedCallback', value: function connectedCallback() {
-      var a = this.querySelectorAll('input'),
-          b = a[1].parentNode.nextElementSibling;a[1].checked ? (a[1].parentNode.classList.add('active'), b.querySelector('.switcher-label-' + a[1].value).classList.add('active')) : b.querySelector('.switcher-label-' + a[0].value).classList.add('active'), this.addEventListener('click', function (a) {
-        for (var b = a.target, c = b.parentNode, d = c.nextElementSibling.querySelectorAll('span'), e = 0; e < d.length; e++) {
-          d[e].classList.remove('active');
-        }el.classList.contains('active') ? (parent.classList.remove('active'), this.dispatchCustomEvent('joomla.switcher.off')) : (parent.classList.add('active'), this.dispatchCustomEvent('joomla.switcher.on')), parent.nextElementSibling.querySelector('.switcher-label-' + el.value).classList.add('active');
+      var a = this,
+          b = this.querySelectorAll('input'),
+          c = b[1].parentNode.nextElementSibling;if (!b.length) throw new Error('Switcher not properly setup');b[1].checked ? (b[1].parentNode.classList.add('active'), c.querySelector('.switcher-label-' + b[1].value).classList.add('active')) : c.querySelector('.switcher-label-' + b[0].value).classList.add('active'), b.forEach(function (b) {
+        b.addEventListener('click', function (b) {
+          var c = b.target,
+              d = this.parentNode,
+              e = d.nextElementSibling.querySelectorAll('span');e.forEach(function (a) {
+            a.classList.remove('active');
+          }), this.parentNode.classList.contains('active') ? this.parentNode.classList.remove('active') : this.parentNode.classList.add('active'), this.classList.contains('active') ? (this.classList.remove('active'), a.dispatchCustomEvent('joomla.switcher.off')) : (this.classList.add('active'), a.dispatchCustomEvent('joomla.switcher.on')), d.nextElementSibling.querySelector('.switcher-label-' + this.value).classList.add('active');
+        });
       });
     } }, { key: 'disconnectedCallback', value: function disconnectedCallback() {
       this.removeEventListener('joomla.switcher.toggle', this), this.removeEventListener('joomla.switcher.on', this), this.removeEventListener('joomla.switcher.off', this), this.removeEventListener('click', this);

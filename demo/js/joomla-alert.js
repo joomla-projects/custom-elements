@@ -10,7 +10,7 @@
 class AlertElement extends HTMLElement {
 	/* Attributes to monitor */
 	static get observedAttributes() { return ['level', 'dismiss', 'acknowledge', 'href']; }
-	get level() { return this.getAttribute('level') || 'info'; }
+	get level() { return this.getAttribute('level'); }
 	set level(value) { return this.setAttribute('level', value); }
 	get dismiss() { return this.getAttribute('dismiss'); }
 	get acknowledge() { return this.getAttribute('acknowledge'); }
@@ -131,33 +131,22 @@ class AlertElement extends HTMLElement {
 
 		/* Add the required listener */
 		if (closeButton) {
-			if (!this.href) {
-				closeButton.addEventListener('click', function () {
-					self.dispatchCustomEvent('joomla.alert.buttonClicked');
-					if (self.getAttribute('data-callback')) {
-						window[self.getAttribute('data-callback')]();
-						self.close();
-					} else {
-						self.close();
-					}
-				});
-			} else {
-				closeButton.addEventListener('click', function () {
-					self.dispatchCustomEvent('joomla.alert.buttonClicked');
+			closeButton.addEventListener('click', function () {
+				self.dispatchCustomEvent('joomla.alert.buttonClicked');
+				if (this.href) {
 					window.location.href = self.href;
-					self.close();
-				});
-			}
+				}
+				self.close();
+			});
 		}
 
 		if (this.hasAttribute('auto-dismiss')) {
 			setTimeout(function () {
 				self.dispatchCustomEvent('joomla.alert.buttonClicked');
-				if (self.hasAttribute('data-callback')) {
-					window[self.getAttribute('data-callback')]();
-				} else {
-					self.close();
+				if (this.href) {
+					window.location.href = self.href;
 				}
+				self.close();
 			}, parseInt(self.getAttribute('auto-dismiss')) ? self.getAttribute('auto-dismiss') : 3000);
 		}
 	}

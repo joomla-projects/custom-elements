@@ -16,9 +16,14 @@ class SwitcherElement extends HTMLElement {
 
 	/* Lifecycle, element appended to the DOM */
 	connectedCallback() {
+		const self = this;
 		// Add the initial active class
 		const switcher = this.querySelectorAll('input'),
 			  next     = switcher[1].parentNode.nextElementSibling;
+
+		if (!switcher.length) {
+			throw new Error('Switcher not properly setup')
+		}
 
 		if (switcher[1].checked) {
 			switcher[1].parentNode.classList.add('active');
@@ -29,27 +34,37 @@ class SwitcherElement extends HTMLElement {
 			next.querySelector('.switcher-label-' + switcher[0].value).classList.add('active');
 		}
 
-		// Add the active class on click
-		this.addEventListener('click', function(event) {
-			let el     = event.target,
-				parent = el.parentNode,
-				spans  = parent.nextElementSibling.querySelectorAll('span');
+		switcher.forEach(function(switchEl) {
+			// Add the active class on click
+			switchEl.addEventListener('click', function (event) {
+				let el = event.target,
+					parent = this.parentNode,
+					spans = parent.nextElementSibling.querySelectorAll('span');
 
-			for (let i = 0; i < spans.length; i++) {
-				spans[i].classList.remove('active');
-			}
+				spans.forEach(function(span) {
+					span.classList.remove('active');
+				});
 
-			if (!el.classList.contains('active')) {
-				parent.classList.add('active');
-				this.dispatchCustomEvent('joomla.switcher.on');
-			}
-			else {
-				parent.classList.remove('active');
-				this.dispatchCustomEvent('joomla.switcher.off');
-			}
+				if (this.parentNode.classList.contains('active')) {
+					this.parentNode.classList.remove('active');
+				} else {
+					this.parentNode.classList.add('active');
+				}
 
-			parent.nextElementSibling.querySelector('.switcher-label-' + el.value).classList.add('active');
-		});
+				if (!this.classList.contains('active')) {
+					this.classList.add('active');
+					self.dispatchCustomEvent('joomla.switcher.on');
+				}
+				else {
+					this.classList.remove('active');
+
+					self.dispatchCustomEvent('joomla.switcher.off');
+				}
+
+				parent.nextElementSibling.querySelector('.switcher-label-' + this.value).classList.add('active');
+			});
+		})
+
 	}
 
 	/* Lifecycle, element removed from the DOM */

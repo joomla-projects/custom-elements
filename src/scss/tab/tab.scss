@@ -1,9 +1,3 @@
-
-
-@import "../variables";
-
-@import "node_modules/bootstrap/scss/mixins";
-
 joomla-tab {
   display: flex;
   flex-direction: column;
@@ -22,31 +16,31 @@ joomla-tab {
     overflow-x: auto;
     overflow-y: hidden;
     white-space: nowrap;
-    a {
-      display: block;
-      color: #0d1321;
-      padding: 0.75em 1em;
-      position: relative;
-      box-shadow: 1px 0 0 rgba(0, 0, 0, 0.05);
-      text-decoration: none;
-      &[active] {
-        background-color: rgba(0, 0, 0, 0.03);
-        background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.05) 100%);
-        border-left: 0 none;
-        border-right: 0 none;
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-        box-shadow: 2px 0 1px -1px rgba(0, 0, 0, 0.08) inset, -2px 0 1px -1px rgba(0, 0, 0, 0.08) inset, 0 1px 0 rgba(0, 0, 0, 0.02) inset;
-        &:after {
-          background-color: #006898;
-          bottom: -1px;
-          content: "";
-          height: 5px;
-          left: 0;
-          opacity: 0.8;
-          position: absolute;
-          right: 0;
-        }
+  }
+  a[role="tab"] {
+    display: block;
+    color: #0d1321;
+    padding: 0.75em 1em;
+    position: relative;
+    box-shadow: 1px 0 0 rgba(0, 0, 0, 0.05);
+    text-decoration: none;
+    &[active] {
+      background-color: rgba(0, 0, 0, 0.03);
+      background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.05) 100%);
+      border-left: 0 none;
+      border-right: 0 none;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      box-shadow: 2px 0 1px -1px rgba(0, 0, 0, 0.08) inset, -2px 0 1px -1px rgba(0, 0, 0, 0.08) inset, 0 1px 0 rgba(0, 0, 0, 0.02) inset;
+      &:after {
+        background-color: #006898;
+        bottom: -1px;
+        content: "";
+        height: 5px;
+        left: 0;
+        opacity: 0.8;
+        position: absolute;
+        right: 0;
       }
     }
   }
@@ -106,7 +100,35 @@ joomla-tab {
     > section {
       border: 0 none;
       box-shadow: none;
-      padding: 0 15px;
+      padding: 15px;
+    }
+  }
+  &[view="accordion"] {
+    > ul {
+      flex-direction: column;
+      border-radius: 0.25rem;
+      white-space: normal;
+      box-shadow: 0 1px #fff inset, 0 0 3px rgba(0, 0, 0, 0.04);
+    }
+    section {
+      display: none;
+      padding: 15px;
+    }
+    section[active] {
+      display: block;
+      border-bottom: 1px solid #ddd;
+    }
+    [active] {
+      background-color: #fff;
+    }
+    a[role="tab"] {
+      border-bottom: 1px solid #ddd;
+      &[active]:after {
+        width: 5px;
+        height: 100%;
+        top: 0;
+        left: 0;
+      }
     }
   }
 }

@@ -19,7 +19,7 @@ var _createClass = function () {
   if ('function' != typeof b && null !== b) throw new TypeError('Super expression must either be null or a function, not ' + (typeof b === 'undefined' ? 'undefined' : _typeof(b)));a.prototype = Object.create(b && b.prototype, { constructor: { value: a, enumerable: !1, writable: !0, configurable: !0 } }), b && (Object.setPrototypeOf ? Object.setPrototypeOf(a, b) : a.__proto__ = b);
 }(function () {
   if (!document.getElementById('joomla-collapse-stylesheet')) {
-    var a = document.createElement('style');a.id = 'joomla-collapse-stylesheet', a.innerHTML = '', document.head.appendChild(a);
+    var a = document.createElement('style');a.id = 'joomla-collapse-stylesheet', a.innerText = '', document.head.appendChild(a);
   }
 })();var CollapseElement = function (a) {
   function b() {

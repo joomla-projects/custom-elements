@@ -9,6 +9,7 @@
             - 'collapse'
             - 'dropdown'
             - 'modal'
+            - 'popover'
             - 'switcher'
             - 'tab'
             - 'tooltip'

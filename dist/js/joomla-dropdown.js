@@ -1,16 +1,8 @@
 (function () {
-<<<<<<< HEAD
 	if (!document.getElementById('joomla-dropdown-stylesheet')) {
 		const style = document.createElement('style');
 		style.id = 'joomla-dropdown-stylesheet';
-		style.innerHTML = ``;
-=======
-	const css = ``;
-	if (!document.getElementById('joomla-dropdown-stylesheet')) {
-		const style = document.createElement('style');
-		style.id = 'joomla-dropdown-stylesheet';
-		style.innerHTML = css;
->>>>>>> 649bc4c... commit the scaffolding for all elements
+		style.innerText = ``;
 		document.head.appendChild(style);
 	}
 })();

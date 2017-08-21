@@ -1,16 +1,8 @@
 (function () {
-<<<<<<< HEAD
 	if (!document.getElementById('joomla-collapse-stylesheet')) {
 		const style = document.createElement('style');
 		style.id = 'joomla-collapse-stylesheet';
-		style.innerHTML = ``;
-=======
-	const css = ``;
-	if (!document.getElementById('joomla-collapse-stylesheet')) {
-		const style = document.createElement('style');
-		style.id = 'joomla-collapse-stylesheet';
-		style.innerHTML = css;
->>>>>>> 649bc4c... commit the scaffolding for all elements
+		style.innerText = ``;
 		document.head.appendChild(style);
 	}
 })();

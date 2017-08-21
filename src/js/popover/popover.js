@@ -1,16 +1,8 @@
 (function () {
-<<<<<<< HEAD
 	if (!document.getElementById('joomla-popover-stylesheet')) {
 		const style = document.createElement('style');
 		style.id = 'joomla-popover-stylesheet';
 		style.innerHTML = `{{stylesheet}}`;
-=======
-	const css = `{{stylesheet}}`;
-	if (!document.getElementById('joomla-popover-stylesheet')) {
-		const style = document.createElement('style');
-		style.id = 'joomla-popover-stylesheet';
-		style.innerHTML = css;
->>>>>>> 649bc4c... commit the scaffolding for all elements
 		document.head.appendChild(style);
 	}
 })();

@@ -1,16 +1,8 @@
 (function () {
-<<<<<<< HEAD
 	if (!document.getElementById('joomla-modal-stylesheet')) {
 		const style = document.createElement('style');
 		style.id = 'joomla-modal-stylesheet';
 		style.innerHTML = ``;
-=======
-	const css = ``;
-	if (!document.getElementById('joomla-modal-stylesheet')) {
-		const style = document.createElement('style');
-		style.id = 'joomla-modal-stylesheet';
-		style.innerHTML = css;
->>>>>>> 649bc4c... commit the scaffolding for all elements
 		document.head.appendChild(style);
 	}
 })();

@@ -24,10 +24,6 @@ The simplified version of the custom elements
 <joomla-alert level="danger" href="https://www.joomla.org/">
     <strong>Oh snap!</strong> Click open to go to Google.com
 </joomla-alert>
-
-<joomla-alert level="success" acknowledge="true" data-callback="someCallbackFunction">
-    <strong>Advanced!</strong> Let's call a callback function!
-</joomla-alert>
 ```
 
 ### Alerts demo:
@@ -44,9 +40,6 @@ The simplified version of the custom elements
 <joomla-alert level="danger" href="https://www.joomla.org/">
     <strong>Oh snap!</strong> Click open to go to Google.com
 </joomla-alert>
-<joomla-alert level="success" acknowledge="true" data-callback="someCallbackFunction">
-    <strong>Advanced!</strong> Let's call a callback function!
-</joomla-alert>
 
 ## Attibutes
 Control the design and functionality of the custom element through attributes.
@@ -59,7 +52,6 @@ Control the design and functionality of the custom element through attributes.
 |acknowledge	|Appends a generic button with a title `Ok`. True is the only value.|
 |auto-dismiss	|Controls the auto close functionality of the alert. Values (integers) represent milliseconds|
 |href	|if is set a redirect button is created. Value must be an actual url|
-|data-callback	|Creates an ok button and on click calls the given callback function |
 
 All Strings are translateble, using the common API: `Joomla.JText._('JCLOSE')`
 
@@ -215,7 +207,4 @@ for (var i = 0, l = changeButtons.length; i < l; i++) {
 document.getElementById('i-will-close-that-alert').addEventListener('click', function(event) { var a = document.getElementById('close-me-with-a-btn');
 if (a) a.close(); event.target.setAttribute('disabled', true); event.target.removeEventListener('click', arguments.callee); });
 
-window.someCallbackFunction = function() {
-	alert('Custom Functionality Called');
-};
 </script>

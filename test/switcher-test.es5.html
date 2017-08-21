@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+		<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+		<script src="../../web-component-tester/browser.js"></script>
+
+		<!-- Step 1: import the element to test -->
+		<script src="../dist/js/joomla-switcher-es5.min.js"></script>
+	</head>
+
+	<body>
+
+		<!-- You can use the document as a place to set up your fixtures. -->
+		<test-fixture id="switcher-element-basic">
+			<template>
+			<joomla-switcher>
+					<span class="joomla-switcher switcher">
+						<input id="switcher0" name="switcher" value="0" type="radio" class="active" checked>
+						<input id="switcher1" name="switcher" value="1" type="radio">
+						<span class="switch"></span>
+					</span>
+					<span class="switcher-labels">
+						<span class="switcher-label-0 active">No</span>
+						<span class="switcher-label-1">Yes</span>
+					</span>
+
+			</joomla-switcher>
+			</template>
+		</test-fixture>
+
+		<script>
+			suite('<joomla-switcher-basic>', () => {
+
+				let myEl;
+
+				setup(() => {
+					myEl = fixture('switcher-element-basic');
+
+					const switcherEl = myEl.querySelector('.joomla-switcher.switcher');
+					const labelEl    = myEl.querySelector('.switcher-labels');
+
+
+				});
+
+				test('Custom Element script is loaded', () => {
+					assert.equal(typeof customElements.get('joomla-switcher') === 'function', true);
+				});
+
+				test('Has the container span for the radios', () => {
+					const switcherEl = myEl.querySelector('.joomla-switcher.switcher');
+					assert.equal(switcherEl.getAttribute('class'), 'joomla-switcher switcher');
+				});
+
+				test('Has the container span for the labels', () => {
+						const labelEl = myEl.querySelector('.switcher-labels');
+						assert.equal(labelEl.getAttribute('class'), 'switcher-labels');
+					});
+
+				// test('Respects level attribute change, any unsupported value', () => {
+				// 	myEl.setAttribute('level', 'unknown');
+				// 	assert.equal(myEl.getAttribute('level'), 'info');
+				// });
+
+				// test('Respects level attribute change, warning', () => {
+				// 	myEl.setAttribute('level', 'warning');
+				// 	assert.equal(myEl.getAttribute('level'), 'warning');
+				// });
+
+				// test('Respects level attribute change, danger', () => {
+				// 	myEl.setAttribute('level', 'danger');
+				// 	assert.equal(myEl.getAttribute('level'), 'danger');
+				// });
+
+				// test('Respects level attribute change, success', () => {
+				// 	myEl.setAttribute('level', 'success');
+				// 	assert.equal(myEl.getAttribute('level'), 'success');
+				// });
+
+				// test('Has the right text', () => {
+				// 	console.info(myEl)
+				// 	assert.equal(myEl.querySelector('#text').innerText, 'Has some text');
+				// });
+			});
+
+		</script>
+
+	</body>
+
+</html>

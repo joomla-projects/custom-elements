@@ -7,7 +7,6 @@
 	}
 })();
 
-
 class TabElement extends HTMLElement {
 	/* Attributes to monitor */
 	static get observedAttributes() { return ['recall', 'orientation', 'view']; }
