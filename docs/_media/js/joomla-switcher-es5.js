@@ -33,7 +33,7 @@ var _createClass = function () {
         a.removeChild(a.firstChild);
       }return a.appendChild(d), a.appendChild(f), a;
     } }, { key: 'connectedCallback', value: function connectedCallback() {
-      var a = this;if (!a) throw new Error('Switcher not properly setup');this.createMarkup(a);var b = [].slice.call(a.querySelectorAll('input')),
+      var a = this;this.createMarkup(a);var b = [].slice.call(a.querySelectorAll('input')),
           c = a.querySelector('span.switcher'),
           d = b[1].parentNode.nextElementSibling;c.setAttribute('tabindex', 0), b[1].checked ? (b[1].parentNode.classList.add('active'), d.querySelector('.switcher-label-' + b[1].value).classList.add('active')) : d.querySelector('.switcher-label-' + b[0].value).classList.add('active'), b.forEach(function (b) {
         if (b.id) {

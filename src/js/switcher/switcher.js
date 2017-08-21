@@ -74,11 +74,6 @@ class SwitcherElement extends HTMLElement {
 	connectedCallback() {
 		const self = this;
 
-		// Throw an error if the switch hasn't been setup properly
-		if (!self) {
-			throw new Error('Switcher not properly setup')
-		}
-
 		// Create the markup
 		this.createMarkup(self);
 
