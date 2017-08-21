@@ -4,7 +4,9 @@
 - Components
  - [Alert](/alert)
  - [Tabs](/tab)
+ - [Switcher](/switcher)
 
 - Customization
  - [Alert](/alert)
  - [Tabs](/tab)
+ - [Switcher](/switcher)

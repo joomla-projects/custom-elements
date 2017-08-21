@@ -1,9 +1,8 @@
 (function () {
-	const css = `{{stylesheet}}`;
 	if (!document.getElementById('joomla-switcher-stylesheet')) {
 		const style = document.createElement('style');
 		style.id = 'joomla-switcher-stylesheet';
-		style.innerHTML = css;
+		style.innerHTML = `{{stylesheet}}`;
 		document.head.appendChild(style);
 	}
 })();
@@ -17,8 +16,14 @@ class SwitcherElement extends HTMLElement {
 	/* Lifecycle, element appended to the DOM */
 	connectedCallback() {
 		// Add the initial active class
-		const switcher = this.querySelectorAll('input'),
-			  next     = switcher[1].parentNode.nextElementSibling;
+		const switcher = this.querySelectorAll('input');
+
+		// Throw an error if the switch hasn't been setup properly
+		if (!switcher.length) {
+			throw new Error('Switcher not properly setup')
+		}
+
+		let next = switcher[1].parentNode.nextElementSibling;
 
 		if (switcher[1].checked) {
 			switcher[1].parentNode.classList.add('active');
@@ -31,24 +36,27 @@ class SwitcherElement extends HTMLElement {
 
 		// Add the active class on click
 		this.addEventListener('click', function(event) {
-			let el     = event.target,
-				parent = el.parentNode,
-				spans  = parent.nextElementSibling.querySelectorAll('span');
+			let el = event.target;
 
-			for (let i = 0; i < spans.length; i++) {
-				spans[i].classList.remove('active');
-			}
+			if (el.tagName.toLowerCase() === 'input') {
+				let parent = el.parentNode,
+				    spans  = parent.nextElementSibling.querySelectorAll('span');
 
-			if (!el.classList.contains('active')) {
-				parent.classList.add('active');
-				this.dispatchCustomEvent('joomla.switcher.on');
-			}
-			else {
-				parent.classList.remove('active');
-				this.dispatchCustomEvent('joomla.switcher.off');
-			}
+				spans.forEach(function(element) {
+					element.classList.remove('active');
+				});
 
-			parent.nextElementSibling.querySelector('.switcher-label-' + el.value).classList.add('active');
+				if (!el.classList.contains('active')) {
+					parent.classList.add('active');
+					this.dispatchCustomEvent('joomla.switcher.on');
+				}
+				else {
+					parent.classList.remove('active');
+					this.dispatchCustomEvent('joomla.switcher.off');
+				}
+
+				parent.nextElementSibling.querySelector('.switcher-label-' + el.value).classList.add('active');
+			}
 		});
 	}
 
