@@ -21,13 +21,13 @@ The simplified version of the custom element
 </joomla-switcher>
 
 <joomla-switcher class="switcher-primary" offText="No" onText="Yes">
-	<input name="switcher2" id="sw3" value="0" type="radio">
-	<input name="switcher2" id="sw4" value="1" type="radio" class="active" checked>
+	<input name="switcher2" id="sw3" value="0" type="radio" class="active" checked>
+	<input name="switcher2" id="sw4" value="1" type="radio">
 </joomla-switcher>
 
 <joomla-switcher class="switcher-danger" offText="Stable" onText="Alpha">
-	<input name="switcher3" id="sw5" value="0" type="radio">
-	<input name="switcher3" id="sw6" value="1" type="radio" class="active" checked>
+	<input name="switcher3" id="sw5" value="0" type="radio" class="active" checked>
+	<input name="switcher3" id="sw6" value="1" type="radio">
 </joomla-switcher>
 
 
