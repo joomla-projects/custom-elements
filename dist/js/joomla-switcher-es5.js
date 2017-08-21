@@ -24,11 +24,18 @@ var _createClass = function () {
 })();var SwitcherElement = function (a) {
   function b() {
     return _classCallCheck(this, b), _possibleConstructorReturn(this, (b.__proto__ || Object.getPrototypeOf(b)).call(this));
-  }return _inherits(b, a), _createClass(b, [{ key: 'connectedCallback', value: function connectedCallback() {
-      var a = this,
-          b = [].slice.call(this.querySelectorAll('input')),
-          c = this.querySelector('span.switcher'),
-          d = b[1].parentNode.nextElementSibling;if (!b.length) throw new Error('Switcher not properly setup');c.setAttribute('tabindex', 0), b[1].checked ? (b[1].parentNode.classList.add('active'), d.querySelector('.switcher-label-' + b[1].value).classList.add('active')) : d.querySelector('.switcher-label-' + b[0].value).classList.add('active'), b.forEach(function (b) {
+  }return _inherits(b, a), _createClass(b, [{ key: 'createMarkup', value: function createMarkup(a) {
+      var b = [].slice.call(a.querySelectorAll('input')),
+          c = 0,
+          d = document.createElement('span');d.classList.add('switcher'), d.classList.add(a.getAttribute('class'));var e = document.createElement('span');e.classList.add('switch'), b.forEach(function (a, b) {
+        d.appendChild(a), 1 === b && a.checked && (c = 1);
+      }), d.appendChild(e);var f = document.createElement('span');f.classList.add('switcher-labels');var g = document.createElement('span');g.classList.add('switcher-label-0'), g.innerText = this.getText(a.getAttribute('offText'), 'Off');var h = document.createElement('span');for (h.classList.add('switcher-label-1'), h.innerText = this.getText(a.getAttribute('onText'), 'On'), 0 == c ? g.classList.add('active') : h.classList.add('active'), f.appendChild(g), f.appendChild(h); a.firstChild;) {
+        a.removeChild(a.firstChild);
+      }return a.appendChild(d), a.appendChild(f), a;
+    } }, { key: 'connectedCallback', value: function connectedCallback() {
+      var a = this;this.createMarkup(a);var b = [].slice.call(a.querySelectorAll('input')),
+          c = a.querySelector('span.switcher'),
+          d = b[1].parentNode.nextElementSibling;c.setAttribute('tabindex', 0), b[1].checked ? (b[1].parentNode.classList.add('active'), d.querySelector('.switcher-label-' + b[1].value).classList.add('active')) : d.querySelector('.switcher-label-' + b[0].value).classList.add('active'), b.forEach(function (b) {
         if (b.id) {
           var c = b.parentNode,
               d = c.nextElementSibling.querySelector('span.switcher-label-' + b.value);d.id = b.id + '-label', b.setAttribute('aria-labelledby', d.id);
@@ -57,6 +64,8 @@ var _createClass = function () {
       }), a.classList.add('active'), this.dispatchCustomEvent('joomla.switcher.on'));var f = d.filter(function (a) {
         return a !== c;
       });f[0].setAttribute('checked', ''), b.nextElementSibling.querySelector('.switcher-label-' + a.value).classList.add('active');
+    } }, { key: 'getText', value: function getText(a, b) {
+      return window.Joomla && Joomla.JText && Joomla.JText._ && 'function' == typeof Joomla.JText._ && Joomla.JText._(a) ? Joomla.JText._(a) : b;
     } }]), b;
 }(HTMLElement);customElements.define('joomla-switcher', SwitcherElement);
 

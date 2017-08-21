@@ -13,32 +13,87 @@ class SwitcherElement extends HTMLElement {
 		super();
 	}
 
+	/* Method to get the translated text */
+	createMarkup(switcher) {
+		let inputs  = [].slice.call(switcher.querySelectorAll('input')),
+		    checked = 0;
+
+		// Create the first 'span' wrapper
+		let spanFirst = document.createElement('span');
+		spanFirst.classList.add('switcher');
+		spanFirst.classList.add(switcher.getAttribute('class'));
+
+		let switchEl = document.createElement('span');
+		switchEl.classList.add('switch');
+
+		inputs.forEach(function(input, index) {
+			spanFirst.appendChild(input);
+
+			if (index === 1 && input.checked) {
+				checked = 1;
+			}
+		});
+
+		spanFirst.appendChild(switchEl);
+
+		// Create the second 'span' wrapper
+		let spanSecond = document.createElement('span');
+		spanSecond.classList.add('switcher-labels');
+
+		let labelFirst = document.createElement('span');
+		labelFirst.classList.add('switcher-label-0');
+		labelFirst.innerText = this.getText(switcher.getAttribute('offText'), 'Off');
+
+		let labelSecond = document.createElement('span');
+		labelSecond.classList.add('switcher-label-1');
+		labelSecond.innerText = this.getText(switcher.getAttribute('onText'), 'On');
+
+		if (checked === 0) {
+			labelFirst.classList.add('active');
+		}
+		else {
+			labelSecond.classList.add('active');
+		}
+
+		spanSecond.appendChild(labelFirst);
+		spanSecond.appendChild(labelSecond);
+
+		// Remove all child nodes from the switcher
+		while (switcher.firstChild) {
+			switcher.removeChild(switcher.firstChild);
+		}
+
+		// Append everything back to the main element
+		switcher.appendChild(spanFirst);
+		switcher.appendChild(spanSecond);
+
+		return switcher;
+	}
+
 	/* Lifecycle, element appended to the DOM */
 	connectedCallback() {
 		const self = this;
-		// Add the initial active class
-		const switcher  = [].slice.call(this.querySelectorAll('input')),
-			  container = this.querySelector('span.switcher'),
-			  next      = switcher[1].parentNode.nextElementSibling;
 
-		// Throw an error if the switch hasn't been setup properly
-		if (!switcher.length) {
-			throw new Error('Switcher not properly setup')
-		}
+		// Create the markup
+		this.createMarkup(self);
+
+		// Add the initial active class
+		const inputs    = [].slice.call(self.querySelectorAll('input')),
+			  container = self.querySelector('span.switcher'),
+			  next      = inputs[1].parentNode.nextElementSibling;
 
 		// Add tab focus
 		container.setAttribute('tabindex', 0);
 
-		if (switcher[1].checked) {
-			switcher[1].parentNode.classList.add('active');
-			next.querySelector('.switcher-label-' + switcher[1].value).classList.add('active');
+		if (inputs[1].checked) {
+			inputs[1].parentNode.classList.add('active');
+			next.querySelector('.switcher-label-' + inputs[1].value).classList.add('active');
 		}
-		else
-		{
-			next.querySelector('.switcher-label-' + switcher[0].value).classList.add('active');
+		else {
+			next.querySelector('.switcher-label-' + inputs[0].value).classList.add('active');
 		}
 
-		switcher.forEach(function(switchEl) {
+		inputs.forEach(function(switchEl) {
 			// Add the required accessibility tags
 			if (switchEl.id) {
 				const parent      = switchEl.parentNode,
@@ -56,7 +111,6 @@ class SwitcherElement extends HTMLElement {
 				self.toggle(event.target);
 			});
 		});
-
 
 		container.addEventListener('keydown', function (event) {
 			if (event.keyCode === 13 || event.keyCode === 32) {
@@ -122,6 +176,11 @@ class SwitcherElement extends HTMLElement {
 
 		newActive[0].setAttribute('checked', '');
 		parent.nextElementSibling.querySelector('.switcher-label-' + element.value).classList.add('active');
+	}
+
+	/* Method to get the translated text */
+	getText(str, fallback) {
+		return (window.Joomla && Joomla.JText && Joomla.JText._ && typeof Joomla.JText._ === 'function' && Joomla.JText._(str)) ? Joomla.JText._(str) : fallback;
 	}
 }
 customElements.define('joomla-switcher', SwitcherElement);

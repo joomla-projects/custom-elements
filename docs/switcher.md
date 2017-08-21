@@ -7,59 +7,40 @@ In order to use the switcher custom element you need to import the element in th
 
 The simplified version of the custom element
 ```html
-<joomla-switcher>
-	<span class="switcher">
-		<input name="switcher" id="sw1" value="0" type="radio" class="active" checked>
-		<input name="switcher" id="sw2" value="1" type="radio">
-		<span class="switch"></span>
-	</span>
-	<span class="switcher-labels">
-		<span class="switcher-label-0 active">No</span>
-	<span class="switcher-label-1">Yes</span>
-	</span>
+<joomla-switcher offText="No" onText="Yes">
+	<input name="switcher" id="sw1" value="0" type="radio" class="active" checked>
+	<input name="switcher" id="sw2" value="1" type="radio">
 </joomla-switcher>
 
 ```
 
 ### Switcher demo:
-<joomla-switcher>
-	<span class="switcher">
-		<input name="switcher1" id="sw12" value="0" type="radio" class="active" checked>
-		<input name="switcher1" id="sw22" value="1" type="radio">
-		<span class="switch"></span>
-	</span>
-	<span class="switcher-labels">
-		<span class="switcher-label-0 active">No</span>
-		<span class="switcher-label-1">Yes</span>
-	</span>
+<joomla-switcher offText="Off" onText="On">
+	<input name="switcher1" id="sw1" value="0" type="radio">
+	<input name="switcher1" id="sw2" value="1" type="radio" class="active" checked>
 </joomla-switcher>
 
-<joomla-switcher>
-	<span class="switcher switcher-primary">
-		<input name="switcher2" id="sw13" value="0" type="radio" class="active" checked>
-		<input name="switcher2" id="sw23" value="1" type="radio">
-		<span class="switch"></span>
-	</span>
-	<span class="switcher-labels">
-		<span class="switcher-label-0 active">Hide</span>
-		<span class="switcher-label-1">Show</span>
-	</span>
+<joomla-switcher class="switcher-primary" offText="No" onText="Yes">
+	<input name="switcher2" id="sw3" value="0" type="radio">
+	<input name="switcher2" id="sw4" value="1" type="radio" class="active" checked>
 </joomla-switcher>
 
-<joomla-switcher>
-	<span class="switcher switcher-danger">
-		<input name="switcher3" id="sw14" value="0" type="radio" class="active" checked>
-		<input name="switcher3" id="sw24" value="1" type="radio">
-		<span class="switch"></span>
-	</span>
-	<span class="switcher-labels">
-		<span class="switcher-label-0 active">Stable</span>
-		<span class="switcher-label-1">Alpha</span>
-	</span>
+<joomla-switcher class="switcher-danger" offText="Stable" onText="Alpha">
+	<input name="switcher3" id="sw5" value="0" type="radio">
+	<input name="switcher3" id="sw6" value="1" type="radio" class="active" checked>
 </joomla-switcher>
+
 
 ## Attibutes
 Control the design and functionality of the custom element through attributes.
+
+|Attribute				|Description								     												|
+|-----------------------|-----------------------------------------------------------------------------------------------|
+|class		|This attribute is responsible for the looks. Possible values: `switcher-primary` and `switcher-danger`		|
+|offText	|The text that's displayed when the switcher is toggled off													|
+|onText		|The text that's displayed when the switcher is toggled on													|
+
+All Strings are translateble, using the common API: `Joomla.JText._('JON')`
 
 ## Events
 The custom element exposes a few events for hooking into switcher functionality.
