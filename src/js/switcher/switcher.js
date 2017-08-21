@@ -17,9 +17,9 @@ class SwitcherElement extends HTMLElement {
 	connectedCallback() {
 		const self = this;
 		// Add the initial active class
-		const switcher = [].slice.call(this.querySelectorAll('input')),
-			 container = this.querySelector('span.switcher'),
-			  next     = switcher[1].parentNode.nextElementSibling;
+		const switcher  = [].slice.call(this.querySelectorAll('input')),
+			  container = this.querySelector('span.switcher'),
+			  next      = switcher[1].parentNode.nextElementSibling;
 
 		// Throw an error if the switch hasn't been setup properly
 		if (!switcher.length) {
@@ -41,8 +41,8 @@ class SwitcherElement extends HTMLElement {
 		switcher.forEach(function(switchEl) {
 			// Add the required accessibility tags
 			if (switchEl.id) {
-				const parent = switchEl.parentNode,
-					relatedSpan = parent.nextElementSibling.querySelector('span.switcher-label-' + switchEl.value);
+				const parent      = switchEl.parentNode,
+					  relatedSpan = parent.nextElementSibling.querySelector('span.switcher-label-' + switchEl.value);
 
 				relatedSpan.id = switchEl.id + '-label';
 				switchEl.setAttribute('aria-labelledby', relatedSpan.id);
@@ -84,19 +84,20 @@ class SwitcherElement extends HTMLElement {
 	}
 
 	toggle(element) {
-		const parent = element.parentNode,
-			inputs = [].slice.call(parent.querySelectorAll('input')),
-			wasActive = parent.querySelectorAll('input.active'),
-			spans = [].slice.call(parent.nextElementSibling.querySelectorAll('span'));
+		const parent    = element.parentNode,
+			  wasActive = parent.querySelectorAll('input.active'),
+			  inputs    = [].slice.call(parent.querySelectorAll('input')),
+			  spans     = [].slice.call(parent.nextElementSibling.querySelectorAll('span'));
 
 		spans.forEach(function (span) {
 			span.classList.remove('active');
 		});
 
-		if (element.parentNode.classList.contains('active')) {
-			element.parentNode.classList.remove('active');
-		} else {
-			element.parentNode.classList.add('active');
+		if (parent.classList.contains('active')) {
+			parent.classList.remove('active');
+		}
+		else {
+			parent.classList.add('active');
 		}
 
 		if (!element.classList.contains('active')) {
