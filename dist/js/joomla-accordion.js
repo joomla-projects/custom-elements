@@ -103,4 +103,5 @@ class AccordionElement extends HTMLElement {
 		this.removeEventListener(eventName, this);
 	}
 }
+
 customElements.define('joomla-accordion', AccordionElement);

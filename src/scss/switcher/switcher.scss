@@ -2,42 +2,49 @@
 
 @import "node_modules/bootstrap/scss/mixins";
 
-$switcher-width: 60px;
+$switcher-width:  62px;
+$switcher-height: 28px;
+$border-width:    1px;
 
-.joomla-switcher {
-  position: relative;
-  box-sizing: content-box;
+joomla-switcher {
   display: inline-block;
-  width: $switcher-width;
-  height: 26px;
-  margin-top: 2px;
-  vertical-align: middle;
-  cursor: pointer;
-  user-select: none;
-  background-color: darken($white, 5%);
-  background-clip: content-box;
-  border: 1px solid rgba(0,0,0,.18);
-  border-radius: $border-radius;
-  box-shadow: 0 0 0 0 rgb(223,223,223) inset;
-  transition: border .4s ease 0s, box-shadow .4s ease 0s;
+  height: $switcher-height;
+  box-sizing: border-box;
 
-  &.active {
+  .switcher {
+    position: relative;
+    box-sizing: border-box;
+    display: inline-block;
+    width: $switcher-width;
+    height: $switcher-height;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    background-color: darken($white, 5%);
+    background-clip: content-box;
+    border: $border-width solid rgba(0,0,0,.18);
+    border-radius: $border-radius;
+    box-shadow: 0 0 0 0 rgb(223,223,223) inset;
+    transition: border .4s ease 0s, box-shadow .4s ease 0s;
+  }
+
+  .switcher.active {
     background-color: $brand-success;
     border-color: $brand-success;
-    box-shadow: 0 0 0 16px $brand-success inset;
+    box-shadow: 0 0 0 calc(#{$switcher-height} / 2) $brand-success inset;
     transition: border .4s ease 0s, box-shadow .4s ease 0s, background-color 1.2s ease 0s;
   }
 
-  &.switcher-danger.active {
+  .switcher-danger.switcher.active {
     background-color: $brand-danger;
     border-color: $brand-danger;
-    box-shadow: 0 0 0 16px $brand-danger inset;
+    box-shadow: 0 0 0 calc(#{$switcher-height} / 2) $brand-danger inset;
   }
 
-  &.switcher-primary.active {
+  .switcher-primary.switcher.active {
     background-color: $brand-primary;
     border-color: $brand-primary;
-    box-shadow: 0 0 0 16px $brand-primary inset;
+    box-shadow: 0 0 0 calc(#{$switcher-height} / 2) $brand-primary inset;
   }
 
   input {
@@ -46,7 +53,7 @@ $switcher-width: 60px;
     left: 0;
     z-index: 2;
     width: $switcher-width;
-    height: 26px;
+    height: $switcher-height;
     padding: 0;
     margin: 0;
     cursor: pointer;
@@ -57,7 +64,7 @@ $switcher-width: 60px;
     position: absolute;
     top: 0;
     width: calc(#{$switcher-width} / 2);
-    height: 26px;
+    height: calc(#{$switcher-height} - (#{$border-width} * 2));
     background: $white;
     border-radius: $border-radius;
     box-shadow: 0 0 1px rgba(0,0,0,.1) inset, 0 1px 3px rgba(0,0,0,.15);
@@ -69,32 +76,31 @@ $switcher-width: 60px;
   }
 
   input~:checked~.switch {
-    left: calc(#{$switcher-width} / 2);
+    left: calc((#{$switcher-width} / 2) - (#{$border-width} * 2));
   }
 
   input:checked {
     z-index: 0;
   }
 
-}
+  .switcher-labels {
+    position: relative;
 
-.switcher-labels {
-  position: relative;
-  margin-left: 10px;
-
-  span {
-    position: absolute;
-    top: 0;
-    left: 0;
-    color: $gray-light;
-    visibility: hidden;
-    opacity: 0;
-    transition: all .2s ease-in-out;
-
-    &.active {
-      visibility: visible;
-      opacity: 1;
+    span {
+      position: absolute;
+      top: 0;
+      left: 10px;
+      color: $gray-light;
+      visibility: hidden;
+      opacity: 0;
       transition: all .2s ease-in-out;
+
+      &.active {
+        visibility: visible;
+        opacity: 1;
+        transition: all .2s ease-in-out;
+      }
+
     }
 
   }

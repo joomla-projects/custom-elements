@@ -18,7 +18,7 @@ class SwitcherElement extends HTMLElement {
 	connectedCallback() {
 		const self = this;
 		// Add the initial active class
-		const switcher = this.querySelectorAll('input'),
+		const switcher = [].slice.call(this.querySelectorAll('input')),
 			  next     = switcher[1].parentNode.nextElementSibling;
 
 		if (!switcher.length) {
@@ -35,12 +35,22 @@ class SwitcherElement extends HTMLElement {
 		}
 
 		switcher.forEach(function(switchEl) {
+			// Add the required accessibility tags
+			if (switchEl.id) {
+				const parent = switchEl.parentNode,
+					relatedSpan = parent.nextElementSibling.querySelector('span.switcher-label-' + switchEl.value);
+
+				relatedSpan.id = switchEl.id + '-label';
+				switchEl.setAttribute('aria-labelledby', relatedSpan.id)
+			}
+
 			// Add the active class on click
 			switchEl.addEventListener('click', function (event) {
-				let el = event.target,
-					parent = this.parentNode,
-					spans = parent.nextElementSibling.querySelectorAll('span');
+				const parent = this.parentNode,
+					inputs = [].slice.call(parent.querySelectorAll('input')),
+					spans = [].slice.call(parent.nextElementSibling.querySelectorAll('span'));
 
+				console.log(spans)
 				spans.forEach(function(span) {
 					span.classList.remove('active');
 				});
@@ -52,11 +62,17 @@ class SwitcherElement extends HTMLElement {
 				}
 
 				if (!this.classList.contains('active')) {
+					inputs.forEach(function (input) {
+						input.classList.remove('active');
+					});
 					this.classList.add('active');
+
 					self.dispatchCustomEvent('joomla.switcher.on');
 				}
 				else {
-					this.classList.remove('active');
+					inputs.forEach(function (input) {
+						input.classList.remove('active');
+					});
 
 					self.dispatchCustomEvent('joomla.switcher.off');
 				}

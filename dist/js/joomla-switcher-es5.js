@@ -19,21 +19,28 @@ var _createClass = function () {
   if ('function' != typeof b && null !== b) throw new TypeError('Super expression must either be null or a function, not ' + (typeof b === 'undefined' ? 'undefined' : _typeof(b)));a.prototype = Object.create(b && b.prototype, { constructor: { value: a, enumerable: !1, writable: !0, configurable: !0 } }), b && (Object.setPrototypeOf ? Object.setPrototypeOf(a, b) : a.__proto__ = b);
 }(function () {
   if (!document.getElementById('joomla-switcher-stylesheet')) {
-    var a = document.createElement('style');a.id = 'joomla-switcher-stylesheet', a.innerHTML = '.joomla-switcher{position:relative;box-sizing:content-box;display:inline-block;width:60px;height:26px;margin-top:2px;vertical-align:middle;cursor:pointer;user-select:none;background-color:#f2f2f2;background-clip:content-box;border:1px solid rgba(0,0,0,.18);border-radius:.25rem;box-shadow:0 0 0 0 #dfdfdf inset;transition:border .4s ease 0s,box-shadow .4s ease 0s}.joomla-switcher.active{background-color:#5cb85c;border-color:#5cb85c;box-shadow:0 0 0 16px #5cb85c inset;transition:border .4s ease 0s,box-shadow .4s ease 0s,background-color 1.2s ease 0s}.joomla-switcher.switcher-danger.active{background-color:#d9534f;border-color:#d9534f;box-shadow:0 0 0 16px #d9534f inset}.joomla-switcher.switcher-primary.active{background-color:#0275d8;border-color:#0275d8;box-shadow:0 0 0 16px #0275d8 inset}.joomla-switcher input{position:absolute;top:0;left:0;z-index:2;width:60px;height:26px;padding:0;margin:0;cursor:pointer;opacity:0}.joomla-switcher .switch{position:absolute;top:0;width:calc(60px / 2);height:26px;background:#fff;border-radius:.25rem;box-shadow:0 0 1px rgba(0,0,0,.1) inset,0 1px 3px rgba(0,0,0,.15);transition:left .2s ease 0s}.joomla-switcher input:checked~.switch{left:0}.joomla-switcher input~:checked~.switch{left:calc(60px / 2)}.joomla-switcher input:checked{z-index:0}.switcher-labels{position:relative;margin-left:10px}.switcher-labels span{position:absolute;top:0;left:0;color:#636c72;visibility:hidden;opacity:0;transition:all .2s ease-in-out}.switcher-labels span.active{visibility:visible;opacity:1;transition:all .2s ease-in-out}', document.head.appendChild(a);
+    var a = document.createElement('style');a.id = 'joomla-switcher-stylesheet', a.innerHTML = 'joomla-switcher{display:inline-block;height:28px;box-sizing:border-box}joomla-switcher .switcher{position:relative;box-sizing:border-box;display:inline-block;width:62px;height:28px;vertical-align:middle;cursor:pointer;user-select:none;background-color:#f2f2f2;background-clip:content-box;border:1px solid rgba(0,0,0,.18);border-radius:.25rem;box-shadow:0 0 0 0 #dfdfdf inset;transition:border .4s ease 0s,box-shadow .4s ease 0s}joomla-switcher .switcher.active{background-color:#5cb85c;border-color:#5cb85c;box-shadow:0 0 0 calc(28px / 2) #5cb85c inset;transition:border .4s ease 0s,box-shadow .4s ease 0s,background-color 1.2s ease 0s}joomla-switcher .switcher-danger.switcher.active{background-color:#d9534f;border-color:#d9534f;box-shadow:0 0 0 calc(28px / 2) #d9534f inset}joomla-switcher .switcher-primary.switcher.active{background-color:#0275d8;border-color:#0275d8;box-shadow:0 0 0 calc(28px / 2) #0275d8 inset}joomla-switcher input{position:absolute;top:0;left:0;z-index:2;width:62px;height:28px;padding:0;margin:0;cursor:pointer;opacity:0}joomla-switcher .switch{position:absolute;top:0;width:calc(62px / 2);height:calc(28px - (1px * 2));background:#fff;border-radius:.25rem;box-shadow:0 0 1px rgba(0,0,0,.1) inset,0 1px 3px rgba(0,0,0,.15);transition:left .2s ease 0s}joomla-switcher input:checked~.switch{left:0}joomla-switcher input~:checked~.switch{left:calc((62px / 2) - (1px * 2))}joomla-switcher input:checked{z-index:0}joomla-switcher .switcher-labels{position:relative}joomla-switcher .switcher-labels span{position:absolute;top:0;left:10px;color:#636c72;visibility:hidden;opacity:0;transition:all .2s ease-in-out}joomla-switcher .switcher-labels span.active{visibility:visible;opacity:1;transition:all .2s ease-in-out}', document.head.appendChild(a);
   }
 })();var SwitcherElement = function (a) {
   function b() {
     return _classCallCheck(this, b), _possibleConstructorReturn(this, (b.__proto__ || Object.getPrototypeOf(b)).call(this));
   }return _inherits(b, a), _createClass(b, [{ key: 'connectedCallback', value: function connectedCallback() {
       var a = this,
-          b = this.querySelectorAll('input'),
+          b = [].slice.call(this.querySelectorAll('input')),
           c = b[1].parentNode.nextElementSibling;if (!b.length) throw new Error('Switcher not properly setup');b[1].checked ? (b[1].parentNode.classList.add('active'), c.querySelector('.switcher-label-' + b[1].value).classList.add('active')) : c.querySelector('.switcher-label-' + b[0].value).classList.add('active'), b.forEach(function (b) {
-        b.addEventListener('click', function (b) {
-          var c = b.target,
-              d = this.parentNode,
-              e = d.nextElementSibling.querySelectorAll('span');e.forEach(function (a) {
+        if (b.id) {
+          var c = b.parentNode,
+              d = c.nextElementSibling.querySelector('span.switcher-label-' + b.value);d.id = b.id + '-label', b.setAttribute('aria-labelledby', d.id);
+        }b.addEventListener('click', function () {
+          var b = this.parentNode,
+              c = [].slice.call(b.querySelectorAll('input')),
+              d = [].slice.call(b.nextElementSibling.querySelectorAll('span'));console.log(d), d.forEach(function (a) {
             a.classList.remove('active');
-          }), this.parentNode.classList.contains('active') ? this.parentNode.classList.remove('active') : this.parentNode.classList.add('active'), this.classList.contains('active') ? (this.classList.remove('active'), a.dispatchCustomEvent('joomla.switcher.off')) : (this.classList.add('active'), a.dispatchCustomEvent('joomla.switcher.on')), d.nextElementSibling.querySelector('.switcher-label-' + this.value).classList.add('active');
+          }), this.parentNode.classList.contains('active') ? this.parentNode.classList.remove('active') : this.parentNode.classList.add('active'), this.classList.contains('active') ? (c.forEach(function (a) {
+            a.classList.remove('active');
+          }), a.dispatchCustomEvent('joomla.switcher.off')) : (c.forEach(function (a) {
+            a.classList.remove('active');
+          }), this.classList.add('active'), a.dispatchCustomEvent('joomla.switcher.on')), b.nextElementSibling.querySelector('.switcher-label-' + this.value).classList.add('active');
         });
       });
     } }, { key: 'disconnectedCallback', value: function disconnectedCallback() {
