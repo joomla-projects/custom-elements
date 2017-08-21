@@ -36,8 +36,8 @@ var _createClass = function () {
           a.toggle(b.target);
         });
       }), c.addEventListener('keydown', function (a) {
-        if (a.preventDefault(), 13 === a.keyCode || 32 === a.keyCode) {
-          var b = c.querySelector('input:not(.active)');b.click();
+        if (13 === a.keyCode || 32 === a.keyCode) {
+          a.preventDefault();var b = c.querySelector('input:not(.active)');b.click();
         }
       });
     } }, { key: 'disconnectedCallback', value: function disconnectedCallback() {

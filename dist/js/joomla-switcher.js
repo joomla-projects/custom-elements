@@ -59,8 +59,8 @@ class SwitcherElement extends HTMLElement {
 
 
 		container.addEventListener('keydown', function (event) {
-			event.preventDefault();
 			if (event.keyCode === 13 || event.keyCode === 32) {
+				event.preventDefault();
 				const element = container.querySelector('input:not(.active)')
 				element.click();
 			}
