@@ -18,12 +18,16 @@ class SwitcherElement extends HTMLElement {
 		const self = this;
 		// Add the initial active class
 		const switcher = [].slice.call(this.querySelectorAll('input')),
+			 container = this.querySelector('span.switcher'),
 			  next     = switcher[1].parentNode.nextElementSibling;
 
 		// Throw an error if the switch hasn't been setup properly
 		if (!switcher.length) {
 			throw new Error('Switcher not properly setup')
 		}
+
+		// Add tab focus
+		container.setAttribute('tabindex', 0);
 
 		if (switcher[1].checked) {
 			switcher[1].parentNode.classList.add('active');
@@ -46,40 +50,18 @@ class SwitcherElement extends HTMLElement {
 
 			// Add the active class on click
 			switchEl.addEventListener('click', function (event) {
-				const parent = this.parentNode,
-					inputs = [].slice.call(parent.querySelectorAll('input')),
-					spans = [].slice.call(parent.nextElementSibling.querySelectorAll('span'));
-
-				spans.forEach(function(span) {
-					span.classList.remove('active');
-				});
-
-				if (this.parentNode.classList.contains('active')) {
-					this.parentNode.classList.remove('active');
-				} else {
-					this.parentNode.classList.add('active');
-				}
-
-				if (!this.classList.contains('active')) {
-					inputs.forEach(function (input) {
-						input.classList.remove('active');
-					});
-					this.classList.add('active');
-
-					self.dispatchCustomEvent('joomla.switcher.on');
-				}
-				else {
-					inputs.forEach(function (input) {
-						input.classList.remove('active');
-					});
-
-					self.dispatchCustomEvent('joomla.switcher.off');
-				}
-
-				parent.nextElementSibling.querySelector('.switcher-label-' + this.value).classList.add('active');
+				self.toggle(event.target);
 			});
-		})
+		});
 
+
+		container.addEventListener('keydown', function (event) {
+			event.preventDefault();
+			if (event.keyCode === 13 || event.keyCode === 32) {
+				const element = container.querySelector('input:not(.active)')
+				self.toggle(element);
+			}
+		});
 	}
 
 	/* Lifecycle, element removed from the DOM */
@@ -96,6 +78,46 @@ class SwitcherElement extends HTMLElement {
 		OriginalCustomEvent.relatedTarget = this;
 		this.dispatchEvent(OriginalCustomEvent);
 		this.removeEventListener(eventName, this);
+	}
+
+	toggle(element) {
+		const parent = element.parentNode,
+			inputs = [].slice.call(parent.querySelectorAll('input')),
+			wasActive = parent.querySelectorAll('input.active'),
+			spans = [].slice.call(parent.nextElementSibling.querySelectorAll('span'));
+
+		spans.forEach(function (span) {
+			span.classList.remove('active');
+		});
+
+		if (element.parentNode.classList.contains('active')) {
+			element.parentNode.classList.remove('active');
+		} else {
+			element.parentNode.classList.add('active');
+		}
+
+		if (!element.classList.contains('active')) {
+			inputs.forEach(function(input) {
+				input.classList.remove('active');
+				input.removeAttribute('checked');
+			});
+			element.classList.add('active');
+
+			this.dispatchCustomEvent('joomla.switcher.on');
+		}
+		else {
+			inputs.forEach(function (input) {
+				input.classList.remove('active');
+				input.removeAttribute('checked');
+			});
+
+			this.dispatchCustomEvent('joomla.switcher.off');
+		}
+
+		const newActive = inputs.filter(item => item !== wasActive);
+
+		newActive[0].setAttribute('checked', '');
+		parent.nextElementSibling.querySelector('.switcher-label-' + element.value).classList.add('active');
 	}
 }
 customElements.define('joomla-switcher', SwitcherElement);

@@ -27,26 +27,36 @@ var _createClass = function () {
   }return _inherits(b, a), _createClass(b, [{ key: 'connectedCallback', value: function connectedCallback() {
       var a = this,
           b = [].slice.call(this.querySelectorAll('input')),
-          c = b[1].parentNode.nextElementSibling;if (!b.length) throw new Error('Switcher not properly setup');b[1].checked ? (b[1].parentNode.classList.add('active'), c.querySelector('.switcher-label-' + b[1].value).classList.add('active')) : c.querySelector('.switcher-label-' + b[0].value).classList.add('active'), b.forEach(function (b) {
+          c = this.querySelector('span.switcher'),
+          d = b[1].parentNode.nextElementSibling;if (!b.length) throw new Error('Switcher not properly setup');c.setAttribute('tabindex', 0), b[1].checked ? (b[1].parentNode.classList.add('active'), d.querySelector('.switcher-label-' + b[1].value).classList.add('active')) : d.querySelector('.switcher-label-' + b[0].value).classList.add('active'), b.forEach(function (b) {
         if (b.id) {
           var c = b.parentNode,
               d = c.nextElementSibling.querySelector('span.switcher-label-' + b.value);d.id = b.id + '-label', b.setAttribute('aria-labelledby', d.id);
-        }b.addEventListener('click', function () {
-          var b = this.parentNode,
-              c = [].slice.call(b.querySelectorAll('input')),
-              d = [].slice.call(b.nextElementSibling.querySelectorAll('span'));d.forEach(function (a) {
-            a.classList.remove('active');
-          }), this.parentNode.classList.contains('active') ? this.parentNode.classList.remove('active') : this.parentNode.classList.add('active'), this.classList.contains('active') ? (c.forEach(function (a) {
-            a.classList.remove('active');
-          }), a.dispatchCustomEvent('joomla.switcher.off')) : (c.forEach(function (a) {
-            a.classList.remove('active');
-          }), this.classList.add('active'), a.dispatchCustomEvent('joomla.switcher.on')), b.nextElementSibling.querySelector('.switcher-label-' + this.value).classList.add('active');
+        }b.addEventListener('click', function (b) {
+          a.toggle(b.target);
         });
+      }), c.addEventListener('keydown', function (b) {
+        if (b.preventDefault(), 13 === b.keyCode || 32 === b.keyCode) {
+          var d = c.querySelector('input:not(.active)');a.toggle(d);
+        }
       });
     } }, { key: 'disconnectedCallback', value: function disconnectedCallback() {
       this.removeEventListener('joomla.switcher.toggle', this), this.removeEventListener('joomla.switcher.on', this), this.removeEventListener('joomla.switcher.off', this), this.removeEventListener('click', this);
     } }, { key: 'dispatchCustomEvent', value: function dispatchCustomEvent(a) {
       var b = new CustomEvent(a, { bubbles: !0, cancelable: !0 });b.relatedTarget = this, this.dispatchEvent(b), this.removeEventListener(a, this);
+    } }, { key: 'toggle', value: function toggle(a) {
+      var b = a.parentNode,
+          c = [].slice.call(b.querySelectorAll('input')),
+          d = b.querySelectorAll('input.active'),
+          e = [].slice.call(b.nextElementSibling.querySelectorAll('span'));e.forEach(function (a) {
+        a.classList.remove('active');
+      }), a.parentNode.classList.contains('active') ? a.parentNode.classList.remove('active') : a.parentNode.classList.add('active'), a.classList.contains('active') ? (c.forEach(function (a) {
+        a.classList.remove('active'), a.removeAttribute('checked');
+      }), this.dispatchCustomEvent('joomla.switcher.off')) : (c.forEach(function (a) {
+        a.classList.remove('active'), a.removeAttribute('checked');
+      }), a.classList.add('active'), this.dispatchCustomEvent('joomla.switcher.on'));var f = c.filter(function (a) {
+        return a !== d;
+      });f[0].setAttribute('checked', ''), b.nextElementSibling.querySelector('.switcher-label-' + a.value).classList.add('active');
     } }]), b;
 }(HTMLElement);customElements.define('joomla-switcher', SwitcherElement);
 

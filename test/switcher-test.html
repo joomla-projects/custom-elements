@@ -37,7 +37,7 @@
 				setup(() => {
 					myEl = fixture('switcher-element-basic');
 
-					const switcherEl = myEl.querySelector('.joomla-switcher.switcher');
+					const switcherEl = myEl.querySelector('.switcher');
 					const labelEl = myEl.querySelector('.switcher-labels');
 				});
 
@@ -46,7 +46,7 @@
 				});
 
 				test('Has the container span for the radios', () => {
-					const switcherEl = myEl.querySelector('.joomla-switcher.switcher');
+					const switcherEl = myEl.querySelector('.switcher');
 					assert.equal(switcherEl.getAttribute('class'), 'joomla-switcher switcher');
 				});
 
@@ -55,14 +55,34 @@
 					assert.equal(labelEl.getAttribute('class'), 'switcher-labels');
 				});
 
-				// test('Has level info', () => {
-				// 	assert.equal(myEl.getAttribute('level'), 'info');
-				// });
 
-				// test('Respects level attribute change, any unsupported value', () => {
-				// 	myEl.setAttribute('level', 'unknown');
-				// 	assert.equal(myEl.getAttribute('level'), 'info');
-				// });
+				test('Active radio should have active class', () => {
+						const switcherEl = myEl.querySelector('.switcher');
+						const switchs = switcherEl.querySelectorAll('input')
+						assert.equal(switchs[0].getAttribute('class'), 'active');
+						assert.equal(switchs[1].hasAttribute('class'), false);
+					});
+
+				test('Active label should have active class', () => {
+					const labelEl = myEl.querySelector('.switcher-labels');
+					const labels = labelEl.querySelectorAll('span')
+					assert.equal(labels[0].getAttribute('class'), 'switcher-label-0 active');
+					assert.equal(labels[1].getAttribute('class'), 'switcher-label-1');
+				});
+
+				test('Test clicking on the switcher should change the active elements', () => {
+					const switcherEl = myEl.querySelector('.switcher');
+					const switchs = switcherEl.querySelectorAll('input');
+					const labelEl = myEl.querySelector('.switcher-labels');
+					const labels = labelEl.querySelectorAll('span');
+
+					switcherEl.click();
+					assert.equal(switchs[1].getAttribute('class'), 'active');
+					// assert.equal(switchs[0].hasAttribute('class'), false);
+					// assert.equal(labels[0].getAttribute('class'), 'switcher-label-0');
+					// assert.equal(labels[1].getAttribute('class'), 'switcher-label-1 active');
+					// assert.equal(switcherEl.parentNode.hasAttribute('class'), false);
+				});
 
 				// test('Respects level attribute change, warning', () => {
 				// 	myEl.setAttribute('level', 'warning');

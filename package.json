@@ -20,15 +20,15 @@
 		"vanilla-js",
 		"javascript"
 	],
-	"author": "Dimitrios Grammatikogiannis",
+	"author": "Dimitrios Grammatikogiannis, Charlie Lodder",
 	"devDependencies": {
 		"@webcomponents/webcomponentsjs": "latest",
-		"@webcomponents/custom-elements": "1.0.0",
-		"babel-plugin-static-fs": "^1.1.0",
-		"babel-preset-es2015": "^6.18.0",
-		"babelify": "^7.3.0",
-		"babili": "^0.1.4",
-		"bootstrap": "4.0.0-alpha.6",
+		"@webcomponents/custom-elements": "latest",
+		"babel-plugin-static-fs": "latest",
+		"babel-preset-es2015": "latest",
+		"babelify": "latest",
+		"babel-minify": "latest",
+		"bootstrap": "4.0.0-beta",
 		"browserify": "*",
 		"grunt": "latest",
 		"grunt-babel": "latest",
@@ -38,8 +38,9 @@
 		"grunt-contrib-uglify": "git://github.com/gruntjs/grunt-contrib-uglify.git#harmony",
 		"grunt-sass": "latest",
 		"grunt-shell": "latest",
-		"web-component-tester": "6.0.0",
-		"webcomponentsjs": "1.0.1"
+		"web-component-tester": "latest",
+		"webcomponentsjs": "latest",
+		"@polymer/test-fixture": "latest"
 	},
 	"browserify": {
 		"transform": [
