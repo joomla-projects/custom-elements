@@ -28,7 +28,7 @@ var _createClass = function () {
       var a = this.querySelectorAll('input');if (!a.length) throw new Error('Switcher not properly setup');var b = a[1].parentNode.nextElementSibling;a[1].checked ? (a[1].parentNode.classList.add('active'), b.querySelector('.switcher-label-' + a[1].value).classList.add('active')) : b.querySelector('.switcher-label-' + a[0].value).classList.add('active'), this.addEventListener('click', function (a) {
         var b = a.target;if ('input' === b.tagName.toLowerCase()) {
           var c = b.parentNode,
-              d = c.nextElementSibling.querySelectorAll('span');d.forEach(function (a) {
+              d = c.nextElementSibling.querySelectorAll('span');[].slice.call(d).forEach(function (a) {
             a.classList.remove('active');
           }), b.classList.contains('active') ? (c.classList.remove('active'), this.dispatchCustomEvent('joomla.switcher.off')) : (c.classList.add('active'), this.dispatchCustomEvent('joomla.switcher.on')), c.nextElementSibling.querySelector('.switcher-label-' + b.value).classList.add('active');
         }
