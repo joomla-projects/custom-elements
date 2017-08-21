@@ -1,9 +1,8 @@
 (function () {
-	const css = ``;
 	if (!document.getElementById('joomla-modal-stylesheet')) {
 		const style = document.createElement('style');
 		style.id = 'joomla-modal-stylesheet';
-		style.innerHTML = css;
+		style.innerHTML = ``;
 		document.head.appendChild(style);
 	}
 })();

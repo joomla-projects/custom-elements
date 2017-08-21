@@ -1,9 +1,8 @@
 (function () {
-	const css = `{{stylesheet}}`;
 	if (!document.getElementById('joomla-tab-stylesheet')) {
 		const style = document.createElement('style');
 		style.id = 'joomla-tab-stylesheet';
-		style.innerText = css;
+		style.innerText = `{{stylesheet}}`;
 		document.head.appendChild(style);
 	}
 })();

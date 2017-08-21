@@ -1,9 +1,8 @@
 (function () {
-	const css = `{{stylesheet}}`;
 	if (!document.getElementById('joomla-collapse-stylesheet')) {
 		const style = document.createElement('style');
 		style.id = 'joomla-collapse-stylesheet';
-		style.innerHTML = css;
+		style.innerHTML = `{{stylesheet}}`;
 		document.head.appendChild(style);
 	}
 })();
