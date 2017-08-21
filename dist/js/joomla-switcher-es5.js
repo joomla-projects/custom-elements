@@ -32,12 +32,12 @@ var _createClass = function () {
         if (b.id) {
           var c = b.parentNode,
               d = c.nextElementSibling.querySelector('span.switcher-label-' + b.value);d.id = b.id + '-label', b.setAttribute('aria-labelledby', d.id);
-        }b.addEventListener('click', function (b) {
+        }b.setAttribute('tabindex', '-1'), b.addEventListener('click', function (b) {
           a.toggle(b.target);
         });
-      }), c.addEventListener('keydown', function (b) {
-        if (b.preventDefault(), 13 === b.keyCode || 32 === b.keyCode) {
-          var d = c.querySelector('input:not(.active)');a.toggle(d);
+      }), c.addEventListener('keydown', function (a) {
+        if (a.preventDefault(), 13 === a.keyCode || 32 === a.keyCode) {
+          var b = c.querySelector('input:not(.active)');b.click();
         }
       });
     } }, { key: 'disconnectedCallback', value: function disconnectedCallback() {

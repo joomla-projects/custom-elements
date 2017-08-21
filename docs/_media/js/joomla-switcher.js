@@ -45,8 +45,11 @@ class SwitcherElement extends HTMLElement {
 					relatedSpan = parent.nextElementSibling.querySelector('span.switcher-label-' + switchEl.value);
 
 				relatedSpan.id = switchEl.id + '-label';
-				switchEl.setAttribute('aria-labelledby', relatedSpan.id)
+				switchEl.setAttribute('aria-labelledby', relatedSpan.id);
 			}
+
+			// Remove the tab focus from the inputs
+			switchEl.setAttribute('tabindex', '-1');
 
 			// Add the active class on click
 			switchEl.addEventListener('click', function (event) {
@@ -59,7 +62,7 @@ class SwitcherElement extends HTMLElement {
 			event.preventDefault();
 			if (event.keyCode === 13 || event.keyCode === 32) {
 				const element = container.querySelector('input:not(.active)')
-				self.toggle(element);
+				element.click();
 			}
 		});
 	}
