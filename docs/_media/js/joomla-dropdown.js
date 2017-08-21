@@ -1,9 +1,8 @@
 (function () {
-	const css = ``;
 	if (!document.getElementById('joomla-dropdown-stylesheet')) {
 		const style = document.createElement('style');
 		style.id = 'joomla-dropdown-stylesheet';
-		style.innerHTML = css;
+		style.innerHTML = ``;
 		document.head.appendChild(style);
 	}
 })();
