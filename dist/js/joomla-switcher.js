@@ -42,7 +42,7 @@ class SwitcherElement extends HTMLElement {
 				let parent = el.parentNode,
 				    spans  = parent.nextElementSibling.querySelectorAll('span');
 
-				spans.forEach(function(element) {
+				[].slice.call(spans).forEach(function(element) {
 					element.classList.remove('active');
 				});
 
