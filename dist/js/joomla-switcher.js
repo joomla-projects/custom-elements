@@ -2,7 +2,7 @@
 	if (!document.getElementById('joomla-switcher-stylesheet')) {
 		const style = document.createElement('style');
 		style.id = 'joomla-switcher-stylesheet';
-		style.innerHTML = `joomla-switcher{display:inline-block;height:28px;box-sizing:border-box}joomla-switcher .switcher{position:relative;box-sizing:border-box;display:inline-block;width:62px;height:28px;vertical-align:middle;cursor:pointer;user-select:none;background-color:#f2f2f2;background-clip:content-box;border:1px solid rgba(0,0,0,.18);border-radius:.25rem;box-shadow:0 0 0 0 #dfdfdf inset;transition:border .4s ease 0s,box-shadow .4s ease 0s}joomla-switcher .switcher.active{background-color:#5cb85c;border-color:#5cb85c;box-shadow:0 0 0 calc(28px / 2) #5cb85c inset;transition:border .4s ease 0s,box-shadow .4s ease 0s,background-color 1.2s ease 0s}joomla-switcher .switcher-danger.switcher.active{background-color:#d9534f;border-color:#d9534f;box-shadow:0 0 0 calc(28px / 2) #d9534f inset}joomla-switcher .switcher-primary.switcher.active{background-color:#0275d8;border-color:#0275d8;box-shadow:0 0 0 calc(28px / 2) #0275d8 inset}joomla-switcher input{position:absolute;top:0;left:0;z-index:2;width:62px;height:28px;padding:0;margin:0;cursor:pointer;opacity:0}joomla-switcher .switch{position:absolute;top:0;width:calc(62px / 2);height:calc(28px - (1px * 2));background:#fff;border-radius:.25rem;box-shadow:0 0 1px rgba(0,0,0,.1) inset,0 1px 3px rgba(0,0,0,.15);transition:left .2s ease 0s}joomla-switcher input:checked~.switch{left:0}joomla-switcher input~:checked~.switch{left:calc((62px / 2) - (1px * 2))}joomla-switcher input:checked{z-index:0}joomla-switcher .switcher-labels{position:relative}joomla-switcher .switcher-labels span{position:absolute;top:0;left:10px;color:#636c72;visibility:hidden;opacity:0;transition:all .2s ease-in-out}joomla-switcher .switcher-labels span.active{visibility:visible;opacity:1;transition:all .2s ease-in-out}`;
+		style.innerHTML = `joomla-switcher{display:inline-flex;height:28px;box-sizing:border-box}joomla-switcher .switcher{position:relative;box-sizing:border-box;display:inline-block;width:62px;height:28px;vertical-align:middle;cursor:pointer;user-select:none;background-color:#f2f2f2;background-clip:content-box;border:1px solid rgba(0,0,0,.18);border-radius:.25rem;box-shadow:0 0 0 0 #dfdfdf inset;transition:border .4s ease 0s,box-shadow .4s ease 0s}joomla-switcher .switcher.active{background-color:#5cb85c;border-color:#5cb85c;box-shadow:0 0 0 calc(28px / 2) #5cb85c inset;transition:border .4s ease 0s,box-shadow .4s ease 0s,background-color 1.2s ease 0s}joomla-switcher .switcher-danger.switcher.active{background-color:#d9534f;border-color:#d9534f;box-shadow:0 0 0 calc(28px / 2) #d9534f inset}joomla-switcher .switcher-primary.switcher.active{background-color:#0275d8;border-color:#0275d8;box-shadow:0 0 0 calc(28px / 2) #0275d8 inset}joomla-switcher input{position:absolute;top:0;left:0;z-index:2;width:62px;height:28px;padding:0;margin:0;cursor:pointer;opacity:0}joomla-switcher .switch{position:absolute;top:0;width:calc(62px / 2);height:calc(28px - (1px * 2));background:#fff;border-radius:.25rem;box-shadow:0 0 1px rgba(0,0,0,.1) inset,0 1px 3px rgba(0,0,0,.15);transition:left .2s ease 0s}joomla-switcher input:checked~.switch{left:0}joomla-switcher input~:checked~.switch{left:calc((62px / 2) - (1px * 2))}joomla-switcher input:checked{z-index:0}joomla-switcher .switcher-labels{position:relative}joomla-switcher .switcher-labels span{position:absolute;top:0;left:10px;color:#636c72;visibility:hidden;opacity:0;transition:all .2s ease-in-out}joomla-switcher .switcher-labels span.active{visibility:visible;opacity:1;transition:all .2s ease-in-out}`;
 		document.head.appendChild(style);
 	}
 })();
@@ -17,9 +17,9 @@ class SwitcherElement extends HTMLElement {
 	connectedCallback() {
 		const self = this;
 		// Add the initial active class
-		const switcher = [].slice.call(this.querySelectorAll('input')),
-			 container = this.querySelector('span.switcher'),
-			  next     = switcher[1].parentNode.nextElementSibling;
+		const switcher  = [].slice.call(this.querySelectorAll('input')),
+			  container = this.querySelector('span.switcher'),
+			  next      = switcher[1].parentNode.nextElementSibling;
 
 		// Throw an error if the switch hasn't been setup properly
 		if (!switcher.length) {
@@ -41,8 +41,8 @@ class SwitcherElement extends HTMLElement {
 		switcher.forEach(function(switchEl) {
 			// Add the required accessibility tags
 			if (switchEl.id) {
-				const parent = switchEl.parentNode,
-					relatedSpan = parent.nextElementSibling.querySelector('span.switcher-label-' + switchEl.value);
+				const parent      = switchEl.parentNode,
+					  relatedSpan = parent.nextElementSibling.querySelector('span.switcher-label-' + switchEl.value);
 
 				relatedSpan.id = switchEl.id + '-label';
 				switchEl.setAttribute('aria-labelledby', relatedSpan.id);
@@ -84,19 +84,20 @@ class SwitcherElement extends HTMLElement {
 	}
 
 	toggle(element) {
-		const parent = element.parentNode,
-			inputs = [].slice.call(parent.querySelectorAll('input')),
-			wasActive = parent.querySelectorAll('input.active'),
-			spans = [].slice.call(parent.nextElementSibling.querySelectorAll('span'));
+		const parent    = element.parentNode,
+			  wasActive = parent.querySelectorAll('input.active'),
+			  inputs    = [].slice.call(parent.querySelectorAll('input')),
+			  spans     = [].slice.call(parent.nextElementSibling.querySelectorAll('span'));
 
 		spans.forEach(function (span) {
 			span.classList.remove('active');
 		});
 
-		if (element.parentNode.classList.contains('active')) {
-			element.parentNode.classList.remove('active');
-		} else {
-			element.parentNode.classList.add('active');
+		if (parent.classList.contains('active')) {
+			parent.classList.remove('active');
+		}
+		else {
+			parent.classList.add('active');
 		}
 
 		if (!element.classList.contains('active')) {
