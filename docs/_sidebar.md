@@ -9,6 +9,7 @@
  - [Grouped Buttons](/group-buttons)
  - [Modal](/modal)
  - [Popover](/popover)
+ - [Switcher](/switcher)
  - [Tabs](/tab)
  - [Tooltip](/tooltip)
 
@@ -20,5 +21,6 @@
  - [Grouped Buttons](/group-buttons)
  - [Modal](/modal)
  - [Popover](/popover)
+ - [Switcher](/switcher)
  - [Tabs](/tab)
  - [Tooltip](/tooltip)
