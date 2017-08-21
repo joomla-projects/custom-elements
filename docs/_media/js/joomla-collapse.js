@@ -1,8 +1,16 @@
 (function () {
+<<<<<<< HEAD
 	if (!document.getElementById('joomla-collapse-stylesheet')) {
 		const style = document.createElement('style');
 		style.id = 'joomla-collapse-stylesheet';
 		style.innerHTML = ``;
+=======
+	const css = ``;
+	if (!document.getElementById('joomla-collapse-stylesheet')) {
+		const style = document.createElement('style');
+		style.id = 'joomla-collapse-stylesheet';
+		style.innerHTML = css;
+>>>>>>> 649bc4c... commit the scaffolding for all elements
 		document.head.appendChild(style);
 	}
 })();
@@ -31,6 +39,7 @@ class CollapseElement extends HTMLElement {
 
 			linked[i].addEventListener('click', function (event) {
 
+				let colId = '';
 				if (!event.target.hasAttribute('data-target')) colId = event.target.getAttribute('href').replace('#', '');
 				if (!event.target.hasAttribute('href')) colId = event.target.getAttribute('data-target').replace('#', '');
 				event.preventDefault();
@@ -58,9 +67,9 @@ class CollapseElement extends HTMLElement {
 		switch (attr) {
 			case 'state':
 				let linked = document.querySelector('[href="#' + this.id + '"]');
-				if (newVal === "closed") {
+				if (newValue === "closed") {
 					linked.setAttribute('aria-expanded', 'false');
-				} else if (newVal === "open") {
+				} else if (newValue === "open") {
 					linked.setAttribute('aria-expanded', 'true');
 				}
 				break;
@@ -71,12 +80,21 @@ class CollapseElement extends HTMLElement {
 		let linked = document.querySelector('[href="#' + this.id + '"]');
 		if (!linked) linked = document.querySelector('[data-target="#' + this.id + '"]');
 		if (this.state === "closed") {
+			this.state = "open"
 			linked.setAttribute('aria-expanded', 'true');
 		} else {
+			this.state = "closed"
 			linked.setAttribute('aria-expanded', 'false');
 		}
 		this.classList.toggle('show');
 	};
 
+	/* Method to dispatch events */
+	dispatchCustomEvent(eventName) {
+		let OriginalCustomEvent = new CustomEvent(eventName, { "bubbles": true, "cancelable": true });
+		OriginalCustomEvent.relatedTarget = this;
+		this.dispatchEvent(OriginalCustomEvent);
+		this.removeEventListener(eventName, this);
+	}
 }
 customElements.define('joomla-collapse', CollapseElement);

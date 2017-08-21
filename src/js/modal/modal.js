@@ -1,8 +1,16 @@
 (function () {
+<<<<<<< HEAD
 	if (!document.getElementById('joomla-modal-stylesheet')) {
 		const style = document.createElement('style');
 		style.id = 'joomla-modal-stylesheet';
 		style.innerHTML = `{{stylesheet}}`;
+=======
+	const css = `{{stylesheet}}`;
+	if (!document.getElementById('joomla-modal-stylesheet')) {
+		const style = document.createElement('style');
+		style.id = 'joomla-modal-stylesheet';
+		style.innerHTML = css;
+>>>>>>> 649bc4c... commit the scaffolding for all elements
 		document.head.appendChild(style);
 	}
 })();
@@ -95,37 +103,44 @@ class ModalElement extends HTMLElement {
      * @return {Array}           The parent elements
      */
     getParents(elem, selector) {
+		// Element.matches() polyfill
+		if (!Element.prototype.matches) {
+			Element.prototype.matches =
+				Element.prototype.matchesSelector ||
+				Element.prototype.mozMatchesSelector ||
+				Element.prototype.msMatchesSelector ||
+				Element.prototype.oMatchesSelector ||
+				Element.prototype.webkitMatchesSelector ||
+				function (s) {
+					var matches = (this.document || this.ownerDocument).querySelectorAll(s),
+						i = matches.length;
+					while (--i >= 0 && matches.item(i) !== this) { }
+					return i > -1;
+				};
+		}
 
-	// Element.matches() polyfill
-	if (!Element.prototype.matches) {
-		Element.prototype.matches =
-			Element.prototype.matchesSelector ||
-			Element.prototype.mozMatchesSelector ||
-			Element.prototype.msMatchesSelector ||
-			Element.prototype.oMatchesSelector ||
-			Element.prototype.webkitMatchesSelector ||
-			function (s) {
-				var matches = (this.document || this.ownerDocument).querySelectorAll(s),
-					i = matches.length;
-				while (--i >= 0 && matches.item(i) !== this) { }
-				return i > -1;
-			};
-	}
+		// Setup parents array
+		let parents = [];
 
-	// Setup parents array
-	let parents = [];
-
-	// Get matching parent elements
-	for (; elem && elem !== document; elem = elem.parentNode) {
-		if (selector) {
-			if (elem.matches(selector)) {
+		// Get matching parent elements
+		for (; elem && elem !== document; elem = elem.parentNode) {
+			if (selector) {
+				if (elem.matches(selector)) {
+					parents.push(elem);
+				}
+			} else {
 				parents.push(elem);
 			}
-		} else {
-			parents.push(elem);
 		}
+		return parents;
+	};
+
+	/* Method to dispatch events */
+	dispatchCustomEvent(eventName) {
+		let OriginalCustomEvent = new CustomEvent(eventName, { "bubbles": true, "cancelable": true });
+		OriginalCustomEvent.relatedTarget = this;
+		this.dispatchEvent(OriginalCustomEvent);
+		this.removeEventListener(eventName, this);
 	}
-	return parents;
-};
 }
 customElements.define('joomla-modal', ModalElement);

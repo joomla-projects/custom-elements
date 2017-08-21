@@ -42,6 +42,8 @@ var _createClass = function () {
       for (var a = this.querySelectorAll('[type="radio"]'), b = 0, c = a.length; b < c; b++) {
         a[b].checked = !1, a[b].removeAttribute('checked'), 'label' == a[b].parentNode.tagName.toLowerCase() && (a[b].parentNode.classList.remove('active'), a[b].parentNode.setAttribute('aria-pressed', 'false'));
       }
+    } }, { key: 'dispatchCustomEvent', value: function dispatchCustomEvent(a) {
+      var b = new CustomEvent(a, { bubbles: !0, cancelable: !0 });b.relatedTarget = this, this.dispatchEvent(b), this.removeEventListener(a, this);
     } }], [{ key: 'observedAttributes', get: function get() {} }]), b;
 }(HTMLElement);customElements.define('joomla-button', ButtonElement);
 

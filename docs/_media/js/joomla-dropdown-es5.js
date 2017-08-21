@@ -25,23 +25,23 @@ var _createClass = function () {
   function b() {
     return _classCallCheck(this, b), _possibleConstructorReturn(this, (b.__proto__ || Object.getPrototypeOf(b)).call(this));
   }return _inherits(b, a), _createClass(b, [{ key: 'connectedCallback', value: function connectedCallback() {
-      var a = this.querySelector('button.dropdown-toggle'),
-          b = this.querySelector('a.dropdown-toggle'),
-          c = this.querySelectorAll('.dropdown-menu > a'),
-          d = null,
-          e = this;if ((a || b) && (d = a ? a : b, !!d.id)) {
-        this.classList.add('dropdown'), this.style.display = 'block', d.setAttribute('aria-haspopup', 'true'), d.setAttribute('aria-expanded', 'false'), d.addEventListener('click', function (a) {
-          var b = upTo(a.target, 'dgt41-dropdown');b && b.classList.contains('show') ? (b.classList.remove('show'), a.target.setAttribute('aria-expanded', 'false')) : (b.classList.add('show'), a.target.setAttribute('aria-expanded', 'true'));
-        });for (var f = 0, g = c.length; f < g; f++) {
-          c[f].addEventListener('click', function () {
-            e.close();
+      var a = document.querySelector('#' + this.getAttribute('aria-labelledby')),
+          b = this.querySelectorAll('.dropdown-menu > a'),
+          c = this;if (a.id) {
+        this.classList.add('dropdown'), this.style.display = 'block', a.setAttribute('aria-haspopup', 'true'), a.setAttribute('aria-expanded', 'false'), a.addEventListener('click', function (a) {
+          var b = upTo(a.target, 'joomla-dropdown');b && b.classList.contains('show') ? (b.classList.remove('show'), a.target.setAttribute('aria-expanded', 'false')) : (b.classList.add('show'), a.target.setAttribute('aria-expanded', 'true'));
+        });for (var d = 0, e = b.length; d < e; d++) {
+          b[d].addEventListener('click', function () {
+            c.close();
           });
         }
       }
     } }, { key: 'disconnectedCallback', value: function disconnectedCallback() {} }, { key: 'adoptedCallback', value: function adoptedCallback() {} }, { key: 'attributeChangedCallback', value: function attributeChangedCallback(a) {
       switch (a) {}
     } }, { key: 'close', value: function close() {
-      var a = this.querySelector('.dropdown-toggle');this.classList.remove('show'), a.setAttribute('aria-expanded', 'false');
+      var a = document.querySelector('#' + this.getAttribute('aria-labelledby'));this.classList.remove('show'), a.setAttribute('aria-expanded', 'false');
+    } }, { key: 'dispatchCustomEvent', value: function dispatchCustomEvent(a) {
+      var b = new CustomEvent(a, { bubbles: !0, cancelable: !0 });b.relatedTarget = this, this.dispatchEvent(b), this.removeEventListener(a, this);
     } }], [{ key: 'observedAttributes', get: function get() {} }]), b;
 }(HTMLElement);customElements.define('joomla-dropdown', DropdownElement);
 

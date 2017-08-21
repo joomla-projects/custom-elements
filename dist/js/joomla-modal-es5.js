@@ -50,6 +50,8 @@ var _createClass = function () {
       });for (var c = []; a && a !== document; a = a.parentNode) {
         b ? a.matches(b) && c.push(a) : c.push(a);
       }return parents;
+    } }, { key: 'dispatchCustomEvent', value: function dispatchCustomEvent(a) {
+      var b = new CustomEvent(a, { bubbles: !0, cancelable: !0 });b.relatedTarget = this, this.dispatchEvent(b), this.removeEventListener(a, this);
     } }], [{ key: 'observedAttributes', get: function get() {} }]), b;
 }(HTMLElement);customElements.define('joomla-modal', ModalElement);
 

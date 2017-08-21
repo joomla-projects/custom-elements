@@ -27,14 +27,16 @@ var _createClass = function () {
   }return _inherits(b, a), _createClass(b, [{ key: 'connectedCallback', value: function connectedCallback() {
       if (this.id) for (var a = document.querySelectorAll('[href="#' + this.id + '"],[data-target="#' + this.id + '"]'), b = 0, c = a.length; b < c; b++) {
         this.state && 'closed' !== this.state ? (a[b].setAttribute('aria-expanded', 'true'), a[b].setAttribute('aria-controls', this.id), this.classList.add('show')) : (a[b].setAttribute('aria-expanded', 'false'), a[b].setAttribute('aria-controls', this.id), this.classList.remove('show')), a[b].addEventListener('click', function (a) {
-          a.target.hasAttribute('data-target') || (colId = a.target.getAttribute('href').replace('#', '')), a.target.hasAttribute('href') || (colId = a.target.getAttribute('data-target').replace('#', '')), a.preventDefault(), a.stopPropagation(), document.getElementById(colId).toggle();
+          var b = '';a.target.hasAttribute('data-target') || (b = a.target.getAttribute('href').replace('#', '')), a.target.hasAttribute('href') || (b = a.target.getAttribute('data-target').replace('#', '')), a.preventDefault(), a.stopPropagation(), document.getElementById(b).toggle();
         });
       }
-    } }, { key: 'disconnectedCallback', value: function disconnectedCallback() {} }, { key: 'adoptedCallback', value: function adoptedCallback() {} }, { key: 'attributeChangedCallback', value: function attributeChangedCallback(a) {
+    } }, { key: 'disconnectedCallback', value: function disconnectedCallback() {} }, { key: 'adoptedCallback', value: function adoptedCallback() {} }, { key: 'attributeChangedCallback', value: function attributeChangedCallback(a, b, c) {
       switch (a) {case 'state':
-          var b = document.querySelector('[href="#' + this.id + '"]');'closed' === newVal ? b.setAttribute('aria-expanded', 'false') : 'open' === newVal && b.setAttribute('aria-expanded', 'true');}
+          var d = document.querySelector('[href="#' + this.id + '"]');'closed' === c ? d.setAttribute('aria-expanded', 'false') : 'open' === c && d.setAttribute('aria-expanded', 'true');}
     } }, { key: 'toggle', value: function toggle() {
-      var a = document.querySelector('[href="#' + this.id + '"]');a || (a = document.querySelector('[data-target="#' + this.id + '"]')), 'closed' === this.state ? a.setAttribute('aria-expanded', 'true') : a.setAttribute('aria-expanded', 'false'), this.classList.toggle('show');
+      var a = document.querySelector('[href="#' + this.id + '"]');a || (a = document.querySelector('[data-target="#' + this.id + '"]')), 'closed' === this.state ? (this.state = 'open', a.setAttribute('aria-expanded', 'true')) : (this.state = 'closed', a.setAttribute('aria-expanded', 'false')), this.classList.toggle('show');
+    } }, { key: 'dispatchCustomEvent', value: function dispatchCustomEvent(a) {
+      var b = new CustomEvent(a, { bubbles: !0, cancelable: !0 });b.relatedTarget = this, this.dispatchEvent(b), this.removeEventListener(a, this);
     } }, { key: 'state', get: function get() {
       return this.getAttribute('state') || 'closed';
     }, set: function set(a) {

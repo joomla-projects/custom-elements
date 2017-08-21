@@ -1,8 +1,16 @@
 (function () {
+<<<<<<< HEAD
 	if (!document.getElementById('joomla-tooltip-stylesheet')) {
 		const style = document.createElement('style');
 		style.id = 'joomla-tooltip-stylesheet';
 		style.innerHTML = `{{stylesheet}}`;
+=======
+	const css = `{{stylesheet}}`;
+	if (!document.getElementById('joomla-tooltip-stylesheet')) {
+		const style = document.createElement('style');
+		style.id = 'joomla-tooltip-stylesheet';
+		style.innerHTML = css;
+>>>>>>> 649bc4c... commit the scaffolding for all elements
 		document.head.appendChild(style);
 	}
 })();
@@ -69,6 +77,14 @@ class TooltipElement extends HTMLElement {
 	/* Lifecycle, element removed from the DOM */
 	disconnectedCallback() {
 		this.querySelector('button').removeEventListener('click', this);
+	}
+
+	/* Method to dispatch events */
+	dispatchCustomEvent(eventName) {
+		let OriginalCustomEvent = new CustomEvent(eventName, { "bubbles": true, "cancelable": true });
+		OriginalCustomEvent.relatedTarget = this;
+		this.dispatchEvent(OriginalCustomEvent);
+		this.removeEventListener(eventName, this);
 	}
 }
 

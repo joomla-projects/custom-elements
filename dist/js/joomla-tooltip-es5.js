@@ -50,6 +50,8 @@ var _createClass = function () {
       }), this.append(a), this.append(b);
     } }, { key: 'disconnectedCallback', value: function disconnectedCallback() {
       this.querySelector('button').removeEventListener('click', this);
+    } }, { key: 'dispatchCustomEvent', value: function dispatchCustomEvent(a) {
+      var b = new CustomEvent(a, { bubbles: !0, cancelable: !0 });b.relatedTarget = this, this.dispatchEvent(b), this.removeEventListener(a, this);
     } }]), b;
 }(HTMLElement);customElements.define('joomla-tooltip', TooltipElement);
 

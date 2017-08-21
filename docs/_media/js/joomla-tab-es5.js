@@ -19,26 +19,42 @@ var _createClass = function () {
   if ('function' != typeof b && null !== b) throw new TypeError('Super expression must either be null or a function, not ' + (typeof b === 'undefined' ? 'undefined' : _typeof(b)));a.prototype = Object.create(b && b.prototype, { constructor: { value: a, enumerable: !1, writable: !0, configurable: !0 } }), b && (Object.setPrototypeOf ? Object.setPrototypeOf(a, b) : a.__proto__ = b);
 }(function () {
   if (!document.getElementById('joomla-tab-stylesheet')) {
-    var a = document.createElement('style');a.id = 'joomla-tab-stylesheet', a.innerText = 'joomla-tab{display:flex;flex-direction:column}joomla-tab>ul{display:flex;background-color:#f5f5f5;border-color:#ccc #ccc currentcolor;border-image:none;border-radius:.25rem .25rem 0 0;border-style:solid solid none;border-width:1px 1px 0;box-shadow:0 1px #fff inset,0 2px 3px -3px rgba(0,0,0,.15),0 -4px 0 rgba(0,0,0,.05) inset,0 0 3px rgba(0,0,0,.04);margin:0;padding:0;list-style:outside none none;overflow-x:auto;overflow-y:hidden;white-space:nowrap}joomla-tab>ul a{display:block;color:#0d1321;padding:.75em 1em;position:relative;box-shadow:1px 0 0 rgba(0,0,0,.05);text-decoration:none}joomla-tab>ul a[active]{background-color:rgba(0,0,0,.03);background-image:linear-gradient(to bottom,transparent,rgba(0,0,0,.05) 100%);border-left:0 none;border-right:0 none;border-top-left-radius:0;border-top-right-radius:0;box-shadow:2px 0 1px -1px rgba(0,0,0,.08) inset,-2px 0 1px -1px rgba(0,0,0,.08) inset,0 1px 0 rgba(0,0,0,.02) inset}joomla-tab>ul a[active]:after{background-color:#006898;bottom:-1px;content:"";height:5px;left:0;opacity:.8;position:absolute;right:0}joomla-tab>section{display:none;background-color:#fefefe;border:1px solid #ccc;border-radius:0 0 .25rem .25rem;box-shadow:0 0 3px rgba(0,0,0,.04);padding:15px}joomla-tab>section[active]{display:block}joomla-tab[orientation=vertical]{flex-direction:row;align-items:flex-start}joomla-tab[orientation=vertical]>ul{flex-direction:column;min-width:30%;height:auto;border:1px solid #ccc;border-radius:.25rem;box-shadow:none;overflow:hidden}joomla-tab[orientation=vertical] li:last-of-type a{border-bottom:0}joomla-tab[orientation=vertical] a{display:block;color:#0d1321;padding:.75em 1em;position:relative;border-bottom:1px solid #ddd;box-shadow:none;text-decoration:none}joomla-tab[orientation=vertical] a[active]{border-left:0 none;border-right:0 none;background-color:#fff;background-image:none;box-shadow:none}joomla-tab[orientation=vertical] a[active]:after{left:-1px;width:5px;height:auto;top:0;bottom:0}joomla-tab[orientation=vertical]>section{border:0 none;box-shadow:none;padding:0 15px}', document.head.appendChild(a);
+    var a = document.createElement('style');a.id = 'joomla-tab-stylesheet', a.innerHTML = 'joomla-tab{display:flex;flex-direction:column}joomla-tab>ul{display:flex;background-color:#f5f5f5;border-color:#ccc #ccc currentcolor;border-image:none;border-radius:.25rem .25rem 0 0;border-style:solid solid none;border-width:1px 1px 0;box-shadow:0 1px #fff inset,0 2px 3px -3px rgba(0,0,0,.15),0 -4px 0 rgba(0,0,0,.05) inset,0 0 3px rgba(0,0,0,.04);margin:0;padding:0;list-style:outside none none;overflow-x:auto;overflow-y:hidden;white-space:nowrap}joomla-tab>ul a{display:block;color:#0d1321;padding:.75em 1em;position:relative;box-shadow:1px 0 0 rgba(0,0,0,.05);text-decoration:none}joomla-tab>ul a[active]{background-color:rgba(0,0,0,.03);background-image:linear-gradient(to bottom,transparent,rgba(0,0,0,.05) 100%);border-left:0 none;border-right:0 none;border-top-left-radius:0;border-top-right-radius:0;box-shadow:2px 0 1px -1px rgba(0,0,0,.08) inset,-2px 0 1px -1px rgba(0,0,0,.08) inset,0 1px 0 rgba(0,0,0,.02) inset}joomla-tab>ul a[active]:after{background-color:#006898;bottom:-1px;content:"";height:5px;left:0;opacity:.8;position:absolute;right:0}joomla-tab>section{display:none;background-color:#fefefe;border:1px solid #ccc;border-radius:0 0 .25rem .25rem;box-shadow:0 0 3px rgba(0,0,0,.04);padding:15px}joomla-tab>section[active]{display:block}joomla-tab[orientation=vertical]{flex-direction:row;align-items:flex-start}joomla-tab[orientation=vertical]>ul{flex-direction:column;min-width:30%;height:auto;border:1px solid #ccc;border-radius:.25rem;box-shadow:none;overflow:hidden}joomla-tab[orientation=vertical] li:last-of-type a{border-bottom:0}joomla-tab[orientation=vertical] a{display:block;color:#0d1321;padding:.75em 1em;position:relative;border-bottom:1px solid #ddd;box-shadow:none;text-decoration:none}joomla-tab[orientation=vertical] a[active]{border-left:0 none;border-right:0 none;background-color:#fff;background-image:none;box-shadow:none}joomla-tab[orientation=vertical] a[active]:after{left:-1px;width:5px;height:auto;top:0;bottom:0}joomla-tab[orientation=vertical]>section{border:0 none;box-shadow:none;padding:0 15px}', document.head.appendChild(a);
   }
 })();var TabElement = function (a) {
   function b() {
     _classCallCheck(this, b);var a = _possibleConstructorReturn(this, (b.__proto__ || Object.getPrototypeOf(b)).call(this));return a.hasActive = !1, a.currentActive = '', a;
   }return _inherits(b, a), _createClass(b, [{ key: 'recall', get: function get() {
       return this.getAttribute('recall');
+    } }, { key: 'view', get: function get() {
+      return this.getAttribute('view');
+    }, set: function set(a) {
+      this.setAttribute('view', a);
     } }, { key: 'orientation', get: function get() {
       return this.getAttribute('orientation');
     }, set: function set(a) {
-      this.setAttribute('orientation', a);
+      this.setAttribute('oriendation', a);
     } }], [{ key: 'observedAttributes', get: function get() {
-      return ['recall', 'orientation'];
+      return ['recall', 'orientation', 'view'];
     } }]), _createClass(b, [{ key: 'connectedCallback', value: function connectedCallback() {
       var a = this;(!this.orientation || this.orientation && -1 === ['horizontal', 'vertical'].indexOf(this.orientation)) && (this.orientation = 'horizontal');var b = [].slice.call(this.querySelectorAll('section'));if (b) {
         for (var c, d = [], e = 0, f = b.length; e < f; ++e) {
           c = b[e], c.parentNode === this && d.push(c);
-        }this.createNavigation(tabsEl), tabsEl.forEach(function (b) {
+        }if (this.createNavigation(tabsEl), tabsEl.forEach(function (b) {
           if (b.setAttribute('role', 'tabpanel'), b.hasAttribute('active')) return a.hasActive = !0, a.currentActive = b.id, a.querySelector('#tab-' + b.id).setAttribute('aria-selected', 'true'), a.querySelector('#tab-' + b.id).setAttribute('active', ''), void a.querySelector('#tab-' + b.id).setAttribute('tabindex', '0');
-        }), this.hasActive || (tabsEl[0].setAttribute('active', ''), this.hasActive = !0, this.currentActive = tabsEl[0].id, this.querySelector('#tab-' + tabsEl[0].id).setAttribute('aria-selected', 'true'), this.querySelector('#tab-' + tabsEl[0].id).setAttribute('tabindex', '0'), this.querySelector('#tab-' + tabsEl[0].id).setAttribute('active', '')), this.keyListeners(tabsEl), this.hasAttribute('recall') && this.restoreState();
+        }), this.hasActive || (tabsEl[0].setAttribute('active', ''), this.hasActive = !0, this.currentActive = tabsEl[0].id, this.querySelector('#tab-' + tabsEl[0].id).setAttribute('aria-selected', 'true'), this.querySelector('#tab-' + tabsEl[0].id).setAttribute('tabindex', '0'), this.querySelector('#tab-' + tabsEl[0].id).setAttribute('active', '')), this.keyListeners(tabsEl), window.location.href.match(/#\S[^\&]*/)) {
+          var g = window.location.href.match(/#\S[^\&]*/),
+              h = this.querySelector(g[0]);if (h) {
+            var i = this.findAncestor(h, 'joomla-tab'),
+                j = this.findAncestor(i, 'joomla-tab');if (j) {
+              var k = this.findAncestor(i, 'section');j.showTab(k), this.show(h);
+            } else this.showTab(h);
+          }
+        }if (this.hasAttribute('recall') && this.restoreState(), !this.querySelector('joomla-tab')) {
+          this.checkView(this);var l = this;window.addEventListener('resize', function () {
+            l.checkView(l);
+          });
+        }
       }
     } }, { key: 'disconnectedCallback', value: function disconnectedCallback() {
       var a = this.querySelector('ul'),
@@ -48,7 +64,7 @@ var _createClass = function () {
     } }, { key: 'createNavigation', value: function createNavigation(a) {
       var b = this,
           c = document.createElement('ul');c.setAttribute('role', 'tablist');var d = function d(a) {
-        a.preventDefault(), b.hasActive && b.hideCurrent();var c = b.currentActive;b.dispatchCustomEvent('joomla.tab.show', a.target, b.querySelector('#tab-' + c)), a.target.setAttribute('active', ''), a.target.setAttribute('aria-selected', 'true'), a.target.setAttribute('tabindex', '0'), b.querySelector(a.target.hash).setAttribute('active', ''), b.querySelector(a.target.hash).removeAttribute('aria-hidden'), b.currentActive = a.target.hash.substring(1), b.dispatchCustomEvent('joomla.tab.shown', a.target, b.querySelector('#tab-' + c));
+        a.preventDefault(), b.hasActive && b.hideCurrent();var c = b.currentActive;b.dispatchCustomEvent('joomla.tab.show', a.target, b.querySelector('#tab-' + c)), a.target.setAttribute('active', ''), a.target.setAttribute('aria-selected', 'true'), a.target.setAttribute('tabindex', '0'), b.querySelector(a.target.hash).setAttribute('active', ''), b.querySelector(a.target.hash).removeAttribute('aria-hidden'), b.currentActive = a.target.hash.substring(1), b.saveState(a.target.hash), b.dispatchCustomEvent('joomla.tab.shown', a.target, b.querySelector('#tab-' + c));
       };a.forEach(function (a) {
         if (a.id) {
           var b = a.hasAttribute('active'),
@@ -61,19 +77,44 @@ var _createClass = function () {
         var a = this.querySelector('a[aria-controls="' + this.currentActive + '"]');this.dispatchCustomEvent('joomla.tab.hide', a, this.querySelector('#tab-' + this.currentActive)), a.removeAttribute('active'), a.setAttribute('tabindex', '-1'), this.querySelector('#' + this.currentActive).removeAttribute('active'), this.querySelector('#' + this.currentActive).setAttribute('aria-hidden', 'true'), a.removeAttribute('aria-selected'), this.dispatchCustomEvent('joomla.tab.hidden', a, this.querySelector('#tab-' + this.currentActive));
       }
     } }, { key: 'showTab', value: function showTab(a) {
-      var b = querySelector('#tab-' + a.id);b.click();
+      var b = document.querySelector('#tab-' + a.id);b.click(), this.saveState('#' + a.id);
     } }, { key: 'show', value: function show(a) {
-      a.click();
+      a.click(), this.saveState(a.hash);
     } }, { key: 'keyListeners', value: function keyListeners() {
       var a = this;this.querySelector('ul').addEventListener('keydown', function keyBehaviour(b) {
-        var c = a.querySelector('#tab-' + a.currentActive),
+        console.log(a.currentActive);var c = a.querySelector('#tab-' + a.currentActive),
             d = [].slice.call(a.querySelector('ul').querySelectorAll('a')),
             e = c.parentNode.previousElementSibling || d[d.length - 1],
             f = c.parentNode.nextElementSibling || d[0];if (!(b.metaKey || b.altKey)) switch (b.keyCode) {case 37:case 38:
-            'li' === e.tagName.toLowerCase() ? (e.querySelector('a').click(), e.querySelector('a').focus()) : (e.click(), e.focus()), b.preventDefault();break;case 39:case 40:
-            'a' === f.tagName.toLowerCase() ? (f.click(), f.focus()) : (f.querySelector('a').click(), f.querySelector('a').focus()), b.preventDefault();break;default:}
+            'li' === e.tagName.toLowerCase() ? (e.querySelector('a').click(), e.querySelector('a').focus(), a.saveState(e.hash)) : (e.click(), e.focus(), a.saveState(e.hash)), b.preventDefault();break;case 39:case 40:
+            'a' === f.tagName.toLowerCase() ? (f.click(), f.focus(), a.saveState(f.hash)) : (f.querySelector('a').click(), f.querySelector('a').focus(), a.saveState(f.hash)), b.preventDefault();break;default:}
       });
-    } }, { key: 'restoreState', value: function restoreState() {} }, { key: 'dispatchCustomEvent', value: function dispatchCustomEvent(a, b, c) {
+    } }, { key: 'getStorageKey', value: function getStorageKey() {
+      return window.location.href.toString().split(window.location.host)[1].replace(/&return=[a-zA-Z0-9%]+/, '').split('#')[0];
+    } }, { key: 'restoreState', value: function restoreState() {
+      var a = sessionStorage.getItem(this.getStorageKey());if (a) {
+        var b = this.querySelector(a);if (b) {
+          var c = this.findAncestor(b, 'joomla-tab'),
+              d = this.findAncestor(c, 'joomla-tab');if (d) {
+            var e = this.findAncestor(c, 'section');d.showTab(e), this.show(b);
+          } else this.showTab(b);
+        }
+      }
+    } }, { key: 'saveState', value: function saveState(a) {
+      var b = this.getStorageKey();sessionStorage.setItem(b, a);
+    } }, { key: 'checkView', value: function checkView(a) {
+      var b = a.querySelector('ul');if (920 < document.body.getBoundingClientRect().width) {
+        a.view = 'tabs';var c = [].slice.call(b.querySelectorAll('section'));c.forEach(function (b) {
+          a.appendChild(b);
+        });
+      } else {
+        a.view = 'accordion';var d = [].slice.call(a.querySelectorAll('section'));d.forEach(function (a) {
+          var c = a.id && b.querySelector('a[aria-controls="' + a.id + '"]');c && c.parentNode.appendChild(a);
+        });
+      }
+    } }, { key: 'findAncestor', value: function findAncestor(a, b) {
+      for (; (a = a.parentElement) && a.nodeName.toLowerCase() !== b;) {}return a;
+    } }, { key: 'dispatchCustomEvent', value: function dispatchCustomEvent(a, b, c) {
       var d = new CustomEvent(a, { bubbles: !0, cancelable: !0 });d.relatedTarget = c, b.dispatchEvent(d), b.removeEventListener(a, b);
     } }]), b;
 }(HTMLElement);customElements.define('joomla-tab', TabElement);

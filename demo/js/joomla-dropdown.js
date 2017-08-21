@@ -1,8 +1,16 @@
 (function () {
+<<<<<<< HEAD
 	if (!document.getElementById('joomla-dropdown-stylesheet')) {
 		const style = document.createElement('style');
 		style.id = 'joomla-dropdown-stylesheet';
 		style.innerHTML = ``;
+=======
+	const css = ``;
+	if (!document.getElementById('joomla-dropdown-stylesheet')) {
+		const style = document.createElement('style');
+		style.id = 'joomla-dropdown-stylesheet';
+		style.innerHTML = css;
+>>>>>>> 649bc4c... commit the scaffolding for all elements
 		document.head.appendChild(style);
 	}
 })();
@@ -13,29 +21,19 @@ class DropdownElement extends HTMLElement {
 	}
 
 	connectedCallback() {
-		const button = this.querySelector('button.dropdown-toggle');
-		const link = this.querySelector('a.dropdown-toggle');
+		const button = document.querySelector('#' + this.getAttribute('aria-labelledby'));
 		const innerLinks = this.querySelectorAll('.dropdown-menu > a');
-		let triggerEl = null;
 		const self = this;
 
-		if (!button && !link) return;
-
-		if (button) {
-			triggerEl = button;
-		} else {
-			triggerEl = link;
-		}
-
-		if (!triggerEl.id) return;
+		if (!button.id) return;
 		//var children = [].slice.call( menu[getElementsByTagName]('*'));
 		this.classList.add('dropdown');
 		this.style.display = 'block';
-		triggerEl.setAttribute('aria-haspopup', 'true');
-		triggerEl.setAttribute('aria-expanded', 'false');
+		button.setAttribute('aria-haspopup', 'true');
+		button.setAttribute('aria-expanded', 'false');
 
-		triggerEl.addEventListener('click', function (event) {
-			var container = upTo(event.target, 'dgt41-dropdown');
+		button.addEventListener('click', function (event) {
+			var container = upTo(event.target, 'joomla-dropdown');
 
 			if (container && container.classList.contains('show')) {
 				container.classList.remove('show');
@@ -74,9 +72,17 @@ class DropdownElement extends HTMLElement {
 	}
 
 	close() {
-		const button = this.querySelector('.dropdown-toggle');
+		const button = document.querySelector('#' + this.getAttribute('aria-labelledby'));
 		this.classList.remove('show');
 		button.setAttribute("aria-expanded", "false");
 	};
+
+	/* Method to dispatch events */
+	dispatchCustomEvent(eventName) {
+		let OriginalCustomEvent = new CustomEvent(eventName, { "bubbles": true, "cancelable": true });
+		OriginalCustomEvent.relatedTarget = this;
+		this.dispatchEvent(OriginalCustomEvent);
+		this.removeEventListener(eventName, this);
+	}
 }
 customElements.define('joomla-dropdown', DropdownElement);
