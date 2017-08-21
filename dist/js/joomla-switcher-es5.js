@@ -34,7 +34,7 @@ var _createClass = function () {
         }b.addEventListener('click', function () {
           var b = this.parentNode,
               c = [].slice.call(b.querySelectorAll('input')),
-              d = [].slice.call(b.nextElementSibling.querySelectorAll('span'));console.log(d), d.forEach(function (a) {
+              d = [].slice.call(b.nextElementSibling.querySelectorAll('span'));d.forEach(function (a) {
             a.classList.remove('active');
           }), this.parentNode.classList.contains('active') ? this.parentNode.classList.remove('active') : this.parentNode.classList.add('active'), this.classList.contains('active') ? (c.forEach(function (a) {
             a.classList.remove('active');

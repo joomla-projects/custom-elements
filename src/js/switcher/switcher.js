@@ -1,9 +1,8 @@
 (function () {
-	const css = `{{stylesheet}}`;
 	if (!document.getElementById('joomla-switcher-stylesheet')) {
 		const style = document.createElement('style');
 		style.id = 'joomla-switcher-stylesheet';
-		style.innerHTML = css;
+		style.innerHTML = `{{stylesheet}}`;
 		document.head.appendChild(style);
 	}
 })();
@@ -21,6 +20,7 @@ class SwitcherElement extends HTMLElement {
 		const switcher = [].slice.call(this.querySelectorAll('input')),
 			  next     = switcher[1].parentNode.nextElementSibling;
 
+		// Throw an error if the switch hasn't been setup properly
 		if (!switcher.length) {
 			throw new Error('Switcher not properly setup')
 		}
@@ -50,7 +50,6 @@ class SwitcherElement extends HTMLElement {
 					inputs = [].slice.call(parent.querySelectorAll('input')),
 					spans = [].slice.call(parent.nextElementSibling.querySelectorAll('span'));
 
-				console.log(spans)
 				spans.forEach(function(span) {
 					span.classList.remove('active');
 				});

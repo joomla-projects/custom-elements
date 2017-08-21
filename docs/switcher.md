@@ -9,13 +9,13 @@ The simplified version of the custom element
 ```html
 <joomla-switcher>
 	<span class="switcher">
-		<input name="switcher" value="0" type="radio" class="active" checked>
-		<input name="switcher" value="1" type="radio">
+		<input name="switcher" id="sw1" value="0" type="radio" class="active" checked>
+		<input name="switcher" id="sw2" value="1" type="radio">
 		<span class="switch"></span>
 	</span>
 	<span class="switcher-labels">
 		<span class="switcher-label-0 active">No</span>
-		<span class="switcher-label-1">Yes</span>
+	<span class="switcher-label-1">Yes</span>
 	</span>
 </joomla-switcher>
 
@@ -24,8 +24,8 @@ The simplified version of the custom element
 ### Switcher demo:
 <joomla-switcher>
 	<span class="switcher">
-		<input name="switcher1" value="0" type="radio" class="active" checked>
-		<input name="switcher1" value="1" type="radio">
+		<input name="switcher1" id="sw12" value="0" type="radio" class="active" checked>
+		<input name="switcher1" id="sw22" value="1" type="radio">
 		<span class="switch"></span>
 	</span>
 	<span class="switcher-labels">
@@ -36,8 +36,8 @@ The simplified version of the custom element
 
 <joomla-switcher>
 	<span class="switcher switcher-primary">
-		<input name="switcher2" value="0" type="radio" class="active" checked>
-		<input name="switcher2" value="1" type="radio">
+		<input name="switcher2" id="sw13" value="0" type="radio" class="active" checked>
+		<input name="switcher2" id="sw23" value="1" type="radio">
 		<span class="switch"></span>
 	</span>
 	<span class="switcher-labels">
@@ -48,8 +48,8 @@ The simplified version of the custom element
 
 <joomla-switcher>
 	<span class="switcher switcher-danger">
-		<input name="switcher3" value="0" type="radio" class="active" checked>
-		<input name="switcher3" value="1" type="radio">
+		<input name="switcher3" id="sw14" value="0" type="radio" class="active" checked>
+		<input name="switcher3" id="sw24" value="1" type="radio">
 		<span class="switch"></span>
 	</span>
 	<span class="switcher-labels">
