@@ -94,7 +94,7 @@ class AlertElement extends HTMLElement {
 		this.classList.remove('joomla-alert--show');
 	}
 
-	/* Method to dispatch events */
+	/* Method to dispatch events. Internal */
 	dispatchCustomEvent(eventName) {
 		let OriginalCustomEvent = new CustomEvent(eventName, { "bubbles": true, "cancelable": true });
 		OriginalCustomEvent.relatedTarget = this;
@@ -102,7 +102,7 @@ class AlertElement extends HTMLElement {
 		this.removeEventListener(eventName, this);
 	}
 
-	/* Method to create the close button */
+	/* Method to create the close button. Internal */
 	appendCloseButton() {
 		if (this.querySelector('button.joomla-alert--close') || this.querySelector('button.joomla-alert-button--close')) {
 			return;
@@ -133,7 +133,7 @@ class AlertElement extends HTMLElement {
 		if (closeButton) {
 			closeButton.addEventListener('click', function () {
 				self.dispatchCustomEvent('joomla.alert.buttonClicked');
-				if (this.href) {
+				if (self.href) {
 					window.location.href = self.href;
 				}
 				self.close();
@@ -143,7 +143,7 @@ class AlertElement extends HTMLElement {
 		if (this.hasAttribute('auto-dismiss')) {
 			setTimeout(function () {
 				self.dispatchCustomEvent('joomla.alert.buttonClicked');
-				if (this.href) {
+				if (self.href) {
 					window.location.href = self.href;
 				}
 				self.close();
@@ -151,7 +151,7 @@ class AlertElement extends HTMLElement {
 		}
 	}
 
-	/* Method to remove the close button */
+	/* Method to remove the close button. Internal */
 	removeCloseButton() {
 		let button = this.querySelector('button');
 		if (button) {
@@ -160,7 +160,7 @@ class AlertElement extends HTMLElement {
 		}
 	}
 
-	/* Method to get the translated text */
+	/* Method to get the translated text. Internal */
 	getText(str, fallback) {
 		return (window.Joomla && Joomla.JText && Joomla.JText._ && typeof Joomla.JText._ === 'function' && Joomla.JText._(str)) ? Joomla.JText._(str) : fallback;
 	}

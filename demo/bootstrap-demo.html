@@ -46,16 +46,19 @@
 		<h2>popover</h2>
 
 		<h2>switcher</h2>
-			<joomla-switcher>
-				<span class="switcher">
-					<input name="switcher" id="sw1" value="0" type="radio" class="active" checked >
-					<input name="switcher" id="sw2" value="1" type="radio">
-					<span class="switch"></span>
-				</span>
-				<span class="switcher-labels">
-					<span class="switcher-label-0 active">No</span>
-				<span class="switcher-label-1">Yes</span>
-				</span>
+			<joomla-switcher offText="Off" onText="On">
+				<input name="switcher1" id="sw1" value="0" type="radio">
+				<input name="switcher1" id="sw2" value="1" type="radio" class="active" checked>
+			</joomla-switcher>
+
+			<joomla-switcher type="primary" offText="No" onText="Yes">
+				<input name="switcher2" id="sw3" value="0" type="radio" class="active" checked>
+				<input name="switcher2" id="sw4" value="1" type="radio">
+			</joomla-switcher>
+
+			<joomla-switcher type="danger" offText="Stable" onText="Alpha">
+				<input name="switcher3" id="sw5" value="0" type="radio" class="active" checked>
+				<input name="switcher3" id="sw6" value="1" type="radio">
 			</joomla-switcher>
 
 		<h2>tab</h2>
