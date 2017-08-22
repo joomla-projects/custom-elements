@@ -15,16 +15,9 @@
 		<!-- You can use the document as a place to set up your fixtures. -->
 		<test-fixture id="switcher-element-basic">
 			<template>
-				<joomla-switcher>
-					<span class="switcher">
-						<input name="switcher" id="sw1" value="0" type="radio" class="active" checked>
-						<input name="switcher" id="sw2" value="1" type="radio">
-						<span class="switch"></span>
-					</span>
-					<span class="switcher-labels">
-						<span class="switcher-label-0 active">No</span>
-					<span class="switcher-label-1">Yes</span>
-					</span>
+				<joomla-switcher offText="No" onText="Yes">
+					<input name="switcher" id="sw1" value="0" type="radio" class="active" checked>
+					<input name="switcher" id="sw2" value="1" type="radio">
 				</joomla-switcher>
 			</template>
 		</test-fixture>
@@ -43,16 +36,37 @@
 				});
 
 				test('Has the container span for the radios', () => {
-					const switcherEl = myEl.querySelector('.switcher');
+					const switcherEl = myEl.firstChild;
 					assert.equal(switcherEl.getAttribute('class'), 'switcher');
 				});
 
 				test('Has the container span for the labels', () => {
-						const labelEl = myEl.querySelector('.switcher-labels');
-						assert.equal(labelEl.getAttribute('class'), 'switcher-labels');
-					});
-			});
+					const labelEl = myEl.querySelector('.switcher-labels');
+					assert.equal(labelEl.getAttribute('class'), 'switcher-labels');
+				});
 
+				test('Switches on click one', () => {
+					myEl.querySelector('#sw2').click();
+					const el1 = myEl.querySelector('#sw2').getAttribute('class')
+					assert.equal(el1, 'active');
+				});
+
+				test('Switches on click two', () => {
+					// First clisk
+					myEl.querySelector('#sw2').click();
+
+					// Second click
+					myEl.querySelector('#sw1').click();
+					const el1 = myEl.querySelector('#sw1').getAttribute('class')
+					assert.equal(el1, 'active');
+				});
+
+				test('Switches by method', () => {
+					myEl.toggle();
+					const el1 = myEl.querySelector('#sw2').getAttribute('class')
+					assert.equal(el1, 'active');
+				});
+			});
 		</script>
 
 	</body>
