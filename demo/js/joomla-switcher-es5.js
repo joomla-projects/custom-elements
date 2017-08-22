@@ -66,7 +66,7 @@ var _createClass = function () {
           b = [].slice.call(a.querySelectorAll('input')),
           c = [].slice.call(a.nextElementSibling.querySelectorAll('span')),
           d = this.querySelector('input.active'),
-          e = this.querySelector('input:not(.active)');console.log(e), console.log(b), c.forEach(function (a) {
+          e = this.querySelector('input:not(.active)');c.forEach(function (a) {
         a.classList.remove('active');
       }), a.classList.contains('active') ? a.classList.remove('active') : a.classList.add('active'), e.classList.contains('active') ? (b.forEach(function (a) {
         a.classList.remove('active'), a.removeAttribute('checked');

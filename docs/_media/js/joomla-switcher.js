@@ -155,8 +155,6 @@ class SwitcherElement extends HTMLElement {
 			  wasActive   = this.querySelector('input.active'),
 			  newActive = this.querySelector('input:not(.active)');
 
-		console.log(newActive)
-		console.log(inputs)
 		spans.forEach(function (span) {
 			span.classList.remove('active');
 		});
