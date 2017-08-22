@@ -2,72 +2,22 @@
 	if (!document.getElementById('joomla-switcher-stylesheet')) {
 		const style = document.createElement('style');
 		style.id = 'joomla-switcher-stylesheet';
-		style.innerHTML = `joomla-switcher{display:inline-flex;height:28px;box-sizing:border-box}joomla-switcher .switcher{position:relative;box-sizing:border-box;display:inline-block;width:62px;height:28px;vertical-align:middle;cursor:pointer;user-select:none;background-color:#f2f2f2;background-clip:content-box;border:1px solid rgba(0,0,0,.18);border-radius:.25rem;box-shadow:0 0 0 0 #dfdfdf inset;transition:border .4s ease 0s,box-shadow .4s ease 0s}joomla-switcher .switcher.active{background-color:#5cb85c;border-color:#5cb85c;box-shadow:0 0 0 calc(28px / 2) #5cb85c inset;transition:border .4s ease 0s,box-shadow .4s ease 0s,background-color 1.2s ease 0s}joomla-switcher .switcher-danger.switcher.active{background-color:#d9534f;border-color:#d9534f;box-shadow:0 0 0 calc(28px / 2) #d9534f inset}joomla-switcher .switcher-primary.switcher.active{background-color:#0275d8;border-color:#0275d8;box-shadow:0 0 0 calc(28px / 2) #0275d8 inset}joomla-switcher input{position:absolute;top:0;left:0;z-index:2;width:62px;height:28px;padding:0;margin:0;cursor:pointer;opacity:0}joomla-switcher .switch{position:absolute;top:0;width:calc(62px / 2);height:calc(28px - (1px * 2));background:#fff;border-radius:.25rem;box-shadow:0 0 1px rgba(0,0,0,.1) inset,0 1px 3px rgba(0,0,0,.15);transition:left .2s ease 0s}joomla-switcher input:checked~.switch{left:0}joomla-switcher input~:checked~.switch{left:calc((62px / 2) - (1px * 2))}joomla-switcher input:checked{z-index:0}joomla-switcher .switcher-labels{position:relative}joomla-switcher .switcher-labels span{position:absolute;top:0;left:10px;color:#636c72;visibility:hidden;opacity:0;transition:all .2s ease-in-out}joomla-switcher .switcher-labels span.active{visibility:visible;opacity:1;transition:all .2s ease-in-out}`;
+		style.innerHTML = `joomla-switcher{display:block;height:28px;box-sizing:border-box}joomla-switcher .switcher{position:relative;box-sizing:border-box;display:inline-block;width:62px;height:28px;vertical-align:middle;cursor:pointer;user-select:none;background-color:#f2f2f2;background-clip:content-box;border:1px solid rgba(0,0,0,.18);border-radius:.25rem;box-shadow:0 0 0 0 #dfdfdf inset;transition:border .4s ease 0s,box-shadow .4s ease 0s}joomla-switcher .switcher.active{background-color:#5cb85c;border-color:#5cb85c;box-shadow:0 0 0 calc(28px / 2) #5cb85c inset;transition:border .4s ease 0s,box-shadow .4s ease 0s,background-color 1.2s ease 0s}joomla-switcher .switcher-danger.switcher.active{background-color:#d9534f;border-color:#d9534f;box-shadow:0 0 0 calc(28px / 2) #d9534f inset}joomla-switcher .switcher-primary.switcher.active{background-color:#0275d8;border-color:#0275d8;box-shadow:0 0 0 calc(28px / 2) #0275d8 inset}joomla-switcher input{position:absolute;top:0;left:0;z-index:2;width:62px;height:28px;padding:0;margin:0;cursor:pointer;opacity:0}joomla-switcher .switch{position:absolute;top:0;width:calc(62px / 2);height:calc(28px - (1px * 2));background:#fff;border-radius:.25rem;box-shadow:0 0 1px rgba(0,0,0,.1) inset,0 1px 3px rgba(0,0,0,.15);transition:left .2s ease 0s}joomla-switcher input:checked~.switch{left:0}joomla-switcher input~:checked~.switch{left:calc((62px / 2) - (1px * 2))}joomla-switcher input:checked{z-index:0}joomla-switcher .switcher-labels{position:relative}joomla-switcher .switcher-labels span{position:absolute;top:0;left:10px;color:#636c72;visibility:hidden;opacity:0;transition:all .2s ease-in-out}joomla-switcher .switcher-labels span.active{visibility:visible;opacity:1;transition:all .2s ease-in-out}`;
 		document.head.appendChild(style);
 	}
 })();
 
 class SwitcherElement extends HTMLElement {
+	/* Attributes to monitor */
+	static get observedAttributes() { return ['type', 'offText', 'onText']; }
+	get type() { return this.getAttribute('type'); }
+	set type(value) { return this.setAttribute('type', value); }
+	get offText() { return this.getAttribute('offText'); }
+	get onText() { return this.getAttribute('onText'); }
+
 	/* Lifecycle, element created */
 	constructor() {
 		super();
-	}
-
-	/* Method to get the translated text */
-	createMarkup(switcher) {
-		let inputs  = [].slice.call(switcher.querySelectorAll('input')),
-		    checked = 0;
-
-		// Create the first 'span' wrapper
-		let spanFirst = document.createElement('span');
-		spanFirst.classList.add('switcher');
-		spanFirst.classList.add(switcher.getAttribute('class'));
-
-		let switchEl = document.createElement('span');
-		switchEl.classList.add('switch');
-
-		inputs.forEach(function(input, index) {
-			spanFirst.appendChild(input);
-
-			if (index === 1 && input.checked) {
-				checked = 1;
-			}
-		});
-
-		spanFirst.appendChild(switchEl);
-
-		// Create the second 'span' wrapper
-		let spanSecond = document.createElement('span');
-		spanSecond.classList.add('switcher-labels');
-
-		let labelFirst = document.createElement('span');
-		labelFirst.classList.add('switcher-label-0');
-		labelFirst.innerText = this.getText(switcher.getAttribute('offText'), 'Off');
-
-		let labelSecond = document.createElement('span');
-		labelSecond.classList.add('switcher-label-1');
-		labelSecond.innerText = this.getText(switcher.getAttribute('onText'), 'On');
-
-		if (checked === 0) {
-			labelFirst.classList.add('active');
-		}
-		else {
-			labelSecond.classList.add('active');
-		}
-
-		spanSecond.appendChild(labelFirst);
-		spanSecond.appendChild(labelSecond);
-
-		// Remove all child nodes from the switcher
-		while (switcher.firstChild) {
-			switcher.removeChild(switcher.firstChild);
-		}
-
-		// Append everything back to the main element
-		switcher.appendChild(spanFirst);
-		switcher.appendChild(spanSecond);
-
-		return switcher;
 	}
 
 	/* Lifecycle, element appended to the DOM */
@@ -108,7 +58,7 @@ class SwitcherElement extends HTMLElement {
 
 			// Add the active class on click
 			switchEl.addEventListener('click', function (event) {
-				self.toggle(event.target);
+				self.switch();
 			});
 		});
 
@@ -129,7 +79,7 @@ class SwitcherElement extends HTMLElement {
 		this.removeEventListener('click', this);
 	}
 
-	/* Method to dispatch events */
+	/* Method to dispatch events. Internal */
 	dispatchCustomEvent(eventName) {
 		let OriginalCustomEvent = new CustomEvent(eventName, {bubbles: true, cancelable: true});
 		OriginalCustomEvent.relatedTarget = this;
@@ -137,11 +87,73 @@ class SwitcherElement extends HTMLElement {
 		this.removeEventListener(eventName, this);
 	}
 
-	toggle(element) {
-		const parent    = element.parentNode,
-			  wasActive = parent.querySelectorAll('input.active'),
-			  inputs    = [].slice.call(parent.querySelectorAll('input')),
-			  spans     = [].slice.call(parent.nextElementSibling.querySelectorAll('span'));
+	/** Method to build the switch. Internal */
+	createMarkup(switcher) {
+		let inputs = [].slice.call(switcher.querySelectorAll('input')),
+			checked = 0;
+
+		// Create the first 'span' wrapper
+		let spanFirst = document.createElement('span');
+		spanFirst.classList.add('switcher');
+
+		if (this.type && ['primary', 'danger'].indexOf(this.type) !== -1) {
+			spanFirst.classList.add('switcher-' + this.type);
+		}
+
+		let switchEl = document.createElement('span');
+		switchEl.classList.add('switch');
+
+		inputs.forEach(function (input, index) {
+			spanFirst.appendChild(input);
+
+			if (index === 1 && input.checked) {
+				checked = 1;
+			}
+		});
+
+		spanFirst.appendChild(switchEl);
+
+		// Create the second 'span' wrapper
+		let spanSecond = document.createElement('span');
+		spanSecond.classList.add('switcher-labels');
+
+		let labelFirst = document.createElement('span');
+		labelFirst.classList.add('switcher-label-0');
+		labelFirst.innerText = this.getText(this.offText, 'Off');
+
+		let labelSecond = document.createElement('span');
+		labelSecond.classList.add('switcher-label-1');
+		labelSecond.innerText = this.getText(this.onText, 'On');
+
+		if (checked === 0) {
+			labelFirst.classList.add('active');
+		}
+		else {
+			labelSecond.classList.add('active');
+		}
+
+		spanSecond.appendChild(labelFirst);
+		spanSecond.appendChild(labelSecond);
+
+		// Remove all child nodes from the switcher
+		while (switcher.firstChild) {
+			switcher.removeChild(switcher.firstChild);
+		}
+
+		// Append everything back to the main element
+		switcher.appendChild(spanFirst);
+		switcher.appendChild(spanSecond);
+
+		return switcher;
+	}
+
+	/** Method to toggle the switch. Internal */
+	switch() {
+		const parent      = this.firstChild,
+			  inputs      = [].slice.call(parent.querySelectorAll('input')),
+			  spans       = [].slice.call(parent.nextElementSibling.querySelectorAll('span')),
+			  wasActive   = this.querySelector('input.active'),
+			  newActive = this.querySelector('input:not(.active)');
 
 		spans.forEach(function (span) {
 			span.classList.remove('active');
@@ -154,12 +166,12 @@ class SwitcherElement extends HTMLElement {
 			parent.classList.add('active');
 		}
 
-		if (!element.classList.contains('active')) {
+		if (!newActive.classList.contains('active')) {
 			inputs.forEach(function(input) {
 				input.classList.remove('active');
 				input.removeAttribute('checked');
 			});
-			element.classList.add('active');
+			newActive.classList.add('active');
 
 			this.dispatchCustomEvent('joomla.switcher.on');
 		}
@@ -172,13 +184,18 @@ class SwitcherElement extends HTMLElement {
 			this.dispatchCustomEvent('joomla.switcher.off');
 		}
 
-		const newActive = inputs.filter(item => item !== wasActive);
-
-		newActive[0].setAttribute('checked', '');
-		parent.nextElementSibling.querySelector('.switcher-label-' + element.value).classList.add('active');
+		newActive.setAttribute('checked', '');
+		parent.nextElementSibling.querySelector('.switcher-label-' + newActive.value).classList.add('active');
 	}
 
-	/* Method to get the translated text */
+	/** Method to toggle the switch */
+	toggle() {
+		const newActive = this.querySelector('input:not(.active)');
+
+		newActive.click();
+	}
+
+	/* Method to get the translated text. Internal */
 	getText(str, fallback) {
 		return (window.Joomla && Joomla.JText && Joomla.JText._ && typeof Joomla.JText._ === 'function' && Joomla.JText._(str)) ? Joomla.JText._(str) : fallback;
 	}

@@ -15,17 +15,10 @@
 		<!-- You can use the document as a place to set up your fixtures. -->
 		<test-fixture id="switcher-element-basic">
 			<template>
-			<joomla-switcher>
-				<span class="joomla-switcher switcher">
-					<input id="switcher0" name="switcher" value="0" type="radio" class="active" checked>
-					<input id="switcher1" name="switcher" value="1" type="radio">
-					<span class="switch"></span>
-				</span>
-				<span class="switcher-labels">
-					<span class="switcher-label-0 active">No</span>
-					<span class="switcher-label-1">Yes</span>
-				</span>
-			</joomla-switcher>
+				<joomla-switcher offText="No" onText="Yes">
+					<input name="switcher" id="sw1" value="0" type="radio" class="active" checked>
+					<input name="switcher" id="sw2" value="1" type="radio">
+				</joomla-switcher>
 			</template>
 		</test-fixture>
 
@@ -36,9 +29,6 @@
 
 				setup(() => {
 					myEl = fixture('switcher-element-basic');
-
-					const switcherEl = myEl.querySelector('.switcher');
-					const labelEl = myEl.querySelector('.switcher-labels');
 				});
 
 				test('Custom Element script is loaded', () => {
@@ -46,8 +36,8 @@
 				});
 
 				test('Has the container span for the radios', () => {
-					const switcherEl = myEl.querySelector('.switcher');
-					assert.equal(switcherEl.getAttribute('class'), 'joomla-switcher switcher');
+					const switcherEl = myEl.firstChild;
+					assert.equal(switcherEl.getAttribute('class'), 'switcher');
 				});
 
 				test('Has the container span for the labels', () => {
@@ -55,56 +45,28 @@
 					assert.equal(labelEl.getAttribute('class'), 'switcher-labels');
 				});
 
-
-				test('Active radio should have active class', () => {
-						const switcherEl = myEl.querySelector('.switcher');
-						const switchs = switcherEl.querySelectorAll('input')
-						assert.equal(switchs[0].getAttribute('class'), 'active');
-						assert.equal(switchs[1].hasAttribute('class'), false);
-					});
-
-				test('Active label should have active class', () => {
-					const labelEl = myEl.querySelector('.switcher-labels');
-					const labels = labelEl.querySelectorAll('span')
-					assert.equal(labels[0].getAttribute('class'), 'switcher-label-0 active');
-					assert.equal(labels[1].getAttribute('class'), 'switcher-label-1');
+				test('Switches on click one', () => {
+					myEl.querySelector('#sw2').click();
+					const el1 = myEl.querySelector('#sw2').getAttribute('class')
+					assert.equal(el1, 'active');
 				});
 
-				test('Test clicking on the switcher should change the active elements', () => {
-					const switcherEl = myEl.querySelector('.switcher');
-					const switchs = switcherEl.querySelectorAll('input');
-					const labelEl = myEl.querySelector('.switcher-labels');
-					const labels = labelEl.querySelectorAll('span');
+				test('Switches on click two', () => {
+					// First clisk
+					myEl.querySelector('#sw2').click();
 
-					switcherEl.click();
-					assert.equal(switchs[1].getAttribute('class'), 'active');
-					// assert.equal(switchs[0].hasAttribute('class'), false);
-					// assert.equal(labels[0].getAttribute('class'), 'switcher-label-0');
-					// assert.equal(labels[1].getAttribute('class'), 'switcher-label-1 active');
-					// assert.equal(switcherEl.parentNode.hasAttribute('class'), false);
+					// Second click
+					myEl.querySelector('#sw1').click();
+					const el1 = myEl.querySelector('#sw1').getAttribute('class')
+					assert.equal(el1, 'active');
 				});
 
-				// test('Respects level attribute change, warning', () => {
-				// 	myEl.setAttribute('level', 'warning');
-				// 	assert.equal(myEl.getAttribute('level'), 'warning');
-				// });
-
-				// test('Respects level attribute change, danger', () => {
-				// 	myEl.setAttribute('level', 'danger');
-				// 	assert.equal(myEl.getAttribute('level'), 'danger');
-				// });
-
-				// test('Respects level attribute change, success', () => {
-				// 	myEl.setAttribute('level', 'success');
-				// 	assert.equal(myEl.getAttribute('level'), 'success');
-				// });
-
-				// test('Has the right text', () => {
-				// 	console.info(myEl)
-				// 	assert.equal(myEl.querySelector('#text').innerText, 'Has some text');
-				// });
+				test('Switches by method', () => {
+					myEl.toggle();
+					const el1 = myEl.querySelector('#sw2').getAttribute('class')
+					assert.equal(el1, 'active');
+				});
 			});
-
 		</script>
 
 	</body>
