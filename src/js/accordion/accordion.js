@@ -1,8 +1,9 @@
 (function () {
+	const css = `{{stylesheet}}`;
 	if (!document.getElementById('joomla-accordion-stylesheet')) {
 		const style = document.createElement('style');
 		style.id = 'joomla-accordion-stylesheet';
-		style.innerHTML = `{{stylesheet}}`;
+		style.innerHTML = css;
 		document.head.appendChild(style);
 	}
 })();
@@ -68,8 +69,8 @@ class AccordionElement extends HTMLElement {
 	attributeChangedCallback(attr, oldValue, newValue) {
 		switch (attr) {
 			// case 'name':
-				// console.log(newValue);
-				// break;
+			// console.log(newValue);
+			// break;
 		}
 	}
 
@@ -94,14 +95,5 @@ class AccordionElement extends HTMLElement {
 			collapsed.classList.remove('show');
 		}
 	}
-
-	/* Method to dispatch events */
-	dispatchCustomEvent(eventName) {
-		let OriginalCustomEvent = new CustomEvent(eventName, { "bubbles": true, "cancelable": true });
-		OriginalCustomEvent.relatedTarget = this;
-		this.dispatchEvent(OriginalCustomEvent);
-		this.removeEventListener(eventName, this);
-	}
 }
-
 customElements.define('joomla-accordion', AccordionElement);
