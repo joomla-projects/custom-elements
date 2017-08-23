@@ -15,70 +15,35 @@ class ModalElement extends HTMLElement {
 		let triggerBtn = document.querySelector("button[data-href=\"#" + this.id + "\"]");
 		if (triggerBtn) {
 			triggerBtn.addEventListener('click', function (ev) {
-
-				var ancestor = self.findAncestor(self, 'joomla-modal')
-				if (ancestor) {
-					window.Joomla.UI.modal.element = ancestor;
-					console.log(Joomla.UI.modal)
-				}
-
-				let dropShadow = document.createElement('div'),
-					modalContent = this.querySelector('.modal-content');
+				const currentButton = this;
+				let dropShadow = document.createElement('div');
 				dropShadow.classList.add('modal-backdrop', 'show');
-				if (!ancestor) {
-					document.body.appendChild(dropShadow);
+				document.body.appendChild(dropShadow);
+
+				self.classList.add('show');
+				self.firstElementChild.focus();
+
+				// Close on click outside the modal
+				window.addEventListener('click', function (event) {
+					if (!self.findAncestorClass(event.target, 'modal-content') && event.target !== currentButton) {
+						self.close();
+					}
+				})
+
+				// Is there a close button?
+				const modalButton = self.querySelectorAll('button[data-dismiss="modal"]');
+
+				for (var i = 0, l = modalButton.length; i < l; i++) {
+					// Add listeners for close
+					modalButton[i].addEventListener('click', function (event) {
+						self.close();
+					});
 				}
-
-				self.classList.toggle('show');
-				//this.style.display = 'block';
-				self.focus()
-				// if ('WebkitTransition' in document.documentElement.style || 'transition' in document.documentElement.style) {
-				//     dropShadow.addEventListener("transitionend", function(event) {
-				//         console.log(modal)
-				//         modal.classList.toggle('show');
-				//         modal.style.display = 'block'; }, false);
-				// } else {
-				//     modal.classList.toggle('show');
-				//     modal.style.display = 'block';
-				// }
-
-				// let backdrp = document.querySelector('.modal-backdrop.show')
-				// console.log(backdrp)
-				// backdrp.addEventListener('click', function (event) {
-				// console.log(event)
-				// 		self.close();
-				// })
 			})
-		}
-
-		// Is there a close button?
-		const modalButton = this.querySelectorAll('button[data-dismiss="modal"]');
-
-		for (var i = 0, l = modalButton.length; i < l; i++) {
-			// Add listeners for close
-			modalButton[i].addEventListener('click', function (event) {
-
-
-				var topModal = self.findAncestor(event.target, 'joomla-modal');
-				var parentModal = self.findAncestor(topModal, 'joomla-modal');
-
-				console.log(topModal)
-				console.log(parentModal)
-
-				if (parentModal) {
-					topModal.classList.remove('show')
-				} else {
-					topModal.close();
-				}
-			});
 		}
 	}
 
 	disconnectedCallback() {
-
-	}
-
-	adoptedCallback(oldDocument, newDocument) {
 
 	}
 
@@ -97,7 +62,7 @@ class ModalElement extends HTMLElement {
 	close() {
 		const dropShadow = document.querySelector('.modal-backdrop');
 		if (dropShadow) document.body.removeChild(dropShadow);
-		this.classList.toggle('show');
+		this.classList.remove('show');
 		//this.style.display = 'none';
 	}
 
@@ -106,11 +71,16 @@ class ModalElement extends HTMLElement {
 		return el;
 	}
 
+	findAncestorClass(el, className) {
+		while ((el = el.parentElement) && !el.classList.contains(className));
+		return el;
+	}
+
 	includeCss() {
 		if (!document.getElementById('joomla-modal-stylesheet')) {
 			const style = document.createElement('style');
 			style.id = 'joomla-modal-stylesheet';
-			style.innerHTML = `joomla-modal{position:fixed;top:0;right:0;bottom:0;left:0;z-index:1050;overflow:hidden;display:none;outline:0}joomla-modal.show{display:block}`;
+			style.innerHTML = `joomla-modal .modal-dialog{position:fixed;top:0;right:0;bottom:0;left:0;z-index:1050;overflow:hidden;display:none;outline:0}joomla-modal.show .modal-dialog{display:block}`;
 			document.head.appendChild(style);
 		}
 	}

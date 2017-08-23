@@ -23,23 +23,26 @@ var _createClass = function () {
   }return _inherits(b, a), _createClass(b, [{ key: "connectedCallback", value: function connectedCallback() {
       var a = this,
           b = document.querySelector("button[data-href=\"#" + this.id + "\"]");b && b.addEventListener("click", function () {
-        var b = a.findAncestor(a, "joomla-modal");b && (window.Joomla.UI.modal.element = b, console.log(Joomla.UI.modal));var c = document.createElement("div"),
-            d = this.querySelector(".modal-content");c.classList.add("modal-backdrop", "show"), b || document.body.appendChild(c), a.classList.toggle("show"), a.focus();
-      });for (var c = this.querySelectorAll("button[data-dismiss=\"modal\"]"), d = 0, e = c.length; d < e; d++) {
-        c[d].addEventListener("click", function (b) {
-          var c = a.findAncestor(b.target, "joomla-modal"),
-              d = a.findAncestor(c, "joomla-modal");console.log(c), console.log(d), d ? c.classList.remove("show") : c.close();
-        });
-      }
-    } }, { key: "disconnectedCallback", value: function disconnectedCallback() {} }, { key: "adoptedCallback", value: function adoptedCallback() {} }, { key: "attributeChangedCallback", value: function attributeChangedCallback(a) {
+        var b = this,
+            c = document.createElement("div");c.classList.add("modal-backdrop", "show"), document.body.appendChild(c), a.classList.add("show"), a.firstElementChild.focus(), window.addEventListener("click", function (c) {
+          a.findAncestorClass(c.target, "modal-content") || c.target === b || a.close();
+        });for (var d = a.querySelectorAll("button[data-dismiss=\"modal\"]"), e = 0, f = d.length; e < f; e++) {
+          d[e].addEventListener("click", function () {
+            a.close();
+          });
+        }
+      });
+    } }, { key: "disconnectedCallback", value: function disconnectedCallback() {} }, { key: "attributeChangedCallback", value: function attributeChangedCallback(a) {
       switch (a) {}
     } }, { key: "close", value: function close() {
-      var a = document.querySelector(".modal-backdrop");a && document.body.removeChild(a), this.classList.toggle("show");
+      var a = document.querySelector(".modal-backdrop");a && document.body.removeChild(a), this.classList.remove("show");
     } }, { key: "findAncestor", value: function findAncestor(a, b) {
       for (; (a = a.parentElement) && a.nodeName.toLowerCase() !== b;) {}return a;
+    } }, { key: "findAncestorClass", value: function findAncestorClass(a, b) {
+      for (; (a = a.parentElement) && !a.classList.contains(b);) {}return a;
     } }, { key: "includeCss", value: function includeCss() {
       if (!document.getElementById("joomla-modal-stylesheet")) {
-        var a = document.createElement("style");a.id = "joomla-modal-stylesheet", a.innerHTML = "joomla-modal{position:fixed;top:0;right:0;bottom:0;left:0;z-index:1050;overflow:hidden;display:none;outline:0}joomla-modal.show{display:block}", document.head.appendChild(a);
+        var a = document.createElement("style");a.id = "joomla-modal-stylesheet", a.innerHTML = "joomla-modal .modal-dialog{position:fixed;top:0;right:0;bottom:0;left:0;z-index:1050;overflow:hidden;display:none;outline:0}joomla-modal.show .modal-dialog{display:block}", document.head.appendChild(a);
       }
     } }], [{ key: "observedAttributes", get: function get() {} }]), b;
 }(HTMLElement);customElements.define("joomla-modal", ModalElement);

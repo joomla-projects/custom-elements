@@ -1,6 +1,13 @@
 class CollapseElement extends HTMLElement {
+	static get observedAttributes() {
+		return ['state'];
+	}
+	get state() { return this.getAttribute('state') || 'closed'; }
+	set state(value) { return this.setAttribute('state', value); }
+
 	constructor(element) {
 		super();
+		this.includeCss();
 	}
 
 	connectedCallback() {
@@ -13,11 +20,9 @@ class CollapseElement extends HTMLElement {
 			if (!this.state || this.state === "closed") {
 				linked[i].setAttribute('aria-expanded', 'false');
 				linked[i].setAttribute('aria-controls', this.id);
-				this.classList.remove('show')
 			} else {
 				linked[i].setAttribute('aria-expanded', 'true');
 				linked[i].setAttribute('aria-controls', this.id);
-				this.classList.add('show');
 			}
 
 			linked[i].addEventListener('click', function (event) {
@@ -33,18 +38,12 @@ class CollapseElement extends HTMLElement {
 	}
 
 	disconnectedCallback() {
-
+		let linked = document.querySelector('[href="#' + this.id + '"]');
+		if (!linked) linked = document.querySelector('[data-target="#' + this.id + '"]');
+		if (linked) {
+			linked.removeEventListener('click', this)
+		}
 	}
-
-	adoptedCallback(oldDocument, newDocument) {
-
-	}
-
-	static get observedAttributes() {
-		return ['state'];
-	}
-	get state() { return this.getAttribute('state') || 'closed'; }
-	set state(value) { return this.setAttribute('state', value); }
 
 	attributeChangedCallback(attr, oldValue, newValue) {
 		switch (attr) {
@@ -69,11 +68,12 @@ class CollapseElement extends HTMLElement {
 			this.state = "closed"
 			linked.setAttribute('aria-expanded', 'false');
 		}
-		this.classList.toggle('show');
 	}
 
 	includeCss() {
+		console.log('ffff')
 		if (!document.getElementById('joomla-collapse-stylesheet')) {
+			console.log('ssss')
 			const style = document.createElement('style');
 			style.id = 'joomla-collapse-stylesheet';
 			style.innerText = `{{stylesheet}}`;
