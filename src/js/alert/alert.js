@@ -5,7 +5,7 @@
 		style.innerHTML = `{{stylesheet}}`;
 		document.head.appendChild(style);
 	}
-})();
+})()
 
 class AlertElement extends HTMLElement {
 	/* Attributes to monitor */

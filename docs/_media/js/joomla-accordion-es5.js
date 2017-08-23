@@ -44,8 +44,6 @@ var _createClass = function () {
           var a = document.getElementById(f.replace('#', ''));e.setAttribute('aria-expanded', 'true'), a.classList.remove('show');
         }
       }
-    } }, { key: 'dispatchCustomEvent', value: function dispatchCustomEvent(a) {
-      var b = new CustomEvent(a, { bubbles: !0, cancelable: !0 });b.relatedTarget = this, this.dispatchEvent(b), this.removeEventListener(a, this);
     } }], [{ key: 'observedAttributes', get: function get() {
       return ['type', 'button'];
     } }]), b;

@@ -19,7 +19,7 @@ var _createClass = function () {
   if ('function' != typeof b && null !== b) throw new TypeError('Super expression must either be null or a function, not ' + (typeof b === 'undefined' ? 'undefined' : _typeof(b)));a.prototype = Object.create(b && b.prototype, { constructor: { value: a, enumerable: !1, writable: !0, configurable: !0 } }), b && (Object.setPrototypeOf ? Object.setPrototypeOf(a, b) : a.__proto__ = b);
 }(function () {
   if (!document.getElementById('joomla-collapse-stylesheet')) {
-    var a = document.createElement('style');a.id = 'joomla-collapse-stylesheet', a.innerText = '', document.head.appendChild(a);
+    var a = document.createElement('style');a.id = 'joomla-collapse-stylesheet', a.innerText = 'joomla-collapse[state=closed]{display:none}joomla-collapse[state=open]{display:block}', document.head.appendChild(a);
   }
 })();var CollapseElement = function (a) {
   function b() {
@@ -35,8 +35,6 @@ var _createClass = function () {
           var d = document.querySelector('[href="#' + this.id + '"]');'closed' === c ? d.setAttribute('aria-expanded', 'false') : 'open' === c && d.setAttribute('aria-expanded', 'true');}
     } }, { key: 'toggle', value: function toggle() {
       var a = document.querySelector('[href="#' + this.id + '"]');a || (a = document.querySelector('[data-target="#' + this.id + '"]')), 'closed' === this.state ? (this.state = 'open', a.setAttribute('aria-expanded', 'true')) : (this.state = 'closed', a.setAttribute('aria-expanded', 'false')), this.classList.toggle('show');
-    } }, { key: 'dispatchCustomEvent', value: function dispatchCustomEvent(a) {
-      var b = new CustomEvent(a, { bubbles: !0, cancelable: !0 });b.relatedTarget = this, this.dispatchEvent(b), this.removeEventListener(a, this);
     } }, { key: 'state', get: function get() {
       return this.getAttribute('state') || 'closed';
     }, set: function set(a) {

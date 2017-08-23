@@ -19,32 +19,32 @@ var _createClass = function () {
   if ('function' != typeof b && null !== b) throw new TypeError('Super expression must either be null or a function, not ' + (typeof b === 'undefined' ? 'undefined' : _typeof(b)));a.prototype = Object.create(b && b.prototype, { constructor: { value: a, enumerable: !1, writable: !0, configurable: !0 } }), b && (Object.setPrototypeOf ? Object.setPrototypeOf(a, b) : a.__proto__ = b);
 }(function () {
   if (!document.getElementById('joomla-button-stylesheet')) {
-    var a = document.createElement('style');a.id = 'joomla-button-stylesheet', a.innerHTML = '', document.head.appendChild(a);
+    var a = document.createElement('style');a.id = 'joomla-button-stylesheet', a.innerHTML = 'joomla-group-buttons{position:relative;display:inline-flex;vertical-align:middle}joomla-group-buttons>.btn{position:relative;flex:0 1 auto;margin-bottom:0}joomla-group-buttons>.btn:hover{z-index:2}joomla-group-buttons>.btn.active,joomla-group-buttons>.btn:active,joomla-group-buttons>.btn:focus{z-index:2}joomla-group-buttons .btn+.btn,joomla-group-buttons .btn+.btn-group,joomla-group-buttons .btn-group+.btn,joomla-group-buttons .btn-group+.btn-group{margin-left:-1px}.btn-toolbar{display:flex;flex-wrap:wrap;justify-content:flex-start}.btn-toolbar .input-group{width:auto}joomla-group-buttons>.btn:not(:first-child):not(:last-child):not(.dropdown-toggle){border-radius:0}joomla-group-buttons>.btn:first-child{margin-left:0}joomla-group-buttons>.btn:first-child:not(:last-child):not(.dropdown-toggle){border-top-right-radius:0;border-bottom-right-radius:0}joomla-group-buttons>.btn:last-child:not(:first-child),joomla-group-buttons>.dropdown-toggle:not(:first-child){border-top-left-radius:0;border-bottom-left-radius:0}joomla-group-buttons>joomla-group-buttons{float:left}joomla-group-buttons>joomla-group-buttons:not(:first-child):not(:last-child)>.btn{border-radius:0}joomla-group-buttons>joomla-group-buttons:first-child:not(:last-child)>.btn:last-child,joomla-group-buttons>joomla-group-buttons:first-child:not(:last-child)>.dropdown-toggle{border-top-right-radius:0;border-bottom-right-radius:0}joomla-group-buttons>joomla-group-buttons:last-child:not(:first-child)>.btn:first-child{border-top-left-radius:0;border-bottom-left-radius:0}joomla-group-buttons>.btn input[type=checkbox],joomla-group-buttons>.btn input[type=radio],joomla-group-buttons>.btn-group>.btn input[type=checkbox],joomla-group-buttons>.btn-group>.btn input[type=radio]{position:absolute;clip:rect(0,0,0,0);pointer-events:none}', document.head.appendChild(a);
   }
 })();var ButtonElement = function (a) {
   function b() {
     return _classCallCheck(this, b), _possibleConstructorReturn(this, (b.__proto__ || Object.getPrototypeOf(b)).call(this));
   }return _inherits(b, a), _createClass(b, [{ key: 'connectedCallback', value: function connectedCallback() {
-      this.classList.contains('btn', 'btn-group') || this.classList.add('btn', 'btn-group');var a = this.querySelectorAll('[type="checkbox"]');if (a.length) for (var b = 0, c = a.length; b < c; b++) {
-        'label' === a[b].parentNode.tagName.toLowerCase() && (a[b].getAttribute('checked') || a[b].parentNode.classList.contains('active') ? (a[b].checked = !0, a[b].setAttribute('checked', ''), a[b].parentNode.setAttribute('aria-pressed', 'true')) : (a[b].checked = !1, a[b].removeAttribute('checked', ''), a[b].parentNode.setAttribute('aria-pressed', 'false')), a[b].addEventListener('click', function (a) {
-          'label' === a.target.parentNode.tagName.toLowerCase() && (a.target.checked ? (a.target.checked = !0, a.target.setAttribute('checked', ''), a.target.parentNode.classList.add('active'), a.target.parentNode.setAttribute('aria-pressed', 'true')) : (a.target.checked = !1, a.target.removeAttribute('checked'), a.target.parentNode.classList.remove('active'), a.target.parentNode.setAttribute('aria-pressed', 'false')));
+      var a = [].slice.call(this.querySelectorAll('[type="checkbox"]'));if (a.length) a.forEach(function (a) {
+        'label' !== a.parentNode.tagName.toLowerCase() || (a.getAttribute('checked') || a.parentNode.classList.contains('active') ? (a.setAttribute('checked', ''), a.parentNode.setAttribute('aria-pressed', 'true')) : (a.removeAttribute('checked'), a.parentNode.setAttribute('aria-pressed', 'false')), a.setAttribute('tabindex', 0), a.addEventListener('click', function () {
+          this.checked ? (this.setAttribute('checked', ''), this.parentNode.classList.add('active'), this.parentNode.setAttribute('aria-pressed', 'true')) : (this.removeAttribute('checked'), this.parentNode.classList.remove('active'), this.parentNode.setAttribute('aria-pressed', 'false'));
         }));
-      } else {
-        var d = this.querySelectorAll('[type="radio"]');if (d) for (var e = 0, f = d.length; e < f; e++) {
-          'label' === d[e].parentNode.tagName.toLowerCase() && (d[e].getAttribute('checked') || d[e].parentNode.classList.contains('active') ? (d[e].checked = !0, d[e].setAttribute('checked', ''), d[e].parentNode.setAttribute('aria-pressed', 'true')) : (d[e].checked = !1, d[e].removeAttribute('checked', ''), d[e].parentNode.setAttribute('aria-pressed', 'false')), d[e].addEventListener('click', function (a) {
-            'label' === a.target.parentNode.tagName.toLowerCase() && (a.target.checked ? (a.target.parentNode.parentNode.clearAllRadios(), a.target.checked = !0, a.target.setAttribute('checked', ''), a.target.parentNode.classList.add('active'), a.target.parentNode.setAttribute('aria-pressed', 'true')) : (a.target.parentNode.parentNode.clearAllRadios(), a.target.checked = !1, a.target.removeAttribute('checked'), a.target.parentNode.classList.remove('active'), a.target.parentNode.setAttribute('aria-pressed', 'false')));
+      });else {
+        var b = [].slice.call(this.querySelectorAll('[type="radio"]'));b.length && b.forEach(function (a) {
+          'label' !== a.parentNode.tagName.toLowerCase() || (a.getAttribute('checked') || a.parentNode.classList.contains('active') ? (a.setAttribute('checked', ''), a.parentNode.setAttribute('aria-pressed', 'true')) : (a.removeAttribute('checked'), a.parentNode.setAttribute('aria-pressed', 'false')), a.addEventListener('click', function () {
+            this.checked ? (this.parentNode.parentNode.clearAllRadios(), this.setAttribute('checked', ''), this.parentNode.classList.add('active'), this.parentNode.setAttribute('aria-pressed', 'true')) : (this.parentNode.parentNode.clearAllRadios(), this.removeAttribute('checked'), this.parentNode.classList.remove('active'), this.parentNode.setAttribute('aria-pressed', 'false'));
           }));
-        }
+        });
       }
     } }, { key: 'disconnectedCallback', value: function disconnectedCallback() {} }, { key: 'adoptedCallback', value: function adoptedCallback() {} }, { key: 'attributeChangedCallback', value: function attributeChangedCallback(a) {
       switch (a) {}
     } }, { key: 'clearAllRadios', value: function clearAllRadios() {
-      for (var a = this.querySelectorAll('[type="radio"]'), b = 0, c = a.length; b < c; b++) {
-        a[b].checked = !1, a[b].removeAttribute('checked'), 'label' == a[b].parentNode.tagName.toLowerCase() && (a[b].parentNode.classList.remove('active'), a[b].parentNode.setAttribute('aria-pressed', 'false'));
-      }
+      var a = [].slice.call(this.querySelectorAll('[type="radio"]'));a.forEach(function (a) {
+        a.removeAttribute('checked'), 'label' == a.parentNode.tagName.toLowerCase() && (a.parentNode.classList.remove('active'), a.parentNode.setAttribute('aria-pressed', 'false'));
+      });
     } }, { key: 'dispatchCustomEvent', value: function dispatchCustomEvent(a) {
       var b = new CustomEvent(a, { bubbles: !0, cancelable: !0 });b.relatedTarget = this, this.dispatchEvent(b), this.removeEventListener(a, this);
     } }], [{ key: 'observedAttributes', get: function get() {} }]), b;
-}(HTMLElement);customElements.define('joomla-button', ButtonElement);
+}(HTMLElement);customElements.define('joomla-group-buttons', ButtonElement);
 
 },{}]},{},[1]);

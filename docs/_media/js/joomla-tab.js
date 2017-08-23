@@ -37,20 +37,20 @@ class TabElement extends HTMLElement {
 			return;
 		}
 
-		let tabsEl = [];
-		// remove the cascaded tabs
-		for (let i = 0, l = tabs.length; i < l; ++i) {
-			var child = tabs[i];
-			if (child.parentNode === this) {
-				tabsEl.push(child);
-			}
-		}
+		// let tabsEl = [];
+		// // remove the cascaded tabs
+		// for (let i = 0, l = tabs.length; i < l; ++i) {
+		// 	var child = tabs[i];
+		// 	if (child.parentNode === this) {
+		// 		tabsEl.push(child);
+		// 	}
+		// }
 
 		// Create the navigation
-		this.createNavigation(tabsEl)
+		this.createNavigation(tabs)
 
 		// Add missing role
-		tabsEl.forEach((tab) => {
+		tabs.forEach((tab) => {
 			tab.setAttribute('role', 'tabpanel')
 			if (tab.hasAttribute('active')) {
 				this.hasActive = true;
@@ -64,16 +64,16 @@ class TabElement extends HTMLElement {
 
 		// Fallback if no active tab
 		if (!this.hasActive) {
-			tabsEl[0].setAttribute('active', '');
+			tabs[0].setAttribute('active', '');
 			this.hasActive = true;
-			this.currentActive = tabsEl[0].id;
-			this.querySelector('#tab-' + tabsEl[0].id).setAttribute('aria-selected', 'true');
-			this.querySelector('#tab-' + tabsEl[0].id).setAttribute('tabindex', '0');
-			this.querySelector('#tab-' + tabsEl[0].id).setAttribute('active', '');
+			this.currentActive = tabs[0].id;
+			this.querySelector('#tab-' + tabs[0].id).setAttribute('aria-selected', 'true');
+			this.querySelector('#tab-' + tabs[0].id).setAttribute('tabindex', '0');
+			this.querySelector('#tab-' + tabs[0].id).setAttribute('active', '');
 		}
 
 		// Keyboard access
-		this.keyListeners(tabsEl)
+		this.keyListeners(tabs)
 
 		// Check if there is a hash in the URI
 		if (window.location.href.match(/#\S[^\&]*/)) {

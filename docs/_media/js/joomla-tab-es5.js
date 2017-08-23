@@ -38,21 +38,19 @@ var _createClass = function () {
       return ['recall', 'orientation', 'view'];
     } }]), _createClass(b, [{ key: 'connectedCallback', value: function connectedCallback() {
       var a = this;(!this.orientation || this.orientation && -1 === ['horizontal', 'vertical'].indexOf(this.orientation)) && (this.orientation = 'horizontal');var b = [].slice.call(this.querySelectorAll('section'));if (b) {
-        for (var c, d = [], e = 0, f = b.length; e < f; ++e) {
-          c = b[e], c.parentNode === this && d.push(c);
-        }if (this.createNavigation(tabsEl), tabsEl.forEach(function (b) {
+        if (this.createNavigation(b), b.forEach(function (b) {
           if (b.setAttribute('role', 'tabpanel'), b.hasAttribute('active')) return a.hasActive = !0, a.currentActive = b.id, a.querySelector('#tab-' + b.id).setAttribute('aria-selected', 'true'), a.querySelector('#tab-' + b.id).setAttribute('active', ''), void a.querySelector('#tab-' + b.id).setAttribute('tabindex', '0');
-        }), this.hasActive || (tabsEl[0].setAttribute('active', ''), this.hasActive = !0, this.currentActive = tabsEl[0].id, this.querySelector('#tab-' + tabsEl[0].id).setAttribute('aria-selected', 'true'), this.querySelector('#tab-' + tabsEl[0].id).setAttribute('tabindex', '0'), this.querySelector('#tab-' + tabsEl[0].id).setAttribute('active', '')), this.keyListeners(tabsEl), window.location.href.match(/#\S[^\&]*/)) {
-          var g = window.location.href.match(/#\S[^\&]*/),
-              h = this.querySelector(g[0]);if (h) {
-            var i = this.findAncestor(h, 'joomla-tab'),
-                j = this.findAncestor(i, 'joomla-tab');if (j) {
-              var k = this.findAncestor(i, 'section');j.showTab(k), this.show(h);
-            } else this.showTab(h);
+        }), this.hasActive || (b[0].setAttribute('active', ''), this.hasActive = !0, this.currentActive = b[0].id, this.querySelector('#tab-' + b[0].id).setAttribute('aria-selected', 'true'), this.querySelector('#tab-' + b[0].id).setAttribute('tabindex', '0'), this.querySelector('#tab-' + b[0].id).setAttribute('active', '')), this.keyListeners(b), window.location.href.match(/#\S[^\&]*/)) {
+          var c = window.location.href.match(/#\S[^\&]*/),
+              d = this.querySelector(c[0]);if (d) {
+            var e = this.findAncestor(d, 'joomla-tab'),
+                f = this.findAncestor(e, 'joomla-tab');if (f) {
+              var g = this.findAncestor(e, 'section');f.showTab(g), this.show(d);
+            } else this.showTab(d);
           }
         }if (this.hasAttribute('recall') && this.restoreState(), !this.querySelector('joomla-tab')) {
-          this.checkView(this);var l = this;window.addEventListener('resize', function () {
-            l.checkView(l);
+          this.checkView(this);var h = this;window.addEventListener('resize', function () {
+            h.checkView(h);
           });
         }
       }

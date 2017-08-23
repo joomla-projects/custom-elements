@@ -8,6 +8,8 @@
 	<meta name="keywords" content="joomla,ui,components,vanilla,es6,es5,agnostic,webcomponents">
 	<meta name="description" content="A collection of User interface elements">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.css">
+
 	<link rel="stylesheet" href="_media/vue.css" title="vue">
 
 	<script src="_media/ce-loader.js"></script>
@@ -23,12 +25,24 @@
 <script>
 	window.$docsify = {
 		name: 'Joomla UI components',
-		maxLevel: 4,
-		subMaxLevel: 2,
+		maxLevel: 0,
+		subMaxLevel: 0,
 		auto2top: true,
 		coverpage: true,
 		loadSidebar: true,
-		executeScript: true
+		executeScript: true,
+		markdown: {
+			renderer: {
+				code: function (code, lang) {
+					if (lang === "mermaid") {
+						return (
+							'<div class="mermaid">' + mermaid.render(lang, code) + "</div>"
+						);
+					}
+					return this.origin.code.apply(this, arguments);
+				}
+			}
+		}
 		//    alias: {
 		//      '/zh-cn/changelog': '/changelog',
 		//      '/changelog': 'https://raw.githubusercontent.com/QingWei-Li/docsify/master/CHANGELOG'
@@ -45,6 +59,7 @@
 <script src="//unpkg.com/prismjs/components/prism-bash.min.js"></script>
 <script src="//unpkg.com/prismjs/components/prism-markdown.min.js"></script>
 <script src="//unpkg.com/prismjs/components/prism-nginx.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
 
 <!-- Load all the custom elements -->
 <script src="_media/js/joomla-accordion-es5.min.js" defer></script>

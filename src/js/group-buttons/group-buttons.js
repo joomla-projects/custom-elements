@@ -1,7 +1,7 @@
 (function () {
-	if (!document.getElementById('joomla-button-stylesheet')) {
+	if (!document.getElementById('joomla-group-button-stylesheet')) {
 		const style = document.createElement('style');
-		style.id = 'joomla-button-stylesheet';
+		style.id = 'joomla-group-button-stylesheet';
 		style.innerHTML = `{{stylesheet}}`;
 		document.head.appendChild(style);
 	}
@@ -13,83 +13,64 @@ class ButtonElement extends HTMLElement {
 	}
 
 	connectedCallback() {
-		if (!this.classList.contains('btn', 'btn-group')) {
-			this.classList.add('btn', 'btn-group')
-		}
-
-		const buttons = this.querySelectorAll('[type="checkbox"]')
+		const buttons = [].slice.call(this.querySelectorAll('[type="checkbox"]'));
 		// Checkboxes
 		if (buttons.length) {
-			for (let i = 0, l = buttons.length; i < l; i++) {
-				if (buttons[i].parentNode.tagName.toLowerCase() !== 'label') {
-					continue;
+			buttons.forEach(function(button) {
+				if (button.parentNode.tagName.toLowerCase() !== 'label') {
+					return;
 				}
-				if (buttons[i].getAttribute('checked') || buttons[i].parentNode.classList.contains('active')) {
-					buttons[i].checked = true;
-					buttons[i].setAttribute('checked', '');
-					buttons[i].parentNode.setAttribute('aria-pressed', 'true');
+				if (button.getAttribute('checked') || button.parentNode.classList.contains('active')) {
+					button.setAttribute('checked', '');
+					button.parentNode.setAttribute('aria-pressed', 'true');
 				} else {
-					buttons[i].checked = false;
-					buttons[i].removeAttribute('checked', '');
-					buttons[i].parentNode.setAttribute('aria-pressed', 'false');
+					button.removeAttribute('checked');
+					button.parentNode.setAttribute('aria-pressed', 'false');
 				}
 
-				buttons[i].addEventListener('click', function (event) {
-
-					if (event.target.parentNode.tagName.toLowerCase() === 'label') {
-
-						if (event.target.checked) {
-							event.target.checked = true;
-							event.target.setAttribute('checked', '');
-							event.target.parentNode.classList.add('active');
-							event.target.parentNode.setAttribute('aria-pressed', 'true');
-						} else {
-							event.target.checked = false;
-							event.target.removeAttribute('checked');
-							event.target.parentNode.classList.remove('active');
-							event.target.parentNode.setAttribute('aria-pressed', 'false');
-						}
+				button.setAttribute('tabindex', 0);
+				button.addEventListener('click', function (event) {
+					if (this.checked) {
+						this.setAttribute('checked', '');
+						this.parentNode.classList.add('active');
+						this.parentNode.setAttribute('aria-pressed', 'true');
+					} else {
+						this.removeAttribute('checked');
+						this.parentNode.classList.remove('active');
+						this.parentNode.setAttribute('aria-pressed', 'false');
 					}
 				})
-			}
+			});
 		} else { // Radios
-			const radios = this.querySelectorAll('[type="radio"]');
+			const radios = [].slice.call(this.querySelectorAll('[type="radio"]'));
 
-			if (radios) {
-				for (let i = 0, l = radios.length; i < l; i++) {
-					if (radios[i].parentNode.tagName.toLowerCase() !== 'label') {
-						continue;
+			if (radios.length) {
+				radios.forEach(function(radio) {
+					if (radio.parentNode.tagName.toLowerCase() !== 'label') {
+						return;
 					}
-					if (radios[i].getAttribute('checked') || radios[i].parentNode.classList.contains('active')) {
-
-						radios[i].checked = true;
-						radios[i].setAttribute('checked', '');
-						radios[i].parentNode.setAttribute('aria-pressed', 'true');
+					if (radio.getAttribute('checked') || radio.parentNode.classList.contains('active')) {
+						radio.setAttribute('checked', '');
+						radio.parentNode.setAttribute('aria-pressed', 'true');
 					} else {
-						radios[i].checked = false;
-						radios[i].removeAttribute('checked', '');
-						radios[i].parentNode.setAttribute('aria-pressed', 'false');
+						radio.removeAttribute('checked');
+						radio.parentNode.setAttribute('aria-pressed', 'false');
 					}
 
-					radios[i].addEventListener('click', function (event) {
-
-						if (event.target.parentNode.tagName.toLowerCase() === 'label') {
-							if (event.target.checked) {
-								event.target.parentNode.parentNode.clearAllRadios();
-								event.target.checked = true;
-								event.target.setAttribute('checked', '');
-								event.target.parentNode.classList.add('active');
-								event.target.parentNode.setAttribute('aria-pressed', 'true');
-							} else {
-								event.target.parentNode.parentNode.clearAllRadios();
-								event.target.checked = false;
-								event.target.removeAttribute('checked');
-								event.target.parentNode.classList.remove('active');
-								event.target.parentNode.setAttribute('aria-pressed', 'false');
-							}
+					radio.addEventListener('click', function (event) {
+						if (this.checked) {
+							this.parentNode.parentNode.clearAllRadios();
+							this.setAttribute('checked', '');
+							this.parentNode.classList.add('active');
+							this.parentNode.setAttribute('aria-pressed', 'true');
+						} else {
+							this.parentNode.parentNode.clearAllRadios();
+							this.removeAttribute('checked');
+							this.parentNode.classList.remove('active');
+							this.parentNode.setAttribute('aria-pressed', 'false');
 						}
 					})
-				}
+				})
 			}
 		}
 	}
@@ -115,15 +96,14 @@ class ButtonElement extends HTMLElement {
 	}
 
 	clearAllRadios() {
-		const radios = this.querySelectorAll('[type="radio"]');
-		for (let i = 0, l = radios.length; i < l; i++) {
-			radios[i].checked = false;
-			radios[i].removeAttribute('checked');
-			if (radios[i].parentNode.tagName.toLowerCase() == 'label') {
-				radios[i].parentNode.classList.remove('active');
-				radios[i].parentNode.setAttribute('aria-pressed', 'false');
+		const radios = [].slice.call(this.querySelectorAll('[type="radio"]'));
+		radios.forEach(function(radio) {
+			radio.removeAttribute('checked');
+			if (radio.parentNode.tagName.toLowerCase() == 'label') {
+				radio.parentNode.classList.remove('active');
+				radio.parentNode.setAttribute('aria-pressed', 'false');
 			}
-		}
+		});
 	}
 
 	/* Method to dispatch events */
@@ -134,4 +114,4 @@ class ButtonElement extends HTMLElement {
 		this.removeEventListener(eventName, this);
 	}
 }
-customElements.define('joomla-button', ButtonElement);
+customElements.define('joomla-group-buttons', ButtonElement);

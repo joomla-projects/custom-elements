@@ -2,7 +2,7 @@
 	if (!document.getElementById('joomla-modal-stylesheet')) {
 		const style = document.createElement('style');
 		style.id = 'joomla-modal-stylesheet';
-		style.innerHTML = ``;
+		style.innerHTML = `joomla-modal{position:fixed;top:0;right:0;bottom:0;left:0;z-index:1050;overflow:hidden;display:none;outline:0}joomla-modal.show{display:block}`;
 		document.head.appendChild(style);
 	}
 })();
@@ -10,21 +10,36 @@
 class ModalElement extends HTMLElement {
 	constructor(element) {
 		super();
+
+		window.Joomla = window.Joomla || {};
+		window.Joomla.UI = {};
+		window.Joomla.UI.modal = {};
+
 	}
 
 	connectedCallback() {
 		const self = this;
-		const modal = this.querySelector('.modal');
-		triggerBtn = document.querySelector("button[data-target=\"#" + modal.id + "\"]");
+
+		let triggerBtn = document.querySelector("button[data-href=\"#" + this.id + "\"]");
 		if (triggerBtn) {
 			triggerBtn.addEventListener('click', function (ev) {
-				const dropShadow = document.createElement('div'),
+
+				var ancestor = self.findAncestor(self, 'joomla-modal')
+				if (ancestor) {
+					window.Joomla.UI.modal.element = ancestor;
+					console.log(Joomla.UI.modal)
+				}
+
+				let dropShadow = document.createElement('div'),
 					modalContent = this.querySelector('.modal-content');
 				dropShadow.classList.add('modal-backdrop', 'show');
-				document.body.appendChild(dropShadow);
-				modal.classList.toggle('show');
-				modal.style.display = 'block';
-				modal.focus()
+				if (!ancestor) {
+					document.body.appendChild(dropShadow);
+				}
+
+				self.classList.toggle('show');
+				//this.style.display = 'block';
+				self.focus()
 				// if ('WebkitTransition' in document.documentElement.style || 'transition' in document.documentElement.style) {
 				//     dropShadow.addEventListener("transitionend", function(event) {
 				//         console.log(modal)
@@ -35,27 +50,34 @@ class ModalElement extends HTMLElement {
 				//     modal.style.display = 'block';
 				// }
 
-				modal.addEventListener('click', function (event) {
-					const openModal = event.target,
-						modalEl = self.getParents(openModal, 'joomla-modal')[0],
-						isInScope = self.getParents(event.target, '.modal-content'),
-						modalContent = modalEl.querySelector('.modal-content');
-
-					if (isInScope.length === 0) {
-						modalEl.close();
-					}
-				})
+				// let backdrp = document.querySelector('.modal-backdrop.show')
+				// console.log(backdrp)
+				// backdrp.addEventListener('click', function (event) {
+				// console.log(event)
+				// 		self.close();
+				// })
 			})
 		}
 
 		// Is there a close button?
-		const modalButton = modal.querySelectorAll('button[data-dismiss="modal"]');
+		const modalButton = this.querySelectorAll('button[data-dismiss="modal"]');
 
 		for (var i = 0, l = modalButton.length; i < l; i++) {
 			// Add listeners for close
 			modalButton[i].addEventListener('click', function (event) {
-				const elm = self.getParents(event.target, 'joomla-modal');
-				elm[0].close();
+
+
+				var topModal = self.findAncestor(event.target, 'joomla-modal');
+				var parentModal = self.findAncestor(topModal, 'joomla-modal');
+
+				console.log(topModal)
+				console.log(parentModal)
+
+				if (parentModal) {
+					topModal.classList.remove('show')
+				} else {
+					topModal.close();
+				}
 			});
 		}
 	}
@@ -75,64 +97,21 @@ class ModalElement extends HTMLElement {
 	attributeChangedCallback(attr, oldValue, newValue) {
 		switch (attr) {
 			// case 'name':
-				// console.log(newValue);
-				// break;
+			// console.log(newValue);
+			// break;
 		}
 	}
 
 	close() {
 		const dropShadow = document.querySelector('.modal-backdrop');
-		const modal = this.querySelector('.modal');
 		if (dropShadow) document.body.removeChild(dropShadow);
-		modal.classList.toggle('show');
-		modal.style.display = 'none';
+		this.classList.toggle('show');
+		//this.style.display = 'none';
 	}
 
-	    /**
-     * Get all of an element's parent elements up the DOM tree
-     * @param  {Node}   elem     The element
-     * @param  {String} selector A class, ID, data attribute or tag to filter against [optional]
-     * @return {Array}           The parent elements
-     */
-    getParents(elem, selector) {
-		// Element.matches() polyfill
-		if (!Element.prototype.matches) {
-			Element.prototype.matches =
-				Element.prototype.matchesSelector ||
-				Element.prototype.mozMatchesSelector ||
-				Element.prototype.msMatchesSelector ||
-				Element.prototype.oMatchesSelector ||
-				Element.prototype.webkitMatchesSelector ||
-				function (s) {
-					var matches = (this.document || this.ownerDocument).querySelectorAll(s),
-						i = matches.length;
-					while (--i >= 0 && matches.item(i) !== this) { }
-					return i > -1;
-				};
-		}
-
-		// Setup parents array
-		let parents = [];
-
-		// Get matching parent elements
-		for (; elem && elem !== document; elem = elem.parentNode) {
-			if (selector) {
-				if (elem.matches(selector)) {
-					parents.push(elem);
-				}
-			} else {
-				parents.push(elem);
-			}
-		}
-		return parents;
-	};
-
-	/* Method to dispatch events */
-	dispatchCustomEvent(eventName) {
-		let OriginalCustomEvent = new CustomEvent(eventName, { "bubbles": true, "cancelable": true });
-		OriginalCustomEvent.relatedTarget = this;
-		this.dispatchEvent(OriginalCustomEvent);
-		this.removeEventListener(eventName, this);
+	findAncestor(el, tagName) {
+		while ((el = el.parentElement) && el.nodeName.toLowerCase() !== tagName);
+		return el;
 	}
 }
 customElements.define('joomla-modal', ModalElement);

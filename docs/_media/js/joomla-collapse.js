@@ -2,7 +2,7 @@
 	if (!document.getElementById('joomla-collapse-stylesheet')) {
 		const style = document.createElement('style');
 		style.id = 'joomla-collapse-stylesheet';
-		style.innerText = ``;
+		style.innerText = `joomla-collapse[state=closed]{display:none}joomla-collapse[state=open]{display:block}`;
 		document.head.appendChild(style);
 	}
 })();
@@ -81,12 +81,5 @@ class CollapseElement extends HTMLElement {
 		this.classList.toggle('show');
 	};
 
-	/* Method to dispatch events */
-	dispatchCustomEvent(eventName) {
-		let OriginalCustomEvent = new CustomEvent(eventName, { "bubbles": true, "cancelable": true });
-		OriginalCustomEvent.relatedTarget = this;
-		this.dispatchEvent(OriginalCustomEvent);
-		this.removeEventListener(eventName, this);
-	}
 }
 customElements.define('joomla-collapse', CollapseElement);
