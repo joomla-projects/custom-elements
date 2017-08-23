@@ -22,7 +22,7 @@ The simplified version of the custom elements
 </joomla-alert>
 
 <joomla-alert level="danger" href="https://www.joomla.org/">
-    <strong>Oh snap!</strong> Click open to go to Google.com
+    <strong>Oh snap!</strong> Click open to go to joomla.org
 </joomla-alert>
 ```
 
@@ -38,7 +38,7 @@ The simplified version of the custom elements
     <strong>Warning!</strong> This one will self distruct in 10secs.
 </joomla-alert>
 <joomla-alert level="danger" href="https://www.joomla.org/">
-    <strong>Oh snap!</strong> Click open to go to Google.com
+    <strong>Oh snap!</strong> Click open to go to joomla.org
 </joomla-alert>
 
 ## Attibutes
