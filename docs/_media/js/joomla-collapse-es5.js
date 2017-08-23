@@ -17,11 +17,7 @@ var _createClass = function () {
   if (!a) throw new ReferenceError('this hasn\'t been initialised - super() hasn\'t been called');return b && ('object' == (typeof b === 'undefined' ? 'undefined' : _typeof(b)) || 'function' == typeof b) ? b : a;
 }function _inherits(a, b) {
   if ('function' != typeof b && null !== b) throw new TypeError('Super expression must either be null or a function, not ' + (typeof b === 'undefined' ? 'undefined' : _typeof(b)));a.prototype = Object.create(b && b.prototype, { constructor: { value: a, enumerable: !1, writable: !0, configurable: !0 } }), b && (Object.setPrototypeOf ? Object.setPrototypeOf(a, b) : a.__proto__ = b);
-}(function () {
-  if (!document.getElementById('joomla-collapse-stylesheet')) {
-    var a = document.createElement('style');a.id = 'joomla-collapse-stylesheet', a.innerText = 'joomla-collapse[state=closed]{display:none}joomla-collapse[state=open]{display:block}', document.head.appendChild(a);
-  }
-})();var CollapseElement = function (a) {
+}var CollapseElement = function (a) {
   function b() {
     return _classCallCheck(this, b), _possibleConstructorReturn(this, (b.__proto__ || Object.getPrototypeOf(b)).call(this));
   }return _inherits(b, a), _createClass(b, [{ key: 'connectedCallback', value: function connectedCallback() {
@@ -35,6 +31,10 @@ var _createClass = function () {
           var d = document.querySelector('[href="#' + this.id + '"]');'closed' === c ? d.setAttribute('aria-expanded', 'false') : 'open' === c && d.setAttribute('aria-expanded', 'true');}
     } }, { key: 'toggle', value: function toggle() {
       var a = document.querySelector('[href="#' + this.id + '"]');a || (a = document.querySelector('[data-target="#' + this.id + '"]')), 'closed' === this.state ? (this.state = 'open', a.setAttribute('aria-expanded', 'true')) : (this.state = 'closed', a.setAttribute('aria-expanded', 'false')), this.classList.toggle('show');
+    } }, { key: 'includeCss', value: function includeCss() {
+      if (!document.getElementById('joomla-collapse-stylesheet')) {
+        var a = document.createElement('style');a.id = 'joomla-collapse-stylesheet', a.innerText = 'joomla-collapse[state=closed]{display:none}joomla-collapse[state=open]{display:block}', document.head.appendChild(a);
+      }
     } }, { key: 'state', get: function get() {
       return this.getAttribute('state') || 'closed';
     }, set: function set(a) {

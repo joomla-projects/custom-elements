@@ -17,13 +17,9 @@ var _createClass = function () {
   if (!a) throw new ReferenceError('this hasn\'t been initialised - super() hasn\'t been called');return b && ('object' == (typeof b === 'undefined' ? 'undefined' : _typeof(b)) || 'function' == typeof b) ? b : a;
 }function _inherits(a, b) {
   if ('function' != typeof b && null !== b) throw new TypeError('Super expression must either be null or a function, not ' + (typeof b === 'undefined' ? 'undefined' : _typeof(b)));a.prototype = Object.create(b && b.prototype, { constructor: { value: a, enumerable: !1, writable: !0, configurable: !0 } }), b && (Object.setPrototypeOf ? Object.setPrototypeOf(a, b) : a.__proto__ = b);
-}(function () {
-  if (!document.getElementById('joomla-dropdown-stylesheet')) {
-    var a = document.createElement('style');a.id = 'joomla-dropdown-stylesheet', a.innerText = 'joomla-dropdown{display:none}joomla-dropdown[expanded]{position:relative;display:block;top:100%;left:0;z-index:1000;min-width:10rem;width:20rem;padding:.5rem 0;margin:.125rem 0 0;font-size:1rem;color:#292b2c;text-align:left;list-style:none;background-color:#fff;-webkit-background-clip:padding-box;background-clip:padding-box;border:1px solid rgba(0,0,0,.15);border-radius:.25rem}', document.head.appendChild(a);
-  }
-})();var DropdownElement = function (a) {
+}var DropdownElement = function (a) {
   function b() {
-    return _classCallCheck(this, b), _possibleConstructorReturn(this, (b.__proto__ || Object.getPrototypeOf(b)).call(this));
+    _classCallCheck(this, b);var a = _possibleConstructorReturn(this, (b.__proto__ || Object.getPrototypeOf(b)).call(this));return a.includeCss(), a;
   }return _inherits(b, a), _createClass(b, [{ key: 'for', get: function get() {
       return this.getAttribute('for');
     } }], [{ key: 'observedAttributes', get: function get() {
@@ -46,6 +42,10 @@ var _createClass = function () {
       var a = document.querySelector('#' + this.getAttribute('aria-labelledby'));this.removeAttribute('expanded'), a.setAttribute('aria-expanded', 'false');
     } }, { key: 'findAncestor', value: function findAncestor(a, b) {
       for (; (a = a.parentElement) && a.nodeName.toLowerCase() !== b;) {}return a;
+    } }, { key: 'includeCss', value: function includeCss() {
+      if (!document.getElementById('joomla-dropdown-stylesheet')) {
+        var a = document.createElement('style');a.id = 'joomla-dropdown-stylesheet', a.innerText = 'joomla-dropdown{display:none}joomla-dropdown[expanded]{position:relative;display:block;top:100%;left:0;z-index:1000;min-width:10rem;width:20rem;padding:.5rem 0;margin:.125rem 0 0;font-size:1rem;color:#292b2c;text-align:left;list-style:none;background-color:#fff;-webkit-background-clip:padding-box;background-clip:padding-box;border:1px solid rgba(0,0,0,.15);border-radius:.25rem}', document.head.appendChild(a);
+      }
     } }]), b;
 }(HTMLElement);customElements.define('joomla-dropdown', DropdownElement);
 

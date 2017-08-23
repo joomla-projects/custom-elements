@@ -1,12 +1,3 @@
-(function () {
-	if (!document.getElementById('joomla-tab-stylesheet')) {
-		const style = document.createElement('style');
-		style.id = 'joomla-tab-stylesheet';
-		style.innerText = `{{stylesheet}}`;
-		document.head.appendChild(style);
-	}
-})();
-
 class TabElement extends HTMLElement {
 	/* Attributes to monitor */
 	static get observedAttributes() { return ['recall', 'orientation', 'view']; }
@@ -19,6 +10,7 @@ class TabElement extends HTMLElement {
 	/* Lifecycle, element created */
 	constructor() {
 		super();
+		this.includeCss();
 		this.hasActive = false;
 		this.currentActive = '';
 	}
@@ -339,6 +331,15 @@ class TabElement extends HTMLElement {
 		OriginalCustomEvent.relatedTarget = related;
 		element.dispatchEvent(OriginalCustomEvent);
 		element.removeEventListener(eventName, element);
+	}
+
+	includeCss() {
+		if (!document.getElementById('joomla-tab-stylesheet')) {
+			const style = document.createElement('style');
+			style.id = 'joomla-tab-stylesheet';
+			style.innerText = `{{stylesheet}}`;
+			document.head.appendChild(style);
+		}
 	}
 }
 

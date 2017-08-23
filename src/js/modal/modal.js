@@ -1,15 +1,7 @@
-(function () {
-	if (!document.getElementById('joomla-modal-stylesheet')) {
-		const style = document.createElement('style');
-		style.id = 'joomla-modal-stylesheet';
-		style.innerHTML = `{{stylesheet}}`;
-		document.head.appendChild(style);
-	}
-})();
-
 class ModalElement extends HTMLElement {
 	constructor(element) {
 		super();
+		this.includeCss();
 
 		window.Joomla = window.Joomla || {};
 		window.Joomla.UI = {};
@@ -112,6 +104,15 @@ class ModalElement extends HTMLElement {
 	findAncestor(el, tagName) {
 		while ((el = el.parentElement) && el.nodeName.toLowerCase() !== tagName);
 		return el;
+	}
+
+	includeCss() {
+		if (!document.getElementById('joomla-modal-stylesheet')) {
+			const style = document.createElement('style');
+			style.id = 'joomla-modal-stylesheet';
+			style.innerHTML = `{{stylesheet}}`;
+			document.head.appendChild(style);
+		}
 	}
 }
 customElements.define('joomla-modal', ModalElement);

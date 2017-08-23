@@ -17,13 +17,9 @@ var _createClass = function () {
   if (!a) throw new ReferenceError('this hasn\'t been initialised - super() hasn\'t been called');return b && ('object' == (typeof b === 'undefined' ? 'undefined' : _typeof(b)) || 'function' == typeof b) ? b : a;
 }function _inherits(a, b) {
   if ('function' != typeof b && null !== b) throw new TypeError('Super expression must either be null or a function, not ' + (typeof b === 'undefined' ? 'undefined' : _typeof(b)));a.prototype = Object.create(b && b.prototype, { constructor: { value: a, enumerable: !1, writable: !0, configurable: !0 } }), b && (Object.setPrototypeOf ? Object.setPrototypeOf(a, b) : a.__proto__ = b);
-}(function () {
-  if (!document.getElementById('joomla-popover-stylesheet')) {
-    var a = document.createElement('style');a.id = 'joomla-popover-stylesheet', a.innerHTML = '', document.head.appendChild(a);
-  }
-})();var PopoverElement = function (a) {
+}var PopoverElement = function (a) {
   function b() {
-    return _classCallCheck(this, b), _possibleConstructorReturn(this, (b.__proto__ || Object.getPrototypeOf(b)).call(this));
+    _classCallCheck(this, b);var a = _possibleConstructorReturn(this, (b.__proto__ || Object.getPrototypeOf(b)).call(this));return a.includeCss(), a;
   }return _inherits(b, a), _createClass(b, [{ key: 'label', get: function get() {
       return this.getAttribute('label');
     } }, { key: 'tip', get: function get() {
@@ -52,6 +48,10 @@ var _createClass = function () {
       this.querySelector('button').removeEventListener('click', this);
     } }, { key: 'dispatchCustomEvent', value: function dispatchCustomEvent(a) {
       var b = new CustomEvent(a, { bubbles: !0, cancelable: !0 });b.relatedTarget = this, this.dispatchEvent(b), this.removeEventListener(a, this);
+    } }, { key: 'includeCss', value: function includeCss() {
+      if (!document.getElementById('joomla-popover-stylesheet')) {
+        var a = document.createElement('style');a.id = 'joomla-popover-stylesheet', a.innerHTML = '', document.head.appendChild(a);
+      }
     } }]), b;
 }(HTMLElement);customElements.define('joomla-popover', PopoverElement);
 

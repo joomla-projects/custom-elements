@@ -1,12 +1,3 @@
-(function () {
-	if (!document.getElementById('joomla-alert-stylesheet')) {
-		const style = document.createElement('style');
-		style.id = 'joomla-alert-stylesheet';
-		style.innerHTML = `{{stylesheet}}`;
-		document.head.appendChild(style);
-	}
-})()
-
 class AlertElement extends HTMLElement {
 	/* Attributes to monitor */
 	static get observedAttributes() { return ['level', 'dismiss', 'acknowledge', 'href']; }
@@ -19,6 +10,7 @@ class AlertElement extends HTMLElement {
 	/* Lifecycle, element created */
 	constructor() {
 		super();
+		this.includeCss();
 	}
 
 	/* Lifecycle, element appended to the DOM */
@@ -163,6 +155,15 @@ class AlertElement extends HTMLElement {
 	/* Method to get the translated text. Internal */
 	getText(str, fallback) {
 		return (window.Joomla && Joomla.JText && Joomla.JText._ && typeof Joomla.JText._ === 'function' && Joomla.JText._(str)) ? Joomla.JText._(str) : fallback;
+	}
+
+	includeCss() {
+		if (!document.getElementById('joomla-alert-stylesheet')) {
+			const style = document.createElement('style');
+			style.id = 'joomla-alert-stylesheet';
+			style.innerHTML = `{{stylesheet}}`;
+			document.head.appendChild(style);
+		}
 	}
 }
 

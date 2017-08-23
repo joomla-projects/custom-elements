@@ -1,12 +1,3 @@
-(function () {
-	if (!document.getElementById('joomla-switcher-stylesheet')) {
-		const style = document.createElement('style');
-		style.id = 'joomla-switcher-stylesheet';
-		style.innerHTML = `{{stylesheet}}`;
-		document.head.appendChild(style);
-	}
-})();
-
 class SwitcherElement extends HTMLElement {
 	/* Attributes to monitor */
 	static get observedAttributes() { return ['type', 'offText', 'onText']; }
@@ -18,6 +9,7 @@ class SwitcherElement extends HTMLElement {
 	/* Lifecycle, element created */
 	constructor() {
 		super();
+		this.includeCss();
 	}
 
 	/* Lifecycle, element appended to the DOM */
@@ -198,6 +190,15 @@ class SwitcherElement extends HTMLElement {
 	/* Method to get the translated text. Internal */
 	getText(str, fallback) {
 		return (window.Joomla && Joomla.JText && Joomla.JText._ && typeof Joomla.JText._ === 'function' && Joomla.JText._(str)) ? Joomla.JText._(str) : fallback;
+	}
+
+	includeCss() {
+		if (!document.getElementById('joomla-switcher-stylesheet')) {
+			const style = document.createElement('style');
+			style.id = 'joomla-switcher-stylesheet';
+			style.innerHTML = `{{stylesheet}}`;
+			document.head.appendChild(style);
+		}
 	}
 }
 customElements.define('joomla-switcher', SwitcherElement);

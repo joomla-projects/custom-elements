@@ -1,12 +1,3 @@
-(function () {
-	if (!document.getElementById('joomla-popover-stylesheet')) {
-		const style = document.createElement('style');
-		style.id = 'joomla-popover-stylesheet';
-		style.innerHTML = ``;
-		document.head.appendChild(style);
-	}
-})();
-
 class PopoverElement extends HTMLElement {
 	// /* Attributes to monitor */
 	static get observedAttributes() { return ['label', 'tip', 'text', 'position']; }
@@ -19,6 +10,7 @@ class PopoverElement extends HTMLElement {
 	/* Lifecycle, element created */
 	constructor() {
 		super();
+		this.includeCss();
 	}
 
 	/* Lifecycle, element appended to the DOM */
@@ -77,6 +69,15 @@ class PopoverElement extends HTMLElement {
 		OriginalCustomEvent.relatedTarget = this;
 		this.dispatchEvent(OriginalCustomEvent);
 		this.removeEventListener(eventName, this);
+	}
+
+	includeCss() {
+		if (!document.getElementById('joomla-popover-stylesheet')) {
+			const style = document.createElement('style');
+			style.id = 'joomla-popover-stylesheet';
+			style.innerHTML = ``;
+			document.head.appendChild(style);
+		}
 	}
 }
 

@@ -1,12 +1,3 @@
-(function () {
-	if (!document.getElementById('joomla-dropdown-stylesheet')) {
-		const style = document.createElement('style');
-		style.id = 'joomla-dropdown-stylesheet';
-		style.innerText = `{{stylesheet}}`;
-		document.head.appendChild(style);
-	}
-})();
-
 class DropdownElement extends HTMLElement {
 
 	static get observedAttributes() {
@@ -17,6 +8,7 @@ class DropdownElement extends HTMLElement {
 
 	constructor(element) {
 		super();
+		this.includeCss();
 	}
 
 	connectedCallback() {
@@ -84,5 +76,13 @@ class DropdownElement extends HTMLElement {
 		return el;
 	}
 
+	includeCss() {
+		if (!document.getElementById('joomla-dropdown-stylesheet')) {
+			const style = document.createElement('style');
+			style.id = 'joomla-dropdown-stylesheet';
+			style.innerText = `{{stylesheet}}`;
+			document.head.appendChild(style);
+		}
+	}
 }
 customElements.define('joomla-dropdown', DropdownElement);

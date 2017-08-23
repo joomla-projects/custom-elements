@@ -1,16 +1,7 @@
-(function () {
-	const css = ``;
-	if (!document.getElementById('joomla-accordion-stylesheet')) {
-		const style = document.createElement('style');
-		style.id = 'joomla-accordion-stylesheet';
-		style.innerHTML = css;
-		document.head.appendChild(style);
-	}
-})();
-
 class AccordionElement extends HTMLElement {
-	constructor(element) {
+	constructor() {
 		super();
+		this.includeCss();
 	}
 
 	connectedCallback() {
@@ -93,6 +84,15 @@ class AccordionElement extends HTMLElement {
 			const collapsed = document.getElementById(togglerHref.replace('#', ''));
 			toggler.setAttribute('aria-expanded', 'true');
 			collapsed.classList.remove('show');
+		}
+	}
+
+	includeCss() {
+		if (!document.getElementById('joomla-accordion-stylesheet')) {
+			const style = document.createElement('style');
+			style.id = 'joomla-accordion-stylesheet';
+			style.innerHTML = ``;
+			document.head.appendChild(style);
 		}
 	}
 }

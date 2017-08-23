@@ -1,15 +1,7 @@
-(function () {
-	if (!document.getElementById('joomla-group-button-stylesheet')) {
-		const style = document.createElement('style');
-		style.id = 'joomla-group-button-stylesheet';
-		style.innerHTML = `{{stylesheet}}`;
-		document.head.appendChild(style);
-	}
-})();
-
 class ButtonElement extends HTMLElement {
 	constructor(element) {
 		super();
+		this.includeCss();
 	}
 
 	connectedCallback() {
@@ -112,6 +104,15 @@ class ButtonElement extends HTMLElement {
 		OriginalCustomEvent.relatedTarget = this;
 		this.dispatchEvent(OriginalCustomEvent);
 		this.removeEventListener(eventName, this);
+	}
+
+	includeCss() {
+		if (!document.getElementById('joomla-group-button-stylesheet')) {
+			const style = document.createElement('style');
+			style.id = 'joomla-group-button-stylesheet';
+			style.innerHTML = `{{stylesheet}}`;
+			document.head.appendChild(style);
+		}
 	}
 }
 customElements.define('joomla-group-buttons', ButtonElement);

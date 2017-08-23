@@ -1,12 +1,3 @@
-(function () {
-	if (!document.getElementById('joomla-collapse-stylesheet')) {
-		const style = document.createElement('style');
-		style.id = 'joomla-collapse-stylesheet';
-		style.innerText = `{{stylesheet}}`;
-		document.head.appendChild(style);
-	}
-})();
-
 class CollapseElement extends HTMLElement {
 	constructor(element) {
 		super();
@@ -79,7 +70,15 @@ class CollapseElement extends HTMLElement {
 			linked.setAttribute('aria-expanded', 'false');
 		}
 		this.classList.toggle('show');
-	};
+	}
 
+	includeCss() {
+		if (!document.getElementById('joomla-collapse-stylesheet')) {
+			const style = document.createElement('style');
+			style.id = 'joomla-collapse-stylesheet';
+			style.innerText = `{{stylesheet}}`;
+			document.head.appendChild(style);
+		}
+	}
 }
 customElements.define('joomla-collapse', CollapseElement);
