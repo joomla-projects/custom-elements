@@ -1,0 +1,1892 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'i' ]
+2 info using npm@3.10.10
+3 info using node@v6.11.2
+4 silly loadCurrentTree Starting
+5 silly install loadCurrentTree
+6 silly install readLocalPackageData
+7 silly install normalizeTree
+8 silly loadCurrentTree Finishing
+9 silly loadIdealTree Starting
+10 silly install loadIdealTree
+11 silly cloneCurrentTree Starting
+12 silly install cloneCurrentTreeToIdealTree
+13 silly cloneCurrentTree Finishing
+14 silly loadShrinkwrap Starting
+15 silly install loadShrinkwrap
+16 silly loadShrinkwrap Finishing
+17 silly loadAllDepsIntoIdealTree Starting
+18 silly install loadAllDepsIntoIdealTree
+19 silly fetchNamedPackageData @polymer/test-fixture
+20 silly mapToRegistry name @polymer/test-fixture
+21 silly mapToRegistry scope (from package name) @polymer
+22 verbose mapToRegistry no registry URL found in name for scope @polymer
+23 silly mapToRegistry using default registry
+24 silly mapToRegistry registry https://registry.npmjs.org/
+25 silly mapToRegistry data Result {
+25 silly mapToRegistry   raw: '@polymer/test-fixture',
+25 silly mapToRegistry   scope: '@polymer',
+25 silly mapToRegistry   escapedName: '@polymer%2ftest-fixture',
+25 silly mapToRegistry   name: '@polymer/test-fixture',
+25 silly mapToRegistry   rawSpec: '',
+25 silly mapToRegistry   spec: 'latest',
+25 silly mapToRegistry   type: 'tag' }
+26 silly mapToRegistry uri https://registry.npmjs.org/@polymer%2ftest-fixture
+27 silly fetchNamedPackageData @webcomponents/custom-elements
+28 silly mapToRegistry name @webcomponents/custom-elements
+29 silly mapToRegistry scope (from package name) @webcomponents
+30 verbose mapToRegistry no registry URL found in name for scope @webcomponents
+31 silly mapToRegistry using default registry
+32 silly mapToRegistry registry https://registry.npmjs.org/
+33 silly mapToRegistry data Result {
+33 silly mapToRegistry   raw: '@webcomponents/custom-elements',
+33 silly mapToRegistry   scope: '@webcomponents',
+33 silly mapToRegistry   escapedName: '@webcomponents%2fcustom-elements',
+33 silly mapToRegistry   name: '@webcomponents/custom-elements',
+33 silly mapToRegistry   rawSpec: '',
+33 silly mapToRegistry   spec: 'latest',
+33 silly mapToRegistry   type: 'tag' }
+34 silly mapToRegistry uri https://registry.npmjs.org/@webcomponents%2fcustom-elements
+35 silly fetchNamedPackageData @webcomponents/webcomponentsjs
+36 silly mapToRegistry name @webcomponents/webcomponentsjs
+37 silly mapToRegistry scope (from package name) @webcomponents
+38 verbose mapToRegistry no registry URL found in name for scope @webcomponents
+39 silly mapToRegistry using default registry
+40 silly mapToRegistry registry https://registry.npmjs.org/
+41 silly mapToRegistry data Result {
+41 silly mapToRegistry   raw: '@webcomponents/webcomponentsjs',
+41 silly mapToRegistry   scope: '@webcomponents',
+41 silly mapToRegistry   escapedName: '@webcomponents%2fwebcomponentsjs',
+41 silly mapToRegistry   name: '@webcomponents/webcomponentsjs',
+41 silly mapToRegistry   rawSpec: '',
+41 silly mapToRegistry   spec: 'latest',
+41 silly mapToRegistry   type: 'tag' }
+42 silly mapToRegistry uri https://registry.npmjs.org/@webcomponents%2fwebcomponentsjs
+43 silly fetchNamedPackageData babel-minify
+44 silly mapToRegistry name babel-minify
+45 silly mapToRegistry using default registry
+46 silly mapToRegistry registry https://registry.npmjs.org/
+47 silly mapToRegistry data Result {
+47 silly mapToRegistry   raw: 'babel-minify',
+47 silly mapToRegistry   scope: null,
+47 silly mapToRegistry   escapedName: 'babel-minify',
+47 silly mapToRegistry   name: 'babel-minify',
+47 silly mapToRegistry   rawSpec: '',
+47 silly mapToRegistry   spec: 'latest',
+47 silly mapToRegistry   type: 'tag' }
+48 silly mapToRegistry uri https://registry.npmjs.org/babel-minify
+49 silly fetchNamedPackageData babel-plugin-static-fs
+50 silly mapToRegistry name babel-plugin-static-fs
+51 silly mapToRegistry using default registry
+52 silly mapToRegistry registry https://registry.npmjs.org/
+53 silly mapToRegistry data Result {
+53 silly mapToRegistry   raw: 'babel-plugin-static-fs',
+53 silly mapToRegistry   scope: null,
+53 silly mapToRegistry   escapedName: 'babel-plugin-static-fs',
+53 silly mapToRegistry   name: 'babel-plugin-static-fs',
+53 silly mapToRegistry   rawSpec: '',
+53 silly mapToRegistry   spec: 'latest',
+53 silly mapToRegistry   type: 'tag' }
+54 silly mapToRegistry uri https://registry.npmjs.org/babel-plugin-static-fs
+55 silly fetchNamedPackageData babel-preset-es2015
+56 silly mapToRegistry name babel-preset-es2015
+57 silly mapToRegistry using default registry
+58 silly mapToRegistry registry https://registry.npmjs.org/
+59 silly mapToRegistry data Result {
+59 silly mapToRegistry   raw: 'babel-preset-es2015',
+59 silly mapToRegistry   scope: null,
+59 silly mapToRegistry   escapedName: 'babel-preset-es2015',
+59 silly mapToRegistry   name: 'babel-preset-es2015',
+59 silly mapToRegistry   rawSpec: '',
+59 silly mapToRegistry   spec: 'latest',
+59 silly mapToRegistry   type: 'tag' }
+60 silly mapToRegistry uri https://registry.npmjs.org/babel-preset-es2015
+61 silly fetchNamedPackageData babelify
+62 silly mapToRegistry name babelify
+63 silly mapToRegistry using default registry
+64 silly mapToRegistry registry https://registry.npmjs.org/
+65 silly mapToRegistry data Result {
+65 silly mapToRegistry   raw: 'babelify',
+65 silly mapToRegistry   scope: null,
+65 silly mapToRegistry   escapedName: 'babelify',
+65 silly mapToRegistry   name: 'babelify',
+65 silly mapToRegistry   rawSpec: '',
+65 silly mapToRegistry   spec: 'latest',
+65 silly mapToRegistry   type: 'tag' }
+66 silly mapToRegistry uri https://registry.npmjs.org/babelify
+67 silly fetchNamedPackageData bootstrap
+68 silly mapToRegistry name bootstrap
+69 silly mapToRegistry using default registry
+70 silly mapToRegistry registry https://registry.npmjs.org/
+71 silly mapToRegistry data Result {
+71 silly mapToRegistry   raw: 'bootstrap',
+71 silly mapToRegistry   scope: null,
+71 silly mapToRegistry   escapedName: 'bootstrap',
+71 silly mapToRegistry   name: 'bootstrap',
+71 silly mapToRegistry   rawSpec: '',
+71 silly mapToRegistry   spec: 'latest',
+71 silly mapToRegistry   type: 'tag' }
+72 silly mapToRegistry uri https://registry.npmjs.org/bootstrap
+73 silly fetchNamedPackageData browserify
+74 silly mapToRegistry name browserify
+75 silly mapToRegistry using default registry
+76 silly mapToRegistry registry https://registry.npmjs.org/
+77 silly mapToRegistry data Result {
+77 silly mapToRegistry   raw: 'browserify',
+77 silly mapToRegistry   scope: null,
+77 silly mapToRegistry   escapedName: 'browserify',
+77 silly mapToRegistry   name: 'browserify',
+77 silly mapToRegistry   rawSpec: '',
+77 silly mapToRegistry   spec: 'latest',
+77 silly mapToRegistry   type: 'tag' }
+78 silly mapToRegistry uri https://registry.npmjs.org/browserify
+79 silly fetchNamedPackageData eslint
+80 silly mapToRegistry name eslint
+81 silly mapToRegistry using default registry
+82 silly mapToRegistry registry https://registry.npmjs.org/
+83 silly mapToRegistry data Result {
+83 silly mapToRegistry   raw: 'eslint',
+83 silly mapToRegistry   scope: null,
+83 silly mapToRegistry   escapedName: 'eslint',
+83 silly mapToRegistry   name: 'eslint',
+83 silly mapToRegistry   rawSpec: '',
+83 silly mapToRegistry   spec: 'latest',
+83 silly mapToRegistry   type: 'tag' }
+84 silly mapToRegistry uri https://registry.npmjs.org/eslint
+85 silly fetchNamedPackageData grunt
+86 silly mapToRegistry name grunt
+87 silly mapToRegistry using default registry
+88 silly mapToRegistry registry https://registry.npmjs.org/
+89 silly mapToRegistry data Result {
+89 silly mapToRegistry   raw: 'grunt',
+89 silly mapToRegistry   scope: null,
+89 silly mapToRegistry   escapedName: 'grunt',
+89 silly mapToRegistry   name: 'grunt',
+89 silly mapToRegistry   rawSpec: '',
+89 silly mapToRegistry   spec: 'latest',
+89 silly mapToRegistry   type: 'tag' }
+90 silly mapToRegistry uri https://registry.npmjs.org/grunt
+91 silly fetchNamedPackageData grunt-babel
+92 silly mapToRegistry name grunt-babel
+93 silly mapToRegistry using default registry
+94 silly mapToRegistry registry https://registry.npmjs.org/
+95 silly mapToRegistry data Result {
+95 silly mapToRegistry   raw: 'grunt-babel',
+95 silly mapToRegistry   scope: null,
+95 silly mapToRegistry   escapedName: 'grunt-babel',
+95 silly mapToRegistry   name: 'grunt-babel',
+95 silly mapToRegistry   rawSpec: '',
+95 silly mapToRegistry   spec: 'latest',
+95 silly mapToRegistry   type: 'tag' }
+96 silly mapToRegistry uri https://registry.npmjs.org/grunt-babel
+97 silly fetchNamedPackageData grunt-browserify
+98 silly mapToRegistry name grunt-browserify
+99 silly mapToRegistry using default registry
+100 silly mapToRegistry registry https://registry.npmjs.org/
+101 silly mapToRegistry data Result {
+101 silly mapToRegistry   raw: 'grunt-browserify',
+101 silly mapToRegistry   scope: null,
+101 silly mapToRegistry   escapedName: 'grunt-browserify',
+101 silly mapToRegistry   name: 'grunt-browserify',
+101 silly mapToRegistry   rawSpec: '',
+101 silly mapToRegistry   spec: 'latest',
+101 silly mapToRegistry   type: 'tag' }
+102 silly mapToRegistry uri https://registry.npmjs.org/grunt-browserify
+103 silly fetchNamedPackageData grunt-contrib-copy
+104 silly mapToRegistry name grunt-contrib-copy
+105 silly mapToRegistry using default registry
+106 silly mapToRegistry registry https://registry.npmjs.org/
+107 silly mapToRegistry data Result {
+107 silly mapToRegistry   raw: 'grunt-contrib-copy',
+107 silly mapToRegistry   scope: null,
+107 silly mapToRegistry   escapedName: 'grunt-contrib-copy',
+107 silly mapToRegistry   name: 'grunt-contrib-copy',
+107 silly mapToRegistry   rawSpec: '',
+107 silly mapToRegistry   spec: 'latest',
+107 silly mapToRegistry   type: 'tag' }
+108 silly mapToRegistry uri https://registry.npmjs.org/grunt-contrib-copy
+109 silly fetchNamedPackageData grunt-contrib-cssmin
+110 silly mapToRegistry name grunt-contrib-cssmin
+111 silly mapToRegistry using default registry
+112 silly mapToRegistry registry https://registry.npmjs.org/
+113 silly mapToRegistry data Result {
+113 silly mapToRegistry   raw: 'grunt-contrib-cssmin',
+113 silly mapToRegistry   scope: null,
+113 silly mapToRegistry   escapedName: 'grunt-contrib-cssmin',
+113 silly mapToRegistry   name: 'grunt-contrib-cssmin',
+113 silly mapToRegistry   rawSpec: '',
+113 silly mapToRegistry   spec: 'latest',
+113 silly mapToRegistry   type: 'tag' }
+114 silly mapToRegistry uri https://registry.npmjs.org/grunt-contrib-cssmin
+115 silly fetchOtherPackageData grunt-contrib-uglify@git://github.com/gruntjs/grunt-contrib-uglify.git#harmony
+116 silly cache add args [ 'grunt-contrib-uglify@git://github.com/gruntjs/grunt-contrib-uglify.git#harmony',
+116 silly cache add   null ]
+117 verbose cache add spec grunt-contrib-uglify@git://github.com/gruntjs/grunt-contrib-uglify.git#harmony
+118 silly fetchNamedPackageData grunt-sass
+119 silly mapToRegistry name grunt-sass
+120 silly mapToRegistry using default registry
+121 silly mapToRegistry registry https://registry.npmjs.org/
+122 silly mapToRegistry data Result {
+122 silly mapToRegistry   raw: 'grunt-sass',
+122 silly mapToRegistry   scope: null,
+122 silly mapToRegistry   escapedName: 'grunt-sass',
+122 silly mapToRegistry   name: 'grunt-sass',
+122 silly mapToRegistry   rawSpec: '',
+122 silly mapToRegistry   spec: 'latest',
+122 silly mapToRegistry   type: 'tag' }
+123 silly mapToRegistry uri https://registry.npmjs.org/grunt-sass
+124 silly fetchNamedPackageData grunt-shell
+125 silly mapToRegistry name grunt-shell
+126 silly mapToRegistry using default registry
+127 silly mapToRegistry registry https://registry.npmjs.org/
+128 silly mapToRegistry data Result {
+128 silly mapToRegistry   raw: 'grunt-shell',
+128 silly mapToRegistry   scope: null,
+128 silly mapToRegistry   escapedName: 'grunt-shell',
+128 silly mapToRegistry   name: 'grunt-shell',
+128 silly mapToRegistry   rawSpec: '',
+128 silly mapToRegistry   spec: 'latest',
+128 silly mapToRegistry   type: 'tag' }
+129 silly mapToRegistry uri https://registry.npmjs.org/grunt-shell
+130 silly fetchNamedPackageData web-component-tester
+131 silly mapToRegistry name web-component-tester
+132 silly mapToRegistry using default registry
+133 silly mapToRegistry registry https://registry.npmjs.org/
+134 silly mapToRegistry data Result {
+134 silly mapToRegistry   raw: 'web-component-tester',
+134 silly mapToRegistry   scope: null,
+134 silly mapToRegistry   escapedName: 'web-component-tester',
+134 silly mapToRegistry   name: 'web-component-tester',
+134 silly mapToRegistry   rawSpec: '',
+134 silly mapToRegistry   spec: 'latest',
+134 silly mapToRegistry   type: 'tag' }
+135 silly mapToRegistry uri https://registry.npmjs.org/web-component-tester
+136 silly fetchNamedPackageData webcomponentsjs
+137 silly mapToRegistry name webcomponentsjs
+138 silly mapToRegistry using default registry
+139 silly mapToRegistry registry https://registry.npmjs.org/
+140 silly mapToRegistry data Result {
+140 silly mapToRegistry   raw: 'webcomponentsjs',
+140 silly mapToRegistry   scope: null,
+140 silly mapToRegistry   escapedName: 'webcomponentsjs',
+140 silly mapToRegistry   name: 'webcomponentsjs',
+140 silly mapToRegistry   rawSpec: '',
+140 silly mapToRegistry   spec: 'latest',
+140 silly mapToRegistry   type: 'tag' }
+141 silly mapToRegistry uri https://registry.npmjs.org/webcomponentsjs
+142 silly cache add parsed spec Result {
+142 silly cache add   raw: 'grunt-contrib-uglify@git://github.com/gruntjs/grunt-contrib-uglify.git#harmony',
+142 silly cache add   scope: null,
+142 silly cache add   escapedName: 'grunt-contrib-uglify',
+142 silly cache add   name: 'grunt-contrib-uglify',
+142 silly cache add   rawSpec: 'git://github.com/gruntjs/grunt-contrib-uglify.git#harmony',
+142 silly cache add   spec: 'git://github.com/gruntjs/grunt-contrib-uglify.git#harmony',
+142 silly cache add   type: 'hosted',
+142 silly cache add   hosted:
+142 silly cache add    { type: 'github',
+142 silly cache add      ssh: 'git@github.com:gruntjs/grunt-contrib-uglify.git#harmony',
+142 silly cache add      sshUrl: 'git+ssh://git@github.com/gruntjs/grunt-contrib-uglify.git#harmony',
+142 silly cache add      httpsUrl: 'git+https://github.com/gruntjs/grunt-contrib-uglify.git#harmony',
+142 silly cache add      gitUrl: 'git://github.com/gruntjs/grunt-contrib-uglify.git#harmony',
+142 silly cache add      shortcut: 'github:gruntjs/grunt-contrib-uglify#harmony',
+142 silly cache add      directUrl: 'https://raw.githubusercontent.com/gruntjs/grunt-contrib-uglify/harmony/package.json' } }
+143 verbose addRemoteGit caching git://github.com/gruntjs/grunt-contrib-uglify.git#harmony
+144 verbose addRemoteGit git://github.com/gruntjs/grunt-contrib-uglify.git#harmony is a repository hosted by github
+145 silly tryClone cloning git://github.com/gruntjs/grunt-contrib-uglify.git#harmony via git://github.com/gruntjs/grunt-contrib-uglify.git#harmony
+146 verbose tryClone git-github-com-gruntjs-grunt-contrib-uglify-git-harmony-d65311d3 not in flight; caching
+147 verbose correctMkdir C:\Users\LodderC\AppData\Roaming\npm-cache\_git-remotes correctMkdir not in flight; initializing
+148 verbose request uri https://registry.npmjs.org/@webcomponents%2fcustom-elements
+149 verbose request no auth needed
+150 info attempt registry request try #1 at 4:56:06 PM
+151 verbose request id 0918836d73d150b7
+152 verbose etag "5914f532-4ced"
+153 http request GET https://registry.npmjs.org/@webcomponents%2fcustom-elements
+154 verbose request uri https://registry.npmjs.org/@polymer%2ftest-fixture
+155 verbose request no auth needed
+156 info attempt registry request try #1 at 4:56:06 PM
+157 verbose etag "599bd999-31a7"
+158 http request GET https://registry.npmjs.org/@polymer%2ftest-fixture
+159 verbose request uri https://registry.npmjs.org/babel-plugin-static-fs
+160 verbose request no auth needed
+161 info attempt registry request try #1 at 4:56:06 PM
+162 verbose etag W/"5695350d-1ad7"
+163 verbose lastModified Tue, 12 Jan 2016 17:17:01 GMT
+164 http request GET https://registry.npmjs.org/babel-plugin-static-fs
+165 verbose request uri https://registry.npmjs.org/babel-minify
+166 verbose request no auth needed
+167 info attempt registry request try #1 at 4:56:06 PM
+168 verbose etag W/"59936119-7a05"
+169 verbose lastModified Tue, 15 Aug 2017 21:01:13 GMT
+170 http request GET https://registry.npmjs.org/babel-minify
+171 verbose request uri https://registry.npmjs.org/@webcomponents%2fwebcomponentsjs
+172 verbose request no auth needed
+173 info attempt registry request try #1 at 4:56:06 PM
+174 verbose etag "599239f0-6fef"
+175 http request GET https://registry.npmjs.org/@webcomponents%2fwebcomponentsjs
+176 verbose request uri https://registry.npmjs.org/babelify
+177 verbose request no auth needed
+178 info attempt registry request try #1 at 4:56:06 PM
+179 verbose etag W/"594fc2db-76bc"
+180 verbose lastModified Sun, 25 Jun 2017 14:04:11 GMT
+181 http request GET https://registry.npmjs.org/babelify
+182 verbose request uri https://registry.npmjs.org/babel-preset-es2015
+183 verbose request no auth needed
+184 info attempt registry request try #1 at 4:56:06 PM
+185 verbose etag W/"599a7bf9-18c49"
+186 verbose lastModified Mon, 21 Aug 2017 06:21:45 GMT
+187 http request GET https://registry.npmjs.org/babel-preset-es2015
+188 verbose request uri https://registry.npmjs.org/bootstrap
+189 verbose request no auth needed
+190 info attempt registry request try #1 at 4:56:06 PM
+191 verbose etag W/"599d4c3c-e2a0"
+192 verbose lastModified Wed, 23 Aug 2017 09:34:52 GMT
+193 http request GET https://registry.npmjs.org/bootstrap
+194 verbose request uri https://registry.npmjs.org/grunt-babel
+195 verbose request no auth needed
+196 info attempt registry request try #1 at 4:56:06 PM
+197 verbose etag W/"598a4a5c-2fff"
+198 verbose lastModified Tue, 08 Aug 2017 23:33:48 GMT
+199 http request GET https://registry.npmjs.org/grunt-babel
+200 verbose request uri https://registry.npmjs.org/grunt-browserify
+201 verbose request no auth needed
+202 info attempt registry request try #1 at 4:56:06 PM
+203 verbose etag W/"599a1394-17022"
+204 verbose lastModified Sun, 20 Aug 2017 22:56:20 GMT
+205 http request GET https://registry.npmjs.org/grunt-browserify
+206 verbose request uri https://registry.npmjs.org/grunt-contrib-copy
+207 verbose request no auth needed
+208 info attempt registry request try #1 at 4:56:06 PM
+209 verbose etag W/"5962ee92-9cf3"
+210 verbose lastModified Mon, 10 Jul 2017 03:03:46 GMT
+211 http request GET https://registry.npmjs.org/grunt-contrib-copy
+212 verbose request uri https://registry.npmjs.org/eslint
+213 verbose request no auth needed
+214 info attempt registry request try #1 at 4:56:06 PM
+215 verbose etag W/"599d0631-78e8a"
+216 verbose lastModified Wed, 23 Aug 2017 04:36:01 GMT
+217 http request GET https://registry.npmjs.org/eslint
+218 verbose request uri https://registry.npmjs.org/grunt-contrib-cssmin
+219 verbose request no auth needed
+220 info attempt registry request try #1 at 4:56:06 PM
+221 verbose etag W/"5980915c-df57"
+222 verbose lastModified Tue, 01 Aug 2017 14:34:04 GMT
+223 http request GET https://registry.npmjs.org/grunt-contrib-cssmin
+224 verbose request uri https://registry.npmjs.org/grunt
+225 verbose request no auth needed
+226 info attempt registry request try #1 at 4:56:06 PM
+227 verbose etag W/"5997f646-18c30"
+228 verbose lastModified Sat, 19 Aug 2017 08:26:46 GMT
+229 http request GET https://registry.npmjs.org/grunt
+230 verbose request uri https://registry.npmjs.org/browserify
+231 verbose request no auth needed
+232 info attempt registry request try #1 at 4:56:06 PM
+233 verbose etag W/"59930a7a-daadd"
+234 verbose lastModified Tue, 15 Aug 2017 14:51:38 GMT
+235 http request GET https://registry.npmjs.org/browserify
+236 verbose request uri https://registry.npmjs.org/grunt-sass
+237 verbose request no auth needed
+238 info attempt registry request try #1 at 4:56:06 PM
+239 verbose etag W/"599c61f4-cb30"
+240 verbose lastModified Tue, 22 Aug 2017 16:55:16 GMT
+241 http request GET https://registry.npmjs.org/grunt-sass
+242 verbose request uri https://registry.npmjs.org/grunt-shell
+243 verbose request no auth needed
+244 info attempt registry request try #1 at 4:56:06 PM
+245 verbose etag W/"5980916b-9512"
+246 verbose lastModified Tue, 01 Aug 2017 14:34:19 GMT
+247 http request GET https://registry.npmjs.org/grunt-shell
+248 verbose request uri https://registry.npmjs.org/webcomponentsjs
+249 verbose request no auth needed
+250 info attempt registry request try #1 at 4:56:06 PM
+251 verbose etag W/"5924d287-15bc"
+252 verbose lastModified Wed, 24 May 2017 00:23:35 GMT
+253 http request GET https://registry.npmjs.org/webcomponentsjs
+254 verbose request uri https://registry.npmjs.org/web-component-tester
+255 verbose request no auth needed
+256 info attempt registry request try #1 at 4:56:06 PM
+257 verbose etag W/"599be6bd-440b5"
+258 verbose lastModified Tue, 22 Aug 2017 08:09:33 GMT
+259 http request GET https://registry.npmjs.org/web-component-tester
+260 http 304 https://registry.npmjs.org/bootstrap
+261 verbose headers { date: 'Thu, 24 Aug 2017 15:56:06 GMT',
+261 verbose headers   via: '1.1 varnish',
+261 verbose headers   'cache-control': 'max-age=300',
+261 verbose headers   etag: 'W/"599d4c3c-e2a0"',
+261 verbose headers   age: '261',
+261 verbose headers   connection: 'keep-alive',
+261 verbose headers   'x-served-by': 'cache-lcy1130-LCY',
+261 verbose headers   'x-cache': 'HIT',
+261 verbose headers   'x-cache-hits': '1',
+261 verbose headers   'x-timer': 'S1503590166.373074,VS0,VE0',
+261 verbose headers   vary: 'Accept-Encoding, Accept' }
+262 silly get cb [ 304,
+262 silly get   { date: 'Thu, 24 Aug 2017 15:56:06 GMT',
+262 silly get     via: '1.1 varnish',
+262 silly get     'cache-control': 'max-age=300',
+262 silly get     etag: 'W/"599d4c3c-e2a0"',
+262 silly get     age: '261',
+262 silly get     connection: 'keep-alive',
+262 silly get     'x-served-by': 'cache-lcy1130-LCY',
+262 silly get     'x-cache': 'HIT',
+262 silly get     'x-cache-hits': '1',
+262 silly get     'x-timer': 'S1503590166.373074,VS0,VE0',
+262 silly get     vary: 'Accept-Encoding, Accept' } ]
+263 verbose etag https://registry.npmjs.org/bootstrap from cache
+264 verbose get saving bootstrap to C:\Users\LodderC\AppData\Roaming\npm-cache\registry.npmjs.org\bootstrap\.cache.json
+265 verbose correctMkdir C:\Users\LodderC\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+266 http 304 https://registry.npmjs.org/eslint
+267 verbose headers { date: 'Thu, 24 Aug 2017 15:56:06 GMT',
+267 verbose headers   via: '1.1 varnish',
+267 verbose headers   'cache-control': 'max-age=300',
+267 verbose headers   etag: 'W/"599d0631-78e8a"',
+267 verbose headers   age: '54',
+267 verbose headers   connection: 'keep-alive',
+267 verbose headers   'x-served-by': 'cache-lcy1139-LCY',
+267 verbose headers   'x-cache': 'HIT',
+267 verbose headers   'x-cache-hits': '2',
+267 verbose headers   'x-timer': 'S1503590166.373633,VS0,VE0',
+267 verbose headers   vary: 'Accept-Encoding, Accept' }
+268 silly get cb [ 304,
+268 silly get   { date: 'Thu, 24 Aug 2017 15:56:06 GMT',
+268 silly get     via: '1.1 varnish',
+268 silly get     'cache-control': 'max-age=300',
+268 silly get     etag: 'W/"599d0631-78e8a"',
+268 silly get     age: '54',
+268 silly get     connection: 'keep-alive',
+268 silly get     'x-served-by': 'cache-lcy1139-LCY',
+268 silly get     'x-cache': 'HIT',
+268 silly get     'x-cache-hits': '2',
+268 silly get     'x-timer': 'S1503590166.373633,VS0,VE0',
+268 silly get     vary: 'Accept-Encoding, Accept' } ]
+269 verbose etag https://registry.npmjs.org/eslint from cache
+270 verbose get saving eslint to C:\Users\LodderC\AppData\Roaming\npm-cache\registry.npmjs.org\eslint\.cache.json
+271 verbose correctMkdir C:\Users\LodderC\AppData\Roaming\npm-cache correctMkdir already in flight; waiting
+272 http 304 https://registry.npmjs.org/browserify
+273 verbose headers { date: 'Thu, 24 Aug 2017 15:56:06 GMT',
+273 verbose headers   via: '1.1 varnish',
+273 verbose headers   'cache-control': 'max-age=300',
+273 verbose headers   etag: 'W/"59930a7a-daadd"',
+273 verbose headers   age: '22',
+273 verbose headers   connection: 'keep-alive',
+273 verbose headers   'x-served-by': 'cache-lcy1142-LCY',
+273 verbose headers   'x-cache': 'HIT',
+273 verbose headers   'x-cache-hits': '1',
+273 verbose headers   'x-timer': 'S1503590166.374288,VS0,VE1',
+273 verbose headers   vary: 'Accept-Encoding, Accept' }
+274 silly get cb [ 304,
+274 silly get   { date: 'Thu, 24 Aug 2017 15:56:06 GMT',
+274 silly get     via: '1.1 varnish',
+274 silly get     'cache-control': 'max-age=300',
+274 silly get     etag: 'W/"59930a7a-daadd"',
+274 silly get     age: '22',
+274 silly get     connection: 'keep-alive',
+274 silly get     'x-served-by': 'cache-lcy1142-LCY',
+274 silly get     'x-cache': 'HIT',
+274 silly get     'x-cache-hits': '1',
+274 silly get     'x-timer': 'S1503590166.374288,VS0,VE1',
+274 silly get     vary: 'Accept-Encoding, Accept' } ]
+275 verbose etag https://registry.npmjs.org/browserify from cache
+276 verbose get saving browserify to C:\Users\LodderC\AppData\Roaming\npm-cache\registry.npmjs.org\browserify\.cache.json
+277 verbose correctMkdir C:\Users\LodderC\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+278 http 304 https://registry.npmjs.org/grunt-contrib-cssmin
+279 verbose headers { date: 'Thu, 24 Aug 2017 15:56:06 GMT',
+279 verbose headers   via: '1.1 varnish',
+279 verbose headers   'cache-control': 'max-age=300',
+279 verbose headers   etag: 'W/"5980915c-df57"',
+279 verbose headers   age: '45',
+279 verbose headers   connection: 'keep-alive',
+279 verbose headers   'x-served-by': 'cache-lcy1149-LCY',
+279 verbose headers   'x-cache': 'HIT',
+279 verbose headers   'x-cache-hits': '1',
+279 verbose headers   'x-timer': 'S1503590166.375072,VS0,VE1',
+279 verbose headers   vary: 'Accept-Encoding, Accept' }
+280 silly get cb [ 304,
+280 silly get   { date: 'Thu, 24 Aug 2017 15:56:06 GMT',
+280 silly get     via: '1.1 varnish',
+280 silly get     'cache-control': 'max-age=300',
+280 silly get     etag: 'W/"5980915c-df57"',
+280 silly get     age: '45',
+280 silly get     connection: 'keep-alive',
+280 silly get     'x-served-by': 'cache-lcy1149-LCY',
+280 silly get     'x-cache': 'HIT',
+280 silly get     'x-cache-hits': '1',
+280 silly get     'x-timer': 'S1503590166.375072,VS0,VE1',
+280 silly get     vary: 'Accept-Encoding, Accept' } ]
+281 verbose etag https://registry.npmjs.org/grunt-contrib-cssmin from cache
+282 verbose get saving grunt-contrib-cssmin to C:\Users\LodderC\AppData\Roaming\npm-cache\registry.npmjs.org\grunt-contrib-cssmin\.cache.json
+283 verbose correctMkdir C:\Users\LodderC\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+284 http 304 https://registry.npmjs.org/babel-preset-es2015
+285 verbose headers { date: 'Thu, 24 Aug 2017 15:56:06 GMT',
+285 verbose headers   via: '1.1 varnish',
+285 verbose headers   'cache-control': 'max-age=300',
+285 verbose headers   etag: 'W/"599a7bf9-18c49"',
+285 verbose headers   age: '250',
+285 verbose headers   connection: 'keep-alive',
+285 verbose headers   'x-served-by': 'cache-lhr6343-LHR',
+285 verbose headers   'x-cache': 'HIT',
+285 verbose headers   'x-cache-hits': '1',
+285 verbose headers   'x-timer': 'S1503590166.376360,VS0,VE1',
+285 verbose headers   vary: 'Accept-Encoding, Accept' }
+286 silly get cb [ 304,
+286 silly get   { date: 'Thu, 24 Aug 2017 15:56:06 GMT',
+286 silly get     via: '1.1 varnish',
+286 silly get     'cache-control': 'max-age=300',
+286 silly get     etag: 'W/"599a7bf9-18c49"',
+286 silly get     age: '250',
+286 silly get     connection: 'keep-alive',
+286 silly get     'x-served-by': 'cache-lhr6343-LHR',
+286 silly get     'x-cache': 'HIT',
+286 silly get     'x-cache-hits': '1',
+286 silly get     'x-timer': 'S1503590166.376360,VS0,VE1',
+286 silly get     vary: 'Accept-Encoding, Accept' } ]
+287 verbose etag https://registry.npmjs.org/babel-preset-es2015 from cache
+288 verbose get saving babel-preset-es2015 to C:\Users\LodderC\AppData\Roaming\npm-cache\registry.npmjs.org\babel-preset-es2015\.cache.json
+289 verbose correctMkdir C:\Users\LodderC\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+290 http 304 https://registry.npmjs.org/babelify
+291 verbose headers { date: 'Thu, 24 Aug 2017 15:56:06 GMT',
+291 verbose headers   via: '1.1 varnish',
+291 verbose headers   'cache-control': 'max-age=300',
+291 verbose headers   etag: 'W/"594fc2db-76bc"',
+291 verbose headers   age: '101',
+291 verbose headers   connection: 'keep-alive',
+291 verbose headers   'x-served-by': 'cache-lhr6351-LHR',
+291 verbose headers   'x-cache': 'HIT',
+291 verbose headers   'x-cache-hits': '681',
+291 verbose headers   'x-timer': 'S1503590166.376020,VS0,VE0',
+291 verbose headers   vary: 'Accept-Encoding, Accept' }
+292 silly get cb [ 304,
+292 silly get   { date: 'Thu, 24 Aug 2017 15:56:06 GMT',
+292 silly get     via: '1.1 varnish',
+292 silly get     'cache-control': 'max-age=300',
+292 silly get     etag: 'W/"594fc2db-76bc"',
+292 silly get     age: '101',
+292 silly get     connection: 'keep-alive',
+292 silly get     'x-served-by': 'cache-lhr6351-LHR',
+292 silly get     'x-cache': 'HIT',
+292 silly get     'x-cache-hits': '681',
+292 silly get     'x-timer': 'S1503590166.376020,VS0,VE0',
+292 silly get     vary: 'Accept-Encoding, Accept' } ]
+293 verbose etag https://registry.npmjs.org/babelify from cache
+294 verbose get saving babelify to C:\Users\LodderC\AppData\Roaming\npm-cache\registry.npmjs.org\babelify\.cache.json
+295 verbose correctMkdir C:\Users\LodderC\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+296 http 304 https://registry.npmjs.org/grunt-babel
+297 verbose headers { date: 'Thu, 24 Aug 2017 15:56:06 GMT',
+297 verbose headers   via: '1.1 varnish',
+297 verbose headers   'cache-control': 'max-age=300',
+297 verbose headers   etag: 'W/"598a4a5c-2fff"',
+297 verbose headers   age: '127',
+297 verbose headers   connection: 'keep-alive',
+297 verbose headers   'x-served-by': 'cache-lhr6339-LHR',
+297 verbose headers   'x-cache': 'HIT',
+297 verbose headers   'x-cache-hits': '1',
+297 verbose headers   'x-timer': 'S1503590166.377500,VS0,VE0',
+297 verbose headers   vary: 'Accept-Encoding, Accept' }
+298 silly get cb [ 304,
+298 silly get   { date: 'Thu, 24 Aug 2017 15:56:06 GMT',
+298 silly get     via: '1.1 varnish',
+298 silly get     'cache-control': 'max-age=300',
+298 silly get     etag: 'W/"598a4a5c-2fff"',
+298 silly get     age: '127',
+298 silly get     connection: 'keep-alive',
+298 silly get     'x-served-by': 'cache-lhr6339-LHR',
+298 silly get     'x-cache': 'HIT',
+298 silly get     'x-cache-hits': '1',
+298 silly get     'x-timer': 'S1503590166.377500,VS0,VE0',
+298 silly get     vary: 'Accept-Encoding, Accept' } ]
+299 verbose etag https://registry.npmjs.org/grunt-babel from cache
+300 verbose get saving grunt-babel to C:\Users\LodderC\AppData\Roaming\npm-cache\registry.npmjs.org\grunt-babel\.cache.json
+301 verbose correctMkdir C:\Users\LodderC\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+302 http 304 https://registry.npmjs.org/grunt-contrib-copy
+303 verbose headers { date: 'Thu, 24 Aug 2017 15:56:06 GMT',
+303 verbose headers   via: '1.1 varnish',
+303 verbose headers   'cache-control': 'max-age=300',
+303 verbose headers   etag: 'W/"5962ee92-9cf3"',
+303 verbose headers   age: '184',
+303 verbose headers   connection: 'keep-alive',
+303 verbose headers   'x-served-by': 'cache-lhr6340-LHR',
+303 verbose headers   'x-cache': 'HIT',
+303 verbose headers   'x-cache-hits': '1',
+303 verbose headers   'x-timer': 'S1503590166.375343,VS0,VE0',
+303 verbose headers   vary: 'Accept-Encoding, Accept' }
+304 silly get cb [ 304,
+304 silly get   { date: 'Thu, 24 Aug 2017 15:56:06 GMT',
+304 silly get     via: '1.1 varnish',
+304 silly get     'cache-control': 'max-age=300',
+304 silly get     etag: 'W/"5962ee92-9cf3"',
+304 silly get     age: '184',
+304 silly get     connection: 'keep-alive',
+304 silly get     'x-served-by': 'cache-lhr6340-LHR',
+304 silly get     'x-cache': 'HIT',
+304 silly get     'x-cache-hits': '1',
+304 silly get     'x-timer': 'S1503590166.375343,VS0,VE0',
+304 silly get     vary: 'Accept-Encoding, Accept' } ]
+305 verbose etag https://registry.npmjs.org/grunt-contrib-copy from cache
+306 verbose get saving grunt-contrib-copy to C:\Users\LodderC\AppData\Roaming\npm-cache\registry.npmjs.org\grunt-contrib-copy\.cache.json
+307 verbose correctMkdir C:\Users\LodderC\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+308 http 304 https://registry.npmjs.org/grunt-shell
+309 verbose headers { date: 'Thu, 24 Aug 2017 15:56:06 GMT',
+309 verbose headers   via: '1.1 varnish',
+309 verbose headers   'cache-control': 'max-age=300',
+309 verbose headers   etag: 'W/"5980916b-9512"',
+309 verbose headers   age: '2',
+309 verbose headers   connection: 'keep-alive',
+309 verbose headers   'x-served-by': 'cache-lcy1139-LCY',
+309 verbose headers   'x-cache': 'HIT',
+309 verbose headers   'x-cache-hits': '1',
+309 verbose headers   'x-timer': 'S1503590166.376079,VS0,VE0',
+309 verbose headers   vary: 'Accept-Encoding, Accept' }
+310 silly get cb [ 304,
+310 silly get   { date: 'Thu, 24 Aug 2017 15:56:06 GMT',
+310 silly get     via: '1.1 varnish',
+310 silly get     'cache-control': 'max-age=300',
+310 silly get     etag: 'W/"5980916b-9512"',
+310 silly get     age: '2',
+310 silly get     connection: 'keep-alive',
+310 silly get     'x-served-by': 'cache-lcy1139-LCY',
+310 silly get     'x-cache': 'HIT',
+310 silly get     'x-cache-hits': '1',
+310 silly get     'x-timer': 'S1503590166.376079,VS0,VE0',
+310 silly get     vary: 'Accept-Encoding, Accept' } ]
+311 verbose etag https://registry.npmjs.org/grunt-shell from cache
+312 verbose get saving grunt-shell to C:\Users\LodderC\AppData\Roaming\npm-cache\registry.npmjs.org\grunt-shell\.cache.json
+313 verbose correctMkdir C:\Users\LodderC\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+314 http 304 https://registry.npmjs.org/grunt
+315 verbose headers { date: 'Thu, 24 Aug 2017 15:56:06 GMT',
+315 verbose headers   via: '1.1 varnish',
+315 verbose headers   'cache-control': 'max-age=300',
+315 verbose headers   etag: 'W/"5997f646-18c30"',
+315 verbose headers   age: '236',
+315 verbose headers   connection: 'keep-alive',
+315 verbose headers   'x-served-by': 'cache-lhr6326-LHR',
+315 verbose headers   'x-cache': 'HIT',
+315 verbose headers   'x-cache-hits': '1',
+315 verbose headers   'x-timer': 'S1503590166.376498,VS0,VE0',
+315 verbose headers   vary: 'Accept-Encoding, Accept' }
+316 silly get cb [ 304,
+316 silly get   { date: 'Thu, 24 Aug 2017 15:56:06 GMT',
+316 silly get     via: '1.1 varnish',
+316 silly get     'cache-control': 'max-age=300',
+316 silly get     etag: 'W/"5997f646-18c30"',
+316 silly get     age: '236',
+316 silly get     connection: 'keep-alive',
+316 silly get     'x-served-by': 'cache-lhr6326-LHR',
+316 silly get     'x-cache': 'HIT',
+316 silly get     'x-cache-hits': '1',
+316 silly get     'x-timer': 'S1503590166.376498,VS0,VE0',
+316 silly get     vary: 'Accept-Encoding, Accept' } ]
+317 verbose etag https://registry.npmjs.org/grunt from cache
+318 verbose get saving grunt to C:\Users\LodderC\AppData\Roaming\npm-cache\registry.npmjs.org\grunt\.cache.json
+319 verbose correctMkdir C:\Users\LodderC\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+320 http 304 https://registry.npmjs.org/grunt-sass
+321 verbose headers { date: 'Thu, 24 Aug 2017 15:56:06 GMT',
+321 verbose headers   via: '1.1 varnish',
+321 verbose headers   'cache-control': 'max-age=300',
+321 verbose headers   etag: 'W/"599c61f4-cb30"',
+321 verbose headers   age: '80',
+321 verbose headers   connection: 'keep-alive',
+321 verbose headers   'x-served-by': 'cache-lhr6321-LHR',
+321 verbose headers   'x-cache': 'HIT',
+321 verbose headers   'x-cache-hits': '2',
+321 verbose headers   'x-timer': 'S1503590166.377023,VS0,VE0',
+321 verbose headers   vary: 'Accept-Encoding, Accept' }
+322 silly get cb [ 304,
+322 silly get   { date: 'Thu, 24 Aug 2017 15:56:06 GMT',
+322 silly get     via: '1.1 varnish',
+322 silly get     'cache-control': 'max-age=300',
+322 silly get     etag: 'W/"599c61f4-cb30"',
+322 silly get     age: '80',
+322 silly get     connection: 'keep-alive',
+322 silly get     'x-served-by': 'cache-lhr6321-LHR',
+322 silly get     'x-cache': 'HIT',
+322 silly get     'x-cache-hits': '2',
+322 silly get     'x-timer': 'S1503590166.377023,VS0,VE0',
+322 silly get     vary: 'Accept-Encoding, Accept' } ]
+323 verbose etag https://registry.npmjs.org/grunt-sass from cache
+324 verbose get saving grunt-sass to C:\Users\LodderC\AppData\Roaming\npm-cache\registry.npmjs.org\grunt-sass\.cache.json
+325 verbose correctMkdir C:\Users\LodderC\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+326 http 304 https://registry.npmjs.org/babel-plugin-static-fs
+327 verbose headers { date: 'Thu, 24 Aug 2017 15:56:06 GMT',
+327 verbose headers   via: '1.1 varnish',
+327 verbose headers   'cache-control': 'max-age=300',
+327 verbose headers   etag: 'W/"5695350d-1ad7"',
+327 verbose headers   age: '0',
+327 verbose headers   connection: 'keep-alive',
+327 verbose headers   'x-served-by': 'cache-lhr6325-LHR',
+327 verbose headers   'x-cache': 'HIT',
+327 verbose headers   'x-cache-hits': '1',
+327 verbose headers   'x-timer': 'S1503590166.376946,VS0,VE16',
+327 verbose headers   vary: 'Accept-Encoding, Accept' }
+328 silly get cb [ 304,
+328 silly get   { date: 'Thu, 24 Aug 2017 15:56:06 GMT',
+328 silly get     via: '1.1 varnish',
+328 silly get     'cache-control': 'max-age=300',
+328 silly get     etag: 'W/"5695350d-1ad7"',
+328 silly get     age: '0',
+328 silly get     connection: 'keep-alive',
+328 silly get     'x-served-by': 'cache-lhr6325-LHR',
+328 silly get     'x-cache': 'HIT',
+328 silly get     'x-cache-hits': '1',
+328 silly get     'x-timer': 'S1503590166.376946,VS0,VE16',
+328 silly get     vary: 'Accept-Encoding, Accept' } ]
+329 verbose etag https://registry.npmjs.org/babel-plugin-static-fs from cache
+330 verbose get saving babel-plugin-static-fs to C:\Users\LodderC\AppData\Roaming\npm-cache\registry.npmjs.org\babel-plugin-static-fs\.cache.json
+331 verbose correctMkdir C:\Users\LodderC\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+332 http 304 https://registry.npmjs.org/web-component-tester
+333 verbose headers { date: 'Thu, 24 Aug 2017 15:56:06 GMT',
+333 verbose headers   via: '1.1 varnish',
+333 verbose headers   'cache-control': 'max-age=300',
+333 verbose headers   etag: 'W/"599be6bd-440b5"',
+333 verbose headers   age: '0',
+333 verbose headers   connection: 'keep-alive',
+333 verbose headers   'x-served-by': 'cache-lcy1121-LCY',
+333 verbose headers   'x-cache': 'HIT',
+333 verbose headers   'x-cache-hits': '1',
+333 verbose headers   'x-timer': 'S1503590166.377601,VS0,VE19',
+333 verbose headers   vary: 'Accept-Encoding, Accept' }
+334 silly get cb [ 304,
+334 silly get   { date: 'Thu, 24 Aug 2017 15:56:06 GMT',
+334 silly get     via: '1.1 varnish',
+334 silly get     'cache-control': 'max-age=300',
+334 silly get     etag: 'W/"599be6bd-440b5"',
+334 silly get     age: '0',
+334 silly get     connection: 'keep-alive',
+334 silly get     'x-served-by': 'cache-lcy1121-LCY',
+334 silly get     'x-cache': 'HIT',
+334 silly get     'x-cache-hits': '1',
+334 silly get     'x-timer': 'S1503590166.377601,VS0,VE19',
+334 silly get     vary: 'Accept-Encoding, Accept' } ]
+335 verbose etag https://registry.npmjs.org/web-component-tester from cache
+336 verbose get saving web-component-tester to C:\Users\LodderC\AppData\Roaming\npm-cache\registry.npmjs.org\web-component-tester\.cache.json
+337 verbose correctMkdir C:\Users\LodderC\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+338 http 304 https://registry.npmjs.org/webcomponentsjs
+339 verbose headers { date: 'Thu, 24 Aug 2017 15:56:06 GMT',
+339 verbose headers   via: '1.1 varnish',
+339 verbose headers   'cache-control': 'max-age=300',
+339 verbose headers   etag: 'W/"5924d287-15bc"',
+339 verbose headers   age: '0',
+339 verbose headers   connection: 'keep-alive',
+339 verbose headers   'x-served-by': 'cache-lhr6325-LHR',
+339 verbose headers   'x-cache': 'HIT',
+339 verbose headers   'x-cache-hits': '1',
+339 verbose headers   'x-timer': 'S1503590166.384294,VS0,VE18',
+339 verbose headers   vary: 'Accept-Encoding, Accept' }
+340 silly get cb [ 304,
+340 silly get   { date: 'Thu, 24 Aug 2017 15:56:06 GMT',
+340 silly get     via: '1.1 varnish',
+340 silly get     'cache-control': 'max-age=300',
+340 silly get     etag: 'W/"5924d287-15bc"',
+340 silly get     age: '0',
+340 silly get     connection: 'keep-alive',
+340 silly get     'x-served-by': 'cache-lhr6325-LHR',
+340 silly get     'x-cache': 'HIT',
+340 silly get     'x-cache-hits': '1',
+340 silly get     'x-timer': 'S1503590166.384294,VS0,VE18',
+340 silly get     vary: 'Accept-Encoding, Accept' } ]
+341 verbose etag https://registry.npmjs.org/webcomponentsjs from cache
+342 verbose get saving webcomponentsjs to C:\Users\LodderC\AppData\Roaming\npm-cache\registry.npmjs.org\webcomponentsjs\.cache.json
+343 verbose correctMkdir C:\Users\LodderC\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+344 silly resolveWithNewModule eslint@4.5.0 checking installable status
+345 silly cache add args [ 'eslint@^4.5.0', null ]
+346 verbose cache add spec eslint@^4.5.0
+347 silly cache add parsed spec Result {
+347 silly cache add   raw: 'eslint@^4.5.0',
+347 silly cache add   scope: null,
+347 silly cache add   escapedName: 'eslint',
+347 silly cache add   name: 'eslint',
+347 silly cache add   rawSpec: '^4.5.0',
+347 silly cache add   spec: '>=4.5.0 <5.0.0',
+347 silly cache add   type: 'range' }
+348 silly addNamed eslint@>=4.5.0 <5.0.0
+349 verbose addNamed ">=4.5.0 <5.0.0" is a valid semver range for eslint
+350 silly addNameRange { name: 'eslint', range: '>=4.5.0 <5.0.0', hasData: false }
+351 silly mapToRegistry name eslint
+352 silly mapToRegistry using default registry
+353 silly mapToRegistry registry https://registry.npmjs.org/
+354 silly mapToRegistry data Result {
+354 silly mapToRegistry   raw: 'eslint',
+354 silly mapToRegistry   scope: null,
+354 silly mapToRegistry   escapedName: 'eslint',
+354 silly mapToRegistry   name: 'eslint',
+354 silly mapToRegistry   rawSpec: '',
+354 silly mapToRegistry   spec: 'latest',
+354 silly mapToRegistry   type: 'tag' }
+355 silly mapToRegistry uri https://registry.npmjs.org/eslint
+356 verbose addNameRange registry:https://registry.npmjs.org/eslint not in flight; fetching
+357 silly resolveWithNewModule bootstrap@4.0.0-beta checking installable status
+358 silly cache add args [ 'bootstrap@4.0.0-beta', null ]
+359 verbose cache add spec bootstrap@4.0.0-beta
+360 silly cache add parsed spec Result {
+360 silly cache add   raw: 'bootstrap@4.0.0-beta',
+360 silly cache add   scope: null,
+360 silly cache add   escapedName: 'bootstrap',
+360 silly cache add   name: 'bootstrap',
+360 silly cache add   rawSpec: '4.0.0-beta',
+360 silly cache add   spec: '4.0.0-beta',
+360 silly cache add   type: 'version' }
+361 silly addNamed bootstrap@4.0.0-beta
+362 verbose addNamed "4.0.0-beta" is a plain semver version for bootstrap
+363 silly mapToRegistry name bootstrap
+364 silly mapToRegistry using default registry
+365 silly mapToRegistry registry https://registry.npmjs.org/
+366 silly mapToRegistry data Result {
+366 silly mapToRegistry   raw: 'bootstrap',
+366 silly mapToRegistry   scope: null,
+366 silly mapToRegistry   escapedName: 'bootstrap',
+366 silly mapToRegistry   name: 'bootstrap',
+366 silly mapToRegistry   rawSpec: '',
+366 silly mapToRegistry   spec: 'latest',
+366 silly mapToRegistry   type: 'tag' }
+367 silly mapToRegistry uri https://registry.npmjs.org/bootstrap
+368 verbose addNameVersion registry:https://registry.npmjs.org/bootstrap not in flight; fetching
+369 silly resolveWithNewModule grunt-contrib-cssmin@2.2.1 checking installable status
+370 silly cache add args [ 'grunt-contrib-cssmin@latest', null ]
+371 verbose cache add spec grunt-contrib-cssmin@latest
+372 silly resolveWithNewModule babelify@7.3.0 checking installable status
+373 silly cache add args [ 'babelify@latest', null ]
+374 verbose cache add spec babelify@latest
+375 silly resolveWithNewModule babel-preset-es2015@6.24.1 checking installable status
+376 silly cache add args [ 'babel-preset-es2015@latest', null ]
+377 verbose cache add spec babel-preset-es2015@latest
+378 silly resolveWithNewModule browserify@14.4.0 checking installable status
+379 silly cache add args [ 'browserify@*', null ]
+380 verbose cache add spec browserify@*
+381 silly cache add parsed spec Result {
+381 silly cache add   raw: 'browserify@*',
+381 silly cache add   scope: null,
+381 silly cache add   escapedName: 'browserify',
+381 silly cache add   name: 'browserify',
+381 silly cache add   rawSpec: '*',
+381 silly cache add   spec: '*',
+381 silly cache add   type: 'range' }
+382 silly addNamed browserify@*
+383 verbose addNamed "*" is a valid semver range for browserify
+384 silly addNameRange { name: 'browserify', range: '*', hasData: false }
+385 silly mapToRegistry name browserify
+386 silly mapToRegistry using default registry
+387 silly mapToRegistry registry https://registry.npmjs.org/
+388 silly mapToRegistry data Result {
+388 silly mapToRegistry   raw: 'browserify',
+388 silly mapToRegistry   scope: null,
+388 silly mapToRegistry   escapedName: 'browserify',
+388 silly mapToRegistry   name: 'browserify',
+388 silly mapToRegistry   rawSpec: '',
+388 silly mapToRegistry   spec: 'latest',
+388 silly mapToRegistry   type: 'tag' }
+389 silly mapToRegistry uri https://registry.npmjs.org/browserify
+390 verbose addNameRange registry:https://registry.npmjs.org/browserify not in flight; fetching
+391 silly resolveWithNewModule grunt@1.0.1 checking installable status
+392 silly cache add args [ 'grunt@latest', null ]
+393 verbose cache add spec grunt@latest
+394 silly resolveWithNewModule grunt-shell@2.1.0 checking installable status
+395 silly cache add args [ 'grunt-shell@latest', null ]
+396 verbose cache add spec grunt-shell@latest
+397 silly resolveWithNewModule grunt-contrib-copy@1.0.0 checking installable status
+398 silly cache add args [ 'grunt-contrib-copy@latest', null ]
+399 verbose cache add spec grunt-contrib-copy@latest
+400 silly resolveWithNewModule grunt-sass@2.0.0 checking installable status
+401 silly cache add args [ 'grunt-sass@latest', null ]
+402 verbose cache add spec grunt-sass@latest
+403 silly resolveWithNewModule grunt-babel@7.0.0 checking installable status
+404 silly cache add args [ 'grunt-babel@latest', null ]
+405 verbose cache add spec grunt-babel@latest
+406 silly cache add parsed spec Result {
+406 silly cache add   raw: 'grunt-contrib-cssmin@latest',
+406 silly cache add   scope: null,
+406 silly cache add   escapedName: 'grunt-contrib-cssmin',
+406 silly cache add   name: 'grunt-contrib-cssmin',
+406 silly cache add   rawSpec: 'latest',
+406 silly cache add   spec: 'latest',
+406 silly cache add   type: 'tag' }
+407 silly addNamed grunt-contrib-cssmin@latest
+408 verbose addNamed "latest" is being treated as a dist-tag for grunt-contrib-cssmin
+409 info addNameTag [ 'grunt-contrib-cssmin', 'latest' ]
+410 silly mapToRegistry name grunt-contrib-cssmin
+411 silly mapToRegistry using default registry
+412 silly mapToRegistry registry https://registry.npmjs.org/
+413 silly mapToRegistry data Result {
+413 silly mapToRegistry   raw: 'grunt-contrib-cssmin',
+413 silly mapToRegistry   scope: null,
+413 silly mapToRegistry   escapedName: 'grunt-contrib-cssmin',
+413 silly mapToRegistry   name: 'grunt-contrib-cssmin',
+413 silly mapToRegistry   rawSpec: '',
+413 silly mapToRegistry   spec: 'latest',
+413 silly mapToRegistry   type: 'tag' }
+414 silly mapToRegistry uri https://registry.npmjs.org/grunt-contrib-cssmin
+415 verbose addNameTag registry:https://registry.npmjs.org/grunt-contrib-cssmin not in flight; fetching
+416 silly cache add parsed spec Result {
+416 silly cache add   raw: 'babelify@latest',
+416 silly cache add   scope: null,
+416 silly cache add   escapedName: 'babelify',
+416 silly cache add   name: 'babelify',
+416 silly cache add   rawSpec: 'latest',
+416 silly cache add   spec: 'latest',
+416 silly cache add   type: 'tag' }
+417 silly addNamed babelify@latest
+418 verbose addNamed "latest" is being treated as a dist-tag for babelify
+419 info addNameTag [ 'babelify', 'latest' ]
+420 silly mapToRegistry name babelify
+421 silly mapToRegistry using default registry
+422 silly mapToRegistry registry https://registry.npmjs.org/
+423 silly mapToRegistry data Result {
+423 silly mapToRegistry   raw: 'babelify',
+423 silly mapToRegistry   scope: null,
+423 silly mapToRegistry   escapedName: 'babelify',
+423 silly mapToRegistry   name: 'babelify',
+423 silly mapToRegistry   rawSpec: '',
+423 silly mapToRegistry   spec: 'latest',
+423 silly mapToRegistry   type: 'tag' }
+424 silly mapToRegistry uri https://registry.npmjs.org/babelify
+425 verbose addNameTag registry:https://registry.npmjs.org/babelify not in flight; fetching
+426 silly cache add parsed spec Result {
+426 silly cache add   raw: 'babel-preset-es2015@latest',
+426 silly cache add   scope: null,
+426 silly cache add   escapedName: 'babel-preset-es2015',
+426 silly cache add   name: 'babel-preset-es2015',
+426 silly cache add   rawSpec: 'latest',
+426 silly cache add   spec: 'latest',
+426 silly cache add   type: 'tag' }
+427 silly addNamed babel-preset-es2015@latest
+428 verbose addNamed "latest" is being treated as a dist-tag for babel-preset-es2015
+429 info addNameTag [ 'babel-preset-es2015', 'latest' ]
+430 silly mapToRegistry name babel-preset-es2015
+431 silly mapToRegistry using default registry
+432 silly mapToRegistry registry https://registry.npmjs.org/
+433 silly mapToRegistry data Result {
+433 silly mapToRegistry   raw: 'babel-preset-es2015',
+433 silly mapToRegistry   scope: null,
+433 silly mapToRegistry   escapedName: 'babel-preset-es2015',
+433 silly mapToRegistry   name: 'babel-preset-es2015',
+433 silly mapToRegistry   rawSpec: '',
+433 silly mapToRegistry   spec: 'latest',
+433 silly mapToRegistry   type: 'tag' }
+434 silly mapToRegistry uri https://registry.npmjs.org/babel-preset-es2015
+435 verbose addNameTag registry:https://registry.npmjs.org/babel-preset-es2015 not in flight; fetching
+436 silly cache add parsed spec Result {
+436 silly cache add   raw: 'grunt@latest',
+436 silly cache add   scope: null,
+436 silly cache add   escapedName: 'grunt',
+436 silly cache add   name: 'grunt',
+436 silly cache add   rawSpec: 'latest',
+436 silly cache add   spec: 'latest',
+436 silly cache add   type: 'tag' }
+437 silly addNamed grunt@latest
+438 verbose addNamed "latest" is being treated as a dist-tag for grunt
+439 info addNameTag [ 'grunt', 'latest' ]
+440 silly mapToRegistry name grunt
+441 silly mapToRegistry using default registry
+442 silly mapToRegistry registry https://registry.npmjs.org/
+443 silly mapToRegistry data Result {
+443 silly mapToRegistry   raw: 'grunt',
+443 silly mapToRegistry   scope: null,
+443 silly mapToRegistry   escapedName: 'grunt',
+443 silly mapToRegistry   name: 'grunt',
+443 silly mapToRegistry   rawSpec: '',
+443 silly mapToRegistry   spec: 'latest',
+443 silly mapToRegistry   type: 'tag' }
+444 silly mapToRegistry uri https://registry.npmjs.org/grunt
+445 verbose addNameTag registry:https://registry.npmjs.org/grunt not in flight; fetching
+446 silly cache add parsed spec Result {
+446 silly cache add   raw: 'grunt-shell@latest',
+446 silly cache add   scope: null,
+446 silly cache add   escapedName: 'grunt-shell',
+446 silly cache add   name: 'grunt-shell',
+446 silly cache add   rawSpec: 'latest',
+446 silly cache add   spec: 'latest',
+446 silly cache add   type: 'tag' }
+447 silly addNamed grunt-shell@latest
+448 verbose addNamed "latest" is being treated as a dist-tag for grunt-shell
+449 info addNameTag [ 'grunt-shell', 'latest' ]
+450 silly mapToRegistry name grunt-shell
+451 silly mapToRegistry using default registry
+452 silly mapToRegistry registry https://registry.npmjs.org/
+453 silly mapToRegistry data Result {
+453 silly mapToRegistry   raw: 'grunt-shell',
+453 silly mapToRegistry   scope: null,
+453 silly mapToRegistry   escapedName: 'grunt-shell',
+453 silly mapToRegistry   name: 'grunt-shell',
+453 silly mapToRegistry   rawSpec: '',
+453 silly mapToRegistry   spec: 'latest',
+453 silly mapToRegistry   type: 'tag' }
+454 silly mapToRegistry uri https://registry.npmjs.org/grunt-shell
+455 verbose addNameTag registry:https://registry.npmjs.org/grunt-shell not in flight; fetching
+456 silly cache add parsed spec Result {
+456 silly cache add   raw: 'grunt-contrib-copy@latest',
+456 silly cache add   scope: null,
+456 silly cache add   escapedName: 'grunt-contrib-copy',
+456 silly cache add   name: 'grunt-contrib-copy',
+456 silly cache add   rawSpec: 'latest',
+456 silly cache add   spec: 'latest',
+456 silly cache add   type: 'tag' }
+457 silly addNamed grunt-contrib-copy@latest
+458 verbose addNamed "latest" is being treated as a dist-tag for grunt-contrib-copy
+459 info addNameTag [ 'grunt-contrib-copy', 'latest' ]
+460 silly mapToRegistry name grunt-contrib-copy
+461 silly mapToRegistry using default registry
+462 silly mapToRegistry registry https://registry.npmjs.org/
+463 silly mapToRegistry data Result {
+463 silly mapToRegistry   raw: 'grunt-contrib-copy',
+463 silly mapToRegistry   scope: null,
+463 silly mapToRegistry   escapedName: 'grunt-contrib-copy',
+463 silly mapToRegistry   name: 'grunt-contrib-copy',
+463 silly mapToRegistry   rawSpec: '',
+463 silly mapToRegistry   spec: 'latest',
+463 silly mapToRegistry   type: 'tag' }
+464 silly mapToRegistry uri https://registry.npmjs.org/grunt-contrib-copy
+465 verbose addNameTag registry:https://registry.npmjs.org/grunt-contrib-copy not in flight; fetching
+466 silly cache add parsed spec Result {
+466 silly cache add   raw: 'grunt-sass@latest',
+466 silly cache add   scope: null,
+466 silly cache add   escapedName: 'grunt-sass',
+466 silly cache add   name: 'grunt-sass',
+466 silly cache add   rawSpec: 'latest',
+466 silly cache add   spec: 'latest',
+466 silly cache add   type: 'tag' }
+467 silly addNamed grunt-sass@latest
+468 verbose addNamed "latest" is being treated as a dist-tag for grunt-sass
+469 info addNameTag [ 'grunt-sass', 'latest' ]
+470 silly mapToRegistry name grunt-sass
+471 silly mapToRegistry using default registry
+472 silly mapToRegistry registry https://registry.npmjs.org/
+473 silly mapToRegistry data Result {
+473 silly mapToRegistry   raw: 'grunt-sass',
+473 silly mapToRegistry   scope: null,
+473 silly mapToRegistry   escapedName: 'grunt-sass',
+473 silly mapToRegistry   name: 'grunt-sass',
+473 silly mapToRegistry   rawSpec: '',
+473 silly mapToRegistry   spec: 'latest',
+473 silly mapToRegistry   type: 'tag' }
+474 silly mapToRegistry uri https://registry.npmjs.org/grunt-sass
+475 verbose addNameTag registry:https://registry.npmjs.org/grunt-sass not in flight; fetching
+476 silly cache add parsed spec Result {
+476 silly cache add   raw: 'grunt-babel@latest',
+476 silly cache add   scope: null,
+476 silly cache add   escapedName: 'grunt-babel',
+476 silly cache add   name: 'grunt-babel',
+476 silly cache add   rawSpec: 'latest',
+476 silly cache add   spec: 'latest',
+476 silly cache add   type: 'tag' }
+477 silly addNamed grunt-babel@latest
+478 verbose addNamed "latest" is being treated as a dist-tag for grunt-babel
+479 info addNameTag [ 'grunt-babel', 'latest' ]
+480 silly mapToRegistry name grunt-babel
+481 silly mapToRegistry using default registry
+482 silly mapToRegistry registry https://registry.npmjs.org/
+483 silly mapToRegistry data Result {
+483 silly mapToRegistry   raw: 'grunt-babel',
+483 silly mapToRegistry   scope: null,
+483 silly mapToRegistry   escapedName: 'grunt-babel',
+483 silly mapToRegistry   name: 'grunt-babel',
+483 silly mapToRegistry   rawSpec: '',
+483 silly mapToRegistry   spec: 'latest',
+483 silly mapToRegistry   type: 'tag' }
+484 silly mapToRegistry uri https://registry.npmjs.org/grunt-babel
+485 verbose addNameTag registry:https://registry.npmjs.org/grunt-babel not in flight; fetching
+486 info git [ 'config', '--get', 'remote.origin.url' ]
+487 silly resolveWithNewModule babel-plugin-static-fs@1.1.0 checking installable status
+488 silly cache add args [ 'babel-plugin-static-fs@latest', null ]
+489 verbose cache add spec babel-plugin-static-fs@latest
+490 silly resolveWithNewModule web-component-tester@6.1.2 checking installable status
+491 silly cache add args [ 'web-component-tester@latest', null ]
+492 verbose cache add spec web-component-tester@latest
+493 http 304 https://registry.npmjs.org/babel-minify
+494 verbose headers { date: 'Thu, 24 Aug 2017 15:56:06 GMT',
+494 verbose headers   via: '1.1 varnish',
+494 verbose headers   'cache-control': 'max-age=300',
+494 verbose headers   etag: 'W/"59936119-7a05"',
+494 verbose headers   age: '0',
+494 verbose headers   connection: 'keep-alive',
+494 verbose headers   'x-served-by': 'cache-lhr6331-LHR',
+494 verbose headers   'x-cache': 'HIT',
+494 verbose headers   'x-cache-hits': '1',
+494 verbose headers   'x-timer': 'S1503590166.374351,VS0,VE136',
+494 verbose headers   vary: 'Accept-Encoding, Accept' }
+495 silly get cb [ 304,
+495 silly get   { date: 'Thu, 24 Aug 2017 15:56:06 GMT',
+495 silly get     via: '1.1 varnish',
+495 silly get     'cache-control': 'max-age=300',
+495 silly get     etag: 'W/"59936119-7a05"',
+495 silly get     age: '0',
+495 silly get     connection: 'keep-alive',
+495 silly get     'x-served-by': 'cache-lhr6331-LHR',
+495 silly get     'x-cache': 'HIT',
+495 silly get     'x-cache-hits': '1',
+495 silly get     'x-timer': 'S1503590166.374351,VS0,VE136',
+495 silly get     vary: 'Accept-Encoding, Accept' } ]
+496 verbose etag https://registry.npmjs.org/babel-minify from cache
+497 verbose get saving babel-minify to C:\Users\LodderC\AppData\Roaming\npm-cache\registry.npmjs.org\babel-minify\.cache.json
+498 verbose correctMkdir C:\Users\LodderC\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+499 verbose get https://registry.npmjs.org/bootstrap not expired, no request
+500 silly cache add parsed spec Result {
+500 silly cache add   raw: 'babel-plugin-static-fs@latest',
+500 silly cache add   scope: null,
+500 silly cache add   escapedName: 'babel-plugin-static-fs',
+500 silly cache add   name: 'babel-plugin-static-fs',
+500 silly cache add   rawSpec: 'latest',
+500 silly cache add   spec: 'latest',
+500 silly cache add   type: 'tag' }
+501 silly addNamed babel-plugin-static-fs@latest
+502 verbose addNamed "latest" is being treated as a dist-tag for babel-plugin-static-fs
+503 info addNameTag [ 'babel-plugin-static-fs', 'latest' ]
+504 silly mapToRegistry name babel-plugin-static-fs
+505 silly mapToRegistry using default registry
+506 silly mapToRegistry registry https://registry.npmjs.org/
+507 silly mapToRegistry data Result {
+507 silly mapToRegistry   raw: 'babel-plugin-static-fs',
+507 silly mapToRegistry   scope: null,
+507 silly mapToRegistry   escapedName: 'babel-plugin-static-fs',
+507 silly mapToRegistry   name: 'babel-plugin-static-fs',
+507 silly mapToRegistry   rawSpec: '',
+507 silly mapToRegistry   spec: 'latest',
+507 silly mapToRegistry   type: 'tag' }
+508 silly mapToRegistry uri https://registry.npmjs.org/babel-plugin-static-fs
+509 verbose addNameTag registry:https://registry.npmjs.org/babel-plugin-static-fs not in flight; fetching
+510 silly cache add parsed spec Result {
+510 silly cache add   raw: 'web-component-tester@latest',
+510 silly cache add   scope: null,
+510 silly cache add   escapedName: 'web-component-tester',
+510 silly cache add   name: 'web-component-tester',
+510 silly cache add   rawSpec: 'latest',
+510 silly cache add   spec: 'latest',
+510 silly cache add   type: 'tag' }
+511 silly addNamed web-component-tester@latest
+512 verbose addNamed "latest" is being treated as a dist-tag for web-component-tester
+513 info addNameTag [ 'web-component-tester', 'latest' ]
+514 silly mapToRegistry name web-component-tester
+515 silly mapToRegistry using default registry
+516 silly mapToRegistry registry https://registry.npmjs.org/
+517 silly mapToRegistry data Result {
+517 silly mapToRegistry   raw: 'web-component-tester',
+517 silly mapToRegistry   scope: null,
+517 silly mapToRegistry   escapedName: 'web-component-tester',
+517 silly mapToRegistry   name: 'web-component-tester',
+517 silly mapToRegistry   rawSpec: '',
+517 silly mapToRegistry   spec: 'latest',
+517 silly mapToRegistry   type: 'tag' }
+518 silly mapToRegistry uri https://registry.npmjs.org/web-component-tester
+519 verbose addNameTag registry:https://registry.npmjs.org/web-component-tester not in flight; fetching
+520 verbose get https://registry.npmjs.org/eslint not expired, no request
+521 silly addNameRange number 2 { name: 'eslint', range: '>=4.5.0 <5.0.0', hasData: true }
+522 silly addNameRange versions [ 'eslint',
+522 silly addNameRange   [ '0.0.4',
+522 silly addNameRange     '0.0.5',
+522 silly addNameRange     '0.0.6',
+522 silly addNameRange     '0.0.7',
+522 silly addNameRange     '0.1.0-dev',
+522 silly addNameRange     '0.1.0',
+522 silly addNameRange     '0.1.1',
+522 silly addNameRange     '0.1.2',
+522 silly addNameRange     '0.1.3',
+522 silly addNameRange     '0.1.4',
+522 silly addNameRange     '0.2.0',
+522 silly addNameRange     '0.3.0',
+522 silly addNameRange     '0.4.0',
+522 silly addNameRange     '0.4.1',
+522 silly addNameRange     '0.4.2',
+522 silly addNameRange     '0.4.3',
+522 silly addNameRange     '0.4.4',
+522 silly addNameRange     '0.4.5',
+522 silly addNameRange     '0.5.0',
+522 silly addNameRange     '0.5.1',
+522 silly addNameRange     '0.6.0',
+522 silly addNameRange     '0.6.1',
+522 silly addNameRange     '0.6.2',
+522 silly addNameRange     '0.7.1',
+522 silly addNameRange     '0.7.2',
+522 silly addNameRange     '0.7.3',
+522 silly addNameRange     '0.7.4',
+522 silly addNameRange     '0.8.0',
+522 silly addNameRange     '0.8.1',
+522 silly addNameRange     '0.8.2',
+522 silly addNameRange     '0.9.0',
+522 silly addNameRange     '0.9.1',
+522 silly addNameRange     '0.9.2',
+522 silly addNameRange     '0.10.0-alpha',
+522 silly addNameRange     '0.10.0-alpha.1',
+522 silly addNameRange     '0.10.0-alpha.2',
+522 silly addNameRange     '0.10.0',
+522 silly addNameRange     '0.11.0-alpha.0',
+522 silly addNameRange     '0.10.1',
+522 silly addNameRange     '0.10.2',
+522 silly addNameRange     '0.11.0',
+522 silly addNameRange     '0.12.0',
+522 silly addNameRange     '0.13.0',
+522 silly addNameRange     '0.14.0',
+522 silly addNameRange     '0.14.1',
+522 silly addNameRange     '0.15.0',
+522 silly addNameRange     '0.15.1',
+522 silly addNameRange     '0.16.0',
+522 silly addNameRange     '0.16.1',
+522 silly addNameRange     '0.16.2',
+522 silly addNameRange     '0.17.0',
+522 silly addNameRange     '0.17.1',
+522 silly addNameRange     '0.18.0',
+522 silly addNameRange     '0.19.0',
+522 silly addNameRange     '0.20.0',
+522 silly addNameRange     '0.21.0',
+522 silly addNameRange     '0.21.1',
+522 silly addNameRange     '0.21.2',
+522 silly addNameRange     '0.22.0',
+522 silly addNameRange     '0.22.1',
+522 silly addNameRange     '0.23.0',
+522 silly addNameRange     '0.24.0',
+522 silly addNameRange     '0.24.1',
+522 silly addNameRange     '1.0.0-rc-1',
+522 silly addNameRange     '1.0.0-rc-2',
+522 silly addNameRange     '1.0.0-rc-3',
+522 silly addNameRange     '1.0.0',
+522 silly addNameRange     '1.1.0',
+522 silly addNameRange     '1.2.0',
+522 silly addNameRange     '1.2.1',
+522 silly addNameRange     '1.3.0',
+522 silly addNameRange     '1.3.1',
+522 silly addNameRange     '1.4.0',
+522 silly addNameRange     '1.4.1',
+522 silly addNameRange     '1.4.2',
+522 silly addNameRange     '1.4.3',
+522 silly addNameRange     '1.5.0',
+522 silly addNameRange     '1.5.1',
+522 silly addNameRange     '1.6.0',
+522 silly addNameRange     '1.7.0',
+522 silly addNameRange     '1.7.1',
+522 silly addNameRange     '1.7.2',
+522 silly addNameRange     '1.7.3',
+522 silly addNameRange     '1.8.0',
+522 silly addNameRange     '1.9.0',
+522 silly addNameRange     '1.10.0',
+522 silly addNameRange     '1.10.1',
+522 silly addNameRange     '1.10.2',
+522 silly addNameRange     '1.10.3',
+522 silly addNameRange     '2.0.0-alpha-1',
+522 silly addNameRange     '2.0.0-alpha-2',
+522 silly addNameRange     '2.0.0-beta.1',
+522 silly addNameRange     '2.0.0-beta.2',
+522 silly addNameRange     '2.0.0-beta.3',
+522 silly addNameRange     '2.0.0-rc.0',
+522 silly addNameRange     '2.0.0-rc.1',
+522 silly addNameRange     '2.0.0',
+522 silly addNameRange     '2.1.0',
+522 silly addNameRange     '2.2.0',
+522 silly addNameRange     '2.3.0',
+522 silly addNameRange     ... 68 more items ] ]
+523 silly addNamed eslint@4.5.0
+524 verbose addNamed "4.5.0" is a plain semver version for eslint
+525 verbose get https://registry.npmjs.org/browserify not expired, no request
+526 silly addNameRange number 2 { name: 'browserify', range: '*', hasData: true }
+527 silly addNameRange versions [ 'browserify',
+527 silly addNameRange   [ '0.0.1',
+527 silly addNameRange     '0.0.2',
+527 silly addNameRange     '0.0.3',
+527 silly addNameRange     '0.0.4',
+527 silly addNameRange     '0.0.5',
+527 silly addNameRange     '0.1.0',
+527 silly addNameRange     '0.1.1',
+527 silly addNameRange     '0.1.2',
+527 silly addNameRange     '0.1.3',
+527 silly addNameRange     '0.1.4',
+527 silly addNameRange     '0.1.5',
+527 silly addNameRange     '0.2.0',
+527 silly addNameRange     '0.2.1',
+527 silly addNameRange     '0.2.2',
+527 silly addNameRange     '0.2.3',
+527 silly addNameRange     '0.2.4',
+527 silly addNameRange     '0.2.5',
+527 silly addNameRange     '0.2.6',
+527 silly addNameRange     '0.2.7',
+527 silly addNameRange     '0.2.8',
+527 silly addNameRange     '0.2.9',
+527 silly addNameRange     '0.2.10',
+527 silly addNameRange     '0.2.11',
+527 silly addNameRange     '0.3.0',
+527 silly addNameRange     '0.3.1',
+527 silly addNameRange     '0.3.2',
+527 silly addNameRange     '0.3.3',
+527 silly addNameRange     '0.3.4',
+527 silly addNameRange     '0.3.5',
+527 silly addNameRange     '0.3.6',
+527 silly addNameRange     '0.3.7',
+527 silly addNameRange     '0.4.0',
+527 silly addNameRange     '0.4.1',
+527 silly addNameRange     '0.4.2',
+527 silly addNameRange     '0.4.3',
+527 silly addNameRange     '0.4.4',
+527 silly addNameRange     '0.4.5',
+527 silly addNameRange     '0.4.6',
+527 silly addNameRange     '0.4.7',
+527 silly addNameRange     '0.4.8',
+527 silly addNameRange     '0.4.9',
+527 silly addNameRange     '0.4.10',
+527 silly addNameRange     '0.4.11',
+527 silly addNameRange     '0.4.12',
+527 silly addNameRange     '0.4.13',
+527 silly addNameRange     '0.4.14',
+527 silly addNameRange     '0.4.15',
+527 silly addNameRange     '0.5.0',
+527 silly addNameRange     '0.5.1',
+527 silly addNameRange     '0.5.2',
+527 silly addNameRange     '1.0.0',
+527 silly addNameRange     '1.1.0',
+527 silly addNameRange     '1.1.1',
+527 silly addNameRange     '1.1.2',
+527 silly addNameRange     '1.1.3',
+527 silly addNameRange     '1.1.4',
+527 silly addNameRange     '1.2.0',
+527 silly addNameRange     '1.2.1',
+527 silly addNameRange     '1.2.2',
+527 silly addNameRange     '1.2.3',
+527 silly addNameRange     '1.2.4',
+527 silly addNameRange     '1.2.5',
+527 silly addNameRange     '1.2.6',
+527 silly addNameRange     '1.2.7',
+527 silly addNameRange     '1.2.8',
+527 silly addNameRange     '1.2.9',
+527 silly addNameRange     '1.3.0',
+527 silly addNameRange     '1.4.0',
+527 silly addNameRange     '1.4.1',
+527 silly addNameRange     '1.4.2',
+527 silly addNameRange     '1.4.3',
+527 silly addNameRange     '1.4.4',
+527 silly addNameRange     '1.4.5',
+527 silly addNameRange     '1.4.6',
+527 silly addNameRange     '1.4.7',
+527 silly addNameRange     '1.4.8',
+527 silly addNameRange     '1.5.0',
+527 silly addNameRange     '1.6.0',
+527 silly addNameRange     '1.6.1',
+527 silly addNameRange     '1.7.0',
+527 silly addNameRange     '1.7.1',
+527 silly addNameRange     '1.7.2',
+527 silly addNameRange     '1.7.3',
+527 silly addNameRange     '1.7.4',
+527 silly addNameRange     '1.7.5',
+527 silly addNameRange     '1.7.6',
+527 silly addNameRange     '1.7.7',
+527 silly addNameRange     '1.8.0',
+527 silly addNameRange     '1.8.1',
+527 silly addNameRange     '1.8.2',
+527 silly addNameRange     '1.8.3',
+527 silly addNameRange     '1.9.0',
+527 silly addNameRange     '1.9.1',
+527 silly addNameRange     '1.9.2',
+527 silly addNameRange     '1.9.3',
+527 silly addNameRange     '1.9.4',
+527 silly addNameRange     '1.10.0',
+527 silly addNameRange     '1.10.1',
+527 silly addNameRange     '1.10.2',
+527 silly addNameRange     '1.10.3',
+527 silly addNameRange     ... 367 more items ] ]
+528 silly addNamed browserify@14.4.0
+529 verbose addNamed "14.4.0" is a plain semver version for browserify
+530 http 304 https://registry.npmjs.org/grunt-browserify
+531 verbose headers { date: 'Thu, 24 Aug 2017 15:56:06 GMT',
+531 verbose headers   via: '1.1 varnish',
+531 verbose headers   'cache-control': 'max-age=300',
+531 verbose headers   etag: 'W/"599a1394-17022"',
+531 verbose headers   age: '0',
+531 verbose headers   connection: 'keep-alive',
+531 verbose headers   'x-served-by': 'cache-lhr6337-LHR',
+531 verbose headers   'x-cache': 'HIT',
+531 verbose headers   'x-cache-hits': '1',
+531 verbose headers   'x-timer': 'S1503590166.377351,VS0,VE134',
+531 verbose headers   vary: 'Accept-Encoding, Accept' }
+532 silly get cb [ 304,
+532 silly get   { date: 'Thu, 24 Aug 2017 15:56:06 GMT',
+532 silly get     via: '1.1 varnish',
+532 silly get     'cache-control': 'max-age=300',
+532 silly get     etag: 'W/"599a1394-17022"',
+532 silly get     age: '0',
+532 silly get     connection: 'keep-alive',
+532 silly get     'x-served-by': 'cache-lhr6337-LHR',
+532 silly get     'x-cache': 'HIT',
+532 silly get     'x-cache-hits': '1',
+532 silly get     'x-timer': 'S1503590166.377351,VS0,VE134',
+532 silly get     vary: 'Accept-Encoding, Accept' } ]
+533 verbose etag https://registry.npmjs.org/grunt-browserify from cache
+534 verbose get saving grunt-browserify to C:\Users\LodderC\AppData\Roaming\npm-cache\registry.npmjs.org\grunt-browserify\.cache.json
+535 verbose correctMkdir C:\Users\LodderC\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+536 verbose get https://registry.npmjs.org/grunt-contrib-cssmin not expired, no request
+537 silly addNameTag next cb for grunt-contrib-cssmin with tag latest
+538 silly addNamed grunt-contrib-cssmin@2.2.1
+539 verbose addNamed "2.2.1" is a plain semver version for grunt-contrib-cssmin
+540 verbose get https://registry.npmjs.org/babelify not expired, no request
+541 silly addNameTag next cb for babelify with tag latest
+542 silly addNamed babelify@7.3.0
+543 verbose addNamed "7.3.0" is a plain semver version for babelify
+544 verbose get https://registry.npmjs.org/babel-preset-es2015 not expired, no request
+545 silly addNameTag next cb for babel-preset-es2015 with tag latest
+546 silly addNamed babel-preset-es2015@6.24.1
+547 verbose addNamed "6.24.1" is a plain semver version for babel-preset-es2015
+548 silly resolveWithNewModule webcomponentsjs@1.0.2 checking installable status
+549 silly cache add args [ 'webcomponentsjs@latest', null ]
+550 verbose cache add spec webcomponentsjs@latest
+551 warn addRemoteGit Error: Command failed: git -c core.longpaths=true config --get remote.origin.url
+551 warn addRemoteGit
+551 warn addRemoteGit     at ChildProcess.exithandler (child_process.js:198:12)
+551 warn addRemoteGit     at emitTwo (events.js:106:13)
+551 warn addRemoteGit     at ChildProcess.emit (events.js:191:7)
+551 warn addRemoteGit     at maybeClose (internal/child_process.js:891:16)
+551 warn addRemoteGit     at Socket.<anonymous> (internal/child_process.js:342:11)
+551 warn addRemoteGit     at emitOne (events.js:96:13)
+551 warn addRemoteGit     at Socket.emit (events.js:188:7)
+551 warn addRemoteGit     at Pipe._handle.close [as _onclose] (net.js:497:12)
+551 warn addRemoteGit  git://github.com/gruntjs/grunt-contrib-uglify.git#harmony resetting remote C:\Users\LodderC\AppData\Roaming\npm-cache\_git-remotes\git-github-com-gruntjs-grunt-contrib-uglify-git-harmony-d65311d3 because of error: { Error: Command failed: git -c core.longpaths=true config --get remote.origin.url
+551 warn addRemoteGit
+551 warn addRemoteGit     at ChildProcess.exithandler (child_process.js:198:12)
+551 warn addRemoteGit     at emitTwo (events.js:106:13)
+551 warn addRemoteGit     at ChildProcess.emit (events.js:191:7)
+551 warn addRemoteGit     at maybeClose (internal/child_process.js:891:16)
+551 warn addRemoteGit     at Socket.<anonymous> (internal/child_process.js:342:11)
+551 warn addRemoteGit     at emitOne (events.js:96:13)
+551 warn addRemoteGit     at Socket.emit (events.js:188:7)
+551 warn addRemoteGit     at Pipe._handle.close [as _onclose] (net.js:497:12)
+551 warn addRemoteGit   killed: false,
+551 warn addRemoteGit   code: 1,
+551 warn addRemoteGit   signal: null,
+551 warn addRemoteGit   cmd: 'git -c core.longpaths=true config --get remote.origin.url' }
+552 info resetRemote resetting C:\Users\LodderC\AppData\Roaming\npm-cache\_git-remotes\git-github-com-gruntjs-grunt-contrib-uglify-git-harmony-d65311d3 for git://github.com/gruntjs/grunt-contrib-uglify.git#harmony
+553 silly gentlyRm C:\Users\LodderC\AppData\Roaming\npm-cache\_git-remotes\git-github-com-gruntjs-grunt-contrib-uglify-git-harmony-d65311d3 is being purged
+554 verbose gentlyRm don't care about contents; nuking C:\Users\LodderC\AppData\Roaming\npm-cache\_git-remotes\git-github-com-gruntjs-grunt-contrib-uglify-git-harmony-d65311d3
+555 verbose get https://registry.npmjs.org/grunt-shell not expired, no request
+556 silly addNameTag next cb for grunt-shell with tag latest
+557 silly addNamed grunt-shell@2.1.0
+558 verbose addNamed "2.1.0" is a plain semver version for grunt-shell
+559 verbose get https://registry.npmjs.org/grunt not expired, no request
+560 silly addNameTag next cb for grunt with tag latest
+561 silly addNamed grunt@1.0.1
+562 verbose addNamed "1.0.1" is a plain semver version for grunt
+563 verbose get https://registry.npmjs.org/grunt-contrib-copy not expired, no request
+564 silly addNameTag next cb for grunt-contrib-copy with tag latest
+565 silly addNamed grunt-contrib-copy@1.0.0
+566 verbose addNamed "1.0.0" is a plain semver version for grunt-contrib-copy
+567 verbose get https://registry.npmjs.org/grunt-babel not expired, no request
+568 silly addNameTag next cb for grunt-babel with tag latest
+569 silly addNamed grunt-babel@7.0.0
+570 verbose addNamed "7.0.0" is a plain semver version for grunt-babel
+571 verbose get https://registry.npmjs.org/grunt-sass not expired, no request
+572 silly addNameTag next cb for grunt-sass with tag latest
+573 silly addNamed grunt-sass@2.0.0
+574 verbose addNamed "2.0.0" is a plain semver version for grunt-sass
+575 silly cache add parsed spec Result {
+575 silly cache add   raw: 'webcomponentsjs@latest',
+575 silly cache add   scope: null,
+575 silly cache add   escapedName: 'webcomponentsjs',
+575 silly cache add   name: 'webcomponentsjs',
+575 silly cache add   rawSpec: 'latest',
+575 silly cache add   spec: 'latest',
+575 silly cache add   type: 'tag' }
+576 silly addNamed webcomponentsjs@latest
+577 verbose addNamed "latest" is being treated as a dist-tag for webcomponentsjs
+578 info addNameTag [ 'webcomponentsjs', 'latest' ]
+579 silly mapToRegistry name webcomponentsjs
+580 silly mapToRegistry using default registry
+581 silly mapToRegistry registry https://registry.npmjs.org/
+582 silly mapToRegistry data Result {
+582 silly mapToRegistry   raw: 'webcomponentsjs',
+582 silly mapToRegistry   scope: null,
+582 silly mapToRegistry   escapedName: 'webcomponentsjs',
+582 silly mapToRegistry   name: 'webcomponentsjs',
+582 silly mapToRegistry   rawSpec: '',
+582 silly mapToRegistry   spec: 'latest',
+582 silly mapToRegistry   type: 'tag' }
+583 silly mapToRegistry uri https://registry.npmjs.org/webcomponentsjs
+584 verbose addNameTag registry:https://registry.npmjs.org/webcomponentsjs not in flight; fetching
+585 silly vacuum-fs purging C:\Users\LodderC\AppData\Roaming\npm-cache\_git-remotes\git-github-com-gruntjs-grunt-contrib-uglify-git-harmony-d65311d3
+586 verbose get https://registry.npmjs.org/babel-plugin-static-fs not expired, no request
+587 silly addNameTag next cb for babel-plugin-static-fs with tag latest
+588 silly addNamed babel-plugin-static-fs@1.1.0
+589 verbose addNamed "1.1.0" is a plain semver version for babel-plugin-static-fs
+590 verbose get https://registry.npmjs.org/web-component-tester not expired, no request
+591 silly addNameTag next cb for web-component-tester with tag latest
+592 silly addNamed web-component-tester@6.1.2
+593 verbose addNamed "6.1.2" is a plain semver version for web-component-tester
+594 silly vacuum-fs quitting because other entries in C:\Users\LodderC\AppData\Roaming\npm-cache\_git-remotes
+595 silly cache afterAdd bootstrap@4.0.0-beta
+596 verbose afterAdd C:\Users\LodderC\AppData\Roaming\npm-cache\bootstrap\4.0.0-beta\package\package.json not in flight; writing
+597 verbose correctMkdir C:\Users\LodderC\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+598 silly cache afterAdd grunt-contrib-cssmin@2.2.1
+599 verbose afterAdd C:\Users\LodderC\AppData\Roaming\npm-cache\grunt-contrib-cssmin\2.2.1\package\package.json not in flight; writing
+600 verbose correctMkdir C:\Users\LodderC\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+601 silly cache afterAdd eslint@4.5.0
+602 verbose afterAdd C:\Users\LodderC\AppData\Roaming\npm-cache\eslint\4.5.0\package\package.json not in flight; writing
+603 verbose correctMkdir C:\Users\LodderC\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+604 silly cache afterAdd browserify@14.4.0
+605 verbose afterAdd C:\Users\LodderC\AppData\Roaming\npm-cache\browserify\14.4.0\package\package.json not in flight; writing
+606 verbose correctMkdir C:\Users\LodderC\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+607 silly cache afterAdd babel-preset-es2015@6.24.1
+608 verbose afterAdd C:\Users\LodderC\AppData\Roaming\npm-cache\babel-preset-es2015\6.24.1\package\package.json not in flight; writing
+609 verbose correctMkdir C:\Users\LodderC\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+610 silly cache afterAdd babelify@7.3.0
+611 verbose afterAdd C:\Users\LodderC\AppData\Roaming\npm-cache\babelify\7.3.0\package\package.json not in flight; writing
+612 verbose correctMkdir C:\Users\LodderC\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+613 verbose get https://registry.npmjs.org/webcomponentsjs not expired, no request
+614 silly addNameTag next cb for webcomponentsjs with tag latest
+615 silly addNamed webcomponentsjs@1.0.2
+616 verbose addNamed "1.0.2" is a plain semver version for webcomponentsjs
+617 silly cache afterAdd grunt-shell@2.1.0
+618 verbose afterAdd C:\Users\LodderC\AppData\Roaming\npm-cache\grunt-shell\2.1.0\package\package.json not in flight; writing
+619 verbose correctMkdir C:\Users\LodderC\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+620 silly cache afterAdd grunt-contrib-copy@1.0.0
+621 verbose afterAdd C:\Users\LodderC\AppData\Roaming\npm-cache\grunt-contrib-copy\1.0.0\package\package.json not in flight; writing
+622 verbose correctMkdir C:\Users\LodderC\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+623 silly cache afterAdd grunt-sass@2.0.0
+624 verbose afterAdd C:\Users\LodderC\AppData\Roaming\npm-cache\grunt-sass\2.0.0\package\package.json not in flight; writing
+625 verbose correctMkdir C:\Users\LodderC\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+626 silly cache afterAdd grunt-babel@7.0.0
+627 verbose afterAdd C:\Users\LodderC\AppData\Roaming\npm-cache\grunt-babel\7.0.0\package\package.json not in flight; writing
+628 verbose correctMkdir C:\Users\LodderC\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+629 silly cache afterAdd grunt@1.0.1
+630 verbose afterAdd C:\Users\LodderC\AppData\Roaming\npm-cache\grunt\1.0.1\package\package.json not in flight; writing
+631 verbose correctMkdir C:\Users\LodderC\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+632 silly cache afterAdd babel-plugin-static-fs@1.1.0
+633 verbose afterAdd C:\Users\LodderC\AppData\Roaming\npm-cache\babel-plugin-static-fs\1.1.0\package\package.json not in flight; writing
+634 verbose correctMkdir C:\Users\LodderC\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+635 silly resolveWithNewModule babel-minify@0.2.0 checking installable status
+636 silly cache add args [ 'babel-minify@latest', null ]
+637 verbose cache add spec babel-minify@latest
+638 silly resolveWithNewModule grunt-browserify@5.2.0 checking installable status
+639 silly cache add args [ 'grunt-browserify@latest', null ]
+640 verbose cache add spec grunt-browserify@latest
+641 silly cache add parsed spec Result {
+641 silly cache add   raw: 'babel-minify@latest',
+641 silly cache add   scope: null,
+641 silly cache add   escapedName: 'babel-minify',
+641 silly cache add   name: 'babel-minify',
+641 silly cache add   rawSpec: 'latest',
+641 silly cache add   spec: 'latest',
+641 silly cache add   type: 'tag' }
+642 silly addNamed babel-minify@latest
+643 verbose addNamed "latest" is being treated as a dist-tag for babel-minify
+644 info addNameTag [ 'babel-minify', 'latest' ]
+645 silly mapToRegistry name babel-minify
+646 silly mapToRegistry using default registry
+647 silly mapToRegistry registry https://registry.npmjs.org/
+648 silly mapToRegistry data Result {
+648 silly mapToRegistry   raw: 'babel-minify',
+648 silly mapToRegistry   scope: null,
+648 silly mapToRegistry   escapedName: 'babel-minify',
+648 silly mapToRegistry   name: 'babel-minify',
+648 silly mapToRegistry   rawSpec: '',
+648 silly mapToRegistry   spec: 'latest',
+648 silly mapToRegistry   type: 'tag' }
+649 silly mapToRegistry uri https://registry.npmjs.org/babel-minify
+650 verbose addNameTag registry:https://registry.npmjs.org/babel-minify not in flight; fetching
+651 silly cache afterAdd web-component-tester@6.1.2
+652 verbose afterAdd C:\Users\LodderC\AppData\Roaming\npm-cache\web-component-tester\6.1.2\package\package.json not in flight; writing
+653 verbose correctMkdir C:\Users\LodderC\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+654 silly cache add parsed spec Result {
+654 silly cache add   raw: 'grunt-browserify@latest',
+654 silly cache add   scope: null,
+654 silly cache add   escapedName: 'grunt-browserify',
+654 silly cache add   name: 'grunt-browserify',
+654 silly cache add   rawSpec: 'latest',
+654 silly cache add   spec: 'latest',
+654 silly cache add   type: 'tag' }
+655 silly addNamed grunt-browserify@latest
+656 verbose addNamed "latest" is being treated as a dist-tag for grunt-browserify
+657 info addNameTag [ 'grunt-browserify', 'latest' ]
+658 silly mapToRegistry name grunt-browserify
+659 silly mapToRegistry using default registry
+660 silly mapToRegistry registry https://registry.npmjs.org/
+661 silly mapToRegistry data Result {
+661 silly mapToRegistry   raw: 'grunt-browserify',
+661 silly mapToRegistry   scope: null,
+661 silly mapToRegistry   escapedName: 'grunt-browserify',
+661 silly mapToRegistry   name: 'grunt-browserify',
+661 silly mapToRegistry   rawSpec: '',
+661 silly mapToRegistry   spec: 'latest',
+661 silly mapToRegistry   type: 'tag' }
+662 silly mapToRegistry uri https://registry.npmjs.org/grunt-browserify
+663 verbose addNameTag registry:https://registry.npmjs.org/grunt-browserify not in flight; fetching
+664 verbose afterAdd C:\Users\LodderC\AppData\Roaming\npm-cache\bootstrap\4.0.0-beta\package\package.json written
+665 silly cache afterAdd webcomponentsjs@1.0.2
+666 verbose afterAdd C:\Users\LodderC\AppData\Roaming\npm-cache\webcomponentsjs\1.0.2\package\package.json not in flight; writing
+667 verbose correctMkdir C:\Users\LodderC\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+668 verbose afterAdd C:\Users\LodderC\AppData\Roaming\npm-cache\eslint\4.5.0\package\package.json written
+669 verbose afterAdd C:\Users\LodderC\AppData\Roaming\npm-cache\browserify\14.4.0\package\package.json written
+670 verbose afterAdd C:\Users\LodderC\AppData\Roaming\npm-cache\grunt-contrib-cssmin\2.2.1\package\package.json written
+671 verbose afterAdd C:\Users\LodderC\AppData\Roaming\npm-cache\grunt-contrib-copy\1.0.0\package\package.json written
+672 verbose afterAdd C:\Users\LodderC\AppData\Roaming\npm-cache\babelify\7.3.0\package\package.json written
+673 verbose afterAdd C:\Users\LodderC\AppData\Roaming\npm-cache\grunt-shell\2.1.0\package\package.json written
+674 verbose afterAdd C:\Users\LodderC\AppData\Roaming\npm-cache\grunt-babel\7.0.0\package\package.json written
+675 verbose afterAdd C:\Users\LodderC\AppData\Roaming\npm-cache\babel-preset-es2015\6.24.1\package\package.json written
+676 verbose afterAdd C:\Users\LodderC\AppData\Roaming\npm-cache\grunt-sass\2.0.0\package\package.json written
+677 verbose afterAdd C:\Users\LodderC\AppData\Roaming\npm-cache\grunt\1.0.1\package\package.json written
+678 verbose get https://registry.npmjs.org/babel-minify not expired, no request
+679 silly addNameTag next cb for babel-minify with tag latest
+680 silly addNamed babel-minify@0.2.0
+681 verbose addNamed "0.2.0" is a plain semver version for babel-minify
+682 verbose get https://registry.npmjs.org/grunt-browserify not expired, no request
+683 silly addNameTag next cb for grunt-browserify with tag latest
+684 silly addNamed grunt-browserify@5.2.0
+685 verbose addNamed "5.2.0" is a plain semver version for grunt-browserify
+686 verbose afterAdd C:\Users\LodderC\AppData\Roaming\npm-cache\babel-plugin-static-fs\1.1.0\package\package.json written
+687 verbose afterAdd C:\Users\LodderC\AppData\Roaming\npm-cache\web-component-tester\6.1.2\package\package.json written
+688 verbose afterAdd C:\Users\LodderC\AppData\Roaming\npm-cache\webcomponentsjs\1.0.2\package\package.json written
+689 silly cache afterAdd grunt-browserify@5.2.0
+690 verbose afterAdd C:\Users\LodderC\AppData\Roaming\npm-cache\grunt-browserify\5.2.0\package\package.json not in flight; writing
+691 verbose correctMkdir C:\Users\LodderC\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+692 silly cache afterAdd babel-minify@0.2.0
+693 verbose afterAdd C:\Users\LodderC\AppData\Roaming\npm-cache\babel-minify\0.2.0\package\package.json not in flight; writing
+694 verbose correctMkdir C:\Users\LodderC\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+695 verbose afterAdd C:\Users\LodderC\AppData\Roaming\npm-cache\grunt-browserify\5.2.0\package\package.json written
+696 verbose afterAdd C:\Users\LodderC\AppData\Roaming\npm-cache\babel-minify\0.2.0\package\package.json written
+697 info git [ 'clone',
+697 info git   '--template=C:\\Users\\LodderC\\AppData\\Roaming\\npm-cache\\_git-remotes\\_templates',
+697 info git   '--mirror',
+697 info git   'git://github.com/gruntjs/grunt-contrib-uglify.git',
+697 info git   'C:\\Users\\LodderC\\AppData\\Roaming\\npm-cache\\_git-remotes\\git-github-com-gruntjs-grunt-contrib-uglify-git-harmony-d65311d3' ]
+698 http 304 https://registry.npmjs.org/@polymer%2ftest-fixture
+699 verbose headers { date: 'Thu, 24 Aug 2017 15:56:06 GMT',
+699 verbose headers   via: '1.1 varnish',
+699 verbose headers   'cache-control': 'max-age=0',
+699 verbose headers   etag: '"599bd999-31a7"',
+699 verbose headers   age: '0',
+699 verbose headers   connection: 'keep-alive',
+699 verbose headers   'x-served-by': 'cache-lcy1149-LCY',
+699 verbose headers   'x-cache': 'MISS',
+699 verbose headers   'x-cache-hits': '0',
+699 verbose headers   'x-timer': 'S1503590166.372187,VS0,VE580',
+699 verbose headers   vary: 'Accept-Encoding' }
+700 silly get cb [ 304,
+700 silly get   { date: 'Thu, 24 Aug 2017 15:56:06 GMT',
+700 silly get     via: '1.1 varnish',
+700 silly get     'cache-control': 'max-age=0',
+700 silly get     etag: '"599bd999-31a7"',
+700 silly get     age: '0',
+700 silly get     connection: 'keep-alive',
+700 silly get     'x-served-by': 'cache-lcy1149-LCY',
+700 silly get     'x-cache': 'MISS',
+700 silly get     'x-cache-hits': '0',
+700 silly get     'x-timer': 'S1503590166.372187,VS0,VE580',
+700 silly get     vary: 'Accept-Encoding' } ]
+701 verbose etag https://registry.npmjs.org/@polymer%2ftest-fixture from cache
+702 verbose get saving @polymer/test-fixture to C:\Users\LodderC\AppData\Roaming\npm-cache\registry.npmjs.org\_40polymer_252ftest-fixture\.cache.json
+703 verbose correctMkdir C:\Users\LodderC\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+704 silly resolveWithNewModule @polymer/test-fixture@0.0.3 checking installable status
+705 silly cache add args [ '@polymer/test-fixture@latest', null ]
+706 verbose cache add spec @polymer/test-fixture@latest
+707 silly cache add parsed spec Result {
+707 silly cache add   raw: '@polymer/test-fixture@latest',
+707 silly cache add   scope: '@polymer',
+707 silly cache add   escapedName: '@polymer%2ftest-fixture',
+707 silly cache add   name: '@polymer/test-fixture',
+707 silly cache add   rawSpec: 'latest',
+707 silly cache add   spec: 'latest',
+707 silly cache add   type: 'tag' }
+708 silly addNamed @polymer/test-fixture@latest
+709 verbose addNamed "latest" is being treated as a dist-tag for @polymer/test-fixture
+710 info addNameTag [ '@polymer/test-fixture', 'latest' ]
+711 silly mapToRegistry name @polymer/test-fixture
+712 silly mapToRegistry scope (from package name) @polymer
+713 verbose mapToRegistry no registry URL found in name for scope @polymer
+714 silly mapToRegistry using default registry
+715 silly mapToRegistry registry https://registry.npmjs.org/
+716 silly mapToRegistry data Result {
+716 silly mapToRegistry   raw: '@polymer/test-fixture',
+716 silly mapToRegistry   scope: '@polymer',
+716 silly mapToRegistry   escapedName: '@polymer%2ftest-fixture',
+716 silly mapToRegistry   name: '@polymer/test-fixture',
+716 silly mapToRegistry   rawSpec: '',
+716 silly mapToRegistry   spec: 'latest',
+716 silly mapToRegistry   type: 'tag' }
+717 silly mapToRegistry uri https://registry.npmjs.org/@polymer%2ftest-fixture
+718 verbose addNameTag registry:https://registry.npmjs.org/@polymer%2ftest-fixture not in flight; fetching
+719 verbose get https://registry.npmjs.org/@polymer%2ftest-fixture not expired, no request
+720 silly addNameTag next cb for @polymer/test-fixture with tag latest
+721 silly addNamed @polymer/test-fixture@0.0.3
+722 verbose addNamed "0.0.3" is a plain semver version for @polymer/test-fixture
+723 silly cache afterAdd @polymer/test-fixture@0.0.3
+724 verbose afterAdd C:\Users\LodderC\AppData\Roaming\npm-cache\@polymer\test-fixture\0.0.3\package\package.json not in flight; writing
+725 verbose correctMkdir C:\Users\LodderC\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+726 verbose afterAdd C:\Users\LodderC\AppData\Roaming\npm-cache\@polymer\test-fixture\0.0.3\package\package.json written
+727 http 304 https://registry.npmjs.org/@webcomponents%2fcustom-elements
+728 verbose headers { date: 'Thu, 24 Aug 2017 15:56:06 GMT',
+728 verbose headers   via: '1.1 varnish',
+728 verbose headers   'cache-control': 'max-age=0',
+728 verbose headers   etag: '"5914f532-4ced"',
+728 verbose headers   age: '0',
+728 verbose headers   connection: 'keep-alive',
+728 verbose headers   'x-served-by': 'cache-lcy1123-LCY',
+728 verbose headers   'x-cache': 'MISS',
+728 verbose headers   'x-cache-hits': '0',
+728 verbose headers   'x-timer': 'S1503590166.370296,VS0,VE660',
+728 verbose headers   vary: 'Accept-Encoding' }
+729 silly get cb [ 304,
+729 silly get   { date: 'Thu, 24 Aug 2017 15:56:06 GMT',
+729 silly get     via: '1.1 varnish',
+729 silly get     'cache-control': 'max-age=0',
+729 silly get     etag: '"5914f532-4ced"',
+729 silly get     age: '0',
+729 silly get     connection: 'keep-alive',
+729 silly get     'x-served-by': 'cache-lcy1123-LCY',
+729 silly get     'x-cache': 'MISS',
+729 silly get     'x-cache-hits': '0',
+729 silly get     'x-timer': 'S1503590166.370296,VS0,VE660',
+729 silly get     vary: 'Accept-Encoding' } ]
+730 verbose etag https://registry.npmjs.org/@webcomponents%2fcustom-elements from cache
+731 verbose get saving @webcomponents/custom-elements to C:\Users\LodderC\AppData\Roaming\npm-cache\registry.npmjs.org\_40webcomponents_252fcustom-elements\.cache.json
+732 verbose correctMkdir C:\Users\LodderC\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+733 silly resolveWithNewModule @webcomponents/custom-elements@1.0.0 checking installable status
+734 silly cache add args [ '@webcomponents/custom-elements@latest', null ]
+735 verbose cache add spec @webcomponents/custom-elements@latest
+736 silly cache add parsed spec Result {
+736 silly cache add   raw: '@webcomponents/custom-elements@latest',
+736 silly cache add   scope: '@webcomponents',
+736 silly cache add   escapedName: '@webcomponents%2fcustom-elements',
+736 silly cache add   name: '@webcomponents/custom-elements',
+736 silly cache add   rawSpec: 'latest',
+736 silly cache add   spec: 'latest',
+736 silly cache add   type: 'tag' }
+737 silly addNamed @webcomponents/custom-elements@latest
+738 verbose addNamed "latest" is being treated as a dist-tag for @webcomponents/custom-elements
+739 info addNameTag [ '@webcomponents/custom-elements', 'latest' ]
+740 silly mapToRegistry name @webcomponents/custom-elements
+741 silly mapToRegistry scope (from package name) @webcomponents
+742 verbose mapToRegistry no registry URL found in name for scope @webcomponents
+743 silly mapToRegistry using default registry
+744 silly mapToRegistry registry https://registry.npmjs.org/
+745 silly mapToRegistry data Result {
+745 silly mapToRegistry   raw: '@webcomponents/custom-elements',
+745 silly mapToRegistry   scope: '@webcomponents',
+745 silly mapToRegistry   escapedName: '@webcomponents%2fcustom-elements',
+745 silly mapToRegistry   name: '@webcomponents/custom-elements',
+745 silly mapToRegistry   rawSpec: '',
+745 silly mapToRegistry   spec: 'latest',
+745 silly mapToRegistry   type: 'tag' }
+746 silly mapToRegistry uri https://registry.npmjs.org/@webcomponents%2fcustom-elements
+747 verbose addNameTag registry:https://registry.npmjs.org/@webcomponents%2fcustom-elements not in flight; fetching
+748 verbose get https://registry.npmjs.org/@webcomponents%2fcustom-elements not expired, no request
+749 silly addNameTag next cb for @webcomponents/custom-elements with tag latest
+750 silly addNamed @webcomponents/custom-elements@1.0.0
+751 verbose addNamed "1.0.0" is a plain semver version for @webcomponents/custom-elements
+752 silly cache afterAdd @webcomponents/custom-elements@1.0.0
+753 verbose afterAdd C:\Users\LodderC\AppData\Roaming\npm-cache\@webcomponents\custom-elements\1.0.0\package\package.json not in flight; writing
+754 verbose correctMkdir C:\Users\LodderC\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+755 verbose afterAdd C:\Users\LodderC\AppData\Roaming\npm-cache\@webcomponents\custom-elements\1.0.0\package\package.json written
+756 http 304 https://registry.npmjs.org/@webcomponents%2fwebcomponentsjs
+757 verbose headers { date: 'Thu, 24 Aug 2017 15:56:06 GMT',
+757 verbose headers   via: '1.1 varnish',
+757 verbose headers   'cache-control': 'max-age=0',
+757 verbose headers   etag: '"599239f0-6fef"',
+757 verbose headers   age: '0',
+757 verbose headers   connection: 'keep-alive',
+757 verbose headers   'x-served-by': 'cache-lhr6336-LHR',
+757 verbose headers   'x-cache': 'MISS',
+757 verbose headers   'x-cache-hits': '0',
+757 verbose headers   'x-timer': 'S1503590166.372583,VS0,VE686',
+757 verbose headers   vary: 'Accept-Encoding' }
+758 silly get cb [ 304,
+758 silly get   { date: 'Thu, 24 Aug 2017 15:56:06 GMT',
+758 silly get     via: '1.1 varnish',
+758 silly get     'cache-control': 'max-age=0',
+758 silly get     etag: '"599239f0-6fef"',
+758 silly get     age: '0',
+758 silly get     connection: 'keep-alive',
+758 silly get     'x-served-by': 'cache-lhr6336-LHR',
+758 silly get     'x-cache': 'MISS',
+758 silly get     'x-cache-hits': '0',
+758 silly get     'x-timer': 'S1503590166.372583,VS0,VE686',
+758 silly get     vary: 'Accept-Encoding' } ]
+759 verbose etag https://registry.npmjs.org/@webcomponents%2fwebcomponentsjs from cache
+760 verbose get saving @webcomponents/webcomponentsjs to C:\Users\LodderC\AppData\Roaming\npm-cache\registry.npmjs.org\_40webcomponents_252fwebcomponentsjs\.cache.json
+761 verbose correctMkdir C:\Users\LodderC\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+762 silly resolveWithNewModule @webcomponents/webcomponentsjs@1.0.8 checking installable status
+763 silly cache add args [ '@webcomponents/webcomponentsjs@latest', null ]
+764 verbose cache add spec @webcomponents/webcomponentsjs@latest
+765 silly cache add parsed spec Result {
+765 silly cache add   raw: '@webcomponents/webcomponentsjs@latest',
+765 silly cache add   scope: '@webcomponents',
+765 silly cache add   escapedName: '@webcomponents%2fwebcomponentsjs',
+765 silly cache add   name: '@webcomponents/webcomponentsjs',
+765 silly cache add   rawSpec: 'latest',
+765 silly cache add   spec: 'latest',
+765 silly cache add   type: 'tag' }
+766 silly addNamed @webcomponents/webcomponentsjs@latest
+767 verbose addNamed "latest" is being treated as a dist-tag for @webcomponents/webcomponentsjs
+768 info addNameTag [ '@webcomponents/webcomponentsjs', 'latest' ]
+769 silly mapToRegistry name @webcomponents/webcomponentsjs
+770 silly mapToRegistry scope (from package name) @webcomponents
+771 verbose mapToRegistry no registry URL found in name for scope @webcomponents
+772 silly mapToRegistry using default registry
+773 silly mapToRegistry registry https://registry.npmjs.org/
+774 silly mapToRegistry data Result {
+774 silly mapToRegistry   raw: '@webcomponents/webcomponentsjs',
+774 silly mapToRegistry   scope: '@webcomponents',
+774 silly mapToRegistry   escapedName: '@webcomponents%2fwebcomponentsjs',
+774 silly mapToRegistry   name: '@webcomponents/webcomponentsjs',
+774 silly mapToRegistry   rawSpec: '',
+774 silly mapToRegistry   spec: 'latest',
+774 silly mapToRegistry   type: 'tag' }
+775 silly mapToRegistry uri https://registry.npmjs.org/@webcomponents%2fwebcomponentsjs
+776 verbose addNameTag registry:https://registry.npmjs.org/@webcomponents%2fwebcomponentsjs not in flight; fetching
+777 verbose get https://registry.npmjs.org/@webcomponents%2fwebcomponentsjs not expired, no request
+778 silly addNameTag next cb for @webcomponents/webcomponentsjs with tag latest
+779 silly addNamed @webcomponents/webcomponentsjs@1.0.8
+780 verbose addNamed "1.0.8" is a plain semver version for @webcomponents/webcomponentsjs
+781 silly cache afterAdd @webcomponents/webcomponentsjs@1.0.8
+782 verbose afterAdd C:\Users\LodderC\AppData\Roaming\npm-cache\@webcomponents\webcomponentsjs\1.0.8\package\package.json not in flight; writing
+783 verbose correctMkdir C:\Users\LodderC\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+784 verbose afterAdd C:\Users\LodderC\AppData\Roaming\npm-cache\@webcomponents\webcomponentsjs\1.0.8\package\package.json written
+785 error git clone --template=C:\Users\LodderC\AppData\Roaming\npm-cache\_git-remotes\_templates --mirror git://github.com/gruntjs/grunt-contrib-uglify.git C:\Users\LodderC\AppData\Roaming\npm-cache\_git-remotes\git-github-com-gruntjs-grunt-contrib-uglify-git-harmony-d65311d3: Cloning into bare repository 'C:\Users\LodderC\AppData\Roaming\npm-cache\_git-remotes\git-github-com-gruntjs-grunt-contrib-uglify-git-harmony-d65311d3'...
+785 error git clone --template=C:\Users\LodderC\AppData\Roaming\npm-cache\_git-remotes\_templates --mirror git://github.com/gruntjs/grunt-contrib-uglify.git C:\Users\LodderC\AppData\Roaming\npm-cache\_git-remotes\git-github-com-gruntjs-grunt-contrib-uglify-git-harmony-d65311d3: fatal: unable to connect to github.com:
+785 error git clone --template=C:\Users\LodderC\AppData\Roaming\npm-cache\_git-remotes\_templates --mirror git://github.com/gruntjs/grunt-contrib-uglify.git C:\Users\LodderC\AppData\Roaming\npm-cache\_git-remotes\git-github-com-gruntjs-grunt-contrib-uglify-git-harmony-d65311d3: github.com[0: 192.30.253.113]: errno=Invalid argument
+785 error git clone --template=C:\Users\LodderC\AppData\Roaming\npm-cache\_git-remotes\_templates --mirror git://github.com/gruntjs/grunt-contrib-uglify.git C:\Users\LodderC\AppData\Roaming\npm-cache\_git-remotes\git-github-com-gruntjs-grunt-contrib-uglify-git-harmony-d65311d3: github.com[1: 192.30.253.112]: errno=Invalid argument
+786 silly fetchPackageMetaData Error: Command failed: git -c core.longpaths=true clone --template=C:\Users\LodderC\AppData\Roaming\npm-cache\_git-remotes\_templates --mirror git://github.com/gruntjs/grunt-contrib-uglify.git C:\Users\LodderC\AppData\Roaming\npm-cache\_git-remotes\git-github-com-gruntjs-grunt-contrib-uglify-git-harmony-d65311d3
+786 silly fetchPackageMetaData Cloning into bare repository 'C:\Users\LodderC\AppData\Roaming\npm-cache\_git-remotes\git-github-com-gruntjs-grunt-contrib-uglify-git-harmony-d65311d3'...
+786 silly fetchPackageMetaData fatal: unable to connect to github.com:
+786 silly fetchPackageMetaData github.com[0: 192.30.253.113]: errno=Invalid argument
+786 silly fetchPackageMetaData github.com[1: 192.30.253.112]: errno=Invalid argument
+786 silly fetchPackageMetaData
+786 silly fetchPackageMetaData
+786 silly fetchPackageMetaData     at ChildProcess.exithandler (child_process.js:198:12)
+786 silly fetchPackageMetaData     at emitTwo (events.js:106:13)
+786 silly fetchPackageMetaData     at ChildProcess.emit (events.js:191:7)
+786 silly fetchPackageMetaData     at maybeClose (internal/child_process.js:891:16)
+786 silly fetchPackageMetaData     at Process.ChildProcess._handle.onexit (internal/child_process.js:226:5)
+786 silly fetchPackageMetaData  error for grunt-contrib-uglify@git://github.com/gruntjs/grunt-contrib-uglify.git#harmony { Error: Command failed: git -c core.longpaths=true clone --template=C:\Users\LodderC\AppData\Roaming\npm-cache\_git-remotes\_templates --mirror git://github.com/gruntjs/grunt-contrib-uglify.git C:\Users\LodderC\AppData\Roaming\npm-cache\_git-remotes\git-github-com-gruntjs-grunt-contrib-uglify-git-harmony-d65311d3
+786 silly fetchPackageMetaData Cloning into bare repository 'C:\Users\LodderC\AppData\Roaming\npm-cache\_git-remotes\git-github-com-gruntjs-grunt-contrib-uglify-git-harmony-d65311d3'...
+786 silly fetchPackageMetaData fatal: unable to connect to github.com:
+786 silly fetchPackageMetaData github.com[0: 192.30.253.113]: errno=Invalid argument
+786 silly fetchPackageMetaData github.com[1: 192.30.253.112]: errno=Invalid argument
+786 silly fetchPackageMetaData
+786 silly fetchPackageMetaData
+786 silly fetchPackageMetaData     at ChildProcess.exithandler (child_process.js:198:12)
+786 silly fetchPackageMetaData     at emitTwo (events.js:106:13)
+786 silly fetchPackageMetaData     at ChildProcess.emit (events.js:191:7)
+786 silly fetchPackageMetaData     at maybeClose (internal/child_process.js:891:16)
+786 silly fetchPackageMetaData     at Process.ChildProcess._handle.onexit (internal/child_process.js:226:5)
+786 silly fetchPackageMetaData   killed: false,
+786 silly fetchPackageMetaData   code: 128,
+786 silly fetchPackageMetaData   signal: null,
+786 silly fetchPackageMetaData   cmd: 'git -c core.longpaths=true clone --template=C:\\Users\\LodderC\\AppData\\Roaming\\npm-cache\\_git-remotes\\_templates --mirror git://github.com/gruntjs/grunt-contrib-uglify.git C:\\Users\\LodderC\\AppData\\Roaming\\npm-cache\\_git-remotes\\git-github-com-gruntjs-grunt-contrib-uglify-git-harmony-d65311d3' }
+787 silly rollbackFailedOptional Starting
+788 silly rollbackFailedOptional Finishing
+789 silly runTopLevelLifecycles Finishing
+790 silly install printInstalled
+791 verbose stack Error: Command failed: git -c core.longpaths=true clone --template=C:\Users\LodderC\AppData\Roaming\npm-cache\_git-remotes\_templates --mirror git://github.com/gruntjs/grunt-contrib-uglify.git C:\Users\LodderC\AppData\Roaming\npm-cache\_git-remotes\git-github-com-gruntjs-grunt-contrib-uglify-git-harmony-d65311d3
+791 verbose stack Cloning into bare repository 'C:\Users\LodderC\AppData\Roaming\npm-cache\_git-remotes\git-github-com-gruntjs-grunt-contrib-uglify-git-harmony-d65311d3'...
+791 verbose stack fatal: unable to connect to github.com:
+791 verbose stack github.com[0: 192.30.253.113]: errno=Invalid argument
+791 verbose stack github.com[1: 192.30.253.112]: errno=Invalid argument
+791 verbose stack
+791 verbose stack
+791 verbose stack     at ChildProcess.exithandler (child_process.js:198:12)
+791 verbose stack     at emitTwo (events.js:106:13)
+791 verbose stack     at ChildProcess.emit (events.js:191:7)
+791 verbose stack     at maybeClose (internal/child_process.js:891:16)
+791 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:226:5)
+792 verbose cwd C:\dev\ce
+793 error Windows_NT 6.3.9600
+794 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "i"
+795 error node v6.11.2
+796 error npm  v3.10.10
+797 error code 128
+798 error Command failed: git -c core.longpaths=true clone --template=C:\Users\LodderC\AppData\Roaming\npm-cache\_git-remotes\_templates --mirror git://github.com/gruntjs/grunt-contrib-uglify.git C:\Users\LodderC\AppData\Roaming\npm-cache\_git-remotes\git-github-com-gruntjs-grunt-contrib-uglify-git-harmony-d65311d3
+798 error Cloning into bare repository 'C:\Users\LodderC\AppData\Roaming\npm-cache\_git-remotes\git-github-com-gruntjs-grunt-contrib-uglify-git-harmony-d65311d3'...
+798 error fatal: unable to connect to github.com:
+798 error github.com[0: 192.30.253.113]: errno=Invalid argument
+798 error github.com[1: 192.30.253.112]: errno=Invalid argument
+799 error If you need help, you may report this error at:
+799 error     <https://github.com/npm/npm/issues>
+800 verbose exit [ 1, true ]
