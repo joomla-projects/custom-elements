@@ -57,7 +57,7 @@ class SwitcherElement extends HTMLElement {
 		container.addEventListener('keydown', function (event) {
 			if (event.keyCode === 13 || event.keyCode === 32) {
 				event.preventDefault();
-				const element = container.querySelector('input:not(.active)')
+				const element = container.querySelector('input:not(.active)');
 				element.click();
 			}
 		});
@@ -141,10 +141,10 @@ class SwitcherElement extends HTMLElement {
 
 	/** Method to toggle the switch. Internal */
 	switch() {
-		const parent      = this.firstChild,
-			  inputs      = [].slice.call(parent.querySelectorAll('input')),
-			  spans       = [].slice.call(parent.nextElementSibling.querySelectorAll('span')),
-			  wasActive   = this.querySelector('input.active'),
+		const parent    = this.firstChild,
+			  inputs    = [].slice.call(parent.querySelectorAll('input')),
+			  spans     = [].slice.call(parent.nextElementSibling.querySelectorAll('span')),
+			  wasActive = this.querySelector('input.active'),
 			  newActive = this.querySelector('input:not(.active)');
 
 		spans.forEach(function (span) {

@@ -39,14 +39,14 @@ class TabElement extends HTMLElement {
 		// }
 
 		// Create the navigation
-		this.createNavigation(tabs)
+		this.createNavigation(tabs);
 
 		// Add missing role
 		tabs.forEach((tab) => {
-			tab.setAttribute('role', 'tabpanel')
+			tab.setAttribute('role', 'tabpanel');
 			if (tab.hasAttribute('active')) {
 				this.hasActive = true;
-				this.currentActive = tab.id
+				this.currentActive = tab.id;
 				this.querySelector('#tab-' + tab.id).setAttribute('aria-selected', 'true');
 				this.querySelector('#tab-' + tab.id).setAttribute('active', '');
 				this.querySelector('#tab-' + tab.id).setAttribute('tabindex', '0');
@@ -65,7 +65,7 @@ class TabElement extends HTMLElement {
 		}
 
 		// Keyboard access
-		this.keyListeners(tabs)
+		this.keyListeners(tabs);
 
 		// Check if there is a hash in the URI
 		if (window.location.href.match(/#\S[^\&]*/)) {
@@ -100,7 +100,7 @@ class TabElement extends HTMLElement {
 			let self = this;
 			window.addEventListener('resize', function () {
 				self.checkView(self);
-			})
+			});
 		}
 	}
 
@@ -125,7 +125,7 @@ class TabElement extends HTMLElement {
 			e.preventDefault();
 
 			if (this.hasActive) {
-				this.hideCurrent()
+				this.hideCurrent();
 			}
 
 			const currentTabLink = this.currentActive;
@@ -144,7 +144,7 @@ class TabElement extends HTMLElement {
 
 			// Emit shown event
 			this.dispatchCustomEvent('joomla.tab.shown', e.target, this.querySelector('#tab-' + currentTabLink));
-		}
+		};
 
 		tabs.forEach((tab) => {
 			if (!tab.id) {
@@ -162,7 +162,7 @@ class TabElement extends HTMLElement {
 			aElement.setAttribute('tabindex', active ? '0' : '-1');
 			aElement.setAttribute('href', '#' + tab.id);
 			aElement.setAttribute('id', 'tab-' + tab.id);
-			aElement.innerHTML = tab.getAttribute('name')
+			aElement.innerHTML = tab.getAttribute('name');
 
 			if (active) {
 				aElement.setAttribute('active', '');
@@ -171,7 +171,7 @@ class TabElement extends HTMLElement {
 			aElement.addEventListener('click', activateTabFromLink);
 
 			liElement.append(aElement);
-			nav.append(liElement)
+			nav.append(liElement);
 
 			// aElement.addEventListener('joomla.tab.show', function (e) { console.log('show', e) });
 			// aElement.addEventListener('joomla.tab.shown', function (e) { console.log('shown', e) });
@@ -204,7 +204,7 @@ class TabElement extends HTMLElement {
 	}
 
 	showTab(tab) {
-		const tabLink = document.querySelector('#tab-' + tab.id)
+		const tabLink = document.querySelector('#tab-' + tab.id);
 		tabLink.click();
 		this.saveState('#' + tab.id);
 	}
@@ -216,7 +216,6 @@ class TabElement extends HTMLElement {
 
 	keyListeners() {
 		const keyBehaviour = (e) => {
-			console.log(this.currentActive)
 			// collect tab targets, and their parents' prev/next (or first/last)
 			let currentTab = this.querySelector('#tab-' + this.currentActive);
 			let tablist = [].slice.call(this.querySelector('ul').querySelectorAll('a'));
@@ -259,12 +258,12 @@ class TabElement extends HTMLElement {
 				default:
 					break;
 			}
-		}
-		this.querySelector('ul').addEventListener('keydown', keyBehaviour)
+		};
+		this.querySelector('ul').addEventListener('keydown', keyBehaviour);
 	}
 
 	getStorageKey() {
-		return window.location.href.toString().split(window.location.host)[1].replace(/&return=[a-zA-Z0-9%]+/, "").split('#')[0];
+		return window.location.href.toString().split(window.location.host)[1].replace(/&return=[a-zA-Z0-9%]+/, '').split('#')[0];
 	}
 
 	restoreState() {
@@ -299,7 +298,7 @@ class TabElement extends HTMLElement {
 	checkView(self) {
 		const nav = self.querySelector('ul');
 		if (document.body.getBoundingClientRect().width > 920) {
-			self.view = 'tabs'
+			self.view = 'tabs';
 			// convert to tabs
 			const panels = [].slice.call(nav.querySelectorAll('section'));
 
@@ -307,7 +306,7 @@ class TabElement extends HTMLElement {
 				self.appendChild(panel);
 			});
 		} else {
-			self.view = 'accordion'
+			self.view = 'accordion';
 			// convert to accordion
 			const panels = [].slice.call(self.querySelectorAll('section'));
 
@@ -327,7 +326,7 @@ class TabElement extends HTMLElement {
 
 	/* Method to dispatch events */
 	dispatchCustomEvent(eventName, element, related) {
-		let OriginalCustomEvent = new CustomEvent(eventName, { "bubbles": true, "cancelable": true });
+		let OriginalCustomEvent = new CustomEvent(eventName, { bubbles: true, cancelable: true });
 		OriginalCustomEvent.relatedTarget = related;
 		element.dispatchEvent(OriginalCustomEvent);
 		element.removeEventListener(eventName, element);

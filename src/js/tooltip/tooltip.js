@@ -31,7 +31,7 @@ class TooltipElement extends HTMLElement {
 			document.addEventListener('click', function (e) {
 				if (btnElement !== e.target) {
 					spanElement.innerHTML = '';
-					self.removeEventListener('keydown', this)
+					self.removeEventListener('keydown', this);
 				}
 			});
 
@@ -39,23 +39,23 @@ class TooltipElement extends HTMLElement {
 			document.addEventListener('keydown', function (e) {
 				if ((e.keyCode || e.which) === 9) {
 					spanElement.innerHTML = '';
-					self.removeEventListener('keydown', this)
+					self.removeEventListener('keydown', this);
 				}
 			});
 
 			spanElement.innerHTML = '';
 			spanElement.innerHTML = '<span class="toggletip-bubble ' + position + '">' + tip + '</span>';
-		}
+		};
 
 		btnElement.setAttribute('aria-label', this.label ? this.label : 'more info');
 		btnElement.innerHTML = this.text ? this.text : '';
-		spanElement.setAttribute('role', 'status')
+		spanElement.setAttribute('role', 'status');
 
 		// On click
 		btnElement.addEventListener('click', showTip);
 
 		this.append(btnElement);
-		this.append(spanElement)
+		this.append(spanElement);
 	}
 
 	/* Lifecycle, element removed from the DOM */
@@ -65,7 +65,7 @@ class TooltipElement extends HTMLElement {
 
 	/* Method to dispatch events */
 	dispatchCustomEvent(eventName) {
-		let OriginalCustomEvent = new CustomEvent(eventName, { "bubbles": true, "cancelable": true });
+		let OriginalCustomEvent = new CustomEvent(eventName, { bubbles: true, cancelable: true });
 		OriginalCustomEvent.relatedTarget = this;
 		this.dispatchEvent(OriginalCustomEvent);
 		this.removeEventListener(eventName, this);

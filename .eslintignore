@@ -1,0 +1,5 @@
+**/*.min.js
+**/demo/*
+**/dist/*
+**/docs/*
+**/test/*

@@ -31,7 +31,7 @@ class ButtonElement extends HTMLElement {
 						this.parentNode.classList.remove('active');
 						this.parentNode.setAttribute('aria-pressed', 'false');
 					}
-				})
+				});
 			});
 		} else { // Radios
 			const radios = [].slice.call(this.querySelectorAll('[type="radio"]'));
@@ -61,8 +61,8 @@ class ButtonElement extends HTMLElement {
 							this.parentNode.classList.remove('active');
 							this.parentNode.setAttribute('aria-pressed', 'false');
 						}
-					})
-				})
+					});
+				});
 			}
 		}
 	}

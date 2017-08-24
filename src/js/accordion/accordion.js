@@ -38,9 +38,9 @@ class AccordionElement extends HTMLElement {
 					event.stopPropagation();
 					self.resetAll();
 					event.target.setAttribute('aria-expanded', 'true');
-					const togglerHref = event.target.getAttribute('href')
+					const togglerHref = event.target.getAttribute('href');
 					document.getElementById(togglerHref.replace('#', '')).classList.add('show');
-				})
+				});
 			}
 		}
 	}
@@ -72,7 +72,7 @@ class AccordionElement extends HTMLElement {
 
 	/* Reset active accordion */
 	resetAll() {
-		const cards = this.querySelectorAll('section')
+		const cards = this.querySelectorAll('section');
 		for (let i = 0, l = cards.length; i < l; i++) {
 			const toggler = cards[i].querySelector('[data-toggle="collapse"]');
 			const togglerHref = toggler.getAttribute('href');
