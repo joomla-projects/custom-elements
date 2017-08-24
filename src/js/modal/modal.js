@@ -6,7 +6,6 @@ class ModalElement extends HTMLElement {
 		window.Joomla = window.Joomla || {};
 		window.Joomla.UI = {};
 		window.Joomla.UI.modal = {};
-
 	}
 
 	connectedCallback() {
@@ -28,7 +27,7 @@ class ModalElement extends HTMLElement {
 					if (!self.findAncestorClass(event.target, 'modal-content') && event.target !== currentButton) {
 						self.close();
 					}
-				})
+				});
 
 				// Is there a close button?
 				const modalButton = self.querySelectorAll('button[data-dismiss="modal"]');
@@ -39,7 +38,7 @@ class ModalElement extends HTMLElement {
 						self.close();
 					});
 				}
-			})
+			});
 		}
 	}
 
