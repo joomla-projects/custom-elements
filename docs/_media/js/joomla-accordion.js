@@ -49,10 +49,6 @@ class AccordionElement extends HTMLElement {
 
 	}
 
-	adoptedCallback(oldDocument, newDocument) {
-
-	}
-
 	static get observedAttributes() {
 		return ['type', 'button'];
 	}
