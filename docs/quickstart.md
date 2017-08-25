@@ -31,12 +31,24 @@ Due to compatibility issues due to browsers support you need to have a polyfill,
 
 For each element that you want to use in your page you have to insert a simple script tag and a stylesheet tag in the head of your page, e.g.:
 ```html
-<link rel="styleesheet" href="joomla-alert.min.css">
 <script src="joomla-alert.min.js"></script>
 ```
 
-?> The polyfill needs to be inserted only once before the first elements.
+?> The polyfill needs to be inserted only once before the first element.
 
 ## Customize your elements
 
 Every element has its own `.scss` file and there is a `variables.scss` that can be used to specify your colours. Once you've changed the variables re-run `grunt` to rebuild the elements
+
+
+## Custom elements are CSS framework agnostic
+
+Check these collections of custom elements running quite happily with the most popular css frameworks:
+
+----
+<a href="/bootstrap-demo.html">Bootstrap</a>
+-----
+<a href="/foundation-demo.html">Foundation</a>
+-----
+<a href="/uikit-demo.html">UiKit</a>
+-----

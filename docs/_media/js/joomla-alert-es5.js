@@ -17,7 +17,7 @@ var _createClass = function () {
   if (!a) throw new ReferenceError('this hasn\'t been initialised - super() hasn\'t been called');return b && ('object' == (typeof b === 'undefined' ? 'undefined' : _typeof(b)) || 'function' == typeof b) ? b : a;
 }function _inherits(a, b) {
   if ('function' != typeof b && null !== b) throw new TypeError('Super expression must either be null or a function, not ' + (typeof b === 'undefined' ? 'undefined' : _typeof(b)));a.prototype = Object.create(b && b.prototype, { constructor: { value: a, enumerable: !1, writable: !0, configurable: !0 } }), b && (Object.setPrototypeOf ? Object.setPrototypeOf(a, b) : a.__proto__ = b);
-}var AlertElement = function (a) {
+}var JoomlaAlertElement = function (a) {
   function b() {
     _classCallCheck(this, b);var a = _possibleConstructorReturn(this, (b.__proto__ || Object.getPrototypeOf(b)).call(this));if (!document.getElementById('joomla-alert-stylesheet')) {
       var c = document.createElement('style');c.id = 'joomla-alert-stylesheet', c.innerHTML = 'joomla-alert{padding:.5rem 1.25rem;margin-bottom:1rem;border:1px solid transparent;border-radius:.25rem;display:block;opacity:0;transition:opacity .15s linear}joomla-alert .joomla-alert--close,joomla-alert .joomla-alert-button--close{position:relative;top:-.5rem;right:-1.25rem;padding:.5rem 1.25rem;color:inherit}joomla-alert .joomla-alert--close{font-size:1.5rem;font-weight:700;line-height:1;text-shadow:0 1px 0 #fff}joomla-alert .joomla-alert--close,joomla-alert .joomla-alert-button--close{background:0 0;border:0;float:right;color:#000;opacity:.5}joomla-alert .joomla-alert--close:focus,joomla-alert .joomla-alert--close:hover,joomla-alert .joomla-alert-button--close:focus,joomla-alert .joomla-alert-button--close:hover{color:#000;text-decoration:none;cursor:pointer;opacity:.75}joomla-alert button.joomla-alert-button--close{font-size:100%;line-height:1.15;cursor:pointer;padding-top:.75rem;background:0 0;border:0;-webkit-appearance:none}joomla-alert.joomla-alert--show{opacity:1}joomla-alert[level=success]{color:#3c763d;background-color:#dff0d8;border-color:#d0e9c6}joomla-alert[level=success] hr{border-top-color:#c1e2b3}joomla-alert[level=success] .alert-link{color:#2b542c}joomla-alert[level=info]{color:#31708f;background-color:#d9edf7;border-color:#bcdff1}joomla-alert[level=info] hr{border-top-color:#a6d5ec}joomla-alert[level=info] .alert-link{color:#245269}joomla-alert[level=warning]{color:#8a6d3b;background-color:#fcf8e3;border-color:#faf2cc}joomla-alert[level=warning] hr{border-top-color:#f7ecb5}joomla-alert[level=warning] .alert-link{color:#66512c}joomla-alert[level=danger]{color:#a94442;background-color:#f2dede;border-color:#ebcccc}joomla-alert[level=danger] hr{border-top-color:#e4b9b9}joomla-alert[level=danger] .alert-link{color:#843534}', document.head.appendChild(c);
@@ -69,6 +69,6 @@ var _createClass = function () {
     } }, { key: 'getText', value: function getText(a, b) {
       return window.Joomla && Joomla.JText && Joomla.JText._ && 'function' == typeof Joomla.JText._ && Joomla.JText._(a) ? Joomla.JText._(a) : b;
     } }]), b;
-}(HTMLElement);customElements.define('joomla-alert', AlertElement);
+}(HTMLElement);customElements.define('joomla-alert', JoomlaAlertElement);
 
 },{}]},{},[1]);

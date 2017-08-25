@@ -62,7 +62,7 @@ class JoomlaTabElement extends HTMLElement {
     }
 
     // Keyboard access
-    this.keyListeners(tabs);
+    this.keyListeners(this);
 
     // Check if there is a hash in the URI
     if (window.location.href.match(/#\S[^&]*/)) {
@@ -211,11 +211,11 @@ class JoomlaTabElement extends HTMLElement {
     this.saveState(ulLink.hash);
   }
 
-  keyListeners() {
+  keyListeners(self) {
     const keyBehaviour = (e) => {
       // collect tab targets, and their parents' prev/next (or first/last)
-      const currentTab = this.querySelector(`#tab-${this.currentActive}`);
-      const tablist = [].slice.call(this.querySelector('ul').querySelectorAll('a'));
+      const currentTab = self.querySelector(`#tab-${this.currentActive}`);
+      const tablist = [].slice.call(self.querySelector('ul').querySelectorAll('a'));
       const previousTabItem = currentTab.parentNode.previousElementSibling ||
           tablist[tablist.length - 1];
       const nextTabItem = currentTab.parentNode.nextElementSibling ||
@@ -228,40 +228,38 @@ class JoomlaTabElement extends HTMLElement {
       switch (e.keyCode) {
         case 37:
         case 38:
+          e.preventDefault();
           if (previousTabItem.tagName.toLowerCase() !== 'li') {
             previousTabItem.click();
             previousTabItem.focus();
-            this.saveState(previousTabItem.hash);
+            self.saveState(previousTabItem.hash);
           } else {
             previousTabItem.querySelector('a').click();
             previousTabItem.querySelector('a').focus();
-            this.saveState(previousTabItem.hash);
+            self.saveState(previousTabItem.hash);
           }
-
-          e.preventDefault();
           break;
         case 39:
         case 40:
+          e.preventDefault();
           if (nextTabItem.tagName.toLowerCase() === 'a') {
             nextTabItem.click();
             nextTabItem.focus();
-            this.saveState(nextTabItem.hash);
+            self.saveState(nextTabItem.hash);
           } else {
             nextTabItem.querySelector('a').click();
             nextTabItem.querySelector('a').focus();
-            this.saveState(nextTabItem.hash);
+            self.saveState(nextTabItem.hash);
           }
-
-          e.preventDefault();
           break;
         default:
           break;
       }
     };
-    this.querySelector('ul').addEventListener('keydown', keyBehaviour);
+    self.querySelector('ul').addEventListener('keydown', keyBehaviour);
   }
 
-  static getStorageKey() {
+  getStorageKey() {
     return window.location.href.toString().split(window.location.host)[1].replace(/&return=[a-zA-Z0-9%]+/, '').split('#')[0];
   }
 
@@ -288,7 +286,7 @@ class JoomlaTabElement extends HTMLElement {
     }
   }
 
-  static saveState(value) {
+  saveState(value) {
     const storageKey = this.getStorageKey();
     sessionStorage.setItem(storageKey, value);
   }
@@ -326,7 +324,7 @@ class JoomlaTabElement extends HTMLElement {
   /*eslint-enable */
 
   /* Method to dispatch events */
-  static dispatchCustomEvent(eventName, element, related) {
+  dispatchCustomEvent(eventName, element, related) {
     const OriginalCustomEvent = new CustomEvent(eventName, { bubbles: true, cancelable: true });
     OriginalCustomEvent.relatedTarget = related;
     element.dispatchEvent(OriginalCustomEvent);
