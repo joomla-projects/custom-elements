@@ -81,4 +81,5 @@ class CollapseElement extends HTMLElement {
 		}
 	}
 }
+
 customElements.define('joomla-collapse', CollapseElement);
