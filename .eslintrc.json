@@ -1,0 +1,8 @@
+{
+	"root": true,
+	// All code should use ES6 and the Airbnb rules
+	"extends": "airbnb",
+	"env": {
+		"browser": true
+	}
+}

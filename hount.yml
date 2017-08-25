@@ -1,0 +1,19 @@
+fail_on_violations: false
+
+scss:
+  config_file: scss-lint.yml
+
+jshint:
+  enabled: false
+
+eslint:
+  enabled: true
+  config_file: .eslintrc.json
+  config_file: .eslintrc.json
+  ignore_file: .eslintignore
+   checks:
+    import/no-unresolved:
+      enabled: false
+
+ruby:
+  enabled: false
