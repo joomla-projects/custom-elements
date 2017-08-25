@@ -38,6 +38,24 @@ After that, in the root folder of this project just run `wct` and see the status
 
 The default setup is based on MacOS system and looking for Chrome, Firefox and Safari browsers, you can change this by editing line 5 of https://github.com/joomla-projects/custom-elements/blob/master/wct.conf.json#L5
 
+### Linting
+
+We use ESLint and AirBnb's style guide to lint our Javascript.
+
+You'll firstly need to install all the node packages, like so:
+```bash
+$ npm i
+```
+
+You can then run the linter:
+```bash
+$ npm run lint
+```
+or you can try and automatically fix some errors where possible.
+```bash
+$ npm run lint-fix
+```
+
 ### Browser support
 
 Although all the major browsers are **committed** to support custom elements some of the **all green browsers** do need a polyfill. The polyfills can be found in the dist folder and are created by the Polymer team (Polymer is a Google project).

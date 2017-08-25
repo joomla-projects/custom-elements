@@ -192,7 +192,7 @@ class SwitcherElement extends HTMLElement {
     if (!document.getElementById('joomla-switcher-stylesheet')) {
       const style = document.createElement('style');
       style.id = 'joomla-switcher-stylesheet';
-      style.innerHTML = `{{stylesheet}}`;
+      style.innerHTML = '{{stylesheet}}';
       document.head.appendChild(style);
     }
   }

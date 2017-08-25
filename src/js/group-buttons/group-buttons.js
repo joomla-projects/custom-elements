@@ -110,7 +110,7 @@ class ButtonElement extends HTMLElement {
     if (!document.getElementById('joomla-group-button-stylesheet')) {
       const style = document.createElement('style');
       style.id = 'joomla-group-button-stylesheet';
-      style.innerHTML = `{{stylesheet}}`;
+      style.innerHTML = '{{stylesheet}}';
       document.head.appendChild(style);
     }
   }

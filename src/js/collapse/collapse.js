@@ -5,27 +5,33 @@ class CollapseElement extends HTMLElement {
   get state() { return this.getAttribute('state') || 'closed'; }
   set state(value) { return this.setAttribute('state', value); }
 
-  constructor(element) {
+  constructor() {
     super();
-    this.includeCss();
+
+    if (!document.getElementById('joomla-collapse-stylesheet')) {
+      const style = document.createElement('style');
+      style.id = 'joomla-collapse-stylesheet';
+      style.innerText = '{{stylesheet}}';
+      document.head.appendChild(style);
+    }
   }
 
   connectedCallback() {
     // id is required
     if (!this.id) return;
 
-    const linked = document.querySelectorAll(`[href="#${this.id}"],[data-target="#${this.id}"]`);
+    const linked = [].slice.call(document.querySelectorAll(`[href="#${this.id}"],[data-target="#${this.id}"]`));
 
-    for (let i = 0, l = linked.length; i < l; i++) {
+    linked.forEach(function (element) {
       if (!this.state || this.state === 'closed') {
-        linked[i].setAttribute('aria-expanded', 'false');
-        linked[i].setAttribute('aria-controls', this.id);
+        element.setAttribute('aria-expanded', 'false');
+        element.setAttribute('aria-controls', this.id);
       } else {
-        linked[i].setAttribute('aria-expanded', 'true');
-        linked[i].setAttribute('aria-controls', this.id);
+        element.setAttribute('aria-expanded', 'true');
+        element.setAttribute('aria-controls', this.id);
       }
 
-      linked[i].addEventListener('click', (event) => {
+      element.addEventListener('click', (event) => {
         let colId = '';
         if (!event.target.hasAttribute('data-target')) colId = event.target.getAttribute('href').replace('#', '');
         if (!event.target.hasAttribute('href')) colId = event.target.getAttribute('data-target').replace('#', '');
@@ -33,7 +39,7 @@ class CollapseElement extends HTMLElement {
         event.stopPropagation();
         document.getElementById(colId).toggle();
       });
-    }
+    });
   }
 
   disconnectedCallback() {
@@ -54,6 +60,8 @@ class CollapseElement extends HTMLElement {
           linked.setAttribute('aria-expanded', 'true');
         }
         break;
+      default:
+        break;
     }
   }
 
@@ -66,17 +74,6 @@ class CollapseElement extends HTMLElement {
     } else {
       this.state = 'closed';
       linked.setAttribute('aria-expanded', 'false');
-    }
-  }
-
-  includeCss() {
-    console.log('ffff');
-    if (!document.getElementById('joomla-collapse-stylesheet')) {
-      console.log('ssss');
-      const style = document.createElement('style');
-      style.id = 'joomla-collapse-stylesheet';
-      style.innerHTML = `{{stylesheet}}`;
-      document.head.appendChild(style);
     }
   }
 }

@@ -75,7 +75,7 @@ class PopoverElement extends HTMLElement {
     if (!document.getElementById('joomla-popover-stylesheet')) {
       const style = document.createElement('style');
       style.id = 'joomla-popover-stylesheet';
-      style.innerHTML = `{{stylesheet}}`;
+      style.innerHTML = '{{stylesheet}}';
       document.head.appendChild(style);
     }
   }

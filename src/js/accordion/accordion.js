@@ -87,7 +87,7 @@ class AccordionElement extends HTMLElement {
     if (!document.getElementById('joomla-accordion-stylesheet')) {
       const style = document.createElement('style');
       style.id = 'joomla-accordion-stylesheet';
-      style.innerHTML = `{{stylesheet}}`;
+      style.innerHTML = '{{stylesheet}}';
       document.head.appendChild(style);
     }
   }
