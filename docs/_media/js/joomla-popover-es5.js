@@ -19,17 +19,25 @@ var _createClass = function () {
   if ('function' != typeof b && null !== b) throw new TypeError('Super expression must either be null or a function, not ' + (typeof b === 'undefined' ? 'undefined' : _typeof(b)));a.prototype = Object.create(b && b.prototype, { constructor: { value: a, enumerable: !1, writable: !0, configurable: !0 } }), b && (Object.setPrototypeOf ? Object.setPrototypeOf(a, b) : a.__proto__ = b);
 }var PopoverElement = function (a) {
   function b() {
-    _classCallCheck(this, b);var a = _possibleConstructorReturn(this, (b.__proto__ || Object.getPrototypeOf(b)).call(this));return a.includeCss(), a;
+    _classCallCheck(this, b);var a = _possibleConstructorReturn(this, (b.__proto__ || Object.getPrototypeOf(b)).call(this));if (!document.getElementById('joomla-popover-stylesheet')) {
+      var c = document.createElement('style');c.id = 'joomla-popover-stylesheet', c.innerHTML = '', document.head.appendChild(c);
+    }return a;
   }return _inherits(b, a), _createClass(b, [{ key: 'label', get: function get() {
       return this.getAttribute('label');
+    }, set: function set(a) {
+      return this.setAttribute('label', a);
     } }, { key: 'tip', get: function get() {
       return this.getAttribute('tip');
+    }, set: function set(a) {
+      return this.setAttribute('tip', a);
     } }, { key: 'position', get: function get() {
       return this.getAttribute('position');
     }, set: function set(a) {
-      this.setAttribute('position', a);
+      return this.setAttribute('position', a);
     } }, { key: 'text', get: function get() {
       return this.getAttribute('text');
+    }, set: function set(a) {
+      return this.getAttribute('text', a);
     } }], [{ key: 'observedAttributes', get: function get() {
       return ['label', 'tip', 'text', 'position'];
     } }]), _createClass(b, [{ key: 'connectedCallback', value: function connectedCallback() {
@@ -48,10 +56,6 @@ var _createClass = function () {
       this.querySelector('button').removeEventListener('click', this);
     } }, { key: 'dispatchCustomEvent', value: function dispatchCustomEvent(a) {
       var b = new CustomEvent(a, { bubbles: !0, cancelable: !0 });b.relatedTarget = this, this.dispatchEvent(b), this.removeEventListener(a, this);
-    } }, { key: 'includeCss', value: function includeCss() {
-      if (!document.getElementById('joomla-popover-stylesheet')) {
-        var a = document.createElement('style');a.id = 'joomla-popover-stylesheet', a.innerHTML = '', document.head.appendChild(a);
-      }
     } }]), b;
 }(HTMLElement);customElements.define('joomla-popover', PopoverElement);
 

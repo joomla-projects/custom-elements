@@ -19,7 +19,9 @@ var _createClass = function () {
   if ('function' != typeof b && null !== b) throw new TypeError('Super expression must either be null or a function, not ' + (typeof b === 'undefined' ? 'undefined' : _typeof(b)));a.prototype = Object.create(b && b.prototype, { constructor: { value: a, enumerable: !1, writable: !0, configurable: !0 } }), b && (Object.setPrototypeOf ? Object.setPrototypeOf(a, b) : a.__proto__ = b);
 }var CollapseElement = function (a) {
   function b() {
-    _classCallCheck(this, b);var a = _possibleConstructorReturn(this, (b.__proto__ || Object.getPrototypeOf(b)).call(this));return a.includeCss(), a;
+    _classCallCheck(this, b);var a = _possibleConstructorReturn(this, (b.__proto__ || Object.getPrototypeOf(b)).call(this));if (!document.getElementById('joomla-collapse-stylesheet')) {
+      var c = document.createElement('style');c.id = 'joomla-collapse-stylesheet', c.innerText = 'joomla-collapse[state=closed]{display:none}joomla-collapse[state=open]{display:block}', document.head.appendChild(c);
+    }return a;
   }return _inherits(b, a), _createClass(b, [{ key: 'state', get: function get() {
       return this.getAttribute('state') || 'closed';
     }, set: function set(a) {
@@ -27,22 +29,20 @@ var _createClass = function () {
     } }], [{ key: 'observedAttributes', get: function get() {
       return ['state'];
     } }]), _createClass(b, [{ key: 'connectedCallback', value: function connectedCallback() {
-      if (this.id) for (var a = document.querySelectorAll('[href="#' + this.id + '"],[data-target="#' + this.id + '"]'), b = 0, c = a.length; b < c; b++) {
-        this.state && 'closed' !== this.state ? (a[b].setAttribute('aria-expanded', 'true'), a[b].setAttribute('aria-controls', this.id)) : (a[b].setAttribute('aria-expanded', 'false'), a[b].setAttribute('aria-controls', this.id)), a[b].addEventListener('click', function (a) {
-          var b = '';a.target.hasAttribute('data-target') || (b = a.target.getAttribute('href').replace('#', '')), a.target.hasAttribute('href') || (b = a.target.getAttribute('data-target').replace('#', '')), a.preventDefault(), a.stopPropagation(), document.getElementById(b).toggle();
+      if (this.id) {
+        var a = [].slice.call(document.querySelectorAll('[href="#' + this.id + '"],[data-target="#' + this.id + '"]'));a.forEach(function (a) {
+          this.state && 'closed' !== this.state ? (a.setAttribute('aria-expanded', 'true'), a.setAttribute('aria-controls', this.id)) : (a.setAttribute('aria-expanded', 'false'), a.setAttribute('aria-controls', this.id)), a.addEventListener('click', function (a) {
+            var b = '';a.target.hasAttribute('data-target') || (b = a.target.getAttribute('href').replace('#', '')), a.target.hasAttribute('href') || (b = a.target.getAttribute('data-target').replace('#', '')), a.preventDefault(), a.stopPropagation(), document.getElementById(b).toggle();
+          });
         });
       }
     } }, { key: 'disconnectedCallback', value: function disconnectedCallback() {
       var a = document.querySelector('[href="#' + this.id + '"]');a || (a = document.querySelector('[data-target="#' + this.id + '"]')), a && a.removeEventListener('click', this);
     } }, { key: 'attributeChangedCallback', value: function attributeChangedCallback(a, b, c) {
       switch (a) {case 'state':
-          var d = document.querySelector('[href="#' + this.id + '"]');'closed' === c ? d.setAttribute('aria-expanded', 'false') : 'open' === c && d.setAttribute('aria-expanded', 'true');}
+          var d = document.querySelector('[href="#' + this.id + '"]');'closed' === c ? d.setAttribute('aria-expanded', 'false') : 'open' === c && d.setAttribute('aria-expanded', 'true');break;default:}
     } }, { key: 'toggle', value: function toggle() {
       var a = document.querySelector('[href="#' + this.id + '"]');a || (a = document.querySelector('[data-target="#' + this.id + '"]')), 'closed' === this.state ? (this.state = 'open', a.setAttribute('aria-expanded', 'true')) : (this.state = 'closed', a.setAttribute('aria-expanded', 'false'));
-    } }, { key: 'includeCss', value: function includeCss() {
-      if (console.log('ffff'), !document.getElementById('joomla-collapse-stylesheet')) {
-        console.log('ssss');var a = document.createElement('style');a.id = 'joomla-collapse-stylesheet', a.innerText = 'joomla-collapse[state=closed]{display:none}joomla-collapse[state=open]{display:block}', document.head.appendChild(a);
-      }
     } }]), b;
 }(HTMLElement);customElements.define('joomla-collapse', CollapseElement);
 

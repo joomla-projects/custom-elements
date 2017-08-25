@@ -1,84 +1,84 @@
 class PopoverElement extends HTMLElement {
-	// /* Attributes to monitor */
-	static get observedAttributes() { return ['label', 'tip', 'text', 'position']; }
-	get label() { return this.getAttribute('label'); }
-	get tip() { return this.getAttribute('tip'); }
-	get position() { return this.getAttribute('position'); }
-	get text() { return this.getAttribute('text'); }
-	set position(value) { this.setAttribute('position', value); }
+  // /* Attributes to monitor */
+  static get observedAttributes() { return ['label', 'tip', 'text', 'position']; }
+  get label() { return this.getAttribute('label'); }
+  set label(value) { return this.setAttribute('label', value); }
+  get tip() { return this.getAttribute('tip'); }
+  set tip(value) { return this.setAttribute('tip', value); }
+  get position() { return this.getAttribute('position'); }
+  set position(value) { return this.setAttribute('position', value); }
+  get text() { return this.getAttribute('text'); }
+  set text(value) { return this.getAttribute('text', value); }
 
-	/* Lifecycle, element created */
-	constructor() {
-		super();
-		this.includeCss();
-	}
+  /* Lifecycle, element created */
+  constructor() {
+    super();
 
-	/* Lifecycle, element appended to the DOM */
-	connectedCallback() {
-		if (!this.position || (this.position && ['top', 'bottom', 'left', 'right'].indexOf(this.position) === -1)) {
-			this.position = 'top';
-		}
+    if (!document.getElementById('joomla-popover-stylesheet')) {
+      const style = document.createElement('style');
+      style.id = 'joomla-popover-stylesheet';
+      style.innerHTML = ``;
+      document.head.appendChild(style);
+    }
+  }
 
-		// create the html
-		const btnElement = document.createElement('button');
-		const spanElement = document.createElement('span');
-		const tip = this.tip;
-		const position = this.position;
-		const self = this;
+  /* Lifecycle, element appended to the DOM */
+  connectedCallback() {
+    if (!this.position || (this.position && ['top', 'bottom', 'left', 'right'].indexOf(this.position) === -1)) {
+      this.position = 'top';
+    }
 
-		const showTip = () => {
-			// Close on outside click
-			document.addEventListener('click', function (e) {
-				if (btnElement !== e.target) {
-					spanElement.innerHTML = '';
-					self.removeEventListener('keydown', this)
-				}
-			});
+    // create the html
+    const btnElement = document.createElement('button');
+    const spanElement = document.createElement('span');
+    const tip = this.tip;
+    const position = this.position;
+    const self = this;
 
-			// Remove toggletip on ESC
-			document.addEventListener('keydown', function (e) {
-				if ((e.keyCode || e.which) === 9) {
-					spanElement.innerHTML = '';
-					self.removeEventListener('keydown', this)
-				}
-			});
+    const showTip = () => {
+      // Close on outside click
+      document.addEventListener('click', function (e) {
+        if (btnElement !== e.target) {
+          spanElement.innerHTML = '';
+          self.removeEventListener('keydown', this);
+        }
+      });
 
-			spanElement.innerHTML = '';
-			spanElement.innerHTML = '<span class="toggletip-bubble ' + position + '">' + tip + '</span>';
-		}
+      // Remove toggletip on ESC
+      document.addEventListener('keydown', function (e) {
+        if ((e.keyCode || e.which) === 9) {
+          spanElement.innerHTML = '';
+          self.removeEventListener('keydown', this);
+        }
+      });
 
-		btnElement.setAttribute('aria-label', this.label ? this.label : 'more info');
-		btnElement.innerHTML = this.text ? this.text : '';
-		spanElement.setAttribute('role', 'status')
+      spanElement.innerHTML = '';
+      spanElement.innerHTML = `<span class="toggletip-bubble ${position}">${tip}</span>`;
+    };
 
-		// On click
-		btnElement.addEventListener('click', showTip);
+    btnElement.setAttribute('aria-label', this.label ? this.label : 'more info');
+    btnElement.innerHTML = this.text ? this.text : '';
+    spanElement.setAttribute('role', 'status');
 
-		this.append(btnElement);
-		this.append(spanElement)
-	}
+    // On click
+    btnElement.addEventListener('click', showTip);
 
-	/* Lifecycle, element removed from the DOM */
-	disconnectedCallback() {
-		this.querySelector('button').removeEventListener('click', this);
-	}
+    this.append(btnElement);
+    this.append(spanElement);
+  }
 
-	/* Method to dispatch events */
-	dispatchCustomEvent(eventName) {
-		let OriginalCustomEvent = new CustomEvent(eventName, { "bubbles": true, "cancelable": true });
-		OriginalCustomEvent.relatedTarget = this;
-		this.dispatchEvent(OriginalCustomEvent);
-		this.removeEventListener(eventName, this);
-	}
+  /* Lifecycle, element removed from the DOM */
+  disconnectedCallback() {
+    this.querySelector('button').removeEventListener('click', this);
+  }
 
-	includeCss() {
-		if (!document.getElementById('joomla-popover-stylesheet')) {
-			const style = document.createElement('style');
-			style.id = 'joomla-popover-stylesheet';
-			style.innerHTML = ``;
-			document.head.appendChild(style);
-		}
-	}
+  /* Method to dispatch events */
+  dispatchCustomEvent(eventName) {
+    const OriginalCustomEvent = new CustomEvent(eventName, { bubbles: true, cancelable: true });
+    OriginalCustomEvent.relatedTarget = this;
+    this.dispatchEvent(OriginalCustomEvent);
+    this.removeEventListener(eventName, this);
+  }
 }
 
 customElements.define('joomla-popover', PopoverElement);

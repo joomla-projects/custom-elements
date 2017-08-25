@@ -1,88 +1,87 @@
 class DropdownElement extends HTMLElement {
+  static get observedAttributes() {
+    return ['for'];
+  }
 
-	static get observedAttributes() {
-		return ['for'];
-	}
+  get for() { return this.getAttribute('for'); }
+  set for(value) { return this.setAttribute('for', value); }
 
-	get for() { return this.getAttribute('for'); }
+  constructor() {
+    super();
 
-	constructor(element) {
-		super();
-		this.includeCss();
-	}
+    if (!document.getElementById('joomla-dropdown-stylesheet')) {
+      const style = document.createElement('style');
+      style.id = 'joomla-dropdown-stylesheet';
+      style.innerText = '{{stylesheet}}';
+      document.head.appendChild(style);
+    }
+  }
 
-	connectedCallback() {
-		this.setAttribute('aria-labelledby', this.for.substring(1))
-		const button = document.querySelector(this.for);
-		const innerLinks = this.querySelectorAll('a');
-		const self = this;
+  connectedCallback() {
+    this.setAttribute('aria-labelledby', this.for.substring(1));
+    const button = document.querySelector(this.for);
+    const innerLinks = this.querySelectorAll('a');
+    const self = this;
 
-		if (!button.id) return;
-		//var children = [].slice.call( menu[getElementsByTagName]('*'));
-		// this.classList.add('dropdown');
+    if (!button.id) return;
+    // var children = [].slice.call( menu[getElementsByTagName]('*'));
+    // this.classList.add('dropdown');
 
-		button.setAttribute('aria-haspopup', 'true');
-		button.setAttribute('aria-expanded', 'false');
+    button.setAttribute('aria-haspopup', 'true');
+    button.setAttribute('aria-expanded', 'false');
 
-		button.addEventListener('click', function (event) {
-			console.log('clicked')
-			if (self.hasAttribute('expanded')) {
-				self.removeAttribute('expanded');
-				event.target.setAttribute('aria-expanded', 'false')
-			} else {
-				self.setAttribute('expanded', '');
-				event.target.setAttribute('aria-expanded', 'true')
-			}
+    button.addEventListener('click', (ev) => {
+      if (self.hasAttribute('expanded')) {
+        self.removeAttribute('expanded');
+        ev.target.setAttribute('aria-expanded', 'false');
+      } else {
+        self.setAttribute('expanded', '');
+        ev.target.setAttribute('aria-expanded', 'true');
+      }
 
-			document.addEventListener('click', function (event) {
-				if (event.target !== button) {
-					if (!self.findAncestor(event.target, 'joomla-dropdown')) {
-						self.close();
-					}
-				}
-			})
+      document.addEventListener('click', (evt) => {
+        if (evt.target !== button) {
+          if (!self.findAncestor(evt.target, 'joomla-dropdown')) {
+            self.close();
+          }
+        }
+      });
 
-			for (var i = 0, l = innerLinks.length; i < l; i++) {
-				innerLinks[i].addEventListener('click', function (event) {
-					self.close();
-				})
-			}
-		});
+      innerLinks.forEach((innerLink) => {
+        innerLink.addEventListener('click', () => {
+          self.close();
+        });
+      });
+    });
+  }
 
+  /*eslint-disable */
+  disconnectedCallback() { }
 
-	}
-
-	disconnectedCallback() { }
-
-	adoptedCallback(oldDocument, newDocument) { }
+  adoptedCallback(oldDocument, newDocument) { }
 
 
-	attributeChangedCallback(attr, oldValue, newValue) {
-		switch (attr) {
-			// case 'name':
-			// console.log(newValue);
-			// break;
-		}
-	}
+  attributeChangedCallback(attr, oldValue, newValue) {
+    switch (attr) {
+      // case 'name':
+      // console.log(newValue);
+      // break;
+    }
+  }
+  /*eslint-enable */
 
-	close() {
-		const button = document.querySelector('#' + this.getAttribute('aria-labelledby'));
-		this.removeAttribute('expanded');
-		button.setAttribute("aria-expanded", "false");
-	}
+  close() {
+    const button = document.querySelector(`#${this.getAttribute('aria-labelledby')}`);
+    this.removeAttribute('expanded');
+    button.setAttribute('aria-expanded', 'false');
+  }
 
-	findAncestor(el, tagName) {
-		while ((el = el.parentElement) && el.nodeName.toLowerCase() !== tagName);
-		return el;
-	}
-
-	includeCss() {
-		if (!document.getElementById('joomla-dropdown-stylesheet')) {
-			const style = document.createElement('style');
-			style.id = 'joomla-dropdown-stylesheet';
-			style.innerText = `{{stylesheet}}`;
-			document.head.appendChild(style);
-		}
-	}
+  /*eslint-disable */
+  findAncestor(el, tagName) {
+    while ((el = el.parentElement) && el.nodeName.toLowerCase() !== tagName);
+    return el;
+  }
+  /*eslint-enable */
 }
+
 customElements.define('joomla-dropdown', DropdownElement);

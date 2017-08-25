@@ -19,7 +19,9 @@ var _createClass = function () {
   if ('function' != typeof b && null !== b) throw new TypeError('Super expression must either be null or a function, not ' + (typeof b === 'undefined' ? 'undefined' : _typeof(b)));a.prototype = Object.create(b && b.prototype, { constructor: { value: a, enumerable: !1, writable: !0, configurable: !0 } }), b && (Object.setPrototypeOf ? Object.setPrototypeOf(a, b) : a.__proto__ = b);
 }var TabElement = function (a) {
   function b() {
-    _classCallCheck(this, b);var a = _possibleConstructorReturn(this, (b.__proto__ || Object.getPrototypeOf(b)).call(this));return a.includeCss(), a.hasActive = !1, a.currentActive = '', a;
+    _classCallCheck(this, b);var a = _possibleConstructorReturn(this, (b.__proto__ || Object.getPrototypeOf(b)).call(this));if (a.hasActive = !1, a.currentActive = '', !document.getElementById('joomla-tab-stylesheet')) {
+      var c = document.createElement('style');c.id = 'joomla-tab-stylesheet', c.innerText = 'joomla-tab{display:flex;flex-direction:column}joomla-tab>ul{display:flex;background-color:#f5f5f5;border-color:#ccc #ccc currentcolor;border-image:none;border-radius:.25rem .25rem 0 0;border-style:solid solid none;border-width:1px 1px 0;box-shadow:0 1px #fff inset,0 2px 3px -3px rgba(0,0,0,.15),0 -4px 0 rgba(0,0,0,.05) inset,0 0 3px rgba(0,0,0,.04);margin:0;padding:0;list-style:outside none none;overflow-x:auto;overflow-y:hidden;white-space:nowrap}joomla-tab a[role=tab]{display:block;color:#0d1321;padding:.75em 1em;position:relative;box-shadow:1px 0 0 rgba(0,0,0,.05);text-decoration:none}joomla-tab a[role=tab][active]{background-color:rgba(0,0,0,.03);background-image:linear-gradient(to bottom,transparent,rgba(0,0,0,.05) 100%);border-left:0 none;border-right:0 none;border-top-left-radius:0;border-top-right-radius:0;box-shadow:2px 0 1px -1px rgba(0,0,0,.08) inset,-2px 0 1px -1px rgba(0,0,0,.08) inset,0 1px 0 rgba(0,0,0,.02) inset}joomla-tab a[role=tab][active]:after{background-color:#006898;bottom:-1px;content:"";height:5px;left:0;opacity:.8;position:absolute;right:0}joomla-tab>section{display:none;background-color:#fefefe;border:1px solid #ccc;border-radius:0 0 .25rem .25rem;box-shadow:0 0 3px rgba(0,0,0,.04);padding:15px}joomla-tab>section[active]{display:block}joomla-tab[orientation=vertical]{flex-direction:row;align-items:flex-start}joomla-tab[orientation=vertical]>ul{flex-direction:column;min-width:30%;height:auto;border:1px solid #ccc;border-radius:.25rem;box-shadow:none;overflow:hidden}joomla-tab[orientation=vertical] li:last-of-type a{border-bottom:0}joomla-tab[orientation=vertical] a{display:block;color:#0d1321;padding:.75em 1em;position:relative;border-bottom:1px solid #ddd;box-shadow:none;text-decoration:none}joomla-tab[orientation=vertical] a[active]{border-left:0 none;border-right:0 none;background-color:#fff;background-image:none;box-shadow:none}joomla-tab[orientation=vertical] a[active]:after{left:-1px;width:5px;height:auto;top:0;bottom:0}joomla-tab[orientation=vertical]>section{border:0 none;box-shadow:none;padding:15px}joomla-tab[view=accordion]>ul{flex-direction:column;border-radius:.25rem;white-space:normal;box-shadow:0 1px #fff inset,0 0 3px rgba(0,0,0,.04)}joomla-tab[view=accordion] section{display:none;padding:15px}joomla-tab[view=accordion] section[active]{display:block;border-bottom:1px solid #ddd}joomla-tab[view=accordion] [active]{background-color:#fff}joomla-tab[view=accordion] a[role=tab]{border-bottom:1px solid #ddd}joomla-tab[view=accordion] a[role=tab][active]:after{width:5px;height:100%;top:0;left:0}', document.head.appendChild(c);
+    }return a;
   }return _inherits(b, a), _createClass(b, [{ key: 'recall', get: function get() {
       return this.getAttribute('recall');
     } }, { key: 'view', get: function get() {
@@ -35,9 +37,9 @@ var _createClass = function () {
     } }]), _createClass(b, [{ key: 'connectedCallback', value: function connectedCallback() {
       var a = this;(!this.orientation || this.orientation && -1 === ['horizontal', 'vertical'].indexOf(this.orientation)) && (this.orientation = 'horizontal');var b = [].slice.call(this.querySelectorAll('section'));if (b) {
         if (this.createNavigation(b), b.forEach(function (b) {
-          if (b.setAttribute('role', 'tabpanel'), b.hasAttribute('active')) return a.hasActive = !0, a.currentActive = b.id, a.querySelector('#tab-' + b.id).setAttribute('aria-selected', 'true'), a.querySelector('#tab-' + b.id).setAttribute('active', ''), void a.querySelector('#tab-' + b.id).setAttribute('tabindex', '0');
-        }), this.hasActive || (b[0].setAttribute('active', ''), this.hasActive = !0, this.currentActive = b[0].id, this.querySelector('#tab-' + b[0].id).setAttribute('aria-selected', 'true'), this.querySelector('#tab-' + b[0].id).setAttribute('tabindex', '0'), this.querySelector('#tab-' + b[0].id).setAttribute('active', '')), this.keyListeners(b), window.location.href.match(/#\S[^\&]*/)) {
-          var c = window.location.href.match(/#\S[^\&]*/),
+          b.setAttribute('role', 'tabpanel'), b.hasAttribute('active') && (a.hasActive = !0, a.currentActive = b.id, a.querySelector('#tab-' + b.id).setAttribute('aria-selected', 'true'), a.querySelector('#tab-' + b.id).setAttribute('active', ''), a.querySelector('#tab-' + b.id).setAttribute('tabindex', '0'));
+        }), this.hasActive || (b[0].setAttribute('active', ''), this.hasActive = !0, this.currentActive = b[0].id, this.querySelector('#tab-' + b[0].id).setAttribute('aria-selected', 'true'), this.querySelector('#tab-' + b[0].id).setAttribute('tabindex', '0'), this.querySelector('#tab-' + b[0].id).setAttribute('active', '')), this.keyListeners(b), window.location.href.match(/#\S[^&]*/)) {
+          var c = window.location.href.match(/#\S[^&]*/),
               d = this.querySelector(c[0]);if (d) {
             var e = this.findAncestor(d, 'joomla-tab'),
                 f = this.findAncestor(e, 'joomla-tab');if (f) {
@@ -76,15 +78,13 @@ var _createClass = function () {
       a.click(), this.saveState(a.hash);
     } }, { key: 'keyListeners', value: function keyListeners() {
       var a = this;this.querySelector('ul').addEventListener('keydown', function keyBehaviour(b) {
-        console.log(a.currentActive);var c = a.querySelector('#tab-' + a.currentActive),
+        var c = a.querySelector('#tab-' + a.currentActive),
             d = [].slice.call(a.querySelector('ul').querySelectorAll('a')),
             e = c.parentNode.previousElementSibling || d[d.length - 1],
             f = c.parentNode.nextElementSibling || d[0];if (!(b.metaKey || b.altKey)) switch (b.keyCode) {case 37:case 38:
             'li' === e.tagName.toLowerCase() ? (e.querySelector('a').click(), e.querySelector('a').focus(), a.saveState(e.hash)) : (e.click(), e.focus(), a.saveState(e.hash)), b.preventDefault();break;case 39:case 40:
             'a' === f.tagName.toLowerCase() ? (f.click(), f.focus(), a.saveState(f.hash)) : (f.querySelector('a').click(), f.querySelector('a').focus(), a.saveState(f.hash)), b.preventDefault();break;default:}
       });
-    } }, { key: 'getStorageKey', value: function getStorageKey() {
-      return window.location.href.toString().split(window.location.host)[1].replace(/&return=[a-zA-Z0-9%]+/, '').split('#')[0];
     } }, { key: 'restoreState', value: function restoreState() {
       var a = sessionStorage.getItem(this.getStorageKey());if (a) {
         var b = this.querySelector(a);if (b) {
@@ -94,26 +94,24 @@ var _createClass = function () {
           } else this.showTab(b);
         }
       }
-    } }, { key: 'saveState', value: function saveState(a) {
-      var b = this.getStorageKey();sessionStorage.setItem(b, a);
     } }, { key: 'checkView', value: function checkView(a) {
       var b = a.querySelector('ul');if (920 < document.body.getBoundingClientRect().width) {
-        a.view = 'tabs';var c = [].slice.call(b.querySelectorAll('section'));c.forEach(function (b) {
+        this.view = 'tabs';var c = [].slice.call(b.querySelectorAll('section'));c.forEach(function (b) {
           a.appendChild(b);
         });
       } else {
-        a.view = 'accordion';var d = [].slice.call(a.querySelectorAll('section'));d.forEach(function (a) {
+        this.view = 'accordion';var d = [].slice.call(a.querySelectorAll('section'));d.forEach(function (a) {
           var c = a.id && b.querySelector('a[aria-controls="' + a.id + '"]');c && c.parentNode.appendChild(a);
         });
       }
     } }, { key: 'findAncestor', value: function findAncestor(a, b) {
       for (; (a = a.parentElement) && a.nodeName.toLowerCase() !== b;) {}return a;
+    } }], [{ key: 'getStorageKey', value: function getStorageKey() {
+      return window.location.href.toString().split(window.location.host)[1].replace(/&return=[a-zA-Z0-9%]+/, '').split('#')[0];
+    } }, { key: 'saveState', value: function saveState(a) {
+      var b = this.getStorageKey();sessionStorage.setItem(b, a);
     } }, { key: 'dispatchCustomEvent', value: function dispatchCustomEvent(a, b, c) {
       var d = new CustomEvent(a, { bubbles: !0, cancelable: !0 });d.relatedTarget = c, b.dispatchEvent(d), b.removeEventListener(a, b);
-    } }, { key: 'includeCss', value: function includeCss() {
-      if (!document.getElementById('joomla-tab-stylesheet')) {
-        var a = document.createElement('style');a.id = 'joomla-tab-stylesheet', a.innerText = 'joomla-tab{display:flex;flex-direction:column}joomla-tab>ul{display:flex;background-color:#f5f5f5;border-color:#ccc #ccc currentcolor;border-image:none;border-radius:.25rem .25rem 0 0;border-style:solid solid none;border-width:1px 1px 0;box-shadow:0 1px #fff inset,0 2px 3px -3px rgba(0,0,0,.15),0 -4px 0 rgba(0,0,0,.05) inset,0 0 3px rgba(0,0,0,.04);margin:0;padding:0;list-style:outside none none;overflow-x:auto;overflow-y:hidden;white-space:nowrap}joomla-tab a[role=tab]{display:block;color:#0d1321;padding:.75em 1em;position:relative;box-shadow:1px 0 0 rgba(0,0,0,.05);text-decoration:none}joomla-tab a[role=tab][active]{background-color:rgba(0,0,0,.03);background-image:linear-gradient(to bottom,transparent,rgba(0,0,0,.05) 100%);border-left:0 none;border-right:0 none;border-top-left-radius:0;border-top-right-radius:0;box-shadow:2px 0 1px -1px rgba(0,0,0,.08) inset,-2px 0 1px -1px rgba(0,0,0,.08) inset,0 1px 0 rgba(0,0,0,.02) inset}joomla-tab a[role=tab][active]:after{background-color:#006898;bottom:-1px;content:"";height:5px;left:0;opacity:.8;position:absolute;right:0}joomla-tab>section{display:none;background-color:#fefefe;border:1px solid #ccc;border-radius:0 0 .25rem .25rem;box-shadow:0 0 3px rgba(0,0,0,.04);padding:15px}joomla-tab>section[active]{display:block}joomla-tab[orientation=vertical]{flex-direction:row;align-items:flex-start}joomla-tab[orientation=vertical]>ul{flex-direction:column;min-width:30%;height:auto;border:1px solid #ccc;border-radius:.25rem;box-shadow:none;overflow:hidden}joomla-tab[orientation=vertical] li:last-of-type a{border-bottom:0}joomla-tab[orientation=vertical] a{display:block;color:#0d1321;padding:.75em 1em;position:relative;border-bottom:1px solid #ddd;box-shadow:none;text-decoration:none}joomla-tab[orientation=vertical] a[active]{border-left:0 none;border-right:0 none;background-color:#fff;background-image:none;box-shadow:none}joomla-tab[orientation=vertical] a[active]:after{left:-1px;width:5px;height:auto;top:0;bottom:0}joomla-tab[orientation=vertical]>section{border:0 none;box-shadow:none;padding:15px}joomla-tab[view=accordion]>ul{flex-direction:column;border-radius:.25rem;white-space:normal;box-shadow:0 1px #fff inset,0 0 3px rgba(0,0,0,.04)}joomla-tab[view=accordion] section{display:none;padding:15px}joomla-tab[view=accordion] section[active]{display:block;border-bottom:1px solid #ddd}joomla-tab[view=accordion] [active]{background-color:#fff}joomla-tab[view=accordion] a[role=tab]{border-bottom:1px solid #ddd}joomla-tab[view=accordion] a[role=tab][active]:after{width:5px;height:100%;top:0;left:0}', document.head.appendChild(a);
-      }
     } }]), b;
 }(HTMLElement);customElements.define('joomla-tab', TabElement);
 

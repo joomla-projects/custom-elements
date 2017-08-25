@@ -94,7 +94,7 @@ module.exports = function (grunt) {
         // Repeat
         tmpJs = grunt.file.read('src/js/' + element + '/' + element + '.js');
         tmpJs = tmpJs.replace(/joomla-/g, settings.prefix + '-');
-        tmpJs = tmpJs.replace(/'{{stylesheet}}'/g, "'" + tmpCss + "'");
+        tmpJs = tmpJs.replace(/'{{stylesheet}}'/g, "`" + tmpCss + "`");
 
         grunt.file.write('src/js/' + element + '/' + element + '_es6.js', tmpJs);
 
