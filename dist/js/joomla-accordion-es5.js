@@ -31,7 +31,7 @@ var _createClass = function () {
           c = d(e, f), 'continue' === c;
         }
       }
-    } }, { key: 'disconnectedCallback', value: function disconnectedCallback() {} }, { key: 'adoptedCallback', value: function adoptedCallback() {} }, { key: 'attributeChangedCallback', value: function attributeChangedCallback(a) {
+    } }, { key: 'disconnectedCallback', value: function disconnectedCallback() {} }, { key: 'attributeChangedCallback', value: function attributeChangedCallback(a) {
       switch (a) {}
     } }, { key: 'toggle', value: function toggle() {} }, { key: 'resetAll', value: function resetAll() {
       for (var b = this.querySelectorAll('section'), c = 0, d = b.length; c < d; c++) {

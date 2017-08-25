@@ -7,12 +7,7 @@ jshint:
   enabled: false
 
 eslint:
-  enabled: true
-  config_file: .eslintrc.json
-  ignore_file: .eslintignore
-   checks:
-    import/no-unresolved:
-      enabled: false
+  enabled: false
 
 ruby:
   enabled: false
