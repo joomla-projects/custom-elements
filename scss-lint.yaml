@@ -1,6 +1,6 @@
 # Default application configuration that all configurations inherit from.
 scss_files:
-  "src/scss/*.scss"
+  "src/scss/**/*.scss"
 
 plugin_directories: ['.scss-linters']
 
