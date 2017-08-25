@@ -23,15 +23,15 @@ var _createClass = function () {
       var c = document.createElement('style');c.id = 'joomla-collapse-stylesheet', c.innerText = 'joomla-collapse[state=closed]{display:none}joomla-collapse[state=open]{display:block}', document.head.appendChild(c);
     }return a;
   }return _inherits(b, a), _createClass(b, [{ key: 'state', get: function get() {
-      return this.getAttribute('state') || 'closed';
+      return this.getAttribute('state');
     }, set: function set(a) {
       return this.setAttribute('state', a);
     } }], [{ key: 'observedAttributes', get: function get() {
       return ['state'];
     } }]), _createClass(b, [{ key: 'connectedCallback', value: function connectedCallback() {
-      if (this.id) {
-        var a = [].slice.call(document.querySelectorAll('[href="#' + this.id + '"],[data-target="#' + this.id + '"]'));a.forEach(function (a) {
-          this.state && 'closed' !== this.state ? (a.setAttribute('aria-expanded', 'true'), a.setAttribute('aria-controls', this.id)) : (a.setAttribute('aria-expanded', 'false'), a.setAttribute('aria-controls', this.id)), a.addEventListener('click', function (a) {
+      var a = this;if (this.id) {
+        var b = [].slice.call(document.querySelectorAll('[href="#' + this.id + '"],[data-target="#' + this.id + '"]'));b.forEach(function (b) {
+          !a.state || a.state && 'closed' === a.state ? (a.state = 'closed', b.setAttribute('aria-expanded', 'false'), b.setAttribute('aria-controls', a.id)) : (b.setAttribute('aria-expanded', 'true'), b.setAttribute('aria-controls', a.id)), b.addEventListener('click', function (a) {
             var b = '';a.target.hasAttribute('data-target') || (b = a.target.getAttribute('href').replace('#', '')), a.target.hasAttribute('href') || (b = a.target.getAttribute('data-target').replace('#', '')), a.preventDefault(), a.stopPropagation(), document.getElementById(b).toggle();
           });
         });
@@ -39,8 +39,8 @@ var _createClass = function () {
     } }, { key: 'disconnectedCallback', value: function disconnectedCallback() {
       var a = document.querySelector('[href="#' + this.id + '"]');a || (a = document.querySelector('[data-target="#' + this.id + '"]')), a && a.removeEventListener('click', this);
     } }, { key: 'attributeChangedCallback', value: function attributeChangedCallback(a, b, c) {
-      switch (a) {case 'state':
-          var d = document.querySelector('[href="#' + this.id + '"]');'closed' === c ? d.setAttribute('aria-expanded', 'false') : 'open' === c && d.setAttribute('aria-expanded', 'true');break;default:}
+      var d = document.querySelector('[href="#' + this.id + '"]');switch (a) {case 'state':
+          'closed' === c ? d.setAttribute('aria-expanded', 'false') : 'open' === c && d.setAttribute('aria-expanded', 'true');break;default:}
     } }, { key: 'toggle', value: function toggle() {
       var a = document.querySelector('[href="#' + this.id + '"]');a || (a = document.querySelector('[data-target="#' + this.id + '"]')), 'closed' === this.state ? (this.state = 'open', a.setAttribute('aria-expanded', 'true')) : (this.state = 'closed', a.setAttribute('aria-expanded', 'false'));
     } }]), b;

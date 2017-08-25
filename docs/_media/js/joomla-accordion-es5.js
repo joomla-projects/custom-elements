@@ -23,13 +23,12 @@ var _createClass = function () {
       var c = document.createElement('style');c.id = 'joomla-accordion-stylesheet', c.innerHTML = '', document.head.appendChild(c);
     }return a;
   }return _inherits(b, a), _createClass(b, [{ key: 'connectedCallback', value: function connectedCallback() {
-      if (this.innerHTML) {
-        this.setAttribute('role', 'tablist'), this.setAttribute('aria-multiselectable', 'true');var a = this.querySelectorAll('section');a.length && a.forEach(function (a) {
-          var b = a.querySelector('[data-toggle="collapse"]'),
-              c = b.getAttribute('href'),
-              d = this;if (c) {
-            var e = document.getElementById(c.replace('#', ''));e.classList.contains('show') ? (e.setAttribute('role', 'tabpanel'), b.setAttribute('aria-expanded', 'true')) : (e.setAttribute('role', 'tabpanel'), b.setAttribute('aria-expanded', 'true')), b.addEventListener('click', function (a) {
-              a.preventDefault(), a.stopPropagation(), d.resetAll(), a.target.setAttribute('aria-expanded', 'true'), document.getElementById(c.replace('#', '')).classList.add('show');
+      var a = this;if (this.innerHTML) {
+        this.setAttribute('role', 'tablist'), this.setAttribute('aria-multiselectable', 'true');var b = this.querySelectorAll('section');b.length && b.forEach(function (b) {
+          var c = b.querySelector('[data-toggle="collapse"]'),
+              d = c.getAttribute('href');if (d) {
+            var e = document.getElementById(d.replace('#', ''));e.classList.contains('show') ? (e.setAttribute('role', 'tabpanel'), c.setAttribute('aria-expanded', 'true')) : (e.setAttribute('role', 'tabpanel'), c.setAttribute('aria-expanded', 'true')), c.addEventListener('click', function (b) {
+              b.preventDefault(), b.stopPropagation(), a.resetAll(), b.target.setAttribute('aria-expanded', 'true'), document.getElementById(d.replace('#', '')).classList.add('show');
             });
           }
         });
@@ -39,7 +38,7 @@ var _createClass = function () {
           break;case 'button':
           break;default:}
     } }, { key: 'resetAll', value: function resetAll() {
-      var a = this.querySelectorAll('section');a.forEach(function (a) {
+      var a = [].slice.call(this.querySelectorAll('section'));a.forEach(function (a) {
         var b = a.querySelector('[data-toggle="collapse"]'),
             c = b.getAttribute('href');if (c) {
           var d = document.getElementById(c.replace('#', ''));b.setAttribute('aria-expanded', 'true'), d.classList.remove('show');

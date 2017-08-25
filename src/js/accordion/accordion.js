@@ -11,6 +11,7 @@ class AccordionElement extends HTMLElement {
   }
 
   connectedCallback() {
+    const self = this;
     // Return early if no content is given
     if (!this.innerHTML) {
       return;
@@ -23,10 +24,10 @@ class AccordionElement extends HTMLElement {
 
     // Checkboxes
     if (cards.length) {
-      cards.forEach(function (card) {
+      cards.forEach((card) => {
         const toggler = card.querySelector('[data-toggle="collapse"]');
         const togglerHref = toggler.getAttribute('href');
-        const self = this;
+
         if (!togglerHref) {
           return;
         }
@@ -72,7 +73,7 @@ class AccordionElement extends HTMLElement {
 
   /* Reset active accordion */
   resetAll() {
-    const cards = this.querySelectorAll('section');
+    const cards = [].slice.call(this.querySelectorAll('section'));
     cards.forEach((card) => {
       const toggler = card.querySelector('[data-toggle="collapse"]');
       const togglerHref = toggler.getAttribute('href');
