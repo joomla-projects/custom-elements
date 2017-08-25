@@ -1,6 +1,6 @@
 const Joomla = window.Joomla || {};
 
-class SwitcherElement extends HTMLElement {
+class JoomlaSwitcherElement extends HTMLElement {
   /* Attributes to monitor */
   static get observedAttributes() { return ['type', 'offText', 'onText']; }
   get type() { return this.getAttribute('type'); }
@@ -196,4 +196,4 @@ class SwitcherElement extends HTMLElement {
   }
 }
 
-customElements.define('joomla-switcher', SwitcherElement);
+customElements.define('joomla-switcher', JoomlaSwitcherElement);
