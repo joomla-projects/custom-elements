@@ -7,9 +7,9 @@ $switcher-height: 28px;
 $border-width:    1px;
 
 joomla-switcher {
+  box-sizing: border-box;
   display: block;
   height: $switcher-height;
-  box-sizing: border-box;
 
   .switcher {
     position: relative;
