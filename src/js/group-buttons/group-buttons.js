@@ -1,4 +1,4 @@
-class ButtonElement extends HTMLElement {
+class JoomlaButtonElement extends HTMLElement {
   constructor() {
     super();
 
@@ -114,4 +114,4 @@ class ButtonElement extends HTMLElement {
     this.removeEventListener(eventName, this);
   }
 }
-customElements.define('joomla-group-buttons', ButtonElement);
+customElements.define('joomla-group-buttons', JoomlaButtonElement);

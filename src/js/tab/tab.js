@@ -1,4 +1,4 @@
-class TabElement extends HTMLElement {
+class JoomlaTabElement extends HTMLElement {
   /* Attributes to monitor */
   static get observedAttributes() { return ['recall', 'orientation', 'view']; }
   get recall() { return this.getAttribute('recall'); }
@@ -334,4 +334,4 @@ class TabElement extends HTMLElement {
   }
 }
 
-customElements.define('joomla-tab', TabElement);
+customElements.define('joomla-tab', JoomlaTabElement);

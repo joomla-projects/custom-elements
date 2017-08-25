@@ -1,4 +1,4 @@
-class AlertElement extends HTMLElement {
+class JoomlaAlertElement extends HTMLElement {
   /* Attributes to monitor */
   static get observedAttributes() { return ['level', 'dismiss', 'acknowledge', 'href']; }
   get level() { return this.getAttribute('level'); }
@@ -174,4 +174,4 @@ class AlertElement extends HTMLElement {
   /*eslint-enable */
 }
 
-customElements.define('joomla-alert', AlertElement);
+customElements.define('joomla-alert', JoomlaAlertElement);
