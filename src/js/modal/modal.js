@@ -1,4 +1,4 @@
-class ModalElement extends HTMLElement {
+class JoomlaModalElement extends HTMLElement {
   constructor() {
     super();
 
@@ -85,4 +85,4 @@ class ModalElement extends HTMLElement {
   }
   /*eslint-disable */
 }
-customElements.define('joomla-modal', ModalElement);
+customElements.define('joomla-modal', JoomlaModalElement);

@@ -1,4 +1,4 @@
-class DropdownElement extends HTMLElement {
+class JoomlaDropdownElement extends HTMLElement {
   static get observedAttributes() {
     return ['for'];
   }
@@ -84,4 +84,4 @@ class DropdownElement extends HTMLElement {
   /*eslint-enable */
 }
 
-customElements.define('joomla-dropdown', DropdownElement);
+customElements.define('joomla-dropdown', JoomlaDropdownElement);
