@@ -41,7 +41,7 @@ var _createClass = function () {
       var a = document.querySelector('[href="#' + this.id + '"]');a || (a = document.querySelector('[data-target="#' + this.id + '"]')), 'closed' === this.state ? (this.state = 'open', a.setAttribute('aria-expanded', 'true')) : (this.state = 'closed', a.setAttribute('aria-expanded', 'false'));
     } }, { key: 'includeCss', value: function includeCss() {
       if (console.log('ffff'), !document.getElementById('joomla-collapse-stylesheet')) {
-        console.log('ssss');var a = document.createElement('style');a.id = 'joomla-collapse-stylesheet', a.innerText = '{{stylesheet}}', document.head.appendChild(a);
+        console.log('ssss');var a = document.createElement('style');a.id = 'joomla-collapse-stylesheet', a.innerHTML = 'joomla-collapse[state=closed]{display:none}joomla-collapse[state=open]{display:block}', document.head.appendChild(a);
       }
     } }]), b;
 }(HTMLElement);customElements.define('joomla-collapse', CollapseElement);

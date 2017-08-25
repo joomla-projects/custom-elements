@@ -75,7 +75,7 @@ class TooltipElement extends HTMLElement {
     if (!document.getElementById('joomla-tooltip-stylesheet')) {
       const style = document.createElement('style');
       style.id = 'joomla-tooltip-stylesheet';
-      style.innerHTML = '{{stylesheet}}';
+      style.innerHTML = `{{stylesheet}}`;
       document.head.appendChild(style);
     }
   }

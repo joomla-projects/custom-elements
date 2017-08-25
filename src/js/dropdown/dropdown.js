@@ -77,7 +77,7 @@ class DropdownElement extends HTMLElement {
     if (!document.getElementById('joomla-dropdown-stylesheet')) {
       const style = document.createElement('style');
       style.id = 'joomla-dropdown-stylesheet';
-      style.innerText = '{{stylesheet}}';
+      style.innerHTML = `{{stylesheet}}`;
       document.head.appendChild(style);
     }
   }

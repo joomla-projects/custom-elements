@@ -79,7 +79,7 @@ class ModalElement extends HTMLElement {
     if (!document.getElementById('joomla-modal-stylesheet')) {
       const style = document.createElement('style');
       style.id = 'joomla-modal-stylesheet';
-      style.innerHTML = '{{stylesheet}}';
+      style.innerHTML = `joomla-modal .modal-dialog{position:fixed;top:0;right:0;bottom:0;left:0;z-index:1050;overflow:hidden;display:none;outline:0}joomla-modal.show .modal-dialog{display:block}`;
       document.head.appendChild(style);
     }
   }

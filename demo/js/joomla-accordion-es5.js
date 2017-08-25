@@ -42,7 +42,7 @@ var _createClass = function () {
       }
     } }, { key: 'includeCss', value: function includeCss() {
       if (!document.getElementById('joomla-accordion-stylesheet')) {
-        var a = document.createElement('style');a.id = 'joomla-accordion-stylesheet', a.innerHTML = '{{stylesheet}}', document.head.appendChild(a);
+        var a = document.createElement('style');a.id = 'joomla-accordion-stylesheet', a.innerHTML = '', document.head.appendChild(a);
       }
     } }], [{ key: 'observedAttributes', get: function get() {
       return ['type', 'button'];

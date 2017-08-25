@@ -79,7 +79,7 @@ class ModalElement extends HTMLElement {
     if (!document.getElementById('joomla-modal-stylesheet')) {
       const style = document.createElement('style');
       style.id = 'joomla-modal-stylesheet';
-      style.innerHTML = '{{stylesheet}}';
+      style.innerHTML = `{{stylesheet}}`;
       document.head.appendChild(style);
     }
   }

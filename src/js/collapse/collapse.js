@@ -75,7 +75,7 @@ class CollapseElement extends HTMLElement {
       console.log('ssss');
       const style = document.createElement('style');
       style.id = 'joomla-collapse-stylesheet';
-      style.innerText = '{{stylesheet}}';
+      style.innerHTML = `{{stylesheet}}`;
       document.head.appendChild(style);
     }
   }

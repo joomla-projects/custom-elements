@@ -160,7 +160,7 @@ class AlertElement extends HTMLElement {
     if (!document.getElementById('joomla-alert-stylesheet')) {
       const style = document.createElement('style');
       style.id = 'joomla-alert-stylesheet';
-      style.innerHTML = '{{stylesheet}}';
+      style.innerHTML = `{{stylesheet}}`;
       document.head.appendChild(style);
     }
   }

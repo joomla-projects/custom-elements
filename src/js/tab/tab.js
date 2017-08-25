@@ -336,7 +336,7 @@ class TabElement extends HTMLElement {
     if (!document.getElementById('joomla-tab-stylesheet')) {
       const style = document.createElement('style');
       style.id = 'joomla-tab-stylesheet';
-      style.innerText = '{{stylesheet}}';
+      style.innerHTML = `{{stylesheet}}`;
       document.head.appendChild(style);
     }
   }

@@ -42,7 +42,7 @@ var _createClass = function () {
       for (; (a = a.parentElement) && !a.classList.contains(b);) {}return a;
     } }, { key: 'includeCss', value: function includeCss() {
       if (!document.getElementById('joomla-modal-stylesheet')) {
-        var a = document.createElement('style');a.id = 'joomla-modal-stylesheet', a.innerHTML = '{{stylesheet}}', document.head.appendChild(a);
+        var a = document.createElement('style');a.id = 'joomla-modal-stylesheet', a.innerHTML = 'joomla-modal .modal-dialog{position:fixed;top:0;right:0;bottom:0;left:0;z-index:1050;overflow:hidden;display:none;outline:0}joomla-modal.show .modal-dialog{display:block}', document.head.appendChild(a);
       }
     } }], [{ key: 'observedAttributes', get: function get() {} }]), b;
 }(HTMLElement);customElements.define('joomla-modal', ModalElement);

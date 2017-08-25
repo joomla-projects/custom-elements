@@ -50,7 +50,7 @@ var _createClass = function () {
       var b = new CustomEvent(a, { bubbles: !0, cancelable: !0 });b.relatedTarget = this, this.dispatchEvent(b), this.removeEventListener(a, this);
     } }, { key: 'includeCss', value: function includeCss() {
       if (!document.getElementById('joomla-popover-stylesheet')) {
-        var a = document.createElement('style');a.id = 'joomla-popover-stylesheet', a.innerHTML = '{{stylesheet}}', document.head.appendChild(a);
+        var a = document.createElement('style');a.id = 'joomla-popover-stylesheet', a.innerHTML = '', document.head.appendChild(a);
       }
     } }]), b;
 }(HTMLElement);customElements.define('joomla-popover', PopoverElement);
