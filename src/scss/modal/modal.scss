@@ -2,21 +2,22 @@
 
 @import "node_modules/bootstrap/scss/mixins";
 
-joomla-modal{
-	.modal-dialog {
-		position: fixed;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		z-index: 1050;
-		overflow: hidden;
-				display:none;
-		outline: 0
-	}
-	&.show {
-			.modal-dialog {
-			display:block;
-			}
-	}
+joomla-modal {
+
+  .modal-dialog {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: none;
+    z-index: 1050;
+    overflow: hidden;
+    outline: 0;
+  }
+
+  &.show .modal-dialog {
+    display:block;
+  }
+
 }

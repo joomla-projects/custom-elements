@@ -5,18 +5,20 @@
 joomla-tooltip {
   position: relative;
   display: inline-block;
+
   button {
     width: 1.6rem;
     height: 1.6rem;
     border-radius: 50%;
     border: 0;
-    background: #1C3D5C;
+    background: #1c3d5c;
     font-family: serif;
     font-weight: bold;
     font-size: 1.4rem;
     line-height: 1.4rem;
     color: #fff;
   }
+
   .toggletip-bubble {
     display: inline-block;
     position: absolute;
@@ -31,6 +33,7 @@ joomla-tooltip {
     box-shadow: 0 0 5px rgba(0,0,0,.4);
     transition: all ease-in;
     animation-duration: .3s;
+
     &:after {
       position: absolute;
       top: .6rem;
@@ -40,12 +43,14 @@ joomla-tooltip {
       height: 0;
       border-style: solid;
     }
+
     &.top {
       bottom: 100%;
       left: 50%;
       margin-bottom: .6rem;
       transform: translate(-50%, 0px);
       animation-name: toggletip-fadeInTop;
+
       &:after {
         top: 100%;
         left: 50%;
@@ -54,13 +59,16 @@ joomla-tooltip {
         border-color: #222 transparent transparent transparent;
         transform: translateX(-50%);
       }
+
     }
+
     &.left {
       top: 50%;
       right: 100%;
       margin-right: .6rem;
       transform: translate(0px, -50%);
       animation-name: toggletip-fadeInLeft;
+
       &:after {
         top: 50%;
         left: 100%;
@@ -70,12 +78,14 @@ joomla-tooltip {
         transform: translateY(-50%);
       }
     }
+
     &.right {
       top: 50%;
       left: 100%;
       margin-left: .6rem;
       transform: translate(0px, -50%);
       animation-name: toggletip-fadeInRight;
+
       &:after {
         top: 50%;
         right: 100%;
@@ -84,13 +94,16 @@ joomla-tooltip {
         border-color: transparent #222 transparent transparent;
         transform: translateY(-50%);
       }
+
     }
+
     &.bottom {
       top: 100%;
       left: 50%;
       margin-top: .6rem;
       transform: translate(-50%, 0px);
       animation-name: toggletip-fadeInBottom;
+
       &:after {
         top: -6px;
         left: 50%;
