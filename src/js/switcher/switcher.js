@@ -1,3 +1,5 @@
+const Joomla = window.Joomla || {};
+
 class SwitcherElement extends HTMLElement {
   /* Attributes to monitor */
   static get observedAttributes() { return ['type', 'offText', 'onText']; }
@@ -189,11 +191,9 @@ class SwitcherElement extends HTMLElement {
   }
 
   /* Method to get the translated text. Internal */
-  /*eslint-disable */
-  getText(str, fallback) {
+  static getText(str, fallback) {
     return (window.Joomla && Joomla.JText && Joomla.JText._ && typeof Joomla.JText._ === 'function' && Joomla.JText._(str)) ? Joomla.JText._(str) : fallback;
   }
-  /*eslint-enable */
 }
 
 customElements.define('joomla-switcher', SwitcherElement);

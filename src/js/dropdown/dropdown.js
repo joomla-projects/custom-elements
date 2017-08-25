@@ -77,7 +77,7 @@ class DropdownElement extends HTMLElement {
   }
 
   /*eslint-disable */
-  findAncestor(el, tagName) {
+  static findAncestor(el, tagName) {
     while ((el = el.parentElement) && el.nodeName.toLowerCase() !== tagName);
     return el;
   }

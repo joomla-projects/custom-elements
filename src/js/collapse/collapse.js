@@ -24,7 +24,7 @@ class CollapseElement extends HTMLElement {
 
     const linked = [].slice.call(document.querySelectorAll(`[href="#${this.id}"],[data-target="#${this.id}"]`));
 
-    linked.forEach(function (element) {
+    linked.forEach((element) => {
       if (!self.state || (self.state && self.state === 'closed')) {
         self.state = 'closed';
         element.setAttribute('aria-expanded', 'false');
