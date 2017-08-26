@@ -86,6 +86,9 @@ class JoomlaSwitcherElement extends HTMLElement {
 
   /** Method to build the switch. Internal */
   createMarkup(switcher) {
+    // Set the role as "switch"
+    this.setAttribute('role', 'switch');
+
     const inputs = [].slice.call(switcher.querySelectorAll('input'));
     let checked = 0;
 
@@ -105,6 +108,10 @@ class JoomlaSwitcherElement extends HTMLElement {
 
       if (index === 1 && input.checked) {
         checked = 1;
+      }
+
+      if (input.checked) {
+        input.setAttribute('aria-checked', true);
       }
     });
 
@@ -164,6 +171,7 @@ class JoomlaSwitcherElement extends HTMLElement {
       inputs.forEach((input) => {
         input.classList.remove('active');
         input.removeAttribute('checked');
+        input.setAttribute('aria-checked', false);
       });
       newActive.classList.add('active');
 
@@ -172,12 +180,14 @@ class JoomlaSwitcherElement extends HTMLElement {
       inputs.forEach((input) => {
         input.classList.remove('active');
         input.removeAttribute('checked');
+        input.setAttribute('aria-checked', false);
       });
 
       this.dispatchCustomEvent('joomla.switcher.off');
     }
 
     newActive.setAttribute('checked', '');
+    newActive.setAttribute('aria-checked', true);
     parent.nextElementSibling.querySelector(`.switcher-label-${newActive.value}`).classList.add('active');
   }
 
