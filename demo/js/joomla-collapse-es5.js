@@ -17,7 +17,7 @@ var _createClass = function () {
   if (!a) throw new ReferenceError('this hasn\'t been initialised - super() hasn\'t been called');return b && ('object' == (typeof b === 'undefined' ? 'undefined' : _typeof(b)) || 'function' == typeof b) ? b : a;
 }function _inherits(a, b) {
   if ('function' != typeof b && null !== b) throw new TypeError('Super expression must either be null or a function, not ' + (typeof b === 'undefined' ? 'undefined' : _typeof(b)));a.prototype = Object.create(b && b.prototype, { constructor: { value: a, enumerable: !1, writable: !0, configurable: !0 } }), b && (Object.setPrototypeOf ? Object.setPrototypeOf(a, b) : a.__proto__ = b);
-}var CollapseElement = function (a) {
+}var JoomlaCollapseElement = function (a) {
   function b() {
     _classCallCheck(this, b);var a = _possibleConstructorReturn(this, (b.__proto__ || Object.getPrototypeOf(b)).call(this));if (!document.getElementById('joomla-collapse-stylesheet')) {
       var c = document.createElement('style');c.id = 'joomla-collapse-stylesheet', c.innerText = 'joomla-collapse[state=closed]{display:none}joomla-collapse[state=open]{display:block}', document.head.appendChild(c);
@@ -44,6 +44,6 @@ var _createClass = function () {
     } }, { key: 'toggle', value: function toggle() {
       var a = document.querySelector('[href="#' + this.id + '"]');a || (a = document.querySelector('[data-target="#' + this.id + '"]')), 'closed' === this.state ? (this.state = 'open', a.setAttribute('aria-expanded', 'true')) : (this.state = 'closed', a.setAttribute('aria-expanded', 'false'));
     } }]), b;
-}(HTMLElement);customElements.define('joomla-collapse', CollapseElement);
+}(HTMLElement);customElements.define('joomla-collapse', JoomlaCollapseElement);
 
 },{}]},{},[1]);
