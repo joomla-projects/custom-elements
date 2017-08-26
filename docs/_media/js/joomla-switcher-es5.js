@@ -55,7 +55,7 @@ var _createClass = function () {
       var b = [].slice.call(a.querySelectorAll('input')),
           c = 0,
           d = document.createElement('span');d.classList.add('switcher'), this.type && -1 !== ['primary', 'danger'].indexOf(this.type) && d.classList.add('switcher-' + this.type);var e = document.createElement('span');e.classList.add('switch'), b.forEach(function (a, b) {
-        d.appendChild(a), 1 === b && a.checked && (c = 1);
+        a.setAttribute('role', 'switch'), a.checked && a.setAttribute('aria-checked', !0), d.appendChild(a), 1 === b && a.checked && (c = 1);
       }), d.appendChild(e);var f = document.createElement('span');f.classList.add('switcher-labels');var g = document.createElement('span');g.classList.add('switcher-label-0'), g.innerText = this.getText(this.offText, 'Off');var h = document.createElement('span');for (h.classList.add('switcher-label-1'), h.innerText = this.getText(this.onText, 'On'), 0 == c ? g.classList.add('active') : h.classList.add('active'), f.appendChild(g), f.appendChild(h); a.firstChild;) {
         a.removeChild(a.firstChild);
       }return a.appendChild(d), a.appendChild(f), a;
@@ -66,10 +66,10 @@ var _createClass = function () {
           d = this.querySelector('input:not(.active)');c.forEach(function (a) {
         a.classList.remove('active');
       }), a.classList.contains('active') ? a.classList.remove('active') : a.classList.add('active'), d.classList.contains('active') ? (b.forEach(function (a) {
-        a.classList.remove('active'), a.removeAttribute('checked');
+        a.classList.remove('active'), a.removeAttribute('checked'), a.setAttribute('aria-checked', !1);
       }), this.dispatchCustomEvent('joomla.switcher.off')) : (b.forEach(function (a) {
-        a.classList.remove('active'), a.removeAttribute('checked');
-      }), d.classList.add('active'), this.dispatchCustomEvent('joomla.switcher.on')), d.setAttribute('checked', ''), a.nextElementSibling.querySelector('.switcher-label-' + d.value).classList.add('active');
+        a.classList.remove('active'), a.removeAttribute('checked'), a.setAttribute('aria-checked', !1);
+      }), d.classList.add('active'), this.dispatchCustomEvent('joomla.switcher.on')), d.setAttribute('checked', ''), d.setAttribute('aria-checked', !0), a.nextElementSibling.querySelector('.switcher-label-' + d.value).classList.add('active');
     } }, { key: 'toggle', value: function toggle() {
       var a = this.querySelector('input:not(.active)');a.click();
     } }, { key: 'getText', value: function getText(a, b) {
