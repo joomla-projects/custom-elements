@@ -10,14 +10,14 @@ joomla-modal {
     right: 0;
     bottom: 0;
     left: 0;
-    display: none;
     z-index: 1050;
+    display: none;
     overflow: hidden;
     outline: 0;
   }
 
   &.show .modal-dialog {
-    display:block;
+    display: block;
   }
 
 }
