@@ -86,9 +86,6 @@ class JoomlaSwitcherElement extends HTMLElement {
 
   /** Method to build the switch. Internal */
   createMarkup(switcher) {
-    // Set the role as "switch"
-    this.setAttribute('role', 'switch');
-
     const inputs = [].slice.call(switcher.querySelectorAll('input'));
     let checked = 0;
 
@@ -104,14 +101,16 @@ class JoomlaSwitcherElement extends HTMLElement {
     switchEl.classList.add('switch');
 
     inputs.forEach((input, index) => {
+      input.setAttribute('role', 'switch');
+
+      if (input.checked) {
+        input.setAttribute('aria-checked', true);
+      }
+
       spanFirst.appendChild(input);
 
       if (index === 1 && input.checked) {
         checked = 1;
-      }
-
-      if (input.checked) {
-        input.setAttribute('aria-checked', true);
       }
     });
 

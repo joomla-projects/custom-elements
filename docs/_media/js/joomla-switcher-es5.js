@@ -52,10 +52,10 @@ var _createClass = function () {
     } }, { key: 'dispatchCustomEvent', value: function dispatchCustomEvent(a) {
       var b = new CustomEvent(a, { bubbles: !0, cancelable: !0 });b.relatedTarget = this, this.dispatchEvent(b), this.removeEventListener(a, this);
     } }, { key: 'createMarkup', value: function createMarkup(a) {
-      this.setAttribute('role', 'switch');var b = [].slice.call(a.querySelectorAll('input')),
+      var b = [].slice.call(a.querySelectorAll('input')),
           c = 0,
           d = document.createElement('span');d.classList.add('switcher'), this.type && -1 !== ['primary', 'danger'].indexOf(this.type) && d.classList.add('switcher-' + this.type);var e = document.createElement('span');e.classList.add('switch'), b.forEach(function (a, b) {
-        d.appendChild(a), 1 === b && a.checked && (c = 1), a.checked && a.setAttribute('aria-checked', !0);
+        a.setAttribute('role', 'switch'), a.checked && a.setAttribute('aria-checked', !0), d.appendChild(a), 1 === b && a.checked && (c = 1);
       }), d.appendChild(e);var f = document.createElement('span');f.classList.add('switcher-labels');var g = document.createElement('span');g.classList.add('switcher-label-0'), g.innerText = this.getText(this.offText, 'Off');var h = document.createElement('span');for (h.classList.add('switcher-label-1'), h.innerText = this.getText(this.onText, 'On'), 0 == c ? g.classList.add('active') : h.classList.add('active'), f.appendChild(g), f.appendChild(h); a.firstChild;) {
         a.removeChild(a.firstChild);
       }return a.appendChild(d), a.appendChild(f), a;
