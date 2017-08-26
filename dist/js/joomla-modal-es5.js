@@ -17,10 +17,10 @@ var _createClass = function () {
   if (!a) throw new ReferenceError('this hasn\'t been initialised - super() hasn\'t been called');return b && ('object' == (typeof b === 'undefined' ? 'undefined' : _typeof(b)) || 'function' == typeof b) ? b : a;
 }function _inherits(a, b) {
   if ('function' != typeof b && null !== b) throw new TypeError('Super expression must either be null or a function, not ' + (typeof b === 'undefined' ? 'undefined' : _typeof(b)));a.prototype = Object.create(b && b.prototype, { constructor: { value: a, enumerable: !1, writable: !0, configurable: !0 } }), b && (Object.setPrototypeOf ? Object.setPrototypeOf(a, b) : a.__proto__ = b);
-}var ModalElement = function (a) {
+}var JoomlaModalElement = function (a) {
   function b() {
     _classCallCheck(this, b);var a = _possibleConstructorReturn(this, (b.__proto__ || Object.getPrototypeOf(b)).call(this));if (window.Joomla = window.Joomla || {}, window.Joomla.UI = {}, window.Joomla.UI.modal = {}, !document.getElementById('joomla-modal-stylesheet')) {
-      var c = document.createElement('style');c.id = 'joomla-modal-stylesheet', c.innerHTML = 'joomla-modal .modal-dialog{position:fixed;top:0;right:0;bottom:0;left:0;z-index:1050;overflow:hidden;display:none;outline:0}joomla-modal.show .modal-dialog{display:block}', document.head.appendChild(c);
+      var c = document.createElement('style');c.id = 'joomla-modal-stylesheet', c.innerHTML = 'joomla-modal .modal-dialog{position:fixed;top:0;right:0;bottom:0;left:0;z-index:1050;display:none;overflow:hidden;outline:0}joomla-modal.show .modal-dialog{display:block}', document.head.appendChild(c);
     }return a;
   }return _inherits(b, a), _createClass(b, [{ key: 'connectedCallback', value: function connectedCallback() {
       var a = this,
@@ -43,6 +43,6 @@ var _createClass = function () {
     } }, { key: 'findAncestorClass', value: function findAncestorClass(a, b) {
       for (; (a = a.parentElement) && !a.classList.contains(b);) {}return a;
     } }], [{ key: 'observedAttributes', get: function get() {} }]), b;
-}(HTMLElement);customElements.define('joomla-modal', ModalElement);
+}(HTMLElement);customElements.define('joomla-modal', JoomlaModalElement);
 
 },{}]},{},[1]);

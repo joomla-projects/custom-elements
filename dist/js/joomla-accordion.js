@@ -1,4 +1,4 @@
-class AccordionElement extends HTMLElement {
+class JoomlaAccordionElement extends HTMLElement {
   constructor() {
     super();
 
@@ -88,4 +88,4 @@ class AccordionElement extends HTMLElement {
     });
   }
 }
-customElements.define('joomla-accordion', AccordionElement);
+customElements.define('joomla-accordion', JoomlaAccordionElement);

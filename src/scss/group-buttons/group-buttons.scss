@@ -1,9 +1,5 @@
 @import "../variables";
-
 @import "node_modules/bootstrap/scss/mixins";
-
-
-// scss-lint:disable QualifyingElement
 
 // Make the div behave like a button
 joomla-group-buttons {
@@ -21,11 +17,13 @@ joomla-group-buttons {
     @include hover {
       z-index: 2;
     }
+
     &:focus,
     &:active,
     &.active {
       z-index: 2;
     }
+
   }
 
   // Prevent double borders when buttons are next to each other
@@ -35,6 +33,7 @@ joomla-group-buttons {
   .btn-group + .btn-group {
     margin-left: -$input-btn-border-width;
   }
+
 }
 
 // Optional: Group multiple button groups together for a toolbar
@@ -46,6 +45,7 @@ joomla-group-buttons {
   .input-group {
     width: auto;
   }
+
 }
 
 joomla-group-buttons > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {
@@ -59,7 +59,9 @@ joomla-group-buttons > .btn:first-child {
   &:not(:last-child):not(.dropdown-toggle) {
     @include border-right-radius(0);
   }
+
 }
+
 // Need .dropdown-toggle since :last-child doesn't apply given a .dropdown-menu immediately after it
 joomla-group-buttons > .btn:last-child:not(:first-child),
 joomla-group-buttons > .dropdown-toggle:not(:first-child) {
@@ -70,15 +72,20 @@ joomla-group-buttons > .dropdown-toggle:not(:first-child) {
 joomla-group-buttons > joomla-group-buttons {
   float: left;
 }
+
 joomla-group-buttons > joomla-group-buttons:not(:first-child):not(:last-child) > .btn {
   border-radius: 0;
 }
+
 joomla-group-buttons > joomla-group-buttons:first-child:not(:last-child) {
+
   > .btn:last-child,
   > .dropdown-toggle {
     @include border-right-radius(0);
   }
+
 }
+
 joomla-group-buttons > joomla-group-buttons:last-child:not(:first-child) > .btn:first-child {
   @include border-left-radius(0);
 }
@@ -125,6 +132,7 @@ joomla-group-buttons.show .dropdown-toggle {
   &.btn-link {
     @include box-shadow(none);
   }
+
 }
 
 
@@ -141,6 +149,7 @@ joomla-group-buttons.show .dropdown-toggle {
 // https://github.com/twbs/bootstrap/pull/14559 for more information.
 
 joomla-group-buttons {
+
   > .btn,
   > .btn-group > .btn {
     input[type="radio"],
@@ -149,6 +158,8 @@ joomla-group-buttons {
       clip: rect(0,0,0,0);
       pointer-events: none;
     }
+
   }
+
 }
 

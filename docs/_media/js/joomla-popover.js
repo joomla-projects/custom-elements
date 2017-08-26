@@ -1,4 +1,4 @@
-class PopoverElement extends HTMLElement {
+class JoomlaPopoverElement extends HTMLElement {
   // /* Attributes to monitor */
   static get observedAttributes() { return ['label', 'tip', 'text', 'position']; }
   get label() { return this.getAttribute('label'); }
@@ -81,4 +81,4 @@ class PopoverElement extends HTMLElement {
   }
 }
 
-customElements.define('joomla-popover', PopoverElement);
+customElements.define('joomla-popover', JoomlaPopoverElement);

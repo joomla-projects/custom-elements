@@ -1,4 +1,4 @@
-class CollapseElement extends HTMLElement {
+class JoomlaCollapseElement extends HTMLElement {
   static get observedAttributes() {
     return ['state'];
   }
@@ -81,4 +81,4 @@ class CollapseElement extends HTMLElement {
   }
 }
 
-customElements.define('joomla-collapse', CollapseElement);
+customElements.define('joomla-collapse', JoomlaCollapseElement);
