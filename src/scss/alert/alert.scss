@@ -1,4 +1,3 @@
-
 @import "../variables";
 
 $alert-padding-y: .5rem;
@@ -82,18 +81,18 @@ joomla-alert {
 }
 
 // Alternate styles
-//
-// Generate contextual modifier classes for colorizing the alert.
-
 joomla-alert[level="success"] {
   @include alert-variant($alert-success-bg, $alert-success-border, $alert-success-text);
 }
+
 joomla-alert[level="info"] {
   @include alert-variant($alert-info-bg, $alert-info-border, $alert-info-text);
 }
+
 joomla-alert[level="warning"] {
   @include alert-variant($alert-warning-bg, $alert-warning-border, $alert-warning-text);
 }
+
 joomla-alert[level="danger"] {
   @include alert-variant($alert-danger-bg, $alert-danger-border, $alert-danger-text);
 }

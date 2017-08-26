@@ -1,12 +1,14 @@
 @import "../variables";
-
 @import "node_modules/bootstrap/scss/mixins";
 
 joomla-collapse {
+
 	&[state="closed"] {
-		display:none;
+		display: none;
 	}
+
 	&[state="open"] {
-		display:block;
+		display: block;
 	}
+
 }
