@@ -1,3 +1,8 @@
+/** Include the relative styles */
+const style = document.createElement('style');
+style.innerHTML = '{{stylesheet}}';
+document.head.appendChild(style);
+
 class JoomlaPopoverElement extends HTMLElement {
   // /* Attributes to monitor */
   static get observedAttributes() { return ['label', 'tip', 'text', 'position']; }
@@ -13,13 +18,6 @@ class JoomlaPopoverElement extends HTMLElement {
   /* Lifecycle, element created */
   constructor() {
     super();
-
-    if (!document.getElementById('joomla-popover-stylesheet')) {
-      const style = document.createElement('style');
-      style.id = 'joomla-popover-stylesheet';
-      style.innerHTML = '{{stylesheet}}';
-      document.head.appendChild(style);
-    }
   }
 
   /* Lifecycle, element appended to the DOM */

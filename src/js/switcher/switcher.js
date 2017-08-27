@@ -1,3 +1,8 @@
+/** Include the relative styles */
+const style = document.createElement('style');
+style.innerHTML = '{{stylesheet}}';
+document.head.appendChild(style);
+
 class JoomlaSwitcherElement extends HTMLElement {
   /* Attributes to monitor */
   static get observedAttributes() { return ['type', 'offText', 'onText']; }
@@ -9,13 +14,6 @@ class JoomlaSwitcherElement extends HTMLElement {
   /* Lifecycle, element created */
   constructor() {
     super();
-
-    if (!document.getElementById('joomla-switcher-stylesheet')) {
-      const style = document.createElement('style');
-      style.id = 'joomla-switcher-stylesheet';
-      style.innerHTML = '{{stylesheet}}';
-      document.head.appendChild(style);
-    }
   }
 
   /* Lifecycle, element appended to the DOM */

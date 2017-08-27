@@ -1,3 +1,8 @@
+/** Include the relative styles */
+const style = document.createElement('style');
+style.innerHTML = '{{stylesheet}}';
+document.head.appendChild(style);
+
 class JoomlaAlertElement extends HTMLElement {
   /* Attributes to monitor */
   static get observedAttributes() { return ['type', 'dismiss', 'acknowledge', 'href', 'auto-dismiss']; }
@@ -15,14 +20,6 @@ class JoomlaAlertElement extends HTMLElement {
   /* Lifecycle, element created */
   constructor() {
     super();
-
-    /** Include the relative styles */
-    if (!document.getElementById('joomla-alert-stylesheet')) {
-      const style = document.createElement('style');
-      style.id = 'joomla-alert-stylesheet';
-      style.innerHTML = '{{stylesheet}}';
-      document.head.appendChild(style);
-    }
   }
 
   /* Lifecycle, element appended to the DOM */
