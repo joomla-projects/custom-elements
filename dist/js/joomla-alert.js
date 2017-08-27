@@ -10,7 +10,7 @@ class JoomlaAlertElement extends HTMLElement {
   get href() { return this.getAttribute('href'); }
   set href(value) { return this.setAttribute('href', value); }
   get ['auto-dismiss']() { return parseInt(this.getAttribute('auto-dismiss'), 13); }
-  set ['auto-dismiss'](value) { return this.setAttribute('auto-dismiss', parseInt(value)); }
+  set ['auto-dismiss'](value) { return this.setAttribute('auto-dismiss', parseInt(value, 13)); }
 
   /* Lifecycle, element created */
   constructor() {
@@ -155,7 +155,7 @@ class JoomlaAlertElement extends HTMLElement {
     }
 
     if (self['auto-dismiss'] > 0) {
-      const timeout = self['auto-dismiss']
+      const timeout = self['auto-dismiss'];
       setTimeout(() => {
         self.dispatchCustomEvent('joomla.alert.buttonClicked');
         if (self.href) {

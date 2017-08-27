@@ -41,7 +41,7 @@ var _createClass = function () {
     } }, { key: 'auto-dismiss', get: function get() {
       return parseInt(this.getAttribute('auto-dismiss'), 13);
     }, set: function set(a) {
-      return this.setAttribute('auto-dismiss', parseInt(a));
+      return this.setAttribute('auto-dismiss', parseInt(a, 13));
     } }], [{ key: 'observedAttributes', get: function get() {
       return ['type', 'dismiss', 'acknowledge', 'href', 'auto-dismiss'];
     } }]), _createClass(b, [{ key: 'connectedCallback', value: function connectedCallback() {
