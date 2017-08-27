@@ -1,3 +1,5 @@
+const Joomla = window.Joomla || {};
+
 /** Include the relative styles */
 const style = document.createElement('style');
 style.innerHTML = '{{stylesheet}}';
@@ -10,11 +12,6 @@ class JoomlaSwitcherElement extends HTMLElement {
   set type(value) { return this.setAttribute('type', value); }
   get offText() { return this.getAttribute('offText'); }
   get onText() { return this.getAttribute('onText'); }
-
-  /* Lifecycle, element created */
-  constructor() {
-    super();
-  }
 
   /* Lifecycle, element appended to the DOM */
   connectedCallback() {
@@ -197,11 +194,9 @@ class JoomlaSwitcherElement extends HTMLElement {
   }
 
   /* Method to get the translated text. Internal */
-  /*eslint-disable */
-  getText(str, fallback) {
+  static getText(str, fallback) {
     return (window.Joomla && Joomla.JText && Joomla.JText._ && typeof Joomla.JText._ === 'function' && Joomla.JText._(str)) ? Joomla.JText._(str) : fallback;
   }
-  /*eslint-enable */
 }
 
 customElements.define('joomla-switcher', JoomlaSwitcherElement);

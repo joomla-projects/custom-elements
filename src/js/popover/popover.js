@@ -15,11 +15,6 @@ class JoomlaPopoverElement extends HTMLElement {
   get text() { return this.getAttribute('text'); }
   set text(value) { return this.getAttribute('text', value); }
 
-  /* Lifecycle, element created */
-  constructor() {
-    super();
-  }
-
   /* Lifecycle, element appended to the DOM */
   connectedCallback() {
     if (!this.position || (this.position && ['top', 'bottom', 'left', 'right'].indexOf(this.position) === -1)) {
@@ -35,7 +30,7 @@ class JoomlaPopoverElement extends HTMLElement {
 
     const showTip = () => {
       // Close on outside click
-      document.addEventListener('click', function (e) {
+      document.addEventListener('click', (e) => {
         if (btnElement !== e.target) {
           spanElement.innerHTML = '';
           self.removeEventListener('keydown', this);
@@ -43,7 +38,7 @@ class JoomlaPopoverElement extends HTMLElement {
       });
 
       // Remove toggletip on ESC
-      document.addEventListener('keydown', function (e) {
+      document.addEventListener('keydown', (e) => {
         if ((e.keyCode || e.which) === 9) {
           spanElement.innerHTML = '';
           self.removeEventListener('keydown', this);

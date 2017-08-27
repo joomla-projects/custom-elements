@@ -1,3 +1,5 @@
+const Joomla = window.Joomla || {};
+
 /** Include the relative styles */
 const style = document.createElement('style');
 style.innerHTML = '{{stylesheet}}';
@@ -16,11 +18,6 @@ class JoomlaAlertElement extends HTMLElement {
   set href(value) { return this.setAttribute('href', value); }
   get ['auto-dismiss']() { return parseInt(this.getAttribute('auto-dismiss'), 10); }
   set ['auto-dismiss'](value) { return this.setAttribute('auto-dismiss', parseInt(value, 10)); }
-
-  /* Lifecycle, element created */
-  constructor() {
-    super();
-  }
 
   /* Lifecycle, element appended to the DOM */
   connectedCallback() {
@@ -95,12 +92,10 @@ class JoomlaAlertElement extends HTMLElement {
   /* Method to close the alert */
   close() {
     this.dispatchCustomEvent('joomla.alert.close');
-    const fireEnd = () => {
+    this.addEventListener('transitionend', () => {
       this.dispatchCustomEvent('joomla.alert.closed');
       this.parentNode.removeChild(this);
-    };
-
-    this.addEventListener('transitionend', fireEnd);
+    });
     this.classList.remove('joomla-alert--show');
   }
 
@@ -173,11 +168,9 @@ class JoomlaAlertElement extends HTMLElement {
   }
 
   /* Method to get the translated text. Internal */
-  /*eslint-disable */
   getText(str, fallback) {
     return (window.Joomla && Joomla.JText && Joomla.JText._ && typeof Joomla.JText._ === 'function' && Joomla.JText._(str)) ? Joomla.JText._(str) : fallback;
   }
-  /*eslint-enable */
 }
 
 customElements.define('joomla-alert', JoomlaAlertElement);

@@ -17,7 +17,7 @@ class JoomlaModalElement extends HTMLElement {
 
     const triggerBtn = document.querySelector(`button[data-href="#${this.id}"]`);
     if (triggerBtn) {
-      triggerBtn.addEventListener('click', function () {
+      triggerBtn.addEventListener('click', () => {
         const currentButton = this;
         const dropShadow = document.createElement('div');
         dropShadow.classList.add('modal-backdrop', 'show');
