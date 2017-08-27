@@ -17,11 +17,9 @@ var _createClass = function () {
   if (!a) throw new ReferenceError('this hasn\'t been initialised - super() hasn\'t been called');return b && ('object' == (typeof b === 'undefined' ? 'undefined' : _typeof(b)) || 'function' == typeof b) ? b : a;
 }function _inherits(a, b) {
   if ('function' != typeof b && null !== b) throw new TypeError('Super expression must either be null or a function, not ' + (typeof b === 'undefined' ? 'undefined' : _typeof(b)));a.prototype = Object.create(b && b.prototype, { constructor: { value: a, enumerable: !1, writable: !0, configurable: !0 } }), b && (Object.setPrototypeOf ? Object.setPrototypeOf(a, b) : a.__proto__ = b);
-}var JoomlaAccordionElement = function (a) {
+}var style = document.createElement('style');style.innerHTML = '.collapse.show{display:block}.collapse{display:none}', document.head.appendChild(style);var JoomlaAccordionElement = function (a) {
   function b() {
-    _classCallCheck(this, b);var a = _possibleConstructorReturn(this, (b.__proto__ || Object.getPrototypeOf(b)).call(this));if (!document.getElementById('joomla-accordion-stylesheet')) {
-      var c = document.createElement('style');c.id = 'joomla-accordion-stylesheet', c.innerHTML = '', document.head.appendChild(c);
-    }return a;
+    return _classCallCheck(this, b), _possibleConstructorReturn(this, (b.__proto__ || Object.getPrototypeOf(b)).call(this));
   }return _inherits(b, a), _createClass(b, [{ key: 'connectedCallback', value: function connectedCallback() {
       var a = this;if (this.innerHTML) {
         this.setAttribute('role', 'tablist'), this.setAttribute('aria-multiselectable', 'true');var b = this.querySelectorAll('section');b.length && b.forEach(function (b) {

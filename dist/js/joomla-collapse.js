@@ -1,3 +1,8 @@
+/** Include the relative styles */
+const style = document.createElement('style');
+style.innerHTML = `joomla-collapse[state=closed]{display:none}joomla-collapse[state=open]{display:block}`;
+document.head.appendChild(style);
+
 class JoomlaCollapseElement extends HTMLElement {
   static get observedAttributes() {
     return ['state'];
@@ -8,13 +13,6 @@ class JoomlaCollapseElement extends HTMLElement {
 
   constructor() {
     super();
-
-    if (!document.getElementById('joomla-collapse-stylesheet')) {
-      const style = document.createElement('style');
-      style.id = 'joomla-collapse-stylesheet';
-      style.innerText = `joomla-collapse[state=closed]{display:none}joomla-collapse[state=open]{display:block}`;
-      document.head.appendChild(style);
-    }
   }
 
   connectedCallback() {
