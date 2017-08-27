@@ -4,3 +4,12 @@
 @import "../../../node_modules/bootstrap/scss/mixins";
 @import "../../../node_modules/bootstrap/scss/variables";
 @import "../variables";
+
+
+.collapse.show {
+  display: block;
+}
+
+.collapse {
+  display: none;
+}
