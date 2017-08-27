@@ -1,4 +1,9 @@
-class CollapseElement extends HTMLElement {
+/** Include the relative styles */
+const style = document.createElement('style');
+style.innerHTML = `joomla-collapse[state=closed]{display:none}joomla-collapse[state=open]{display:block}`;
+document.head.appendChild(style);
+
+class JoomlaCollapseElement extends HTMLElement {
   static get observedAttributes() {
     return ['state'];
   }
@@ -8,13 +13,6 @@ class CollapseElement extends HTMLElement {
 
   constructor() {
     super();
-
-    if (!document.getElementById('joomla-collapse-stylesheet')) {
-      const style = document.createElement('style');
-      style.id = 'joomla-collapse-stylesheet';
-      style.innerText = `joomla-collapse[state=closed]{display:none}joomla-collapse[state=open]{display:block}`;
-      document.head.appendChild(style);
-    }
   }
 
   connectedCallback() {
@@ -24,7 +22,7 @@ class CollapseElement extends HTMLElement {
 
     const linked = [].slice.call(document.querySelectorAll(`[href="#${this.id}"],[data-target="#${this.id}"]`));
 
-    linked.forEach(function (element) {
+    linked.forEach((element) => {
       if (!self.state || (self.state && self.state === 'closed')) {
         self.state = 'closed';
         element.setAttribute('aria-expanded', 'false');
@@ -81,4 +79,4 @@ class CollapseElement extends HTMLElement {
   }
 }
 
-customElements.define('joomla-collapse', CollapseElement);
+customElements.define('joomla-collapse', JoomlaCollapseElement);

@@ -1,28 +1,27 @@
 const Joomla = window.Joomla || {};
 
+/** Include the relative styles */
+const style = document.createElement('style');
+style.innerHTML = '{{stylesheet}}';
+document.head.appendChild(style);
+
 class JoomlaAlertElement extends HTMLElement {
   /* Attributes to monitor */
-  static get observedAttributes() { return ['level', 'dismiss', 'acknowledge', 'href']; }
-  get level() { return this.getAttribute('level'); }
-  set level(value) { return this.setAttribute('level', value); }
+  static get observedAttributes() { return ['type', 'dismiss', 'acknowledge', 'href', 'auto-dismiss']; }
+  get type() { return this.getAttribute('type'); }
+  set type(value) { return this.setAttribute('type', value); }
   get dismiss() { return this.getAttribute('dismiss'); }
   set dismiss(value) { return this.setAttribute('dismiss', value); }
   get acknowledge() { return this.getAttribute('acknowledge'); }
   set acknowledge(value) { return this.setAttribute('acknowledge', value); }
   get href() { return this.getAttribute('href'); }
   set href(value) { return this.setAttribute('href', value); }
+  get ['auto-dismiss']() { return parseInt(this.getAttribute('auto-dismiss'), 10); }
+  set ['auto-dismiss'](value) { return this.setAttribute('auto-dismiss', parseInt(value, 10)); }
 
   /* Lifecycle, element created */
   constructor() {
     super();
-
-    /** Include the relative styles */
-    if (!document.getElementById('joomla-alert-stylesheet')) {
-      const style = document.createElement('style');
-      style.id = 'joomla-alert-stylesheet';
-      style.innerHTML = '{{stylesheet}}';
-      document.head.appendChild(style);
-    }
   }
 
   /* Lifecycle, element appended to the DOM */
@@ -30,10 +29,11 @@ class JoomlaAlertElement extends HTMLElement {
     this.setAttribute('role', 'alert');
     this.classList.add('joomla-alert--show');
 
-    // Default to info
-    if (!this.level || ['info', 'warning', 'danger', 'success'].indexOf(this.level) === -1) {
-      this.setAttribute('level', 'info');
+    // If no type has been defined, the default as "info"
+    if (!this.type) {
+      this.setAttribute('type', 'info');
     }
+
     // Append button
     if (this.hasAttribute('dismiss') || this.hasAttribute('acknowledge') || (this.hasAttribute('href') && this.getAttribute('href') !== '')) {
       if (!this.querySelector('button.joomla-alert--close') && !this.querySelector('button.joomla-alert-button--close')) {
@@ -64,9 +64,9 @@ class JoomlaAlertElement extends HTMLElement {
   /* Respond to attribute changes */
   attributeChangedCallback(attr, oldValue, newValue) {
     switch (attr) {
-      case 'level':
-        if (!newValue || (newValue && ['info', 'warning', 'danger', 'success'].indexOf(newValue) === -1)) {
-          this.level = 'info';
+      case 'type':
+        if (!newValue) {
+          this.type = 'info';
         }
         break;
       case 'dismiss':
@@ -82,6 +82,11 @@ class JoomlaAlertElement extends HTMLElement {
           this.removeCloseButton();
         } else if (!this.querySelector('button.joomla-alert-button--close')) {
           this.appendCloseButton();
+        }
+        break;
+      case 'auto-dismiss':
+        if (!newValue || newValue === '') {
+          this.removeAttribute('auto-dismiss');
         }
         break;
       default:
@@ -146,14 +151,15 @@ class JoomlaAlertElement extends HTMLElement {
       });
     }
 
-    if (this.hasAttribute('auto-dismiss')) {
+    if (self['auto-dismiss'] > 0) {
+      const timeout = self['auto-dismiss'];
       setTimeout(() => {
         self.dispatchCustomEvent('joomla.alert.buttonClicked');
         if (self.href) {
           window.location.href = self.href;
         }
         self.close();
-      }, parseInt(self.getAttribute('auto-dismiss'), 50));
+      }, timeout);
     }
   }
 

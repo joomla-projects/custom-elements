@@ -1,4 +1,9 @@
-class DropdownElement extends HTMLElement {
+/** Include the relative styles */
+const style = document.createElement('style');
+style.innerHTML = `joomla-dropdown{display:none}joomla-dropdown[expanded]{position:relative;top:100%;left:0;z-index:1000;display:block;width:20rem;min-width:10rem;padding:.5rem 0;margin:.125rem 0 0;font-size:1rem;color:#292b2c;text-align:left;list-style:none;background-color:#fff;background-clip:padding-box;border:1px solid rgba(0,0,0,.15);border-radius:.25rem}`;
+document.head.appendChild(style);
+
+class JoomlaDropdownElement extends HTMLElement {
   static get observedAttributes() {
     return ['for'];
   }
@@ -8,13 +13,6 @@ class DropdownElement extends HTMLElement {
 
   constructor() {
     super();
-
-    if (!document.getElementById('joomla-dropdown-stylesheet')) {
-      const style = document.createElement('style');
-      style.id = 'joomla-dropdown-stylesheet';
-      style.innerText = `joomla-dropdown{display:none}joomla-dropdown[expanded]{position:relative;display:block;top:100%;left:0;z-index:1000;min-width:10rem;width:20rem;padding:.5rem 0;margin:.125rem 0 0;font-size:1rem;color:#292b2c;text-align:left;list-style:none;background-color:#fff;-webkit-background-clip:padding-box;background-clip:padding-box;border:1px solid rgba(0,0,0,.15);border-radius:.25rem}`;
-      document.head.appendChild(style);
-    }
   }
 
   connectedCallback() {
@@ -84,4 +82,4 @@ class DropdownElement extends HTMLElement {
   /*eslint-enable */
 }
 
-customElements.define('joomla-dropdown', DropdownElement);
+customElements.define('joomla-dropdown', JoomlaDropdownElement);

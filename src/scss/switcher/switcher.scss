@@ -1,15 +1,18 @@
-@import "../variables";
+// Switcher
 
-@import "node_modules/bootstrap/scss/mixins";
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../../node_modules/bootstrap/scss/mixins";
+@import "../../../node_modules/bootstrap/scss/variables";
+@import "../variables";
 
 $switcher-width:  62px;
 $switcher-height: 28px;
 $border-width:    1px;
 
 joomla-switcher {
+  box-sizing: border-box;
   display: block;
   height: $switcher-height;
-  box-sizing: border-box;
 
   .switcher {
     position: relative;
@@ -26,25 +29,11 @@ joomla-switcher {
     border-radius: $border-radius;
     box-shadow: 0 0 0 0 rgb(223,223,223) inset;
     transition: border .4s ease 0s, box-shadow .4s ease 0s;
-  }
 
-  .switcher.active {
-    background-color: $brand-success;
-    border-color: $brand-success;
-    box-shadow: 0 0 0 calc(#{$switcher-height} / 2) $brand-success inset;
-    transition: border .4s ease 0s, box-shadow .4s ease 0s, background-color 1.2s ease 0s;
-  }
+    &.active {
+      transition: border .4s ease 0s, box-shadow .4s ease 0s, background-color 1.2s ease 0s;
+    }
 
-  .switcher-danger.switcher.active {
-    background-color: $brand-danger;
-    border-color: $brand-danger;
-    box-shadow: 0 0 0 calc(#{$switcher-height} / 2) $brand-danger inset;
-  }
-
-  .switcher-primary.switcher.active {
-    background-color: $brand-primary;
-    border-color: $brand-primary;
-    box-shadow: 0 0 0 calc(#{$switcher-height} / 2) $brand-primary inset;
   }
 
   input {
@@ -67,8 +56,12 @@ joomla-switcher {
     height: calc(#{$switcher-height} - (#{$border-width} * 2));
     background: $white;
     border-radius: $border-radius;
-    box-shadow: 0 0 1px rgba(0,0,0,.1) inset, 0 1px 3px rgba(0,0,0,.15);
+    box-shadow: 0 1px 3px rgba(0,0,0,.15);
     transition: left .2s ease 0s;
+  }
+
+  .switcher:focus .switch {
+    animation: switcherPulsate 1.5s infinite;
   }
 
   input:checked~.switch {
@@ -90,7 +83,7 @@ joomla-switcher {
       position: absolute;
       top: 0;
       left: 10px;
-      color: $gray-light;
+      color: $gray-600;
       visibility: hidden;
       opacity: 0;
       transition: all .2s ease-in-out;
@@ -105,4 +98,25 @@ joomla-switcher {
 
   }
 
+}
+
+// Alternate styles
+@each $color, $value in $theme-colors {
+  joomla-switcher[type="#{$color}"] .switcher.active {
+    background-color: theme-color-level($color);
+    border-color: theme-color-level($color);
+    box-shadow: 0 0 0 calc(#{$switcher-height} / 2) theme-color-level($color) inset;
+  }
+}
+
+@keyframes switcherPulsate {
+  0% {
+    box-shadow: 0 0 0 0 rgba(66,133,244,.55);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(66,133,244,0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(66,133,244,0);
+  }
 }

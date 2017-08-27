@@ -1,4 +1,9 @@
-class TabElement extends HTMLElement {
+/** Include the relative styles */
+const style = document.createElement('style');
+style.innerHTML = `joomla-tab{display:flex;flex-direction:column}joomla-tab>ul{display:flex;padding:0;margin:0;overflow-x:auto;overflow-y:hidden;white-space:nowrap;list-style:outside none none;background-color:#f5f5f5;border-color:#ccc #ccc currentcolor;border-style:solid solid none;border-width:1px 1px 0;border-radius:.25rem .25rem 0 0;border-image:none;box-shadow:0 1px #fff inset,0 2px 3px -3px rgba(0,0,0,.15),0 -4px 0 rgba(0,0,0,.05) inset,0 0 3px rgba(0,0,0,.04)}joomla-tab a[role=tab]{position:relative;display:block;padding:.75em 1em;color:#0d1321;text-decoration:none;box-shadow:1px 0 0 rgba(0,0,0,.05)}joomla-tab a[role=tab][active]{background-color:rgba(0,0,0,.03);background-image:linear-gradient(to bottom,transparent,rgba(0,0,0,.05) 100%);border-right:0 none;border-left:0 none;border-top-left-radius:0;border-top-right-radius:0;box-shadow:2px 0 1px -1px rgba(0,0,0,.08) inset,-2px 0 1px -1px rgba(0,0,0,.08) inset,0 1px 0 rgba(0,0,0,.02) inset}joomla-tab a[role=tab][active]::after{position:absolute;right:0;bottom:-1px;left:0;height:5px;content:"";background-color:#006898;opacity:.8}joomla-tab>section{display:none;padding:15px;background-color:#fefefe;border:1px solid #ccc;border-radius:0 0 .25rem .25rem;box-shadow:0 0 3px rgba(0,0,0,.04)}joomla-tab>section[active]{display:block}joomla-tab[orientation=vertical]{flex-direction:row;align-items:flex-start}joomla-tab[orientation=vertical]>ul{flex-direction:column;min-width:30%;height:auto;overflow:hidden;border:1px solid #ccc;border-radius:.25rem;box-shadow:none}li joomla-tab[orientation=vertical]:last-of-type a{border-bottom:0}joomla-tab[orientation=vertical] a{position:relative;display:block;padding:.75em 1em;color:#0d1321;text-decoration:none;border-bottom:1px solid #ddd;box-shadow:none}joomla-tab[orientation=vertical] a[active]{background-color:#fff;background-image:none;border-right:0 none;border-left:0 none;box-shadow:none}joomla-tab[orientation=vertical] a[active]::after{top:0;bottom:0;left:-1px;width:5px;height:auto}joomla-tab[orientation=vertical]>section{padding:15px;border:0 none;box-shadow:none}joomla-tab[view=accordion]>ul{flex-direction:column;white-space:normal;border-radius:.25rem;box-shadow:0 1px #fff inset,0 0 3px rgba(0,0,0,.04)}joomla-tab[view=accordion] section{display:none;padding:15px}joomla-tab[view=accordion] section[active]{display:block;border-bottom:1px solid #ddd}joomla-tab[view=accordion] [active]{background-color:#fff}joomla-tab[view=accordion] a[role=tab]{border-bottom:1px solid #ddd}joomla-tab[view=accordion] a[role=tab][active]::after{top:0;left:0;width:5px;height:100%}`;
+document.head.appendChild(style);
+
+class JoomlaTabElement extends HTMLElement {
   /* Attributes to monitor */
   static get observedAttributes() { return ['recall', 'orientation', 'view']; }
   get recall() { return this.getAttribute('recall'); }
@@ -13,13 +18,6 @@ class TabElement extends HTMLElement {
 
     this.hasActive = false;
     this.currentActive = '';
-
-    if (!document.getElementById('joomla-tab-stylesheet')) {
-      const style = document.createElement('style');
-      style.id = 'joomla-tab-stylesheet';
-      style.innerText = `joomla-tab{display:flex;flex-direction:column}joomla-tab>ul{display:flex;background-color:#f5f5f5;border-color:#ccc #ccc currentcolor;border-image:none;border-radius:.25rem .25rem 0 0;border-style:solid solid none;border-width:1px 1px 0;box-shadow:0 1px #fff inset,0 2px 3px -3px rgba(0,0,0,.15),0 -4px 0 rgba(0,0,0,.05) inset,0 0 3px rgba(0,0,0,.04);margin:0;padding:0;list-style:outside none none;overflow-x:auto;overflow-y:hidden;white-space:nowrap}joomla-tab a[role=tab]{display:block;color:#0d1321;padding:.75em 1em;position:relative;box-shadow:1px 0 0 rgba(0,0,0,.05);text-decoration:none}joomla-tab a[role=tab][active]{background-color:rgba(0,0,0,.03);background-image:linear-gradient(to bottom,transparent,rgba(0,0,0,.05) 100%);border-left:0 none;border-right:0 none;border-top-left-radius:0;border-top-right-radius:0;box-shadow:2px 0 1px -1px rgba(0,0,0,.08) inset,-2px 0 1px -1px rgba(0,0,0,.08) inset,0 1px 0 rgba(0,0,0,.02) inset}joomla-tab a[role=tab][active]:after{background-color:#006898;bottom:-1px;content:"";height:5px;left:0;opacity:.8;position:absolute;right:0}joomla-tab>section{display:none;background-color:#fefefe;border:1px solid #ccc;border-radius:0 0 .25rem .25rem;box-shadow:0 0 3px rgba(0,0,0,.04);padding:15px}joomla-tab>section[active]{display:block}joomla-tab[orientation=vertical]{flex-direction:row;align-items:flex-start}joomla-tab[orientation=vertical]>ul{flex-direction:column;min-width:30%;height:auto;border:1px solid #ccc;border-radius:.25rem;box-shadow:none;overflow:hidden}joomla-tab[orientation=vertical] li:last-of-type a{border-bottom:0}joomla-tab[orientation=vertical] a{display:block;color:#0d1321;padding:.75em 1em;position:relative;border-bottom:1px solid #ddd;box-shadow:none;text-decoration:none}joomla-tab[orientation=vertical] a[active]{border-left:0 none;border-right:0 none;background-color:#fff;background-image:none;box-shadow:none}joomla-tab[orientation=vertical] a[active]:after{left:-1px;width:5px;height:auto;top:0;bottom:0}joomla-tab[orientation=vertical]>section{border:0 none;box-shadow:none;padding:15px}joomla-tab[view=accordion]>ul{flex-direction:column;border-radius:.25rem;white-space:normal;box-shadow:0 1px #fff inset,0 0 3px rgba(0,0,0,.04)}joomla-tab[view=accordion] section{display:none;padding:15px}joomla-tab[view=accordion] section[active]{display:block;border-bottom:1px solid #ddd}joomla-tab[view=accordion] [active]{background-color:#fff}joomla-tab[view=accordion] a[role=tab]{border-bottom:1px solid #ddd}joomla-tab[view=accordion] a[role=tab][active]:after{width:5px;height:100%;top:0;left:0}`;
-      document.head.appendChild(style);
-    }
   }
 
   /* Lifecycle, element appended to the DOM */
@@ -261,9 +259,11 @@ class TabElement extends HTMLElement {
     this.querySelector('ul').addEventListener('keydown', keyBehaviour);
   }
 
-  static getStorageKey() {
+  /*eslint-disable */
+  getStorageKey() {
     return window.location.href.toString().split(window.location.host)[1].replace(/&return=[a-zA-Z0-9%]+/, '').split('#')[0];
   }
+  /*eslint-disable */
 
   restoreState() {
     const tabLinkHash = sessionStorage.getItem(this.getStorageKey());
@@ -288,7 +288,7 @@ class TabElement extends HTMLElement {
     }
   }
 
-  static saveState(value) {
+  saveState(value) {
     const storageKey = this.getStorageKey();
     sessionStorage.setItem(storageKey, value);
   }
@@ -326,12 +326,14 @@ class TabElement extends HTMLElement {
   /*eslint-enable */
 
   /* Method to dispatch events */
-  static dispatchCustomEvent(eventName, element, related) {
+  /*eslint-disable */
+  dispatchCustomEvent(eventName, element, related) {
     const OriginalCustomEvent = new CustomEvent(eventName, { bubbles: true, cancelable: true });
     OriginalCustomEvent.relatedTarget = related;
     element.dispatchEvent(OriginalCustomEvent);
     element.removeEventListener(eventName, element);
   }
+  /*eslint-enable */
 }
 
-customElements.define('joomla-tab', TabElement);
+customElements.define('joomla-tab', JoomlaTabElement);

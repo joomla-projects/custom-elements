@@ -1,4 +1,9 @@
-class SwitcherElement extends HTMLElement {
+/** Include the relative styles */
+const style = document.createElement('style');
+style.innerHTML = `joomla-switcher{box-sizing:border-box;display:block;height:28px}joomla-switcher .switcher{position:relative;box-sizing:border-box;display:inline-block;width:62px;height:28px;vertical-align:middle;cursor:pointer;user-select:none;background-color:#f2f2f2;background-clip:content-box;border:1px solid rgba(0,0,0,.18);border-radius:.25rem;box-shadow:0 0 0 0 #dfdfdf inset;transition:border .4s ease 0s,box-shadow .4s ease 0s}joomla-switcher .switcher.active{transition:border .4s ease 0s,box-shadow .4s ease 0s,background-color 1.2s ease 0s}joomla-switcher input{position:absolute;top:0;left:0;z-index:2;width:62px;height:28px;padding:0;margin:0;cursor:pointer;opacity:0}joomla-switcher .switch{position:absolute;top:0;width:calc(62px / 2);height:calc(28px - (1px * 2));background:#fff;border-radius:.25rem;box-shadow:0 1px 3px rgba(0,0,0,.15);transition:left .2s ease 0s}joomla-switcher .switcher:focus .switch{animation:switcherPulsate 1.5s infinite}joomla-switcher input:checked~.switch{left:0}joomla-switcher input~:checked~.switch{left:calc((62px / 2) - (1px * 2))}joomla-switcher input:checked{z-index:0}joomla-switcher .switcher-labels{position:relative}joomla-switcher .switcher-labels span{position:absolute;top:0;left:10px;color:#868e96;visibility:hidden;opacity:0;transition:all .2s ease-in-out}joomla-switcher .switcher-labels span.active{visibility:visible;opacity:1;transition:all .2s ease-in-out}joomla-switcher[type=primary] .switcher.active{background-color:#006898;border-color:#006898;box-shadow:0 0 0 calc(28px / 2) #006898 inset}joomla-switcher[type=secondary] .switcher.active{background-color:#868e96;border-color:#868e96;box-shadow:0 0 0 calc(28px / 2) #868e96 inset}joomla-switcher[type=success] .switcher.active{background-color:#438243;border-color:#438243;box-shadow:0 0 0 calc(28px / 2) #438243 inset}joomla-switcher[type=info] .switcher.active{background-color:#17a2b8;border-color:#17a2b8;box-shadow:0 0 0 calc(28px / 2) #17a2b8 inset}joomla-switcher[type=warning] .switcher.active{background-color:#f0ad4e;border-color:#f0ad4e;box-shadow:0 0 0 calc(28px / 2) #f0ad4e inset}joomla-switcher[type=danger] .switcher.active{background-color:#d9534f;border-color:#d9534f;box-shadow:0 0 0 calc(28px / 2) #d9534f inset}joomla-switcher[type=light] .switcher.active{background-color:#f8f9fa;border-color:#f8f9fa;box-shadow:0 0 0 calc(28px / 2) #f8f9fa inset}joomla-switcher[type=dark] .switcher.active{background-color:#343a40;border-color:#343a40;box-shadow:0 0 0 calc(28px / 2) #343a40 inset}@keyframes switcherPulsate{0%{box-shadow:0 0 0 0 rgba(66,133,244,.55)}70%{box-shadow:0 0 0 10px rgba(66,133,244,0)}100%{box-shadow:0 0 0 0 rgba(66,133,244,0)}}`;
+document.head.appendChild(style);
+
+class JoomlaSwitcherElement extends HTMLElement {
   /* Attributes to monitor */
   static get observedAttributes() { return ['type', 'offText', 'onText']; }
   get type() { return this.getAttribute('type'); }
@@ -9,13 +14,6 @@ class SwitcherElement extends HTMLElement {
   /* Lifecycle, element created */
   constructor() {
     super();
-
-    if (!document.getElementById('joomla-switcher-stylesheet')) {
-      const style = document.createElement('style');
-      style.id = 'joomla-switcher-stylesheet';
-      style.innerHTML = `joomla-switcher{display:block;height:28px;box-sizing:border-box}joomla-switcher .switcher{position:relative;box-sizing:border-box;display:inline-block;width:62px;height:28px;vertical-align:middle;cursor:pointer;user-select:none;background-color:#f2f2f2;background-clip:content-box;border:1px solid rgba(0,0,0,.18);border-radius:.25rem;box-shadow:0 0 0 0 #dfdfdf inset;transition:border .4s ease 0s,box-shadow .4s ease 0s}joomla-switcher .switcher.active{background-color:#5cb85c;border-color:#5cb85c;box-shadow:0 0 0 calc(28px / 2) #5cb85c inset;transition:border .4s ease 0s,box-shadow .4s ease 0s,background-color 1.2s ease 0s}joomla-switcher .switcher-danger.switcher.active{background-color:#d9534f;border-color:#d9534f;box-shadow:0 0 0 calc(28px / 2) #d9534f inset}joomla-switcher .switcher-primary.switcher.active{background-color:#0275d8;border-color:#0275d8;box-shadow:0 0 0 calc(28px / 2) #0275d8 inset}joomla-switcher input{position:absolute;top:0;left:0;z-index:2;width:62px;height:28px;padding:0;margin:0;cursor:pointer;opacity:0}joomla-switcher .switch{position:absolute;top:0;width:calc(62px / 2);height:calc(28px - (1px * 2));background:#fff;border-radius:.25rem;box-shadow:0 0 1px rgba(0,0,0,.1) inset,0 1px 3px rgba(0,0,0,.15);transition:left .2s ease 0s}joomla-switcher input:checked~.switch{left:0}joomla-switcher input~:checked~.switch{left:calc((62px / 2) - (1px * 2))}joomla-switcher input:checked{z-index:0}joomla-switcher .switcher-labels{position:relative}joomla-switcher .switcher-labels span{position:absolute;top:0;left:10px;color:#636c72;visibility:hidden;opacity:0;transition:all .2s ease-in-out}joomla-switcher .switcher-labels span.active{visibility:visible;opacity:1;transition:all .2s ease-in-out}`;
-      document.head.appendChild(style);
-    }
   }
 
   /* Lifecycle, element appended to the DOM */
@@ -93,14 +91,21 @@ class SwitcherElement extends HTMLElement {
     const spanFirst = document.createElement('span');
     spanFirst.classList.add('switcher');
 
-    if (this.type && ['primary', 'danger'].indexOf(this.type) !== -1) {
-      spanFirst.classList.add(`switcher-${this.type}`);
+    // If no type has been defined, the default as "success"
+    if (!this.type) {
+      this.setAttribute('type', 'success');
     }
 
     const switchEl = document.createElement('span');
     switchEl.classList.add('switch');
 
     inputs.forEach((input, index) => {
+      input.setAttribute('role', 'switch');
+
+      if (input.checked) {
+        input.setAttribute('aria-checked', true);
+      }
+
       spanFirst.appendChild(input);
 
       if (index === 1 && input.checked) {
@@ -164,6 +169,7 @@ class SwitcherElement extends HTMLElement {
       inputs.forEach((input) => {
         input.classList.remove('active');
         input.removeAttribute('checked');
+        input.setAttribute('aria-checked', false);
       });
       newActive.classList.add('active');
 
@@ -172,12 +178,14 @@ class SwitcherElement extends HTMLElement {
       inputs.forEach((input) => {
         input.classList.remove('active');
         input.removeAttribute('checked');
+        input.setAttribute('aria-checked', false);
       });
 
       this.dispatchCustomEvent('joomla.switcher.off');
     }
 
     newActive.setAttribute('checked', '');
+    newActive.setAttribute('aria-checked', true);
     parent.nextElementSibling.querySelector(`.switcher-label-${newActive.value}`).classList.add('active');
   }
 
@@ -196,4 +204,4 @@ class SwitcherElement extends HTMLElement {
   /*eslint-enable */
 }
 
-customElements.define('joomla-switcher', SwitcherElement);
+customElements.define('joomla-switcher', JoomlaSwitcherElement);

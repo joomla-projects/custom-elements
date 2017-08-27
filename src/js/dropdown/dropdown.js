@@ -1,3 +1,8 @@
+/** Include the relative styles */
+const style = document.createElement('style');
+style.innerHTML = '{{stylesheet}}';
+document.head.appendChild(style);
+
 class JoomlaDropdownElement extends HTMLElement {
   static get observedAttributes() {
     return ['for'];
@@ -8,13 +13,6 @@ class JoomlaDropdownElement extends HTMLElement {
 
   constructor() {
     super();
-
-    if (!document.getElementById('joomla-dropdown-stylesheet')) {
-      const style = document.createElement('style');
-      style.id = 'joomla-dropdown-stylesheet';
-      style.innerText = '{{stylesheet}}';
-      document.head.appendChild(style);
-    }
   }
 
   connectedCallback() {

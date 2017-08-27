@@ -1,3 +1,8 @@
+/** Include the relative styles */
+const style = document.createElement('style');
+style.innerHTML = '{{stylesheet}}';
+document.head.appendChild(style);
+
 class JoomlaTabElement extends HTMLElement {
   /* Attributes to monitor */
   static get observedAttributes() { return ['recall', 'orientation', 'view']; }
@@ -13,13 +18,6 @@ class JoomlaTabElement extends HTMLElement {
 
     this.hasActive = false;
     this.currentActive = '';
-
-    if (!document.getElementById('joomla-tab-stylesheet')) {
-      const style = document.createElement('style');
-      style.id = 'joomla-tab-stylesheet';
-      style.innerText = '{{stylesheet}}';
-      document.head.appendChild(style);
-    }
   }
 
   /* Lifecycle, element appended to the DOM */
@@ -261,9 +259,11 @@ class JoomlaTabElement extends HTMLElement {
     this.querySelector('ul').addEventListener('keydown', keyBehaviour);
   }
 
-  static getStorageKey() {
+  /*eslint-disable */
+  getStorageKey() {
     return window.location.href.toString().split(window.location.host)[1].replace(/&return=[a-zA-Z0-9%]+/, '').split('#')[0];
   }
+  /*eslint-disable */
 
   restoreState() {
     const tabLinkHash = sessionStorage.getItem(this.getStorageKey());
@@ -288,7 +288,7 @@ class JoomlaTabElement extends HTMLElement {
     }
   }
 
-  static saveState(value) {
+  saveState(value) {
     const storageKey = this.getStorageKey();
     sessionStorage.setItem(storageKey, value);
   }
@@ -326,12 +326,14 @@ class JoomlaTabElement extends HTMLElement {
   /*eslint-enable */
 
   /* Method to dispatch events */
-  static dispatchCustomEvent(eventName, element, related) {
+  /*eslint-disable */
+  dispatchCustomEvent(eventName, element, related) {
     const OriginalCustomEvent = new CustomEvent(eventName, { bubbles: true, cancelable: true });
     OriginalCustomEvent.relatedTarget = related;
     element.dispatchEvent(OriginalCustomEvent);
     element.removeEventListener(eventName, element);
   }
+  /*eslint-enable */
 }
 
 customElements.define('joomla-tab', JoomlaTabElement);

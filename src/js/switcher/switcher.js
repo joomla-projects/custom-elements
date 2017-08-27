@@ -1,5 +1,10 @@
 const Joomla = window.Joomla || {};
 
+/** Include the relative styles */
+const style = document.createElement('style');
+style.innerHTML = '{{stylesheet}}';
+document.head.appendChild(style);
+
 class JoomlaSwitcherElement extends HTMLElement {
   /* Attributes to monitor */
   static get observedAttributes() { return ['type', 'offText', 'onText']; }
@@ -11,13 +16,6 @@ class JoomlaSwitcherElement extends HTMLElement {
   /* Lifecycle, element created */
   constructor() {
     super();
-
-    if (!document.getElementById('joomla-switcher-stylesheet')) {
-      const style = document.createElement('style');
-      style.id = 'joomla-switcher-stylesheet';
-      style.innerHTML = '{{stylesheet}}';
-      document.head.appendChild(style);
-    }
   }
 
   /* Lifecycle, element appended to the DOM */
@@ -95,14 +93,21 @@ class JoomlaSwitcherElement extends HTMLElement {
     const spanFirst = document.createElement('span');
     spanFirst.classList.add('switcher');
 
-    if (this.type && ['primary', 'danger'].indexOf(this.type) !== -1) {
-      spanFirst.classList.add(`switcher-${this.type}`);
+    // If no type has been defined, the default as "success"
+    if (!this.type) {
+      this.setAttribute('type', 'success');
     }
 
     const switchEl = document.createElement('span');
     switchEl.classList.add('switch');
 
     inputs.forEach((input, index) => {
+      input.setAttribute('role', 'switch');
+
+      if (input.checked) {
+        input.setAttribute('aria-checked', true);
+      }
+
       spanFirst.appendChild(input);
 
       if (index === 1 && input.checked) {
@@ -166,6 +171,7 @@ class JoomlaSwitcherElement extends HTMLElement {
       inputs.forEach((input) => {
         input.classList.remove('active');
         input.removeAttribute('checked');
+        input.setAttribute('aria-checked', false);
       });
       newActive.classList.add('active');
 
@@ -174,12 +180,14 @@ class JoomlaSwitcherElement extends HTMLElement {
       inputs.forEach((input) => {
         input.classList.remove('active');
         input.removeAttribute('checked');
+        input.setAttribute('aria-checked', false);
       });
 
       this.dispatchCustomEvent('joomla.switcher.off');
     }
 
     newActive.setAttribute('checked', '');
+    newActive.setAttribute('aria-checked', true);
     parent.nextElementSibling.querySelector(`.switcher-label-${newActive.value}`).classList.add('active');
   }
 

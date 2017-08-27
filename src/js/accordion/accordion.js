@@ -1,13 +1,11 @@
+/** Include the relative styles */
+const style = document.createElement('style');
+style.innerHTML = '{{stylesheet}}';
+document.head.appendChild(style);
+
 class JoomlaAccordionElement extends HTMLElement {
   constructor() {
     super();
-
-    if (!document.getElementById('joomla-accordion-stylesheet')) {
-      const style = document.createElement('style');
-      style.id = 'joomla-accordion-stylesheet';
-      style.innerHTML = '{{stylesheet}}';
-      document.head.appendChild(style);
-    }
   }
 
   connectedCallback() {

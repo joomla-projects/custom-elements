@@ -17,11 +17,9 @@ var _createClass = function () {
   if (!a) throw new ReferenceError('this hasn\'t been initialised - super() hasn\'t been called');return b && ('object' == (typeof b === 'undefined' ? 'undefined' : _typeof(b)) || 'function' == typeof b) ? b : a;
 }function _inherits(a, b) {
   if ('function' != typeof b && null !== b) throw new TypeError('Super expression must either be null or a function, not ' + (typeof b === 'undefined' ? 'undefined' : _typeof(b)));a.prototype = Object.create(b && b.prototype, { constructor: { value: a, enumerable: !1, writable: !0, configurable: !0 } }), b && (Object.setPrototypeOf ? Object.setPrototypeOf(a, b) : a.__proto__ = b);
-}var ModalElement = function (a) {
+}var style = document.createElement('style');style.innerHTML = 'joomla-modal{position:fixed;top:0;right:0;bottom:0;left:0;z-index:1050;box-sizing:inherit;display:none;max-width:500px;margin:10px auto;overflow:hidden;border-radius:5px;outline:0}joomla-modal.show{display:block}joomla-modal .modal-dialog{position:relative;display:flex;flex-direction:column;background-color:#fff;background-clip:padding-box;border:1px solid rgba(0,0,0,.2);border-radius:.3rem;outline:0}joomla-modal .modal-dialog header{display:flex;align-items:center;justify-content:space-between;padding:15px;border-bottom:1px solid #e9ecef}joomla-modal .modal-dialog header .close{float:right;padding:0;font-size:1.5rem;font-weight:700;line-height:1;color:#000;text-shadow:0 1px 0 #fff;cursor:pointer;background:0 0;border:0;opacity:.5;-webkit-appearance:none}joomla-modal .modal-dialog section{position:relative;flex:1 1 auto;padding:15px}joomla-modal .modal-dialog footer{display:flex;align-items:center;justify-content:flex-end;padding:15px;border-top:1px solid #e9ecef}.modal-backdrop.show{opacity:.5}.modal-backdrop{position:fixed;top:0;right:0;bottom:0;left:0;z-index:1040;background-color:#000}', document.head.appendChild(style);var JoomlaModalElement = function (a) {
   function b() {
-    _classCallCheck(this, b);var a = _possibleConstructorReturn(this, (b.__proto__ || Object.getPrototypeOf(b)).call(this));if (window.Joomla = window.Joomla || {}, window.Joomla.UI = {}, window.Joomla.UI.modal = {}, !document.getElementById('joomla-modal-stylesheet')) {
-      var c = document.createElement('style');c.id = 'joomla-modal-stylesheet', c.innerHTML = 'joomla-modal .modal-dialog{position:fixed;top:0;right:0;bottom:0;left:0;z-index:1050;overflow:hidden;display:none;outline:0}joomla-modal.show .modal-dialog{display:block}', document.head.appendChild(c);
-    }return a;
+    _classCallCheck(this, b);var a = _possibleConstructorReturn(this, (b.__proto__ || Object.getPrototypeOf(b)).call(this));return window.Joomla = window.Joomla || {}, window.Joomla.UI = {}, window.Joomla.UI.modal = {}, a;
   }return _inherits(b, a), _createClass(b, [{ key: 'connectedCallback', value: function connectedCallback() {
       var a = this,
           b = document.querySelector('button[data-href="#' + this.id + '"]');b && b.addEventListener('click', function () {
@@ -43,6 +41,6 @@ var _createClass = function () {
     } }, { key: 'findAncestorClass', value: function findAncestorClass(a, b) {
       for (; (a = a.parentElement) && !a.classList.contains(b);) {}return a;
     } }], [{ key: 'observedAttributes', get: function get() {} }]), b;
-}(HTMLElement);customElements.define('joomla-modal', ModalElement);
+}(HTMLElement);customElements.define('joomla-modal', JoomlaModalElement);
 
 },{}]},{},[1]);

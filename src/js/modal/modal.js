@@ -1,3 +1,8 @@
+/** Include the relative styles */
+const style = document.createElement('style');
+style.innerHTML = '{{stylesheet}}';
+document.head.appendChild(style);
+
 class JoomlaModalElement extends HTMLElement {
   constructor() {
     super();
@@ -5,13 +10,6 @@ class JoomlaModalElement extends HTMLElement {
     window.Joomla = window.Joomla || {};
     window.Joomla.UI = {};
     window.Joomla.UI.modal = {};
-
-    if (!document.getElementById('joomla-modal-stylesheet')) {
-      const style = document.createElement('style');
-      style.id = 'joomla-modal-stylesheet';
-      style.innerHTML = '{{stylesheet}}';
-      document.head.appendChild(style);
-    }
   }
 
   connectedCallback() {

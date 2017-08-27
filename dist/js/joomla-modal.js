@@ -1,17 +1,15 @@
-class ModalElement extends HTMLElement {
+/** Include the relative styles */
+const style = document.createElement('style');
+style.innerHTML = `joomla-modal{position:fixed;top:0;right:0;bottom:0;left:0;z-index:1050;box-sizing:inherit;display:none;max-width:500px;margin:10px auto;overflow:hidden;border-radius:5px;outline:0}joomla-modal.show{display:block}joomla-modal .modal-dialog{position:relative;display:flex;flex-direction:column;background-color:#fff;background-clip:padding-box;border:1px solid rgba(0,0,0,.2);border-radius:.3rem;outline:0}joomla-modal .modal-dialog header{display:flex;align-items:center;justify-content:space-between;padding:15px;border-bottom:1px solid #e9ecef}joomla-modal .modal-dialog header .close{float:right;padding:0;font-size:1.5rem;font-weight:700;line-height:1;color:#000;text-shadow:0 1px 0 #fff;cursor:pointer;background:0 0;border:0;opacity:.5;-webkit-appearance:none}joomla-modal .modal-dialog section{position:relative;flex:1 1 auto;padding:15px}joomla-modal .modal-dialog footer{display:flex;align-items:center;justify-content:flex-end;padding:15px;border-top:1px solid #e9ecef}.modal-backdrop.show{opacity:.5}.modal-backdrop{position:fixed;top:0;right:0;bottom:0;left:0;z-index:1040;background-color:#000}`;
+document.head.appendChild(style);
+
+class JoomlaModalElement extends HTMLElement {
   constructor() {
     super();
 
     window.Joomla = window.Joomla || {};
     window.Joomla.UI = {};
     window.Joomla.UI.modal = {};
-
-    if (!document.getElementById('joomla-modal-stylesheet')) {
-      const style = document.createElement('style');
-      style.id = 'joomla-modal-stylesheet';
-      style.innerHTML = `joomla-modal .modal-dialog{position:fixed;top:0;right:0;bottom:0;left:0;z-index:1050;overflow:hidden;display:none;outline:0}joomla-modal.show .modal-dialog{display:block}`;
-      document.head.appendChild(style);
-    }
   }
 
   connectedCallback() {
@@ -85,4 +83,4 @@ class ModalElement extends HTMLElement {
   }
   /*eslint-disable */
 }
-customElements.define('joomla-modal', ModalElement);
+customElements.define('joomla-modal', JoomlaModalElement);

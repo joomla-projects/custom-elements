@@ -1,6 +1,9 @@
 # Default application configuration that all configurations inherit from.
 scss_files:
-  "src/scss/**/*.scss"
+  "src/**/*.scss"
+
+exclude:
+  - "scss/_normalize.scss"
 
 plugin_directories: ['.scss-linters']
 
@@ -24,6 +27,8 @@ linters:
   BorderZero:
     enabled: true
     convention: zero # or `none`
+    exclude:
+      - _normalize.scss
 
   ChainedClasses:
     enabled: false
@@ -36,6 +41,9 @@ linters:
 
   Comment:
     enabled: true
+    exclude:
+      - _normalize.scss
+      - bootstrap.scss
     style: silent
 
   DebugStatement:
@@ -99,6 +107,8 @@ linters:
   LeadingZero:
     enabled: true
     style: exclude_zero # or 'include_zero'
+    exclude:
+      - _normalize.scss
 
   MergeableSelector:
     enabled: false
@@ -127,6 +137,8 @@ linters:
     ignore_unspecified: false
     min_properties: 2
     separate_groups: false
+    exclude:
+      - _normalize.scss
     order:
       - position
       - top
@@ -437,7 +449,7 @@ linters:
     enabled: true
 
   QualifyingElement:
-    enabled: true
+    enabled: false
     allow_element_with_attribute: false
     allow_element_with_class: false
     allow_element_with_id: false
@@ -525,6 +537,8 @@ linters:
     identifier_list: base
     additional_identifiers: []
     excluded_identifiers: []
+    exclude:
+      - _normalize.scss
 
   ZeroUnit:
     enabled: true

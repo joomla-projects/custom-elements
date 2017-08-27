@@ -1,13 +1,11 @@
-class AccordionElement extends HTMLElement {
+/** Include the relative styles */
+const style = document.createElement('style');
+style.innerHTML = `.collapse.show{display:block}.collapse{display:none}`;
+document.head.appendChild(style);
+
+class JoomlaAccordionElement extends HTMLElement {
   constructor() {
     super();
-
-    if (!document.getElementById('joomla-accordion-stylesheet')) {
-      const style = document.createElement('style');
-      style.id = 'joomla-accordion-stylesheet';
-      style.innerHTML = ``;
-      document.head.appendChild(style);
-    }
   }
 
   connectedCallback() {
@@ -88,4 +86,4 @@ class AccordionElement extends HTMLElement {
     });
   }
 }
-customElements.define('joomla-accordion', AccordionElement);
+customElements.define('joomla-accordion', JoomlaAccordionElement);
