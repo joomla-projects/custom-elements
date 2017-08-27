@@ -38,8 +38,12 @@ var _createClass = function () {
       return this.getAttribute('href');
     }, set: function set(a) {
       return this.setAttribute('href', a);
+    } }, { key: 'auto-dismiss', get: function get() {
+      return parseInt(this.getAttribute('auto-dismiss'), 13);
+    }, set: function set(a) {
+      return this.setAttribute('auto-dismiss', parseInt(a));
     } }], [{ key: 'observedAttributes', get: function get() {
-      return ['type', 'dismiss', 'acknowledge', 'href'];
+      return ['type', 'dismiss', 'acknowledge', 'href', 'auto-dismiss'];
     } }]), _createClass(b, [{ key: 'connectedCallback', value: function connectedCallback() {
       this.setAttribute('role', 'alert'), this.classList.add('joomla-alert--show'), this.type || this.setAttribute('type', 'info'), (this.hasAttribute('dismiss') || this.hasAttribute('acknowledge') || this.hasAttribute('href') && '' !== this.getAttribute('href')) && !this.querySelector('button.joomla-alert--close') && !this.querySelector('button.joomla-alert-button--close') && this.appendCloseButton(), this.dispatchCustomEvent('joomla.alert.show');var a = this.querySelector('button.joomla-alert--close') || this.querySelector('button.joomla-alert-button--close');a && a.focus();
     } }, { key: 'disconnectedCallback', value: function disconnectedCallback() {
@@ -48,7 +52,8 @@ var _createClass = function () {
       switch (a) {case 'type':
           c || (this.type = 'info');break;case 'dismiss':case 'acknowledge':
           c && 'true' !== c ? this.removeCloseButton() : this.appendCloseButton();break;case 'href':
-          c && '' !== c ? !this.querySelector('button.joomla-alert-button--close') && this.appendCloseButton() : this.removeCloseButton();break;default:}
+          c && '' !== c ? !this.querySelector('button.joomla-alert-button--close') && this.appendCloseButton() : this.removeCloseButton();break;case 'auto-dismiss':
+          c && '' !== c || this.removeAttribute('auto-dismiss');break;default:}
     } }, { key: 'close', value: function close() {
       var a = this;this.dispatchCustomEvent('joomla.alert.close');this.addEventListener('transitionend', function fireEnd() {
         a.dispatchCustomEvent('joomla.alert.closed'), a.parentNode.removeChild(a);
@@ -60,8 +65,8 @@ var _createClass = function () {
         var a = this,
             b = document.createElement('button');if (this.hasAttribute('dismiss') ? (b.classList.add('joomla-alert--close'), b.innerHTML = '<span aria-hidden="true">&times;</span>', b.setAttribute('aria-label', this.getText('JCLOSE', 'Close'))) : (b.classList.add('joomla-alert-button--close'), b.innerHTML = this.hasAttribute('acknowledge') ? this.getText('JOK', 'ok') : this.getText('JOPEN', 'Open')), this.firstChild ? this.insertBefore(b, this.firstChild) : this.appendChild(b), b && b.addEventListener('click', function () {
           a.dispatchCustomEvent('joomla.alert.buttonClicked'), a.href && (window.location.href = a.href), a.close();
-        }), this.hasAttribute('auto-dismiss')) {
-          var c = parseInt(a.getAttribute('auto-dismiss'), 1e3);setTimeout(function () {
+        }), 0 < a['auto-dismiss']) {
+          var c = a['auto-dismiss'];setTimeout(function () {
             a.dispatchCustomEvent('joomla.alert.buttonClicked'), a.href && (window.location.href = a.href), a.close();
           }, c);
         }

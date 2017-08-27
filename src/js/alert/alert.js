@@ -1,6 +1,6 @@
 class JoomlaAlertElement extends HTMLElement {
   /* Attributes to monitor */
-  static get observedAttributes() { return ['type', 'dismiss', 'acknowledge', 'href']; }
+  static get observedAttributes() { return ['type', 'dismiss', 'acknowledge', 'href', 'auto-dismiss']; }
   get type() { return this.getAttribute('type'); }
   set type(value) { return this.setAttribute('type', value); }
   get dismiss() { return this.getAttribute('dismiss'); }
@@ -9,6 +9,8 @@ class JoomlaAlertElement extends HTMLElement {
   set acknowledge(value) { return this.setAttribute('acknowledge', value); }
   get href() { return this.getAttribute('href'); }
   set href(value) { return this.setAttribute('href', value); }
+  get ['auto-dismiss']() { return parseInt(this.getAttribute('auto-dismiss'), 13); }
+  set ['auto-dismiss'](value) { return this.setAttribute('auto-dismiss', parseInt(value)); }
 
   /* Lifecycle, element created */
   constructor() {
@@ -83,6 +85,11 @@ class JoomlaAlertElement extends HTMLElement {
           this.appendCloseButton();
         }
         break;
+      case 'auto-dismiss':
+        if (!newValue || newValue === '') {
+          this.removeAttribute('auto-dismiss');
+        }
+        break;
       default:
         break;
     }
@@ -147,8 +154,8 @@ class JoomlaAlertElement extends HTMLElement {
       });
     }
 
-    if (this.hasAttribute('auto-dismiss')) {
-      const timeout = parseInt(self.getAttribute('auto-dismiss'), 1000)
+    if (self['auto-dismiss'] > 0) {
+      const timeout = self['auto-dismiss']
       setTimeout(() => {
         self.dispatchCustomEvent('joomla.alert.buttonClicked');
         if (self.href) {
