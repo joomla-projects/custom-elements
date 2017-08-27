@@ -1,3 +1,10 @@
+// Tab
+
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../../node_modules/bootstrap/scss/mixins";
+@import "../../../node_modules/bootstrap/scss/variables";
+@import "../variables";
+
 joomla-tab {
   display: flex;
   flex-direction: column;
