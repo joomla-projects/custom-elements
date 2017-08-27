@@ -85,6 +85,8 @@ var _createClass = function () {
             'li' === e.tagName.toLowerCase() ? (e.querySelector('a').click(), e.querySelector('a').focus(), a.saveState(e.hash)) : (e.click(), e.focus(), a.saveState(e.hash)), b.preventDefault();break;case 39:case 40:
             'a' === f.tagName.toLowerCase() ? (f.click(), f.focus(), a.saveState(f.hash)) : (f.querySelector('a').click(), f.querySelector('a').focus(), a.saveState(f.hash)), b.preventDefault();break;default:}
       });
+    } }, { key: 'getStorageKey', value: function getStorageKey() {
+      return window.location.href.toString().split(window.location.host)[1].replace(/&return=[a-zA-Z0-9%]+/, '').split('#')[0];
     } }, { key: 'restoreState', value: function restoreState() {
       var a = sessionStorage.getItem(this.getStorageKey());if (a) {
         var b = this.querySelector(a);if (b) {
@@ -94,6 +96,8 @@ var _createClass = function () {
           } else this.showTab(b);
         }
       }
+    } }, { key: 'saveState', value: function saveState(a) {
+      var b = this.getStorageKey();sessionStorage.setItem(b, a);
     } }, { key: 'checkView', value: function checkView(a) {
       var b = a.querySelector('ul');if (920 < document.body.getBoundingClientRect().width) {
         this.view = 'tabs';var c = [].slice.call(b.querySelectorAll('section'));c.forEach(function (b) {
@@ -106,10 +110,6 @@ var _createClass = function () {
       }
     } }, { key: 'findAncestor', value: function findAncestor(a, b) {
       for (; (a = a.parentElement) && a.nodeName.toLowerCase() !== b;) {}return a;
-    } }], [{ key: 'getStorageKey', value: function getStorageKey() {
-      return window.location.href.toString().split(window.location.host)[1].replace(/&return=[a-zA-Z0-9%]+/, '').split('#')[0];
-    } }, { key: 'saveState', value: function saveState(a) {
-      var b = this.getStorageKey();sessionStorage.setItem(b, a);
     } }, { key: 'dispatchCustomEvent', value: function dispatchCustomEvent(a, b, c) {
       var d = new CustomEvent(a, { bubbles: !0, cancelable: !0 });d.relatedTarget = c, b.dispatchEvent(d), b.removeEventListener(a, b);
     } }]), b;

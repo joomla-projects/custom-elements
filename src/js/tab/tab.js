@@ -261,7 +261,7 @@ class JoomlaTabElement extends HTMLElement {
     this.querySelector('ul').addEventListener('keydown', keyBehaviour);
   }
 
-  static getStorageKey() {
+  getStorageKey() {
     return window.location.href.toString().split(window.location.host)[1].replace(/&return=[a-zA-Z0-9%]+/, '').split('#')[0];
   }
 
@@ -288,7 +288,7 @@ class JoomlaTabElement extends HTMLElement {
     }
   }
 
-  static saveState(value) {
+  saveState(value) {
     const storageKey = this.getStorageKey();
     sessionStorage.setItem(storageKey, value);
   }
@@ -326,7 +326,7 @@ class JoomlaTabElement extends HTMLElement {
   /*eslint-enable */
 
   /* Method to dispatch events */
-  static dispatchCustomEvent(eventName, element, related) {
+  dispatchCustomEvent(eventName, element, related) {
     const OriginalCustomEvent = new CustomEvent(eventName, { bubbles: true, cancelable: true });
     OriginalCustomEvent.relatedTarget = related;
     element.dispatchEvent(OriginalCustomEvent);

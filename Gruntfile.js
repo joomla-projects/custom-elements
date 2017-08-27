@@ -246,19 +246,6 @@ module.exports = function (grunt) {
 
   // Copy files to the docs and demo foders
   grunt.registerTask('copyDist', 'Copy the distribution files to docs and demo', function () {
-
-    //{ expand: true, cwd: '<%= folder.node_module %>jquery/dist/', src: ['*', '!(core.js)'], dest: 'media/vendor/jquery/js/', filter: 'isFile'},
-    // Put a copy in the demo folder
-    grunt.config.set('copy.dist.files', [{
-      expand: true,
-      filter: 'isFile',
-      cwd: 'dist/js/',
-      src: ['*'],
-      dest: 'demo/js/'
-    }]);
-
-    grunt.task.run('copy:dist');
-
     // Put a copy in the docs folder
     grunt.config.set('copy.docs.files', [{
       expand: true,
