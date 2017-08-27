@@ -102,7 +102,7 @@ joomla-switcher {
 
 // Alternate styles
 @each $color, $value in $theme-colors {
-  joomla-switcher[theme="#{$color}"] .switcher.active {
+  joomla-switcher[type="#{$color}"] .switcher.active {
     background-color: theme-color-level($color);
     border-color: theme-color-level($color);
     box-shadow: 0 0 0 calc(#{$switcher-height} / 2) theme-color-level($color) inset;

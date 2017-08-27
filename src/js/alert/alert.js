@@ -1,8 +1,8 @@
 class JoomlaAlertElement extends HTMLElement {
   /* Attributes to monitor */
-  static get observedAttributes() { return ['theme', 'dismiss', 'acknowledge', 'href']; }
-  get theme() { return this.getAttribute('theme'); }
-  set theme(value) { return this.setAttribute('theme', value); }
+  static get observedAttributes() { return ['type', 'dismiss', 'acknowledge', 'href']; }
+  get type() { return this.getAttribute('type'); }
+  set type(value) { return this.setAttribute('type', value); }
   get dismiss() { return this.getAttribute('dismiss'); }
   set dismiss(value) { return this.setAttribute('dismiss', value); }
   get acknowledge() { return this.getAttribute('acknowledge'); }
@@ -28,9 +28,9 @@ class JoomlaAlertElement extends HTMLElement {
     this.setAttribute('role', 'alert');
     this.classList.add('joomla-alert--show');
 
-    // If no theme has been defined, the default as "info"
-    if (!this.theme) {
-      this.setAttribute('theme', 'info');
+    // If no type has been defined, the default as "info"
+    if (!this.type) {
+      this.setAttribute('type', 'info');
     }
 
     // Append button
@@ -63,9 +63,9 @@ class JoomlaAlertElement extends HTMLElement {
   /* Respond to attribute changes */
   attributeChangedCallback(attr, oldValue, newValue) {
     switch (attr) {
-      case 'theme':
+      case 'type':
         if (!newValue) {
-          this.theme = 'info';
+          this.type = 'info';
         }
         break;
       case 'dismiss':

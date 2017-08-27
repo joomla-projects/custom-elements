@@ -1,8 +1,8 @@
 class JoomlaSwitcherElement extends HTMLElement {
   /* Attributes to monitor */
-  static get observedAttributes() { return ['theme', 'offText', 'onText']; }
-  get theme() { return this.getAttribute('theme'); }
-  set theme(value) { return this.setAttribute('theme', value); }
+  static get observedAttributes() { return ['type', 'offText', 'onText']; }
+  get type() { return this.getAttribute('type'); }
+  set type(value) { return this.setAttribute('type', value); }
   get offText() { return this.getAttribute('offText'); }
   get onText() { return this.getAttribute('onText'); }
 
@@ -93,9 +93,9 @@ class JoomlaSwitcherElement extends HTMLElement {
     const spanFirst = document.createElement('span');
     spanFirst.classList.add('switcher');
 
-    // If no theme has been defined, the default as "success"
-    if (!this.theme) {
-      this.setAttribute('theme', 'success');
+    // If no type has been defined, the default as "success"
+    if (!this.type) {
+      this.setAttribute('type', 'success');
     }
 
     const switchEl = document.createElement('span');

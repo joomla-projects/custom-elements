@@ -13,31 +13,31 @@ The simplified version of the custom elements
     <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
 </joomla-alert>
 
-<joomla-alert theme="success" acknowledge="true">
+<joomla-alert type="success" acknowledge="true">
     <strong>Well done!</strong> You successfully read this important alert message.
 </joomla-alert>
 
-<joomla-alert theme="warning" dismiss="true" auto-dismiss="10000">
+<joomla-alert type="warning" dismiss="true" auto-dismiss="10000">
     <strong>Warning!</strong> This one will self distruct in 10secs.
 </joomla-alert>
 
-<joomla-alert theme="danger" href="https://www.joomla.org/">
+<joomla-alert type="danger" href="https://www.joomla.org/">
     <strong>Oh snap!</strong> Click open to go to joomla.org
 </joomla-alert>
 ```
 
 ### Alerts demo:
 <joomla-alert>No params passed</joomla-alert>
-<joomla-alert theme="info" dismiss="true">
+<joomla-alert type="info" dismiss="true">
     <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
 </joomla-alert>
-<joomla-alert theme="success" acknowledge="true">
+<joomla-alert type="success" acknowledge="true">
     <strong>Well done!</strong> You successfully read this important alert message.
 </joomla-alert>
-<joomla-alert theme="warning" dismiss="true" auto-dismiss="10000">
+<joomla-alert type="warning" dismiss="true" auto-dismiss="10000">
     <strong>Warning!</strong> This one will self distruct in 10secs.
 </joomla-alert>
-<joomla-alert theme="danger" href="https://www.joomla.org/">
+<joomla-alert type="danger" href="https://www.joomla.org/">
     <strong>Oh snap!</strong> Click open to go to joomla.org
 </joomla-alert>
 
@@ -47,7 +47,7 @@ Control the design and functionality of the custom element through attributes.
 
 |Attribute			|Description								     			|
 |-----------------------|-----------------------------------------------------------------------------------------------|
-|theme		|This attribute is responsible for the looks.				|
+|type		|This attribute is responsible for the looks.				|
 |dismiss	|Appends the x button. True is the only value.|
 |acknowledge	|Appends a generic button with a title `Ok`. True is the only value.|
 |auto-dismiss	|Controls the auto close functionality of the alert. Values (integers) represent milliseconds|
@@ -73,7 +73,7 @@ element.close()
 
 Change the alert type:
 ```js
-element.setAttribute('theme', 'warning')
+element.setAttribute('type', 'warning')
 ```
 
 Remove or add the close button:
@@ -114,7 +114,7 @@ Use the following script:
 
 ```js
 var tempElement = document.createElement('joomla-alert');
-tempElement.setAttribute('theme', 'success');
+tempElement.setAttribute('type', 'success');
 tempElement.setAttribute('dismiss', 'true');
 tempElement.innerHTML = 'Wow it works!';
 
@@ -137,20 +137,20 @@ Use the following script:
 
 ```js
 var tempElement1 = document.querySelector('joomla-alert');
-tempElement1.setAttribute('theme', 'success');
+tempElement1.setAttribute('type', 'success');
 
 tempElement1.setAttribute('dismiss', '');
 ```
 
 
 ### Live example
-<joomla-alert id="change-me" theme="info" dismiss="true"><strong>Alert:</strong> text goes here</joomla-alert>
+<joomla-alert id="change-me" type="info" dismiss="true"><strong>Alert:</strong> text goes here</joomla-alert>
 
 <div id="replaceble" markdown="0">
-<button role="button" data-opt1="theme" value="info">Make it info</button>
-<button role="button" data-opt1="theme" value="success">Make it success</button>
-<button role="button" data-opt1="theme" value="warning">Make it warning</button>
-<button role="button" data-opt1="theme" value="danger">Make it danger</button>
+<button role="button" data-opt1="type" value="info">Make it info</button>
+<button role="button" data-opt1="type" value="success">Make it success</button>
+<button role="button" data-opt1="type" value="warning">Make it warning</button>
+<button role="button" data-opt1="type" value="danger">Make it danger</button>
 <button role="button" data-opt1="dismiss" value="true">Add close button</button>
 <button role="button" data-opt1="dismiss" value="false">Remove close button</button>
 </div>
@@ -169,7 +169,7 @@ tempElement.close();
 
 
 ### Demo
-<joomla-alert id="close-me-with-a-btn" theme="danger" acknowledge="true">
+<joomla-alert id="close-me-with-a-btn" type="danger" acknowledge="true">
 <strong>Alert:</strong> Close me with javascript
 </joomla-alert>
 <p>
@@ -180,7 +180,7 @@ tempElement.close();
 <script markdown="0">
 var addNew = function() {
     var tempElement = document.createElement('joomla-alert');
-    tempElement.setAttribute('theme', 'success');
+    tempElement.setAttribute('type', 'success');
     tempElement.setAttribute('dismiss', 'true');
     tempElement.innerHTML = 'Wow it works!';
 

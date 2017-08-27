@@ -15,17 +15,17 @@ The simplified version of the custom element
 ```
 
 ### Switcher demo:
-<joomla-switcher theme="success" offText="Off" onText="On">
+<joomla-switcher type="success" offText="Off" onText="On">
 	<input name="switcher1" id="sw1" value="0" type="radio">
 	<input name="switcher1" id="sw2" value="1" type="radio" class="active" checked>
 </joomla-switcher>
 
-<joomla-switcher theme="primary" offText="No" onText="Yes">
+<joomla-switcher type="primary" offText="No" onText="Yes">
 	<input name="switcher2" id="sw3" value="0" type="radio" class="active" checked>
 	<input name="switcher2" id="sw4" value="1" type="radio">
 </joomla-switcher>
 
-<joomla-switcher theme="danger" offText="Stable" onText="Alpha">
+<joomla-switcher type="danger" offText="Stable" onText="Alpha">
 	<input name="switcher3" id="sw5" value="0" type="radio" class="active" checked>
 	<input name="switcher3" id="sw6" value="1" type="radio">
 </joomla-switcher>
@@ -36,7 +36,7 @@ Control the design and functionality of the custom element through attributes.
 
 |Attribute				|Description								     												|
 |-----------------------|-----------------------------------------------------------------------------------------------|
-|theme		|This attribute is responsible for the looks.																|
+|type		|This attribute is responsible for the looks.																|
 |offText	|The text that's displayed when the switcher is toggled off													|
 |onText		|The text that's displayed when the switcher is toggled on													|
 
