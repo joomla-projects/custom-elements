@@ -7,10 +7,15 @@ In order to use the popover custom element you need to import the element in the
 
 The simplified version of the custom elements
 ```html
-<joomla-popover label="more info" tip="This clarifies whatever needs clarifying" text="i" position="bottom">
+<joomla-popover
+	label="more info"
+	title="Something important"
+	tip="This clarifies whatever needs clarifying"
+	text="i"
+	position="bottom">
 </joomla-popover>
 ```
 
 ### Popover demo:
-<joomla-popover label="more info" tip="This clarifies whatever needs clarifying" text="i" position="bottom">
+<joomla-popover label="more info" title="Something important" tip="This clarifies whatever needs clarifying" text="i" position="bottom">
 </joomla-popover>

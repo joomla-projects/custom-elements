@@ -7,16 +7,32 @@ In order to use the tooltip custom element you need to import the element in the
 
 The simplified version of the custom elements
 ```html
-<joomla-tooltip label="more info" tip="This clarifies whatever needs clarifying" text="i" position="top">
+<joomla-tooltip
+	label="more info"
+	tip="This clarifies whatever needs clarifying"
+	text="i"
+	position="top">
 </joomla-tooltip>
 
-<joomla-tooltip label="more info" tip="This clarifies whatever needs clarifying" text="i" position="left">
+<joomla-tooltip
+	label="more info"
+	tip="This clarifies whatever needs clarifying"
+	text="i"
+	position="left">
 </joomla-tooltip>
 
-<joomla-tooltip label="more info" tip="This clarifies whatever needs clarifying" text="i" position="right">
+<joomla-tooltip
+	label="more info"
+	tip="This clarifies whatever needs clarifying"
+	text="i"
+	position="right">
 </joomla-tooltip>
 
-<joomla-tooltip label="more info" tip="This clarifies whatever needs clarifying" text="i" position="bottom">
+<joomla-tooltip
+	label="more info"
+	tip="This clarifies whatever needs clarifying"
+	text="i"
+	position="bottom">
 </joomla-tooltip>
 ```
 
