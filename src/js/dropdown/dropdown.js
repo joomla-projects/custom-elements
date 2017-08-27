@@ -75,7 +75,7 @@ class JoomlaDropdownElement extends HTMLElement {
   }
 
   /*eslint-disable */
-  static findAncestor(el, tagName) {
+  findAncestor(el, tagName) {
     while ((el = el.parentElement) && el.nodeName.toLowerCase() !== tagName);
     return el;
   }

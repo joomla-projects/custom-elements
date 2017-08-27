@@ -13,7 +13,7 @@ class JoomlaPasswordStrength {
     let score = 0;
     let mods = 0;
     const sets = ['lowercase', 'uppercase', 'numbers', 'special', 'length'];
-    sets.forEach(function (set) {
+    sets.forEach((set) => {
       if (Object.prototype.hasOwnProperty.call(this, set) && this[set] > 0) {
         mods += 1;
       }
@@ -61,7 +61,7 @@ class JoomlaPasswordElement extends HTMLElement {
       const minUppercase = this.minUppercase;
       const minLowercase = this.minLowercase;
 
-      const strength = new PasswordStrength({
+      const strength = new JoomlaPasswordStrength({
         lowercase: minLowercase || 0,
         uppercase: minUppercase || 0,
         numbers: minIntegers || 0,
@@ -120,7 +120,7 @@ class JoomlaPasswordElement extends HTMLElement {
     if (this.switchable) {
       const inputGroup = this.querySelector('.input-group-addon');
 
-      inputGroup.addEventListener('click', function () {
+      inputGroup.addEventListener('click', () => {
         const target = this.querySelector('.fa');
         const srText = target.nextElementSibling;
 
@@ -184,7 +184,7 @@ class JoomlaPasswordElement extends HTMLElement {
   /** Method to check the input and set the meter * */
   getMeter(element) {
     const meter = document.querySelector('.progress-bar');
-    const strength = new PasswordStrength({
+    const strength = new JoomlaPasswordStrength({
       lowercase: this.minLowercase || 0,
       uppercase: this.minUppercase || 0,
       numbers: this.minIntegers || 0,

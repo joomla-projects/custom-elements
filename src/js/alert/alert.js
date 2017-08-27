@@ -173,7 +173,7 @@ class JoomlaAlertElement extends HTMLElement {
   }
 
   /* Method to get the translated text. Internal */
-  static getText(str, fallback) {
+  getText(str, fallback) {
     return (window.Joomla && Joomla.JText && Joomla.JText._ && typeof Joomla.JText._ === 'function' && Joomla.JText._(str)) ? Joomla.JText._(str) : fallback;
   }
 }
