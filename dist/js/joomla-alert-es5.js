@@ -39,9 +39,9 @@ var _createClass = function () {
     }, set: function set(a) {
       return this.setAttribute('href', a);
     } }, { key: 'auto-dismiss', get: function get() {
-      return parseInt(this.getAttribute('auto-dismiss'), 13);
+      return parseInt(this.getAttribute('auto-dismiss'), 10);
     }, set: function set(a) {
-      return this.setAttribute('auto-dismiss', parseInt(a, 13));
+      return this.setAttribute('auto-dismiss', parseInt(a, 10));
     } }], [{ key: 'observedAttributes', get: function get() {
       return ['type', 'dismiss', 'acknowledge', 'href', 'auto-dismiss'];
     } }]), _createClass(b, [{ key: 'connectedCallback', value: function connectedCallback() {

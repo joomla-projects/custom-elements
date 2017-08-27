@@ -9,8 +9,8 @@ class JoomlaAlertElement extends HTMLElement {
   set acknowledge(value) { return this.setAttribute('acknowledge', value); }
   get href() { return this.getAttribute('href'); }
   set href(value) { return this.setAttribute('href', value); }
-  get ['auto-dismiss']() { return parseInt(this.getAttribute('auto-dismiss'), 13); }
-  set ['auto-dismiss'](value) { return this.setAttribute('auto-dismiss', parseInt(value, 13)); }
+  get ['auto-dismiss']() { return parseInt(this.getAttribute('auto-dismiss'), 10); }
+  set ['auto-dismiss'](value) { return this.setAttribute('auto-dismiss', parseInt(value, 10)); }
 
   /* Lifecycle, element created */
   constructor() {
