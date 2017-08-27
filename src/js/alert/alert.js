@@ -148,13 +148,14 @@ class JoomlaAlertElement extends HTMLElement {
     }
 
     if (this.hasAttribute('auto-dismiss')) {
+      const timeout = parseInt(self.getAttribute('auto-dismiss'), 1000)
       setTimeout(() => {
         self.dispatchCustomEvent('joomla.alert.buttonClicked');
         if (self.href) {
           window.location.href = self.href;
         }
         self.close();
-      }, parseInt(self.getAttribute('auto-dismiss'), 50));
+      }, timeout);
     }
   }
 

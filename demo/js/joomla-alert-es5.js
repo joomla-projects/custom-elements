@@ -58,11 +58,13 @@ var _createClass = function () {
     } }, { key: 'appendCloseButton', value: function appendCloseButton() {
       if (!(this.querySelector('button.joomla-alert--close') || this.querySelector('button.joomla-alert-button--close'))) {
         var a = this,
-            b = document.createElement('button');this.hasAttribute('dismiss') ? (b.classList.add('joomla-alert--close'), b.innerHTML = '<span aria-hidden="true">&times;</span>', b.setAttribute('aria-label', this.getText('JCLOSE', 'Close'))) : (b.classList.add('joomla-alert-button--close'), b.innerHTML = this.hasAttribute('acknowledge') ? this.getText('JOK', 'ok') : this.getText('JOPEN', 'Open')), this.firstChild ? this.insertBefore(b, this.firstChild) : this.appendChild(b), b && b.addEventListener('click', function () {
+            b = document.createElement('button');if (this.hasAttribute('dismiss') ? (b.classList.add('joomla-alert--close'), b.innerHTML = '<span aria-hidden="true">&times;</span>', b.setAttribute('aria-label', this.getText('JCLOSE', 'Close'))) : (b.classList.add('joomla-alert-button--close'), b.innerHTML = this.hasAttribute('acknowledge') ? this.getText('JOK', 'ok') : this.getText('JOPEN', 'Open')), this.firstChild ? this.insertBefore(b, this.firstChild) : this.appendChild(b), b && b.addEventListener('click', function () {
           a.dispatchCustomEvent('joomla.alert.buttonClicked'), a.href && (window.location.href = a.href), a.close();
-        }), this.hasAttribute('auto-dismiss') && setTimeout(function () {
-          a.dispatchCustomEvent('joomla.alert.buttonClicked'), a.href && (window.location.href = a.href), a.close();
-        }, parseInt(a.getAttribute('auto-dismiss'), 50));
+        }), this.hasAttribute('auto-dismiss')) {
+          var c = parseInt(a.getAttribute('auto-dismiss'), 1e3);setTimeout(function () {
+            a.dispatchCustomEvent('joomla.alert.buttonClicked'), a.href && (window.location.href = a.href), a.close();
+          }, c);
+        }
       }
     } }, { key: 'removeCloseButton', value: function removeCloseButton() {
       var a = this.querySelector('button');a && (a.removeEventListener('click', this), a.parentNode.removeChild(a));
