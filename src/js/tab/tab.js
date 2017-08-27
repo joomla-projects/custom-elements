@@ -261,9 +261,11 @@ class JoomlaTabElement extends HTMLElement {
     this.querySelector('ul').addEventListener('keydown', keyBehaviour);
   }
 
-  static getStorageKey() {
+  /*eslint-disable */
+  getStorageKey() {
     return window.location.href.toString().split(window.location.host)[1].replace(/&return=[a-zA-Z0-9%]+/, '').split('#')[0];
   }
+  /*eslint-disable */
 
   restoreState() {
     const tabLinkHash = sessionStorage.getItem(this.getStorageKey());
@@ -288,7 +290,7 @@ class JoomlaTabElement extends HTMLElement {
     }
   }
 
-  static saveState(value) {
+  saveState(value) {
     const storageKey = this.getStorageKey();
     sessionStorage.setItem(storageKey, value);
   }
@@ -326,12 +328,14 @@ class JoomlaTabElement extends HTMLElement {
   /*eslint-enable */
 
   /* Method to dispatch events */
-  static dispatchCustomEvent(eventName, element, related) {
+  /*eslint-disable */
+  dispatchCustomEvent(eventName, element, related) {
     const OriginalCustomEvent = new CustomEvent(eventName, { bubbles: true, cancelable: true });
     OriginalCustomEvent.relatedTarget = related;
     element.dispatchEvent(OriginalCustomEvent);
     element.removeEventListener(eventName, element);
   }
+  /*eslint-enable */
 }
 
 customElements.define('joomla-tab', JoomlaTabElement);
