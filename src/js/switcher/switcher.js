@@ -13,11 +13,6 @@ class JoomlaSwitcherElement extends HTMLElement {
   get offText() { return this.getAttribute('offText'); }
   get onText() { return this.getAttribute('onText'); }
 
-  /* Lifecycle, element created */
-  constructor() {
-    super();
-  }
-
   /* Lifecycle, element appended to the DOM */
   connectedCallback() {
     const self = this;

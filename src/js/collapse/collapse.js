@@ -11,10 +11,6 @@ class JoomlaCollapseElement extends HTMLElement {
   get state() { return this.getAttribute('state'); }
   set state(value) { return this.setAttribute('state', value); }
 
-  constructor() {
-    super();
-  }
-
   connectedCallback() {
     const self = this;
     // id is required

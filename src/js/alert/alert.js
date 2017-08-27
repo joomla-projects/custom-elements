@@ -19,11 +19,6 @@ class JoomlaAlertElement extends HTMLElement {
   get ['auto-dismiss']() { return parseInt(this.getAttribute('auto-dismiss'), 10); }
   set ['auto-dismiss'](value) { return this.setAttribute('auto-dismiss', parseInt(value, 10)); }
 
-  /* Lifecycle, element created */
-  constructor() {
-    super();
-  }
-
   /* Lifecycle, element appended to the DOM */
   connectedCallback() {
     this.setAttribute('role', 'alert');

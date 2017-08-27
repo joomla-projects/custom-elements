@@ -11,10 +11,6 @@ class JoomlaDropdownElement extends HTMLElement {
   get for() { return this.getAttribute('for'); }
   set for(value) { return this.setAttribute('for', value); }
 
-  constructor() {
-    super();
-  }
-
   connectedCallback() {
     this.setAttribute('aria-labelledby', this.for.substring(1));
     const button = document.querySelector(this.for);

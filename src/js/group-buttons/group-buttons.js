@@ -1,15 +1,9 @@
+/** Include the relative styles */
+const style = document.createElement('style');
+style.innerHTML = '{{stylesheet}}';
+document.head.appendChild(style);
+
 class JoomlaButtonElement extends HTMLElement {
-  constructor() {
-    super();
-
-    if (!document.getElementById('joomla-group-button-stylesheet')) {
-      const style = document.createElement('style');
-      style.id = 'joomla-group-button-stylesheet';
-      style.innerHTML = '{{stylesheet}}';
-      document.head.appendChild(style);
-    }
-  }
-
   connectedCallback() {
     const buttons = [].slice.call(this.querySelectorAll('[type="checkbox"]'));
     // Checkboxes

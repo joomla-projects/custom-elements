@@ -15,11 +15,6 @@ class JoomlaTooltipElement extends HTMLElement {
   get text() { return this.getAttribute('text'); }
   set text(value) { return this.getAttribute('text', value); }
 
-  /* Lifecycle, element created */
-  constructor() {
-    super();
-  }
-
   /* Lifecycle, element appended to the DOM */
   connectedCallback() {
     if (!this.position || (this.position && ['top', 'bottom', 'left', 'right'].indexOf(this.position) === -1)) {
