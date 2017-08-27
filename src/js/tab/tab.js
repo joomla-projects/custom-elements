@@ -104,7 +104,7 @@ class JoomlaTabElement extends HTMLElement {
     const ulEl = this.querySelector('ul');
     const navigation = [].slice.call(ulEl.querySelectorAll('a'));
 
-    navigation.forEach(function (link) {
+    navigation.forEach((link) => {
       link.removeEventListener('click', this);
     });
     ulEl.removeEventListener('keydown', this);
@@ -168,10 +168,10 @@ class JoomlaTabElement extends HTMLElement {
       liElement.append(aElement);
       nav.append(liElement);
 
-      // aElement.addEventListener('joomla.tab.show', function (e) { console.log('show', e) });
-      // aElement.addEventListener('joomla.tab.shown', function (e) { console.log('shown', e) });
-      // aElement.addEventListener('joomla.tab.hide', function (e) { console.log('hide', e) });
-      // aElement.addEventListener('joomla.tab.hidden', function (e) { console.log('hidden', e) });
+      // aElement.addEventListener('joomla.tab.show', (e) => { console.log('show', e) });
+      // aElement.addEventListener('joomla.tab.shown', (e) => { console.log('shown', e) });
+      // aElement.addEventListener('joomla.tab.hide', (e) => { console.log('hide', e) });
+      // aElement.addEventListener('joomla.tab.hidden', (e) => { console.log('hidden', e) });
 
       tab.setAttribute('aria-labelledby', `tab-${tab.id}`);
       if (!active) {

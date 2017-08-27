@@ -30,7 +30,7 @@ class JoomlaPopoverElement extends HTMLElement {
 
     const showTip = () => {
       // Close on outside click
-      document.addEventListener('click', function (e) {
+      document.addEventListener('click', (e) => {
         if (btnElement !== e.target) {
           spanElement.innerHTML = '';
           self.removeEventListener('keydown', this);
@@ -38,7 +38,7 @@ class JoomlaPopoverElement extends HTMLElement {
       });
 
       // Remove toggletip on ESC
-      document.addEventListener('keydown', function (e) {
+      document.addEventListener('keydown', (e) => {
         if ((e.keyCode || e.which) === 9) {
           spanElement.innerHTML = '';
           self.removeEventListener('keydown', this);

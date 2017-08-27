@@ -21,7 +21,7 @@ class JoomlaButtonElement extends HTMLElement {
         }
 
         button.setAttribute('tabindex', 0);
-        button.addEventListener('click', function () {
+        button.addEventListener('click', () => {
           if (this.checked) {
             this.setAttribute('checked', '');
             this.parentNode.classList.add('active');
