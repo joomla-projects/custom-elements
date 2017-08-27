@@ -44,24 +44,24 @@ joomla-modal {
       -ms-flex-pack: justify;
       justify-content: space-between;
       padding: 15px;
-	  border-bottom: 1px solid #e9ecef;
-	  
-		 .close {
-			padding:0;
-			cursor:pointer;
-			background:0 0;
-			border:0;
-			-webkit-appearance:none;
-			float: right;
-			font-size: 1.5rem;
-			font-weight: 700;
-			line-height: 1;
-			color: #000;
-			text-shadow: 0 1px 0 #fff;
-			opacity: .5
-		}
+      border-bottom: 1px solid #e9ecef;
+
+      .close {
+        padding:0;
+        cursor:pointer;
+        background:0 0;
+        border:0;
+        -webkit-appearance: none;
+        float: right;
+        font-size: 1.5rem;
+        font-weight: 700;
+        line-height: 1;
+        color: #000;
+        text-shadow: 0 1px 0 #fff;
+        opacity: .5;
+      }
     }
-    
+
     section {
       position: relative;
       -ms-flex: 1 1 auto;

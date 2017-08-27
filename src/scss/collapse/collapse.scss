@@ -7,12 +7,12 @@
 
 joomla-collapse {
 
-	&[state="closed"] {
-		display: none;
-	}
+  &[state="closed"] {
+    display: none;
+  }
 
-	&[state="open"] {
-		display: block;
-	}
+  &[state="open"] {
+    display: block;
+  }
 
 }
