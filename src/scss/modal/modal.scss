@@ -12,72 +12,63 @@ joomla-modal {
   bottom: 0;
   left: 0;
   z-index: 1050;
-  overflow: hidden;
-  display:none;
-  outline: 0;
+  box-sizing: inherit;
+  display: none;
   max-width: 500px;
   margin: 10px auto;
+  overflow: hidden;
   border-radius: 5px;
-  box-sizing: inherit;
+  outline: 0;
 
   &.show {
-    display:block;
+    display: block;
   }
-  
+
   .modal-dialog {
     position: relative;
-    display: -ms-flexbox;
     display: flex;
-    -ms-flex-direction: column;
     flex-direction: column;
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid rgba(0, 0, 0, .2);
     border-radius: .3rem;
     outline: 0;
-    
+
     header {
-      display: -ms-flexbox;
       display: flex;
-      -ms-flex-align: center;
       align-items: center;
-      -ms-flex-pack: justify;
       justify-content: space-between;
       padding: 15px;
       border-bottom: 1px solid #e9ecef;
 
       .close {
-        padding:0;
-        cursor:pointer;
-        background:0 0;
-        border:0;
-        -webkit-appearance: none;
         float: right;
+        padding: 0;
         font-size: 1.5rem;
         font-weight: 700;
         line-height: 1;
         color: #000;
         text-shadow: 0 1px 0 #fff;
+        cursor: pointer;
+        background: 0 0;
+        border: 0;
         opacity: .5;
+        -webkit-appearance: none;
       }
     }
 
     section {
       position: relative;
-      -ms-flex: 1 1 auto;
       flex: 1 1 auto;
-      padding: 15px
+      padding: 15px;
     }
-    
+
     footer {
-      display: -ms-flexbox;
       display: flex;
-      -ms-flex-align: center;
       align-items: center;
-      -ms-flex-pack: end;
       justify-content: flex-end;
       padding: 15px;
-      border-top: 1px solid #e9ecef  
+      border-top: 1px solid #e9ecef;
     }
   }
 }
@@ -86,11 +77,11 @@ joomla-modal {
   opacity: .5;
 }
 .modal-backdrop {
-  position:fixed;
-  top:0;
-  right:0;
-  bottom:0;
-  left:0;
-  z-index:1040;
-  background-color:#000;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1040;
+  background-color: #000;
 }
