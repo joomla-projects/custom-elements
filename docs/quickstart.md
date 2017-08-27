@@ -47,9 +47,9 @@ Every element has its own `.scss` file and there is a `variables.scss` that can 
 Check these collections of custom elements running quite happily with the most popular css frameworks:
 
 ----
-<a href="/bootstrap-demo.html">Bootstrap</a>
+<a href="/custom-elements/bootstrap-demo.html">Bootstrap</a>
 -----
-<a href="/foundation-demo.html">Foundation</a>
+<a href="/custom-elements/foundation-demo.html">Foundation</a>
 -----
-<a href="/uikit-demo.html">UiKit</a>
+<a href="/custom-elements/uikit-demo.html">UiKit</a>
 -----
