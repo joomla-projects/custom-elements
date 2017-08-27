@@ -83,19 +83,19 @@
 		<h2>Alerts</h2>
 			<joomla-alert>No params passed</joomla-alert>
 
-			<joomla-alert level="info" dismiss>
+			<joomla-alert type="info" dismiss>
 				<strong>Heads up!</strong> This alert needs your attention, but it's not super important.
 			</joomla-alert>
 
-			<joomla-alert level="success" dismiss>
+			<joomla-alert type="success" dismiss>
 				<strong>Well done!</strong> You successfully read this important alert message.
 			</joomla-alert>
 
-			<joomla-alert level="warning" dismiss auto-dismiss="10000">
+			<joomla-alert type="warning" dismiss auto-dismiss="10000">
 				<strong>Warning!</strong> This one will self distruct in 10secs.
 			</joomla-alert>
 
-			<joomla-alert level="danger" href="https://www.google.com/">
+			<joomla-alert type="danger" href="https://www.google.com/">
 				<strong>Oh snap!</strong> Click open to go to Google.com
 			</joomla-alert>
 
@@ -208,7 +208,7 @@
 			</joomla-popover>
 		<hr>
 		<h2>Switcher</h2>
-			<joomla-switcher offText="Off" onText="On">
+			<joomla-switcher type="success" offText="Off" onText="On">
 				<input name="switcher1" id="sw1" value="0" type="radio">
 				<input name="switcher1" id="sw2" value="1" type="radio" class="active" checked>
 			</joomla-switcher>
@@ -220,14 +220,12 @@
 				<input name="switcher2" id="sw4" value="1" type="radio">
 			</joomla-switcher>
 
-
 			<hr>
 
 			<joomla-switcher type="danger" offText="Stable" onText="Alpha">
 				<input name="switcher3" id="sw5" value="0" type="radio" class="active" checked>
 				<input name="switcher3" id="sw6" value="1" type="radio">
 			</joomla-switcher>
-
 
 		<hr>
 		<h2>Tab</h2>

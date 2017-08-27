@@ -1,8 +1,8 @@
 class JoomlaAlertElement extends HTMLElement {
   /* Attributes to monitor */
-  static get observedAttributes() { return ['level', 'dismiss', 'acknowledge', 'href']; }
-  get level() { return this.getAttribute('level'); }
-  set level(value) { return this.setAttribute('level', value); }
+  static get observedAttributes() { return ['type', 'dismiss', 'acknowledge', 'href']; }
+  get type() { return this.getAttribute('type'); }
+  set type(value) { return this.setAttribute('type', value); }
   get dismiss() { return this.getAttribute('dismiss'); }
   set dismiss(value) { return this.setAttribute('dismiss', value); }
   get acknowledge() { return this.getAttribute('acknowledge'); }
@@ -28,10 +28,11 @@ class JoomlaAlertElement extends HTMLElement {
     this.setAttribute('role', 'alert');
     this.classList.add('joomla-alert--show');
 
-    // Default to info
-    if (!this.level || ['info', 'warning', 'danger', 'success'].indexOf(this.level) === -1) {
-      this.setAttribute('level', 'info');
+    // If no type has been defined, the default as "info"
+    if (!this.type) {
+      this.setAttribute('type', 'info');
     }
+
     // Append button
     if (this.hasAttribute('dismiss') || this.hasAttribute('acknowledge') || (this.hasAttribute('href') && this.getAttribute('href') !== '')) {
       if (!this.querySelector('button.joomla-alert--close') && !this.querySelector('button.joomla-alert-button--close')) {
@@ -62,9 +63,9 @@ class JoomlaAlertElement extends HTMLElement {
   /* Respond to attribute changes */
   attributeChangedCallback(attr, oldValue, newValue) {
     switch (attr) {
-      case 'level':
-        if (!newValue || (newValue && ['info', 'warning', 'danger', 'success'].indexOf(newValue) === -1)) {
-          this.level = 'info';
+      case 'type':
+        if (!newValue) {
+          this.type = 'info';
         }
         break;
       case 'dismiss':

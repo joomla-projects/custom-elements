@@ -1,5 +1,9 @@
+// Group buttons
+
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../../node_modules/bootstrap/scss/mixins";
+@import "../../../node_modules/bootstrap/scss/variables";
 @import "../variables";
-@import "node_modules/bootstrap/scss/mixins";
 
 // Make the div behave like a button
 joomla-group-buttons {

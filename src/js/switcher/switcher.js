@@ -93,8 +93,9 @@ class JoomlaSwitcherElement extends HTMLElement {
     const spanFirst = document.createElement('span');
     spanFirst.classList.add('switcher');
 
-    if (this.type && ['primary', 'danger'].indexOf(this.type) !== -1) {
-      spanFirst.classList.add(`switcher-${this.type}`);
+    // If no type has been defined, the default as "success"
+    if (!this.type) {
+      this.setAttribute('type', 'success');
     }
 
     const switchEl = document.createElement('span');

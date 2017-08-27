@@ -1,8 +1,8 @@
 class JoomlaAlertElement extends HTMLElement {
   /* Attributes to monitor */
-  static get observedAttributes() { return ['level', 'dismiss', 'acknowledge', 'href']; }
-  get level() { return this.getAttribute('level'); }
-  set level(value) { return this.setAttribute('level', value); }
+  static get observedAttributes() { return ['type', 'dismiss', 'acknowledge', 'href']; }
+  get type() { return this.getAttribute('type'); }
+  set type(value) { return this.setAttribute('type', value); }
   get dismiss() { return this.getAttribute('dismiss'); }
   set dismiss(value) { return this.setAttribute('dismiss', value); }
   get acknowledge() { return this.getAttribute('acknowledge'); }
@@ -18,7 +18,7 @@ class JoomlaAlertElement extends HTMLElement {
     if (!document.getElementById('joomla-alert-stylesheet')) {
       const style = document.createElement('style');
       style.id = 'joomla-alert-stylesheet';
-      style.innerHTML = `joomla-alert{display:block;padding:.5rem 1.25rem;margin-bottom:1rem;border:1px solid transparent;opacity:0;border-radius:.25rem;transition:opacity .15s linear}joomla-alert.joomla-alert--show{opacity:1}joomla-alert .joomla-alert--close,joomla-alert .joomla-alert-button--close{position:relative;top:-.5rem;right:-1.25rem;padding:.5rem 1.25rem;color:inherit}joomla-alert .joomla-alert--close{font-size:1.5rem;font-weight:700;line-height:1;text-shadow:0 1px 0 #fff}joomla-alert .joomla-alert--close,joomla-alert .joomla-alert-button--close{float:right;color:#000;background:0 0;border:0;opacity:.5}joomla-alert .joomla-alert--close:focus,joomla-alert .joomla-alert--close:hover,joomla-alert .joomla-alert-button--close:focus,joomla-alert .joomla-alert-button--close:hover{color:#000;text-decoration:none;cursor:pointer;opacity:.75}joomla-alert button.joomla-alert-button--close{padding-top:.75rem;font-size:100%;line-height:1.15;cursor:pointer;background:0 0;border:0;-webkit-appearance:none}joomla-alert[level=success]{color:#3c763d;background-color:#dff0d8;border-color:#d0e9c6}joomla-alert[level=success] hr{border-top-color:#c1e2b3}joomla-alert[level=success] .alert-link{color:#2b542c}joomla-alert[level=info]{color:#31708f;background-color:#d9edf7;border-color:#bcdff1}joomla-alert[level=info] hr{border-top-color:#a6d5ec}joomla-alert[level=info] .alert-link{color:#245269}joomla-alert[level=warning]{color:#8a6d3b;background-color:#fcf8e3;border-color:#faf2cc}joomla-alert[level=warning] hr{border-top-color:#f7ecb5}joomla-alert[level=warning] .alert-link{color:#66512c}joomla-alert[level=danger]{color:#a94442;background-color:#f2dede;border-color:#ebcccc}joomla-alert[level=danger] hr{border-top-color:#e4b9b9}joomla-alert[level=danger] .alert-link{color:#843534}`;
+      style.innerHTML = `joomla-alert{display:block;padding:.5rem 1.25rem;margin-bottom:1rem;border:1px solid transparent;opacity:0;border-radius:.25rem;transition:opacity .15s linear}joomla-alert.joomla-alert--show{opacity:1}joomla-alert .joomla-alert--close,joomla-alert .joomla-alert-button--close{position:relative;top:-.5rem;right:-1.25rem;padding:.5rem 1.25rem;color:inherit}joomla-alert .joomla-alert--close{font-size:1.5rem;font-weight:700;line-height:1;text-shadow:0 1px 0 #fff}joomla-alert .joomla-alert--close,joomla-alert .joomla-alert-button--close{float:right;color:#000;background:0 0;border:0;opacity:.5}joomla-alert .joomla-alert--close:focus,joomla-alert .joomla-alert--close:hover,joomla-alert .joomla-alert-button--close:focus,joomla-alert .joomla-alert-button--close:hover{color:#000;text-decoration:none;cursor:pointer;opacity:.75}joomla-alert button.joomla-alert-button--close{padding-top:.75rem;font-size:100%;line-height:1.15;cursor:pointer;background:0 0;border:0;-webkit-appearance:none}joomla-alert[type=primary]{color:#00364f;background-color:#cce1ea;border-color:#b8d5e2}joomla-alert[type=primary] hr{border-top-color:#a6cadb}joomla-alert[type=primary] .alert-link{color:#00131c}joomla-alert[type=secondary]{color:#464a4e;background-color:#e7e8ea;border-color:#dddfe2}joomla-alert[type=secondary] hr{border-top-color:#cfd2d6}joomla-alert[type=secondary] .alert-link{color:#2e3133}joomla-alert[type=success]{color:#234423;background-color:#d9e6d9;border-color:#cadcca}joomla-alert[type=success] hr{border-top-color:#bbd2bb}joomla-alert[type=success] .alert-link{color:#122212}joomla-alert[type=info]{color:#0c5460;background-color:#d1ecf1;border-color:#bee5eb}joomla-alert[type=info] hr{border-top-color:#abdde5}joomla-alert[type=info] .alert-link{color:#062c33}joomla-alert[type=warning]{color:#7d5a29;background-color:#fcefdc;border-color:#fbe8cd}joomla-alert[type=warning] hr{border-top-color:#f9ddb5}joomla-alert[type=warning] .alert-link{color:#573e1c}joomla-alert[type=danger]{color:#712b29;background-color:#f7dddc;border-color:#f4cfce}joomla-alert[type=danger] hr{border-top-color:#efbbb9}joomla-alert[type=danger] .alert-link{color:#4c1d1b}joomla-alert[type=light]{color:#818182;background-color:#fefefe;border-color:#fdfdfe}joomla-alert[type=light] hr{border-top-color:#ececf6}joomla-alert[type=light] .alert-link{color:#686868}joomla-alert[type=dark]{color:#1b1e21;background-color:#d6d8d9;border-color:#c6c8ca}joomla-alert[type=dark] hr{border-top-color:#b9bbbe}joomla-alert[type=dark] .alert-link{color:#040505}`;
       document.head.appendChild(style);
     }
   }
@@ -28,10 +28,11 @@ class JoomlaAlertElement extends HTMLElement {
     this.setAttribute('role', 'alert');
     this.classList.add('joomla-alert--show');
 
-    // Default to info
-    if (!this.level || ['info', 'warning', 'danger', 'success'].indexOf(this.level) === -1) {
-      this.setAttribute('level', 'info');
+    // If no type has been defined, the default as "info"
+    if (!this.type) {
+      this.setAttribute('type', 'info');
     }
+
     // Append button
     if (this.hasAttribute('dismiss') || this.hasAttribute('acknowledge') || (this.hasAttribute('href') && this.getAttribute('href') !== '')) {
       if (!this.querySelector('button.joomla-alert--close') && !this.querySelector('button.joomla-alert-button--close')) {
@@ -62,9 +63,9 @@ class JoomlaAlertElement extends HTMLElement {
   /* Respond to attribute changes */
   attributeChangedCallback(attr, oldValue, newValue) {
     switch (attr) {
-      case 'level':
-        if (!newValue || (newValue && ['info', 'warning', 'danger', 'success'].indexOf(newValue) === -1)) {
-          this.level = 'info';
+      case 'type':
+        if (!newValue) {
+          this.type = 'info';
         }
         break;
       case 'dismiss':
