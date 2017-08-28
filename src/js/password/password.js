@@ -1,5 +1,13 @@
 const Joomla = window.Joomla || {};
 
+/** Include the relative styles */
+if (!document.head.querySelector('#joomla-password-style')) {
+  const style = document.createElement('style');
+  style.id = 'joomla-password-style';
+  style.innerHTML = '{{stylesheet}}';
+  document.head.appendChild(style);
+}
+
 class JoomlaPasswordStrength {
   constructor(settings) {
     this.lowercase = settings.lowercase || 0;

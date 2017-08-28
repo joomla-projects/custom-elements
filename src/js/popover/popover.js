@@ -1,7 +1,10 @@
 /** Include the relative styles */
-const style = document.createElement('style');
-style.innerHTML = '{{stylesheet}}';
-document.head.appendChild(style);
+if (!document.head.querySelector('#joomla-popover-style')) {
+  const style = document.createElement('style');
+  style.id = 'joomla-popover-style';
+  style.innerHTML = '{{stylesheet}}';
+  document.head.appendChild(style);
+}
 
 class JoomlaPopoverElement extends HTMLElement {
   // /* Attributes to monitor */

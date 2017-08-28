@@ -1,7 +1,10 @@
 /** Include the relative styles */
-const style = document.createElement('style');
-style.innerHTML = '{{stylesheet}}';
-document.head.appendChild(style);
+if (!document.head.querySelector('#joomla-modal-style')) {
+  const style = document.createElement('style');
+  style.id = 'joomla-modal-style';
+  style.innerHTML = '{{stylesheet}}';
+  document.head.appendChild(style);
+}
 
 class JoomlaModalElement extends HTMLElement {
   constructor() {

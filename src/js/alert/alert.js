@@ -1,9 +1,12 @@
 const Joomla = window.Joomla || {};
 
 /** Include the relative styles */
-const style = document.createElement('style');
-style.innerHTML = '{{stylesheet}}';
-document.head.appendChild(style);
+if (!document.head.querySelector('#joomla-alert-style')) {
+  const style = document.createElement('style');
+  style.id = 'joomla-alert-style';
+  style.innerHTML = '{{stylesheet}}';
+  document.head.appendChild(style);
+}
 
 class JoomlaAlertElement extends HTMLElement {
   /* Attributes to monitor */

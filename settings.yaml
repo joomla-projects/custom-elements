@@ -3,15 +3,16 @@
 #### Comment out the elements you don't want to be created
 'prefix'   : 'joomla'
 'elements':
-            - 'accordion'
+            # - 'accordion'
             - 'alert'
-            - 'group-buttons'
-            - 'collapse'
-            - 'dropdown'
-            - 'modal'
-            - 'popover'
-            - 'switcher'
+            # - 'group-buttons'
+            # - 'collapse'
+            # - 'dropdown'
+            # - 'modal'
+            # - 'popover'
+            # - 'password'
+            # - 'switcher'
             - 'tab'
-            - 'tooltip'
+            # - 'tooltip'
 
 ## - 'popover' Use css for this

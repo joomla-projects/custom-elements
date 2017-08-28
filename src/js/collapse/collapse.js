@@ -1,7 +1,10 @@
 /** Include the relative styles */
-const style = document.createElement('style');
-style.innerHTML = '{{stylesheet}}';
-document.head.appendChild(style);
+if (!document.head.querySelector('#joomla-collapse-style')) {
+  const style = document.createElement('style');
+  style.id = 'joomla-collapse-style';
+  style.innerHTML = '{{stylesheet}}';
+  document.head.appendChild(style);
+}
 
 class JoomlaCollapseElement extends HTMLElement {
   static get observedAttributes() {

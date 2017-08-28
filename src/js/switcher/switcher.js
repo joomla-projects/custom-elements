@@ -1,9 +1,12 @@
 const Joomla = window.Joomla || {};
 
 /** Include the relative styles */
-const style = document.createElement('style');
-style.innerHTML = '{{stylesheet}}';
-document.head.appendChild(style);
+if (!document.head.querySelector('#joomla-switcher-style')) {
+  const style = document.createElement('style');
+  style.id = 'joomla-switcher-style';
+  style.innerHTML = '{{stylesheet}}';
+  document.head.appendChild(style);
+}
 
 class JoomlaSwitcherElement extends HTMLElement {
   /* Attributes to monitor */

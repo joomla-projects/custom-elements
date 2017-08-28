@@ -1,7 +1,10 @@
 /** Include the relative styles */
-const style = document.createElement('style');
-style.innerHTML = '{{stylesheet}}';
-document.head.appendChild(style);
+if (!document.head.querySelector('#joomla-tooltip-style')) {
+  const style = document.createElement('style');
+  style.id = 'joomla-tooltip-style';
+  style.innerHTML = '{{stylesheet}}';
+  document.head.appendChild(style);
+}
 
 class JoomlaTooltipElement extends HTMLElement {
   /* Attributes to monitor */

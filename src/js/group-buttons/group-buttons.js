@@ -1,7 +1,10 @@
 /** Include the relative styles */
-const style = document.createElement('style');
-style.innerHTML = '{{stylesheet}}';
-document.head.appendChild(style);
+if (!document.head.querySelector('#joomla-group-buttons-style')) {
+  const style = document.createElement('style');
+  style.id = 'joomla-group-buttons-style';
+  style.innerHTML = '{{stylesheet}}';
+  document.head.appendChild(style);
+}
 
 class JoomlaButtonElement extends HTMLElement {
   connectedCallback() {
@@ -49,7 +52,7 @@ class JoomlaButtonElement extends HTMLElement {
             radio.parentNode.setAttribute('aria-pressed', 'false');
           }
 
-          radio.addEventListener('click', function () {
+          radio.addEventListener('click', () => {
             if (this.checked) {
               this.parentNode.parentNode.clearAllRadios();
               this.setAttribute('checked', '');
