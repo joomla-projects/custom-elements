@@ -81,7 +81,6 @@ class JoomlaFieldMedia extends HTMLElement {
   // }
 
   connectedCallback() {
-    console.log(this.buttonClear)
     const button = this.querySelector(this.buttonSelect);
     const buttonClear = this.querySelector(this.buttonClear);
     this.show = this.show.bind(this);
@@ -164,8 +163,8 @@ class JoomlaFieldMedia extends HTMLElement {
           case 'image':
             imgPreview.src = this.basePath + value;
             break;
-            default:
-            //imgPreview.src = dummy image path;
+          default:
+            // imgPreview.src = dummy image path;
             break;
         }
 

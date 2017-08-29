@@ -22,7 +22,7 @@ var _createClass = function () {
   function b() {
     return _classCallCheck(this, b), _possibleConstructorReturn(this, (b.__proto__ || Object.getPrototypeOf(b)).apply(this, arguments));
   }return _inherits(b, a), _createClass(b, [{ key: 'connectedCallback', value: function connectedCallback() {
-      console.log(this.buttonClear);var a = this.querySelector(this.buttonSelect),
+      var a = this.querySelector(this.buttonSelect),
           b = this.querySelector(this.buttonClear);this.show = this.show.bind(this), this.modalClose = this.modalClose.bind(this), this.clearValue = this.clearValue.bind(this), this.setValue = this.setValue.bind(this), this.updatePreview = this.updatePreview.bind(this), a.addEventListener('click', this.show), b && b.addEventListener('click', this.clearValue), this.updatePreview();
     } }, { key: 'disconnectedCallback', value: function disconnectedCallback() {
       var a = this.querySelector(this.buttonClear);a.removeEventListener('click', self);
