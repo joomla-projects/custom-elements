@@ -28,11 +28,10 @@ var _createClass = function () {
       var a = this.querySelector(this.buttonClear);a.removeEventListener('click', self);
     } }, { key: 'show', value: function show() {
       var a = this,
-          b = this,
-          c = this.querySelector(this.input);window.jQuery(this.querySelector('[role="dialog"]')).modal('show'), window.jQuery(this.querySelector(this.buttonSaveSelected)).on('click', function (c) {
+          b = this;window.jQuery(this.querySelector('[role="dialog"]')).modal('show'), window.jQuery(this.querySelector(this.buttonSaveSelected)).on('click', function (c) {
         return c.preventDefault(), c.stopPropagation(), a.selectedPath && b.setValue(a.selectedPath), b.modalClose(), !1;
       }), window.document.addEventListener('onMediaFileSelected', function (a) {
-        console.log(a.detail), b.selectedPath = a.detail.path;
+        b.selectedPath = a.detail.path;
       });
     } }, { key: 'modalClose', value: function modalClose() {
       window.jQuery(this.querySelector('[role="dialog"]')).modal('hide');

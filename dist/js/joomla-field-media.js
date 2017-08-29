@@ -106,7 +106,7 @@ class JoomlaFieldMedia extends HTMLElement {
 
   show() {
     const self = this;
-    const input = this.querySelector(this.input);
+
     window.jQuery(this.querySelector('[role="dialog"]')).modal('show');
 
     window.jQuery(this.querySelector(this.buttonSaveSelected)).on('click', (e) => {
@@ -122,7 +122,6 @@ class JoomlaFieldMedia extends HTMLElement {
     });
 
     window.document.addEventListener('onMediaFileSelected', (e) => {
-      console.log(e.detail)
       self.selectedPath = e.detail.path;
     });
   }
