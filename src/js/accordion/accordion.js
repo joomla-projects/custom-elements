@@ -51,11 +51,11 @@ class JoomlaAccordionElement extends HTMLElement {
     }
   }
 
+  /*eslint-disable */
   static get observedAttributes() {
     return ['type', 'button'];
   }
 
-  /*eslint-disable */
   attributeChangedCallback(attr, oldValue, newValue) {
     switch (attr) {
       case 'type':

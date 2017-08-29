@@ -36,7 +36,7 @@ class JoomlaTabElement extends HTMLElement {
     const self = this;
     const tabs = [].slice.call(this.querySelectorAll('section'));
     let tabsEl = [];
-    let tabLinkHash = [];
+    const tabLinkHash = [];
 
     // Sanity check
     if (!tabs) {
@@ -68,7 +68,6 @@ class JoomlaTabElement extends HTMLElement {
       // @todo end
 
       // Add possible parent tab to the aray for activation
-      console.log(tabLinkHash)
       if (tabLinkHash.length && tabLinkHash[0] !== '') {
         const hash = tabLinkHash[0].substring(5);
         const element = this.querySelector(`#${hash}`);
@@ -393,14 +392,12 @@ class JoomlaTabElement extends HTMLElement {
   /*eslint-enable */
 
   /* Method to dispatch events */
-  /*eslint-disable */
   dispatchCustomEvent(eventName, element, related) {
     const OriginalCustomEvent = new CustomEvent(eventName, { bubbles: true, cancelable: true });
     OriginalCustomEvent.relatedTarget = related;
     element.dispatchEvent(OriginalCustomEvent);
     element.removeEventListener(eventName, element);
   }
-  /*eslint-enable */
 }
 
 customElements.define('joomla-tab', JoomlaTabElement);

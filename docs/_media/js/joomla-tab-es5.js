@@ -42,7 +42,7 @@ var _createClass = function () {
         if (this.findAncestor(this, 'joomla-tab') && (this.isNested = !0), this.querySelector('joomla-tab') && (this.hasNested = !0), this.hasAttribute('recall')) {
           var f = sessionStorage.getItem(this.getStorageKey());f && e.push(f);
         }if (this.hasNested) {
-          var g = sessionStorage.getItem(this.getStorageKey());if (g && e.push(g), console.log(e), e.length && '' !== e[0]) {
+          var g = sessionStorage.getItem(this.getStorageKey());if (g && e.push(g), e.length && '' !== e[0]) {
             var h = e[0].substring(5),
                 i = this.querySelector('#' + h);if (i) {
               var j = this.findAncestor(i, 'joomla-tab'),

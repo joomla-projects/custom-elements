@@ -13,6 +13,8 @@
             # - 'password'
             # - 'switcher'
             - 'tab'
+            - 'field-media'
+            - 'field-send-mail'
             # - 'tooltip'
 
 ## - 'popover' Use css for this
