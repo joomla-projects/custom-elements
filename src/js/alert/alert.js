@@ -10,7 +10,7 @@ if (!document.head.querySelector('#joomla-alert-style')) {
 
 class JoomlaAlertElement extends HTMLElement {
   /* Attributes to monitor */
-  static get observedAttributes() { return ['type', 'dismiss', 'acknowledge', 'href', 'auto-dismiss']; }
+  static get observedAttributes() { return ['type', 'dismiss', 'acknowledge', 'href', 'auto-dismiss', 'position']; }
   get type() { return this.getAttribute('type'); }
   set type(value) { return this.setAttribute('type', value); }
   get dismiss() { return this.getAttribute('dismiss'); }
@@ -21,6 +21,8 @@ class JoomlaAlertElement extends HTMLElement {
   set href(value) { return this.setAttribute('href', value); }
   get ['auto-dismiss']() { return parseInt(this.getAttribute('auto-dismiss'), 10); }
   set ['auto-dismiss'](value) { return this.setAttribute('auto-dismiss', parseInt(value, 10)); }
+  get position() { return this.getAttribute('position'); }
+  set position(value) { return this.setAttribute('position', value); }
 
   /* Lifecycle, element appended to the DOM */
   connectedCallback() {
