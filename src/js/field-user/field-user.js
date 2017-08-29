@@ -38,8 +38,10 @@ class JoomlaFieldUser extends HTMLElement {
     const onchangeStr = this.input.getAttribute('data-onchange');
     let onchangeCallback;
     if (onchangeStr) {
+      /* eslint-disable */
       onchangeCallback = new Function(onchangeStr);
       this.input.addEventListener('change', onchangeCallback.bind(this.input));
+      /* eslint-enable */
     }
   }
 

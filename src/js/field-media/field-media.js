@@ -68,7 +68,8 @@ class JoomlaFieldMedia extends HTMLElement {
   //       break;
   //     case 'preview':
   //       // bool|string
-  //       if (['true', 'false', 'tooltip', 'static'].indexOf(newValue) > -1 && oldValue !== newValue) {
+  //       if (['true', 'false', 'tooltip', 'static'].indexOf(newValue) > -1
+  //           && oldValue !== newValue) {
   //         this.preview = newValue;
   //       } else {
   //         // if (oldValue )
