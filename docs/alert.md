@@ -40,6 +40,9 @@ The simplified version of the custom elements
 <joomla-alert type="danger" href="https://www.joomla.org/">
     <strong>Oh snap!</strong> Click open to go to joomla.org
 </joomla-alert>
+<p>
+<button role="button" id="insertNewFloated" class="btn btn-success">Create a floated alert</button>
+</p>
 
 ## Attibutes
 Control the design and functionality of the custom element through attributes.
@@ -52,6 +55,7 @@ Control the design and functionality of the custom element through attributes.
 |acknowledge	|Appends a generic button with a title `Ok`. True is the only value.|
 |auto-dismiss	|Controls the auto close functionality of the alert. Values (integers) represent milliseconds|
 |href	|if is set a redirect button is created. Value must be an actual url|
+|position	|Add the following parameter to adjust the alerts's position to different corners. Possible values: `top-left`, `top-center` and `top-right`|
 
 All Strings are translateble, using the common API: `Joomla.JText._('JCLOSE')`
 
@@ -183,8 +187,16 @@ var addNew = function() {
     tempElement.setAttribute('type', 'success');
     tempElement.setAttribute('dismiss', 'true');
     tempElement.innerHTML = 'Wow it works!';
-
     document.getElementById('insert-new-alert').appendChild(tempElement);
+}
+
+var addNewFloated = function() {
+    var tempElement = document.createElement('joomla-alert');
+    tempElement.setAttribute('type', 'warning');
+    tempElement.setAttribute('dismiss', 'true');
+	tempElement.setAttribute('position', 'top-center');
+    tempElement.innerHTML = "I'm a floated alert! You can position me to the top left or right too!";
+    document.body.appendChild(tempElement);
 }
 
 var changeAlert = function(dataAttr, value) {
@@ -194,7 +206,10 @@ var changeAlert = function(dataAttr, value) {
 var addNewButton = document.getElementById('insertNew'),
     changeButtons = document.querySelectorAll('#replaceble > button');
 
+var addNewButtonFloated = document.getElementById('insertNewFloated')
+
 addNewButton.addEventListener('click', addNew);
+addNewButtonFloated.addEventListener('click', addNewFloated);
 document.getElementById('change-me').addEventListener('joomla.alert.close', function() { alert('Seeing is believing. Event "joomla.alert.close" fired!') });
 document.getElementById('change-me').addEventListener('joomla.alert.closed', function() {
     document.getElementById('replaceble').innerHTML = '<h4>Oops the alert has been destroyed. This text was initiated using the event "joomla.alert.closed" (the popup used the event "joomla.alert.close"</h4>';
