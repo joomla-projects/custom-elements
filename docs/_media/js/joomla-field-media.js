@@ -106,15 +106,15 @@ class JoomlaFieldMedia extends HTMLElement {
 
   show() {
     const self = this;
+    const input = this.querySelector(this.input);
     window.jQuery(this.querySelector('[role="dialog"]')).modal('show');
 
     window.jQuery(this.querySelector(this.buttonSaveSelected)).on('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
+
       if (this.selectedPath) {
-        self.setValue(self.rootFolder + this.selectedPath);
-      } else {
-        self.setValue('');
+        self.setValue(this.selectedPath);
       }
 
       self.modalClose();
@@ -122,15 +122,8 @@ class JoomlaFieldMedia extends HTMLElement {
     });
 
     window.document.addEventListener('onMediaFileSelected', (e) => {
-      const path = e.item.path;
-
-      // @TODO use the data from the event for the type
-      // This field will support more than images
-      if (path.match(/.jpg|.jpeg|.gif|.png/)) {
-        self.selectedPath = e.item.path;
-      } else {
-        self.selectedPath = '';
-      }
+      console.log(e.detail)
+      self.selectedPath = e.detail.path;
     });
   }
 
@@ -191,4 +184,5 @@ class JoomlaFieldMedia extends HTMLElement {
     }
   }
 }
+
 customElements.define('joomla-field-media', JoomlaFieldMedia);
