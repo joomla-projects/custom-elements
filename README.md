@@ -1,6 +1,7 @@
 # Joomla UI custom elements
 
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.svg)](http://gruntjs.com/)
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/joomla-projects/custom-elements)
 
 ### UI components using modern technologies
 
