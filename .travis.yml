@@ -6,6 +6,6 @@ node_js:
 before_install:
   - if [[ `npm -v` != 5* ]]; then npm install -g npm@5; fi
 install:
-  - npm install
+  - npm install eslint
 script:
   - `eslint src`
