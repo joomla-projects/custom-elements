@@ -1,5 +1,7 @@
 # Joomla UI custom elements
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/joomla-projects/custom-elements.svg)](https://greenkeeper.io/)
+
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.svg)](http://gruntjs.com/)
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/joomla-projects/custom-elements)
 
