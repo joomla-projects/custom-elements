@@ -10,7 +10,7 @@ if (!document.head.querySelector('#joomla-alert-style')) {
 
 class JoomlaAlertElement extends HTMLElement {
   /* Attributes to monitor */
-  static get observedAttributes() { return ['type', 'dismiss', 'acknowledge', 'href', 'auto-dismiss', 'position']; }
+  static get observedAttributes() { return ['type', 'dismiss', 'acknowledge', 'href', 'auto-dismiss', 'position', 'textClose', 'textDismiss', 'textAcknowledge']; }
   get type() { return this.getAttribute('type'); }
   set type(value) { return this.setAttribute('type', value); }
   get dismiss() { return this.getAttribute('dismiss'); }
