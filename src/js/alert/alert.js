@@ -23,6 +23,10 @@ class JoomlaAlertElement extends HTMLElement {
   set ['auto-dismiss'](value) { return this.setAttribute('auto-dismiss', parseInt(value, 10)); }
   get position() { return this.getAttribute('position'); }
   set position(value) { return this.setAttribute('position', value); }
+  
+  get textClose() { return this.getAttribute('textClose') || 'Close'; }
+  get textDismiss() { return this.getAttribute('textDismiss') || 'Open'; }
+  get textAcknowledge() { return this.getAttribute('textAcknowledge') || 'Ok'; }
 
   /* Lifecycle, element appended to the DOM */
   connectedCallback() {
@@ -124,13 +128,13 @@ class JoomlaAlertElement extends HTMLElement {
     if (this.hasAttribute('dismiss')) {
       closeButton.classList.add('joomla-alert--close');
       closeButton.innerHTML = '<span aria-hidden="true">&times;</span>';
-      closeButton.setAttribute('aria-label', this.getText('JCLOSE', 'Close'));
+      closeButton.setAttribute('aria-label', this.textClose);
     } else {
       closeButton.classList.add('joomla-alert-button--close');
       if (this.hasAttribute('acknowledge')) {
-        closeButton.innerHTML = this.getText('JOK', 'ok');
+        closeButton.innerHTML = this.textAcknowledge;
       } else {
-        closeButton.innerHTML = this.getText('JOPEN', 'Open');
+        closeButton.innerHTML = this.textDismiss;
       }
     }
 
@@ -170,11 +174,6 @@ class JoomlaAlertElement extends HTMLElement {
       button.removeEventListener('click', this);
       button.parentNode.removeChild(button);
     }
-  }
-
-  /* Method to get the translated text. Internal */
-  getText(str, fallback) {
-    return (window.Joomla && Joomla.JText && Joomla.JText._ && typeof Joomla.JText._ === 'function' && Joomla.JText._(str)) ? Joomla.JText._(str) : fallback;
   }
 }
 

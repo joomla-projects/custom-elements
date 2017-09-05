@@ -121,11 +121,11 @@ class JoomlaSwitcherElement extends HTMLElement {
 
     const labelFirst = document.createElement('span');
     labelFirst.classList.add('switcher-label-0');
-    labelFirst.innerText = this.getText(this.offText, 'Off');
+    labelFirst.innerText = this.offText;
 
     const labelSecond = document.createElement('span');
     labelSecond.classList.add('switcher-label-1');
-    labelSecond.innerText = this.getText(this.onText, 'On');
+    labelSecond.innerText = this.onText;
 
     if (checked === 0) {
       labelFirst.classList.add('active');
@@ -194,11 +194,6 @@ class JoomlaSwitcherElement extends HTMLElement {
     const newActive = this.querySelector('input:not(.active)');
 
     newActive.click();
-  }
-
-  /* Method to get the translated text. Internal */
-  static getText(str, fallback) {
-    return (window.Joomla && Joomla.JText && Joomla.JText._ && typeof Joomla.JText._ === 'function' && Joomla.JText._(str)) ? Joomla.JText._(str) : fallback;
   }
 }
 
