@@ -24,8 +24,11 @@ class JoomlaAlertElement extends HTMLElement {
   get position() { return this.getAttribute('position'); }
   set position(value) { return this.setAttribute('position', value); }
   get textClose() { return this.getAttribute('textClose') || 'Close'; }
+  set textClose(value) { return this.setAttribute('textClose', value); }
   get textDismiss() { return this.getAttribute('textDismiss') || 'Open'; }
+  set textDismiss(value) { return this.setAttribute('textDismiss', value); }
   get textAcknowledge() { return this.getAttribute('textAcknowledge') || 'Ok'; }
+  set textAcknowledge(value) { return this.setAttribute('textAcknowledge', value); }
 
   /* Lifecycle, element appended to the DOM */
   connectedCallback() {
