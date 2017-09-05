@@ -384,12 +384,11 @@ class JoomlaTabElement extends HTMLElement {
     }
   }
 
-  /*eslint-disable */
   findAncestor(el, tagName) {
+    // eslint-disable-next-line no-alert
     while ((el = el.parentElement) && el.nodeName.toLowerCase() !== tagName);
     return el;
   }
-  /*eslint-enable */
 
   /* Method to dispatch events */
   dispatchCustomEvent(eventName, element, related) {

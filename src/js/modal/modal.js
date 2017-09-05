@@ -74,16 +74,18 @@ class JoomlaModalElement extends HTMLElement {
     // this.style.display = 'none';
   }
 
-  /*eslint-disable */
   findAncestor(el, tagName) {
+    /* eslint-disable */
     while ((el = el.parentElement) && el.nodeName.toLowerCase() !== tagName);
     return el;
+    /* eslint-enable */
   }
 
   findAncestorClass(el, className) {
+    /* eslint-disable */
     while ((el = el.parentElement) && !el.classList.contains(className));
     return el;
+    /* eslint-enable */
   }
-  /*eslint-disable */
 }
 customElements.define('joomla-modal', JoomlaModalElement);

@@ -15,6 +15,7 @@
             - 'tab'
             - 'field-media'
             - 'field-send-mail'
+            - 'field-user'
             # - 'tooltip'
 
 ## - 'popover' Use css for this
