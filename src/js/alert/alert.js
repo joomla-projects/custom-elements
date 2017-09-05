@@ -23,7 +23,6 @@ class JoomlaAlertElement extends HTMLElement {
   set ['auto-dismiss'](value) { return this.setAttribute('auto-dismiss', parseInt(value, 10)); }
   get position() { return this.getAttribute('position'); }
   set position(value) { return this.setAttribute('position', value); }
-  
   get textClose() { return this.getAttribute('textClose') || 'Close'; }
   get textDismiss() { return this.getAttribute('textDismiss') || 'Open'; }
   get textAcknowledge() { return this.getAttribute('textAcknowledge') || 'Ok'; }
