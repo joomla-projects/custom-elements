@@ -78,7 +78,7 @@ module.exports = function (grunt) {
             ]
           })
         ],
-        src: 'src/scss/css/' + element + '.css',
+        src: 'src/scss/css/' + element + '.css'
       }]);
 
       grunt.task.run('postcss:' + element);
