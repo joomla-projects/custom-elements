@@ -13,8 +13,8 @@ class JoomlaSwitcherElement extends HTMLElement {
   static get observedAttributes() { return ['type', 'offText', 'onText']; }
   get type() { return this.getAttribute('type'); }
   set type(value) { return this.setAttribute('type', value); }
-  get offText() { return this.getAttribute('offText'); }
-  get onText() { return this.getAttribute('onText'); }
+  get offText() { return this.getAttribute('offText') || 'Off'; }
+  get onText() { return this.getAttribute('onText') || 'On'; }
 
   /* Lifecycle, element appended to the DOM */
   connectedCallback() {
