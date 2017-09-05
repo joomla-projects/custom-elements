@@ -77,8 +77,8 @@ module.exports = function (grunt) {
               'Opera >= ' + settings.Browsers.Opera
             ]
           })
-		],
-		src: 'src/scss/css/' + element + '.css',
+        ],
+        src: 'src/scss/css/' + element + '.css',
       }]);
 
       grunt.task.run('postcss:' + element);
