@@ -9,6 +9,7 @@ module.exports = function (grunt) {
   }
 
   // Load required modules
+  grunt.loadNpmTasks('grunt-postcss');
   grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-babel');
@@ -53,8 +54,8 @@ module.exports = function (grunt) {
 
   // Compile the css
   grunt.registerTask('compile', 'Compile css files', function () {
-    // Compile the css files
     var compileCss = function (element) {
+      // Compile the css files
       grunt.config.set('sass.' + element + '.files', [{
         src: 'src/scss/' + element + '/' + element + '.scss',
         dest: 'src/scss/css/' + element + '.css'
@@ -62,6 +63,27 @@ module.exports = function (grunt) {
 
       grunt.task.run('sass:' + element);
 
+      // Autoprefix the CSS files
+      grunt.config.set('postcss.' + element + '.files', [{
+        map: false,
+        processors: [
+          require('autoprefixer')({
+            browsers: [
+              'Chrome = ' + settings.browsers.Chrome,
+              'Firefox = ' + settings.browsers.Firefox,
+              'Edge = ' + settings.browsers.Edge,
+              'Explorer = ' + settings.browsers.Explorer,
+              'Safari = ' + settings.browsers.Safari,
+              'Opera = ' + settings.browsers.Opera
+            ]
+          })
+        ],
+        src: 'src/scss/css/' + element + '.css',
+      }]);
+
+      grunt.task.run('postcss:' + element);
+
+      // Autoprefix the CSS files
       grunt.config.set('cssmin.' + element + '.files', [{
         src: 'src/scss/css/' + element + '.css',
         dest: 'src/scss/css/' + settings.prefix + '-' + element + '.min.css'
