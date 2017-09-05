@@ -63,18 +63,18 @@ module.exports = function (grunt) {
 
       grunt.task.run('sass:' + element);
 
-	  // Autoprefix the CSS files
+      // Autoprefix the CSS files
       grunt.config.set('postcss.' + element + '.files', [{
         map: false,
         processors: [
           require('autoprefixer')({
             browsers: [
-              'Chrome >= ' + settings.Browsers.Chrome,
-              'Firefox >= ' + settings.Browsers.Firefox,
-              'Edge >= ' + settings.Browsers.Edge,
-              'Explorer >= ' + settings.Browsers.Explorer,
-              'Safari >= ' + settings.Browsers.Safari,
-              'Opera >= ' + settings.Browsers.Opera
+              'Chrome >= ' + settings.browsers.Chrome,
+              'Firefox >= ' + settings.browsers.Firefox,
+              'Edge >= ' + settings.browsers.Edge,
+              'Explorer >= ' + settings.browsers.Explorer,
+              'Safari >= ' + settings.browsers.Safari,
+              'Opera >= ' + settings.browsers.Opera
             ]
           })
         ],
