@@ -24,6 +24,7 @@
   ],
   "author": "Dimitrios Grammatikogiannis, Charlie Lodder",
   "devDependencies": {
+    "autoprefixer": "^7.1.3",
     "@polymer/test-fixture": "latest",
     "@webcomponents/custom-elements": "latest",
     "@webcomponents/webcomponentsjs": "latest",
@@ -43,6 +44,7 @@
     "grunt-contrib-uglify": "git://github.com/gruntjs/grunt-contrib-uglify.git#harmony",
     "grunt-sass": "latest",
     "grunt-shell": "latest",
+    "grunt-postcss": "latest",
     "web-component-tester": "latest",
     "webcomponentsjs": "latest",
     "eslint": "latest",
