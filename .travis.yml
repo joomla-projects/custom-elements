@@ -9,3 +9,5 @@ install:
   - npm install
 script:
   - eslint src
+notifications:
+  email: false
