@@ -69,12 +69,12 @@ module.exports = function (grunt) {
         processors: [
           require('autoprefixer')({
             browsers: [
-              'Chrome >= ' + settings.browsers.Chrome,
-              'Firefox >= ' + settings.browsers.Firefox,
-              'Edge >= ' + settings.browsers.Edge,
-              'Explorer >= ' + settings.browsers.Explorer,
-              'Safari >= ' + settings.browsers.Safari,
-              'Opera >= ' + settings.browsers.Opera
+              'Chrome = ' + settings.browsers.Chrome,
+              'Firefox = ' + settings.browsers.Firefox,
+              'Edge = ' + settings.browsers.Edge,
+              'Explorer = ' + settings.browsers.Explorer,
+              'Safari = ' + settings.browsers.Safari,
+              'Opera = ' + settings.browsers.Opera
             ]
           })
         ],
