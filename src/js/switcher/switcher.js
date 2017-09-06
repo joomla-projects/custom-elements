@@ -48,8 +48,9 @@ class JoomlaSwitcherElement extends HTMLElement {
         const relatedSpan = parent.nextElementSibling.querySelector(`span.switcher-label-${switchEl.value}`);
 
         relatedSpan.id = `${switchEl.id}-label`;
-        if (switchEl.classList.contains('active'))
-        switchEl.setAttribute('aria-labelledby', relatedSpan.id);
+        if (switchEl.classList.contains('active')) {
+          switchEl.setAttribute('aria-labelledby', relatedSpan.id);
+        }
       }
 
       // Remove the tab focus from the inputs
