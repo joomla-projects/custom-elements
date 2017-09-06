@@ -25,23 +25,18 @@ var _createClass = function () {
   }return _inherits(b, a), _createClass(b, [{ key: 'attributeChangedCallback', value: function attributeChangedCallback(a) {
       switch (a) {}
     } }, { key: 'connectedCallback', value: function connectedCallback() {
-      if (!this.id) throw new Error('`Joomla-modal` requires an id');this;if (this.setAttribute('role', 'dialog'), this.classList.add('fade'), this.iframe = this.getAttribute('iframe') || '', this.width = this.getAttribute('width') || '100%', this.height = this.getAttribute('height') || '600px', !this.container) {
+      if (!this.id) throw new Error('`Joomla-modal` requires an id');if (this.setAttribute('role', 'dialog'), this.classList.add('fade'), this.iframe = this.getAttribute('iframe') || '', this.width = this.getAttribute('width') || '100%', this.height = this.getAttribute('height') || '600px', !this.container) {
         var b = document.createElement('div');b.classList.add('joomla-modal-dialog'), b.setAttribute('role', 'document'), b.innerHTML = this.innerHTML, this.innerHTML = '', this.appendChild(b), this.container = this.querySelector('.joomla-modal-dialog');
-      }this.header = this.querySelector('header'), this.main = this.querySelector('section'), this.footer = this.querySelector('footer'), this.setAttribute('tabindex', -1);var a = 'modal-title-' + new Date().getUTCMilliseconds();if (this.setAttribute('aria-labelledby', a), this.header) {
-        var c = this.header.querySelector('h5'),
-            d = this.header.querySelector('button');if (!c) {
-          var e = document.createElement('h5');e.innerText = this.title, c.id = a;
-        }if (!d) document.createElement('button');this.header.appendChild(htag), this.header.appendChild(closeButton);
-      } else {
-        var f = document.createElement('h5');f.innerText = this.title, f.id = a;var g = document.createElement('button');g.setAttribute('aria-label', 'Close'), g.setAttribute('data-dismiss', ''), g.innerHTML = '<span aria-hidden="true">\xD7</span>';var h = document.createElement('header');h.appendChild(f), h.appendChild(g), this.container.insertAdjacentElement('afterbegin', h);
+      }this.header = this.querySelector('header'), this.main = this.querySelector('section'), this.footer = this.querySelector('footer'), this.setAttribute('tabindex', -1);var a = 'modal-title-' + new Date().getUTCMilliseconds();if (this.setAttribute('aria-labelledby', a), !this.header) {
+        var c = document.createElement('h5');c.innerText = this.title, c.id = a;var d = document.createElement('button');d.setAttribute('aria-label', 'Close'), d.setAttribute('data-dismiss', ''), d.innerHTML = '<span aria-hidden="true">\xD7</span>';var e = document.createElement('header');e.appendChild(c), e.appendChild(d), this.container.insertAdjacentElement('afterbegin', e);
       }this.header = this.container.querySelector('header'), this.body = this.container.querySelector('section'), this.footer = this.container.querySelector('footer'), this.triggerBtn = document.querySelector('button[data-href="#' + this.id + '"]'), this.triggerBtn && this.triggerBtn.addEventListener('click', this.open.bind(this));
     } }, { key: 'disconnectedCallback', value: function disconnectedCallback() {
       this.triggerBtn && this.triggerBtn.removeEventListener('click', this.open);
     } }, { key: 'open', value: function open() {
       var a = this,
           b = this,
-          c = document.createElement('div');if (c.classList.add('modal-backdrop', 'fade'), c.classList.add('modal-backdrop', 'show'), document.body.appendChild(c), this.removeAttribute('aria-hidden'), console.log(this.body), console.log(this.iframe), this.body && (this.iframeEl = this.main.querySelector('iframe'), this.iframe)) {
-        this.iframeEl && this.iframeEl.parentNode.remove(this.iframeEl);var e = document.createElement('iframe');e.width = this.width, e.height = this.height, e.src = this.iframe, e.setAttribute('frameborder', 0), console.log(e), this.body.appendChild(e), this.iframeEl = this.main.querySelector('iframe');
+          c = document.createElement('div');if (c.classList.add('modal-backdrop', 'fade'), c.classList.add('modal-backdrop', 'show'), document.body.appendChild(c), this.removeAttribute('aria-hidden'), this.body && (this.iframeEl = this.main.querySelector('iframe'), this.iframe)) {
+        this.iframeEl && this.iframeEl.parentNode.remove(this.iframeEl);var e = document.createElement('iframe');e.width = this.width, e.height = this.height, e.src = this.iframe, e.setAttribute('frameborder', 0), this.body.appendChild(e), this.iframeEl = this.main.querySelector('iframe');
       }this.adjustDimensions(), this.scrollTop = 0, this.modal.classList.add('show'), this.focusableElements = [].slice.call(this.querySelectorAll(this.focusableSelectors.join())), this.focusableElements.length ? this.focusableElements[0].focus() : this.header.querySelector('button').focus(), this.addEventListener('keydown', this.keyPress.bind(this)), document.addEventListener('click', function (c) {
         b.findAncestorByClass(c.target, 'joomla-modal-dialog') || c.target === a.triggerBtn || b.close();
       });var d = b.querySelectorAll('button[data-dismiss]');d.forEach(function (c) {

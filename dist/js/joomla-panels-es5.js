@@ -59,11 +59,11 @@ var _createClass = function () {
     } }, { key: 'createNavigation', value: function createNavigation() {
       var a = this,
           b = this,
-          c = '';console.log(this.firstElementChild), 'ul' !== this.firstElementChild.tagName.toLowerCase() && (c = document.createElement('ul')), c.setAttribute('role', 'tablist'), this.panels.forEach(function (d) {
+          c = '';'ul' !== this.firstElementChild.tagName.toLowerCase() && (c = document.createElement('ul')), c.setAttribute('role', 'tablist'), this.panels.forEach(function (d) {
         if (!d.id) throw new Error('`joomla-panels` All panels require an ID');if (d.parentNode === a) {
           var e = d.getAttribute('active') || !1,
               f = document.createElement('li'),
-              g = document.createElement('a');f.setAttribute('role', 'presentation'), g.setAttribute('role', 'tab'), g.setAttribute('aria-controls', d.id), g.setAttribute('aria-selected', e ? 'true' : 'false'), g.setAttribute('tabindex', e ? '0' : '-1'), g.setAttribute('href', '#' + d.id), g.setAttribute('id', 'tab-' + d.id), g.innerHTML = d.getAttribute('name'), e && !activeDone && g.setAttribute('active', ''), g.addEventListener('click', b.activateTabFromLink.bind(b)), a.tabsLinks.push(g), f.append(g), c.append(f), d.setAttribute('aria-labelledby', 'tab-' + d.id), e || d.setAttribute('aria-hidden', 'true');
+              g = document.createElement('a');f.setAttribute('role', 'presentation'), g.setAttribute('role', 'tab'), g.setAttribute('aria-controls', d.id), g.setAttribute('aria-selected', e ? 'true' : 'false'), g.setAttribute('tabindex', e ? '0' : '-1'), g.setAttribute('href', '#' + d.id), g.setAttribute('id', 'tab-' + d.id), g.innerHTML = d.getAttribute('name'), e && g.setAttribute('active', ''), g.addEventListener('click', b.activateTabFromLink.bind(b)), a.tabsLinks.push(g), f.append(g), c.append(f), d.setAttribute('aria-labelledby', 'tab-' + d.id), e || d.setAttribute('aria-hidden', 'true');
         }
       }), this.insertAdjacentElement('afterbegin', c), this.querySelector('ul').addEventListener('keydown', this.keyBehaviour.bind(this));
     } }, { key: 'hideCurrent', value: function hideCurrent() {
@@ -115,7 +115,7 @@ var _createClass = function () {
         self.appendChild(a);
       });
     } }, { key: 'toAccordion', value: function toAccordion() {
-      var a = this;console.log(this.panels), this.panels.length && this.panels.forEach(function (b) {
+      var a = this;this.panels.length && this.panels.forEach(function (b) {
         var c = a.querySelector('a[aria-controls="' + b.id + '"]');c.parentNode.appendChild(b);
       });
     } }, { key: 'changeView', value: function changeView() {

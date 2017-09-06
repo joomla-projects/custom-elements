@@ -38,9 +38,9 @@ var _createClass = function () {
           var c = b.parentNode,
               d = c.nextElementSibling.querySelector('span.switcher-label-' + b.value);d.id = b.id + '-label', b.classList.contains('active') && b.setAttribute('aria-labelledby', d.id);
         }b.setAttribute('tabindex', '-1'), b.addEventListener('click', a.switch.bind(a));
-      }), this.container.addEventListener('keydown', function (a) {
-        if (13 === a.keyCode || 32 === a.keyCode) {
-          a.preventDefault();var b = container.querySelector('input:not(.active)');b.click();
+      }), this.container.addEventListener('keydown', function (b) {
+        if (13 === b.keyCode || 32 === b.keyCode) {
+          b.preventDefault();var c = a.container.querySelector('input:not(.active)');c.click();
         }
       });
     } }, { key: 'disconnectedCallback', value: function disconnectedCallback() {

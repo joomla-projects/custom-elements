@@ -42,8 +42,8 @@ class JoomlaPanelsElement extends HTMLElement {
     }
 
     this.view = this.getAttribute('view') || 'tabs';
-    this.recall = this.recall || "false";
-    this.responsive = this.getAttribute('responsive') || "false";
+    this.recall = this.recall || 'false';
+    this.responsive = this.getAttribute('responsive') || 'false';
     this.collapseWidth = this.getAttribute('collapseWidth') || 0;
 
     // Get tab elements
@@ -51,7 +51,7 @@ class JoomlaPanelsElement extends HTMLElement {
 
     // Sanity check
     if (!this.panels.length) {
-      throw new Error('`Joomla-panels` require one ore more panels!')
+      throw new Error('`Joomla-panels` require one ore more panels!');
     }
 
     // Is this nested
@@ -105,14 +105,14 @@ class JoomlaPanelsElement extends HTMLElement {
 
     // Check if there is a hash in the URI
     if (window.location.href.match(/#tab-/)) {
-     // this.activateUriHash();
+      // this.activateUriHash();
     }
 
     if (this.view === 'accordion') {
       this.toAccordion.bind(this)();
     }
 
-    if (this.responsive === "true") {
+    if (this.responsive === 'true') {
       // Convert tabs to accordian and vice versa
       this.changeView.bind(this);
 
@@ -138,7 +138,7 @@ class JoomlaPanelsElement extends HTMLElement {
   createNavigation() {
     const self = this;
     let nav = '';
-    console.log(this.firstElementChild)
+
     if (this.firstElementChild.tagName.toLowerCase() !== 'ul') {
       nav = document.createElement('ul');
     }
@@ -166,7 +166,7 @@ class JoomlaPanelsElement extends HTMLElement {
       aElement.setAttribute('id', `tab-${panel.id}`);
       aElement.innerHTML = panel.getAttribute('name');
 
-      if (active && !activeDone) {
+      if (active) {
         aElement.setAttribute('active', '');
       }
 
@@ -226,7 +226,7 @@ class JoomlaPanelsElement extends HTMLElement {
     // Emit shown event
     this.dispatchCustomEvent('joomla.tab.shown', e.target, this.querySelector(`#tab-${currentTabLink}`));
     this.saveState(`#tab-${e.target.hash.substring(1)}`);
-  };
+  }
 
   showTab(tab) {
     const tabLink = document.querySelector(`#tab-${tab.id}`);
@@ -368,7 +368,7 @@ class JoomlaPanelsElement extends HTMLElement {
     //     this.tabsLinks.push(this.panels[i]);
     //   }
     // }
-    console.log(this.panels)
+
     if (this.panels.length) {
       this.panels.forEach((panel) => {
         const link = self.querySelector('a[aria-controls="' + panel.id + '"]')

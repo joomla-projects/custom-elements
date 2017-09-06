@@ -19,12 +19,12 @@ class JoomlaModalElement extends HTMLElement {
     this.innerWidth = '';
     this.innerHeight = '';
     this.iframe = '';
-    this.container = this.querySelector('.joomla-modal-dialog')
+    this.container = this.querySelector('.joomla-modal-dialog');
     this.title = this.getAttribute('title') || 'Modal';
   }
 
   static get observedAttributes() {
-    return ['width', 'height', 'innerWidth', 'innerHeight', 'iframe',];
+    return ['width', 'height', 'innerWidth', 'innerHeight', 'iframe'];
   }
 
   /*eslint-disable */
@@ -42,9 +42,8 @@ class JoomlaModalElement extends HTMLElement {
       throw new Error('`Joomla-modal` requires an id');
     }
 
-    const self = this;
     this.setAttribute('role', 'dialog');
-    this.classList.add('fade')
+    this.classList.add('fade');
     this.iframe = this.getAttribute('iframe') || '';
     this.width = this.getAttribute('width') || '100%';
     this.height = this.getAttribute('height') || '600px';
@@ -56,7 +55,7 @@ class JoomlaModalElement extends HTMLElement {
       cont.innerHTML = this.innerHTML;
       this.innerHTML = '';
       this.appendChild(cont);
-      this.container = this.querySelector('.joomla-modal-dialog')
+      this.container = this.querySelector('.joomla-modal-dialog');
     }
 
     this.header = this.querySelector('header');
@@ -66,32 +65,17 @@ class JoomlaModalElement extends HTMLElement {
     this.setAttribute('tabindex', -1);
 
     // Unique Id
-    const randomId = 'modal-title-' + new Date().getUTCMilliseconds();
-    this.setAttribute('aria-labelledby', randomId)
+    const randomId = `modal-title-${new Date().getUTCMilliseconds()}`;
+    this.setAttribute('aria-labelledby', randomId);
 
-    if (this.header) {
-      const title = this.header.querySelector('h5');
-      const closeBtn = this.header.querySelector('button');
-      if (!title) {
-        const htag = document.createElement('h5');
-        htag.innerText = this.title;
-        title.id = randomId;
-      }
-      if (!closeBtn) {
-        const closeButton = document.createElement('button');
-      }
-
-      this.header.appendChild(htag)
-      this.header.appendChild(closeButton)
-
-    } else {
+    if (!this.header) {
       const htag = document.createElement('h5');
       htag.innerText = this.title;
       htag.id = randomId;
       const closeButton = document.createElement('button');
-      closeButton.setAttribute('aria-label', 'Close')
-      closeButton.setAttribute('data-dismiss', '')
-      closeButton.innerHTML = `<span aria-hidden="true">×</span>`
+      closeButton.setAttribute('aria-label', 'Close');
+      closeButton.setAttribute('data-dismiss', '');
+      closeButton.innerHTML = '<span aria-hidden="true">×</span>';
 
       const header = document.createElement('header');
 
@@ -100,9 +84,9 @@ class JoomlaModalElement extends HTMLElement {
 
       this.container.insertAdjacentElement('afterbegin', header);
     }
-    this.header = this.container.querySelector('header')
+    this.header = this.container.querySelector('header');
     this.body = this.container.querySelector('section');
-    this.footer = this.container.querySelector('footer')
+    this.footer = this.container.querySelector('footer');
 
     this.triggerBtn = document.querySelector(`button[data-href="#${this.id}"]`);
     if (this.triggerBtn) {
@@ -126,10 +110,7 @@ class JoomlaModalElement extends HTMLElement {
 
     this.removeAttribute('aria-hidden');
     // Iframe specific code, reload
-    console.log(this.body)
-    console.log(this.iframe)
     if (this.body) {
-
       this.iframeEl = this.main.querySelector('iframe');
       if (this.iframe) {
         if (this.iframeEl) {
@@ -140,9 +121,8 @@ class JoomlaModalElement extends HTMLElement {
         newIframe.height = this.height;
         newIframe.src = this.iframe;
         newIframe.setAttribute('frameborder', 0);
-        console.log(newIframe)
         this.body.appendChild(newIframe);
-        this.iframeEl = this.main.querySelector('iframe')
+        this.iframeEl = this.main.querySelector('iframe');
       }
     }
 
@@ -183,13 +163,13 @@ class JoomlaModalElement extends HTMLElement {
     if (dropShadow) document.body.removeChild(dropShadow);
     this.setAttribute('aria-hidden', 'true');
     this.classList.remove('show');
-    this.main.innerHTML = ''
+    this.main.innerHTML = '';
     this.triggerBtn.focus();
   }
 
   handleTabEvent(e) {
     // Get the index of the current active element within the modal
-    let focusedIndex = this.focusableElements.indexOf(document.activeElement);
+    const focusedIndex = this.focusableElements.indexOf(document.activeElement);
     // Handle TAB event if need to skip
     // If first element is focused and shiftkey is in use
     if (e.shiftKey && (focusedIndex === 0 || focusedIndex === -1)) {
@@ -237,7 +217,7 @@ class JoomlaModalElement extends HTMLElement {
     footerHeight += parseInt(window.getComputedStyle(this.footer).getPropertyValue('margin-bottom'));
 
     const padding = this.offsetTop;
-    const maxModalHeight = window.height - (padding * 2)
+    const maxModalHeight = window.height - (padding * 2);
     const modalBodyPadding = (bodyHeightOuter - bodyHeight);
     const maxModalBodyHeight = maxModalHeight - (headerHeight + footerHeight + modalBodyPadding);
 
@@ -249,11 +229,9 @@ class JoomlaModalElement extends HTMLElement {
         this.container.style.overflowY = 'auto';
         this.iframeEl.style.maxHeight = maxModalBodyHeight - modalBodyPadding;
       }
-    } else {
-      if (modalHeight > maxModalHeight) {
-        this.container.style.maxHeight = maxModalBodyHeight;
-        this.container.style.overflowY = 'auto';
-      }
+    } else if (modalHeight > maxModalHeight) {
+      this.container.style.maxHeight = maxModalBodyHeight;
+      this.container.style.overflowY = 'auto';
     }
   }
 
