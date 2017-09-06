@@ -1,5 +1,3 @@
-const Joomla = window.Joomla || {};
-
 /** Include the relative styles */
 if (!document.head.querySelector('#joomla-switcher-style')) {
   const style = document.createElement('style');
@@ -16,51 +14,56 @@ class JoomlaSwitcherElement extends HTMLElement {
   get offText() { return this.getAttribute('offText') || 'Off'; }
   get onText() { return this.getAttribute('onText') || 'On'; }
 
+  constructor() {
+    super();
+
+    this.inputs = '';
+    this.container = '';
+  }
   /* Lifecycle, element appended to the DOM */
   connectedCallback() {
-    const self = this;
+    this.inputs = [].slice.call(this.querySelectorAll('input'));
 
     // Create the markup
-    this.createMarkup(self);
+    this.createMarkup.bind(this)();
 
     // Add the initial active class
-    const inputs = [].slice.call(self.querySelectorAll('input'));
-    const container = self.querySelector('span.switcher');
-    const next = inputs[1].parentNode.nextElementSibling;
+    this.container = this.querySelector('span.switcher');
+    const next = this.inputs[1].parentNode.nextElementSibling;
 
     // Add tab focus
-    container.setAttribute('tabindex', 0);
+    this.container.setAttribute('tabindex', 0);
 
-    if (inputs[1].checked) {
-      inputs[1].parentNode.classList.add('active');
-      next.querySelector(`.switcher-label-${inputs[1].value}`).classList.add('active');
+    if (this.inputs[1].checked) {
+      this.inputs[1].parentNode.classList.add('active');
+      next.querySelector(`.switcher-label-${this.inputs[1].value}`).classList.add('active');
     } else {
-      next.querySelector(`.switcher-label-${inputs[0].value}`).classList.add('active');
+      next.querySelector(`.switcher-label-${this.inputs[0].value}`).classList.add('active');
     }
 
-    inputs.forEach((switchEl) => {
+    this.inputs.forEach((switchEl) => {
       // Add the required accessibility tags
       if (switchEl.id) {
         const parent = switchEl.parentNode;
         const relatedSpan = parent.nextElementSibling.querySelector(`span.switcher-label-${switchEl.value}`);
 
         relatedSpan.id = `${switchEl.id}-label`;
-        switchEl.setAttribute('aria-labelledby', relatedSpan.id);
+        if (switchEl.classList.contains('active')) {
+          switchEl.setAttribute('aria-labelledby', relatedSpan.id);
+        }
       }
 
       // Remove the tab focus from the inputs
       switchEl.setAttribute('tabindex', '-1');
 
       // Add the active class on click
-      switchEl.addEventListener('click', () => {
-        self.switch();
-      });
+      switchEl.addEventListener('click', this.switch.bind(this));
     });
 
-    container.addEventListener('keydown', (event) => {
+    this.container.addEventListener('keydown', (event) => {
       if (event.keyCode === 13 || event.keyCode === 32) {
         event.preventDefault();
-        const element = container.querySelector('input:not(.active)');
+        const element = this.container.querySelector('input:not(.active)');
         element.click();
       }
     });
@@ -68,10 +71,8 @@ class JoomlaSwitcherElement extends HTMLElement {
 
   /* Lifecycle, element removed from the DOM */
   disconnectedCallback() {
-    this.removeEventListener('joomla.switcher.toggle', this);
-    this.removeEventListener('joomla.switcher.on', this);
-    this.removeEventListener('joomla.switcher.off', this);
-    this.removeEventListener('click', this);
+    this.removeEventListener('joomla.switcher.toggle', this.toggle, true);
+    this.removeEventListener('click', this.switch, true);
   }
 
   /* Method to dispatch events. Internal */
@@ -83,8 +84,7 @@ class JoomlaSwitcherElement extends HTMLElement {
   }
 
   /** Method to build the switch. Internal */
-  createMarkup(switcher) {
-    const inputs = [].slice.call(switcher.querySelectorAll('input'));
+  createMarkup() {
     let checked = 0;
 
     // Create the first 'span' wrapper
@@ -99,7 +99,7 @@ class JoomlaSwitcherElement extends HTMLElement {
     const switchEl = document.createElement('span');
     switchEl.classList.add('switch');
 
-    inputs.forEach((input, index) => {
+    this.inputs.forEach((input, index) => {
       input.setAttribute('role', 'switch');
 
       if (input.checked) {
@@ -137,21 +137,18 @@ class JoomlaSwitcherElement extends HTMLElement {
     spanSecond.appendChild(labelSecond);
 
     // Remove all child nodes from the switcher
-    while (switcher.firstChild) {
-      switcher.removeChild(switcher.firstChild);
+    while (this.firstChild) {
+      this.removeChild(this.firstChild);
     }
 
     // Append everything back to the main element
-    switcher.appendChild(spanFirst);
-    switcher.appendChild(spanSecond);
-
-    return switcher;
+    this.appendChild(spanFirst);
+    this.appendChild(spanSecond);
   }
 
   /** Method to toggle the switch. Internal */
   switch() {
     const parent = this.firstChild;
-    const inputs = [].slice.call(parent.querySelectorAll('input'));
     const spans = [].slice.call(parent.nextElementSibling.querySelectorAll('span'));
     const newActive = this.querySelector('input:not(.active)');
 
@@ -166,7 +163,7 @@ class JoomlaSwitcherElement extends HTMLElement {
     }
 
     if (!newActive.classList.contains('active')) {
-      inputs.forEach((input) => {
+      this.inputs.forEach((input) => {
         input.classList.remove('active');
         input.removeAttribute('checked');
         input.setAttribute('aria-checked', false);
@@ -175,7 +172,7 @@ class JoomlaSwitcherElement extends HTMLElement {
 
       this.dispatchCustomEvent('joomla.switcher.on');
     } else {
-      inputs.forEach((input) => {
+      this.inputs.forEach((input) => {
         input.classList.remove('active');
         input.removeAttribute('checked');
         input.setAttribute('aria-checked', false);
