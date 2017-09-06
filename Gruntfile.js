@@ -286,14 +286,14 @@ module.exports = function (grunt) {
     }
 
     // Clear the polyfills folder
-    deleteFolderRecursive('dist/polyfills');
+    // deleteFolderRecursive('dist/polyfills');
     deleteFolderRecursive('dist/js');
 
     // Create the css files
     grunt.task.run('compile');
 
     // Create the polyfills
-    grunt.task.run('polyfills');
+    // grunt.task.run('polyfills');
 
     // Create the elements
     grunt.task.run('createElements');

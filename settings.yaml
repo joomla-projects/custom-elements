@@ -6,19 +6,14 @@
     'joomla'
 
 'elements':
-    # - 'accordion'
     - 'alert'
-    # - 'group-buttons'
-    # - 'collapse'
-    # - 'dropdown'
-    # - 'modal'
-    # - 'popover'
-    # - 'password'
-    # - 'switcher'
-    - 'tab'
-    - 'field-media'
-    - 'field-send-mail'
-    # - 'tooltip'
+    - 'group-buttons'
+    - 'collapse'
+    - 'dropdown'
+    - 'modal'
+    - 'switcher'
+    - 'panels'
+    - 'tip'
 
 'browsers':
     'Chrome':   'last 1 version'
