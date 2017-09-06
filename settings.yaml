@@ -16,8 +16,6 @@
     # - 'password'
     # - 'switcher'
     - 'tab'
-    - 'field-media'
-    - 'field-send-mail'
     # - 'tooltip'
 
 'browsers':
