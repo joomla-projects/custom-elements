@@ -29,9 +29,8 @@ Due to compatibility issues due to browsers support you need to have a polyfill,
 <script src="webcomponents-loader.js"></script>
 ```
 
-For each element that you want to use in your page you have to insert a simple script tag and a stylesheet tag in the head of your page, e.g.:
+For each element that you want to use in your page you have to insert a simple script tag in the head of your page, e.g.:
 ```html
-<link rel="styleesheet" href="joomla-alert.min.css">
 <script src="joomla-alert.min.js"></script>
 ```
 
@@ -39,7 +38,7 @@ For each element that you want to use in your page you have to insert a simple s
 
 ## Customize your elements
 
-Every element has its own `.scss` file and there is a `variables.scss` that can be used to specify your colours. Once you've changed the variables re-run `grunt` to rebuild the elements
+Every element has its own `.scss` file and there is a global `variables.scss` that can be used to specify your colours. Once you've changed the variables re-run `grunt` to rebuild the elements
 
 
 ## Custom elements are CSS framework agnostic
