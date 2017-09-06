@@ -1,18 +1,29 @@
 #### Override this file by adding a setting-custom.yaml in the root folder (next to settings.yaml file)
 #### Prefix is used to customize the elements, eg yupee will produce: yupee-alert, yupee-modal, etc
 #### Comment out the elements you don't want to be created
-'prefix'   : 'joomla'
-'elements':
-            # - 'accordion'
-            - 'alert'
-            # - 'group-buttons'
-            # - 'collapse'
-            # - 'dropdown'
-            # - 'modal'
-            # - 'popover'
-            # - 'password'
-            # - 'switcher'
-            - 'tab'
-            # - 'tooltip'
 
-## - 'popover' Use css for this
+'prefix':
+    'joomla'
+
+'elements':
+    # - 'accordion'
+    - 'alert'
+    # - 'group-buttons'
+    # - 'collapse'
+    # - 'dropdown'
+    # - 'modal'
+    # - 'popover'
+    # - 'password'
+    # - 'switcher'
+    - 'tab'
+    - 'field-media'
+    - 'field-send-mail'
+    # - 'tooltip'
+
+'browsers':
+    'Chrome':   'last 1 version'
+    'Firefox':  'last 1 version'
+    'Edge':     'last 1 version'
+    'Explorer': 'last 1 version'
+    'Safari':   'last 1 version'
+    'Opera':    'last 1 version'
