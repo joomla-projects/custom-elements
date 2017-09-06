@@ -63,7 +63,7 @@ class JoomlaSwitcherElement extends HTMLElement {
     this.container.addEventListener('keydown', (event) => {
       if (event.keyCode === 13 || event.keyCode === 32) {
         event.preventDefault();
-        const element = container.querySelector('input:not(.active)');
+        const element = this.container.querySelector('input:not(.active)');
         element.click();
       }
     });
