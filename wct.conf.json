@@ -18,16 +18,16 @@
 				{
 					"browserName": "safari",
 					"platform": "OS X 10.11",
-					"version": "9"
+					"version": "10.12"
 				},
 				{
-					"browserName": "safari",
-					"platform": "Windows 10",
+					"browserName": "chrome",
+					"platform": "OS X 10.11",
 					"version": ""
 				},
 				{
 					"browserName": "firefox",
-					"platform": "Windows 10",
+					"platform": "OS X 10.11",
 					"version": ""
 				}
 				]
