@@ -1,3 +1,4 @@
+
 sudo: false
 dist: trusty
 language: node_js
@@ -8,16 +9,19 @@ before_install:
 install:
 - npm install
 before_script:
-- npm install -g bower
-- bower install
+  - npm install -g bower
+  - bower install
 script:
 - eslint src
-- wct
+- wct --plugin sauce
 notifications:
   email: false
 addons:
   sauce_connect:
+  #$ sudo gem install travis
+  #$ travis encrypt travis encrypt SAUCE_ACCESS_KEY=Your Sauce Labs access key --add
     username: joomla-custom-elements
 env:
   global:
-    secure: kS4GZ9ZjTqoqjHGPuPosjGDEeQQ6H/3BNv87VZwiz3cZ3HCOY8Kf69HESLndf0HNCQjpwRSavCJeyNZU4PnVVofKB8Z+QD27ysIJe8fgE0au4jBWRXqp2PQvXW54ufxI7wj453SoaaGYJ5GcVkvgGxg3U3vOvXv8419H8orCFjqHaSjN8yOVIaXB7EeYMcxPZrWAb8Mu2VBpJ1GV8SL7FrA8GCNriPZy8bKttfUosfvSk60+KsDGfDmiQbQWSnl2cC0jeZclGW1HJNme5mKeie2Tw4+RFQEu1l57s4uLeqVyThUICr1S8FeNlQ14N5fZJsz/koxWM0TGYiY7VtGIy80VUur4HSdubBF+sKrb6Xxpt+WkhUSRWknZxx9Ci+eGwe2ZvINSl+h25UKVj/7ukSOLZt7tLdCJoS8v7eFK9i10HbOLXGcaBQIobrYjHm/67xDUvQURNFi/M3QO2MomEQsAX36PFnNMARSivuWbPcddZJZklMTkTOJ0Ng9d3P3EGm9RFmi9RfCnHzFBM5eRE4GWkip6MgO1IsVpE+dVzZIQdX8alny9VDyJgsQwB82ZPpfJnRiWOgOES8Z8xnh++9pE6lrt0DUhegHHCm/OcSaaomclhMGIULn89bh7KBVX80trc/yHL0tYrmjeLTQBIUumMLdUVBxRcETcja2TcC4=
+    secure: djJBrRijrdqoTCkM239z6gnP/uQTAIYepMx0IGuAXgI4xgppwjYi8r0dcKjaihfk87CjEmV83RCvp21FW4l/LNgpwzQfQd4X1k9lGs5tQzyjg47fGCOg3goqudBiHyb72IYRcb7bvGIfBaf3pK2cw3bq5xlCN4Xma/LRIkQ0T3vjUNoqbNNsGJTXh+xeJbgfSToG73qI7teivGX0bOcMsHC8eMBbN8iV8/LAb5NxNc3DuN6dvCfdI1BlqRlXPXMccPLQA8r7UkS8getcoO50yYWqiC3XYaOp3d67GeJf/FK4TVUvvTnFM4FXnZuv5ryNTHWBMLnqDbJx1dWdldprOx4YeFh3UWJdboQMJcZQU+uoQhvxadkJ5CRTylK4Ce2tknqebjx+MqEsd5sC3j/CDfVt96PPt7NR7/WGko7BucmXicKZf+G142PFsUU0l1UlwCyrlwU+1OmwPrvLWq9NQ5nlUh0HtC2FOudYMcAbJrMTP+VRSbtshWETYsIgGn0spxHJCZsvFUCZO7HdGjVzuckOiwgcg0gKS4gedi9/C5e2ux/xQnJUU0I/PsB13SQwGlWwINccsa+Bxrsf04mZtodUjI5kyyTRBv34tS1jdzl+naq5dCfSXGp/tfGcQkuagWv7+q6D6JsVkXiGrRssQRVjytVqKk3PLDtvfJssXmc=
+    
