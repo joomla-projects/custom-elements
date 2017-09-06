@@ -235,10 +235,12 @@ class JoomlaModalElement extends HTMLElement {
     }
   }
 
+  /*eslint-disable */
   findAncestorByClass(el, className) {
     while ((el = el.parentElement) && !el.classList.contains(className));
     return el;
   }
+  /*eslint-enable */
 }
 
 customElements.define('joomla-modal', JoomlaModalElement);

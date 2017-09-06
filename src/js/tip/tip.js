@@ -47,6 +47,8 @@ class JoomlaTipElement extends HTMLElement {
   }
 
   showTip() {
+    const self =this;
+
     // Close on outside click
     document.addEventListener('click', (e) => {
       if (this.btnElement !== e.target) {

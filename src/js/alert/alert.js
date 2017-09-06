@@ -66,23 +66,23 @@ class JoomlaAlertElement extends HTMLElement {
   attributeChangedCallback(attr, oldValue, newValue) {
     switch (attr) {
       case 'type':
-        if (!newValue) {
+        if (!newValue || ['info', 'warning', 'success', 'danger'].indexOf(newValue) === -1) {
           this.type = 'info';
         }
         break;
       case 'dismiss':
       case 'acknowledge':
         if (!newValue || newValue === 'true') {
-          this.appendCloseButton.bind(this);
+          this.appendCloseButton.bind(this)();
         } else {
-          this.removeCloseButton.bind(this);
+          this.removeCloseButton.bind(this)();
         }
         break;
       case 'href':
         if (!newValue || newValue === '') {
-          this.removeCloseButton.bind(this);
+          this.removeCloseButton.bind(this)();
         } else if (!this.querySelector('button.joomla-alert-button--close')) {
-          this.appendCloseButton.bind(this);
+          this.appendCloseButton.bind(this)();
         }
         break;
       case 'auto-dismiss':
@@ -170,10 +170,9 @@ class JoomlaAlertElement extends HTMLElement {
 
   /* Method to remove the close button. Internal */
   removeCloseButton() {
-    const button = this.querySelector('button');
-    if (button) {
-      button.removeEventListener('click', this);
-      button.parentNode.removeChild(button);
+    if (this.closeButton) {
+      this.closeButton.removeEventListener('click', this.buttonCloseFn);
+      this.closeButton.parentNode.removeChild(this.closeButton);
     }
   }
 }

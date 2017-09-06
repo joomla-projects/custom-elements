@@ -28,9 +28,9 @@ var _createClass = function () {
       this.firstChild.tagName && 'button' === this.firstChild.tagName.toLowerCase() && this.firstChild.removeEventListener('click', this.buttonCloseFn);
     } }, { key: 'attributeChangedCallback', value: function attributeChangedCallback(a, b, c) {
       switch (a) {case 'type':
-          c || (this.type = 'info');break;case 'dismiss':case 'acknowledge':
-          c && 'true' !== c ? this.removeCloseButton.bind(this) : this.appendCloseButton.bind(this);break;case 'href':
-          c && '' !== c ? !this.querySelector('button.joomla-alert-button--close') && this.appendCloseButton.bind(this) : this.removeCloseButton.bind(this);break;case 'auto-dismiss':
+          c && -1 !== ['info', 'warning', 'success', 'danger'].indexOf(c) || (this.type = 'info');break;case 'dismiss':case 'acknowledge':
+          c && 'true' !== c ? this.removeCloseButton.bind(this)() : this.appendCloseButton.bind(this)();break;case 'href':
+          c && '' !== c ? !this.querySelector('button.joomla-alert-button--close') && this.appendCloseButton.bind(this)() : this.removeCloseButton.bind(this)();break;case 'auto-dismiss':
           c && '' !== c || this.removeAttribute('auto-dismiss');break;default:}
     } }, { key: 'buttonCloseFn', value: function buttonCloseFn() {
       this.dispatchCustomEvent('joomla.alert.buttonClicked'), this.href && (window.location.href = this.href), this.close();
@@ -50,7 +50,7 @@ var _createClass = function () {
         }
       }
     } }, { key: 'removeCloseButton', value: function removeCloseButton() {
-      var a = this.querySelector('button');a && (a.removeEventListener('click', this), a.parentNode.removeChild(a));
+      this.closeButton && (this.closeButton.removeEventListener('click', this.buttonCloseFn), this.closeButton.parentNode.removeChild(this.closeButton));
     } }, { key: 'type', get: function get() {
       return this.getAttribute('type');
     }, set: function set(a) {

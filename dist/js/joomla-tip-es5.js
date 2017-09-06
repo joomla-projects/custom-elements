@@ -27,10 +27,11 @@ var _createClass = function () {
     } }, { key: 'disconnectedCallback', value: function disconnectedCallback() {
       this.querySelector('button').removeEventListener('click', this.showTip, !0);
     } }, { key: 'showTip', value: function showTip() {
-      var a = this;document.addEventListener('click', function (b) {
-        a.btnElement !== b.target && (a.spanElement.innerHTML = '', self.removeEventListener('keydown', a));
-      }), document.addEventListener('keydown', function (b) {
-        9 === (b.keyCode || b.which) && (a.spanElement.innerHTML = '', self.removeEventListener('keydown', a));
+      var a = this,
+          b = this;document.addEventListener('click', function (c) {
+        a.btnElement !== c.target && (a.spanElement.innerHTML = '', b.removeEventListener('keydown', a));
+      }), document.addEventListener('keydown', function (c) {
+        9 === (c.keyCode || c.which) && (a.spanElement.innerHTML = '', b.removeEventListener('keydown', a));
       }), this.spanElement.innerHTML = '', this.spanElement.innerHTML = '<span class="toggletip-bubble ' + this.position + '">' + this.tip + '</span>';
     } }, { key: 'dispatchCustomEvent', value: function dispatchCustomEvent(a) {
       var b = new CustomEvent(a, { bubbles: !0, cancelable: !0 });b.relatedTarget = this, this.dispatchEvent(b), this.removeEventListener(a, this);
