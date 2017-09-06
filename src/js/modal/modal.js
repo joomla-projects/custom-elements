@@ -200,21 +200,21 @@ class JoomlaModalElement extends HTMLElement {
     // Legacy code
     // Height
     let modalHeight = this.offsetHeight;
-    modalHeight += parseInt(window.getComputedStyle(this).getPropertyValue('margin-top'));
-    modalHeight += parseInt(window.getComputedStyle(this).getPropertyValue('margin-bottom'));
+    modalHeight += parseInt(window.getComputedStyle(this).getPropertyValue('margin-top'), 10);
+    modalHeight += parseInt(window.getComputedStyle(this).getPropertyValue('margin-bottom'), 10);
 
     const bodyHeight = this.body.getBoundingClientRect.height;
     let bodyHeightOuter = this.body.offsetHeight;
-    bodyHeightOuter += parseInt(window.getComputedStyle(this.body).getPropertyValue('margin-top'));
-    bodyHeightOuter += parseInt(window.getComputedStyle(this.body).getPropertyValue('margin-bottom'));
+    bodyHeightOuter += parseInt(window.getComputedStyle(this.body).getPropertyValue('margin-top'), 10);
+    bodyHeightOuter += parseInt(window.getComputedStyle(this.body).getPropertyValue('margin-bottom'), 10);
 
     let headerHeight = this.header.offsetHeight;
-    headerHeight += parseInt(window.getComputedStyle(this.header).getPropertyValue('margin-top'));
-    headerHeight += parseInt(window.getComputedStyle(this.header).getPropertyValue('margin-bottom'));
+    headerHeight += parseInt(window.getComputedStyle(this.header).getPropertyValue('margin-top'), 10);
+    headerHeight += parseInt(window.getComputedStyle(this.header).getPropertyValue('margin-bottom'), 10);
 
     let footerHeight = this.footer.offsetHeight;
-    footerHeight += parseInt(window.getComputedStyle(this.footer).getPropertyValue('margin-top'));
-    footerHeight += parseInt(window.getComputedStyle(this.footer).getPropertyValue('margin-bottom'));
+    footerHeight += parseInt(window.getComputedStyle(this.footer).getPropertyValue('margin-top'), 10);
+    footerHeight += parseInt(window.getComputedStyle(this.footer).getPropertyValue('margin-bottom'), 10);
 
     const padding = this.offsetTop;
     const maxModalHeight = window.height - (padding * 2);

@@ -21,8 +21,8 @@ joomla-modal {
   outline: 0;
 
   &.jviewport-width10 {
-   width: 10vw;
-   margin-left: -5vw;
+    width: 10vw;
+    margin-left: -5vw;
   }
   &.jviewport-width20 {
     width: 20vw;
@@ -37,7 +37,7 @@ joomla-modal {
     margin-left: -20vw;
   }
   &.jviewport-width50 {
-   width: 50vw;
+    width: 50vw;
     margin-left: -25vw;
   }
   &.jviewport-width60 {
@@ -77,11 +77,11 @@ joomla-modal {
 
     &.fade {
       opacity: 0;
-      transition: opacity .15s linear
+      transition: opacity .15s linear;
     }
 
     &.fade.show {
-      opacity:1;
+      opacity: 1;
     }
 
     header {
@@ -108,8 +108,8 @@ joomla-modal {
 
       h5 {
         margin-bottom: 0;
+        font-size: 1.25rem;
         line-height: 1.5;
-        font-size: 1.25rem
       }
     }
 
@@ -166,7 +166,7 @@ joomla-modal {
       border-top: 1px solid #e9ecef;
 
       .btn {
-        margin-left: 10px
+        margin-left: 10px;
       }
     }
   }
