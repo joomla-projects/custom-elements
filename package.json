@@ -24,7 +24,7 @@
   ],
   "author": "Dimitrios Grammatikogiannis, Charlie Lodder",
   "devDependencies": {
-    "autoprefixer": "^7.1.3",
+    "autoprefixer": "^7.1.4",
     "@polymer/test-fixture": "latest",
     "@webcomponents/custom-elements": "latest",
     "@webcomponents/webcomponentsjs": "latest",
