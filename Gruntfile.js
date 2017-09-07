@@ -1,11 +1,15 @@
-module.exports = function (grunt) {
+module.exports = (grunt) => {
+  String.prototype.capitalizeFirstLetter = () => {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+  }
+
   if (grunt.file.exists('settings-custom.yaml')) {
     // We have a custom setup
-    var settings = grunt.file.readYAML('settings-custom.yaml');
+    settings = grunt.file.readYAML('settings-custom.yaml');
     console.log('Custom settings supplied')
   } else {
     // We will use the default options
-    var settings = grunt.file.readYAML('settings.yaml');
+    settings = grunt.file.readYAML('settings.yaml');
   }
 
   // Load required modules
@@ -18,11 +22,11 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-contrib-copy');
 
-  var fs = require('fs');
-  var deleteFolderRecursive = function (path) {
+  const fs = require('fs');
+  const deleteFolderRecursive = (path) => {
     if (fs.existsSync(path)) {
-      fs.readdirSync(path).forEach(function (file, index) {
-        var curPath = path + "/" + file;
+      fs.readdirSync(path).forEach((file, index) => {
+        const curPath = path + "/" + file;
         if (fs.lstatSync(curPath).isDirectory()) { // recurse
           deleteFolderRecursive(curPath);
         } else { // delete file
@@ -34,10 +38,10 @@ module.exports = function (grunt) {
   };
 
   // Patch the Custom Element Polyfill to add the WebComponentsReady event
-  grunt.registerTask('patchCE', 'Patch Custom Elements Polyfill', function () {
+  grunt.registerTask('patchCE', 'Patch Custom Elements Polyfill', () => {
     // Patch the Custom Element polyfill
     if (grunt.file.exists('dist/polyfills/webcomponents-ce.js')) {
-      var ce = grunt.file.read('dist/polyfills/webcomponents-ce.js');
+      let ce = grunt.file.read('dist/polyfills/webcomponents-ce.js');
       ce = ce.replace('//# sourceMappingURL=custom-elements.min.js.map', `
 (function(){
 	window.WebComponents = window.WebComponents || {};
@@ -53,8 +57,8 @@ module.exports = function (grunt) {
   });
 
   // Compile the css
-  grunt.registerTask('compile', 'Compile css files', function () {
-    var compileCss = function (element) {
+  grunt.registerTask('compile', 'Compile css files', () => {
+    const compileCss = (element) => {
       // Compile the css files
       grunt.config.set('sass.' + element + '.files', [{
         src: 'src/scss/' + element + '/' + element + '.scss',
@@ -93,17 +97,19 @@ module.exports = function (grunt) {
     };
 
     console.info('Build the stylesheets')
-    settings.elements.forEach(function (element) {
+    settings.elements.forEach((element) => {
       // Create the css for each element
       compileCss(element);
     });
   });
 
   // Create the Custom Elements
-  grunt.registerTask('createElements', 'Create the Custom Elemets', function () {
+  grunt.registerTask('createElements', 'Create the Custom Elemets', () => {
     // Create the custom element
-    var createElement = function (element, settings) {
-      var tmpJs = '', tmpJsPlain = '', tmpCss = '';
+    const createElement = (element, settings) => {
+      let tmpJs = '';
+      let tmpJsPlain = '';
+      let tmpCss = '';
 
       if (grunt.file.exists('src/js/' + element + '/' + element + '.js')) {
         tmpJs = grunt.file.read('src/js/' + element + '/' + element + '.js');
@@ -128,7 +134,7 @@ module.exports = function (grunt) {
               {
                 "presets": [
                   "es2015",
-                  "babili"
+                  "minify"
                 ],
                 "plugins": [
                   "static-fs"
@@ -185,19 +191,19 @@ module.exports = function (grunt) {
     };
 
     console.info('Build the custom Elements')
-    settings.elements.forEach(function (element) {
+    settings.elements.forEach((element) => {
       // Create elements as html files, compatible with document-register-element polyfill
       createElement(element, settings);
 
     });
   });
 
-  grunt.registerTask('polyfills', 'Create a copy of the polyfills', function () {
+  grunt.registerTask('polyfillsDist', 'Create a copy of the polyfills', () => {
     // Copy polyfills in dist and demo folders
     if (grunt.file.exists('node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js')) {
-      var polyfills = ['webcomponents-hi-ce', 'webcomponents-hi-sd-ce', 'webcomponents-hi', 'webcomponents-lite', 'webcomponents-loader', 'webcomponents-sd-ce'];
+      let polyfills = ['webcomponents-hi-ce', 'webcomponents-hi-sd-ce', 'webcomponents-hi', 'webcomponents-lite', 'webcomponents-loader', 'webcomponents-sd-ce'];
 
-      polyfills.forEach(function (polyfill, item) {
+      polyfills.forEach((polyfill) => {
         // Put a copy of webcomponentjs polyfills in the dist folder
         grunt.config.set('copy.' + polyfill + '.files', [{
           src: 'node_modules/@webcomponents/webcomponentsjs/' + polyfill + '.js',
@@ -246,12 +252,12 @@ module.exports = function (grunt) {
   });
 
   // Cleanup process
-  grunt.registerTask('clearFiles', 'Clean up', function () {
+  grunt.registerTask('clearFiles', 'Clean up', () => {
 
     // Remove the minified/non minified css
     deleteFolderRecursive('src/scss/css');
 
-    settings.elements.forEach(function (element) {
+    settings.elements.forEach((element) => {
       // Remove the extracripts
       if (grunt.file.exists('src/js/' + element + '/' + element + '_es6.js')) {
         grunt.file.delete('src/js/' + element + '/' + element + '_es6.js');
@@ -267,7 +273,7 @@ module.exports = function (grunt) {
   });
 
   // Copy files to the docs and demo foders
-  grunt.registerTask('copyDist', 'Copy the distribution files to docs and demo', function () {
+  grunt.registerTask('copyDist', 'Copy the distribution files to docs and demo', () => {
     // Put a copy in the docs folder
     grunt.config.set('copy.docs.files', [{
       expand: true,
@@ -280,20 +286,13 @@ module.exports = function (grunt) {
     grunt.task.run('copy:docs');
   });
 
-  grunt.registerTask('default', function () {
-    String.prototype.capitalizeFirstLetter = function () {
-      return this.charAt(0).toUpperCase() + this.slice(1);
-    }
-
+  grunt.registerTask('elements', () => {
     // Clear the polyfills folder
     // deleteFolderRecursive('dist/polyfills');
     deleteFolderRecursive('dist/js');
 
     // Create the css files
     grunt.task.run('compile');
-
-    // Create the polyfills
-    // grunt.task.run('polyfills');
 
     // Create the elements
     grunt.task.run('createElements');
@@ -303,5 +302,15 @@ module.exports = function (grunt) {
 
     // Copy files to docs and demo
     grunt.task.run('copyDist');
+  });
+
+  grunt.registerTask('default', ['elements']);
+
+  grunt.registerTask('polyfills', () => {
+    // Clear the polyfills folder
+    deleteFolderRecursive('dist/polyfills');
+
+    // Create the polyfills
+    grunt.task.run('polyfillsDist');
   });
 };
