@@ -43,7 +43,6 @@
     "grunt-contrib-copy": "latest",
     "grunt-contrib-cssmin": "latest",
     "grunt-contrib-uglify": "git://github.com/gruntjs/grunt-contrib-uglify.git#harmony",
-    "grunt-es6-transpiler": "^1.0.2",
     "grunt-postcss-x": "latest",
     "grunt-sass": "latest",
     "grunt-shell": "latest"
