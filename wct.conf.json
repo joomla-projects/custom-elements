@@ -22,12 +22,12 @@
 				},
 				{
 					"browserName": "chrome",
-					"platform": "OS X 10.12",
+					"platform": "Windows 10",
 					"version": ""
 				},
 				{
 					"browserName": "firefox",
-					"platform": "OS X 10.12",
+					"platform": "Windows 10",
 					"version": ""
 				}
 				]
