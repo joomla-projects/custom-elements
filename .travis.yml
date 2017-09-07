@@ -8,9 +8,6 @@ before_install:
 - if [[ `npm -v` != 5* ]]; then npm install -g npm@5; fi
 install:
 - npm install
-before_script:
-- npm install -g bower
-- bower install
 script:
 - eslint src
 - wct --plugin sauce
