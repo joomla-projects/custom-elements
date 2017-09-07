@@ -18,7 +18,7 @@
 				{
 					"browserName": "safari",
 					"platform": "OS X 10.11",
-					"version": "10.12"
+					"version": ""
 				},
 				{
 					"browserName": "chrome",
