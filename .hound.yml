@@ -1,4 +1,4 @@
-fail_on_violations: false
+fail_on_violations: true
 
 scss:
   config_file: .scss-lint.yml
