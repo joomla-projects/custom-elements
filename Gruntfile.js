@@ -9,7 +9,7 @@ module.exports = function (grunt) {
   }
 
   // Load required modules
-  grunt.loadNpmTasks('grunt-postcss');
+  grunt.loadNpmTasks('grunt-postcss-x');
   grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-babel');
