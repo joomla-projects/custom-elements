@@ -14,12 +14,12 @@
 				},
 				{
 					"browserName": "chrome",
-					"platform": "OS X 10.11",
+					"platform": "Windows 10",
 					"version": "latest"
 				},
 				{
 					"browserName": "firefox",
-					"platform": "OS X 10.11",
+					"platform": "Windows 10",
 					"version": "latest"
 				},
 
