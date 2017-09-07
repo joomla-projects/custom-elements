@@ -15,8 +15,8 @@
     "custom-elements"
   ],
   "devDependencies": {
-    "web-component-tester": "^6.0.0",
-    "webcomponentsjs": "^1.0.0",
+    "web-component-tester": "^6.1.5",
+    "webcomponentsjs": "^1.0.10",
     "test-fixture": "^3.0.0-rc.1"
   }
 }
