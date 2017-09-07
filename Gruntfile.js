@@ -5,11 +5,11 @@ module.exports = (grunt) => {
 
   if (grunt.file.exists('settings-custom.yaml')) {
     // We have a custom setup
-    settings = grunt.file.readYAML('settings-custom.yaml');
+    grunt.settings = grunt.file.readYAML('settings-custom.yaml');
     console.log('Custom settings supplied')
   } else {
     // We will use the default options
-    settings = grunt.file.readYAML('settings.yaml');
+    grunt.settings = grunt.file.readYAML('settings.yaml');
   }
 
   // Load required modules
@@ -73,12 +73,12 @@ module.exports = (grunt) => {
         processors: [
           require('autoprefixer')({
             browsers: [
-              'Chrome = ' + settings.browsers.Chrome,
-              'Firefox = ' + settings.browsers.Firefox,
-              'Edge = ' + settings.browsers.Edge,
-              'Explorer = ' + settings.browsers.Explorer,
-              'Safari = ' + settings.browsers.Safari,
-              'Opera = ' + settings.browsers.Opera
+              'Chrome = ' + grunt.settings.browsers.Chrome,
+              'Firefox = ' + grunt.settings.browsers.Firefox,
+              'Edge = ' + grunt.settings.browsers.Edge,
+              'Explorer = ' + grunt.settings.browsers.Explorer,
+              'Safari = ' + grunt.settings.browsers.Safari,
+              'Opera = ' + grunt.settings.browsers.Opera
             ]
           })
         ],
@@ -90,14 +90,14 @@ module.exports = (grunt) => {
       // Autoprefix the CSS files
       grunt.config.set('cssmin.' + element + '.files', [{
         src: 'src/scss/css/' + element + '.css',
-        dest: 'src/scss/css/' + settings.prefix + '-' + element + '.min.css'
+        dest: 'src/scss/css/' + grunt.settings.prefix + '-' + element + '.min.css'
       }]);
 
       grunt.task.run('cssmin:' + element);
     };
 
     console.info('Build the stylesheets')
-    settings.elements.forEach((element) => {
+    grunt.settings.elements.forEach((element) => {
       // Create the css for each element
       compileCss(element);
     });
@@ -191,9 +191,9 @@ module.exports = (grunt) => {
     };
 
     console.info('Build the custom Elements')
-    settings.elements.forEach((element) => {
+    grunt.settings.elements.forEach((element) => {
       // Create elements as html files, compatible with document-register-element polyfill
-      createElement(element, settings);
+      createElement(element, grunt.settings);
 
     });
   });
@@ -257,7 +257,7 @@ module.exports = (grunt) => {
     // Remove the minified/non minified css
     deleteFolderRecursive('src/scss/css');
 
-    settings.elements.forEach((element) => {
+    grunt.settings.elements.forEach((element) => {
       // Remove the extracripts
       if (grunt.file.exists('src/js/' + element + '/' + element + '_es6.js')) {
         grunt.file.delete('src/js/' + element + '/' + element + '_es6.js');
