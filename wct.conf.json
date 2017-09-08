@@ -1,6 +1,7 @@
 {
 	"verbose": true,
 	"persistent": true,
+	"skipCleanup": true,
 		"plugins": {
 		"local": {
 			"browsers": ["chrome", "firefox"]
