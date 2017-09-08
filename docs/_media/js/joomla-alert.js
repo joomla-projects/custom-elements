@@ -76,10 +76,8 @@ class JoomlaAlertElement extends HTMLElement {
           if (this.firstChild.tagName && this.firstChild.tagName.toLowerCase() !== 'button') {
             this.appendCloseButton.bind(this)();
           }
-        } else {
-          if (this.firstChild.tagName && this.firstChild.tagName.toLowerCase() === 'button') {
-            this.removeCloseButton.bind(this)();
-          }
+        } else if (this.firstChild.tagName && this.firstChild.tagName.toLowerCase() === 'button') {
+          this.removeCloseButton.bind(this)();
         }
         break;
       case 'href':
@@ -87,10 +85,8 @@ class JoomlaAlertElement extends HTMLElement {
           if (this.firstChild.tagName && this.firstChild.tagName.toLowerCase() !== 'button') {
             this.removeCloseButton.bind(this)();
           }
-        } else {
-          if (this.firstChild.tagName && this.firstChild.tagName.toLowerCase() !== 'button' && this.firstChild.classList.contains('joomla-alert-button--close')) {
-            this.appendCloseButton.bind(this)();
-          }
+        } else if (this.firstChild.tagName && this.firstChild.tagName.toLowerCase() !== 'button' && this.firstChild.classList.contains('joomla-alert-button--close')) {
+          this.appendCloseButton.bind(this)();
         }
         break;
       case 'auto-dismiss':
