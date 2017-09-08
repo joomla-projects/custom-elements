@@ -1,42 +1,45 @@
 {
-	"verbose": true,
-	"persistent": true,
-	"skipCleanup": true,
-		"plugins": {
-		"local": {
-			"browsers": ["chrome", "firefox"]
-		},
-		"sauce": {
-			"disabled": true,
-			"browsers": [
-				{
-					"browserName": "safari",
-					"platform": "OS X 10.11",
-					"version": "latest"
-				},
-
-				{
-					"browserName": "MicrosoftEdge",
-					"platform": "Windows 10",
-					"version": "latest"
-				},
-				{
-					"browserName": "internet explorer",
-					"version": "11",
-					"platform": "Windows 8.1"
-				},
-
-				{
-					"browserName": "chrome",
-					"platform": "Windows 10",
-					"version": "latest"
-				},
-				{
-					"browserName": "firefox",
-					"platform": "Windows 10",
-					"version": "latest"
-				}
-			]
-		}
-	}
+   "testTimeout":18000,
+   "verbose":"true",
+   "persistent":"false",
+   "skipCleanup":"true",
+   "compile":"auto",
+   "plugins":{
+      "local":{
+         "browsers":[
+            "chrome",
+            "firefox"
+         ]
+      },
+      "sauce":{
+         "disabled":true,
+         "browsers":[
+            {
+               "browserName":"safari",
+               "platform":"OS X 10.11",
+               "version":"latest"
+            },
+            {
+               "browserName":"MicrosoftEdge",
+               "platform":"Windows 10",
+               "version":"latest"
+            },
+            {
+               "browserName":"internet explorer",
+               "version":"11",
+               "platform":"Windows 8.1"
+            },
+            {
+               "browserName":"chrome",
+               "platform":"Windows 10",
+               "version":"latest"
+            },
+            {
+               "browserName":"firefox",
+               "platform":"Windows 10",
+               "version":"latest"
+            }
+         ]
+      }
+   }
 }
