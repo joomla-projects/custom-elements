@@ -73,12 +73,7 @@ module.exports = (grunt) => {
         processors: [
           require('autoprefixer')({
             browsers: [
-              `Chrome = ${grunt.settings.browsers.Chrome}`,
-              `Firefox = ${grunt.settings.browsers.Firefox}`,
-              `Edge = ${grunt.settings.browsers.Edge}`,
-              `Explorer = ${grunt.settings.browsers.Explorer}`,
-              `Safari = ${grunt.settings.browsers.Safari}`,
-              `Opera = ${grunt.settings.browsers.Opera}`,
+              `grunt.settings.browsers`,
             ]
           })
         ],

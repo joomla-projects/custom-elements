@@ -16,9 +16,4 @@
     - 'tip'
 
 'browsers':
-    'Chrome':   'last 1 version'
-    'Firefox':  'last 1 version'
-    'Edge':     'last 1 version'
-    'Explorer': 'last 1 version'
-    'Safari':   'last 1 version'
-    'Opera':    'last 1 version'
+    'last 1 version'
