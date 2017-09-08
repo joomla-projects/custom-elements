@@ -128,7 +128,7 @@ module.exports = function (grunt) {
               {
                 "presets": [
                   "es2015",
-                  "babili"
+                  "minify"
                 ],
                 "plugins": [
                   "static-fs"
