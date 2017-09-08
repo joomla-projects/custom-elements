@@ -278,7 +278,7 @@ var addNew = function() {
     tempElement.setAttribute('dismiss', 'true');
     tempElement.innerHTML = 'Wow it works!';
     document.getElementById('insert-new-alert').appendChild(tempElement);
-}
+};
 
 var addNewFloated = function() {
     var tempElement = document.createElement('joomla-alert');
@@ -287,16 +287,16 @@ var addNewFloated = function() {
 	tempElement.setAttribute('position', 'top-center');
     tempElement.innerHTML = "I'm a floated alert! You can position me to the top left or right too!";
     document.body.appendChild(tempElement);
-}
+};
 
 var changeAlert = function(dataAttr, value) {
     var tempElement = document.getElementById('change-me');
 	tempElement.setAttribute(dataAttr, value);
-}
+};
 var addNewButton = document.getElementById('insertNew'),
     changeButtons = document.querySelectorAll('#replaceble > button');
 
-var addNewButtonFloated = document.getElementById('insertNewFloated')
+var addNewButtonFloated = document.getElementById('insertNewFloated');
 
 addNewButton.addEventListener('click', addNew);
 addNewButtonFloated.addEventListener('click', addNewFloated);
