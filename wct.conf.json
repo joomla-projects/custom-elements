@@ -1,8 +1,5 @@
 {
    "verbose":"true",
-   "persistent":"false",
-   "skipCleanup":"false",
-   "compile":"always",
    "plugins":{
       "local":{
          "browsers":[
