@@ -3,7 +3,7 @@
    "verbose":"true",
    "persistent":"false",
    "skipCleanup":"true",
-   "compile":"auto",
+   "compile":"never",
    "plugins":{
       "local":{
          "browsers":[
