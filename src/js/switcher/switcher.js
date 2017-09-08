@@ -17,63 +17,57 @@ class JoomlaSwitcherElement extends HTMLElement {
   constructor() {
     super();
 
-    this.inputs = '';
-    this.container = '';
+    this.inputs = [];
+    this.spans = [];
+    this.inputsContainer = '';
+    this.spansContainer = '';
+    this.newActive = '';
   }
+
   /* Lifecycle, element appended to the DOM */
   connectedCallback() {
     this.inputs = [].slice.call(this.querySelectorAll('input'));
 
+    if (this.inputs.length !== 2 || this.inputs[0].type !== 'radio') {
+      throw new Error('`Joomla-switcher` requires two inputs type="checkbox"');
+    }
+
     // Create the markup
     this.createMarkup.bind(this)();
 
-    // Add the initial active class
-    this.container = this.querySelector('span.switcher');
-    const next = this.inputs[1].parentNode.nextElementSibling;
-
-    // Add tab focus
-    this.container.setAttribute('tabindex', 0);
+    this.inputsContainer = this.firstElementChild;
+    this.spansContainer = this.lastElementChild;
 
     if (this.inputs[1].checked) {
       this.inputs[1].parentNode.classList.add('active');
-      next.querySelector(`.switcher-label-${this.inputs[1].value}`).classList.add('active');
+      this.spans[1].classList.add('active');
     } else {
-      next.querySelector(`.switcher-label-${this.inputs[0].value}`).classList.add('active');
+      this.spans[0].classList.add('active');
     }
 
-    this.inputs.forEach((switchEl) => {
-      // Add the required accessibility tags
-      if (switchEl.id) {
-        const parent = switchEl.parentNode;
-        const relatedSpan = parent.nextElementSibling.querySelector(`span.switcher-label-${switchEl.value}`);
-
-        relatedSpan.id = `${switchEl.id}-label`;
-        if (switchEl.classList.contains('active')) { switchEl.setAttribute('aria-labelledby', relatedSpan.id); }
-      }
-
+    this.inputs.forEach((switchEl, index) => {
       // Remove the tab focus from the inputs
       switchEl.setAttribute('tabindex', '-1');
 
+      // Aria-labelledby ONLY in the first input
+      switchEl.setAttribute('role', 'switch');
+      switchEl.setAttribute('aria-labelledby', this.spans[index].innerHTML);
+
       // Add the active class on click
-      switchEl.addEventListener('click', this.switch.bind(this));
+      switchEl.addEventListener('click', this.toggle.bind(this));
     });
 
-    this.container.addEventListener('keydown', (event) => {
-      if (event.keyCode === 13 || event.keyCode === 32) {
-        event.preventDefault();
-        const element = this.container.querySelector('input:not(.active)');
-        element.click();
-      }
-    });
+    this.inputsContainer.addEventListener('keydown', this.keyEvents.bind(this));
   }
 
   /* Lifecycle, element removed from the DOM */
   disconnectedCallback() {
     this.removeEventListener('joomla.switcher.toggle', this.toggle, true);
     this.removeEventListener('click', this.switch, true);
+    this.removeEventListener('keydown', this.keydown, true);
   }
 
-  /* Method to dispatch events. Internal */
+  /* Method to dispatch events */
   dispatchCustomEvent(eventName) {
     const OriginalCustomEvent = new CustomEvent(eventName, { bubbles: true, cancelable: true });
     OriginalCustomEvent.relatedTarget = this;
@@ -81,13 +75,14 @@ class JoomlaSwitcherElement extends HTMLElement {
     this.removeEventListener(eventName, this);
   }
 
-  /** Method to build the switch. Internal */
+  /** Method to build the switch */
   createMarkup() {
     let checked = 0;
 
     // Create the first 'span' wrapper
     const spanFirst = document.createElement('span');
     spanFirst.classList.add('switcher');
+    spanFirst.setAttribute('tabindex', 0);
 
     // If no type has been defined, the default as "success"
     if (!this.type) {
@@ -98,8 +93,6 @@ class JoomlaSwitcherElement extends HTMLElement {
     switchEl.classList.add('switch');
 
     this.inputs.forEach((input, index) => {
-      input.setAttribute('role', 'switch');
-
       if (input.checked) {
         input.setAttribute('aria-checked', true);
       }
@@ -131,42 +124,36 @@ class JoomlaSwitcherElement extends HTMLElement {
       labelSecond.classList.add('active');
     }
 
+    this.spans.push(labelFirst);
+    this.spans.push(labelSecond);
     spanSecond.appendChild(labelFirst);
     spanSecond.appendChild(labelSecond);
-
-    // Remove all child nodes from the switcher
-    while (this.firstChild) {
-      this.removeChild(this.firstChild);
-    }
 
     // Append everything back to the main element
     this.appendChild(spanFirst);
     this.appendChild(spanSecond);
   }
 
-  /** Method to toggle the switch. Internal */
+  /** Method to toggle the switch */
   switch() {
-    const parent = this.firstChild;
-    const spans = [].slice.call(parent.nextElementSibling.querySelectorAll('span'));
-    const newActive = this.querySelector('input:not(.active)');
-
-    spans.forEach((span) => {
+    this.spans.forEach((span) => {
       span.classList.remove('active');
     });
 
-    if (parent.classList.contains('active')) {
-      parent.classList.remove('active');
+    if (this.inputsContainer.classList.contains('active')) {
+      this.inputsContainer.classList.remove('active');
     } else {
-      parent.classList.add('active');
+      this.inputsContainer.classList.add('active');
     }
 
-    if (!newActive.classList.contains('active')) {
+    if (!this.inputs[this.newActive].classList.contains('active')) {
       this.inputs.forEach((input) => {
         input.classList.remove('active');
         input.removeAttribute('checked');
-        input.setAttribute('aria-checked', false);
+        input.removeAttribute('aria-checked');
       });
-      newActive.classList.add('active');
+      this.inputs[this.newActive].classList.add('active');
+      this.inputs[this.newActive].setAttribute('aria-checked', true);
 
       this.dispatchCustomEvent('joomla.switcher.on');
     } else {
@@ -179,16 +166,26 @@ class JoomlaSwitcherElement extends HTMLElement {
       this.dispatchCustomEvent('joomla.switcher.off');
     }
 
-    newActive.setAttribute('checked', '');
-    newActive.setAttribute('aria-checked', true);
-    parent.nextElementSibling.querySelector(`.switcher-label-${newActive.value}`).classList.add('active');
+    this.inputs[this.newActive].setAttribute('checked', '');
+    this.inputs[this.newActive].setAttribute('aria-checked', true);
+    this.spans[this.newActive].classList.add('active');
   }
 
   /** Method to toggle the switch */
-  toggle() {
-    const newActive = this.querySelector('input:not(.active)');
+  toggle(e) {
+    e.preventDefault();
+    this.newActive = this.inputs[1].classList.contains('active') ? 0 : 1;
 
-    newActive.click();
+    this.switch.bind(this)();
+  }
+
+  keyEvents(event) {
+    if (event.keyCode === 13 || event.keyCode === 32) {
+      event.preventDefault();
+      this.newActive = this.inputs[1].classList.contains('active') ? 0 : 1;
+
+      this.switch.bind(this)();
+    }
   }
 }
 
