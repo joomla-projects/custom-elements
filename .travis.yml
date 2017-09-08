@@ -16,9 +16,4 @@ script:
 - wct --plugin sauce
 notifications:
   email: false
-addons:
-  sauce_connect:
-    username: joomla-custom-elements
-env:
-   global:
-    secure: b++dZAqfXDya9QirEP3PBQzPAgtqNYDeDTThdqtgfSF4lM+hTONwOe8iTYBVhbuRXTWJdkAyxIBOKFgJueaaI0oGOD0aE1iTUP98W6YiJn4ueZ+w9sS51jpW+3VLNQhFuyX071aii9+tuBURzmYytEz1JnZ/D8UOPfumFf3EMPnzCb3YkGuzFK9KAcKp3BqF8gGgK6vvP1rXVXb4F/S2PLBgZUmRMoWwxmUJSAs8GXKYVldqoZUxKWDJ/LN9CFzDDyybkTZFp/TkG8+G7AaSx+A2S/8/exJWhFFc+ycxhePQeuC0C2eAtq2lEZG9uDiu72YM6DvOx8UWhh0Uv2S6YVs0EPvfn3Ht5LBl1Ss7k8kBgkAJ0X+Xwm3r/m4jCTad6RBrQbzS3pLM6m0KoEVoBVyHlFj2E55MrJkRvfJSQtbZ0nReYcmA47u74xMWk8v5AkE4nkhZKO4Eun6CWW+rnBb27bNLcw1OZky060ds9a7yqKFQvDV2VWDSXG5jr+wYGD8ByqBwL2ApS4hF3/BhCqFjusJvIwMAGpiof7qoUZvxE1UJgOKZl1J9Imhl0c3y5clnMThINvvRFQFt3NxLi6jDi54wCAocOlJcmg2ykS0hY+6UCGRHyzvX3WLFAydcgkkga1Ov6EDA7WXKu+5DK22bk4Rki5cZdD6+wpRqFQg=
+  
