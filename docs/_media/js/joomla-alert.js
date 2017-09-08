@@ -73,19 +73,19 @@ class JoomlaAlertElement extends HTMLElement {
       case 'dismiss':
       case 'acknowledge':
         if (!newValue || newValue === 'true') {
-          if (this.firstChild.tagName && this.firstChild.tagName.toLowerCase() !== 'button') {
+          if (this.firstElementChild.tagName && this.firstElementChild.tagName.toLowerCase() !== 'button') {
             this.appendCloseButton.bind(this)();
           }
-        } else if (this.firstChild.tagName && this.firstChild.tagName.toLowerCase() === 'button') {
+        } else if (this.firstElementChild.tagName && this.firstElementChild.tagName.toLowerCase() === 'button') {
           this.removeCloseButton.bind(this)();
         }
         break;
       case 'href':
         if (!newValue || newValue === '') {
-          if (this.firstChild.tagName && this.firstChild.tagName.toLowerCase() !== 'button') {
+          if (this.firstElementChild.tagName && this.firstElementChild.tagName.toLowerCase() !== 'button') {
             this.removeCloseButton.bind(this)();
           }
-        } else if (this.firstChild.tagName && this.firstChild.tagName.toLowerCase() !== 'button' && this.firstChild.classList.contains('joomla-alert-button--close')) {
+        } else if (this.firstElementChild.tagName && this.firstElementChild.tagName.toLowerCase() !== 'button' && this.firstElementChild.classList.contains('joomla-alert-button--close')) {
           this.appendCloseButton.bind(this)();
         }
         break;
