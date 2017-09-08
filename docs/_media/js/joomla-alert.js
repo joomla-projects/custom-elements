@@ -73,15 +73,19 @@ class JoomlaAlertElement extends HTMLElement {
       case 'dismiss':
       case 'acknowledge':
         if (!newValue || newValue === 'true') {
-          this.appendCloseButton.bind(this)();
-        } else {
+          if (this.firstElementChild.tagName && this.firstElementChild.tagName.toLowerCase() !== 'button') {
+            this.appendCloseButton.bind(this)();
+          }
+        } else if (this.firstElementChild.tagName && this.firstElementChild.tagName.toLowerCase() === 'button') {
           this.removeCloseButton.bind(this)();
         }
         break;
       case 'href':
         if (!newValue || newValue === '') {
-          this.removeCloseButton.bind(this)();
-        } else if (!this.querySelector('button.joomla-alert-button--close')) {
+          if (this.firstElementChild.tagName && this.firstElementChild.tagName.toLowerCase() !== 'button') {
+            this.removeCloseButton.bind(this)();
+          }
+        } else if (this.firstElementChild.tagName && this.firstElementChild.tagName.toLowerCase() !== 'button' && this.firstElementChild.classList.contains('joomla-alert-button--close')) {
           this.appendCloseButton.bind(this)();
         }
         break;
