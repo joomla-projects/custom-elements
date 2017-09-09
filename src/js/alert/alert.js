@@ -1,11 +1,3 @@
-/** Include the relative styles */
-if (!document.head.querySelector('#joomla-alert-style')) {
-  const style = document.createElement('style');
-  style.id = 'joomla-alert-style';
-  style.innerHTML = '{{stylesheet}}';
-  document.head.appendChild(style);
-}
-
 class JoomlaAlertElement extends HTMLElement {
   /* Attributes to monitor */
   static get observedAttributes() { return ['type', 'dismiss', 'acknowledge', 'href', 'auto-dismiss', 'position', 'textClose', 'textDismiss', 'textAcknowledge']; }

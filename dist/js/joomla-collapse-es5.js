@@ -17,8 +17,6 @@ var _createClass = function () {
   if (!a) throw new ReferenceError('this hasn\'t been initialised - super() hasn\'t been called');return b && ('object' == (typeof b === 'undefined' ? 'undefined' : _typeof(b)) || 'function' == typeof b) ? b : a;
 }function _inherits(a, b) {
   if ('function' != typeof b && null !== b) throw new TypeError('Super expression must either be null or a function, not ' + (typeof b === 'undefined' ? 'undefined' : _typeof(b)));a.prototype = Object.create(b && b.prototype, { constructor: { value: a, enumerable: !1, writable: !0, configurable: !0 } }), b && (Object.setPrototypeOf ? Object.setPrototypeOf(a, b) : a.__proto__ = b);
-}if (!document.head.querySelector('#joomla-collapse-style')) {
-  var style = document.createElement('style');style.id = 'joomla-collapse-style', style.innerHTML = 'joomla-collapse[state=closed]{display:none}joomla-collapse[state=open]{display:block}', document.head.appendChild(style);
 }var JoomlaCollapseElement = function (a) {
   function b() {
     return _classCallCheck(this, b), _possibleConstructorReturn(this, (b.__proto__ || Object.getPrototypeOf(b)).apply(this, arguments));

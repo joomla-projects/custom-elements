@@ -1,11 +1,3 @@
-/** Include the relative styles */
-if (!document.head.querySelector('#joomla-group-buttons-style')) {
-  const style = document.createElement('style');
-  style.id = 'joomla-group-buttons-style';
-  style.innerHTML = '{{stylesheet}}';
-  document.head.appendChild(style);
-}
-
 class JoomlaButtonElement extends HTMLElement {
   connectedCallback() {
     const buttons = [].slice.call(this.querySelectorAll('[type="checkbox"]'));
