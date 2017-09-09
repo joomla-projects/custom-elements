@@ -263,7 +263,18 @@ module.exports = (grunt) => {
   // Copy files to the docs and demo foders
   grunt.registerTask('copyDist', 'Copy the distribution files to docs and demo', () => {
     // Put a copy in the docs folder
-    grunt.config.set('copy.docs.files', [{
+    grunt.config.set('copy.docscss.files', [{
+      expand: true,
+      filter: 'isFile',
+      cwd: 'dist/css/',
+      src: ['*'],
+      dest: 'docs/_media/css/'
+    }]);
+
+    grunt.task.run('copy:docscss');
+
+    // Put a copy in the docs folder
+    grunt.config.set('copy.docsjs.files', [{
       expand: true,
       filter: 'isFile',
       cwd: 'dist/js/',
@@ -271,7 +282,7 @@ module.exports = (grunt) => {
       dest: 'docs/_media/js/'
     }]);
 
-    grunt.task.run('copy:docs');
+    grunt.task.run('copy:docsjs');
   });
 
   grunt.registerTask('elements', () => {
