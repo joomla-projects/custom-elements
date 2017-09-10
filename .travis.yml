@@ -13,7 +13,7 @@ before_script:
 - bower install
 script:
 - eslint src
-- wct --plugin sauce
+- wct
 notifications:
   email: false
 addons:
