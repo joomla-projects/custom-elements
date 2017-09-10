@@ -2,6 +2,7 @@
 
 In order to use the group buttons custom element you need to import the element in the document's head:
 ```html
+<link href="joomla-group-buttons.min.css" rel="stylesheet">
 <script src="joomla-group-buttons.min.js"></script>
 ```
 

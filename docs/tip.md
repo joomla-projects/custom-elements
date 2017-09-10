@@ -2,6 +2,7 @@
 
 In order to use the tip custom element you need to import the element in the document's head:
 ```html
+<link href="joomla-tip.min.css" rel="stylesheet">
 <script src="joomla-tip.min.js"></script>
 ```
 

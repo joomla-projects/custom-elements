@@ -4,6 +4,7 @@
 
 In order to use the tab custom element you need to import the element in the document's head:
 ```html
+<link href="joomla-panels.min.css" rel="stylesheet">
 <script src="joomla-panels.min.js"></script>
 ```
 

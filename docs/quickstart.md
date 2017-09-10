@@ -29,8 +29,9 @@ Due to compatibility issues due to browsers support you need to have a polyfill,
 <script src="webcomponents-loader.js"></script>
 ```
 
-For each element that you want to use in your page you have to insert a simple script tag in the head of your page, e.g.:
+For each element that you want to use in your page you have to import the relevant CSS and JS file on your page, e.g:
 ```html
+<link href="joomla-alert.min.css" rel="stylesheet">
 <script src="joomla-alert.min.js"></script>
 ```
 
@@ -38,17 +39,17 @@ For each element that you want to use in your page you have to insert a simple s
 
 ## Customize your elements
 
-Every element has its own `.scss` file and there is a global `variables.scss` that can be used to specify your colours. Once you've changed the variables re-run `grunt` to rebuild the elements
+Every element has its own `.scss` file and there is a global `variables.scss` that can be used to tweak the styling to your own needs. Once you've changed the variables re-run `grunt` to rebuild the elements.
 
 
 ## Custom elements are CSS framework agnostic
 
-Check these collections of custom elements running quite happily with the most popular css frameworks:
+Check these collections of custom elements running quite happily with the most popular CSS frameworks:
 
 ----
-<a href="/custom-elements/bootstrap-demo.html">Bootstrap</a>
+<a href="/docs/bootstrap-demo.html">Bootstrap</a>
 -----
-<a href="/custom-elements/foundation-demo.html">Foundation</a>
+<a href="/docs/foundation-demo.html">Foundation</a>
 -----
-<a href="/custom-elements/uikit-demo.html">UiKit</a>
+<a href="/docs/uikit-demo.html">UiKit</a>
 -----
