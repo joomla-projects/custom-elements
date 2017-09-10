@@ -7,11 +7,8 @@
 
 'elements':
     - 'alert'
-    - 'group-buttons'
-    - 'collapse'
     - 'dropdown'
     - 'modal'
-    - 'switcher'
     - 'panels'
     - 'tip'
 
