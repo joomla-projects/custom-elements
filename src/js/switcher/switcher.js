@@ -1,11 +1,3 @@
-/** Include the relative styles */
-if (!document.head.querySelector('#joomla-switcher-style')) {
-  const style = document.createElement('style');
-  style.id = 'joomla-switcher-style';
-  style.innerHTML = '{{stylesheet}}';
-  document.head.appendChild(style);
-}
-
 class JoomlaSwitcherElement extends HTMLElement {
   /* Attributes to monitor */
   static get observedAttributes() { return ['type', 'offText', 'onText']; }

@@ -1,11 +1,3 @@
-/** Include the relative styles */
-if (!document.head.querySelector('#joomla-tab-style')) {
-  const style = document.createElement('style');
-  style.id = 'joomla-tab-style';
-  style.innerHTML = '{{stylesheet}}';
-  document.head.appendChild(style);
-}
-
 class JoomlaPanelsElement extends HTMLElement {
   /* Attributes to monitor */
   static get observedAttributes() { return ['recall', 'orientation', 'view', 'responsive', 'collapse-width']; }
