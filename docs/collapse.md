@@ -2,6 +2,7 @@
 
 In order to use the collapse custom element you need to import the element in the document's head:
 ```html
+<link href="joomla-collapse.min.css" rel="stylesheet">
 <script src="joomla-collapse.min.js"></script>
 ```
 

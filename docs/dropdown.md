@@ -2,6 +2,7 @@
 
 In order to use the dropdown custom element you need to import the element in the document's head:
 ```html
+<link href="joomla-dropdown.min.css" rel="stylesheet">
 <script src="joomla-dropdown.min.js"></script>
 ```
 

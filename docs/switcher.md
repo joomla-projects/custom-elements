@@ -2,6 +2,7 @@
 
 In order to use the switcher custom element you need to import the element in the document's head:
 ```html
+<link href="joomla-switcher.min.css" rel="stylesheet">
 <script src="joomla-switcher.min.js"></script>
 ```
 

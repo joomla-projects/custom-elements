@@ -13,6 +13,7 @@ Alerts are available for any length of text, as well as an optional dismiss butt
 In order to use the alert custom element you need to import the element in the document's head:
 
 ```html
+<link href="joomla-alert.min.css" rel="stylesheet">
 <script src="joomla-alert.min.js"></script>
 ```
 

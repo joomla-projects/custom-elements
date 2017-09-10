@@ -2,6 +2,7 @@
 
 In order to use the modal custom element you need to import the element in the document's head:
 ```html
+<link href="joomla-modal.min.css" rel="stylesheet">
 <script src="joomla-modal.min.js"></script>
 ```
 
