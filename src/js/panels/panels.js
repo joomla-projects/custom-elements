@@ -268,11 +268,11 @@ class JoomlaPanelsElement extends HTMLElement {
     }
   }
 
-  /*eslint-disable */
+  /* eslint-disable */
   getStorageKey() {
     return window.location.href.toString().split(window.location.host)[1].replace(/&return=[a-zA-Z0-9%]+/, '').split('#')[0];
   }
-  /*eslint-disable */
+  /* eslint-disable */
 
   saveState(value) {
     const storageKey = this.getStorageKey();
@@ -409,12 +409,12 @@ class JoomlaPanelsElement extends HTMLElement {
       }
     }
   }
-  /*eslint-disable */
+  /* eslint-disable */
   findAncestorByTagNme(el, tagName) {
     while ((el = el.parentElement) && el.nodeName.toLowerCase() !== tagName);
     return el;
   }
-  /*eslint-enable */
+  /* eslint-enable */
 
   /* Method to dispatch events */
   dispatchCustomEvent(eventName, element, related) {

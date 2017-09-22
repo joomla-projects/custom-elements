@@ -62,7 +62,7 @@ class JoomlaButtonElement extends HTMLElement {
     }
   }
 
-  /*eslint-disable */
+  /* eslint-disable */
 	disconnectedCallback() {
 
 	}
@@ -82,7 +82,7 @@ class JoomlaButtonElement extends HTMLElement {
 				// break;
 		}
   }
-  /*eslint-enable */
+  /* eslint-enable */
 
   clearAllRadios() {
     const radios = [].slice.call(this.querySelectorAll('[type="radio"]'));

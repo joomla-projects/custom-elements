@@ -57,7 +57,7 @@ class JoomlaDropdownElement extends HTMLElement {
       // break;
     }
   }
-  /*eslint-enable */
+  /* eslint-enable */
 
   close() {
     const button = document.querySelector(`#${this.getAttribute('aria-labelledby')}`);
@@ -65,12 +65,12 @@ class JoomlaDropdownElement extends HTMLElement {
     button.setAttribute('aria-expanded', 'false');
   }
 
-  /*eslint-disable */
+  /* eslint-disable */
   findAncestor(el, tagName) {
     while ((el = el.parentElement) && el.nodeName.toLowerCase() !== tagName);
     return el;
   }
-  /*eslint-enable */
+  /* eslint-enable */
 }
 
 customElements.define('joomla-dropdown', JoomlaDropdownElement);

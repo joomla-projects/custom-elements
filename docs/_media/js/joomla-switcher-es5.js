@@ -51,8 +51,8 @@ var _createClass = function () {
       }), this.dispatchCustomEvent('joomla.switcher.off')) : (this.inputs.forEach(function (a) {
         a.classList.remove('active'), a.removeAttribute('checked'), a.removeAttribute('aria-checked');
       }), this.inputs[this.newActive].classList.add('active'), this.inputs[this.newActive].setAttribute('aria-checked', !0), this.dispatchCustomEvent('joomla.switcher.on')), this.inputs[this.newActive].setAttribute('checked', ''), this.inputs[this.newActive].setAttribute('aria-checked', !0), this.spans[this.newActive].classList.add('active');
-    } }, { key: 'toggle', value: function toggle(a) {
-      a.preventDefault(), this.newActive = this.inputs[1].classList.contains('active') ? 0 : 1, this.switch.bind(this)();
+    } }, { key: 'toggle', value: function toggle() {
+      this.newActive = this.inputs[1].classList.contains('active') ? 0 : 1, this.switch.bind(this)();
     } }, { key: 'keyEvents', value: function keyEvents(a) {
       (13 === a.keyCode || 32 === a.keyCode) && (a.preventDefault(), this.newActive = this.inputs[1].classList.contains('active') ? 0 : 1, this.switch.bind(this)());
     } }]), b;
