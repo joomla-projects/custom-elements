@@ -27,7 +27,7 @@ class JoomlaModalElement extends HTMLElement {
       // break;
     }
   }
-  /*eslint-enable */
+  /* eslint-enable */
 
   connectedCallback() {
     if (!this.id) {
