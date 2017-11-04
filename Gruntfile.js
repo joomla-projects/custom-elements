@@ -3,14 +3,8 @@ module.exports = (grunt) => {
     return this.charAt(0).toUpperCase() + this.slice(1);
   }
 
-  if (grunt.file.exists('settings-custom.yaml')) {
-    // We have a custom setup
-    grunt.settings = grunt.file.readYAML('settings-custom.yaml');
-    console.log('Custom settings supplied')
-  } else {
-    // We will use the default options
-    grunt.settings = grunt.file.readYAML('settings.yaml');
-  }
+  const pack = require('./package.json');
+  grunt.settings = pack.settings;
 
   // Load required modules
   grunt.loadNpmTasks('grunt-postcss-x');

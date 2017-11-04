@@ -50,7 +50,7 @@
     "grunt-sass": "latest",
     "grunt-shell": "latest",
     "web-component-tester": "latest",
-    "webcomponentsjs": "latest"
+    "wct-browser-legacy": "latest"
   },
   "scripts": {
     "build": "grunt",
@@ -71,5 +71,19 @@
         }
       ]
     ]
+  },
+  "settings": {
+    "prefix": "joomla",
+    "elements": [
+      "alert",
+      "group-buttons",
+      "collapse",
+      "dropdown",
+      "modal",
+      "switcher",
+      "panels",
+      "tip"
+    ],
+    "browsers": "last 1 version"
   }
 }
