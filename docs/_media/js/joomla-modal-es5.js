@@ -4,61 +4,291 @@
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _createClass = function () {
-  function a(a, b) {
-    for (var c, d = 0; d < b.length; d++) {
-      c = b[d], c.enumerable = c.enumerable || !1, c.configurable = !0, 'value' in c && (c.writable = !0), Object.defineProperty(a, c.key, c);
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
     }
-  }return function (b, c, d) {
-    return c && a(b.prototype, c), d && a(b, d), b;
+  }return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
   };
-}();function _classCallCheck(a, b) {
-  if (!(a instanceof b)) throw new TypeError('Cannot call a class as a function');
-}function _possibleConstructorReturn(a, b) {
-  if (!a) throw new ReferenceError('this hasn\'t been initialised - super() hasn\'t been called');return b && ('object' == (typeof b === 'undefined' ? 'undefined' : _typeof(b)) || 'function' == typeof b) ? b : a;
-}function _inherits(a, b) {
-  if ('function' != typeof b && null !== b) throw new TypeError('Super expression must either be null or a function, not ' + (typeof b === 'undefined' ? 'undefined' : _typeof(b)));a.prototype = Object.create(b && b.prototype, { constructor: { value: a, enumerable: !1, writable: !0, configurable: !0 } }), b && (Object.setPrototypeOf ? Object.setPrototypeOf(a, b) : a.__proto__ = b);
-}var JoomlaModalElement = function (a) {
-  function b() {
-    _classCallCheck(this, b);var a = _possibleConstructorReturn(this, (b.__proto__ || Object.getPrototypeOf(b)).call(this));return a.modal = a, a.triggerBtn = '', a.focusableElements = null, a.focusableSelectors = ['a[href]', 'area[href]', 'input:not([disabled])', 'select:not([disabled])', 'textarea:not([disabled])', 'button:not([disabled])', 'iframe', 'object', 'embed', '[contenteditable]', '[tabindex]:not([tabindex^="-"])'], a.width = '', a.height = '', a.innerWidth = '', a.innerHeight = '', a.iframe = '', a.container = a.querySelector('.joomla-modal-dialog'), a.title = a.getAttribute('title') || 'Modal', a;
-  }return _inherits(b, a), _createClass(b, [{ key: 'attributeChangedCallback', value: function attributeChangedCallback(a) {
-      switch (a) {}
-    } }, { key: 'connectedCallback', value: function connectedCallback() {
-      if (!this.id) throw new Error('`Joomla-modal` requires an id');if (this.setAttribute('role', 'dialog'), this.classList.add('fade'), this.iframe = this.getAttribute('iframe') || '', this.width = this.getAttribute('width') || '100%', this.height = this.getAttribute('height') || '600px', !this.container) {
-        var b = document.createElement('div');b.classList.add('joomla-modal-dialog'), b.setAttribute('role', 'document'), b.innerHTML = this.innerHTML, this.innerHTML = '', this.appendChild(b), this.container = this.querySelector('.joomla-modal-dialog');
-      }this.header = this.querySelector('header'), this.main = this.querySelector('section'), this.footer = this.querySelector('footer'), this.setAttribute('tabindex', -1);var a = 'modal-title-' + new Date().getUTCMilliseconds();if (this.setAttribute('aria-labelledby', a), !this.header) {
-        var c = document.createElement('h5');c.innerText = this.title, c.id = a;var d = document.createElement('button');d.setAttribute('aria-label', 'Close'), d.setAttribute('data-dismiss', ''), d.innerHTML = '<span aria-hidden="true">\xD7</span>';var e = document.createElement('header');e.appendChild(c), e.appendChild(d), this.container.insertAdjacentElement('afterbegin', e);
-      }this.header = this.container.querySelector('header'), this.body = this.container.querySelector('section'), this.footer = this.container.querySelector('footer'), this.triggerBtn = document.querySelector('button[data-href="#' + this.id + '"]'), this.triggerBtn && this.triggerBtn.addEventListener('click', this.open.bind(this));
-    } }, { key: 'disconnectedCallback', value: function disconnectedCallback() {
-      this.triggerBtn && this.triggerBtn.removeEventListener('click', this.open);
-    } }, { key: 'open', value: function open() {
-      var a = this,
-          b = this,
-          c = document.createElement('div');if (c.classList.add('modal-backdrop', 'fade'), c.classList.add('modal-backdrop', 'show'), document.body.appendChild(c), this.removeAttribute('aria-hidden'), this.body && (this.iframeEl = this.main.querySelector('iframe'), this.iframe)) {
-        this.iframeEl && this.iframeEl.parentNode.remove(this.iframeEl);var e = document.createElement('iframe');e.width = this.width, e.height = this.height, e.src = this.iframe, e.setAttribute('frameborder', 0), this.body.appendChild(e), this.iframeEl = this.main.querySelector('iframe');
-      }this.adjustDimensions(), this.scrollTop = 0, this.modal.classList.add('show'), this.focusableElements = [].slice.call(this.querySelectorAll(this.focusableSelectors.join())), this.focusableElements.length ? this.focusableElements[0].focus() : this.header.querySelector('button').focus(), this.addEventListener('keydown', this.keyPress.bind(this)), document.addEventListener('click', function (c) {
-        b.findAncestorByClass(c.target, 'joomla-modal-dialog') || c.target === a.triggerBtn || b.close();
-      });var d = b.querySelectorAll('button[data-dismiss]');d.forEach(function (c) {
-        c.addEventListener('click', b.close.bind(a));
+}();
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _possibleConstructorReturn(self, call) {
+  if (!self) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+}
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
+  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+}
+
+var JoomlaModalElement = function (_HTMLElement) {
+  _inherits(JoomlaModalElement, _HTMLElement);
+
+  function JoomlaModalElement() {
+    _classCallCheck(this, JoomlaModalElement);
+
+    var _this = _possibleConstructorReturn(this, (JoomlaModalElement.__proto__ || Object.getPrototypeOf(JoomlaModalElement)).call(this));
+
+    _this.modal = _this;
+    _this.triggerBtn = '';
+    _this.focusableElements = null;
+    _this.focusableSelectors = ['a[href]', 'area[href]', 'input:not([disabled])', 'select:not([disabled])', 'textarea:not([disabled])', 'button:not([disabled])', 'iframe', 'object', 'embed', '[contenteditable]', '[tabindex]:not([tabindex^="-"])'];
+    _this.width = '';
+    _this.height = '';
+    _this.innerWidth = '';
+    _this.innerHeight = '';
+    _this.iframe = '';
+    _this.container = _this.querySelector('.joomla-modal-dialog');
+    _this.title = _this.getAttribute('title') || 'Modal';
+    return _this;
+  }
+
+  _createClass(JoomlaModalElement, [{
+    key: 'attributeChangedCallback',
+
+    /*eslint-disable */
+    value: function attributeChangedCallback(attr, oldValue, newValue) {
+      switch (attr) {}
+    }
+    /* eslint-enable */
+
+  }, {
+    key: 'connectedCallback',
+    value: function connectedCallback() {
+      if (!this.id) {
+        throw new Error('`Joomla-modal` requires an id');
+      }
+
+      this.setAttribute('role', 'dialog');
+      this.classList.add('fade');
+      this.iframe = this.getAttribute('iframe') || '';
+      this.width = this.getAttribute('width') || '100%';
+      this.height = this.getAttribute('height') || '600px';
+
+      if (!this.container) {
+        var cont = document.createElement('div');
+        cont.classList.add('joomla-modal-dialog');
+        cont.setAttribute('role', 'document');
+        cont.innerHTML = this.innerHTML;
+        this.innerHTML = '';
+        this.appendChild(cont);
+        this.container = this.querySelector('.joomla-modal-dialog');
+      }
+
+      this.header = this.querySelector('header');
+      this.main = this.querySelector('section');
+      this.footer = this.querySelector('footer');
+
+      this.setAttribute('tabindex', -1);
+
+      // Unique Id
+      var randomId = 'modal-title-' + new Date().getUTCMilliseconds();
+      this.setAttribute('aria-labelledby', randomId);
+
+      if (!this.header) {
+        var htag = document.createElement('h5');
+        htag.innerText = this.title;
+        htag.id = randomId;
+        var closeButton = document.createElement('button');
+        closeButton.setAttribute('aria-label', 'Close');
+        closeButton.setAttribute('data-dismiss', '');
+        closeButton.innerHTML = '<span aria-hidden="true">×</span>';
+
+        var header = document.createElement('header');
+
+        header.appendChild(htag);
+        header.appendChild(closeButton);
+
+        this.container.insertAdjacentElement('afterbegin', header);
+      }
+      this.header = this.container.querySelector('header');
+      this.body = this.container.querySelector('section');
+      this.footer = this.container.querySelector('footer');
+
+      this.triggerBtn = document.querySelector('button[data-href="#' + this.id + '"]');
+      if (this.triggerBtn) {
+        this.triggerBtn.addEventListener('click', this.open.bind(this));
+      }
+    }
+  }, {
+    key: 'disconnectedCallback',
+    value: function disconnectedCallback() {
+      if (this.triggerBtn) {
+        this.triggerBtn.removeEventListener('click', this.open);
+      }
+    }
+  }, {
+    key: 'open',
+    value: function open() {
+      var _this2 = this;
+
+      var self = this;
+      var dropShadow = document.createElement('div');
+      dropShadow.classList.add('modal-backdrop', 'fade');
+      dropShadow.classList.add('modal-backdrop', 'show');
+      document.body.appendChild(dropShadow);
+
+      this.removeAttribute('aria-hidden');
+      // Iframe specific code, reload
+      if (this.body) {
+        this.iframeEl = this.main.querySelector('iframe');
+        if (this.iframe) {
+          if (this.iframeEl) {
+            this.iframeEl.parentNode.remove(this.iframeEl);
+          }
+          var newIframe = document.createElement('iframe');
+          newIframe.width = this.width;
+          newIframe.height = this.height;
+          newIframe.src = this.iframe;
+          newIframe.setAttribute('frameborder', 0);
+          this.body.appendChild(newIframe);
+          this.iframeEl = this.main.querySelector('iframe');
+        }
+      }
+
+      // Adjust the dimensions
+      this.adjustDimensions();
+
+      this.scrollTop = 0;
+      this.modal.classList.add('show');
+
+      this.focusableElements = [].slice.call(this.querySelectorAll(this.focusableSelectors.join()));
+      if (this.focusableElements.length) {
+        this.focusableElements[0].focus();
+      } else {
+        this.header.querySelector('button').focus();
+      }
+
+      this.addEventListener('keydown', this.keyPress.bind(this));
+
+      // Close on click outside the modal
+      document.addEventListener('click', function (event) {
+        if (!self.findAncestorByClass(event.target, 'joomla-modal-dialog') && event.target !== _this2.triggerBtn) {
+          self.close();
+        }
       });
-    } }, { key: 'close', value: function close() {
-      this.removeEventListener('keydown', this.keyPress, !0);var a = document.querySelector('.modal-backdrop');a && document.body.removeChild(a), this.setAttribute('aria-hidden', 'true'), this.classList.remove('show'), this.main.innerHTML = '', this.triggerBtn.focus();
-    } }, { key: 'handleTabEvent', value: function handleTabEvent(a) {
-      var b = this.focusableElements.indexOf(document.activeElement);a.shiftKey && (0 === b || -1 === b) && (this.focusableElements[this.focusableElements.length - 1].focus(), a.preventDefault()), a.shiftKey || b !== this.focusableElements.length - 1 || (this.focusableElements[0].focus(), a.preventDefault());
-    } }, { key: 'keyPress', value: function keyPress(a) {
-      27 === a.keyCode && this.close(), 9 === a.keyCode && this.handleTabEvent(a);
-    } }, { key: 'adjustDimensions', value: function adjustDimensions() {
-      var a = this.offsetHeight;a += parseInt(window.getComputedStyle(this).getPropertyValue('margin-top'), 10), a += parseInt(window.getComputedStyle(this).getPropertyValue('margin-bottom'), 10);var b = this.body.getBoundingClientRect.height,
-          c = this.body.offsetHeight;c += parseInt(window.getComputedStyle(this.body).getPropertyValue('margin-top'), 10), c += parseInt(window.getComputedStyle(this.body).getPropertyValue('margin-bottom'), 10);var d = this.header.offsetHeight;d += parseInt(window.getComputedStyle(this.header).getPropertyValue('margin-top'), 10), d += parseInt(window.getComputedStyle(this.header).getPropertyValue('margin-bottom'), 10);var e = this.footer.offsetHeight;e += parseInt(window.getComputedStyle(this.footer).getPropertyValue('margin-top'), 10), e += parseInt(window.getComputedStyle(this.footer).getPropertyValue('margin-bottom'), 10);var f = this.offsetTop,
-          g = window.height - 2 * f,
-          h = c - b,
-          i = g - (d + e + h);if (this.iframeEl) {
-        var j = this.iframeEl.getBoundingClientRect().height;j > i && (this.container.style.maxHeight = i, this.container.style.overflowY = 'auto', this.iframeEl.style.maxHeight = i - h);
-      } else a > g && (this.container.style.maxHeight = i, this.container.style.overflowY = 'auto');
-    } }, { key: 'findAncestorByClass', value: function findAncestorByClass(a, b) {
-      for (; (a = a.parentElement) && !a.classList.contains(b);) {}return a;
-    } }], [{ key: 'observedAttributes', get: function get() {
+
+      // Is there a close button?
+      var modalButtons = self.querySelectorAll('button[data-dismiss]');
+      // Add listeners for close
+      modalButtons.forEach(function (modalButton) {
+        modalButton.addEventListener('click', self.close.bind(_this2));
+      });
+    }
+  }, {
+    key: 'close',
+    value: function close() {
+      this.removeEventListener('keydown', this.keyPress, true);
+
+      var dropShadow = document.querySelector('.modal-backdrop');
+      if (dropShadow) document.body.removeChild(dropShadow);
+      this.setAttribute('aria-hidden', 'true');
+      this.classList.remove('show');
+      this.main.innerHTML = '';
+      this.triggerBtn.focus();
+    }
+  }, {
+    key: 'handleTabEvent',
+    value: function handleTabEvent(e) {
+      // Get the index of the current active element within the modal
+      var focusedIndex = this.focusableElements.indexOf(document.activeElement);
+      // Handle TAB event if need to skip
+      // If first element is focused and shiftkey is in use
+      if (e.shiftKey && (focusedIndex === 0 || focusedIndex === -1)) {
+        // Focus last item within modal
+        this.focusableElements[this.focusableElements.length - 1].focus();
+        e.preventDefault();
+      }
+      // If last element is focused and shiftkey is not in use
+      if (!e.shiftKey && focusedIndex === this.focusableElements.length - 1) {
+        // Focus first item within modal
+        this.focusableElements[0].focus();
+        e.preventDefault();
+      }
+    }
+  }, {
+    key: 'keyPress',
+    value: function keyPress(e) {
+      // ESC key
+      if (e.keyCode === 27) {
+        this.close();
+      }
+      // TAB key
+      if (e.keyCode === 9) {
+        this.handleTabEvent(e);
+      }
+    }
+  }, {
+    key: 'adjustDimensions',
+    value: function adjustDimensions() {
+      // Legacy code
+      // Height
+      var modalHeight = this.offsetHeight;
+      modalHeight += parseInt(window.getComputedStyle(this).getPropertyValue('margin-top'), 10);
+      modalHeight += parseInt(window.getComputedStyle(this).getPropertyValue('margin-bottom'), 10);
+
+      var bodyHeight = this.body.getBoundingClientRect.height;
+      var bodyHeightOuter = this.body.offsetHeight;
+      bodyHeightOuter += parseInt(window.getComputedStyle(this.body).getPropertyValue('margin-top'), 10);
+      bodyHeightOuter += parseInt(window.getComputedStyle(this.body).getPropertyValue('margin-bottom'), 10);
+
+      var headerHeight = this.header.offsetHeight;
+      headerHeight += parseInt(window.getComputedStyle(this.header).getPropertyValue('margin-top'), 10);
+      headerHeight += parseInt(window.getComputedStyle(this.header).getPropertyValue('margin-bottom'), 10);
+
+      var footerHeight = this.footer.offsetHeight;
+      footerHeight += parseInt(window.getComputedStyle(this.footer).getPropertyValue('margin-top'), 10);
+      footerHeight += parseInt(window.getComputedStyle(this.footer).getPropertyValue('margin-bottom'), 10);
+
+      var padding = this.offsetTop;
+      var maxModalHeight = window.height - padding * 2;
+      var modalBodyPadding = bodyHeightOuter - bodyHeight;
+      var maxModalBodyHeight = maxModalHeight - (headerHeight + footerHeight + modalBodyPadding);
+
+      if (this.iframeEl) {
+        var iframeHeight = this.iframeEl.getBoundingClientRect().height;
+
+        if (iframeHeight > maxModalBodyHeight) {
+          this.container.style.maxHeight = maxModalBodyHeight;
+          this.container.style.overflowY = 'auto';
+          this.iframeEl.style.maxHeight = maxModalBodyHeight - modalBodyPadding;
+        }
+      } else if (modalHeight > maxModalHeight) {
+        this.container.style.maxHeight = maxModalBodyHeight;
+        this.container.style.overflowY = 'auto';
+      }
+    }
+
+    /* eslint-disable */
+
+  }, {
+    key: 'findAncestorByClass',
+    value: function findAncestorByClass(el, className) {
+      while ((el = el.parentElement) && !el.classList.contains(className)) {}
+      return el;
+    }
+    /* eslint-enable */
+
+  }], [{
+    key: 'observedAttributes',
+    get: function get() {
       return ['width', 'height', 'innerWidth', 'innerHeight', 'iframe'];
-    } }]), b;
-}(HTMLElement);customElements.define('joomla-modal', JoomlaModalElement);
+    }
+  }]);
+
+  return JoomlaModalElement;
+}(HTMLElement);
+
+customElements.define('joomla-modal', JoomlaModalElement);
 
 },{}]},{},[1]);

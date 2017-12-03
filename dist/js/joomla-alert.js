@@ -1,24 +1,26 @@
 class JoomlaAlertElement extends HTMLElement {
   /* Attributes to monitor */
-  static get observedAttributes() { return ['type', 'dismiss', 'acknowledge', 'href', 'auto-dismiss', 'position', 'textClose', 'textDismiss', 'textAcknowledge']; }
+  static get observedAttributes() { return ['type', 'dismiss', 'auto-dismiss', 'position', 'textClose']; }
   get type() { return this.getAttribute('type'); }
   set type(value) { return this.setAttribute('type', value); }
   get dismiss() { return this.getAttribute('dismiss'); }
   set dismiss(value) { return this.setAttribute('dismiss', value); }
-  get acknowledge() { return this.getAttribute('acknowledge'); }
-  set acknowledge(value) { return this.setAttribute('acknowledge', value); }
-  get href() { return this.getAttribute('href'); }
-  set href(value) { return this.setAttribute('href', value); }
   get autoDismiss() { return parseInt(this.getAttribute('auto-dismiss'), 10); }
   set autoDismiss(value) { return this.setAttribute('auto-dismiss', parseInt(value, 10)); }
   get position() { return this.getAttribute('position'); }
   set position(value) { return this.setAttribute('position', value); }
   get textClose() { return this.getAttribute('textClose') || 'Close'; }
   set textClose(value) { return this.setAttribute('textClose', value); }
-  get textDismiss() { return this.getAttribute('textDismiss') || 'Open'; }
-  set textDismiss(value) { return this.setAttribute('textDismiss', value); }
-  get textAcknowledge() { return this.getAttribute('textAcknowledge') || 'Ok'; }
-  set textAcknowledge(value) { return this.setAttribute('textAcknowledge', value); }
+
+  constructor() {
+    // We are extending HTMLElement
+    super();
+
+    // Bind some functions
+    this.close = this.close.bind(this);
+    this.appendCloseButton = this.appendCloseButton.bind(this);
+    this.removeCloseButton = this.removeCloseButton.bind(this);
+  }
 
   /* Lifecycle, element appended to the DOM */
   connectedCallback() {
@@ -28,13 +30,13 @@ class JoomlaAlertElement extends HTMLElement {
     this.classList.add('joomla-alert--show');
 
     // If no type has been defined, the default as "info"
-    if (!this.type) {
+    if (!this.type || (this.type && ['info', 'warning', 'success', 'danger'].indexOf(this.type) === -1)) {
       this.setAttribute('type', 'info');
     }
 
     // Append button
-    if (this.hasAttribute('dismiss') || this.hasAttribute('acknowledge') || (this.hasAttribute('href') && this.getAttribute('href') !== '')) {
-      if (!this.querySelector('button.joomla-alert--close') && !this.querySelector('button.joomla-alert-button--close')) {
+    if (this.hasAttribute('dismiss')) {
+      if (!this.querySelector('button.joomla-alert--close')) {
         this.appendCloseButton.bind(this)();
       }
     }
@@ -50,7 +52,7 @@ class JoomlaAlertElement extends HTMLElement {
   /* Lifecycle, element removed from the DOM */
   disconnectedCallback() {
     if (this.firstChild.tagName && this.firstChild.tagName.toLowerCase() === 'button') {
-      this.firstChild.removeEventListener('click', this.buttonCloseFn);
+      this.firstChild.removeEventListener('click', this.close);
     }
   }
 
@@ -63,22 +65,12 @@ class JoomlaAlertElement extends HTMLElement {
         }
         break;
       case 'dismiss':
-      case 'acknowledge':
         if (!newValue || newValue === 'true') {
           if (this.firstElementChild.tagName && this.firstElementChild.tagName.toLowerCase() !== 'button') {
             this.appendCloseButton.bind(this)();
           }
         } else if (this.firstElementChild.tagName && this.firstElementChild.tagName.toLowerCase() === 'button') {
           this.removeCloseButton.bind(this)();
-        }
-        break;
-      case 'href':
-        if (!newValue || newValue === '') {
-          if (this.firstElementChild.tagName && this.firstElementChild.tagName.toLowerCase() !== 'button') {
-            this.removeCloseButton.bind(this)();
-          }
-        } else if (this.firstElementChild.tagName && this.firstElementChild.tagName.toLowerCase() !== 'button' && this.firstElementChild.classList.contains('joomla-alert-button--close')) {
-          this.appendCloseButton.bind(this)();
         }
         break;
       case 'auto-dismiss':
@@ -91,14 +83,6 @@ class JoomlaAlertElement extends HTMLElement {
     }
   }
 
-  buttonCloseFn() {
-    this.dispatchCustomEvent('joomla.alert.buttonClicked');
-    if (this.href) {
-      window.location.href = this.href;
-    }
-    this.close();
-  }
-
   /* Method to close the alert */
   close() {
     this.dispatchCustomEvent('joomla.alert.close');
@@ -109,7 +93,7 @@ class JoomlaAlertElement extends HTMLElement {
     this.classList.remove('joomla-alert--show');
   }
 
-  /* Method to dispatch events. Internal */
+  /* Method to dispatch events */
   dispatchCustomEvent(eventName) {
     const OriginalCustomEvent = new CustomEvent(eventName, { bubbles: true, cancelable: true });
     OriginalCustomEvent.relatedTarget = this;
@@ -117,7 +101,7 @@ class JoomlaAlertElement extends HTMLElement {
     this.removeEventListener(eventName, this);
   }
 
-  /* Method to create the close button. Internal */
+  /* Method to create the close button */
   appendCloseButton() {
     if (this.querySelector('button.joomla-alert--close') || this.querySelector('button.joomla-alert-button--close')) {
       return;
@@ -125,19 +109,8 @@ class JoomlaAlertElement extends HTMLElement {
 
     const closeButton = document.createElement('button');
 
-    if (this.hasAttribute('dismiss')) {
-      closeButton.classList.add('joomla-alert--close');
-      closeButton.innerHTML = '<span aria-hidden="true">&times;</span>';
-      closeButton.setAttribute('aria-label', this.textClose);
-    } else {
-      closeButton.classList.add('joomla-alert-button--close');
-      if (this.hasAttribute('acknowledge')) {
-        closeButton.innerHTML = this.textAcknowledge;
-      } else {
-        closeButton.innerHTML = this.textDismiss;
-      }
-    }
-
+    closeButton.classList.add('joomla-alert--close');
+    closeButton.setAttribute('aria-label', this.this.textClose);
     this.closeButton = closeButton;
 
     if (this.firstChild) {
@@ -148,7 +121,7 @@ class JoomlaAlertElement extends HTMLElement {
 
     /* Add the required listener */
     if (closeButton) {
-      closeButton.addEventListener('click', this.buttonCloseFn.bind(this));
+      closeButton.addEventListener('click', this.close.bind(this));
     }
 
     if (this.autoDismiss > 0) {
@@ -164,7 +137,7 @@ class JoomlaAlertElement extends HTMLElement {
     }
   }
 
-  /* Method to remove the close button. Internal */
+  /* Method to remove the close button */
   removeCloseButton() {
     if (this.closeButton) {
       this.closeButton.removeEventListener('click', this.buttonCloseFn);

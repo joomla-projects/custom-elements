@@ -4,47 +4,133 @@
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _createClass = function () {
-  function a(a, b) {
-    for (var c, d = 0; d < b.length; d++) {
-      c = b[d], c.enumerable = c.enumerable || !1, c.configurable = !0, 'value' in c && (c.writable = !0), Object.defineProperty(a, c.key, c);
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
     }
-  }return function (b, c, d) {
-    return c && a(b.prototype, c), d && a(b, d), b;
+  }return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
   };
-}();function _classCallCheck(a, b) {
-  if (!(a instanceof b)) throw new TypeError('Cannot call a class as a function');
-}function _possibleConstructorReturn(a, b) {
-  if (!a) throw new ReferenceError('this hasn\'t been initialised - super() hasn\'t been called');return b && ('object' == (typeof b === 'undefined' ? 'undefined' : _typeof(b)) || 'function' == typeof b) ? b : a;
-}function _inherits(a, b) {
-  if ('function' != typeof b && null !== b) throw new TypeError('Super expression must either be null or a function, not ' + (typeof b === 'undefined' ? 'undefined' : _typeof(b)));a.prototype = Object.create(b && b.prototype, { constructor: { value: a, enumerable: !1, writable: !0, configurable: !0 } }), b && (Object.setPrototypeOf ? Object.setPrototypeOf(a, b) : a.__proto__ = b);
-}var JoomlaDropdownElement = function (a) {
-  function b() {
-    return _classCallCheck(this, b), _possibleConstructorReturn(this, (b.__proto__ || Object.getPrototypeOf(b)).apply(this, arguments));
-  }return _inherits(b, a), _createClass(b, [{ key: 'connectedCallback', value: function connectedCallback() {
-      this.setAttribute('aria-labelledby', this.for.substring(1));var a = document.querySelector(this.for),
-          b = this.querySelectorAll('a'),
-          c = this;a.id && (a.setAttribute('aria-haspopup', 'true'), a.setAttribute('aria-expanded', 'false'), a.addEventListener('click', function (d) {
-        c.hasAttribute('expanded') ? (c.removeAttribute('expanded'), d.target.setAttribute('aria-expanded', 'false')) : (c.setAttribute('expanded', ''), d.target.setAttribute('aria-expanded', 'true')), document.addEventListener('click', function (b) {
-          b.target === a || c.findAncestor(b.target, 'joomla-dropdown') || c.close();
-        }), b.forEach(function (a) {
-          a.addEventListener('click', function () {
-            c.close();
+}();
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _possibleConstructorReturn(self, call) {
+  if (!self) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+}
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
+  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+}
+
+var JoomlaDropdownElement = function (_HTMLElement) {
+  _inherits(JoomlaDropdownElement, _HTMLElement);
+
+  function JoomlaDropdownElement() {
+    _classCallCheck(this, JoomlaDropdownElement);
+
+    return _possibleConstructorReturn(this, (JoomlaDropdownElement.__proto__ || Object.getPrototypeOf(JoomlaDropdownElement)).apply(this, arguments));
+  }
+
+  _createClass(JoomlaDropdownElement, [{
+    key: 'connectedCallback',
+    value: function connectedCallback() {
+      this.setAttribute('aria-labelledby', this.for.substring(1));
+      var button = document.querySelector(this.for);
+      var innerLinks = this.querySelectorAll('a');
+      var self = this;
+
+      if (!button.id) return;
+      // var children = [].slice.call( menu[getElementsByTagName]('*'));
+      // this.classList.add('dropdown');
+
+      button.setAttribute('aria-haspopup', 'true');
+      button.setAttribute('aria-expanded', 'false');
+
+      button.addEventListener('click', function (ev) {
+        if (self.hasAttribute('expanded')) {
+          self.removeAttribute('expanded');
+          ev.target.setAttribute('aria-expanded', 'false');
+        } else {
+          self.setAttribute('expanded', '');
+          ev.target.setAttribute('aria-expanded', 'true');
+        }
+
+        document.addEventListener('click', function (evt) {
+          if (evt.target !== button) {
+            if (!self.findAncestor(evt.target, 'joomla-dropdown')) {
+              self.close();
+            }
+          }
+        });
+
+        innerLinks.forEach(function (innerLink) {
+          innerLink.addEventListener('click', function () {
+            self.close();
           });
         });
-      }));
-    } }, { key: 'disconnectedCallback', value: function disconnectedCallback() {} }, { key: 'adoptedCallback', value: function adoptedCallback() {} }, { key: 'attributeChangedCallback', value: function attributeChangedCallback(a) {
-      switch (a) {}
-    } }, { key: 'close', value: function close() {
-      var a = document.querySelector('#' + this.getAttribute('aria-labelledby'));this.removeAttribute('expanded'), a.setAttribute('aria-expanded', 'false');
-    } }, { key: 'findAncestor', value: function findAncestor(a, b) {
-      for (; (a = a.parentElement) && a.nodeName.toLowerCase() !== b;) {}return a;
-    } }, { key: 'for', get: function get() {
+      });
+    }
+
+    /*eslint-disable */
+
+  }, {
+    key: 'disconnectedCallback',
+    value: function disconnectedCallback() {}
+  }, {
+    key: 'adoptedCallback',
+    value: function adoptedCallback(oldDocument, newDocument) {}
+  }, {
+    key: 'attributeChangedCallback',
+    value: function attributeChangedCallback(attr, oldValue, newValue) {
+      switch (attr) {}
+    }
+    /* eslint-enable */
+
+  }, {
+    key: 'close',
+    value: function close() {
+      var button = document.querySelector('#' + this.getAttribute('aria-labelledby'));
+      this.removeAttribute('expanded');
+      button.setAttribute('aria-expanded', 'false');
+    }
+
+    /* eslint-disable */
+
+  }, {
+    key: 'findAncestor',
+    value: function findAncestor(el, tagName) {
+      while ((el = el.parentElement) && el.nodeName.toLowerCase() !== tagName) {}
+      return el;
+    }
+    /* eslint-enable */
+
+  }, {
+    key: 'for',
+    get: function get() {
       return this.getAttribute('for');
-    }, set: function set(a) {
-      return this.setAttribute('for', a);
-    } }], [{ key: 'observedAttributes', get: function get() {
+    },
+    set: function set(value) {
+      return this.setAttribute('for', value);
+    }
+  }], [{
+    key: 'observedAttributes',
+    get: function get() {
       return ['for'];
-    } }]), b;
-}(HTMLElement);customElements.define('joomla-dropdown', JoomlaDropdownElement);
+    }
+  }]);
+
+  return JoomlaDropdownElement;
+}(HTMLElement);
+
+customElements.define('joomla-dropdown', JoomlaDropdownElement);
 
 },{}]},{},[1]);

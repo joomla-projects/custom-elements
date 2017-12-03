@@ -39,6 +39,12 @@ $theme-colors: (
   dark: $gray-800
 );
 
+$alert-colors: (
+  success: $green,
+  info: $cyan,
+  warning: $yellow,
+  danger: $red
+);
 
 // Alerts
 $alert-padding-y:                 .5rem;

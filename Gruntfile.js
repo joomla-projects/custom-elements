@@ -115,9 +115,13 @@ module.exports = (grunt) => {
               "babelify",
               {
                 "presets": [
-                  "es2015",
-                  "minify"
+                  "es2015"
                 ],
+                "env": {
+                  "production": {
+                    "presets": ["minify"]
+                  }
+                },
                 "plugins": [
                   "static-fs"
                 ]

@@ -4,58 +4,162 @@
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _createClass = function () {
-  function a(a, b) {
-    for (var c, d = 0; d < b.length; d++) {
-      c = b[d], c.enumerable = c.enumerable || !1, c.configurable = !0, 'value' in c && (c.writable = !0), Object.defineProperty(a, c.key, c);
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
     }
-  }return function (b, c, d) {
-    return c && a(b.prototype, c), d && a(b, d), b;
+  }return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
   };
-}();function _classCallCheck(a, b) {
-  if (!(a instanceof b)) throw new TypeError('Cannot call a class as a function');
-}function _possibleConstructorReturn(a, b) {
-  if (!a) throw new ReferenceError('this hasn\'t been initialised - super() hasn\'t been called');return b && ('object' == (typeof b === 'undefined' ? 'undefined' : _typeof(b)) || 'function' == typeof b) ? b : a;
-}function _inherits(a, b) {
-  if ('function' != typeof b && null !== b) throw new TypeError('Super expression must either be null or a function, not ' + (typeof b === 'undefined' ? 'undefined' : _typeof(b)));a.prototype = Object.create(b && b.prototype, { constructor: { value: a, enumerable: !1, writable: !0, configurable: !0 } }), b && (Object.setPrototypeOf ? Object.setPrototypeOf(a, b) : a.__proto__ = b);
-}var JoomlaTipElement = function (a) {
-  function b() {
-    return _classCallCheck(this, b), _possibleConstructorReturn(this, (b.__proto__ || Object.getPrototypeOf(b)).apply(this, arguments));
-  }return _inherits(b, a), _createClass(b, [{ key: 'connectedCallback', value: function connectedCallback() {
-      (!this.position || this.position && -1 === ['top', 'bottom', 'left', 'right'].indexOf(this.position)) && (this.position = 'top'), this.btnElement = document.createElement('button'), this.spanElement = document.createElement('span'), this.btnElement.setAttribute('aria-label', this.label ? this.label : 'more info'), this.btnElement.innerHTML = this.text ? this.text : '', this.spanElement.setAttribute('role', 'status'), this.btnElement.addEventListener('click', this.showTip.bind(this)), this.append(this.btnElement), this.append(this.spanElement);
-    } }, { key: 'disconnectedCallback', value: function disconnectedCallback() {
-      this.querySelector('button').removeEventListener('click', this.showTip, !0);
-    } }, { key: 'showTip', value: function showTip() {
-      var a = this,
-          b = this;document.addEventListener('click', function (c) {
-        a.btnElement !== c.target && (a.spanElement.innerHTML = '', b.removeEventListener('keydown', a));
-      }), document.addEventListener('keydown', function (c) {
-        9 === (c.keyCode || c.which) && (a.spanElement.innerHTML = '', b.removeEventListener('keydown', a));
-      }), this.spanElement.innerHTML = '', this.spanElement.innerHTML = '<span class="toggletip-bubble ' + this.position + '">' + this.tip + '</span>';
-    } }, { key: 'dispatchCustomEvent', value: function dispatchCustomEvent(a) {
-      var b = new CustomEvent(a, { bubbles: !0, cancelable: !0 });b.relatedTarget = this, this.dispatchEvent(b), this.removeEventListener(a, this);
-    } }, { key: 'type', get: function get() {
+}();
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _possibleConstructorReturn(self, call) {
+  if (!self) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+}
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
+  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+}
+
+var JoomlaTipElement = function (_HTMLElement) {
+  _inherits(JoomlaTipElement, _HTMLElement);
+
+  function JoomlaTipElement() {
+    _classCallCheck(this, JoomlaTipElement);
+
+    return _possibleConstructorReturn(this, (JoomlaTipElement.__proto__ || Object.getPrototypeOf(JoomlaTipElement)).apply(this, arguments));
+  }
+
+  _createClass(JoomlaTipElement, [{
+    key: 'connectedCallback',
+
+    /* Lifecycle, element appended to the DOM */
+    value: function connectedCallback() {
+      if (!this.position || this.position && ['top', 'bottom', 'left', 'right'].indexOf(this.position) === -1) {
+        this.position = 'top';
+      }
+
+      // create the html
+      this.btnElement = document.createElement('button');
+      this.spanElement = document.createElement('span');
+
+      this.btnElement.setAttribute('aria-label', this.label ? this.label : 'more info');
+      this.btnElement.innerHTML = this.text ? this.text : '';
+      this.spanElement.setAttribute('role', 'status');
+
+      // On click
+      this.btnElement.addEventListener('click', this.showTip.bind(this));
+
+      this.append(this.btnElement);
+      this.append(this.spanElement);
+    }
+
+    /* Lifecycle, element removed from the DOM */
+
+  }, {
+    key: 'disconnectedCallback',
+    value: function disconnectedCallback() {
+      this.querySelector('button').removeEventListener('click', this.showTip, true);
+    }
+  }, {
+    key: 'showTip',
+    value: function showTip() {
+      var _this2 = this;
+
+      var self = this;
+
+      // Close on outside click
+      document.addEventListener('click', function (e) {
+        if (_this2.btnElement !== e.target) {
+          _this2.spanElement.innerHTML = '';
+          self.removeEventListener('keydown', _this2);
+        }
+      });
+
+      // Remove toggletip on ESC
+      document.addEventListener('keydown', function (e) {
+        if ((e.keyCode || e.which) === 9) {
+          _this2.spanElement.innerHTML = '';
+          self.removeEventListener('keydown', _this2);
+        }
+      });
+
+      this.spanElement.innerHTML = '';
+      this.spanElement.innerHTML = '<span class="toggletip-bubble ' + this.position + '">' + this.tip + '</span>';
+    }
+
+    /* Method to dispatch events */
+
+  }, {
+    key: 'dispatchCustomEvent',
+    value: function dispatchCustomEvent(eventName) {
+      var OriginalCustomEvent = new CustomEvent(eventName, { bubbles: true, cancelable: true });
+      OriginalCustomEvent.relatedTarget = this;
+      this.dispatchEvent(OriginalCustomEvent);
+      this.removeEventListener(eventName, this);
+    }
+  }, {
+    key: 'type',
+    get: function get() {
       return this.getAttribute('type');
-    }, set: function set(a) {
-      return this.setAttribute('type', a);
-    } }, { key: 'label', get: function get() {
+    },
+    set: function set(value) {
+      return this.setAttribute('type', value);
+    }
+  }, {
+    key: 'label',
+    get: function get() {
       return this.getAttribute('label');
-    }, set: function set(a) {
-      return this.setAttribute('label', a);
-    } }, { key: 'tip', get: function get() {
+    },
+    set: function set(value) {
+      return this.setAttribute('label', value);
+    }
+  }, {
+    key: 'tip',
+    get: function get() {
       return this.getAttribute('tip');
-    }, set: function set(a) {
-      return this.setAttribute('tip', a);
-    } }, { key: 'position', get: function get() {
+    },
+    set: function set(value) {
+      return this.setAttribute('tip', value);
+    }
+  }, {
+    key: 'position',
+    get: function get() {
       return this.getAttribute('position');
-    }, set: function set(a) {
-      return this.setAttribute('position', a);
-    } }, { key: 'text', get: function get() {
+    },
+    set: function set(value) {
+      return this.setAttribute('position', value);
+    }
+  }, {
+    key: 'text',
+    get: function get() {
       return this.getAttribute('text');
-    }, set: function set(a) {
-      return this.getAttribute('text', a);
-    } }], [{ key: 'observedAttributes', get: function get() {
+    },
+    set: function set(value) {
+      return this.getAttribute('text', value);
+    }
+  }], [{
+    key: 'observedAttributes',
+
+    /* Attributes to monitor */
+    get: function get() {
       return ['type', 'label', 'tip', 'text', 'position'];
-    } }]), b;
-}(HTMLElement);customElements.define('joomla-tip', JoomlaTipElement);
+    }
+  }]);
+
+  return JoomlaTipElement;
+}(HTMLElement);
+
+customElements.define('joomla-tip', JoomlaTipElement);
 
 },{}]},{},[1]);

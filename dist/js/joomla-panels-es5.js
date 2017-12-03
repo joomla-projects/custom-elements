@@ -4,137 +4,547 @@
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _createClass = function () {
-  function a(a, b) {
-    for (var c, d = 0; d < b.length; d++) {
-      c = b[d], c.enumerable = c.enumerable || !1, c.configurable = !0, 'value' in c && (c.writable = !0), Object.defineProperty(a, c.key, c);
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
     }
-  }return function (b, c, d) {
-    return c && a(b.prototype, c), d && a(b, d), b;
+  }return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
   };
-}();function _classCallCheck(a, b) {
-  if (!(a instanceof b)) throw new TypeError('Cannot call a class as a function');
-}function _possibleConstructorReturn(a, b) {
-  if (!a) throw new ReferenceError('this hasn\'t been initialised - super() hasn\'t been called');return b && ('object' == (typeof b === 'undefined' ? 'undefined' : _typeof(b)) || 'function' == typeof b) ? b : a;
-}function _inherits(a, b) {
-  if ('function' != typeof b && null !== b) throw new TypeError('Super expression must either be null or a function, not ' + (typeof b === 'undefined' ? 'undefined' : _typeof(b)));a.prototype = Object.create(b && b.prototype, { constructor: { value: a, enumerable: !1, writable: !0, configurable: !0 } }), b && (Object.setPrototypeOf ? Object.setPrototypeOf(a, b) : a.__proto__ = b);
-}var JoomlaPanelsElement = function (a) {
-  function b() {
-    _classCallCheck(this, b);var a = _possibleConstructorReturn(this, (b.__proto__ || Object.getPrototypeOf(b)).call(this));return a.hasActive = !1, a.currentActive = '', a.hasNested = !1, a.isNested = !1, a.tabs = [], a.tabsLinks = [], a.panels = [], a.tabLinkHash = [], a;
-  }return _inherits(b, a), _createClass(b, [{ key: 'recall', get: function get() {
+}();
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _possibleConstructorReturn(self, call) {
+  if (!self) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+}
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
+  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+}
+
+var JoomlaPanelsElement = function (_HTMLElement) {
+  _inherits(JoomlaPanelsElement, _HTMLElement);
+
+  _createClass(JoomlaPanelsElement, [{
+    key: 'recall',
+    get: function get() {
       return this.getAttribute('recall');
-    }, set: function set(a) {
-      return this.setAttribute('recall', a);
-    } }, { key: 'view', get: function get() {
+    },
+    set: function set(value) {
+      return this.setAttribute('recall', value);
+    }
+  }, {
+    key: 'view',
+    get: function get() {
       return this.getAttribute('view');
-    }, set: function set(a) {
-      this.setAttribute('view', a);
-    } }, { key: 'orientation', get: function get() {
+    },
+    set: function set(value) {
+      this.setAttribute('view', value);
+    }
+  }, {
+    key: 'orientation',
+    get: function get() {
       return this.getAttribute('orientation') || 'horizontal';
-    }, set: function set(a) {
-      this.setAttribute('orientation', a);
-    } }, { key: 'responsive', get: function get() {
+    },
+    set: function set(value) {
+      this.setAttribute('orientation', value);
+    }
+  }, {
+    key: 'responsive',
+    get: function get() {
       return this.getAttribute('responsive');
-    }, set: function set(a) {
-      this.setAttribute('responsive', a);
-    } }, { key: 'collapseWidth', get: function get() {
+    },
+    set: function set(value) {
+      this.setAttribute('responsive', value);
+    }
+  }, {
+    key: 'collapseWidth',
+    get: function get() {
       return this.getAttribute('collapse-width');
-    }, set: function set(a) {
-      this.setAttribute('collapse-width', a);
-    } }], [{ key: 'observedAttributes', get: function get() {
+    },
+    set: function set(value) {
+      this.setAttribute('collapse-width', value);
+    }
+
+    /* Lifecycle, element created */
+
+  }], [{
+    key: 'observedAttributes',
+
+    /* Attributes to monitor */
+    get: function get() {
       return ['recall', 'orientation', 'view', 'responsive', 'collapse-width'];
-    } }]), _createClass(b, [{ key: 'connectedCallback', value: function connectedCallback() {
-      var a = this;if ((!this.orientation || this.orientation && -1 === ['horizontal', 'vertical'].indexOf(this.orientation)) && this.setAttribute('orientation', 'horizontal'), this.view = this.getAttribute('view') || 'tabs', this.recall = this.recall || 'false', this.responsive = this.getAttribute('responsive') || 'false', this.collapseWidth = this.getAttribute('collapseWidth') || 0, this.panels = [].slice.call(this.querySelectorAll('section')), !this.panels.length) throw new Error('`Joomla-panels` require one ore more panels!');if (this.findAncestorByTagNme(this, 'joomla-tab') && (this.isNested = !0), this.querySelector('joomla-tab') && (this.hasNested = !0), this.recall) {
-        var b = sessionStorage.getItem(this.getStorageKey());b && !/@\[/.test(b) && this.tabLinkHash.push(b), this.setTabState();
-      }'ul' !== this.firstElementChild.tagName && this.createNavigation(), this.panels.forEach(function (b) {
-        b.setAttribute('role', 'tabpanel'), a.tabs.push('#tab-' + b.id), b.hasAttribute('active') && (a.hasActive = !0, a.currentActive = b.id, a.querySelector('#tab-' + b.id).setAttribute('aria-selected', 'true'), a.querySelector('#tab-' + b.id).setAttribute('active', ''), a.querySelector('#tab-' + b.id).setAttribute('tabindex', '0'));
-      }), this.hasActive || (this.tabsLinks[0].setAttribute('active', ''), this.hasActive = !0, this.currentActive = this.panels[0].id, this.tabsLinks[0].setAttribute('aria-selected', 'true'), this.tabsLinks[0].setAttribute('tabindex', '0'), this.tabsLinks[0].setAttribute('active', ''), this.panels[0].setAttribute('active', '')), window.location.href.match(/#tab-/), 'accordion' === this.view && this.toAccordion.bind(this)(), 'true' === this.responsive && (this.changeView.bind(this), window.addEventListener('resize', this.changeView.bind(this)));
-    } }, { key: 'disconnectedCallback', value: function disconnectedCallback() {
-      var a = this,
-          b = this.querySelector('ul'),
-          c = [].slice.call(b.querySelectorAll('a'));c.forEach(function (b) {
-        b.removeEventListener('click', a.activateTabFromLink, !0);
-      }), b.removeEventListener('keydown', a.keyBehaviour, !0);
-    } }, { key: 'createNavigation', value: function createNavigation() {
-      var a = this,
-          b = this,
-          c = '';'ul' !== this.firstElementChild.tagName.toLowerCase() && (c = document.createElement('ul')), c.setAttribute('role', 'tablist'), this.panels.forEach(function (d) {
-        if (!d.id) throw new Error('`joomla-panels` All panels require an ID');if (d.parentNode === a) {
-          var e = d.getAttribute('active') || !1,
-              f = document.createElement('li'),
-              g = document.createElement('a');f.setAttribute('role', 'presentation'), g.setAttribute('role', 'tab'), g.setAttribute('aria-controls', d.id), g.setAttribute('aria-selected', e ? 'true' : 'false'), g.setAttribute('tabindex', e ? '0' : '-1'), g.setAttribute('href', '#' + d.id), g.setAttribute('id', 'tab-' + d.id), g.innerHTML = d.getAttribute('name'), e && g.setAttribute('active', ''), g.addEventListener('click', b.activateTabFromLink.bind(b)), a.tabsLinks.push(g), f.append(g), c.append(f), d.setAttribute('aria-labelledby', 'tab-' + d.id), e || d.setAttribute('aria-hidden', 'true');
-        }
-      }), this.insertAdjacentElement('afterbegin', c), this.querySelector('ul').addEventListener('keydown', this.keyBehaviour.bind(this));
-    } }, { key: 'hideCurrent', value: function hideCurrent() {
-      if (this.currentActive) {
-        var a = this.querySelector('a[aria-controls="' + this.currentActive + '"]');this.dispatchCustomEvent('joomla.tab.hide', a, this.querySelector('#tab-' + this.currentActive)), a.removeAttribute('active'), a.setAttribute('tabindex', '-1'), this.querySelector('#' + this.currentActive).removeAttribute('active'), this.querySelector('#' + this.currentActive).setAttribute('aria-hidden', 'true'), a.removeAttribute('aria-selected'), this.dispatchCustomEvent('joomla.tab.hidden', a, this.querySelector('#tab-' + this.currentActive));
+    }
+  }]);
+
+  function JoomlaPanelsElement() {
+    _classCallCheck(this, JoomlaPanelsElement);
+
+    // Setup configuration
+    var _this = _possibleConstructorReturn(this, (JoomlaPanelsElement.__proto__ || Object.getPrototypeOf(JoomlaPanelsElement)).call(this));
+
+    _this.hasActive = false;
+    _this.currentActive = '';
+    _this.hasNested = false;
+    _this.isNested = false;
+    _this.tabs = [];
+    _this.tabsLinks = [];
+    _this.panels = [];
+    _this.tabLinkHash = [];
+    return _this;
+  }
+
+  /* Lifecycle, element appended to the DOM */
+
+  _createClass(JoomlaPanelsElement, [{
+    key: 'connectedCallback',
+    value: function connectedCallback() {
+      var _this2 = this;
+
+      if (!this.orientation || this.orientation && ['horizontal', 'vertical'].indexOf(this.orientation) === -1) {
+        this.setAttribute('orientation', 'horizontal');
       }
-    } }, { key: 'activateTabFromLink', value: function activateTabFromLink(a) {
-      a.preventDefault();var b = this.currentActive;this.hasActive && this.hideCurrent(), this.dispatchCustomEvent('joomla.tab.show', a.target, this.querySelector('#tab-' + b)), a.target.setAttribute('active', ''), a.target.setAttribute('aria-selected', 'true'), a.target.setAttribute('tabindex', '0'), this.querySelector(a.target.hash).setAttribute('active', ''), this.querySelector(a.target.hash).removeAttribute('aria-hidden'), this.currentActive = a.target.hash.substring(1), this.dispatchCustomEvent('joomla.tab.shown', a.target, this.querySelector('#tab-' + b)), this.saveState('#tab-' + a.target.hash.substring(1));
-    } }, { key: 'showTab', value: function showTab(a) {
-      var b = document.querySelector('#tab-' + a.id);b.click();
-    } }, { key: 'show', value: function show(a) {
-      a.click();
-    } }, { key: 'keyBehaviour', value: function keyBehaviour(a) {
-      var b = this.querySelector('#tab-' + this.currentActive),
-          c = b.parentNode.previousElementSibling || b.parentNode.parentNode.lastElementChild,
-          d = b.parentNode.nextElementSibling || b.parentNode.parentNode.firstElementChild;if (!(a.metaKey || a.altKey) && -1 !== this.tabs.indexOf('#' + document.activeElement.id)) switch (a.keyCode) {case 37:case 38:
-          a.preventDefault(), a.stopPropagation(), c.querySelector('a').click(), c.querySelector('a').focus();break;case 39:case 40:
-          a.preventDefault(), a.stopPropagation(), d.querySelector('a').click(), d.querySelector('a').focus();break;default:}
-    } }, { key: 'getStorageKey', value: function getStorageKey() {
+
+      this.view = this.getAttribute('view') || 'tabs';
+      this.recall = this.recall || 'false';
+      this.responsive = this.getAttribute('responsive') || 'false';
+      this.collapseWidth = this.getAttribute('collapseWidth') || 0;
+
+      // Get tab elements
+      this.panels = [].slice.call(this.querySelectorAll('section'));
+
+      // Sanity check
+      if (!this.panels.length) {
+        throw new Error('`Joomla-panels` require one ore more panels!');
+      }
+
+      // Is this nested
+      if (this.findAncestorByTagNme(this, 'joomla-tab')) {
+        this.isNested = true;
+      }
+
+      // Does it have child tab element
+      if (this.querySelector('joomla-tab')) {
+        this.hasNested = true;
+      }
+
+      // Use the sessionStorage state!
+      if (this.recall) {
+        var href = sessionStorage.getItem(this.getStorageKey());
+        // Do not fail on 3.x tab state values hack
+        if (href && !/@\[/.test(href)) {
+          this.tabLinkHash.push(href);
+        }
+        this.setTabState();
+      }
+
+      // Create the navigation
+      if (this.firstElementChild.tagName !== 'ul') {
+        this.createNavigation();
+      }
+
+      // Add missing A11Y
+      this.panels.forEach(function (tab) {
+        tab.setAttribute('role', 'tabpanel');
+        _this2.tabs.push('#tab-' + tab.id);
+        if (tab.hasAttribute('active')) {
+          _this2.hasActive = true;
+          _this2.currentActive = tab.id;
+          _this2.querySelector('#tab-' + tab.id).setAttribute('aria-selected', 'true');
+          _this2.querySelector('#tab-' + tab.id).setAttribute('active', '');
+          _this2.querySelector('#tab-' + tab.id).setAttribute('tabindex', '0');
+        }
+      });
+
+      // Fallback if no active tab
+      if (!this.hasActive) {
+        this.tabsLinks[0].setAttribute('active', '');
+        this.hasActive = true;
+        this.currentActive = this.panels[0].id;
+        this.tabsLinks[0].setAttribute('aria-selected', 'true');
+        this.tabsLinks[0].setAttribute('tabindex', '0');
+        this.tabsLinks[0].setAttribute('active', '');
+        this.panels[0].setAttribute('active', '');
+      }
+
+      // Check if there is a hash in the URI
+      if (window.location.href.match(/#tab-/)) {
+        // this.activateUriHash();
+      }
+
+      if (this.view === 'accordion') {
+        this.toAccordion.bind(this)();
+      }
+
+      if (this.responsive === 'true') {
+        // Convert tabs to accordian and vice versa
+        this.changeView.bind(this);
+
+        // Add behavior for window size change
+        window.addEventListener('resize', this.changeView.bind(this));
+      }
+    }
+
+    /* Lifecycle, element removed from the DOM */
+
+  }, {
+    key: 'disconnectedCallback',
+    value: function disconnectedCallback() {
+      var self = this;
+      var ulEl = this.querySelector('ul');
+      var navigation = [].slice.call(ulEl.querySelectorAll('a'));
+
+      navigation.forEach(function (link) {
+        link.removeEventListener('click', self.activateTabFromLink, true);
+      });
+
+      ulEl.removeEventListener('keydown', self.keyBehaviour, true);
+    }
+
+    /* Method to create the tabs navigation */
+
+  }, {
+    key: 'createNavigation',
+    value: function createNavigation() {
+      var _this3 = this;
+
+      var self = this;
+      var nav = '';
+
+      if (this.firstElementChild.tagName.toLowerCase() !== 'ul') {
+        nav = document.createElement('ul');
+      }
+
+      nav.setAttribute('role', 'tablist');
+      this.panels.forEach(function (panel) {
+        if (!panel.id) {
+          throw new Error('`joomla-panels` All panels require an ID');
+        }
+
+        if (panel.parentNode !== _this3) {
+          return;
+        }
+
+        var active = panel.getAttribute('active') || false;
+        var liElement = document.createElement('li');
+        var aElement = document.createElement('a');
+
+        liElement.setAttribute('role', 'presentation');
+        aElement.setAttribute('role', 'tab');
+        aElement.setAttribute('aria-controls', panel.id);
+        aElement.setAttribute('aria-selected', active ? 'true' : 'false');
+        aElement.setAttribute('tabindex', active ? '0' : '-1');
+        aElement.setAttribute('href', '#' + panel.id);
+        aElement.setAttribute('id', 'tab-' + panel.id);
+        aElement.innerHTML = panel.getAttribute('name');
+
+        if (active) {
+          aElement.setAttribute('active', '');
+        }
+
+        aElement.addEventListener('click', self.activateTabFromLink.bind(self));
+        _this3.tabsLinks.push(aElement);
+
+        liElement.append(aElement);
+        nav.append(liElement);
+
+        panel.setAttribute('aria-labelledby', 'tab-' + panel.id);
+
+        if (!active) {
+          panel.setAttribute('aria-hidden', 'true');
+        }
+      });
+
+      this.insertAdjacentElement('afterbegin', nav);
+
+      // Keyboard access
+      this.querySelector('ul').addEventListener('keydown', this.keyBehaviour.bind(this));
+    }
+  }, {
+    key: 'hideCurrent',
+    value: function hideCurrent() {
+      // Unset the current active tab
+      if (this.currentActive) {
+        // Emit hide event
+        var el = this.querySelector('a[aria-controls="' + this.currentActive + '"]');
+        this.dispatchCustomEvent('joomla.tab.hide', el, this.querySelector('#tab-' + this.currentActive));
+        el.removeAttribute('active');
+        el.setAttribute('tabindex', '-1');
+        this.querySelector('#' + this.currentActive).removeAttribute('active');
+        this.querySelector('#' + this.currentActive).setAttribute('aria-hidden', 'true');
+        el.removeAttribute('aria-selected');
+        // Emit hidden event
+        this.dispatchCustomEvent('joomla.tab.hidden', el, this.querySelector('#tab-' + this.currentActive));
+      }
+    }
+
+    /** Activate Tab */
+
+  }, {
+    key: 'activateTabFromLink',
+    value: function activateTabFromLink(e) {
+      e.preventDefault();
+      var currentTabLink = this.currentActive;
+
+      if (this.hasActive) {
+        this.hideCurrent();
+      }
+
+      // Set the selected tab as active
+      // Emit show event
+      this.dispatchCustomEvent('joomla.tab.show', e.target, this.querySelector('#tab-' + currentTabLink));
+      e.target.setAttribute('active', '');
+      e.target.setAttribute('aria-selected', 'true');
+      e.target.setAttribute('tabindex', '0');
+      this.querySelector(e.target.hash).setAttribute('active', '');
+      this.querySelector(e.target.hash).removeAttribute('aria-hidden');
+      this.currentActive = e.target.hash.substring(1);
+      // Emit shown event
+      this.dispatchCustomEvent('joomla.tab.shown', e.target, this.querySelector('#tab-' + currentTabLink));
+      this.saveState('#tab-' + e.target.hash.substring(1));
+    }
+  }, {
+    key: 'showTab',
+    value: function showTab(tab) {
+      var tabLink = document.querySelector('#tab-' + tab.id);
+      tabLink.click();
+    }
+  }, {
+    key: 'show',
+    value: function show(ulLink) {
+      ulLink.click();
+    }
+  }, {
+    key: 'keyBehaviour',
+    value: function keyBehaviour(e) {
+      // collect tab targets, and their parents' prev/next (or first/last)
+      var currentTab = this.querySelector('#tab-' + this.currentActive);
+
+      var previousTabItem = currentTab.parentNode.previousElementSibling || currentTab.parentNode.parentNode.lastElementChild;
+      var nextTabItem = currentTab.parentNode.nextElementSibling || currentTab.parentNode.parentNode.firstElementChild;
+
+      // Don't catch key events when ⌘ or Alt modifier is present
+      if (e.metaKey || e.altKey) {
+        return;
+      }
+
+      if (this.tabs.indexOf('#' + document.activeElement.id) === -1) {
+        return;
+      }
+
+      // catch left/right and up/down arrow key events
+      switch (e.keyCode) {
+        case 37:
+        case 38:
+          e.preventDefault();
+          e.stopPropagation();
+          previousTabItem.querySelector('a').click();
+          previousTabItem.querySelector('a').focus();
+          break;
+        case 39:
+        case 40:
+          e.preventDefault();
+          e.stopPropagation();
+          nextTabItem.querySelector('a').click();
+          nextTabItem.querySelector('a').focus();
+          break;
+        default:
+          break;
+      }
+    }
+
+    /* eslint-disable */
+
+  }, {
+    key: 'getStorageKey',
+    value: function getStorageKey() {
       return window.location.href.toString().split(window.location.host)[1].replace(/&return=[a-zA-Z0-9%]+/, '').split('#')[0];
-    } }, { key: 'saveState', value: function saveState(a) {
-      var b = this.getStorageKey();sessionStorage.setItem(b, a);
-    } }, { key: 'setTabState', value: function setTabState() {
-      var a = this,
-          b = this,
-          c = this.tabsLinks;if (this.hasNested) {
-        if (this.tabLinkHash.length && '' !== this.tabLinkHash[0]) {
-          var d = this.tabLinkHash[0].substring(5),
-              e = this.querySelector('' + d);if (e) {
-            var f = this.findAncestorByTagNme(e, 'joomla-tab'),
-                g = this.findAncestorByTagNme(f, 'joomla-tab');if (g) {
-              var h = this.findAncestorByTagNme(f, 'section');h && this.tabLinkHash.push('#tab-' + h.id);
+    }
+    /* eslint-disable */
+
+  }, {
+    key: 'saveState',
+    value: function saveState(value) {
+      var storageKey = this.getStorageKey();
+      sessionStorage.setItem(storageKey, value);
+    }
+  }, {
+    key: 'setTabState',
+    value: function setTabState() {
+      var _this4 = this;
+
+      var self = this;
+      var tabs = this.tabsLinks;
+
+      if (this.hasNested) {
+        // Add possible parent tab to the aray for activation
+        if (this.tabLinkHash.length && this.tabLinkHash[0] !== '') {
+          var hash = this.tabLinkHash[0].substring(5);
+          var element = this.querySelector('' + hash);
+
+          // Add the parent tab to the array for activation
+          if (element) {
+            var currentTabSet = this.findAncestorByTagNme(element, 'joomla-tab');
+            var parentTabSet = this.findAncestorByTagNme(currentTabSet, 'joomla-tab');
+
+            if (parentTabSet) {
+              var parentTab = this.findAncestorByTagNme(currentTabSet, 'section');
+              if (parentTab) {
+                this.tabLinkHash.push('#tab-' + parentTab.id);
+              }
             }
           }
-        }c.forEach(function (c) {
-          if (a.tabLinkHash.length) {
-            var d = '#tab-' + c.id;-1 === a.tabLinkHash.indexOf(d) ? c.removeAttribute('active') : c.setAttribute('active', '');
-          }c.parentNode === b && a.tabsLinks.push(c);
-        });
-      } else c.forEach(function (b) {
-        if (a.tabLinkHash.length) {
-          var c = '#tab-' + b.hash;-1 < a.tabLinkHash.indexOf(c) ? b.removeAttribute('active') : b.setAttribute('active', '');
         }
-      }), this.tabsLinks = c;
-    } }, { key: 'toTabs', value: function toTabs() {
-      for (var a = this, b = 0, c = this.panels.length; b < c; ++b) {
-        this.panels[b].parentNode.parentNode.parentNode === this && this.tabsLinks.push(this.panels[b]);
-      }this.tabsLinks.length && this.tabsLinks.forEach(function (a) {
-        self.appendChild(a);
-      });
-    } }, { key: 'toAccordion', value: function toAccordion() {
-      var a = this;this.panels.length && this.panels.forEach(function (b) {
-        var c = a.querySelector('a[aria-controls="' + b.id + '"]');c.parentNode.appendChild(b);
-      });
-    } }, { key: 'changeView', value: function changeView() {
-      if (920 < window.outerWidth) {
-        if ('tabs' === this.view) return;this.toTabs.bind(this), this.view = 'tabs';
+
+        // Remove the cascaded tabs and activate the right tab
+        tabs.forEach(function (tab) {
+          if (_this4.tabLinkHash.length) {
+            var theId = '#tab-' + tab.id;
+
+            if (_this4.tabLinkHash.indexOf(theId) === -1) {
+              tab.removeAttribute('active');
+            } else {
+              tab.setAttribute('active', '');
+            }
+          }
+
+          if (tab.parentNode === self) {
+            _this4.tabsLinks.push(tab);
+          }
+        });
       } else {
-        if ('accordion' === this.view) return;this.toAccordion.bind(this), this.view = 'accordion';
+        // Activate the correct tab
+        tabs.forEach(function (tab) {
+          if (_this4.tabLinkHash.length) {
+            var theId = '#tab-' + tab.hash;
+            if (_this4.tabLinkHash.indexOf(theId) > -1) {
+              tab.removeAttribute('active');
+            } else {
+              tab.setAttribute('active', '');
+            }
+          }
+        });
+
+        this.tabsLinks = tabs;
       }
-    } }, { key: 'activateUriHash', value: function activateUriHash() {
-      var a = window.location.href.match(/#\S[^&]*/),
-          b = this.querySelector(a[0]);if (b) {
-        var c = this.findAncestorByTagNme(b, 'joomla-tab'),
-            d = this.findAncestorByTagNme(c, 'joomla-tab');if (d) {
-          var e = this.findAncestorByTagNme(c, 'section');d.showTab(e), this.show(b);
-        } else this.showTab(b);
+    }
+  }, {
+    key: 'toTabs',
+    value: function toTabs() {
+      var self = this;
+      // remove the cascaded tabs
+      for (var i = 0, l = this.panels.length; i < l; ++i) {
+        if (this.panels[i].parentNode.parentNode.parentNode === this) {
+          this.tabsLinks.push(this.panels[i]);
+        }
       }
-    } }, { key: 'findAncestorByTagNme', value: function findAncestorByTagNme(a, b) {
-      for (; (a = a.parentElement) && a.nodeName.toLowerCase() !== b;) {}return a;
-    } }, { key: 'dispatchCustomEvent', value: function dispatchCustomEvent(a, b, c) {
-      var d = new CustomEvent(a, { bubbles: !0, cancelable: !0 });c && (d.relatedTarget = c), b.dispatchEvent(d), b.removeEventListener(a, b);
-    } }]), b;
-}(HTMLElement);customElements.define('joomla-panels', JoomlaPanelsElement);
+
+      if (this.tabsLinks.length) {
+        this.tabsLinks.forEach(function (panel) {
+          self.appendChild(panel);
+        });
+      }
+    }
+  }, {
+    key: 'toAccordion',
+    value: function toAccordion() {
+      var self = this;
+      // remove the cascaded tabs
+      // for (let i = 0, l = this.panels.length; i < l; ++i) {
+      //   if (this.panels[i].parentNode === this) {
+      //     this.tabsLinks.push(this.panels[i]);
+      //   }
+      // }
+
+      if (this.panels.length) {
+        this.panels.forEach(function (panel) {
+          var link = self.querySelector('a[aria-controls="' + panel.id + '"]');
+          // if (link.parentNode.parentNode === self.firstElementChild)
+          link.parentNode.appendChild(panel);
+        });
+      }
+    }
+
+    /** Method to convert tabs to accordion and vice versa depending on screen size */
+
+  }, {
+    key: 'changeView',
+    value: function changeView() {
+      if (window.outerWidth > 920) {
+        if (this.view === 'tabs') {
+          return;
+        }
+        // convert to tabs
+        this.toTabs.bind(this);
+        this.view = 'tabs';
+      } else {
+        if (this.view === 'accordion') {
+          return;
+        }
+        // convert to accordion
+        this.toAccordion.bind(this);
+        this.view = 'accordion';
+      }
+    }
+  }, {
+    key: 'activateUriHash',
+    value: function activateUriHash() {
+      var hash = window.location.href.match(/#\S[^&]*/);
+      var element = this.querySelector(hash[0]);
+
+      if (element) {
+        // Activate any parent tabs (nested tables)
+        var currentTabSet = this.findAncestorByTagNme(element, 'joomla-tab');
+        var parentTabSet = this.findAncestorByTagNme(currentTabSet, 'joomla-tab');
+
+        if (parentTabSet) {
+          var parentTab = this.findAncestorByTagNme(currentTabSet, 'section');
+          parentTabSet.showTab(parentTab);
+          // Now activate the given tab
+          this.show(element);
+        } else {
+          // Now activate the given tab
+          this.showTab(element);
+        }
+      }
+    }
+    /* eslint-disable */
+
+  }, {
+    key: 'findAncestorByTagNme',
+    value: function findAncestorByTagNme(el, tagName) {
+      while ((el = el.parentElement) && el.nodeName.toLowerCase() !== tagName) {}
+      return el;
+    }
+    /* eslint-enable */
+
+    /* Method to dispatch events */
+
+  }, {
+    key: 'dispatchCustomEvent',
+    value: function dispatchCustomEvent(eventName, element, related) {
+      var OriginalCustomEvent = new CustomEvent(eventName, { bubbles: true, cancelable: true });
+      if (related) {
+        OriginalCustomEvent.relatedTarget = related;
+      }
+
+      element.dispatchEvent(OriginalCustomEvent);
+      element.removeEventListener(eventName, element);
+    }
+  }]);
+
+  return JoomlaPanelsElement;
+}(HTMLElement);
+
+customElements.define('joomla-panels', JoomlaPanelsElement);
 
 },{}]},{},[1]);
