@@ -5,9 +5,7 @@
  - [Alert](/alert)
  - [Collapse](/collapse)
  - [Dropdown](/dropdown)
- - [Grouped Buttons](/group-buttons)
  - [Modal](/modal)
- - [Switcher](/switcher)
  - [Panels](/panels)
  - [Tip](/tip)
 

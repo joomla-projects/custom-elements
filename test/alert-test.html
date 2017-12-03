@@ -133,8 +133,8 @@
 				});
 
 				test('Respects button attribute change, any other value', () => {
-					myEl.setAttribute('acknowledge', 'true');
-					assert.equal(myEl.getAttribute('acknowledge'), 'true');
+					myEl.setAttribute('acknowledge', '');
+					assert.equal(myEl.getAttribute('acknowledge'), '');
 					assert.equal(myEl.querySelectorAll('button.joomla-alert-button--close').length, 1);
 					assert.equal(myEl.querySelector('button').tagName.toLowerCase(), 'button');
 				});
