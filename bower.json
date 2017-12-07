@@ -1,12 +1,12 @@
 {
   "name": "joomla-ui-custom-elements",
-  "version": "0.0.2",
+  "version": "0.0.12",
   "description": "Joomla UI components as custom elements",
   "main": "Gruntfile.js",
   "authors": [
     "Dimitrios Grammatikogiannis"
   ],
-  "license": "MIT",
+  "license": "GPL",
   "keywords": [
     "Joomla",
     "web-component",
@@ -15,8 +15,8 @@
     "custom-elements"
   ],
   "devDependencies": {
-    "web-component-tester": "^6.0.0",
-    "webcomponentsjs": "^1.0.0",
+    "web-component-tester": "^6.1.5",
+    "webcomponentsjs": "^1.0.10",
     "test-fixture": "^3.0.0-rc.1"
   }
 }

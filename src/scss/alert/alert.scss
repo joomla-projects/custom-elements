@@ -1,0 +1,97 @@
+// Alerts
+
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../../node_modules/bootstrap/scss/mixins";
+@import "../../../node_modules/bootstrap/scss/variables";
+@import "../variables";
+
+//
+// Base styles
+//
+
+joomla-alert {
+  display: block;
+  min-width: 250px;
+  padding: $alert-padding-y $alert-padding-x;
+  margin-bottom: $alert-margin-bottom;
+  border: $alert-border-width solid transparent;
+  opacity: 0;
+  @include border-radius($alert-border-radius);
+  @include transition($transition-fade);
+
+  &.joomla-alert--show {
+    opacity: 1;
+  }
+
+  .joomla-alert--close, .joomla-alert-button--close {
+    position: relative;
+    top: -$alert-padding-y;
+    right: -$alert-padding-x;
+    padding: .2rem 1rem;
+    color: inherit;
+  }
+
+  .joomla-alert--close {
+    font-size: $close-font-size;
+    font-weight: $close-font-weight;
+    line-height: 1;
+    text-shadow: $close-text-shadow;
+  }
+
+  .joomla-alert--close, .joomla-alert-button--close {
+    float: right;
+    color: $close-color;
+    background: transparent;
+    border: 0;
+    opacity: .5;
+
+    @include hover-focus {
+      color: $close-color;
+      text-decoration: none;
+      cursor: pointer;
+      opacity: .75;
+    }
+  }
+
+  // Additional properties for button version
+  // iOS requires the button element instead of an anchor tag.
+  // If you want the anchor version, it requires `href="#"`.
+  // See https://developer.mozilla.org/en-US/docs/Web/Events/click#Safari_Mobile
+
+  // scss-lint:disable QualifyingElement
+  button.joomla-alert-button--close {
+    padding-top: .75rem;
+    font-size: 100%;
+    line-height: 1.15;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    -webkit-appearance: none;
+  }
+
+}
+
+// Alternate floated positions
+joomla-alert[position="top-left"] {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+}
+joomla-alert[position="top-center"] {
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+joomla-alert[position="top-right"] {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+}
+
+// Alternate styles
+@each $color, $value in $alert-colors {
+  joomla-alert[type="#{$color}"] {
+    @include alert-variant(theme-color-level($color, -10), theme-color-level($color, -9), theme-color-level($color, 6));
+  }
+}

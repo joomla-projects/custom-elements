@@ -9,6 +9,7 @@
 - Extremely small footprint, no dependencies
 - Fully customizable
 - CSS framework agnostic
+- [CSP](https://csp.withgoogle.com/docs/index.html) compliant
 
 
 [GitHub](https://github.com/joomla-projects/custom-elements/)
