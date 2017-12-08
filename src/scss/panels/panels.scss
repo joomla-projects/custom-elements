@@ -24,6 +24,10 @@ joomla-panels {
     border-radius: $tab-ul-border-radius;
     border-image: none;
     box-shadow: $tab-ul-box-shadow;
+    &[role="tablist"] {
+      padding: 0;
+      margin: 0;
+    }
   }
 
   a[role="tab"] {
