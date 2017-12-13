@@ -35,7 +35,7 @@
     "bootstrap": "4.0.0-beta",
     "browserify": "*",
     "eslint": "latest",
-    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-config-airbnb": "^16.0.0",
     "eslint-config-airbnb-base": "latest",
     "eslint-plugin-import": "latest",
