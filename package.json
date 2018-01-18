@@ -32,7 +32,7 @@
     "babelify": "latest",
     "jquery": "^3.2.1",
     "popper.js": "^1.11.0",
-    "bootstrap": "4.0.0-beta",
+    "bootstrap": "4.0.0",
     "browserify": "*",
     "eslint": "latest",
     "eslint-plugin-jsx-a11y": "^6.0.3",
