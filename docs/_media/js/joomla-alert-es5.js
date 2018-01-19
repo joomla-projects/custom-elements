@@ -51,7 +51,7 @@ function _inherits(subClass, superClass) {
         this.setAttribute('role', 'alert');
         this.classList.add('joomla-alert--show');
 
-        // If no type has been defined, the default as "info"
+        // If no type has been defined, the default is "info"
         if (!this.type) {
           this.setAttribute('type', 'info');
         }
