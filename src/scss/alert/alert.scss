@@ -91,7 +91,7 @@ joomla-alert[position="top-right"] {
 
 // Alternate styles
 @each $color, $value in $alert-colors {
-  joomla-alert[type="#{$color}"] {
+  joomla-alert[level="#{$color}"] {
     @include alert-variant(theme-color-level($color, -10), theme-color-level($color, -9), theme-color-level($color, 6));
   }
 }
