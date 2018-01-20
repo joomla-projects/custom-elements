@@ -52,7 +52,7 @@ function _inherits(subClass, superClass) {
         this.classList.add('joomla-alert--show');
 
         // If no type has been defined, the default is "info"
-        if (!this.type) {
+        if (!this.type || ['info', 'primary', 'warning', 'success', 'danger'].indexOf(this.type) === -1) {
           this.setAttribute('type', 'info');
         }
 
@@ -219,10 +219,10 @@ function _inherits(subClass, superClass) {
     }, {
       key: 'type',
       get: function get() {
-        return this.getAttribute('type');
+        return this.getAttribute('level');
       },
       set: function set(value) {
-        return this.setAttribute('type', value);
+        return this.setAttribute('level', value);
       }
     }, {
       key: 'dismiss',
@@ -293,7 +293,7 @@ function _inherits(subClass, superClass) {
 
       /* Attributes to monitor */
       get: function get() {
-        return ['type', 'dismiss', 'acknowledge', 'href', 'auto-dismiss', 'position', 'textClose', 'textDismiss', 'textAcknowledge'];
+        return ['level', 'dismiss', 'acknowledge', 'href', 'auto-dismiss', 'position', 'textClose', 'textDismiss', 'textAcknowledge'];
       }
     }]);
 

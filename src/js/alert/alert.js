@@ -1,9 +1,9 @@
 (() => {
   class JoomlaAlertElement extends HTMLElement {
     /* Attributes to monitor */
-    static get observedAttributes() { return ['type', 'dismiss', 'acknowledge', 'href', 'auto-dismiss', 'position', 'textClose', 'textDismiss', 'textAcknowledge']; }
-    get type() { return this.getAttribute('type'); }
-    set type(value) { return this.setAttribute('type', value); }
+    static get observedAttributes() { return ['level', 'dismiss', 'acknowledge', 'href', 'auto-dismiss', 'position', 'textClose', 'textDismiss', 'textAcknowledge']; }
+    get type() { return this.getAttribute('level'); }
+    set type(value) { return this.setAttribute('level', value); }
     get dismiss() { return this.getAttribute('dismiss'); }
     set dismiss(value) { return this.setAttribute('dismiss', value); }
     get acknowledge() { return this.getAttribute('acknowledge'); }
@@ -29,7 +29,7 @@
       this.classList.add('joomla-alert--show');
 
       // If no type has been defined, the default is "info"
-      if (!this.type) {
+      if (!this.type || ['info', 'primary', 'warning', 'success', 'danger'].indexOf(this.type) === -1) {
         this.setAttribute('type', 'info');
       }
 
