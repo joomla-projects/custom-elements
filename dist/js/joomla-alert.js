@@ -2,8 +2,8 @@
   class JoomlaAlertElement extends HTMLElement {
     /* Attributes to monitor */
     static get observedAttributes() { return ['level', 'dismiss', 'acknowledge', 'href', 'auto-dismiss', 'position', 'textClose', 'textDismiss', 'textAcknowledge']; }
-    get type() { return this.getAttribute('level'); }
-    set type(value) { return this.setAttribute('level', value); }
+    get level() { return this.getAttribute('level'); }
+    set level(value) { return this.setAttribute('level', value); }
     get dismiss() { return this.getAttribute('dismiss'); }
     set dismiss(value) { return this.setAttribute('dismiss', value); }
     get acknowledge() { return this.getAttribute('acknowledge'); }
@@ -28,9 +28,9 @@
       this.setAttribute('role', 'alert');
       this.classList.add('joomla-alert--show');
 
-      // If no type has been defined, the default is "info"
-      if (!this.type || ['info', 'primary', 'warning', 'success', 'danger'].indexOf(this.type) === -1) {
-        this.setAttribute('type', 'info');
+      // If no level has been defined, the default is "info"
+      if (!this.level || ['info', 'primary', 'warning', 'success', 'danger'].indexOf(this.level) === -1) {
+        this.setAttribute('level', 'info');
       }
 
       // Append button
@@ -58,9 +58,9 @@
     /* Respond to attribute changes */
     attributeChangedCallback(attr, oldValue, newValue) {
       switch (attr) {
-        case 'type':
+        case 'level':
           if (!newValue || ['info', 'primary', 'warning', 'success', 'danger'].indexOf(newValue) === -1) {
-            this.type = 'info';
+            this.level = 'info';
           }
           break;
         case 'dismiss':

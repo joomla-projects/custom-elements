@@ -51,9 +51,9 @@ function _inherits(subClass, superClass) {
         this.setAttribute('role', 'alert');
         this.classList.add('joomla-alert--show');
 
-        // If no type has been defined, the default is "info"
-        if (!this.type || ['info', 'primary', 'warning', 'success', 'danger'].indexOf(this.type) === -1) {
-          this.setAttribute('type', 'info');
+        // If no level has been defined, the default is "info"
+        if (!this.level || ['info', 'primary', 'warning', 'success', 'danger'].indexOf(this.level) === -1) {
+          this.setAttribute('level', 'info');
         }
 
         // Append button
@@ -87,9 +87,9 @@ function _inherits(subClass, superClass) {
       key: 'attributeChangedCallback',
       value: function attributeChangedCallback(attr, oldValue, newValue) {
         switch (attr) {
-          case 'type':
+          case 'level':
             if (!newValue || ['info', 'primary', 'warning', 'success', 'danger'].indexOf(newValue) === -1) {
-              this.type = 'info';
+              this.level = 'info';
             }
             break;
           case 'dismiss':
@@ -217,7 +217,7 @@ function _inherits(subClass, superClass) {
         }
       }
     }, {
-      key: 'type',
+      key: 'level',
       get: function get() {
         return this.getAttribute('level');
       },

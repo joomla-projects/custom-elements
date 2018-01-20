@@ -1,6 +1,6 @@
 {
   "name": "joomla-ui-custom-elements",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "Joomla UI components as custom elements",
   "main": "Gruntfile.js",
   "authors": [
