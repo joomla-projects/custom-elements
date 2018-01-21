@@ -71,24 +71,6 @@ joomla-alert {
 
 }
 
-// Alternate floated positions
-joomla-alert[position="top-left"] {
-  position: fixed;
-  top: 10px;
-  left: 10px;
-}
-joomla-alert[position="top-center"] {
-  position: fixed;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-joomla-alert[position="top-right"] {
-  position: fixed;
-  top: 10px;
-  right: 10px;
-}
-
 // Alternate styles
 @each $color, $value in $alert-colors {
   joomla-alert[level="#{$color}"] {
