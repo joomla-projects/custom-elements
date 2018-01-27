@@ -20,6 +20,7 @@ joomla-alert {
   @include transition($transition-fade);
 
   &.joomla-alert--show {
+    display: block;
     opacity: 1;
   }
 
