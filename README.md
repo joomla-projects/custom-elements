@@ -1,11 +1,14 @@
 # Joomla UI custom elements
 
-[![Build Status](https://travis-ci.org/joomla-projects/custom-elements.svg?branch=master)](https://travis-ci.org/joomla-projects/custom-elements) [![Greenkeeper badge](https://badges.greenkeeper.io/joomla-projects/custom-elements.svg)](https://greenkeeper.io/)
+Build Status
+---------------------
+| Travis-CI  | GreenKeeper | Webcomponents.org |
+| ------------- | ------------- | ------------- |
+| [![Build Status](https://travis-ci.org/joomla-projects/custom-elements.svg?branch=master)](https://travis-ci.org/joomla-projects/custom-elements) | [![Greenkeeper badge](https://badges.greenkeeper.io/joomla-projects/custom-elements.svg)](https://greenkeeper.io/) | [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/joomla-projects/custom-elements) |
 
-[![Built with Grunt](https://cdn.gruntjs.com/builtwith.svg)](http://gruntjs.com/) [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/joomla-projects/custom-elements)
-
-[![Build Status](https://saucelabs.com/browser-matrix/joomla-custom-elements.svg)](https://saucelabs.com/beta/builds/ea93394ca1344c6aa388509849383c6e)
-
+| Sauce Labs |
+| ------------- |
+| [![Build Status](https://saucelabs.com/browser-matrix/joomla-custom-elements.svg)](https://saucelabs.com/beta/builds/ea93394ca1344c6aa388509849383c6e) |
 ### UI components using modern technologies
 
 This is a collection of all the components that Joomla is using. They are developed with the new W3C standard: custom elements. Each component is using plain and optimized javascript for performance. Also the HTML markup (wherever possible) is reduced to offer a great benefit for front end developers).
