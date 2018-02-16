@@ -19,7 +19,7 @@
     "vanilla-js",
     "javascript"
   ],
-  "author": "Dimitrios Grammatikogiannis, Charlie Lodder",
+  "author": "Dimitrios Grammatikogiannis",
   "devDependencies": {
     "@polymer/test-fixture": "latest",
     "@webcomponents/custom-elements": "latest",
