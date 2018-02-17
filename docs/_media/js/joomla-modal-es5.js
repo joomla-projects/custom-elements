@@ -1,4 +1,4 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function(){function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s}return e})()({1:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -32,19 +32,27 @@ function _inherits(subClass, superClass) {
 }
 
 (function () {
+  /** Include the relative styles */
+  if (!document.head.querySelector('#joomla-modal-style')) {
+    var style = document.createElement('style');
+    style.id = 'joomla-modal-style';
+    style.innerHTML = 'joomla-modal{position:fixed;top:0;right:0;bottom:0;left:0;z-index:1050;box-sizing:inherit;display:none;max-width:500px;margin:10px auto;overflow:hidden;border-radius:5px;outline:0}joomla-modal.jviewport-width10{width:10vw;margin-left:-5vw}joomla-modal.jviewport-width20{width:20vw;margin-left:-10vw}joomla-modal.jviewport-width30{width:30vw;margin-left:-15vw}joomla-modal.jviewport-width40{width:40vw;margin-left:-20vw}joomla-modal.jviewport-width50{width:50vw;margin-left:-25vw}joomla-modal.jviewport-width60{width:60vw;margin-left:-30vw}joomla-modal.jviewport-width70{width:70vw;margin-left:-35vw}joomla-modal.jviewport-width80{width:80vw;margin-left:-40vw}joomla-modal.jviewport-width90{width:90vw;margin-left:-45vw}joomla-modal.jviewport-width100{width:100vw;margin-left:-50vw}joomla-modal.show{display:block}joomla-modal .joomla-modal-dialog{position:relative;display:flex;flex-direction:column;background-color:#fff;background-clip:padding-box;border:1px solid rgba(0,0,0,.2);border-radius:.3rem;outline:0}joomla-modal .joomla-modal-dialog.fade{opacity:0;transition:opacity .15s linear}joomla-modal .joomla-modal-dialog.fade.show{opacity:1}joomla-modal .joomla-modal-dialog header{display:flex;align-items:center;justify-content:space-between;padding:15px;border-bottom:1px solid #e9ecef}joomla-modal .joomla-modal-dialog header button{float:right;padding:0;font-size:1.5rem;font-weight:700;line-height:1;color:#000;text-shadow:0 1px 0 #fff;cursor:pointer;background:0 0;border:0;opacity:.5;-webkit-appearance:none}joomla-modal .joomla-modal-dialog header h5{margin-bottom:0;font-size:1.25rem;line-height:1.5}joomla-modal .joomla-modal-dialog section{position:relative;flex:1 1 auto;padding:15px}joomla-modal .joomla-modal-dialog section.jviewport-height10{height:10vh}joomla-modal .joomla-modal-dialog section.jviewport-height20{height:20vh}joomla-modal .joomla-modal-dialog section.jviewport-height30{height:30vh}joomla-modal .joomla-modal-dialog section.jviewport-height40{height:40vh}joomla-modal .joomla-modal-dialog section.jviewport-height50{height:50vh}joomla-modal .joomla-modal-dialog section.jviewport-height60{height:60vh}joomla-modal .joomla-modal-dialog section.jviewport-height70{height:70vh}joomla-modal .joomla-modal-dialog section.jviewport-height80{height:80vh}joomla-modal .joomla-modal-dialog section.jviewport-height90{height:90vh}joomla-modal .joomla-modal-dialog section.jviewport-height100{height:100vh}joomla-modal .joomla-modal-dialog section[class*=jviewport-height],joomla-modal .joomla-modal-dialog section[class^=jviewport-height]{max-height:none}joomla-modal .joomla-modal-dialog footer{display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;-ms-flex-pack:end;justify-content:flex-end;padding:15px;border-top:1px solid #e9ecef}joomla-modal .joomla-modal-dialog footer .btn{margin-left:10px}.modal-backdrop.show{opacity:.5}.modal-backdrop{position:fixed;top:0;right:0;bottom:0;left:0;z-index:1040;background-color:#000}';
+    document.head.appendChild(style);
+  }
+
   // Keycodes
   var KEYCODE = {
     TAB: 9,
     ESC: 27
   };
 
-  var JoomlaModalElement = function (_HTMLElement) {
-    _inherits(JoomlaModalElement, _HTMLElement);
+  customElements.define('joomla-modal', function (_HTMLElement) {
+    _inherits(_class, _HTMLElement);
 
-    function JoomlaModalElement() {
-      _classCallCheck(this, JoomlaModalElement);
+    function _class() {
+      _classCallCheck(this, _class);
 
-      var _this = _possibleConstructorReturn(this, (JoomlaModalElement.__proto__ || Object.getPrototypeOf(JoomlaModalElement)).call(this));
+      var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this));
 
       _this.triggerBtn = '';
       _this.focusableElements = null;
@@ -52,17 +60,9 @@ function _inherits(subClass, superClass) {
       _this.container = _this.querySelector('.joomla-modal-dialog');
       return _this;
     }
+    /* eslint-enable */
 
-    _createClass(JoomlaModalElement, [{
-      key: 'attributeChangedCallback',
-
-      /* eslint-disable */
-      value: function attributeChangedCallback(attr, oldValue, newValue) {
-        switch (attr) {}
-      }
-      /* eslint-enable */
-
-    }, {
+    _createClass(_class, [{
       key: 'connectedCallback',
       value: function connectedCallback() {
         if (!this.id) {
@@ -291,8 +291,6 @@ function _inherits(subClass, superClass) {
         while ((el = el.parentElement) && !el.classList.contains(className)) {}
         return el;
       }
-      /* eslint-enable */
-
     }], [{
       key: 'observedAttributes',
       get: function get() {
@@ -300,10 +298,8 @@ function _inherits(subClass, superClass) {
       }
     }]);
 
-    return JoomlaModalElement;
-  }(HTMLElement);
-
-  customElements.define('joomla-modal', JoomlaModalElement);
+    return _class;
+  }(HTMLElement));
 })();
 
 },{}]},{},[1]);

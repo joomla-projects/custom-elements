@@ -1,4 +1,4 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function(){function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s}return e})()({1:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -31,100 +31,108 @@ function _inherits(subClass, superClass) {
   }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 }
 
-var JoomlaCollapseElement = function (_HTMLElement) {
-  _inherits(JoomlaCollapseElement, _HTMLElement);
-
-  function JoomlaCollapseElement() {
-    _classCallCheck(this, JoomlaCollapseElement);
-
-    return _possibleConstructorReturn(this, (JoomlaCollapseElement.__proto__ || Object.getPrototypeOf(JoomlaCollapseElement)).apply(this, arguments));
+(function () {
+  /** Include the relative styles */
+  if (!document.head.querySelector('#joomla-collapse-style')) {
+    var style = document.createElement('style');
+    style.id = 'joomla-collapse-style';
+    style.innerHTML = 'joomla-collapse[state=closed]{display:none}joomla-collapse[state=open]{display:block}';
+    document.head.appendChild(style);
   }
 
-  _createClass(JoomlaCollapseElement, [{
-    key: 'connectedCallback',
-    value: function connectedCallback() {
-      var self = this;
-      // id is required
-      if (!this.id) return;
+  customElements.define('joomla-collapse', function (_HTMLElement) {
+    _inherits(_class, _HTMLElement);
 
-      var linked = [].slice.call(document.querySelectorAll('[href="#' + this.id + '"],[data-target="#' + this.id + '"]'));
+    function _class() {
+      _classCallCheck(this, _class);
 
-      linked.forEach(function (element) {
-        if (!self.state || self.state && self.state === 'closed') {
-          self.state = 'closed';
-          element.setAttribute('aria-expanded', 'false');
-          element.setAttribute('aria-controls', self.id);
-        } else {
-          element.setAttribute('aria-expanded', 'true');
-          element.setAttribute('aria-controls', self.id);
-        }
-
-        element.addEventListener('click', function (event) {
-          var colId = '';
-          if (!event.target.hasAttribute('data-target')) colId = event.target.getAttribute('href').replace('#', '');
-          if (!event.target.hasAttribute('href')) colId = event.target.getAttribute('data-target').replace('#', '');
-          event.preventDefault();
-          event.stopPropagation();
-          document.getElementById(colId).toggle();
-        });
-      });
+      return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).apply(this, arguments));
     }
-  }, {
-    key: 'disconnectedCallback',
-    value: function disconnectedCallback() {
-      var linked = document.querySelector('[href="#' + this.id + '"]');
-      if (!linked) linked = document.querySelector('[data-target="#' + this.id + '"]');
-      if (linked) {
-        linked.removeEventListener('click', this);
-      }
-    }
-  }, {
-    key: 'attributeChangedCallback',
-    value: function attributeChangedCallback(attr, oldValue, newValue) {
-      var linked = document.querySelector('[href="#' + this.id + '"]');
-      switch (attr) {
-        case 'state':
-          if (newValue === 'closed') {
-            linked.setAttribute('aria-expanded', 'false');
-          } else if (newValue === 'open') {
-            linked.setAttribute('aria-expanded', 'true');
+
+    _createClass(_class, [{
+      key: 'connectedCallback',
+      value: function connectedCallback() {
+        var self = this;
+        // id is required
+        if (!this.id) return;
+
+        var linked = [].slice.call(document.querySelectorAll('[href="#' + this.id + '"],[data-target="#' + this.id + '"]'));
+
+        linked.forEach(function (element) {
+          if (!self.state || self.state && self.state === 'closed') {
+            self.state = 'closed';
+            element.setAttribute('aria-expanded', 'false');
+            element.setAttribute('aria-controls', self.id);
+          } else {
+            element.setAttribute('aria-expanded', 'true');
+            element.setAttribute('aria-controls', self.id);
           }
-          break;
-        default:
-          break;
-      }
-    }
-  }, {
-    key: 'toggle',
-    value: function toggle() {
-      var linked = document.querySelector('[href="#' + this.id + '"]');
-      if (!linked) linked = document.querySelector('[data-target="#' + this.id + '"]');
-      if (this.state === 'closed') {
-        this.state = 'open';
-        linked.setAttribute('aria-expanded', 'true');
-      } else {
-        this.state = 'closed';
-        linked.setAttribute('aria-expanded', 'false');
-      }
-    }
-  }, {
-    key: 'state',
-    get: function get() {
-      return this.getAttribute('state');
-    },
-    set: function set(value) {
-      return this.setAttribute('state', value);
-    }
-  }], [{
-    key: 'observedAttributes',
-    get: function get() {
-      return ['state'];
-    }
-  }]);
 
-  return JoomlaCollapseElement;
-}(HTMLElement);
+          element.addEventListener('click', function (event) {
+            var colId = '';
+            if (!event.target.hasAttribute('data-target')) colId = event.target.getAttribute('href').replace('#', '');
+            if (!event.target.hasAttribute('href')) colId = event.target.getAttribute('data-target').replace('#', '');
+            event.preventDefault();
+            event.stopPropagation();
+            document.getElementById(colId).toggle();
+          });
+        });
+      }
+    }, {
+      key: 'disconnectedCallback',
+      value: function disconnectedCallback() {
+        var linked = document.querySelector('[href="#' + this.id + '"]');
+        if (!linked) linked = document.querySelector('[data-target="#' + this.id + '"]');
+        if (linked) {
+          linked.removeEventListener('click', this);
+        }
+      }
+    }, {
+      key: 'attributeChangedCallback',
+      value: function attributeChangedCallback(attr, oldValue, newValue) {
+        var linked = document.querySelector('[href="#' + this.id + '"]');
+        switch (attr) {
+          case 'state':
+            if (newValue === 'closed') {
+              linked.setAttribute('aria-expanded', 'false');
+            } else if (newValue === 'open') {
+              linked.setAttribute('aria-expanded', 'true');
+            }
+            break;
+          default:
+            break;
+        }
+      }
+    }, {
+      key: 'toggle',
+      value: function toggle() {
+        var linked = document.querySelector('[href="#' + this.id + '"]');
+        if (!linked) linked = document.querySelector('[data-target="#' + this.id + '"]');
+        if (this.state === 'closed') {
+          this.state = 'open';
+          linked.setAttribute('aria-expanded', 'true');
+        } else {
+          this.state = 'closed';
+          linked.setAttribute('aria-expanded', 'false');
+        }
+      }
+    }, {
+      key: 'state',
+      get: function get() {
+        return this.getAttribute('state');
+      },
+      set: function set(value) {
+        return this.setAttribute('state', value);
+      }
+    }], [{
+      key: 'observedAttributes',
+      get: function get() {
+        return ['state'];
+      }
+    }]);
 
-customElements.define('joomla-collapse', JoomlaCollapseElement);
+    return _class;
+  }(HTMLElement));
+})();
 
 },{}]},{},[1]);

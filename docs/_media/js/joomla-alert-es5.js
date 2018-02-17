@@ -1,4 +1,4 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function(){function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s}return e})()({1:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -32,65 +32,40 @@ function _inherits(subClass, superClass) {
 }
 
 (function () {
-  var JoomlaAlertElement = function (_HTMLElement) {
-    _inherits(JoomlaAlertElement, _HTMLElement);
+  /** Include the relative styles */
+  if (!document.head.querySelector('#joomla-alert-style')) {
+    var style = document.createElement('style');
+    style.id = 'joomla-alert-style';
+    style.innerHTML = 'joomla-alert{display:block;min-width:250px;padding:.5rem 1.25rem;margin-bottom:1rem;border:1px solid transparent;opacity:0;border-radius:.25rem;transition:opacity .15s linear}joomla-alert.joomla-alert--show{display:block;opacity:1}joomla-alert .joomla-alert--close,joomla-alert .joomla-alert-button--close{position:relative;top:-.5rem;right:-1.25rem;padding:.2rem 1rem;color:inherit}joomla-alert .joomla-alert--close{font-size:1.5rem;font-weight:700;line-height:1;text-shadow:0 1px 0 #fff}joomla-alert .joomla-alert--close,joomla-alert .joomla-alert-button--close{float:right;color:#000;background:0 0;border:0;opacity:.5}joomla-alert .joomla-alert--close:focus,joomla-alert .joomla-alert--close:hover,joomla-alert .joomla-alert-button--close:focus,joomla-alert .joomla-alert-button--close:hover{color:#000;text-decoration:none;cursor:pointer;opacity:.75}joomla-alert button.joomla-alert-button--close{padding-top:.75rem;font-size:100%;line-height:1.15;cursor:pointer;background:0 0;border:0;-webkit-appearance:none}joomla-alert[type=success]{color:#234423;background-color:#d9e6d9;border-color:#cadcca}joomla-alert[type=success] hr{border-top-color:#bbd2bb}joomla-alert[type=success] .alert-link{color:#122212}joomla-alert[type=info]{color:#0c5460;background-color:#d1ecf1;border-color:#bee5eb}joomla-alert[type=info] hr{border-top-color:#abdde5}joomla-alert[type=info] .alert-link{color:#062c33}joomla-alert[type=warning]{color:#7d5a29;background-color:#fcefdc;border-color:#fbe8cd}joomla-alert[type=warning] hr{border-top-color:#f9ddb5}joomla-alert[type=warning] .alert-link{color:#573e1c}joomla-alert[type=danger]{color:#712b29;background-color:#f7dddc;border-color:#f4cfce}joomla-alert[type=danger] hr{border-top-color:#efbbb9}joomla-alert[type=danger] .alert-link{color:#4c1d1b}';
+    document.head.appendChild(style);
+  }
 
-    _createClass(JoomlaAlertElement, [{
-      key: 'type',
-      get: function get() {
-        return this.getAttribute('type');
-      },
-      set: function set(value) {
-        return this.setAttribute('type', value);
-      }
-    }, {
-      key: 'dismiss',
-      get: function get() {
-        return this.getAttribute('dismiss');
-      }
-    }, {
-      key: 'acknowledge',
-      get: function get() {
-        return this.getAttribute('acknowledge');
-      }
-    }, {
-      key: 'href',
-      get: function get() {
-        return this.getAttribute('href');
-      }
+  customElements.define('joomla-alert', function (_HTMLElement) {
+    _inherits(_class, _HTMLElement);
 
-      /* Lifecycle, element created */
+    function _class() {
+      _classCallCheck(this, _class);
 
-    }], [{
-      key: 'observedAttributes',
-
-      /* Attributes to monitor */
-      get: function get() {
-        return ['type', 'dismiss', 'acknowledge', 'href'];
-      }
-    }]);
-
-    function JoomlaAlertElement() {
-      _classCallCheck(this, JoomlaAlertElement);
-
-      return _possibleConstructorReturn(this, (JoomlaAlertElement.__proto__ || Object.getPrototypeOf(JoomlaAlertElement)).call(this));
+      return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).apply(this, arguments));
     }
 
-    /* Lifecycle, element appended to the DOM */
-
-    _createClass(JoomlaAlertElement, [{
+    _createClass(_class, [{
       key: 'connectedCallback',
+
+      /* Lifecycle, element appended to the DOM */
       value: function connectedCallback() {
         this.setAttribute('role', 'alert');
-        this.classList.add("joomla-alert--show");
+        this.classList.add('joomla-alert--show');
 
         // Default to info
         if (!this.type || ['info', 'warning', 'danger', 'success'].indexOf(this.type) === -1) {
           this.setAttribute('type', 'info');
         }
         // Append button
-        if (this.hasAttribute('dismiss') || this.hasAttribute('acknowledge') || this.hasAttribute('href') && this.getAttribute('href') !== '' && !this.querySelector('button.joomla-alert--close') && !this.querySelector('button.joomla-alert-button--close')) {
-          this.appendCloseButton();
+        if (this.hasAttribute('dismiss') || this.hasAttribute('acknowledge') || this.hasAttribute('href')) {
+          if (this.getAttribute('href') !== '' && !this.querySelector('button.joomla-alert--close') && !this.querySelector('button.joomla-alert-button--close')) {
+            this.appendCloseButton();
+          }
         }
 
         this.dispatchCustomEvent('joomla.alert.show');
@@ -129,7 +104,7 @@ function _inherits(subClass, superClass) {
             break;
           case 'dismiss':
           case 'acknowledge':
-            if (!newValue || newValue === "true") {
+            if (!newValue || newValue === 'true') {
               this.appendCloseButton();
             } else {
               this.removeCloseButton();
@@ -138,11 +113,11 @@ function _inherits(subClass, superClass) {
           case 'href':
             if (!newValue || newValue === '') {
               this.removeCloseButton();
-            } else {
-              if (!this.querySelector('button.joomla-alert-button--close')) {
-                this.appendCloseButton();
-              }
+            } else if (!this.querySelector('button.joomla-alert-button--close')) {
+              this.appendCloseButton();
             }
+            break;
+          default:
             break;
         }
       }
@@ -152,10 +127,12 @@ function _inherits(subClass, superClass) {
     }, {
       key: 'close',
       value: function close() {
+        var _this2 = this;
+
         this.dispatchCustomEvent('joomla.alert.close');
-        this.addEventListener("transitionend", function () {
-          this.dispatchCustomEvent('joomla.alert.closed');
-          this.parentNode.removeChild(this);
+        this.addEventListener('transitionend', function () {
+          _this2.dispatchCustomEvent('joomla.alert.closed');
+          _this2.parentNode.removeChild(_this2);
         }, false);
         this.classList.remove('joomla-alert--show');
       }
@@ -180,8 +157,8 @@ function _inherits(subClass, superClass) {
           return;
         }
 
-        var self = this,
-            closeButton = document.createElement('button');
+        var self = this;
+        var closeButton = document.createElement('button');
 
         if (this.hasAttribute('dismiss')) {
           closeButton.classList.add('joomla-alert--close');
@@ -231,7 +208,7 @@ function _inherits(subClass, superClass) {
             } else {
               self.close();
             }
-          }, parseInt(self.getAttribute('auto-dismiss')) ? self.getAttribute('auto-dismiss') : 3000);
+          }, parseInt(self.getAttribute('auto-dismiss'), 10) ? self.getAttribute('auto-dismiss') : 3000);
         }
       }
 
@@ -252,14 +229,42 @@ function _inherits(subClass, superClass) {
     }, {
       key: 'getText',
       value: function getText(str, fallback) {
-        return window.Joomla && Joomla.JText && Joomla.JText._ && typeof Joomla.JText._ === 'function' && Joomla.JText._(str) ? Joomla.JText._(str) : fallback;
+        return window.Joomla && window.Joomla.JText && window.Joomla.JText._ && typeof window.Joomla.JText._ === 'function' && window.Joomla.JText._(str) ? window.Joomla.JText._(str) : fallback;
+      }
+    }, {
+      key: 'type',
+      get: function get() {
+        return this.getAttribute('type');
+      },
+      set: function set(value) {
+        return this.setAttribute('type', value);
+      }
+    }, {
+      key: 'dismiss',
+      get: function get() {
+        return this.getAttribute('dismiss');
+      }
+    }, {
+      key: 'acknowledge',
+      get: function get() {
+        return this.getAttribute('acknowledge');
+      }
+    }, {
+      key: 'href',
+      get: function get() {
+        return this.getAttribute('href');
+      }
+    }], [{
+      key: 'observedAttributes',
+
+      /* Attributes to monitor */
+      get: function get() {
+        return ['type', 'dismiss', 'acknowledge', 'href'];
       }
     }]);
 
-    return JoomlaAlertElement;
-  }(HTMLElement);
-
-  customElements.define('joomla-alert', JoomlaAlertElement);
+    return _class;
+  }(HTMLElement));
 })();
 
 },{}]},{},[1]);

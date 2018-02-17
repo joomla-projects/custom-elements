@@ -1,11 +1,19 @@
 (() => {
+  /** Include the relative styles */
+  if (!document.head.querySelector('#joomla-modal-style')) {
+    const style = document.createElement('style');
+    style.id = 'joomla-modal-style';
+    style.innerHTML = '{{stylesheet}}';
+    document.head.appendChild(style);
+  }
+
   // Keycodes
   const KEYCODE = {
     TAB: 9,
     ESC: 27,
   };
 
-  class JoomlaModalElement extends HTMLElement {
+  customElements.define('joomla-modal', class extends HTMLElement {
     constructor() {
       super();
 
@@ -18,16 +26,6 @@
     static get observedAttributes() {
       return ['width', 'height', 'innerWidth', 'innerHeight', 'iframe'];
     }
-
-    /* eslint-disable */
-    attributeChangedCallback(attr, oldValue, newValue) {
-      switch (attr) {
-        // case 'name':
-        // console.log(newValue);
-        // break;
-      }
-    }
-    /* eslint-enable */
 
     connectedCallback() {
       if (!this.id) {
@@ -245,7 +243,5 @@
       return el;
     }
     /* eslint-enable */
-  }
-
-  customElements.define('joomla-modal', JoomlaModalElement);
+  });
 })();

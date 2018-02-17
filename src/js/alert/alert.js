@@ -1,5 +1,13 @@
 (() => {
-  class JoomlaAlertElement extends HTMLElement {
+  /** Include the relative styles */
+  if (!document.head.querySelector('#joomla-alert-style')) {
+    const style = document.createElement('style');
+    style.id = 'joomla-alert-style';
+    style.innerHTML = '{{stylesheet}}';
+    document.head.appendChild(style);
+  }
+
+  customElements.define('joomla-alert', class extends HTMLElement {
     /* Attributes to monitor */
     static get observedAttributes() { return ['type', 'dismiss', 'acknowledge', 'href']; }
     get type() { return this.getAttribute('type'); }
@@ -165,7 +173,5 @@
     getText(str, fallback) {
       return (window.Joomla && window.Joomla.JText && window.Joomla.JText._ && typeof window.Joomla.JText._ === 'function' && window.Joomla.JText._(str)) ? window.Joomla.JText._(str) : fallback;
     }
-  }
-
-  customElements.define('joomla-alert', JoomlaAlertElement);
+  });
 })();

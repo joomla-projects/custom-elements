@@ -12,7 +12,7 @@ module.exports = (grunt) => {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-babel');
   grunt.loadNpmTasks('grunt-browserify');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-uglify-es');
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-contrib-copy');
 
@@ -56,7 +56,7 @@ module.exports = (grunt) => {
       // Compile the css files
       grunt.config.set('sass.' + element + '.files', [{
         src: 'src/scss/' + element + '/' + element + '.scss',
-        dest: 'dist/css/' + grunt.settings.prefix + '-' + element + '.css'
+        dest: 'src/scss/css/' + element + '.css'
       }]);
 
       grunt.task.run('sass:' + element);
@@ -71,15 +71,15 @@ module.exports = (grunt) => {
             ]
           })
         ],
-        src: 'dist/css/' + grunt.settings.prefix + '-' + element + '.css',
+        src: 'src/scss/css/' + element + '.css',
       }]);
 
       grunt.task.run('postcss:' + element);
 
       // Autoprefix the CSS files
       grunt.config.set('cssmin.' + element + '.files', [{
-        src: 'dist/css/' + grunt.settings.prefix + '-' + element + '.css',
-        dest: 'dist/css/' + grunt.settings.prefix + '-' + element + '.min.css'
+        src: 'src/scss/css/' + element + '.css',
+        dest: 'src/scss/css/' + element + '.min.css'
       }]);
 
       grunt.task.run('cssmin:' + element);
@@ -98,13 +98,20 @@ module.exports = (grunt) => {
     const createElement = (element, settings) => {
       let tmpJs = '';
       let tmpJsPlain = '';
+      let tmpCss = '';
 
       if (grunt.file.exists('src/js/' + element + '/' + element + '.js')) {
         tmpJs = grunt.file.read('src/js/' + element + '/' + element + '.js');
 
+        // Embed the css in the custom element
+        if (grunt.file.exists('src/scss/css/' + element + '.min.css')) {
+          tmpCss = grunt.file.read('src/scss/css/' + element + '.min.css');
+        }
+  
         // Repeat
         tmpJs = grunt.file.read('src/js/' + element + '/' + element + '.js');
         tmpJs = tmpJs.replace(/joomla-/g, settings.prefix + '-');
+        tmpJs = tmpJs.replace(/'{{stylesheet}}'/g, "`" + tmpCss + "`");
 
         grunt.file.write('src/js/' + element + '/' + element + '_es6.js', tmpJs);
 

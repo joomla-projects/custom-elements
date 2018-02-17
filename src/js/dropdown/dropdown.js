@@ -1,76 +1,84 @@
-class JoomlaDropdownElement extends HTMLElement {
-  static get observedAttributes() {
-    return ['for'];
+(() => {
+  /** Include the relative styles */
+  if (!document.head.querySelector('#joomla-dropdown-style')) {
+    const style = document.createElement('style');
+    style.id = 'joomla-dropdown-style';
+    style.innerHTML = '{{stylesheet}}';
+    document.head.appendChild(style);
   }
 
-  get for() { return this.getAttribute('for'); }
-  set for(value) { return this.setAttribute('for', value); }
+  customElements.define('joomla-dropdown', class extends HTMLElement {
+    static get observedAttributes() {
+      return ['for'];
+    }
 
-  connectedCallback() {
-    this.setAttribute('aria-labelledby', this.for.substring(1));
-    const button = document.querySelector(this.for);
-    const innerLinks = this.querySelectorAll('a');
-    const self = this;
+    get for() { return this.getAttribute('for'); }
+    set for(value) { return this.setAttribute('for', value); }
 
-    if (!button.id) return;
-    // var children = [].slice.call( menu[getElementsByTagName]('*'));
-    // this.classList.add('dropdown');
+    connectedCallback() {
+      this.setAttribute('aria-labelledby', this.for.substring(1));
+      const button = document.querySelector(this.for);
+      const innerLinks = this.querySelectorAll('a');
+      const self = this;
 
-    button.setAttribute('aria-haspopup', 'true');
-    button.setAttribute('aria-expanded', 'false');
+      if (!button.id) return;
+      // var children = [].slice.call( menu[getElementsByTagName]('*'));
+      // this.classList.add('dropdown');
 
-    button.addEventListener('click', (ev) => {
-      if (self.hasAttribute('expanded')) {
-        self.removeAttribute('expanded');
-        ev.target.setAttribute('aria-expanded', 'false');
-      } else {
-        self.setAttribute('expanded', '');
-        ev.target.setAttribute('aria-expanded', 'true');
-      }
+      button.setAttribute('aria-haspopup', 'true');
+      button.setAttribute('aria-expanded', 'false');
 
-      document.addEventListener('click', (evt) => {
-        if (evt.target !== button) {
-          if (!self.findAncestor(evt.target, 'joomla-dropdown')) {
-            self.close();
-          }
+      button.addEventListener('click', (ev) => {
+        if (self.hasAttribute('expanded')) {
+          self.removeAttribute('expanded');
+          ev.target.setAttribute('aria-expanded', 'false');
+        } else {
+          self.setAttribute('expanded', '');
+          ev.target.setAttribute('aria-expanded', 'true');
         }
-      });
 
-      innerLinks.forEach((innerLink) => {
-        innerLink.addEventListener('click', () => {
-          self.close();
+        document.addEventListener('click', (evt) => {
+          if (evt.target !== button) {
+            if (!self.findAncestor(evt.target, 'joomla-dropdown')) {
+              self.close();
+            }
+          }
+        });
+
+        innerLinks.forEach((innerLink) => {
+          innerLink.addEventListener('click', () => {
+            self.close();
+          });
         });
       });
-    });
-  }
-
-  /*eslint-disable */
-  disconnectedCallback() { }
-
-  adoptedCallback(oldDocument, newDocument) { }
-
-
-  attributeChangedCallback(attr, oldValue, newValue) {
-    switch (attr) {
-      // case 'name':
-      // console.log(newValue);
-      // break;
     }
-  }
-  /* eslint-enable */
 
-  close() {
-    const button = document.querySelector(`#${this.getAttribute('aria-labelledby')}`);
-    this.removeAttribute('expanded');
-    button.setAttribute('aria-expanded', 'false');
-  }
+    /*eslint-disable */
+    disconnectedCallback() { }
 
-  /* eslint-disable */
-  findAncestor(el, tagName) {
-    while ((el = el.parentElement) && el.nodeName.toLowerCase() !== tagName);
-    return el;
-  }
-  /* eslint-enable */
-}
+    adoptedCallback(oldDocument, newDocument) { }
 
-customElements.define('joomla-dropdown', JoomlaDropdownElement);
+
+    attributeChangedCallback(attr, oldValue, newValue) {
+      switch (attr) {
+        // case 'name':
+        // console.log(newValue);
+        // break;
+      }
+    }
+    /* eslint-enable */
+
+    close() {
+      const button = document.querySelector(`#${this.getAttribute('aria-labelledby')}`);
+      this.removeAttribute('expanded');
+      button.setAttribute('aria-expanded', 'false');
+    }
+
+    /* eslint-disable */
+    findAncestor(el, tagName) {
+      while ((el = el.parentElement) && el.nodeName.toLowerCase() !== tagName);
+      return el;
+    }
+    /* eslint-enable */
+  });
+})();

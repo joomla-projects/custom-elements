@@ -32,10 +32,10 @@
     "babelify": "latest",
     "browserify": "*",
     "eslint": "latest",
-    "eslint-plugin-jsx-a11y": "latest",
     "eslint-config-airbnb": "latest",
     "eslint-config-airbnb-base": "latest",
     "eslint-plugin-import": "latest",
+    "eslint-plugin-jsx-a11y": "latest",
     "eslint-plugin-react": "latest",
     "grunt": "latest",
     "grunt-babel": "latest",
@@ -43,11 +43,12 @@
     "grunt-contrib-copy": "latest",
     "grunt-contrib-cssmin": "latest",
     "grunt-contrib-uglify": "git://github.com/gruntjs/grunt-contrib-uglify.git#harmony",
+    "grunt-contrib-uglify-es": "git://github.com/gruntjs/grunt-contrib-uglify.git#harmony",
     "grunt-postcss-x": "latest",
     "grunt-sass": "latest",
     "grunt-shell": "latest",
-    "web-component-tester": "latest",
-    "wct-browser-legacy": "latest"
+    "wct-browser-legacy": "latest",
+    "web-component-tester": "latest"
   },
   "scripts": {
     "build": "grunt",
@@ -80,5 +81,8 @@
       "tip"
     ],
     "browsers": "last 1 version"
+  },
+  "dependencies": {
+    "bootstrap": "^4.0.0"
   }
 }
