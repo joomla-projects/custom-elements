@@ -78,4 +78,4 @@
       this.removeEventListener(eventName, this);
     }
   });
-})
+})();

@@ -168,6 +168,6 @@ function _inherits(subClass, superClass) {
 
     return _class;
   }(HTMLElement));
-});
+})();
 
 },{}]},{},[1]);

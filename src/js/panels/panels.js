@@ -436,4 +436,4 @@
       element.removeEventListener(eventName, element);
     }
   });
-})
+})();
