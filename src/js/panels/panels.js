@@ -1,8 +1,8 @@
 (() => {
   /** Include the relative styles */
-  if (!document.head.querySelector('#joomla-tab-style')) {
+  if (!document.head.querySelector('#joomla-panels-style')) {
     const style = document.createElement('style');
-    style.id = 'joomla-tab-style';
+    style.id = 'joomla-panels-style';
     style.innerHTML = '{{stylesheet}}';
     document.head.appendChild(style);
   }
