@@ -18,16 +18,12 @@ joomla-panels {
     white-space: nowrap;
     list-style: outside none none;
     background-color: $tab-ul-bg;
-    border-color: $tab-ul-border-color;
-    border-style: solid solid none;
-    border-width: $tab-ul-border-width;
-    border-radius: $tab-ul-border-radius;
-    border-image: none;
-    box-shadow: $tab-ul-box-shadow;
+
     &[role="tablist"] {
       padding: 0;
       margin: 0;
     }
+
   }
 
   a[role="tab"] {
@@ -36,16 +32,9 @@ joomla-panels {
     padding: $tab-link-padding;
     color: $tab-link-colour;
     text-decoration: none;
-    box-shadow: $tab-link-box-shadow;
 
     &[active] {
       background-color: $tab-link-bg-colour-active;
-      background-image: $tab-link-bg-image-active;
-      border-right: 0 none;
-      border-left: 0 none;
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
-      box-shadow: $tab-link-box-shadow-active;
 
       &::after {
         position: absolute;
@@ -54,7 +43,7 @@ joomla-panels {
         left: 0;
         height: $tab-link-width-active;
         content: "";
-        background-color: theme-color("primary");
+        background-color: darken($tab-link-bg-colour-active, 25%);
         opacity: .8;
       }
 
@@ -66,9 +55,6 @@ joomla-panels {
     display: none;
     padding: $tab-content-padding;
     background-color: $tab-content-bg;
-    border: $tab-content-border;
-    border-radius: $tab-content-border-radius;
-    box-shadow: $tab-content-box-shadow;
 
     &[active] {
       display: block;
@@ -85,9 +71,6 @@ joomla-panels {
       min-width: 30%;
       height: auto;
       overflow: hidden;
-      border: $tab-vertical-ul-border;
-      border-radius: $tab-border-radius;
-      box-shadow: none;
     }
 
     li:last-of-type a {
@@ -100,8 +83,6 @@ joomla-panels {
       padding: $tab-link-padding;
       color: $tab-link-colour;
       text-decoration: none;
-      border-bottom: $tab-accordion-link-border;
-      box-shadow: none;
 
       &[active] {
         background-color: $white;
@@ -134,8 +115,6 @@ joomla-panels {
     > ul {
       flex-direction: column;
       white-space: normal;
-      border-radius: $tab-accordion-ul-border-radius;
-      box-shadow: $tab-accordion-ul-box-shadow;
     }
 
     section {
@@ -145,7 +124,6 @@ joomla-panels {
 
     section[active] {
       display: block;
-      border-bottom: $tab-accordion-link-border;
     }
 
     [active] {
@@ -153,7 +131,6 @@ joomla-panels {
     }
 
     a[role="tab"] {
-      border-bottom: $tab-accordion-link-border;
 
       &[active]::after {
         top: 0;
