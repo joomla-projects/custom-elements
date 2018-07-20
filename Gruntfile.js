@@ -53,10 +53,11 @@ module.exports = (grunt) => {
   // Compile the css
   grunt.registerTask('compile', 'Compile css files', () => {
     const compileCss = (element) => {
+
       // Compile the css files
       grunt.config.set('sass.' + element + '.files', [{
         src: 'src/scss/' + element + '/' + element + '.scss',
-        dest: 'src/scss/css/' + element + '.css'
+        dest: 'dist/css/' + grunt.settings.prefix + '-' + element + '.css'
       }]);
 
       grunt.task.run('sass:' + element);
@@ -67,19 +68,19 @@ module.exports = (grunt) => {
         processors: [
           require('autoprefixer')({
             browsers: [
-              `grunt.settings.browsers`,
+              grunt.settings.browsers,
             ]
           })
         ],
-        src: 'src/scss/css/' + element + '.css',
+        src: 'dist/css/' + grunt.settings.prefix + '-' + element + '.css',
       }]);
 
       grunt.task.run('postcss:' + element);
 
       // Autoprefix the CSS files
       grunt.config.set('cssmin.' + element + '.files', [{
-        src: 'src/scss/css/' + element + '.css',
-        dest: 'src/scss/css/' + element + '.min.css'
+        src: 'dist/css/' + grunt.settings.prefix + '-' + element + '.css',
+        dest: 'dist/css/' + grunt.settings.prefix + '-' + element + '.min.css'
       }]);
 
       grunt.task.run('cssmin:' + element);
@@ -248,7 +249,7 @@ module.exports = (grunt) => {
   grunt.registerTask('clearFiles', 'Clean up', () => {
 
     // Remove the minified/non minified css
-    deleteFolderRecursive('src/scss/css');
+    // deleteFolderRecursive('dist/css');
 
     grunt.settings.elements.forEach((element) => {
       // Remove the extracripts
@@ -293,6 +294,7 @@ module.exports = (grunt) => {
   grunt.registerTask('elements', () => {
     // Clear the polyfills folder
     // deleteFolderRecursive('dist/polyfills');
+    deleteFolderRecursive('dist/css')
     deleteFolderRecursive('dist/js');
 
     // Create the css files

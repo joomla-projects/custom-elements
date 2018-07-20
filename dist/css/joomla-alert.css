@@ -7,6 +7,9 @@ joomla-alert {
   opacity: 0;
   border-radius: 0.25rem;
   transition: opacity 0.15s linear; }
+  @media screen and (prefers-reduced-motion: reduce) {
+    joomla-alert {
+      transition: none; } }
   joomla-alert.joomla-alert--show {
     display: block;
     opacity: 1; }

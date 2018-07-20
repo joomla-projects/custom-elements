@@ -37,7 +37,7 @@
     "eslint-plugin-import": "latest",
     "eslint-plugin-jsx-a11y": "latest",
     "eslint-plugin-react": "latest",
-    "grunt": "latest",
+    "grunt": "^1.0.3",
     "grunt-babel": "latest",
     "grunt-browserify": "latest",
     "grunt-contrib-copy": "latest",
@@ -45,7 +45,7 @@
     "grunt-contrib-uglify": "git://github.com/gruntjs/grunt-contrib-uglify.git#harmony",
     "grunt-contrib-uglify-es": "git://github.com/gruntjs/grunt-contrib-uglify.git#harmony",
     "grunt-postcss-x": "latest",
-    "grunt-sass": "latest",
+    "grunt-sass": "^2.1.0",
     "grunt-shell": "latest",
     "wct-browser-legacy": "latest",
     "web-component-tester": "latest"
@@ -74,15 +74,12 @@
     "prefix": "joomla",
     "elements": [
       "alert",
-      "collapse",
-      "dropdown",
-      "modal",
-      "panels",
-      "tip"
+      "tab"
     ],
     "browsers": "last 1 version"
   },
   "dependencies": {
+    "babel-core": "^6.26.3",
     "bootstrap": "^4.0.0"
   }
 }
