@@ -1,60 +1,51 @@
 (() => {
-  class JoomlaAlert extends HTMLElement {
+  class JoomlaAlertElement extends HTMLElement {
     /* Attributes to monitor */
-    static get observedAttributes() { return ['type', 'dismiss', 'title', 'message', 'show', 'button-text']; }
+    static get observedAttributes() { return ['type', 'dismiss', 'acknowledge', 'href']; }
     get type() { return this.getAttribute('type'); }
     set type(value) { return this.setAttribute('type', value); }
     get dismiss() { return this.getAttribute('dismiss'); }
-    set dismiss(value) { return this.setAttribute('type', value); }
-    get title() { return this.getAttribute('title'); }
-    set title(value) { return this.setAttribute('title', value); }
-    get message() { return this.getAttribute('message'); }
-    set message(value) { return this.setAttribute('message', value); }
-    get buttonText() { return this.getAttribute('button-text'); }
-    set buttonText(value) { return this.setAttribute('button-text', value); }
+    get acknowledge() { return this.getAttribute('acknowledge'); }
+    get href() { return this.getAttribute('href'); }
 
+    /* Lifecycle, element created */
     constructor() {
       super();
-      this.header = '';
-      this.messageContainer = '';
-      this.hasDismissButton = false;
-      this.closeButton = '';
-
-      this.dispatchCustomEvent = this.dispatchCustomEvent.bind(this);
-      this.appendCloseButton = this.appendCloseButton.bind(this);
-      this.removeCloseButton = this.removeCloseButton.bind(this);
-      this.render = this.render.bind(this);
-      this.close = this.close.bind(this);
-      this.callback = this.callback.bind(this);
-      this.init = this.init.bind(this);
-
-      // Create an observer instance linked to the callback function
-      this.observer = new MutationObserver(this.callback);
     }
+
     /* Lifecycle, element appended to the DOM */
     connectedCallback() {
-      // Start observing the target node for configured mutations
-      this.observer.observe(this, { attributes: true, childList: true, subtree: true });
-
       this.setAttribute('role', 'alert');
+      this.classList.add("joomla-alert--show");
 
       // Default to info
       if (!this.type || ['info', 'warning', 'danger', 'success'].indexOf(this.type) === -1) {
         this.setAttribute('type', 'info');
       }
+      // Append button
+      if (this.hasAttribute('dismiss') || this.hasAttribute('acknowledge') || (this.hasAttribute('href') && this.getAttribute('href') !== '')
+        && !this.querySelector('button.joomla-alert--close') && !this.querySelector('button.joomla-alert-button--close')) {
+        this.appendCloseButton();
+      }
 
-      if (this.querySelector('h4') && this.querySelector('div')) {
-        this.init();
+      this.dispatchCustomEvent('joomla.alert.show');
+
+      let closeButton = this.querySelector('button.joomla-alert--close') || this.querySelector('button.joomla-alert-button--close');
+
+      if (closeButton) {
+        closeButton.focus()
       }
     }
 
     /* Lifecycle, element removed from the DOM */
     disconnectedCallback() {
-      if (this.closeButton) {
-        this.closeButton.removeEventListener('click', this.close);
-      }
+      this.removeEventListener('joomla.alert.show', this);
+      this.removeEventListener('joomla.alert.close', this);
+      this.removeEventListener('joomla.alert.closed', this);
 
-      this.observer.disconnect();
+      if (this.firstChild.tagName && this.firstChild.tagName.toLowerCase() === 'button') {
+        this.firstChild.removeEventListener('click', this);
+      }
     }
 
     /* Respond to attribute changes */
@@ -66,109 +57,117 @@
           }
           break;
         case 'dismiss':
-        case 'title':
-        case 'message':
-        case 'button-text':
-          this.render();
+        case 'acknowledge':
+          if (!newValue || newValue === "true") {
+            this.appendCloseButton();
+          } else {
+            this.removeCloseButton();
+          }
           break;
-        default:
+        case 'href':
+          if (!newValue || newValue === '') {
+            this.removeCloseButton();
+          } else {
+            if (!this.querySelector('button.joomla-alert-button--close')) {
+              this.appendCloseButton();
+            }
+          }
           break;
       }
-    }
-
-    /* Method to dispatch events */
-    dispatchCustomEvent(eventName) {
-      const OriginalCustomEvent = new CustomEvent(eventName);
-      this.dispatchEvent(OriginalCustomEvent);
-      this.removeEventListener(eventName, OriginalCustomEvent);
     }
 
     /* Method to close the alert */
     close() {
-      this.dispatchCustomEvent('Joomla.Alert.onClose');
-      this.removeAttribute('show');
-      this.parentNode.removeChild(this);
+      this.dispatchCustomEvent('joomla.alert.close');
+      this.addEventListener("transitionend", function () {
+        this.dispatchCustomEvent('joomla.alert.closed');
+        this.parentNode.removeChild(this);
+      }, false);
+      this.classList.remove('joomla-alert--show');
+    }
+
+    /* Method to dispatch events */
+    dispatchCustomEvent(eventName) {
+      let OriginalCustomEvent = new CustomEvent(eventName);
+      OriginalCustomEvent.relatedTarget = this;
+      this.dispatchEvent(OriginalCustomEvent);
+      this.removeEventListener(eventName, this);
     }
 
     /* Method to create the close button */
     appendCloseButton() {
-      this.closeButton = this.querySelector('button');
-
-      if (this.closeButton) {
-        this.closeButton.setAttribute('aria-label', this.buttonText || 'Close');
-        this.closeButton.addEventListener('click', this.close);
-        this.closeButton.focus();
+      if (this.querySelector('button.joomla-alert--close') || this.querySelector('button.joomla-alert-button--close')) {
         return;
       }
 
-      this.closeButton = document.createElement('button');
-      const span = document.createElement('span');
-      span.setAttribute('aria-hidden', 'true');
-      span.innerHTML = '&times;';
-      this.closeButton.setAttribute('aria-label', this.buttonText || 'Close');
-      this.closeButton.appendChild(span);
+      let self = this, closeButton = document.createElement('button');
 
-      this.insertAdjacentElement('afterbegin', this.closeButton);
-      this.closeButton.addEventListener('click', this.close);
-      this.closeButton.focus();
+      if (this.hasAttribute('dismiss')) {
+        closeButton.classList.add('joomla-alert--close');
+        closeButton.innerHTML = '<span aria-hidden="true">&times;</span>';
+        closeButton.setAttribute('aria-label', this.getText('JCLOSE', 'Close'));
+      } else {
+        closeButton.classList.add('joomla-alert-button--close');
+        if (this.hasAttribute('acknowledge')) {
+          closeButton.innerHTML = this.getText('JOK', 'ok');
+        } else {
+          closeButton.innerHTML = this.getText('JOPEN', 'Open');
+        }
+      }
+
+      if (this.firstChild) {
+        this.insertBefore(closeButton, this.firstChild);
+      } else {
+        this.appendChild(closeButton);
+      }
+
+      /* Add the required listener */
+      if (closeButton) {
+        if (!this.href) {
+          closeButton.addEventListener('click', function () {
+            self.dispatchCustomEvent('joomla.alert.buttonClicked');
+            if (self.getAttribute('data-callback')) {
+              window[self.getAttribute('data-callback')]();
+              self.close();
+            } else {
+              self.close();
+            }
+          });
+        } else {
+          closeButton.addEventListener('click', function () {
+            self.dispatchCustomEvent('joomla.alert.buttonClicked');
+            window.location.href = self.href;
+            self.close();
+          });
+        }
+      }
+
+      if (this.hasAttribute('auto-dismiss')) {
+        setTimeout(function () {
+          self.dispatchCustomEvent('joomla.alert.buttonClicked');
+          if (self.hasAttribute('data-callback')) {
+            window[self.getAttribute('data-callback')]();
+          } else {
+            self.close();
+          }
+        }, parseInt(self.getAttribute('auto-dismiss')) ? self.getAttribute('auto-dismiss') : 3000);
+      }
     }
 
     /* Method to remove the close button */
     removeCloseButton() {
-      if (this.closeButton) {
-        this.closeButton.removeEventListener('click', this.close);
-        this.removeChild(this.closeButton);
+      let button = this.querySelector('button');
+      if (button) {
+        button.removeEventListener('click', this);
+        button.parentNode.removeChild(button);
       }
     }
 
-    // Callback function to execute when mutations are observed
-    callback(mutationsList) {
-      for (let mutation of mutationsList) {
-        if (mutation.type === 'childList') {
-          this.init();
-        }
-      }
-    }
-
-    init() {
-      if (this.header) {
-        this.title = this.header.innerText;
-      }
-
-      if (this.messageContainer) {
-        this.message = this.messageContainer.innerHTML;
-      }
-
-      this.render();
-
-      this.dispatchCustomEvent('Joomla.Alert.onShow');
-    }
-
-    render() {
-      if (this.title) {
-        if (!this.header) {
-          this.header = document.createElement('h4');
-          this.header.innerText = this.title;
-          this.appendChild(this.header);
-        }
-        this.header.innerText = this.title;
-      }
-
-      if (this.message) {
-        if (!this.messageContainer) {
-          this.messageContainer = document.createElement('div');
-          this.messageContainer.innerHTML = this.message;
-          this.appendChild(this.messageContainer);
-        }
-        this.messageContainer.innerHTML = this.message;
-      }
-
-      if (this.hasAttribute('dismiss') || (this.dismiss && this.dismiss !== 'false')) {
-        this.appendCloseButton();
-      } else {
-        this.removeCloseButton();
-      }
+    /* Method to get the translated text */
+    getText(str, fallback) {
+      return (window.Joomla && Joomla.JText && Joomla.JText._ && typeof Joomla.JText._ === 'function' && Joomla.JText._(str)) ? Joomla.JText._(str) : fallback;
     }
   }
-  customElements.define('joomla-alert', JoomlaAlert);
+
+  customElements.define('joomla-alert', JoomlaAlertElement);
 })();
