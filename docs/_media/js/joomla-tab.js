@@ -1,5 +1,5 @@
 (() => {
-  class JoomlaTabs extends HTMLElement {
+  customElements.define('joomla-tab', class extends HTMLElement {
     /* Attributes to monitor */
     static get observedAttributes() { return ['recall', 'orientation', 'view']; }
     get recall() { return this.getAttribute('recall'); }
@@ -204,12 +204,12 @@
         e.target.setAttribute('active', '');
         e.target.setAttribute('aria-selected', 'true');
         e.target.setAttribute('tabindex', '0');
-        this.querySelector(e.target.id).setAttribute('active', '');
-        this.querySelector(e.target.id).removeAttribute('aria-hidden');
-        this.currentActive = e.target.id.substring(1);
+        this.querySelector(e.target.hash).setAttribute('active', '');
+        this.querySelector(e.target.hash).removeAttribute('aria-hidden');
+        this.currentActive = e.target.hash.substring(1);
         // Emit shown event
         this.dispatchCustomEvent('joomla.tab.shown', e.target, this.querySelector(`#tab-${currentTabLink}`));
-        this.saveState(`#tab-${e.target.id.substring(1)}`);
+        this.saveState(`#tab-${e.target.hash.substring(1)}`);
       };
 
       tabs.forEach((tab) => {
@@ -388,7 +388,5 @@
       element.dispatchEvent(OriginalCustomEvent);
       element.removeEventListener(eventName, element);
     }
-  }
-
-  customElements.define('joomla-tabs', JoomlaTabs);
+  });
 })();

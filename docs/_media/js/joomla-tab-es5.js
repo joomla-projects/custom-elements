@@ -32,10 +32,10 @@ function _inherits(subClass, superClass) {
 }
 
 (function () {
-  var JoomlaTabs = function (_HTMLElement) {
-    _inherits(JoomlaTabs, _HTMLElement);
+  customElements.define('joomla-tab', function (_HTMLElement) {
+    _inherits(_class, _HTMLElement);
 
-    _createClass(JoomlaTabs, [{
+    _createClass(_class, [{
       key: 'recall',
       get: function get() {
         return this.getAttribute('recall');
@@ -68,10 +68,10 @@ function _inherits(subClass, superClass) {
       }
     }]);
 
-    function JoomlaTabs() {
-      _classCallCheck(this, JoomlaTabs);
+    function _class() {
+      _classCallCheck(this, _class);
 
-      var _this = _possibleConstructorReturn(this, (JoomlaTabs.__proto__ || Object.getPrototypeOf(JoomlaTabs)).call(this));
+      var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this));
 
       _this.hasActive = false;
       _this.currentActive = '';
@@ -83,7 +83,7 @@ function _inherits(subClass, superClass) {
 
     /* Lifecycle, element appended to the DOM */
 
-    _createClass(JoomlaTabs, [{
+    _createClass(_class, [{
       key: 'connectedCallback',
       value: function connectedCallback() {
         var _this2 = this;
@@ -281,12 +281,12 @@ function _inherits(subClass, superClass) {
           e.target.setAttribute('active', '');
           e.target.setAttribute('aria-selected', 'true');
           e.target.setAttribute('tabindex', '0');
-          _this4.querySelector(e.target.id).setAttribute('active', '');
-          _this4.querySelector(e.target.id).removeAttribute('aria-hidden');
-          _this4.currentActive = e.target.id.substring(1);
+          _this4.querySelector(e.target.hash).setAttribute('active', '');
+          _this4.querySelector(e.target.hash).removeAttribute('aria-hidden');
+          _this4.currentActive = e.target.hash.substring(1);
           // Emit shown event
           _this4.dispatchCustomEvent('joomla.tab.shown', e.target, _this4.querySelector('#tab-' + currentTabLink));
-          _this4.saveState('#tab-' + e.target.id.substring(1));
+          _this4.saveState('#tab-' + e.target.hash.substring(1));
         };
 
         tabs.forEach(function (tab) {
@@ -479,10 +479,8 @@ function _inherits(subClass, superClass) {
       }
     }]);
 
-    return JoomlaTabs;
-  }(HTMLElement);
-
-  customElements.define('joomla-tabs', JoomlaTabs);
+    return _class;
+  }(HTMLElement));
 })();
 
 },{}]},{},[1]);
