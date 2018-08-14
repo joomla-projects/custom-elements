@@ -74,7 +74,12 @@
     "prefix": "joomla",
     "elements": [
       "alert",
-      "tab"
+      "tab",
+      "dropdown",
+      "collapse",
+      "modal",
+      "panels",
+      "tip"
     ],
     "browsers": "last 1 version"
   },

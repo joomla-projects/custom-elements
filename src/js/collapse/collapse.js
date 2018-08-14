@@ -1,12 +1,4 @@
 (() => {
-  /** Include the relative styles */
-  if (!document.head.querySelector('#joomla-collapse-style')) {
-    const style = document.createElement('style');
-    style.id = 'joomla-collapse-style';
-    style.innerHTML = '{{stylesheet}}';
-    document.head.appendChild(style);
-  }
-
   customElements.define('joomla-collapse', class extends HTMLElement {
     static get observedAttributes() {
       return ['state'];

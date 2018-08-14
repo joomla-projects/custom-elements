@@ -1,12 +1,4 @@
 (() => {
-  /** Include the relative styles */
-  if (!document.head.querySelector('#joomla-modal-style')) {
-    const style = document.createElement('style');
-    style.id = 'joomla-modal-style';
-    style.innerHTML = '{{stylesheet}}';
-    document.head.appendChild(style);
-  }
-
   // Keycodes
   const KEYCODE = {
     TAB: 9,

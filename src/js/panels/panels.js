@@ -1,12 +1,4 @@
 (() => {
-  /** Include the relative styles */
-  if (!document.head.querySelector('#joomla-panels-style')) {
-    const style = document.createElement('style');
-    style.id = 'joomla-panels-style';
-    style.innerHTML = '{{stylesheet}}';
-    document.head.appendChild(style);
-  }
-
   customElements.define('joomla-panels', class extends HTMLElement {
     /* Attributes to monitor */
     static get observedAttributes() { return ['recall', 'orientation', 'view', 'responsive', 'collapse-width']; }

@@ -54,7 +54,7 @@ function _inherits(subClass, superClass) {
         return this.getAttribute('orientation');
       },
       set: function set(value) {
-        this.setAttribute('oriendation', value);
+        this.setAttribute('orientation', value);
       }
 
       /* Lifecycle, element created */

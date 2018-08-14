@@ -1,12 +1,4 @@
 (() => {
-  /** Include the relative styles */
-  if (!document.head.querySelector('#joomla-tip-style')) {
-    const style = document.createElement('style');
-    style.id = 'joomla-tip-style';
-    style.innerHTML = '{{stylesheet}}';
-    document.head.appendChild(style);
-  }
-
   customElements.define('joomla-tip', class extends HTMLElement {
     /* Attributes to monitor */
     static get observedAttributes() { return ['type', 'label', 'tip', 'text', 'position']; }
