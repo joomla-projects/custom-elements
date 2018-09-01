@@ -40,7 +40,7 @@
         this.isNested = true;
       }
 
-      if (this.querySelector('joomla-tab')) {
+      if (this.querySelectorAll('joomla-tab')) {
         this.hasNested = true;
       }
 
@@ -60,8 +60,7 @@
         }
         // @todo end
 
-        // Add possible parent tab to the aray for activation
-        console.log(tabLinkHash)
+        // Add possible parent tab to the array for activation
         if (tabLinkHash.length && tabLinkHash[0] !== '') {
           const hash = tabLinkHash[0].substring(5);
           const element = this.querySelector(`#${hash}`);
