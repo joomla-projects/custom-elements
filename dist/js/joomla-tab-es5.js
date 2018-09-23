@@ -254,8 +254,6 @@ function _getPrototypeOf(o) {
           // Add possible parent tab to the aray for activation
 
 
-          console.log(tabLinkHash);
-
           if (tabLinkHash.length && tabLinkHash[0] !== '') {
             var hash = tabLinkHash[0].substring(5);
             var element = this.querySelector("#".concat(hash)); // Add the parent tab to the array for activation
