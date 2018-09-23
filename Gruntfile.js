@@ -123,7 +123,7 @@ module.exports = (grunt) => {
               "babelify",
               {
                 "presets": [
-                  "es2015"
+                  "@babel/preset-env"
                 ],
                 "env": {
                   "production": {
