@@ -14,8 +14,10 @@
     get href() { return this.getAttribute('href'); }
 
     /* Lifecycle, element created */
-    constructor(...args) {
-      super(...args);
+    constructor() {
+      super();
+
+      this.type = 'info';
     }
 
     /* Lifecycle, element appended to the DOM */
@@ -24,7 +26,7 @@
       this.classList.add('joomla-alert--show');
 
       // Default to info
-      if (!this.type || ['info', 'warning', 'danger', 'success'].indexOf(this.type) === -1) {
+      if (['info', 'warning', 'danger', 'success'].indexOf(this.type) === -1) {
         this.setAttribute('type', 'info');
       }
       // Append button
