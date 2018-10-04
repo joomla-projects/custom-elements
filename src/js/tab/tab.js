@@ -31,7 +31,7 @@
       }
 
       // get tab elements
-      const self = this;
+      let self = this;
       const tabs = [].slice.call(this.querySelectorAll('section'));
       let tabsEl = [];
       const tabLinkHash = [];
@@ -372,7 +372,7 @@
 
         if (tabsEl.length) {
           tabsEl.forEach((panel) => {
-            const link = self.querySelector('a[aria-controls="' + panel.id + '"]');
+            const link = self.querySelector(`a[aria-controls="${panel.id}"]`);
             if (link.parentNode.parentNode === self.firstElementChild) {
               link.parentNode.appendChild(panel);
             }
@@ -381,7 +381,8 @@
       }
     }
 
-    findAncestor(el, tagName) {
+    findAncestor(element, tagName) {
+      let el = element;
       while ((el = el.parentElement) && el.nodeName.toLowerCase() !== tagName);
       return el;
     }

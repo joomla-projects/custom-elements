@@ -28,8 +28,8 @@
         this.setAttribute('type', 'info');
       }
       // Append button
-      if ((this.hasAttribute('dismiss') || this.hasAttribute('acknowledge') || (this.hasAttribute('href')) && this.getAttribute('href') !== '')
-        && !this.querySelector('button.joomla-alert--close') && !this.querySelector('button.joomla-alert-button--close')) {
+      if ((this.hasAttribute('dismiss') || this.hasAttribute('acknowledge')) || ((this.hasAttribute('href') && this.getAttribute('href') !== '')
+        && !this.querySelector('button.joomla-alert--close') && !this.querySelector('button.joomla-alert-button--close'))) {
         this.appendCloseButton();
       }
 
