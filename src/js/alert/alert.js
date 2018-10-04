@@ -14,8 +14,8 @@
     get href() { return this.getAttribute('href'); }
 
     /* Lifecycle, element created */
-    constructor() {
-      super();
+    constructor(...args) {
+      super(...args);
     }
 
     /* Lifecycle, element appended to the DOM */
@@ -28,7 +28,7 @@
         this.setAttribute('type', 'info');
       }
       // Append button
-      if (this.hasAttribute('dismiss') || this.hasAttribute('acknowledge') || (this.hasAttribute('href') && this.getAttribute('href') !== '')
+      if ((this.hasAttribute('dismiss') || this.hasAttribute('acknowledge') || (this.hasAttribute('href')) && this.getAttribute('href') !== '')
         && !this.querySelector('button.joomla-alert--close') && !this.querySelector('button.joomla-alert-button--close')) {
         this.appendCloseButton();
       }
@@ -84,7 +84,7 @@
     /* Method to close the alert */
     close() {
       this.dispatchCustomEvent('joomla.alert.close');
-      this.addEventListener('transitionend', function () {
+      this.addEventListener('transitionend', () => {
         this.dispatchCustomEvent('joomla.alert.closed');
         this.parentNode.removeChild(this);
       }, false);
@@ -93,7 +93,7 @@
 
     /* Method to dispatch events */
     dispatchCustomEvent(eventName) {
-      let OriginalCustomEvent = new CustomEvent(eventName);
+      const OriginalCustomEvent = new CustomEvent(eventName);
       OriginalCustomEvent.relatedTarget = this;
       this.dispatchEvent(OriginalCustomEvent);
       this.removeEventListener(eventName, this);
@@ -105,7 +105,8 @@
         return;
       }
 
-      const self = this, closeButton = document.createElement('button');
+      const self = this;
+      const closeButton = document.createElement('button');
 
       if (this.hasAttribute('dismiss')) {
         closeButton.classList.add('joomla-alert--close');
@@ -129,7 +130,7 @@
       /* Add the required listener */
       if (closeButton) {
         if (!this.href) {
-          closeButton.addEventListener('click', function () {
+          closeButton.addEventListener('click', () => {
             self.dispatchCustomEvent('joomla.alert.buttonClicked');
             if (self.getAttribute('data-callback')) {
               window[self.getAttribute('data-callback')]();
@@ -139,7 +140,7 @@
             }
           });
         } else {
-          closeButton.addEventListener('click', function () {
+          closeButton.addEventListener('click', () => {
             self.dispatchCustomEvent('joomla.alert.buttonClicked');
             window.location.href = self.href;
             self.close();
@@ -148,14 +149,14 @@
       }
 
       if (this.hasAttribute('auto-dismiss')) {
-        setTimeout(function () {
+        setTimeout(() => {
           self.dispatchCustomEvent('joomla.alert.buttonClicked');
           if (self.hasAttribute('data-callback')) {
             window[self.getAttribute('data-callback')]();
           } else {
             self.close();
           }
-        }, parseInt(self.getAttribute('auto-dismiss')) ? self.getAttribute('auto-dismiss') : 3000, 10);
+        }, parseInt(self.getAttribute('auto-dismiss'), 10) ? self.getAttribute('auto-dismiss') : 3000);
       }
     }
 

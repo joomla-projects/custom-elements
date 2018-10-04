@@ -31,9 +31,9 @@
       }
 
       // get tab elements
-      let self = this;
+      const self = this;
       const tabs = [].slice.call(this.querySelectorAll('section'));
-      const tabsEl = [];
+      let tabsEl = [];
       const tabLinkHash = [];
 
       // Sanity check
@@ -333,7 +333,7 @@
     /** Method to convert tabs to accordion and vice versa depending on screen size */
     checkView(self) {
       const nav = self.querySelector('ul');
-      let tabsEl = [];
+      const tabsEl = [];
       if (document.body.getBoundingClientRect().width > 920) {
         if (this.view === 'tabs') {
           return;
@@ -343,7 +343,7 @@
         const panels = [].slice.call(nav.querySelectorAll('section'));
 
         // remove the cascaded tabs
-        for (let i = 0, l = panels.length; i < l; ++i) {
+        for (let i = 0, l = panels.length; i < l; i += 1) {
           if (panels[i].parentNode.parentNode.parentNode === self) {
             tabsEl.push(panels[i]);
           }
@@ -358,13 +358,13 @@
         if (this.view === 'accordion') {
           return;
         }
-        self.view = 'accordion'
+        self.view = 'accordion';
 
         // convert to accordion
         const panels = [].slice.call(self.querySelectorAll('section'));
 
         // remove the cascaded tabs
-        for (let i = 0, l = panels.length; i < l; ++i) {
+        for (let i = 0, l = panels.length; i < l; i += 1) {
           if (panels[i].parentNode === self) {
             tabsEl.push(panels[i]);
           }
@@ -372,7 +372,7 @@
 
         if (tabsEl.length) {
           tabsEl.forEach((panel) => {
-            const link = self.querySelector('a[aria-controls="' + panel.id + '"]')
+            const link = self.querySelector('a[aria-controls="' + panel.id + '"]');
             if (link.parentNode.parentNode === self.firstElementChild) {
               link.parentNode.appendChild(panel);
             }
