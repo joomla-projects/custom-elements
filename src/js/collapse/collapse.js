@@ -5,6 +5,7 @@
     }
 
     get state() { return this.getAttribute('state'); }
+
     set state(value) { return this.setAttribute('state', value); }
 
     connectedCallback() {

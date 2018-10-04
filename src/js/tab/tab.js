@@ -2,10 +2,15 @@
   customElements.define('joomla-tab', class extends HTMLElement {
     /* Attributes to monitor */
     static get observedAttributes() { return ['recall', 'orientation', 'view']; }
+
     get recall() { return this.getAttribute('recall'); }
+
     get view() { return this.getAttribute('view'); }
+
     set view(value) { this.setAttribute('view', value); }
+
     get orientation() { return this.getAttribute('orientation'); }
+
     set orientation(value) { this.setAttribute('orientation', value); }
 
     /* Lifecycle, element created */
@@ -26,10 +31,10 @@
       }
 
       // get tab elements
-      const self = this;
+      let self = this;
       const tabs = [].slice.call(this.querySelectorAll('section'));
-      let tabsEl = [];
-      let tabLinkHash = [];
+      const tabsEl = [];
+      const tabLinkHash = [];
 
       // Sanity check
       if (!tabs) {
@@ -281,10 +286,10 @@
         const currentTab = this.querySelector(`#tab-${this.currentActive}`);
         // const tablist = [].slice.call(this.querySelector('ul').querySelectorAll('a'));
 
-        const previousTabItem = currentTab.parentNode.previousElementSibling ||
-          currentTab.parentNode.parentNode.lastElementChild;
-        const nextTabItem = currentTab.parentNode.nextElementSibling ||
-          currentTab.parentNode.parentNode.firstElementChild;
+        const previousTabItem = currentTab.parentNode.previousElementSibling
+          || currentTab.parentNode.parentNode.lastElementChild;
+        const nextTabItem = currentTab.parentNode.nextElementSibling
+          || currentTab.parentNode.parentNode.firstElementChild;
 
         // don't catch key events when ⌘ or Alt modifier is present
         if (e.metaKey || e.altKey) {
@@ -333,7 +338,7 @@
         if (this.view === 'tabs') {
           return;
         }
-        self.view = 'tabs'
+        self.view = 'tabs';
         // convert to tabs
         const panels = [].slice.call(nav.querySelectorAll('section'));
 
@@ -368,8 +373,9 @@
         if (tabsEl.length) {
           tabsEl.forEach((panel) => {
             const link = self.querySelector('a[aria-controls="' + panel.id + '"]')
-            if (link.parentNode.parentNode === self.firstElementChild)
+            if (link.parentNode.parentNode === self.firstElementChild) {
               link.parentNode.appendChild(panel);
+            }
           });
         }
       }
