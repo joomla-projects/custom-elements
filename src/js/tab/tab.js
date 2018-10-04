@@ -31,7 +31,7 @@
       }
 
       // get tab elements
-      let self = this;
+      const self = this;
       const tabs = [].slice.call(this.querySelectorAll('section'));
       let tabsEl = [];
       const tabLinkHash = [];
@@ -332,7 +332,7 @@
 
     /** Method to convert tabs to accordion and vice versa depending on screen size */
     checkView(element) {
-      let el = element;
+      const el = element;
       const nav = el.querySelector('ul');
       const tabsEl = [];
       if (document.body.getBoundingClientRect().width > 920) {
