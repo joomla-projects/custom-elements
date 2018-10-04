@@ -331,49 +331,50 @@
     }
 
     /** Method to convert tabs to accordion and vice versa depending on screen size */
-    checkView(self) {
-      const nav = self.querySelector('ul');
+    checkView(element) {
+      let el = element;
+      const nav = el.querySelector('ul');
       const tabsEl = [];
       if (document.body.getBoundingClientRect().width > 920) {
         if (this.view === 'tabs') {
           return;
         }
-        self.view = 'tabs';
+        el.view = 'tabs';
         // convert to tabs
         const panels = [].slice.call(nav.querySelectorAll('section'));
 
         // remove the cascaded tabs
         for (let i = 0, l = panels.length; i < l; i += 1) {
-          if (panels[i].parentNode.parentNode.parentNode === self) {
+          if (panels[i].parentNode.parentNode.parentNode === el) {
             tabsEl.push(panels[i]);
           }
         }
 
         if (tabsEl.length) {
           tabsEl.forEach((panel) => {
-            self.appendChild(panel);
+            el.appendChild(panel);
           });
         }
       } else {
         if (this.view === 'accordion') {
           return;
         }
-        self.view = 'accordion';
+        el.view = 'accordion';
 
         // convert to accordion
-        const panels = [].slice.call(self.querySelectorAll('section'));
+        const panels = [].slice.call(el.querySelectorAll('section'));
 
         // remove the cascaded tabs
         for (let i = 0, l = panels.length; i < l; i += 1) {
-          if (panels[i].parentNode === self) {
+          if (panels[i].parentNode === el) {
             tabsEl.push(panels[i]);
           }
         }
 
         if (tabsEl.length) {
           tabsEl.forEach((panel) => {
-            const link = self.querySelector(`a[aria-controls="${panel.id}"]`);
-            if (link.parentNode.parentNode === self.firstElementChild) {
+            const link = el.querySelector(`a[aria-controls="${panel.id}"]`);
+            if (link.parentNode.parentNode === el.firstElementChild) {
               link.parentNode.appendChild(panel);
             }
           });
@@ -381,11 +382,12 @@
       }
     }
 
-    findAncestor(element, tagName) {
-      let el = element;
+    /* eslint-disable */
+    findAncestor(el, tagName) {
       while ((el = el.parentElement) && el.nodeName.toLowerCase() !== tagName);
       return el;
     }
+    /* eslint-enable */
 
     /* Method to dispatch events */
     dispatchCustomEvent(eventName, element, related) {
