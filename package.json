@@ -44,7 +44,7 @@
     "grunt-contrib-cssmin": "latest",
     "grunt-contrib-uglify-es": "git://github.com/gruntjs/grunt-contrib-uglify.git#harmony",
     "grunt-postcss-x": "latest",
-    "grunt-sass": "^2.1.0",
+    "grunt-sass": "^3.0.2",
     "grunt-shell": "latest",
     "wct-browser-legacy": "latest",
     "web-component-tester": "latest"
