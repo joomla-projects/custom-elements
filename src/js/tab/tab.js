@@ -382,7 +382,6 @@
       }
     }
 
-    /* eslint-disable */
     findAncestor(el, tagName) {
       let element = el;
       while (element.nodeName.toLowerCase() !== tagName) {
@@ -390,7 +389,6 @@
       }
       return element;
     }
-    /* eslint-enable */
 
     /* Method to dispatch events */
     dispatchCustomEvent(eventName, element, related) {
