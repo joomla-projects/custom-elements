@@ -100,7 +100,7 @@
         tabs.forEach((tab) => {
           if (tabLinkHash.length) {
             const theId = `#tab-${tab.id}`;
-            if (tabLinkHash.indexOf(theId) > -1) {
+            if (tabLinkHash.indexOf(theId) === -1) {
               tab.removeAttribute('active');
             } else {
               tab.setAttribute('active', '');
