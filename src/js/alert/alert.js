@@ -2,10 +2,15 @@
   class JoomlaAlertElement extends HTMLElement {
     /* Attributes to monitor */
     static get observedAttributes() { return ['type', 'dismiss', 'acknowledge', 'href']; }
+
     get type() { return this.getAttribute('type'); }
+
     set type(value) { return this.setAttribute('type', value); }
+
     get dismiss() { return this.getAttribute('dismiss'); }
+
     get acknowledge() { return this.getAttribute('acknowledge'); }
+
     get href() { return this.getAttribute('href'); }
 
     /* Lifecycle, element created */
@@ -16,7 +21,7 @@
     /* Lifecycle, element appended to the DOM */
     connectedCallback() {
       this.setAttribute('role', 'alert');
-      this.classList.add("joomla-alert--show");
+      this.classList.add('joomla-alert--show');
 
       // Default to info
       if (!this.type || ['info', 'warning', 'danger', 'success'].indexOf(this.type) === -1) {
@@ -30,10 +35,10 @@
 
       this.dispatchCustomEvent('joomla.alert.show');
 
-      let closeButton = this.querySelector('button.joomla-alert--close') || this.querySelector('button.joomla-alert-button--close');
+      const closeButton = this.querySelector('button.joomla-alert--close') || this.querySelector('button.joomla-alert-button--close');
 
       if (closeButton) {
-        closeButton.focus()
+        closeButton.focus();
       }
     }
 
@@ -58,7 +63,7 @@
           break;
         case 'dismiss':
         case 'acknowledge':
-          if (!newValue || newValue === "true") {
+          if (!newValue || newValue === 'true') {
             this.appendCloseButton();
           } else {
             this.removeCloseButton();
@@ -67,10 +72,8 @@
         case 'href':
           if (!newValue || newValue === '') {
             this.removeCloseButton();
-          } else {
-            if (!this.querySelector('button.joomla-alert-button--close')) {
-              this.appendCloseButton();
-            }
+          } else if (!this.querySelector('button.joomla-alert-button--close')) {
+            this.appendCloseButton();
           }
           break;
       }
@@ -79,7 +82,7 @@
     /* Method to close the alert */
     close() {
       this.dispatchCustomEvent('joomla.alert.close');
-      this.addEventListener("transitionend", function () {
+      this.addEventListener('transitionend', function () {
         this.dispatchCustomEvent('joomla.alert.closed');
         this.parentNode.removeChild(this);
       }, false);
@@ -88,7 +91,7 @@
 
     /* Method to dispatch events */
     dispatchCustomEvent(eventName) {
-      let OriginalCustomEvent = new CustomEvent(eventName);
+      const OriginalCustomEvent = new CustomEvent(eventName);
       OriginalCustomEvent.relatedTarget = this;
       this.dispatchEvent(OriginalCustomEvent);
       this.removeEventListener(eventName, this);
@@ -100,7 +103,8 @@
         return;
       }
 
-      let self = this, closeButton = document.createElement('button');
+      const self = this; const
+        closeButton = document.createElement('button');
 
       if (this.hasAttribute('dismiss')) {
         closeButton.classList.add('joomla-alert--close');
@@ -124,7 +128,7 @@
       /* Add the required listener */
       if (closeButton) {
         if (!this.href) {
-          closeButton.addEventListener('click', function () {
+          closeButton.addEventListener('click', () => {
             self.dispatchCustomEvent('joomla.alert.buttonClicked');
             if (self.getAttribute('data-callback')) {
               window[self.getAttribute('data-callback')]();
@@ -134,7 +138,7 @@
             }
           });
         } else {
-          closeButton.addEventListener('click', function () {
+          closeButton.addEventListener('click', () => {
             self.dispatchCustomEvent('joomla.alert.buttonClicked');
             window.location.href = self.href;
             self.close();
@@ -143,7 +147,7 @@
       }
 
       if (this.hasAttribute('auto-dismiss')) {
-        setTimeout(function () {
+        setTimeout(() => {
           self.dispatchCustomEvent('joomla.alert.buttonClicked');
           if (self.hasAttribute('data-callback')) {
             window[self.getAttribute('data-callback')]();
@@ -156,7 +160,7 @@
 
     /* Method to remove the close button */
     removeCloseButton() {
-      let button = this.querySelector('button');
+      const button = this.querySelector('button');
       if (button) {
         button.removeEventListener('click', this);
         button.parentNode.removeChild(button);
