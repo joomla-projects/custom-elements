@@ -13,11 +13,6 @@
 
     get href() { return this.getAttribute('href'); }
 
-    /* Lifecycle, element created */
-    constructor() {
-      super();
-    }
-
     /* Lifecycle, element appended to the DOM */
     connectedCallback() {
       this.setAttribute('role', 'alert');
