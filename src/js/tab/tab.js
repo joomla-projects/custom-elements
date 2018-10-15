@@ -105,7 +105,7 @@
         tabs.forEach((tab) => {
           if (tabLinkHash.length) {
             const theId = `#tab-${tab.id}`;
-            if (tabLinkHash.indexOf(theId) > -1) {
+            if (tabLinkHash.indexOf(theId) === -1) {
               tab.removeAttribute('active');
             } else {
               tab.setAttribute('active', '');
@@ -384,8 +384,11 @@
 
     /* eslint-disable */
     findAncestor(el, tagName) {
-      while ((el = el.parentElement) && el.nodeName.toLowerCase() !== tagName);
-      return el;
+      let element = el;
+      while (element.nodeName.toLowerCase() !== tagName) {
+        element = element.parentElement;
+      }
+      return element;
     }
     /* eslint-enable */
 
