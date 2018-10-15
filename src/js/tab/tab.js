@@ -373,15 +373,20 @@
         if (tabsEl.length) {
           tabsEl.forEach((panel) => {
             const link = self.querySelector(`a[aria-controls="${panel.id}"]`);
-            if (link.parentNode.parentNode === self.firstElementChild) link.parentNode.appendChild(panel);
+            if (link.parentNode.parentNode === self.firstElementChild) {
+              link.parentNode.appendChild(panel);
+            }
           });
         }
       }
     }
 
     findAncestor(el, tagName) {
-      while ((el = el.parentElement) && el.nodeName.toLowerCase() !== tagName);
-      return el;
+      let element = el;
+      while (element.nodeName.toLowerCase() !== tagName) {
+        element = element.parentElement;
+      }
+      return element;
     }
 
     /* Method to dispatch events */

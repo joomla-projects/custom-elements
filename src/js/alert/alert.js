@@ -77,7 +77,7 @@
     /* Method to close the alert */
     close() {
       this.dispatchCustomEvent('joomla.alert.close');
-      this.addEventListener('transitionend', function () {
+      this.addEventListener('transitionend', () => {
         this.dispatchCustomEvent('joomla.alert.closed');
         this.parentNode.removeChild(this);
       }, false);
