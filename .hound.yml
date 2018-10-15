@@ -12,4 +12,4 @@ eslint:
   ignore_file: .eslintignore
 
 ruby:
-enabled: false
+  enabled: false
