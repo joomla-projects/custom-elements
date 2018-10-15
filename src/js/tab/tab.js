@@ -344,7 +344,7 @@
         const panels = [].slice.call(nav.querySelectorAll('section'));
 
         // remove the cascaded tabs
-        for (let i = 0, l = panels.length; i < l; i += 1) {
+        for (let i = 0, l = panels.length; i < l; ++i) {
           if (panels[i].parentNode.parentNode.parentNode === el) {
             tabsEl.push(panels[i]);
           }
@@ -365,7 +365,7 @@
         const panels = [].slice.call(el.querySelectorAll('section'));
 
         // remove the cascaded tabs
-        for (let i = 0, l = panels.length; i < l; i += 1) {
+        for (let i = 0, l = panels.length; i < l; ++i) {
           if (panels[i].parentNode === el) {
             tabsEl.push(panels[i]);
           }
