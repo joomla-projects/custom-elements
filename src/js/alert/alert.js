@@ -13,18 +13,25 @@
 
     get href() { return this.getAttribute('href'); }
 
+    /* Lifecycle, element created */
+    constructor() {
+      super();
+
+      this.type = 'info';
+    }
+
     /* Lifecycle, element appended to the DOM */
     connectedCallback() {
       this.setAttribute('role', 'alert');
       this.classList.add('joomla-alert--show');
 
       // Default to info
-      if (!this.type || ['info', 'warning', 'danger', 'success'].indexOf(this.type) === -1) {
+      if (['info', 'warning', 'danger', 'success'].indexOf(this.type) === -1) {
         this.setAttribute('type', 'info');
       }
       // Append button
-      if (this.hasAttribute('dismiss') || this.hasAttribute('acknowledge') || (this.hasAttribute('href') && this.getAttribute('href') !== '')
-        && !this.querySelector('button.joomla-alert--close') && !this.querySelector('button.joomla-alert-button--close')) {
+      if ((this.hasAttribute('dismiss') || this.hasAttribute('acknowledge')) || ((this.hasAttribute('href') && this.getAttribute('href') !== '')
+        && !this.querySelector('button.joomla-alert--close') && !this.querySelector('button.joomla-alert-button--close'))) {
         this.appendCloseButton();
       }
 
@@ -71,6 +78,8 @@
             this.appendCloseButton();
           }
           break;
+        default:
+          break;
       }
     }
 
@@ -98,8 +107,8 @@
         return;
       }
 
-      const self = this; const
-        closeButton = document.createElement('button');
+      const self = this;
+      const closeButton = document.createElement('button');
 
       if (this.hasAttribute('dismiss')) {
         closeButton.classList.add('joomla-alert--close');
@@ -149,7 +158,7 @@
           } else {
             self.close();
           }
-        }, parseInt(self.getAttribute('auto-dismiss')) ? self.getAttribute('auto-dismiss') : 3000);
+        }, parseInt(self.getAttribute('auto-dismiss'), 10) ? self.getAttribute('auto-dismiss') : 3000);
       }
     }
 
