@@ -13,3 +13,6 @@ eslint:
 
 ruby:
   enabled: false
+
+rubocop:
+  enabled: false
