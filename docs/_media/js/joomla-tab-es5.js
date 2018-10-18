@@ -294,7 +294,7 @@ function _getPrototypeOf(o) {
             if (tabLinkHash.length) {
               var theId = "#tab-".concat(tab.id);
 
-              if (tabLinkHash.indexOf(theId) > -1) {
+              if (tabLinkHash.indexOf(theId) === -1) {
                 tab.removeAttribute('active');
               } else {
                 tab.setAttribute('active', '');
@@ -544,8 +544,9 @@ function _getPrototypeOf(o) {
 
     }, {
       key: "checkView",
-      value: function checkView(self) {
-        var nav = self.querySelector('ul');
+      value: function checkView(element) {
+        var el = element;
+        var nav = el.querySelector('ul');
         var tabsEl = [];
 
         if (document.body.getBoundingClientRect().width > 920) {
@@ -553,19 +554,19 @@ function _getPrototypeOf(o) {
             return;
           }
 
-          self.view = 'tabs'; // convert to tabs
+          el.view = 'tabs'; // convert to tabs
 
           var panels = [].slice.call(nav.querySelectorAll('section')); // remove the cascaded tabs
 
           for (var i = 0, l = panels.length; i < l; ++i) {
-            if (panels[i].parentNode.parentNode.parentNode === self) {
+            if (panels[i].parentNode.parentNode.parentNode === el) {
               tabsEl.push(panels[i]);
             }
           }
 
           if (tabsEl.length) {
             tabsEl.forEach(function (panel) {
-              self.appendChild(panel);
+              el.appendChild(panel);
             });
           }
         } else {
@@ -573,21 +574,24 @@ function _getPrototypeOf(o) {
             return;
           }
 
-          self.view = 'accordion'; // convert to accordion
+          el.view = 'accordion'; // convert to accordion
 
-          var _panels = [].slice.call(self.querySelectorAll('section')); // remove the cascaded tabs
+          var _panels = [].slice.call(el.querySelectorAll('section')); // remove the cascaded tabs
 
 
           for (var _i = 0, _l = _panels.length; _i < _l; ++_i) {
-            if (_panels[_i].parentNode === self) {
+            if (_panels[_i].parentNode === el) {
               tabsEl.push(_panels[_i]);
             }
           }
 
           if (tabsEl.length) {
             tabsEl.forEach(function (panel) {
-              var link = self.querySelector('a[aria-controls="' + panel.id + '"]');
-              if (link.parentNode.parentNode === self.firstElementChild) link.parentNode.appendChild(panel);
+              var link = el.querySelector("a[aria-controls=\"".concat(panel.id, "\"]"));
+
+              if (link.parentNode.parentNode === el.firstElementChild) {
+                link.parentNode.appendChild(panel);
+              }
             });
           }
         }
@@ -595,11 +599,13 @@ function _getPrototypeOf(o) {
     }, {
       key: "findAncestor",
       value: function findAncestor(el, tagName) {
-        while ((el = el.parentElement) && el.nodeName.toLowerCase() !== tagName) {
-          ;
+        var element = el;
+
+        while (element.nodeName.toLowerCase() !== tagName) {
+          element = element.parentElement;
         }
 
-        return el;
+        return element;
       }
       /* Method to dispatch events */
 

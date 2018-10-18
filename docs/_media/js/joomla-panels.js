@@ -2,15 +2,25 @@
   customElements.define('joomla-panels', class extends HTMLElement {
     /* Attributes to monitor */
     static get observedAttributes() { return ['recall', 'orientation', 'view', 'responsive', 'collapse-width']; }
+
     get recall() { return this.getAttribute('recall'); }
+
     set recall(value) { return this.setAttribute('recall', value); }
+
     get view() { return this.getAttribute('view'); }
+
     set view(value) { this.setAttribute('view', value); }
+
     get orientation() { return this.getAttribute('orientation') || 'horizontal'; }
+
     set orientation(value) { this.setAttribute('orientation', value); }
+
     get responsive() { return this.getAttribute('responsive'); }
+
     set responsive(value) { this.setAttribute('responsive', value); }
+
     get collapseWidth() { return this.getAttribute('collapse-width'); }
+
     set collapseWidth(value) { this.setAttribute('collapse-width', value); }
 
     /* Lifecycle, element created */
@@ -234,10 +244,10 @@
       // collect tab targets, and their parents' prev/next (or first/last)
       const currentTab = this.querySelector(`#tab-${this.currentActive}`);
 
-      const previousTabItem = currentTab.parentNode.previousElementSibling ||
-        currentTab.parentNode.parentNode.lastElementChild;
-      const nextTabItem = currentTab.parentNode.nextElementSibling ||
-        currentTab.parentNode.parentNode.firstElementChild;
+      const previousTabItem = currentTab.parentNode.previousElementSibling
+        || currentTab.parentNode.parentNode.lastElementChild;
+      const nextTabItem = currentTab.parentNode.nextElementSibling
+        || currentTab.parentNode.parentNode.firstElementChild;
 
       // Don't catch key events when ⌘ or Alt modifier is present
       if (e.metaKey || e.altKey) {

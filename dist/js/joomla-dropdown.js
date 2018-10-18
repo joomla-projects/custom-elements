@@ -5,6 +5,7 @@
     }
 
     get for() { return this.getAttribute('for'); }
+
     set for(value) { return this.setAttribute('for', value); }
 
     connectedCallback() {

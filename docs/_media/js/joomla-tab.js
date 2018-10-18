@@ -2,10 +2,15 @@
   customElements.define('joomla-tab', class extends HTMLElement {
     /* Attributes to monitor */
     static get observedAttributes() { return ['recall', 'orientation', 'view']; }
+
     get recall() { return this.getAttribute('recall'); }
+
     get view() { return this.getAttribute('view'); }
+
     set view(value) { this.setAttribute('view', value); }
+
     get orientation() { return this.getAttribute('orientation'); }
+
     set orientation(value) { this.setAttribute('orientation', value); }
 
     /* Lifecycle, element created */
@@ -29,7 +34,7 @@
       const self = this;
       const tabs = [].slice.call(this.querySelectorAll('section'));
       let tabsEl = [];
-      let tabLinkHash = [];
+      const tabLinkHash = [];
 
       // Sanity check
       if (!tabs) {
@@ -100,7 +105,7 @@
         tabs.forEach((tab) => {
           if (tabLinkHash.length) {
             const theId = `#tab-${tab.id}`;
-            if (tabLinkHash.indexOf(theId) > -1) {
+            if (tabLinkHash.indexOf(theId) === -1) {
               tab.removeAttribute('active');
             } else {
               tab.setAttribute('active', '');
@@ -281,10 +286,10 @@
         const currentTab = this.querySelector(`#tab-${this.currentActive}`);
         // const tablist = [].slice.call(this.querySelector('ul').querySelectorAll('a'));
 
-        const previousTabItem = currentTab.parentNode.previousElementSibling ||
-          currentTab.parentNode.parentNode.lastElementChild;
-        const nextTabItem = currentTab.parentNode.nextElementSibling ||
-          currentTab.parentNode.parentNode.firstElementChild;
+        const previousTabItem = currentTab.parentNode.previousElementSibling
+          || currentTab.parentNode.parentNode.lastElementChild;
+        const nextTabItem = currentTab.parentNode.nextElementSibling
+          || currentTab.parentNode.parentNode.firstElementChild;
 
         // don't catch key events when ⌘ or Alt modifier is present
         if (e.metaKey || e.altKey) {
@@ -326,58 +331,63 @@
     }
 
     /** Method to convert tabs to accordion and vice versa depending on screen size */
-    checkView(self) {
-      const nav = self.querySelector('ul');
-      let tabsEl = [];
+    checkView(element) {
+      const el = element;
+      const nav = el.querySelector('ul');
+      const tabsEl = [];
       if (document.body.getBoundingClientRect().width > 920) {
         if (this.view === 'tabs') {
           return;
         }
-        self.view = 'tabs'
+        el.view = 'tabs';
         // convert to tabs
         const panels = [].slice.call(nav.querySelectorAll('section'));
 
         // remove the cascaded tabs
         for (let i = 0, l = panels.length; i < l; ++i) {
-          if (panels[i].parentNode.parentNode.parentNode === self) {
+          if (panels[i].parentNode.parentNode.parentNode === el) {
             tabsEl.push(panels[i]);
           }
         }
 
         if (tabsEl.length) {
           tabsEl.forEach((panel) => {
-            self.appendChild(panel);
+            el.appendChild(panel);
           });
         }
       } else {
         if (this.view === 'accordion') {
           return;
         }
-        self.view = 'accordion'
+        el.view = 'accordion';
 
         // convert to accordion
-        const panels = [].slice.call(self.querySelectorAll('section'));
+        const panels = [].slice.call(el.querySelectorAll('section'));
 
         // remove the cascaded tabs
         for (let i = 0, l = panels.length; i < l; ++i) {
-          if (panels[i].parentNode === self) {
+          if (panels[i].parentNode === el) {
             tabsEl.push(panels[i]);
           }
         }
 
         if (tabsEl.length) {
           tabsEl.forEach((panel) => {
-            const link = self.querySelector('a[aria-controls="' + panel.id + '"]')
-            if (link.parentNode.parentNode === self.firstElementChild)
+            const link = el.querySelector(`a[aria-controls="${panel.id}"]`);
+            if (link.parentNode.parentNode === el.firstElementChild) {
               link.parentNode.appendChild(panel);
+            }
           });
         }
       }
     }
 
     findAncestor(el, tagName) {
-      while ((el = el.parentElement) && el.nodeName.toLowerCase() !== tagName);
-      return el;
+      let element = el;
+      while (element.nodeName.toLowerCase() !== tagName) {
+        element = element.parentElement;
+      }
+      return element;
     }
 
     /* Method to dispatch events */
