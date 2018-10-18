@@ -173,6 +173,8 @@
 
     /* Method to get the translated text */
     getText(str, fallback) {
+      // TODO: Remove coupling to Joomla CMS Core JS here
+      /* eslint-disable-next-line no-undef */
       return (window.Joomla && Joomla.JText && Joomla.JText._ && typeof Joomla.JText._ === 'function' && Joomla.JText._(str)) ? Joomla.JText._(str) : fallback;
     }
   }
