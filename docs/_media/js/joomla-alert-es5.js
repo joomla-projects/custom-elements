@@ -23,22 +23,6 @@ function _classCallCheck(instance, Constructor) {
   }
 }
 
-function _possibleConstructorReturn(self, call) {
-  if (call && (_typeof(call) === "object" || typeof call === "function")) {
-    return call;
-  }
-
-  return _assertThisInitialized(self);
-}
-
-function _assertThisInitialized(self) {
-  if (self === void 0) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }
-
-  return self;
-}
-
 function _defineProperties(target, props) {
   for (var i = 0; i < props.length; i++) {
     var descriptor = props[i];
@@ -53,6 +37,22 @@ function _createClass(Constructor, protoProps, staticProps) {
   if (protoProps) _defineProperties(Constructor.prototype, protoProps);
   if (staticProps) _defineProperties(Constructor, staticProps);
   return Constructor;
+}
+
+function _possibleConstructorReturn(self, call) {
+  if (call && (_typeof(call) === "object" || typeof call === "function")) {
+    return call;
+  }
+
+  return _assertThisInitialized(self);
+}
+
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
 }
 
 function _inherits(subClass, superClass) {
@@ -160,59 +160,21 @@ function _getPrototypeOf(o) {
   function (_HTMLElement) {
     _inherits(JoomlaAlertElement, _HTMLElement);
 
-    _createClass(JoomlaAlertElement, [{
-      key: "type",
-      get: function get() {
-        return this.getAttribute('type');
-      },
-      set: function set(value) {
-        return this.setAttribute('type', value);
-      }
-    }, {
-      key: "dismiss",
-      get: function get() {
-        return this.getAttribute('dismiss');
-      }
-    }, {
-      key: "acknowledge",
-      get: function get() {
-        return this.getAttribute('acknowledge');
-      }
-    }, {
-      key: "href",
-      get: function get() {
-        return this.getAttribute('href');
-      }
-      /* Lifecycle, element created */
-
-    }], [{
-      key: "observedAttributes",
-
-      /* Attributes to monitor */
-      get: function get() {
-        return ['type', 'dismiss', 'acknowledge', 'href'];
-      }
-    }]);
-
     function JoomlaAlertElement() {
-      var _this;
-
       _classCallCheck(this, JoomlaAlertElement);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(JoomlaAlertElement).call(this));
-      _this.type = 'info';
-      return _this;
+      return _possibleConstructorReturn(this, _getPrototypeOf(JoomlaAlertElement).apply(this, arguments));
     }
-    /* Lifecycle, element appended to the DOM */
-
 
     _createClass(JoomlaAlertElement, [{
       key: "connectedCallback",
+
+      /* Lifecycle, element appended to the DOM */
       value: function connectedCallback() {
         this.setAttribute('role', 'alert');
         this.classList.add('joomla-alert--show'); // Default to info
 
-        if (['info', 'warning', 'danger', 'success'].indexOf(this.type) === -1) {
+        if (!this.type || ['info', 'warning', 'danger', 'success'].indexOf(this.type) === -1) {
           this.setAttribute('type', 'info');
         } // Append button
 
@@ -282,13 +244,13 @@ function _getPrototypeOf(o) {
     }, {
       key: "close",
       value: function close() {
-        var _this2 = this;
+        var _this = this;
 
         this.dispatchCustomEvent('joomla.alert.close');
         this.addEventListener('transitionend', function () {
-          _this2.dispatchCustomEvent('joomla.alert.closed');
+          _this.dispatchCustomEvent('joomla.alert.closed');
 
-          _this2.parentNode.removeChild(_this2);
+          _this.parentNode.removeChild(_this);
         }, false);
         this.classList.remove('joomla-alert--show');
       }
@@ -390,6 +352,36 @@ function _getPrototypeOf(o) {
 
         /* eslint-disable-next-line no-undef */
         return window.Joomla && Joomla.JText && Joomla.JText._ && typeof Joomla.JText._ === 'function' && Joomla.JText._(str) ? Joomla.JText._(str) : fallback;
+      }
+    }, {
+      key: "type",
+      get: function get() {
+        return this.getAttribute('type');
+      },
+      set: function set(value) {
+        return this.setAttribute('type', value);
+      }
+    }, {
+      key: "dismiss",
+      get: function get() {
+        return this.getAttribute('dismiss');
+      }
+    }, {
+      key: "acknowledge",
+      get: function get() {
+        return this.getAttribute('acknowledge');
+      }
+    }, {
+      key: "href",
+      get: function get() {
+        return this.getAttribute('href');
+      }
+    }], [{
+      key: "observedAttributes",
+
+      /* Attributes to monitor */
+      get: function get() {
+        return ['type', 'dismiss', 'acknowledge', 'href'];
       }
     }]);
 

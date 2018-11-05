@@ -1,8 +1,6 @@
-module.exports = (grunt) => {
-  String.prototype.capitalizeFirstLetter = () => {
-    return this.charAt(0).toUpperCase() + this.slice(1);
-  }
+const sass = require('node-sass');
 
+module.exports = (grunt) => {
   const pack = require('./package.json');
   grunt.settings = pack.settings;
 
@@ -54,6 +52,10 @@ module.exports = (grunt) => {
   grunt.registerTask('compile', 'Compile css files', () => {
     const compileCss = (element) => {
 
+      grunt.config.set('sass.options', {
+        implementation: sass,
+      });
+
       // Compile the css files
       grunt.config.set('sass.' + element + '.files', [{
         src: 'src/scss/' + element + '/' + element + '.scss',
@@ -98,18 +100,14 @@ module.exports = (grunt) => {
     // Create the custom element
     const createElement = (element, settings) => {
       let tmpJs = '';
-      let tmpJsPlain = '';
       let tmpCss = '';
 
       if (grunt.file.exists('src/js/' + element + '/' + element + '.js')) {
-        tmpJs = grunt.file.read('src/js/' + element + '/' + element + '.js');
-
         // Embed the css in the custom element
         if (grunt.file.exists('src/scss/css/' + element + '.min.css')) {
           tmpCss = grunt.file.read('src/scss/css/' + element + '.min.css');
         }
   
-        // Repeat
         tmpJs = grunt.file.read('src/js/' + element + '/' + element + '.js');
         tmpJs = tmpJs.replace(/joomla-/g, settings.prefix + '-');
         tmpJs = tmpJs.replace(/'{{stylesheet}}'/g, "`" + tmpCss + "`");
@@ -184,7 +182,7 @@ module.exports = (grunt) => {
       }
     };
 
-    console.info('Build the custom Elements')
+    console.info('Build the custom Elements');
     grunt.settings.elements.forEach((element) => {
       // Create elements as html files, compatible with document-register-element polyfill
       createElement(element, grunt.settings);
@@ -213,7 +211,7 @@ module.exports = (grunt) => {
         }]);
 
         grunt.task.run('copy:' + polyfill + '-map');
-      })
+      });
 
       // Copy the Custom Elements polyfill
       grunt.config.set('copy.ce.files', [{

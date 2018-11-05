@@ -13,20 +13,13 @@
 
     get href() { return this.getAttribute('href'); }
 
-    /* Lifecycle, element created */
-    constructor() {
-      super();
-
-      this.type = 'info';
-    }
-
     /* Lifecycle, element appended to the DOM */
     connectedCallback() {
       this.setAttribute('role', 'alert');
       this.classList.add('joomla-alert--show');
 
       // Default to info
-      if (['info', 'warning', 'danger', 'success'].indexOf(this.type) === -1) {
+      if (!this.type || ['info', 'warning', 'danger', 'success'].indexOf(this.type) === -1) {
         this.setAttribute('type', 'info');
       }
       // Append button
