@@ -79,3 +79,9 @@ joomla-alert[type="danger"] {
     border-top-color: #efbbb9; }
   joomla-alert[type="danger"] .alert-link {
     color: #4c1d1b; }
+
+html[dir=rtl] joomla-alert .joomla-alert--close,
+html[dir=rtl] joomla-alert .joomla-alert-button--close {
+  right: auto;
+  left: -1.25rem;
+  float: left; }
