@@ -141,8 +141,8 @@ joomla-alert {
 html[dir="rtl"] joomla-alert {
   .joomla-alert--close,
   .joomla-alert-button--close {
-    float: left;
     right: auto;
     left: -1.25rem;
+    float: left;
   }
 }
