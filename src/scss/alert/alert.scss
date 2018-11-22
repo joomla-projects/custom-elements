@@ -138,7 +138,7 @@ joomla-alert {
 }
 
 // RTL overrides
-html[dir="rtl"] joomla-alert {
+html[dir=rtl] joomla-alert {
   .joomla-alert--close,
   .joomla-alert-button--close {
     right: auto;
