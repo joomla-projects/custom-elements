@@ -138,10 +138,11 @@ joomla-alert {
 }
 
 // RTL overrides
-html[dir=rtl] joomla-alert .joomla-alert--close, joomla-alert .joomla-alert-button--close {
-  right: 0;
-  left: -1.25rem; }
-
-html[dir=rtl] joomla-alert .joomla-alert--close, joomla-alert .joomla-alert-button--close {
-  float: left; }
-
+html[dir="rtl"] joomla-alert {
+  .joomla-alert--close,
+  .joomla-alert-button--close {
+    float: left;
+    right: auto;
+    left: -1.25rem;
+  }
+}
