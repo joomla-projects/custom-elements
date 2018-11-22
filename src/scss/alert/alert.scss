@@ -136,3 +136,13 @@ joomla-alert {
     @include alert-variant(theme-color-level($color, -10), theme-color-level($color, -9), theme-color-level($color, 6));
   }
 }
+
+// RTL overrides
+html[dir=rtl] joomla-alert {
+  .joomla-alert--close,
+  .joomla-alert-button--close {
+    right: auto;
+    left: -1.25rem;
+    float: left;
+  }
+}
