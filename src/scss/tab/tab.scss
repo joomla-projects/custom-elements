@@ -59,6 +59,7 @@ joomla-tab a[role=tab][active]:after {
   right: 0; }
 
 joomla-tab > section {
+  position: relative;
   display: none;
   background-color: #fefefe;
   border: 1px solid #ccc;
