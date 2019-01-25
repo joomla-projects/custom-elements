@@ -35,3 +35,7 @@ joomla-dropdown {
   position: relative;
   display: inline-flex;
   vertical-align: middle; }
+
+html[dir=rtl] joomla-dropdown {
+  left: auto;
+  right: 0; }

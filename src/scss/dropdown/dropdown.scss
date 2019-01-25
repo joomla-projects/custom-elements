@@ -59,3 +59,9 @@ joomla-dropdown {
   display: inline-flex;
   vertical-align: middle;
 }
+
+// RTL overrides
+html[dir=rtl] joomla-dropdown {
+  left: auto;
+  right: 0;
+}
