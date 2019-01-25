@@ -8,29 +8,40 @@ In order to use the dropdown custom element you need to import the element in th
 
 The simplified version of the custom elements
 ```html
-<button class="btn btn-secondary" id="dropdownMenuButton">
-	Dropdown button
-</button>
+<div class="joomla-dropdown-container">
+	<button class="btn btn-secondary" id="dropdownList">Dropdown with list</button>
 
+	<joomla-dropdown for="#dropdownList">
+		<a class="dropdown-item" href="#">Item 1</a>
+		<a class="dropdown-item" href="#">Item 2</a>
+		<a class="dropdown-item" href="#">Item 3</a>
+	</joomla-dropdown>
+</div>
 
-<joomla-dropdown for="#dropdownMenuButton">
-	<a class="dropdown-item" href="#">Action</a>
-	<a class="dropdown-item" href="#">Another action</a>
-	<a class="dropdown-item" href="#">Something else here</a>
-</joomla-dropdown>
+<div class="joomla-dropdown-container">
+	<button class="btn btn-secondary" id="dropdownText">Dropdown with text</button>
+
+	<joomla-dropdown for="#dropdownText">
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+	</joomla-dropdown>
+</div>
 ```
 
 ### Dropdown demo:
 
 <div class="mermaid">
-<button class="btn btn-secondary" id="dropdownMenuButton">
-Dropdown button
-</button>
-
-
-<joomla-dropdown for="#dropdownMenuButton">
-<a class="dropdown-item" href="#">Action</a>
-<a class="dropdown-item" href="#">Another action</a>
-<a class="dropdown-item" href="#">Something else here</a>
-</joomla-dropdown>
+	<div class="joomla-dropdown-container">
+		<button class="btn btn-secondary" id="dropdownList">Dropdown with list</button>
+		<joomla-dropdown for="#dropdownList">
+			<a class="dropdown-item" href="#">Item 1</a>
+			<a class="dropdown-item" href="#">Item 2</a>
+			<a class="dropdown-item" href="#">Item 3</a>
+		</joomla-dropdown>
+	</div>
+	<div class="joomla-dropdown-container">
+		<button class="btn btn-secondary" id="dropdownText">Dropdown with text</button>
+		<joomla-dropdown for="#dropdownText">
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+		</joomla-dropdown>
+	</div>
 </div>
