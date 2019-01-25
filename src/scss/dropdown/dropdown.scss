@@ -46,9 +46,9 @@ joomla-dropdown {
     &:hover,
     &:focus {
       color: $dropdown-item-color-hover;
-      background: $dropdown-item-bg-hover;
       text-decoration: none;
       cursor: pointer;
+      background: $dropdown-item-bg-hover;
     }
   }
 

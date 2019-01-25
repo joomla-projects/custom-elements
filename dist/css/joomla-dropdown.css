@@ -27,9 +27,9 @@ joomla-dropdown {
     border: 0; }
     joomla-dropdown .dropdown-item:hover, joomla-dropdown .dropdown-item:focus {
       color: #fff;
-      background: #495057;
       text-decoration: none;
-      cursor: pointer; }
+      cursor: pointer;
+      background: #495057; }
 
 .joomla-dropdown-container {
   position: relative;
