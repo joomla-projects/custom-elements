@@ -67,6 +67,7 @@ joomla-tab > section {
   padding: 15px; }
 
 joomla-tab > section[active] {
+  width:100%;
   display: block; }
 
 joomla-tab[orientation=vertical] {
@@ -75,7 +76,7 @@ joomla-tab[orientation=vertical] {
 
 joomla-tab[orientation=vertical] > ul {
   flex-direction: column;
-  min-width: 30%;
+  min-width: 15%;
   height: auto;
   border: 1px solid #ccc;
   border-radius: .25rem;
