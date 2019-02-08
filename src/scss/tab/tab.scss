@@ -76,7 +76,7 @@ joomla-tab[orientation=vertical] {
 
 joomla-tab[orientation=vertical] > ul {
   flex-direction: column;
-  min-width: 15%;
+  flex: 1 0 auto;
   height: auto;
   border: 1px solid #ccc;
   border-radius: .25rem;
