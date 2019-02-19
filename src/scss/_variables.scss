@@ -81,6 +81,8 @@ $font-weight-light:           300;
 $font-weight-normal:          400;
 $font-weight-bold:            700;
 
+
+
 // Alerts
 $alert-padding-y:                   .5rem;
 $alert-padding-x:                   1.25rem;
@@ -94,16 +96,17 @@ $alert-border-level:                -9;
 $alert-color-level:                 6;
 
 // Close
-
 $close-font-size:                   $font-size-base * 1.5;
 $close-font-weight:                 $font-weight-bold;
 $close-color:                       $black;
 $close-text-shadow:                 0 1px 0 $white;
 
+
+
 // Tabs
 $tab-border-radius:               .25rem;
 
-$tab-ul-bg:                       #3073BB;
+$tab-ul-bg:                       #3073bb;
 
 $tab-link-padding:                .75rem 1rem .85rem;
 $tab-link-colour:                 $white;
@@ -117,3 +120,17 @@ $tab-content-bg:                  #fefefe;
 $tab-accordion-link-border:       1px solid #ddd;
 
 $tab-vertical-ul-border:          1px solid #ccc;
+
+
+
+// Dropdown
+$dropdown-bg:                     $white;
+$dropdown-border-width:           1px;
+$dropdown-border-style:           solid;
+$dropdown-border-colour:          $black;
+$dropdown-border-opacity:         .15;
+
+$dropdown-item-padding:           .5rem .75rem;
+$dropdown-item-bg-hover:          $gray-700;
+$dropdown-item-color:             $gray-900;
+$dropdown-item-color-hover:       $white;
