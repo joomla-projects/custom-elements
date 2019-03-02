@@ -171,7 +171,7 @@ function _getPrototypeOf(o) {
 
       /* Lifecycle, element appended to the DOM */
       value: function connectedCallback() {
-        this.setAttribute('role', 'alert');
+        this.setAttribute('role', 'alertdialog');
         this.classList.add('joomla-alert--show'); // Default to info
 
         if (!this.type || ['info', 'warning', 'danger', 'success'].indexOf(this.type) === -1) {
