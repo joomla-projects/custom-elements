@@ -15,7 +15,7 @@
 
     /* Lifecycle, element appended to the DOM */
     connectedCallback() {
-      this.setAttribute('role', 'alert');
+      this.setAttribute('role', 'alertdialog');
       this.classList.add('joomla-alert--show');
 
       // Default to info
