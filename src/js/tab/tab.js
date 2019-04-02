@@ -167,6 +167,7 @@
       }
 
       // Convert tabs to accordian
+      self.checkView(self);
       window.addEventListener('resize', () => {
         self.checkView(self);
       });
