@@ -363,6 +363,7 @@ function _getPrototypeOf(o) {
         } // Convert tabs to accordian
 
 
+        self.checkView(self);
         window.addEventListener('resize', function () {
           self.checkView(self);
         });
@@ -602,6 +603,11 @@ function _getPrototypeOf(o) {
         var element = el;
 
         while (element.nodeName.toLowerCase() !== tagName) {
+          // Ensure we haven't reached the top of the dom tree
+          if (element.parentElement === null) {
+            return;
+          }
+
           element = element.parentElement;
         }
 
