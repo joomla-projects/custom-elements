@@ -30,8 +30,6 @@
 
       this.dispatchCustomEvent('joomla.alert.show');
 
-      const closeButton = this.querySelector('button.joomla-alert--close') || this.querySelector('button.joomla-alert-button--close');
-
     }
 
     /* Lifecycle, element removed from the DOM */
