@@ -184,11 +184,6 @@ function _getPrototypeOf(o) {
         }
 
         this.dispatchCustomEvent('joomla.alert.show');
-        var closeButton = this.querySelector('button.joomla-alert--close') || this.querySelector('button.joomla-alert-button--close');
-
-        if (closeButton) {
-          closeButton.focus();
-        }
       }
       /* Lifecycle, element removed from the DOM */
 
