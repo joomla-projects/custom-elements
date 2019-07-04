@@ -29,7 +29,6 @@
       }
 
       this.dispatchCustomEvent('joomla.alert.show');
-
     }
 
     /* Lifecycle, element removed from the DOM */
