@@ -171,11 +171,15 @@ function _getPrototypeOf(o) {
 
       /* Lifecycle, element appended to the DOM */
       value: function connectedCallback() {
-        this.setAttribute('role', 'alertdialog');
         this.classList.add('joomla-alert--show'); // Default to info
 
         if (!this.type || ['info', 'warning', 'danger', 'success'].indexOf(this.type) === -1) {
           this.setAttribute('type', 'info');
+        } // Default to alert
+
+
+        if (!this.role || ['alert', 'alertdialog'].indexOf(this.role) === -1) {
+          this.setAttribute('role', 'alert');
         } // Append button
 
 
@@ -207,6 +211,13 @@ function _getPrototypeOf(o) {
           case 'type':
             if (!newValue || newValue && ['info', 'warning', 'danger', 'success'].indexOf(newValue) === -1) {
               this.type = 'info';
+            }
+
+            break;
+
+          case 'role':
+            if (!newValue || newValue && ['alert', 'alertdialog'].indexOf(newValue) === -1) {
+              this.role = 'alert';
             }
 
             break;
@@ -357,6 +368,14 @@ function _getPrototypeOf(o) {
         return this.setAttribute('type', value);
       }
     }, {
+      key: "role",
+      get: function get() {
+        return this.getAttribute('role');
+      },
+      set: function set(value) {
+        return this.setAttribute('role', value);
+      }
+    }, {
       key: "dismiss",
       get: function get() {
         return this.getAttribute('dismiss');
@@ -376,7 +395,7 @@ function _getPrototypeOf(o) {
 
       /* Attributes to monitor */
       get: function get() {
-        return ['type', 'dismiss', 'acknowledge', 'href'];
+        return ['type', 'role', 'dismiss', 'acknowledge', 'href'];
       }
     }]);
 
