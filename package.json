@@ -46,7 +46,7 @@
     "grunt-postcss-x": "latest",
     "grunt-sass": "latest",
     "grunt-shell": "latest",
-    "node-sass": "^4.10.0",
+    "node-sass": "^4.12.0",
     "wct-browser-legacy": "latest",
     "web-component-tester": "latest"
   },
