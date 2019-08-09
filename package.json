@@ -30,7 +30,7 @@
     "babel-minify": "latest",
     "babel-plugin-static-fs": "latest",
     "babelify": "latest",
-    "browserify": "*",
+    "browserify": ">=16.5.0",
     "eslint": "latest",
     "eslint-config-airbnb": "latest",
     "eslint-config-airbnb-base": "latest",
