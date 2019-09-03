@@ -388,7 +388,7 @@
       while (element.nodeName.toLowerCase() !== tagName) {
         // Ensure we haven't reached the top of the dom tree
         if (element.parentElement === null) {
-          return;
+          return false;
         }
         element = element.parentElement;
       }

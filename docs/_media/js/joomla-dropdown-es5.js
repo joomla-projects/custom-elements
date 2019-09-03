@@ -171,8 +171,8 @@ function _getPrototypeOf(o) {
       value: function connectedCallback() {
         var _this = this;
 
-        this.setAttribute('aria-labelledby', this.for.substring(1));
-        var button = document.querySelector(this.for);
+        this.setAttribute('aria-labelledby', this["for"].substring(1));
+        var button = document.querySelector(this["for"]);
         var innerLinks = this.querySelectorAll('a');
 
         if (!button.id) {
