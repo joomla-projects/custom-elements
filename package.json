@@ -85,6 +85,8 @@
   },
   "dependencies": {
     "@babel/core": "latest",
-    "bootstrap": "^4.3.1"
+    "bootstrap": "^4.3.1",
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-postcss-x": "^0.9.2"
   }
 }
