@@ -52,6 +52,7 @@
   },
   "scripts": {
     "build": "grunt",
+    "watch": "grunt watch",
     "lint": "eslint src",
     "lint-fix": "eslint src --fix"
   },
