@@ -26,7 +26,8 @@ joomla-dropdown {
   list-style: none;
   background-color: $dropdown-bg;
   background-clip: padding-box;
-  border: $dropdown-border-width $dropdown-border-style rgba($dropdown-border-colour, $dropdown-border-opacity);
+	border: $dropdown-border-width $dropdown-border-style rgba($dropdown-border-colour, $dropdown-border-opacity);
+	box-shadow: $dropdown-shadow-h-offset $dropdown-shadow-v-offset $dropdown-shadow-blur $dropdown-shadow-spread $dropdown-shadow-color;
 
   &[expanded] {
     display: block;
