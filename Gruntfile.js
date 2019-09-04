@@ -5,7 +5,7 @@ module.exports = (grunt) => {
   grunt.settings = pack.settings;
 
   // Load required modules
-  grunt.loadNpmTasks('grunt-postcss-x');
+  grunt.loadNpmTasks('@lodder/grunt-postcss');
   grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-babel');
