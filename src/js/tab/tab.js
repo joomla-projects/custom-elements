@@ -217,7 +217,7 @@
         this.dispatchCustomEvent('joomla.tab.shown', e.target, this.querySelector(`#tab-${currentTabLink}`));
         this.saveState(`#tab-${e.target.hash.substring(1)}`);
       };
-      
+
       tabs.forEach((tab) => {
         if (!tab.id) {
           return;
@@ -240,8 +240,8 @@
         if (active) {
           aElement.setAttribute('active', '');
         }
-        
-        if( isDisable ) {
+
+        if (isDisable) {
           aElement.setAttribute('disabled', 'true');
         }
 
