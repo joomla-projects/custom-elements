@@ -227,7 +227,7 @@
         const liElement = document.createElement('li');
         const aElement = document.createElement('a');
         let isDisable = tab.getAttribute('disabled');
-        isDisable = isDisable !== null  && isDisable === 'true';
+        isDisable = isDisable !== null && isDisable === 'true';
         liElement.setAttribute('role', 'presentation');
         aElement.setAttribute('role', 'tab');
         aElement.setAttribute('aria-controls', tab.id);
