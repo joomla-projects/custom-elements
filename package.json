@@ -81,7 +81,8 @@
       "modal",
       "panels",
       "tip",
-      "callout"
+      "callout",
+      "accordion"
     ],
     "browsers": "last 1 version"
   },
