@@ -202,6 +202,13 @@ joomla-modal {
 
 .modal-backdrop.show {
   opacity: 1;
+	&.fade {
+		opacity: 0;
+		transition: .3s;
+	}
+	&.fade.show {
+		opacity: 1;
+	}
 }
 .modal-backdrop {
   position: fixed;
@@ -210,5 +217,5 @@ joomla-modal {
   bottom: 0;
   left: 0;
   z-index: 1040;
-  background-color:var(--overlay);
+	background-color:var(--overlay);
 }

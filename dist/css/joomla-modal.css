@@ -159,6 +159,11 @@ joomla-modal {
 
 .modal-backdrop.show {
   opacity: 1; }
+  .modal-backdrop.show.fade {
+    opacity: 0;
+    transition: .3s; }
+  .modal-backdrop.show.fade.show {
+    opacity: 1; }
 
 .modal-backdrop {
   position: fixed;
