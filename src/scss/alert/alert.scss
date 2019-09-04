@@ -5,52 +5,52 @@
 //
 
 // Retrieve color Sass maps
-@function color($key: "blue") {
-  @return map-get($colors, $key);
-}
+// @function color($key: "blue") {
+//   @return map-get($colors, $key);
+// }
 
-@function theme-color($key: "primary") {
-  @return map-get($theme-colors, $key);
-}
+// @function theme-color($key: "primary") {
+//   @return map-get($theme-colors, $key);
+// }
 
-@function gray($key: "100") {
-  @return map-get($grays, $key);
-}
+// @function gray($key: "100") {
+//   @return map-get($grays, $key);
+// }
 
-// Request a theme color level
-@function theme-color-level($color-name: "primary", $level: 0) {
-  $color: theme-color($color-name);
-  $color-base: if($level > 0, $black, $white);
-  $level: abs($level);
+// // Request a theme color level
+// @function theme-color-level($color-name: "primary", $level: 0) {
+//   $color: theme-color($color-name);
+//   $color-base: if($level > 0, $black, $white);
+//   $level: abs($level);
 
-  @return mix($color-base, $color, $level * $theme-color-interval);
-}
+//   @return mix($color-base, $color, $level * $theme-color-interval);
+// }
 
 
 //
 // Mixins
 //
 
-@mixin hover-focus {
-  &:hover,
-  &:focus {
-    @content;
-  }
-}
+// @mixin hover-focus {
+//   &:hover,
+//   &:focus {
+//     @content;
+//   }
+// }
 
-@mixin alert-variant($background, $border, $color) {
-  color: $color;
-  background-color: $background;
-  border-color: $border;
+// @mixin alert-variant($background, $border, $color) {
+//   color: $color;
+//   background-color: $background;
+//   border-color: $border;
 
-  hr {
-    border-top-color: darken($border, 5%);
-  }
+//   hr {
+//     border-top-color: darken($border, 5%);
+//   }
 
-  .alert-link {
-    color: darken($color, 10%);
-  }
-}
+//   .alert-link {
+//     color: darken($color, 10%);
+//   }
+// }
 
 //
 // Variables
@@ -104,12 +104,12 @@ joomla-alert {
     border: 0;
     opacity: .5;
 
-    @include hover-focus {
-      color: $close-color;
-      text-decoration: none;
-      cursor: pointer;
-      opacity: .75;
-    }
+    // @include hover-focus {
+    //   color: $close-color;
+    //   text-decoration: none;
+    //   cursor: pointer;
+    //   opacity: .75;
+    // }
   }
 
   // Additional properties for button version

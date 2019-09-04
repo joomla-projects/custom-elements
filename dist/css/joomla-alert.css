@@ -50,11 +50,6 @@ joomla-alert {
     background: transparent;
     border: 0;
     opacity: .5; }
-    joomla-alert .joomla-alert--close:hover, joomla-alert .joomla-alert--close:focus, joomla-alert .joomla-alert-button--close:hover, joomla-alert .joomla-alert-button--close:focus {
-      color: #000;
-      text-decoration: none;
-      cursor: pointer;
-      opacity: .75; }
   joomla-alert button.joomla-alert-button--close {
     padding-top: .75rem;
     font-size: 100%;
