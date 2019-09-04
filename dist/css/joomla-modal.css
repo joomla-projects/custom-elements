@@ -58,8 +58,7 @@ joomla-modal {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1.714rem;
-      border-bottom: 2px solid #ecedf0; }
+      padding: 1.714rem 1.714rem 0.929rem 1.714rem; }
       joomla-modal .joomla-modal-dialog header > * {
         margin: 0; }
       joomla-modal .joomla-modal-dialog header button {
@@ -82,7 +81,7 @@ joomla-modal {
     joomla-modal .joomla-modal-dialog section {
       position: relative;
       flex: 1 1 auto;
-      padding: 15px; }
+      padding: 0 1.714rem; }
       joomla-modal .joomla-modal-dialog section.jviewport-height10 {
         height: 10vh; }
       joomla-modal .joomla-modal-dialog section.jviewport-height20 {
@@ -113,10 +112,25 @@ joomla-modal {
       align-items: center;
       -ms-flex-pack: end;
       justify-content: flex-end;
-      padding: 1.714rem;
-      border-top: 2px solid #ecedf0; }
+      padding: 0.929rem 1.714rem 1.714rem 1.714rem; }
+      joomla-modal .joomla-modal-dialog footer .modal-footer-left-text {
+        flex-grow: 1;
+        text-align: left;
+        color: var(--secondary-color); }
       joomla-modal .joomla-modal-dialog footer .btn {
         margin-left: 10px; }
+  joomla-modal.bordered header {
+    border-bottom: 2px solid #ecedf0;
+    padding-bottom: 1.714rem; }
+  joomla-modal.bordered footer {
+    border-top: 2px solid #ecedf0;
+    padding-top: 1.714rem; }
+  joomla-modal.bordered .joomla-modal-dialog section {
+    padding-top: 1.143rem;
+    padding-bottom: 1.143rem; }
+  joomla-modal.scrollable .joomla-modal-dialog section {
+    max-height: 320px;
+    overflow: auto; }
   joomla-modal.jviewport-width10 .joomla-modal-dialog {
     max-width: 10vw; }
   joomla-modal.jviewport-width20 .joomla-modal-dialog {
