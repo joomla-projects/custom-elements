@@ -36,7 +36,7 @@
         }
 
         document.addEventListener('click', (evt) => {
-          if (evt.target !== button) {
+          if (evt.target !== button && evt.target !== this) {
             if (!this.findAncestor(evt.target, 'joomla-callout')) {
               this.close();
             }
