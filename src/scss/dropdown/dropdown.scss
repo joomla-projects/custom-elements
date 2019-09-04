@@ -14,44 +14,56 @@
 
 joomla-dropdown {
   position: absolute;
-  top: 30px;
+  top: 100%;
   left: 0;
   z-index: 1000;
   display: none;
   box-sizing: border-box;
-  min-width: 10rem;
-  margin-top: .5rem;
+  min-width: 16.071rem;
+  margin-top: 0.214rem;
   font-size: 1rem;
   text-align: left;
   list-style: none;
-  background-color: $dropdown-bg;
+  background-color: #ffffff;
   background-clip: padding-box;
-  border: $dropdown-border-width $dropdown-border-style rgba($dropdown-border-colour, $dropdown-border-opacity);
-
+	border: 1px solid #eaeef5;
+	box-shadow: 0 30px 60px -10px $dropdown-shadow-color;
+	border-radius: 3px;
   &[expanded] {
     display: block;
   }
 
   .dropdown-item {
     display: block;
-    padding: $dropdown-item-padding;
+    padding: 0.571rem 1.143rem;
     clear: both;
-    font-weight: $font-weight-normal;
-    color: $dropdown-item-color;
     text-align: inherit;
     white-space: nowrap;
     background-color: transparent;
     border: 0;
-
-    &:hover,
+		text-decoration: none;
+		border-bottom: 1px solid var(--background);
+		cursor: pointer;
+		color: var(--text-color);
+		transition: 300ms;
+    &:hover{
+			box-shadow: 0 9px 8px -6px rgba(29, 36, 39, 0.2);
+			color: var(--link-color);
+		}
     &:focus {
-      color: $dropdown-item-color-hover;
-      text-decoration: none;
-      cursor: pointer;
-      background: $dropdown-item-bg-hover;
+			outline: 2px solid var(--link-color);
     }
-  }
-
+	}
+	> p{
+		padding-left: 1.143rem;
+		padding-right: 1.143rem;
+		&:first-child{
+			margin-top: 1.143rem;
+		}
+		&:last-child{
+			margin-bottom: 1.143rem;
+		}
+	}
 }
 
 .joomla-dropdown-container {

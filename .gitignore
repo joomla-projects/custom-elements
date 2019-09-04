@@ -7,7 +7,7 @@
 .idea
 .vscode
 .log
-index.html
+index*.html
 
 node_modules/
 bower_components/
