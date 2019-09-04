@@ -58,7 +58,6 @@
 
 @import "../variables";
 
-
 //
 // Base styles
 //
@@ -66,12 +65,13 @@
 joomla-alert {
   display: block;
   min-width: 250px;
-  padding: $alert-padding-y $alert-padding-x;
-  margin-bottom: $alert-margin-bottom;
-  border: $alert-border-width solid transparent;
+  padding: 1.143rem 1.429rem;
+  margin-bottom: 1.143rem;
+  border: 1px solid transparent;
   opacity: 0;
-  border-radius: $alert-border-radius;
-  transition: $transition-fade;
+  border-radius: 3px;
+	transition: 300ms;
+	box-shadow: 0 8px 16px -4px rgba(9, 30, 66, 0.25), 0 0 1px 0 rgba(9, 30, 66, 0.31);
 
   @media screen and (prefers-reduced-motion: reduce) {
     transition: none;
@@ -131,11 +131,11 @@ joomla-alert {
 }
 
 // Alternate styles
-@each $color, $value in $alert-colors {
-  joomla-alert[type="#{$color}"] {
-    @include alert-variant(theme-color-level($color, -10), theme-color-level($color, -9), theme-color-level($color, 6));
-  }
-}
+// @each $color, $value in $alert-colors {
+//   joomla-alert[type="#{$color}"] {
+//     @include alert-variant(theme-color-level($color, -10), theme-color-level($color, -9), theme-color-level($color, 6));
+//   }
+// }
 
 // RTL overrides
 html[dir=rtl] joomla-alert {
