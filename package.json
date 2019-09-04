@@ -80,7 +80,8 @@
       "collapse",
       "modal",
       "panels",
-      "tip"
+      "tip",
+      "callout"
     ],
     "browsers": "last 1 version"
   },
