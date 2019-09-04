@@ -77,6 +77,17 @@ joomla-tab a[role=tab]:active {
     opacity: 0;
     visibility: hidden; }
 
+joomla-tab a[disabled=true]:hover,
+joomla-tab a[disabled=true] {
+  color: var(--secondary-icon-color); }
+  joomla-tab a[disabled=true]:hover::before, joomla-tab a[disabled=true]:hover::after,
+  joomla-tab a[disabled=true]::before,
+  joomla-tab a[disabled=true]::after {
+    display: none; }
+  joomla-tab a[disabled=true]:hover:active,
+  joomla-tab a[disabled=true]:active {
+    outline: none; }
+
 joomla-tab > section {
   position: relative;
   display: none;

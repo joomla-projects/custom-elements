@@ -75,7 +75,17 @@ joomla-tab a[role=tab]:active {
 		visibility: hidden;
 	}
 }
-
+joomla-tab a[disabled=true]:hover,
+joomla-tab a[disabled=true]{
+	color: var(--secondary-icon-color);
+	&::before,
+	&::after{
+		display: none
+	}
+	&:active{
+		outline: none;
+	}
+}
 joomla-tab > section {
 	position: relative;
 	display: none;
