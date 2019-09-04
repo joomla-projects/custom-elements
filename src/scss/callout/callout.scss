@@ -1,0 +1,20 @@
+joomla-callout {
+    position: absolute;
+    top: 30px;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    box-sizing: border-box;
+    min-width: 10rem;
+    margin-top: .5rem;
+    font-size: 1rem;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.15)
+}
+
+joomla-callout[expanded] {
+    display: block
+}
