@@ -35,6 +35,13 @@ joomla-modal {
     display: flex;
 	}
 	
+	&.fade {
+		opacity: 0;
+		transition: .15s;
+	}
+	&.fade.show {
+		opacity: 1;
+	}
   .joomla-modal-dialog {
     position: relative;
     background-color: #fff;
@@ -46,15 +53,6 @@ joomla-modal {
 		max-width: 600px;
 		max-height: 90%;
 		overflow: auto;
-
-    &.fade {
-      opacity: 0;
-      transition: opacity .15s linear;
-    }
-
-    &.fade.show {
-      opacity: 1;
-    }
 
     header {
       display: flex;

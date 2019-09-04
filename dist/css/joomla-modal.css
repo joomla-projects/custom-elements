@@ -2,14 +2,16 @@
   --background: #f4f7fc;
   --inverse-background: #1d2427;
   --color: #252732;
+  --color-rgb: 37, 39, 50;
   --inverse-color: #ffffff;
   --secondary-color: #5e727c;
   --icon-color: #808f94;
   --secondary-icon-color: #bdc5c8;
-  --button-background: #e6f2ff;
+  --button-background: #e5f2ff;
   --cancel-button-background: #f0f3f8;
-  --disabled-button-background: #dcdcdc;
+  --disabled-button-background: #eaeaea;
   --link-color: #0184ff;
+  --link-color-light-rgb: 229, 242, 255;
   --primary-color: #0184ff;
   --primary-gradient-color: #198df8;
   --success-color: #7ac143;
@@ -38,6 +40,11 @@ joomla-modal {
     box-sizing: border-box; }
   joomla-modal.show {
     display: flex; }
+  joomla-modal.fade {
+    opacity: 0;
+    transition: .15s; }
+  joomla-modal.fade.show {
+    opacity: 1; }
   joomla-modal .joomla-modal-dialog {
     position: relative;
     background-color: #fff;
@@ -49,11 +56,6 @@ joomla-modal {
     max-width: 600px;
     max-height: 90%;
     overflow: auto; }
-    joomla-modal .joomla-modal-dialog.fade {
-      opacity: 0;
-      transition: opacity .15s linear; }
-    joomla-modal .joomla-modal-dialog.fade.show {
-      opacity: 1; }
     joomla-modal .joomla-modal-dialog header {
       display: flex;
       align-items: center;
