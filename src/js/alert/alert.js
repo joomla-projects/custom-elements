@@ -2,10 +2,6 @@
   class JoomlaAlertElement extends HTMLElement {
     constructor(){
       super()
-      if(this.getAttribute('collapse') && this.getAttribute('collapse') === 'true'){ 
-        this.content = this.innerHTML
-        this.innerHTML = ''
-      }
     }
     /* Attributes to monitor */
     static get observedAttributes() { return ['type', 'role', 'dismiss', 'acknowledge', 'href']; }
@@ -38,8 +34,8 @@
       }
       //Check if its collapsable
       if(this.hasAttribute('collapse') && this.getAttribute('collapse') !== '' && this.getAttribute('collapse') !== 'false' &&
-        !this.querySelector('.joomla-alert--collapse')){
-          this.appendCollapseArea();
+        !this.querySelector('.joomla-alert--collapse-header') && this.querySelector('.joomla-alert--collapse')){
+          this.appendCollapseHeaderArea();
       }
       // Append button
       if ((this.hasAttribute('dismiss') || this.hasAttribute('acknowledge')) || ((this.hasAttribute('href') && this.getAttribute('href') !== '')
@@ -183,14 +179,13 @@
       }
     }
 
-    appendCollapseArea(){
-      if (this.querySelector('joomla-alert--collapse')) {
+    appendCollapseHeaderArea(){
+      if (this.querySelector('.joomla-alert--collapse') === null && this.querySelector('.joomla-alert--collapse-header') !== null ) {
         return;
       }
-      const collapseItem = document.createElement('div');
-      collapseItem.classList.add('joomla-alert--collapse');
-      collapseItem.innerHTML = this.content
-
+      console.log("collapse-1: ", this)
+      const collapseContainer = this.querySelector('.joomla-alert--collapse') 
+      
       const collapseHeader = document.createElement('div')
       collapseHeader.classList.add('joomla-alert--collapse-header')
       collapseHeader.setAttribute('area-expanded','false')
@@ -201,14 +196,13 @@
       chevronIcon.innerHTML = '&#94;'
       collapseHeader.append(chevronIcon)
       this.prepend(collapseHeader)
-      this.append(collapseItem)
 
       chevronIcon.addEventListener('click', ()  => {
-        if( collapseItem.classList.contains('show') ){
-          collapseItem.classList.remove('show')
+        if (collapseContainer.classList.contains('show') ){
+          collapseContainer.classList.remove('show')
           collapseHeader.setAttribute('area-expanded','false')
         }else{
-          collapseItem.classList.add('show')
+          collapseContainer.classList.add('show')
           collapseHeader.setAttribute('area-expanded','true')
         }
       })

@@ -51,6 +51,9 @@ joomla-alert {
 		display: flex;
 		position: relative;
 		justify-content: space-between;
+		&[area-expanded='true']{
+			margin-bottom: 0.786rem;
+		}
 		.joomla-alert--collapse-icon{
 			width: 14px;
 			height: 14px;

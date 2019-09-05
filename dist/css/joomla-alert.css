@@ -49,6 +49,8 @@ joomla-alert {
     display: flex;
     position: relative;
     justify-content: space-between; }
+    joomla-alert .joomla-alert--collapse-header[area-expanded='true'] {
+      margin-bottom: 0.786rem; }
     joomla-alert .joomla-alert--collapse-header .joomla-alert--collapse-icon {
       width: 14px;
       height: 14px;
