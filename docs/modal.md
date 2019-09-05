@@ -22,6 +22,17 @@ The simplified version of the custom elements
 </joomla-modal>
 ```
 
+
+## Attibutes
+Control the design and functionality of the custom element through attributes.
+
+
+|Attribute		|Description|
+|---------------|-----------------------------------------------------------------------------------------------|
+|title			|This attribute is responsible for showing modal heading/title.|
+|class		|Use `scrollable` and `bordered` class to make a Scrollable and Bordered style modal|
+
+
 ### Modal demo:
 
 <div class="mermaid">

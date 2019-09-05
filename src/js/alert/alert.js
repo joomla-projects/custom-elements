@@ -196,7 +196,7 @@
       collapseHeader.setAttribute('area-expanded','false')
       const collapseHeaderTitle = this.getAttribute('collapse-title') === null ? this.getAttribute('type') : this.getAttribute('collapse-title')
       collapseHeader.innerHTML = collapseHeaderTitle;
-      const chevronIcon = document.createElement('span')
+      const chevronIcon = document.createElement('button')
       chevronIcon.classList.add('joomla-alert--collapse-icon')
       chevronIcon.innerHTML = '&#94;'
       collapseHeader.append(chevronIcon)

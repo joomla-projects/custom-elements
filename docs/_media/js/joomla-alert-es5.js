@@ -161,10 +161,21 @@ function _getPrototypeOf(o) {
     _inherits(JoomlaAlertElement, _HTMLElement);
 
     function JoomlaAlertElement() {
+      var _this;
+
       _classCallCheck(this, JoomlaAlertElement);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(JoomlaAlertElement).apply(this, arguments));
+      _this = _possibleConstructorReturn(this, _getPrototypeOf(JoomlaAlertElement).call(this));
+
+      if (_this.getAttribute('collapse') && _this.getAttribute('collapse') === 'true') {
+        _this.content = _this.innerHTML;
+        _this.innerHTML = '';
+      }
+
+      return _this;
     }
+    /* Attributes to monitor */
+
 
     _createClass(JoomlaAlertElement, [{
       key: "connectedCallback",
@@ -180,6 +191,11 @@ function _getPrototypeOf(o) {
 
         if (!this.role || ['alert', 'alertdialog'].indexOf(this.role) === -1) {
           this.setAttribute('role', 'alert');
+        } //Check if its collapsable
+
+
+        if (this.hasAttribute('collapse') && this.getAttribute('collapse') !== '' && this.getAttribute('collapse') !== 'false' && !this.querySelector('.joomla-alert--collapse')) {
+          this.appendCollapseArea();
         } // Append button
 
 
@@ -250,13 +266,13 @@ function _getPrototypeOf(o) {
     }, {
       key: "close",
       value: function close() {
-        var _this = this;
+        var _this2 = this;
 
         this.dispatchCustomEvent('joomla.alert.close');
         this.addEventListener('transitionend', function () {
-          _this.dispatchCustomEvent('joomla.alert.closed');
+          _this2.dispatchCustomEvent('joomla.alert.closed');
 
-          _this.parentNode.removeChild(_this);
+          _this2.parentNode.removeChild(_this2);
         }, false);
         this.classList.remove('joomla-alert--show');
       }
@@ -349,6 +365,37 @@ function _getPrototypeOf(o) {
           button.parentNode.removeChild(button);
         }
       }
+    }, {
+      key: "appendCollapseArea",
+      value: function appendCollapseArea() {
+        if (this.querySelector('joomla-alert--collapse')) {
+          return;
+        }
+
+        var collapseItem = document.createElement('div');
+        collapseItem.classList.add('joomla-alert--collapse');
+        collapseItem.innerHTML = this.content;
+        var collapseHeader = document.createElement('div');
+        collapseHeader.classList.add('joomla-alert--collapse-header');
+        collapseHeader.setAttribute('area-expanded', 'false');
+        var collapseHeaderTitle = this.getAttribute('collapse-title') === null ? this.getAttribute('type') : this.getAttribute('collapse-title');
+        collapseHeader.innerHTML = collapseHeaderTitle;
+        var chevronIcon = document.createElement('span');
+        chevronIcon.classList.add('joomla-alert--collapse-icon');
+        chevronIcon.innerHTML = '&#94;';
+        collapseHeader.append(chevronIcon);
+        this.prepend(collapseHeader);
+        this.append(collapseItem);
+        chevronIcon.addEventListener('click', function () {
+          if (collapseItem.classList.contains('show')) {
+            collapseItem.classList.remove('show');
+            collapseHeader.setAttribute('area-expanded', 'false');
+          } else {
+            collapseItem.classList.add('show');
+            collapseHeader.setAttribute('area-expanded', 'true');
+          }
+        });
+      }
       /* Method to get the translated text */
 
     }, {
@@ -392,8 +439,6 @@ function _getPrototypeOf(o) {
       }
     }], [{
       key: "observedAttributes",
-
-      /* Attributes to monitor */
       get: function get() {
         return ['type', 'role', 'dismiss', 'acknowledge', 'href'];
       }

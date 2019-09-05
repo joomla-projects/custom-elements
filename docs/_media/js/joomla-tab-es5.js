@@ -399,6 +399,8 @@ function _getPrototypeOf(o) {
 
         var activateTabFromLink = function activateTabFromLink(e) {
           e.preventDefault();
+          var isDisable = e.target.getAttribute('disabled');
+          if (isDisable === 'true') return;
 
           if (_this4.hasActive) {
             _this4.hideCurrent();
@@ -432,6 +434,8 @@ function _getPrototypeOf(o) {
           var active = tab.hasAttribute('active');
           var liElement = document.createElement('li');
           var aElement = document.createElement('a');
+          var isDisable = tab.getAttribute('disabled');
+          isDisable = isDisable !== null && isDisable === 'true';
           liElement.setAttribute('role', 'presentation');
           aElement.setAttribute('role', 'tab');
           aElement.setAttribute('aria-controls', tab.id);
@@ -443,6 +447,10 @@ function _getPrototypeOf(o) {
 
           if (active) {
             aElement.setAttribute('active', '');
+          }
+
+          if (isDisable) {
+            aElement.setAttribute('disabled', 'true');
           }
 
           aElement.addEventListener('click', activateTabFromLink);
