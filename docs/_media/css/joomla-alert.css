@@ -28,8 +28,12 @@ joomla-alert {
   opacity: 0;
   border-radius: 3px;
   transition: 300ms;
+<<<<<<< HEAD
   box-shadow: 0 8px 16px -4px rgba(9, 30, 66, 0.25), 0 0 1px 0 rgba(9, 30, 66, 0.31);
   color: var(--color); }
+=======
+  box-shadow: 0 8px 16px -4px rgba(9, 30, 66, 0.25), 0 0 1px 0 rgba(9, 30, 66, 0.31); }
+>>>>>>> 99ff10fb1b53a2a663821850d881f783e4b2e32a
   @media screen and (prefers-reduced-motion: reduce) {
     joomla-alert {
       transition: none; } }
