@@ -52,7 +52,8 @@ joomla-alert {
   joomla-alert .joomla-alert-content {
     flex-grow: 1; }
   joomla-alert .joomla-alert--icon {
-    padding-right: 1.357rem; }
+    padding-right: 1.357rem;
+    margin-top: 0.286rem; }
   joomla-alert .joomla-alert--collapse-header {
     display: flex;
     position: relative;
@@ -102,14 +103,23 @@ joomla-alert {
     padding-right: 1.5rem; }
   joomla-alert .joomla-alert-button-group {
     padding-top: 1.214rem; }
-    joomla-alert .joomla-alert-button-group a, joomla-alert .joomla-alert-button-group button {
-      padding: 0 0.857rem;
-      line-height: 1.643rem;
-      border: none;
-      background: rgba(0, 0, 0, 0.08);
-      border-radius: 3px;
-      margin-right: 4px;
-      display: inline-block; }
+  joomla-alert .joomla-alert-button-group a,
+  joomla-alert button {
+    padding: 0 0.857rem;
+    line-height: 1.643rem;
+    border: none;
+    background: rgba(0, 0, 0, 0.07);
+    border-radius: 3px;
+    display: inline-block;
+    cursor: pointer;
+    transition: 300ms;
+    color: inherit; }
+  joomla-alert .joomla-alert-button-group a,
+  joomla-alert .joomla-alert-button-group button {
+    margin-right: 4px; }
+    joomla-alert .joomla-alert-button-group a:hover,
+    joomla-alert .joomla-alert-button-group button:hover {
+      background: rgba(0, 0, 0, 0.13); }
   joomla-alert .joomla-alert-link-group {
     padding-top: 0.714rem; }
     joomla-alert .joomla-alert-link-group a {
@@ -133,8 +143,34 @@ joomla-alert {
         joomla-alert .joomla-alert-link-group a:last-child::after {
           display: none; }
 
-html[dir=rtl] joomla-alert .joomla-alert--close,
-html[dir=rtl] joomla-alert .joomla-alert-button--close {
+html[dir=rtl] joomla-alert .joomla-alert--icon {
+  padding-right: 0;
+  padding-left: 1.357rem; }
+
+html[dir=rtl] joomla-alert .joomla-alert--close {
   right: auto;
-  left: -1.25rem;
-  float: left; }
+  left: 1.5000rem; }
+
+html[dir=rtl] joomla-alert[collapse='true'][dismiss='true'] .joomla-alert--collapse-header {
+  padding-right: 0;
+  padding-left: 1.5rem; }
+
+html[dir=rtl] joomla-alert .joomla-alert-button-group a,
+html[dir=rtl] joomla-alert .joomla-alert-button-group button {
+  margin-right: 0;
+  margin-left: 4px; }
+  html[dir=rtl] joomla-alert .joomla-alert-button-group a:hover,
+  html[dir=rtl] joomla-alert .joomla-alert-button-group button:hover {
+    background: rgba(0, 0, 0, 0.13); }
+
+html[dir=rtl] joomla-alert .joomla-alert-link-group a {
+  margin-right: 0;
+  padding-right: 0;
+  margin-left: 8px;
+  padding-left: 12px; }
+  html[dir=rtl] joomla-alert .joomla-alert-link-group a::after {
+    right: auto;
+    left: 0; }
+  html[dir=rtl] joomla-alert .joomla-alert-link-group a:last-child {
+    margin-left: 0;
+    padding-left: 0; }
