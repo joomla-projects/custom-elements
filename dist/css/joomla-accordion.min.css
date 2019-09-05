@@ -1,0 +1,1 @@
+joomla-accordion>h3{border-bottom:2px solid #ccc}joomla-accordion>section{padding:0 18px;background-color:#fff;display:none;overflow:hidden}joomla-accordion>h3.active{color:green}joomla-accordion>h3.active~section.show{display:block}

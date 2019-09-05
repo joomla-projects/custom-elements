@@ -1,12 +1,5 @@
 (() => {
   class JoomlaAlertElement extends HTMLElement {
-    constructor(){
-      super()
-      if(this.getAttribute('collapse') && this.getAttribute('collapse') === 'true'){ 
-        this.content = this.innerHTML
-        this.innerHTML = ''
-      }
-    }
     /* Attributes to monitor */
     static get observedAttributes() { return ['type', 'role', 'dismiss', 'acknowledge', 'href']; }
 
@@ -27,7 +20,7 @@
     /* Lifecycle, element appended to the DOM */
     connectedCallback() {
       this.classList.add('joomla-alert--show');
-      
+
       // Default to info
       if (!this.type || ['info', 'warning', 'danger', 'success'].indexOf(this.type) === -1) {
         this.setAttribute('type', 'info');
@@ -36,17 +29,11 @@
       if (!this.role || ['alert', 'alertdialog'].indexOf(this.role) === -1) {
         this.setAttribute('role', 'alert');
       }
-      //Check if its collapsable
-      if(this.hasAttribute('collapse') && this.getAttribute('collapse') !== '' && this.getAttribute('collapse') !== 'false' &&
-        !this.querySelector('.joomla-alert--collapse')){
-          this.appendCollapseArea();
-      }
       // Append button
       if ((this.hasAttribute('dismiss') || this.hasAttribute('acknowledge')) || ((this.hasAttribute('href') && this.getAttribute('href') !== '')
-        && !this.querySelector('button.joomla-alert--close') && !this.querySelector('button.joomla-alert-button--close'))) {
+          && !this.querySelector('button.joomla-alert--close') && !this.querySelector('button.joomla-alert-button--close'))) {
         this.appendCloseButton();
       }
-      
 
       this.dispatchCustomEvent('joomla.alert.show');
     }
@@ -134,7 +121,7 @@
           closeButton.innerHTML = this.getText('JOPEN', 'Open');
         }
       }
-      
+
       if (this.firstChild) {
         this.insertBefore(closeButton, this.firstChild);
       } else {
@@ -183,38 +170,6 @@
       }
     }
 
-    appendCollapseArea(){
-      if (this.querySelector('joomla-alert--collapse')) {
-        return;
-      }
-      const collapseItem = document.createElement('div');
-      collapseItem.classList.add('joomla-alert--collapse');
-      collapseItem.innerHTML = this.content
-
-      const collapseHeader = document.createElement('div')
-      collapseHeader.classList.add('joomla-alert--collapse-header')
-      collapseHeader.setAttribute('area-expanded','false')
-      const collapseHeaderTitle = this.getAttribute('collapse-title') === null ? this.getAttribute('type') : this.getAttribute('collapse-title')
-      collapseHeader.innerHTML = collapseHeaderTitle;
-      const chevronIcon = document.createElement('span')
-      chevronIcon.classList.add('joomla-alert--collapse-icon')
-      chevronIcon.innerHTML = '&#94;'
-      collapseHeader.append(chevronIcon)
-      this.prepend(collapseHeader)
-      this.append(collapseItem)
-
-      chevronIcon.addEventListener('click', ()  => {
-        if( collapseItem.classList.contains('show') ){
-          collapseItem.classList.remove('show')
-          collapseHeader.setAttribute('area-expanded','false')
-        }else{
-          collapseItem.classList.add('show')
-          collapseHeader.setAttribute('area-expanded','true')
-        }
-      })
-
-    }
-
     /* Method to get the translated text */
     getText(str, fallback) {
       // TODO: Remove coupling to Joomla CMS Core JS here
@@ -223,5 +178,5 @@
     }
   }
 
-  customElements.define('joomla-alert', JoomlaAlertElement);
+  customElements.define('joomla-callouts', JoomlaAlertElement);
 })();

@@ -5,59 +5,58 @@
 //
 
 // Retrieve color Sass maps
-@function color($key: "blue") {
-  @return map-get($colors, $key);
-}
+// @function color($key: "blue") {
+//   @return map-get($colors, $key);
+// }
 
-@function theme-color($key: "primary") {
-  @return map-get($theme-colors, $key);
-}
+// @function theme-color($key: "primary") {
+//   @return map-get($theme-colors, $key);
+// }
 
-@function gray($key: "100") {
-  @return map-get($grays, $key);
-}
+// @function gray($key: "100") {
+//   @return map-get($grays, $key);
+// }
 
-// Request a theme color level
-@function theme-color-level($color-name: "primary", $level: 0) {
-  $color: theme-color($color-name);
-  $color-base: if($level > 0, $black, $white);
-  $level: abs($level);
+// // Request a theme color level
+// @function theme-color-level($color-name: "primary", $level: 0) {
+//   $color: theme-color($color-name);
+//   $color-base: if($level > 0, $black, $white);
+//   $level: abs($level);
 
-  @return mix($color-base, $color, $level * $theme-color-interval);
-}
+//   @return mix($color-base, $color, $level * $theme-color-interval);
+// }
 
 
 //
 // Mixins
 //
 
-@mixin hover-focus {
-  &:hover,
-  &:focus {
-    @content;
-  }
-}
+// @mixin hover-focus {
+//   &:hover,
+//   &:focus {
+//     @content;
+//   }
+// }
 
-@mixin alert-variant($background, $border, $color) {
-  color: $color;
-  background-color: $background;
-  border-color: $border;
+// @mixin alert-variant($background, $border, $color) {
+//   color: $color;
+//   background-color: $background;
+//   border-color: $border;
 
-  hr {
-    border-top-color: darken($border, 5%);
-  }
+//   hr {
+//     border-top-color: darken($border, 5%);
+//   }
 
-  .alert-link {
-    color: darken($color, 10%);
-  }
-}
+//   .alert-link {
+//     color: darken($color, 10%);
+//   }
+// }
 
 //
 // Variables
 //
 
 @import "../variables";
-
 
 //
 // Base styles
@@ -66,12 +65,13 @@
 joomla-alert {
   display: block;
   min-width: 250px;
-  padding: $alert-padding-y $alert-padding-x;
-  margin-bottom: $alert-margin-bottom;
-  border: $alert-border-width solid transparent;
+  padding: 1.143rem 1.429rem;
+  margin-bottom: 1.143rem;
+  border: 1px solid transparent;
   opacity: 0;
-  border-radius: $alert-border-radius;
-  transition: $transition-fade;
+  border-radius: 3px;
+	transition: 300ms;
+	box-shadow: 0 8px 16px -4px rgba(9, 30, 66, 0.25), 0 0 1px 0 rgba(9, 30, 66, 0.31);
 
   @media screen and (prefers-reduced-motion: reduce) {
     transition: none;
@@ -104,12 +104,12 @@ joomla-alert {
     border: 0;
     opacity: .5;
 
-    @include hover-focus {
-      color: $close-color;
-      text-decoration: none;
-      cursor: pointer;
-      opacity: .75;
-    }
+    // @include hover-focus {
+    //   color: $close-color;
+    //   text-decoration: none;
+    //   cursor: pointer;
+    //   opacity: .75;
+    // }
   }
 
   // Additional properties for button version
@@ -131,11 +131,11 @@ joomla-alert {
 }
 
 // Alternate styles
-@each $color, $value in $alert-colors {
-  joomla-alert[type="#{$color}"] {
-    @include alert-variant(theme-color-level($color, -10), theme-color-level($color, -9), theme-color-level($color, 6));
-  }
-}
+// @each $color, $value in $alert-colors {
+//   joomla-alert[type="#{$color}"] {
+//     @include alert-variant(theme-color-level($color, -10), theme-color-level($color, -9), theme-color-level($color, 6));
+//   }
+// }
 
 // RTL overrides
 html[dir=rtl] joomla-alert {

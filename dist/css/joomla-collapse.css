@@ -2,14 +2,16 @@
   --background: #f4f7fc;
   --inverse-background: #1d2427;
   --color: #252732;
+  --color-rgb: 37, 39, 50;
   --inverse-color: #ffffff;
   --secondary-color: #5e727c;
   --icon-color: #808f94;
   --secondary-icon-color: #bdc5c8;
-  --button-background: #e6f2ff;
+  --button-background: #e5f2ff;
   --cancel-button-background: #f0f3f8;
-  --disabled-button-background: #dcdcdc;
+  --disabled-button-background: #eaeaea;
   --link-color: #0184ff;
+  --link-color-light-rgb: 229, 242, 255;
   --primary-color: #0184ff;
   --primary-gradient-color: #198df8;
   --success-color: #7ac143;
@@ -42,7 +44,8 @@ joomla-collapse[state="open"] {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  transition: .3s; }
+  transition: .3s;
+  color: var(--secondary-color); }
   .accordion-panel-title .accordion-arrow {
     pointer-events: none;
     font-size: 50%;
@@ -50,7 +53,7 @@ joomla-collapse[state="open"] {
     transition: .3s;
     transform: rotate(0deg); }
   .accordion-panel-title[aria-expanded="true"] {
-    color: #000; }
+    color: var(--color); }
     .accordion-panel-title[aria-expanded="true"] .accordion-arrow {
       transform: rotate(180deg); }
   .accordion-panel-title:hover {
