@@ -30,7 +30,10 @@ joomla-alert {
   transition: 300ms;
   box-shadow: 0 8px 16px -4px rgba(9, 30, 66, 0.25), 0 0 1px 0 rgba(9, 30, 66, 0.31);
   color: var(--color);
-  position: relative; }
+  position: relative;
+  line-height: 1.643rem; }
+  joomla-alert a {
+    color: var(--primary-color); }
   @media screen and (prefers-reduced-motion: reduce) {
     joomla-alert {
       transition: none; } }
@@ -66,7 +69,8 @@ joomla-alert {
       display: inline-block;
       border: none;
       background-color: transparent;
-      cursor: pointer; }
+      cursor: pointer;
+      overflow: hidden; }
   joomla-alert[type="info"] .joomla-alert--collapse-header .joomla-alert--collapse-icon {
     background-image: url("data:image/svg+xml,%3Csvg width='12' height='7' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6.707 6.283a1 1 0 0 1-1.414 0L.7 1.69A.99.99 0 0 1 2.1.29L6 4.19 9.9.29a.99.99 0 0 1 1.4 1.4L6.707 6.283z' fill='%23C1C7D0' fill-rule='nonzero'/%3E%3C/svg%3E"); }
   joomla-alert .joomla-alert--collapse {
@@ -86,7 +90,8 @@ joomla-alert {
     background-color: transparent;
     right: 1.500rem;
     top: 1.286rem;
-    cursor: pointer; }
+    cursor: pointer;
+    overflow: hidden; }
     joomla-alert .joomla-alert--close span {
       display: none; }
   joomla-alert[type='info'] .joomla-alert--close {
@@ -95,6 +100,38 @@ joomla-alert {
     display: none; }
   joomla-alert[collapse='true'][dismiss='true'] .joomla-alert--collapse-header {
     padding-right: 1.5rem; }
+  joomla-alert .joomla-alert-button-group {
+    padding-top: 1.214rem; }
+    joomla-alert .joomla-alert-button-group a, joomla-alert .joomla-alert-button-group button {
+      padding: 0 0.857rem;
+      line-height: 1.643rem;
+      border: none;
+      background: rgba(0, 0, 0, 0.08);
+      border-radius: 3px;
+      margin-right: 4px;
+      display: inline-block; }
+  joomla-alert .joomla-alert-link-group {
+    padding-top: 0.714rem; }
+    joomla-alert .joomla-alert-link-group a {
+      margin-right: 8px;
+      display: inline-block;
+      position: relative;
+      padding-right: 12px; }
+      joomla-alert .joomla-alert-link-group a::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 50%;
+        margin-top: -2px;
+        height: 4px;
+        width: 4px;
+        border-radius: 50%;
+        background: var(--primary-color); }
+      joomla-alert .joomla-alert-link-group a:last-child {
+        margin-right: 0;
+        padding-right: 0; }
+        joomla-alert .joomla-alert-link-group a:last-child::after {
+          display: none; }
 
 html[dir=rtl] joomla-alert .joomla-alert--close,
 html[dir=rtl] joomla-alert .joomla-alert-button--close {
