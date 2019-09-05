@@ -43,8 +43,13 @@ joomla-alert {
     background-color: var(--success-color);
     color: var(--inverse-color); }
   joomla-alert.joomla-alert--show {
-    display: block;
+    display: flex;
     opacity: 1; }
+  joomla-alert .joomla-alert--collapse-container,
+  joomla-alert .joomla-alert-content {
+    flex-grow: 1; }
+  joomla-alert .joomla-alert--icon {
+    padding-right: 1.357rem; }
   joomla-alert .joomla-alert--collapse-header {
     display: flex;
     position: relative;

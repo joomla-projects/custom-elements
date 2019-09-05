@@ -43,8 +43,17 @@ joomla-alert {
 
 
   &.joomla-alert--show {
-    display: block;
-    opacity: 1;
+    display: flex;
+		opacity: 1;
+	}
+
+	.joomla-alert--collapse-container,
+	.joomla-alert-content{
+		flex-grow: 1;
+	}
+
+	.joomla-alert--icon{
+		padding-right: 1.357rem;
 	}
 
 	.joomla-alert--collapse-header{
