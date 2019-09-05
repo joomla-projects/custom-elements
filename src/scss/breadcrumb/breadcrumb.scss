@@ -1,0 +1,17 @@
+:root{
+  font-size: 14px;
+}
+
+.breadcrumb{
+  display: flex;
+  list-style: none;
+  font-size: 1rem;
+  
+}
+.breadcrumb>li{
+  margin-right: 12px;
+}
+.breadcrumb>li:not(:last-child):after {
+  content: ">";
+  margin-left: 10px;
+}
