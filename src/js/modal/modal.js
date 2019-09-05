@@ -154,7 +154,7 @@
       if (dropShadow) document.body.removeChild(dropShadow);
       this.setAttribute('aria-hidden', 'true');
       this.classList.remove('show');
-      this.main.innerHTML = '';
+      // this.main.innerHTML = '';
       this.triggerBtn.focus();
     }
 
