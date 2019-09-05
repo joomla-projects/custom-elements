@@ -179,7 +179,10 @@
 
     /* Method to remove the close button */
     removeCloseButton() {
-      const button = this.querySelector('button');
+      let button = this.querySelector('button.joomla-alert-button--close');
+      if( button === null ){
+        button = this.querySelector('button.joomla-alert--close');
+      }
       if (button) {
         button.removeEventListener('click', this);
         button.parentNode.removeChild(button);
@@ -187,7 +190,7 @@
     }
 
     appendCollapseContainer(){
-      if (this.querySelector('.joomla-alert--collapse') === null && this.querySelector('.joomla-alert--collapse-header') !== null ) {
+      if (this.querySelector('.joomla-alert--collapse') === null || this.querySelector('.joomla-alert--collapse-header') !== null ) {
         return;
       }
       let collapseBox = this.querySelector('.joomla-alert--collapse')
