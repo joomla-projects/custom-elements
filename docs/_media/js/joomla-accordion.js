@@ -27,6 +27,9 @@
         accordionTitle.setAttribute('area-expanded', 'false');
         accordionTitle.innerHTML = '<span aria-hidden="true">&gt;</span>';
         accordionTitle.setAttribute('target', section.id);
+        if (section.classList.contains('show')) {
+          accordionTitle.classList.add('active');
+        }
         const title = section.getAttribute('name') || `Accordion ${index}`;
         const navTitle = document.createTextNode(title);
         accordionTitle.appendChild(navTitle);

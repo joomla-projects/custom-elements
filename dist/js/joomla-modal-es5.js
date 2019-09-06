@@ -313,6 +313,10 @@ function _getPrototypeOf(o) {
         this.setAttribute('aria-hidden', 'true');
         this.classList.remove('show'); // this.main.innerHTML = '';
 
+        if (this.main.querySelector('iframe')) {
+          this.main.removeChild(this.main.querySelector('iframe'));
+        }
+
         this.triggerBtn.focus();
       }
     }, {
