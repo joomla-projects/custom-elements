@@ -57,16 +57,14 @@
 
       switch (this.position) {
         case 'right':
-          tooltipWrap.style.left = `${Math.round(itemRect.left + itemRect.width + space)}px`;
+          tooltipWrap.style.left = `${Math.round(itemRect.left + itemRect.width)}px`;
           tooltipWrap.style.top = `${Math.round(itemRect.top)}px`;
           break;
         case 'bottom':
-          tooltipWrap.style.left = `${Math.round(itemRect.right - itemRect.width)}px`;
-          tooltipWrap.style.top = `${Math.round(itemRect.bottom) + space}px`;
+
           break;
         case 'left':
-          tooltipWrap.style.left = `${Math.round(itemRect.left - (toolTipRect.width + space))}px`;
-          tooltipWrap.style.top = `${Math.round(itemRect.top)}px`;
+
           break;
 
         default:
