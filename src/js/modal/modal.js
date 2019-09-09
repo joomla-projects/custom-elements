@@ -70,7 +70,6 @@
       this.header = this.container.querySelector('header');
       this.body = this.container.querySelector('section');
       this.footer = this.container.querySelector('footer');
-
       this.triggerBtn = document.querySelector(`[data-href="#${this.id}"]`);
       if (this.triggerBtn) {
         this.triggerBtn.addEventListener('click', this.open.bind(this));
@@ -154,7 +153,10 @@
       if (dropShadow) document.body.removeChild(dropShadow);
       this.setAttribute('aria-hidden', 'true');
       this.classList.remove('show');
-      this.main.innerHTML = '';
+      // this.main.innerHTML = '';
+      if (this.main.querySelector('iframe')) {
+        this.main.removeChild(this.main.querySelector('iframe'));
+      }
       this.triggerBtn.focus();
     }
 

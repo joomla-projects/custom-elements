@@ -2,13 +2,9 @@
   class JoomlaAlertElement extends HTMLElement {
     constructor(){
       super()
-      if(this.getAttribute('collapse') && this.getAttribute('collapse') === 'true'){ 
-        this.content = this.innerHTML
-        this.innerHTML = ''
-      }
     }
     /* Attributes to monitor */
-    static get observedAttributes() { return ['type', 'role', 'dismiss', 'acknowledge', 'href']; }
+    static get observedAttributes() { return ['type', 'role', 'dismiss', 'acknowledge', 'href','collapse']; }
 
     get type() { return this.getAttribute('type'); }
 
@@ -38,8 +34,8 @@
       }
       //Check if its collapsable
       if(this.hasAttribute('collapse') && this.getAttribute('collapse') !== '' && this.getAttribute('collapse') !== 'false' &&
-        !this.querySelector('.joomla-alert--collapse')){
-          this.appendCollapseArea();
+        !this.querySelector('.joomla-alert--collapse-header') && this.querySelector('.joomla-alert--collapse')){
+          this.appendCollapseContainer();
       }
       // Append button
       if ((this.hasAttribute('dismiss') || this.hasAttribute('acknowledge')) || ((this.hasAttribute('href') && this.getAttribute('href') !== '')
@@ -73,6 +69,13 @@
         case 'role':
           if (!newValue || (newValue && ['alert', 'alertdialog'].indexOf(newValue) === -1)) {
             this.role = 'alert';
+          }
+          break;
+        case 'collapse': 
+          if (!newValue || newValue === 'true') {
+            this.appendCollapseContainer();
+          } else {
+            this.removeCollapseContainer();
           }
           break;
         case 'dismiss':
@@ -176,43 +179,63 @@
 
     /* Method to remove the close button */
     removeCloseButton() {
-      const button = this.querySelector('button');
+      let button = this.querySelector('button.joomla-alert-button--close');
+      if( button === null ){
+        button = this.querySelector('button.joomla-alert--close');
+      }
       if (button) {
         button.removeEventListener('click', this);
         button.parentNode.removeChild(button);
       }
     }
 
-    appendCollapseArea(){
-      if (this.querySelector('joomla-alert--collapse')) {
+    appendCollapseContainer(){
+      if (this.querySelector('.joomla-alert--collapse') === null || this.querySelector('.joomla-alert--collapse-header') !== null ) {
         return;
       }
-      const collapseItem = document.createElement('div');
-      collapseItem.classList.add('joomla-alert--collapse');
-      collapseItem.innerHTML = this.content
+      let collapseBox = this.querySelector('.joomla-alert--collapse')
+      
+      const collapseContainer  = document.createElement('div')
+      collapseContainer.classList.add('joomla-alert--collapse-container')
+      collapseBox.parentNode.insertBefore(collapseContainer, collapseBox)
+      collapseContainer.append(this.querySelector('.joomla-alert--collapse'))
+      
 
       const collapseHeader = document.createElement('div')
       collapseHeader.classList.add('joomla-alert--collapse-header')
       collapseHeader.setAttribute('area-expanded','false')
+      
       const collapseHeaderTitle = this.getAttribute('collapse-title') === null ? this.getAttribute('type') : this.getAttribute('collapse-title')
       collapseHeader.innerHTML = collapseHeaderTitle;
-      const chevronIcon = document.createElement('span')
+
+      const chevronIcon = document.createElement('button')
       chevronIcon.classList.add('joomla-alert--collapse-icon')
       chevronIcon.innerHTML = '&#94;'
       collapseHeader.append(chevronIcon)
-      this.prepend(collapseHeader)
-      this.append(collapseItem)
+      collapseContainer.prepend(collapseHeader)
 
       chevronIcon.addEventListener('click', ()  => {
-        if( collapseItem.classList.contains('show') ){
-          collapseItem.classList.remove('show')
+        if (collapseBox.classList.contains('show') ){
+          collapseBox.classList.remove('show')
           collapseHeader.setAttribute('area-expanded','false')
         }else{
-          collapseItem.classList.add('show')
+          collapseBox.classList.add('show')
           collapseHeader.setAttribute('area-expanded','true')
         }
       })
 
+    }
+
+    removeCollapseContainer(){
+      if (this.querySelector('.joomla-alert--collapse-container') === null) {
+        return;
+      }
+      const collapseContainer = this.querySelector('.joomla-alert--collapse-container');
+      const collapseBox = collapseContainer.querySelector('.joomla-alert--collapse')
+      collapseContainer.removeChild(collapseContainer.querySelector('.joomla-alert--collapse-header'))
+      collapseContainer.parentNode.insertBefore(collapseBox, collapseContainer)
+      this.removeChild(collapseContainer)
+      collapseBox.classList.remove('joomla-alert--collapse')
     }
 
     /* Method to get the translated text */

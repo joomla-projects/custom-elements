@@ -161,18 +161,9 @@ function _getPrototypeOf(o) {
     _inherits(JoomlaAlertElement, _HTMLElement);
 
     function JoomlaAlertElement() {
-      var _this;
-
       _classCallCheck(this, JoomlaAlertElement);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(JoomlaAlertElement).call(this));
-
-      if (_this.getAttribute('collapse') && _this.getAttribute('collapse') === 'true') {
-        _this.content = _this.innerHTML;
-        _this.innerHTML = '';
-      }
-
-      return _this;
+      return _possibleConstructorReturn(this, _getPrototypeOf(JoomlaAlertElement).call(this));
     }
     /* Attributes to monitor */
 
@@ -194,8 +185,8 @@ function _getPrototypeOf(o) {
         } //Check if its collapsable
 
 
-        if (this.hasAttribute('collapse') && this.getAttribute('collapse') !== '' && this.getAttribute('collapse') !== 'false' && !this.querySelector('.joomla-alert--collapse')) {
-          this.appendCollapseArea();
+        if (this.hasAttribute('collapse') && this.getAttribute('collapse') !== '' && this.getAttribute('collapse') !== 'false' && !this.querySelector('.joomla-alert--collapse-header') && this.querySelector('.joomla-alert--collapse')) {
+          this.appendCollapseContainer();
         } // Append button
 
 
@@ -238,6 +229,15 @@ function _getPrototypeOf(o) {
 
             break;
 
+          case 'collapse':
+            if (!newValue || newValue === 'true') {
+              this.appendCollapseContainer();
+            } else {
+              this.removeCollapseContainer();
+            }
+
+            break;
+
           case 'dismiss':
           case 'acknowledge':
             if (!newValue || newValue === 'true') {
@@ -266,13 +266,13 @@ function _getPrototypeOf(o) {
     }, {
       key: "close",
       value: function close() {
-        var _this2 = this;
+        var _this = this;
 
         this.dispatchCustomEvent('joomla.alert.close');
         this.addEventListener('transitionend', function () {
-          _this2.dispatchCustomEvent('joomla.alert.closed');
+          _this.dispatchCustomEvent('joomla.alert.closed');
 
-          _this2.parentNode.removeChild(_this2);
+          _this.parentNode.removeChild(_this);
         }, false);
         this.classList.remove('joomla-alert--show');
       }
@@ -358,7 +358,11 @@ function _getPrototypeOf(o) {
     }, {
       key: "removeCloseButton",
       value: function removeCloseButton() {
-        var button = this.querySelector('button');
+        var button = this.querySelector('button.joomla-alert-button--close');
+
+        if (button === null) {
+          button = this.querySelector('button.joomla-alert--close');
+        }
 
         if (button) {
           button.removeEventListener('click', this);
@@ -366,35 +370,50 @@ function _getPrototypeOf(o) {
         }
       }
     }, {
-      key: "appendCollapseArea",
-      value: function appendCollapseArea() {
-        if (this.querySelector('joomla-alert--collapse')) {
+      key: "appendCollapseContainer",
+      value: function appendCollapseContainer() {
+        if (this.querySelector('.joomla-alert--collapse') === null || this.querySelector('.joomla-alert--collapse-header') !== null) {
           return;
         }
 
-        var collapseItem = document.createElement('div');
-        collapseItem.classList.add('joomla-alert--collapse');
-        collapseItem.innerHTML = this.content;
+        var collapseBox = this.querySelector('.joomla-alert--collapse');
+        var collapseContainer = document.createElement('div');
+        collapseContainer.classList.add('joomla-alert--collapse-container');
+        collapseBox.parentNode.insertBefore(collapseContainer, collapseBox);
+        collapseContainer.append(this.querySelector('.joomla-alert--collapse'));
         var collapseHeader = document.createElement('div');
         collapseHeader.classList.add('joomla-alert--collapse-header');
         collapseHeader.setAttribute('area-expanded', 'false');
         var collapseHeaderTitle = this.getAttribute('collapse-title') === null ? this.getAttribute('type') : this.getAttribute('collapse-title');
         collapseHeader.innerHTML = collapseHeaderTitle;
-        var chevronIcon = document.createElement('span');
+        var chevronIcon = document.createElement('button');
         chevronIcon.classList.add('joomla-alert--collapse-icon');
         chevronIcon.innerHTML = '&#94;';
         collapseHeader.append(chevronIcon);
-        this.prepend(collapseHeader);
-        this.append(collapseItem);
+        collapseContainer.prepend(collapseHeader);
         chevronIcon.addEventListener('click', function () {
-          if (collapseItem.classList.contains('show')) {
-            collapseItem.classList.remove('show');
+          if (collapseBox.classList.contains('show')) {
+            collapseBox.classList.remove('show');
             collapseHeader.setAttribute('area-expanded', 'false');
           } else {
-            collapseItem.classList.add('show');
+            collapseBox.classList.add('show');
             collapseHeader.setAttribute('area-expanded', 'true');
           }
         });
+      }
+    }, {
+      key: "removeCollapseContainer",
+      value: function removeCollapseContainer() {
+        if (this.querySelector('.joomla-alert--collapse-container') === null) {
+          return;
+        }
+
+        var collapseContainer = this.querySelector('.joomla-alert--collapse-container');
+        var collapseBox = collapseContainer.querySelector('.joomla-alert--collapse');
+        collapseContainer.removeChild(collapseContainer.querySelector('.joomla-alert--collapse-header'));
+        collapseContainer.parentNode.insertBefore(collapseBox, collapseContainer);
+        this.removeChild(collapseContainer);
+        collapseBox.classList.remove('joomla-alert--collapse');
       }
       /* Method to get the translated text */
 
@@ -440,7 +459,7 @@ function _getPrototypeOf(o) {
     }], [{
       key: "observedAttributes",
       get: function get() {
-        return ['type', 'role', 'dismiss', 'acknowledge', 'href'];
+        return ['type', 'role', 'dismiss', 'acknowledge', 'href', 'collapse'];
       }
     }]);
 

@@ -311,8 +311,12 @@ function _getPrototypeOf(o) {
         var dropShadow = document.querySelector('.modal-backdrop');
         if (dropShadow) document.body.removeChild(dropShadow);
         this.setAttribute('aria-hidden', 'true');
-        this.classList.remove('show');
-        this.main.innerHTML = '';
+        this.classList.remove('show'); // this.main.innerHTML = '';
+
+        if (this.main.querySelector('iframe')) {
+          this.main.removeChild(this.main.querySelector('iframe'));
+        }
+
         this.triggerBtn.focus();
       }
     }, {

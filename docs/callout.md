@@ -19,7 +19,7 @@ The simplified version of the custom elements
 
 # Callout With Footer:
 ```html
-<joomla-callout for="#showCollout" dismiss="true">
+<joomla-callout for="#showCollout2" dismiss="true">
     <div class="callout-title">Title</div>
     <div class="callout-content">
         Message body is optional.  If help documentation is available, consider adding a link to learn more
@@ -29,3 +29,24 @@ The simplified version of the custom elements
     </div>
 </joomla-callout>
 ```
+
+<button id="showCollout">Callout</button>
+<button id="showCollout2">Callout with footer</button>
+
+<joomla-callout for="#showCollout" dismiss="true">
+    <div class="callout-title">Title</div>
+    <div class="callout-content">
+        Message body is optional.  If help documentation is available, consider adding a link to learn more
+    </div>
+    <a href="#" class="callout-link" target="blank">Learn more</a>
+</joomla-callout>
+
+<joomla-callout for="#showCollout2" dismiss="true">
+    <div class="callout-title">Title</div>
+    <div class="callout-content">
+        Message body is optional.  If help documentation is available, consider adding a link to learn more
+    </div>
+    <div class="callout-footer">
+        <a href="#" class="callout-link" target="blank">Learn more</a>
+    </div>
+</joomla-callout>
