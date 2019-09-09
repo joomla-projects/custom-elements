@@ -14,11 +14,15 @@ joomla-breadcrumb{
   display: inline-flex;
   list-style: none;
   font-size: 1rem;
-  span{
-    margin-right: 12px;
+  .item{
+    margin-right: 10px;
     &:not(:last-child):after {
       content: ">";
       margin-left: 10px;
+    }
+    a{
+      color: var(--secondary-color);
+      text-decoration: none;
     }
   }
   .minimize-items-wrapper{

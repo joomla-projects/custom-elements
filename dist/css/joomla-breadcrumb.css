@@ -23,11 +23,14 @@ joomla-breadcrumb {
   display: inline-flex;
   list-style: none;
   font-size: 1rem; }
-  joomla-breadcrumb span {
-    margin-right: 12px; }
-    joomla-breadcrumb span:not(:last-child):after {
+  joomla-breadcrumb .item {
+    margin-right: 10px; }
+    joomla-breadcrumb .item:not(:last-child):after {
       content: ">";
       margin-left: 10px; }
+    joomla-breadcrumb .item a {
+      color: var(--secondary-color);
+      text-decoration: none; }
   joomla-breadcrumb .minimize-items-wrapper {
     display: none;
     position: absolute; }

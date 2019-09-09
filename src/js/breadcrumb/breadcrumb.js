@@ -10,7 +10,7 @@
       const allItems = Array.from(children);
       const minimizeWrapper = document.createElement('div');
       const minimizeItemsWrapper = document.createElement('div');
-      const toggleButton = document.createElement('button');
+      const toggleButton = document.createElement('span');
 
       toggleButton.classList.add('items-toggler');
       toggleButton.innerHTML = '...';
@@ -27,6 +27,7 @@
       /* item manipulate */
       const items = [...this.querySelectorAll('span')];
       items.forEach(item => {
+        item.classList.add('item');
         const createLink = document.createElement('a');
         createLink.setAttribute('href', item.getAttribute('link'));
         createLink.innerHTML = item.getAttribute('value');
@@ -50,17 +51,17 @@
               minimizeItemsWrapper.prepend(filterItems[i]);
             }
           }
-          // if responsive works
+          /* when responsive works */
           self.setAttribute('responsive', true);
         }
       }
 
-      //init minimizeItems function
+      /* init minimizeItems function */
       if(self.offsetWidth > self.parentElement.offsetWidth){
         minimizeItemsFun()
       }
 
-      //check on reisze
+      /* check on reisze */
       window.addEventListener('resize', () => {
           setTimeout(() => {
             if(self.offsetWidth > self.parentElement.offsetWidth){
