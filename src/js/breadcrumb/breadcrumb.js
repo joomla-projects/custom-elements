@@ -3,68 +3,82 @@
     /* Attributes to monitor */
     static get observedAttributes() {}
 
+    /* Lifecycle, element appended to the DOM */
     connectedCallback() {
       const self = this;
-      const allChild = self.children;
-      // responsive
-      const overlayWrapper = document.createElement('div')
-      const overlayItemsWrapper = document.createElement('div')
-      const toggleButton = document.createElement('button')
-      toggleButton.classList.add('items-toggler')
-      overlayItemsWrapper.classList.add('others-items-wrapper')
-      toggleButton.innerHTML = '...'
-      overlayWrapper.appendChild(toggleButton);
-      overlayWrapper.appendChild(overlayItemsWrapper);
-      overlayWrapper.classList.add('others-items')
+      const children = self.children;
+      const allItems = Array.from(children);
+      const minimizeWrapper = document.createElement('div');
+      const minimizeItemsWrapper = document.createElement('div');
+      const toggleButton = document.createElement('button');
+
+      toggleButton.classList.add('items-toggler');
+      toggleButton.innerHTML = '...';
+
+      minimizeItemsWrapper.classList.add('minimize-items-wrapper');
+      minimizeWrapper.appendChild(toggleButton);
+      minimizeWrapper.appendChild(minimizeItemsWrapper);
+      minimizeWrapper.classList.add('minimize-items');
+      
       toggleButton.addEventListener('click', ()=>{
-        overlayItemsWrapper.classList.toggle('active')
+        minimizeItemsWrapper.classList.toggle('active');
       })
 
-      const responsiveFun = (allChild) => {
-        if(self.offsetWidth>self.parentElement.offsetWidth){
-          const allItems = Array.from(allChild);
+      /* item manipulate */
+      const items = [...this.querySelectorAll('span')];
+      items.forEach(item => {
+        const createLink = document.createElement('a');
+        createLink.setAttribute('href', item.getAttribute('link'));
+        createLink.innerHTML = item.getAttribute('value');
+        item.appendChild(createLink);
+        item.removeAttribute('link');
+      });
+      
+      /* minimize items */
+      const minimizeItemsFun = () =>{
+        if(allItems.length>0){
           self.innerHTML = '';
-          allItems.forEach((child, index) => {
-            console.log(index)
-            if((self.parentElement.offsetWidth - 50)>self.offsetWidth){
-              self.appendChild(child)
-              console.log(this.querySelector('others-items'))
+          const filterItems = allItems.filter((item, key) => key>0);
+          self.append(allItems[0]);
+          self.append(minimizeWrapper);
+
+          for(let i = filterItems.length - 1; i >= 0; i--){
+            if(self.offsetWidth + 40 < self.parentElement.offsetWidth){
+              let minimizeItemsDom = this.querySelector('.minimize-items');
+              minimizeWrapper.parentNode.insertBefore(filterItems[i], minimizeWrapper.nextSibling);
             } else{
-              self.append(overlayWrapper);
-              overlayItemsWrapper.appendChild(child)
+              minimizeItemsWrapper.prepend(filterItems[i]);
             }
-          })
+          }
+          // if responsive works
+          self.setAttribute('responsive', true);
         }
       }
 
-      // item manupulate
-      const items = [...this.querySelectorAll('item')];
-      items.forEach(item => {
-        const callbackLink = document.createElement('a');
-        callbackLink.setAttribute('href', item.getAttribute('href'));
-        callbackLink.innerHTML = item.getAttribute('value');
-        item.appendChild(callbackLink);
-        item.removeAttribute('href')
-      });
+      //init minimizeItems function
+      if(self.offsetWidth > self.parentElement.offsetWidth){
+        minimizeItemsFun()
+      }
 
-      responsiveFun(allChild)
-      
-      // window.addEventListener('resize', () => {
-      //   setTimeout(function (){
-      //     responsiveFun(allChild)
-      //     if(self.offsetWidth<self.parentElement.offsetWidth){
-      //       if(document.querySelector('.others-items')){
-      //         self.querySelector('.items-toggler').style.display = 'none';
-      //         console.log('wide')
-      //         const allItems = Array.from(allChild);
-      //         self.innerHTML = '';
-      //         allItems.forEach(child => {
-      //           self.appendChild(child)
-      //         })
-      //       }
-      //     }
-      //   }, 1000)
-      // });
+      //check on reisze
+      window.addEventListener('resize', () => {
+          setTimeout(() => {
+            if(self.offsetWidth > self.parentElement.offsetWidth){
+              minimizeItemsFun()
+            } else if(self.offsetWidth < self.parentElement.offsetWidth){
+              if(self.getAttribute('responsive')){
+                if(allItems.length>0){
+                  minimizeWrapper.remove()
+                  self.innerHTML = '';
+                  allItems.forEach(item => {
+                    self.append(item);
+                  })
+                }
+                self.setAttribute('responsive', false);
+              }
+            }
+          }, 1000);
+      })
     }
   } 
   customElements.define('joomla-breadcrumb', joomlaBreadcrumb);

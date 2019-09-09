@@ -1,17 +1,31 @@
-:root{
-  font-size: 14px;
-}
+// Callout
 
-.breadcrumb{
-  display: flex;
+//
+// Variables
+//
+
+@import "../variables";
+
+
+//
+// Base styles
+//
+joomla-breadcrumb{
+  display: inline-flex;
   list-style: none;
   font-size: 1rem;
-  
-}
-.breadcrumb>li{
-  margin-right: 12px;
-}
-.breadcrumb>li:not(:last-child):after {
-  content: ">";
-  margin-left: 10px;
+  span{
+    margin-right: 12px;
+    &:not(:last-child):after {
+      content: ">";
+      margin-left: 10px;
+    }
+  }
+  .minimize-items-wrapper{
+    display: none;
+    position: absolute;
+  }
+  .minimize-items-wrapper.active{
+    display: block;
+  }
 }

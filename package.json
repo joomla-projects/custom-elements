@@ -82,7 +82,9 @@
       "panels",
       "tip",
       "callout",
-      "accordion"
+      "accordion",
+      "breadcrumb",
+      "pagination"
     ],
     "browsers": "last 1 version"
   },
