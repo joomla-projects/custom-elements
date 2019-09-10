@@ -6,7 +6,7 @@
     "type": "git",
     "url": "git+https://github.com/joomla-projects/custom-elements.git"
   },
-  "license": "GPL-2.0+",
+  "license": "GPL-2.0-or-later",
   "bugs": {
     "url": "https://github.com/joomla-projects/custom-elements/issues"
   },
