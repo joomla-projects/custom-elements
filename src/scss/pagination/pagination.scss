@@ -14,25 +14,21 @@ joomla-pagination{
   nav{
     display: -ms-flexbox;
     display: flex;
-    ol{
+    ul{
       display: -ms-inline-flexbox;
       display: inline-flex;
       list-style: none;
       font-size: 1rem;
       padding: 0;
       margin: 0;
+      list-style: none;
       a{
         transition: .3s;
       }
     }
   }
-  .breadcrumb-item{
+  .pagination-item{
     margin-right: 10px;
-    &:not(:last-child)>a:after {
-      content: ">";
-      margin-left: 10px;
-      color: var(--secondary-color);
-    }
     a{
       color: var(--secondary-color);
       text-decoration: none;
@@ -41,10 +37,10 @@ joomla-pagination{
       &:hover, &:focus{
         color: var(--inverse-background);
       }
-    }
-    &.active>a{
-      color: var(--inverse-background);
-      pointer-events: none;
+      &.active{
+        color: var(--inverse-background);
+        pointer-events: none;
+      }
     }
   }
   .minimize-list{
@@ -55,7 +51,7 @@ joomla-pagination{
     box-shadow: 0 10px 20px -5px rgba(0, 28, 73, 0.15);
     display: none;
     position: absolute;
-    ol{
+    ul{
       -ms-flex-direction: column;
       flex-direction: column;
       max-height: 105px;
@@ -73,7 +69,7 @@ joomla-pagination{
         height: 0;
         top: -4px;
       }
-      .breadcrumb-item{
+      .pagination-item{
         margin-right: 0;
         >a{
           padding: 6px 18px;

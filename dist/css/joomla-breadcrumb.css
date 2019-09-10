@@ -28,7 +28,8 @@ joomla-breadcrumb nav {
     list-style: none;
     font-size: 1rem;
     padding: 0;
-    margin: 0; }
+    margin: 0;
+    list-style: none; }
     joomla-breadcrumb nav ol a {
       transition: .3s; }
 
@@ -45,9 +46,9 @@ joomla-breadcrumb .breadcrumb-item {
     line-height: 1.4rem; }
     joomla-breadcrumb .breadcrumb-item a:hover, joomla-breadcrumb .breadcrumb-item a:focus {
       color: var(--inverse-background); }
-  joomla-breadcrumb .breadcrumb-item.active > a {
-    color: var(--inverse-background);
-    pointer-events: none; }
+    joomla-breadcrumb .breadcrumb-item a.active {
+      color: var(--inverse-background);
+      pointer-events: none; }
 
 joomla-breadcrumb .minimize-list {
   margin-right: 12px; }

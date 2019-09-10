@@ -22,32 +22,29 @@
 joomla-pagination nav {
   display: -ms-flexbox;
   display: flex; }
-  joomla-pagination nav ol {
+  joomla-pagination nav ul {
     display: -ms-inline-flexbox;
     display: inline-flex;
     list-style: none;
     font-size: 1rem;
     padding: 0;
-    margin: 0; }
-    joomla-pagination nav ol a {
+    margin: 0;
+    list-style: none; }
+    joomla-pagination nav ul a {
       transition: .3s; }
 
-joomla-pagination .breadcrumb-item {
+joomla-pagination .pagination-item {
   margin-right: 10px; }
-  joomla-pagination .breadcrumb-item:not(:last-child) > a:after {
-    content: ">";
-    margin-left: 10px;
-    color: var(--secondary-color); }
-  joomla-pagination .breadcrumb-item a {
+  joomla-pagination .pagination-item a {
     color: var(--secondary-color);
     text-decoration: none;
     display: block;
     line-height: 1.4rem; }
-    joomla-pagination .breadcrumb-item a:hover, joomla-pagination .breadcrumb-item a:focus {
+    joomla-pagination .pagination-item a:hover, joomla-pagination .pagination-item a:focus {
       color: var(--inverse-background); }
-  joomla-pagination .breadcrumb-item.active > a {
-    color: var(--inverse-background);
-    pointer-events: none; }
+    joomla-pagination .pagination-item a.active {
+      color: var(--inverse-background);
+      pointer-events: none; }
 
 joomla-pagination .minimize-list {
   margin-right: 12px; }
@@ -57,14 +54,14 @@ joomla-pagination .minimize-items-wrapper {
   box-shadow: 0 10px 20px -5px rgba(0, 28, 73, 0.15);
   display: none;
   position: absolute; }
-  joomla-pagination .minimize-items-wrapper ol {
+  joomla-pagination .minimize-items-wrapper ul {
     -ms-flex-direction: column;
     flex-direction: column;
     max-height: 105px;
     overflow-x: hidden;
     overflow-y: auto;
     position: relative; }
-    joomla-pagination .minimize-items-wrapper ol:before {
+    joomla-pagination .minimize-items-wrapper ul:before {
       content: "";
       position: absolute;
       left: 15px;
@@ -74,14 +71,14 @@ joomla-pagination .minimize-items-wrapper {
       width: 0;
       height: 0;
       top: -4px; }
-    joomla-pagination .minimize-items-wrapper ol .breadcrumb-item {
+    joomla-pagination .minimize-items-wrapper ul .pagination-item {
       margin-right: 0; }
-      joomla-pagination .minimize-items-wrapper ol .breadcrumb-item > a {
+      joomla-pagination .minimize-items-wrapper ul .pagination-item > a {
         padding: 6px 18px; }
-        joomla-pagination .minimize-items-wrapper ol .breadcrumb-item > a:hover, joomla-pagination .minimize-items-wrapper ol .breadcrumb-item > a:focus {
+        joomla-pagination .minimize-items-wrapper ul .pagination-item > a:hover, joomla-pagination .minimize-items-wrapper ul .pagination-item > a:focus {
           background-color: var(--button-background);
           color: var(--inverse-background); }
-        joomla-pagination .minimize-items-wrapper ol .breadcrumb-item > a:after {
+        joomla-pagination .minimize-items-wrapper ul .pagination-item > a:after {
           display: none; }
 
 joomla-pagination .items-toggler {

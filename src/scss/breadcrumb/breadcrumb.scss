@@ -21,6 +21,7 @@ joomla-breadcrumb{
       font-size: 1rem;
       padding: 0;
       margin: 0;
+      list-style: none;
       a{
         transition: .3s;
       }
@@ -41,10 +42,10 @@ joomla-breadcrumb{
       &:hover, &:focus{
         color: var(--inverse-background);
       }
-    }
-    &.active>a{
-      color: var(--inverse-background);
-      pointer-events: none;
+      &.active{
+        color: var(--inverse-background);
+        pointer-events: none;
+      }
     }
   }
   .minimize-list{

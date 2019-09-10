@@ -16,13 +16,11 @@
 
       toggleButton.classList.add('items-toggler');
       toggleButton.innerHTML = '...';
-
       singleLi.classList.add('minimize-list');
       minimizeItemsWrapper.classList.add('minimize-items-wrapper');
       minimizeWrapper.appendChild(toggleButton);
       minimizeWrapper.appendChild(minimizeItemsWrapper);
       minimizeWrapper.classList.add('minimize-items');
-      
       toggleButton.addEventListener('click', ()=>{
         minimizeItemsWrapper.classList.toggle('active');
       })
@@ -58,8 +56,6 @@
           breadcrumbList.appendChild(allItems[0]);
           breadcrumbList.appendChild(singleLi);
           singleLi.append(minimizeWrapper);
-          
-          // nav.append(othersList);
           for(let i = filterItems.length - 1; i >= 0; i--){
             if(breadcrumbList.offsetWidth < nav.offsetWidth){
               singleLi.parentNode.insertBefore(filterItems[i], singleLi.nextSibling);
@@ -72,12 +68,10 @@
           self.setAttribute('responsive', true);
         }
       }
-
       /* init minimizeItems function */
       if(breadcrumbList.offsetWidth > breadcrumbList.parentElement.offsetWidth){
         minimizeItemsFun()
       }
-
       /* check on reisze */
       window.addEventListener('resize', () => {
           setTimeout(() => {

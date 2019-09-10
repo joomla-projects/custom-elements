@@ -7,91 +7,133 @@
     connectedCallback() {
       const self = this;
       const nav = document.createElement('nav');
-      const breadcrumbList = document.createElement('ol');
+      const paginationList = document.createElement('ul');
       const singleLi = document.createElement('li');
       const minimizeWrapper = document.createElement('div');
       const minimizeItemsWrapper = document.createElement('div');
       const toggleButton = document.createElement('span');
-      const minimizeList = document.createElement('ol');
+      const minimizeList = document.createElement('ul');
 
       toggleButton.classList.add('items-toggler');
       toggleButton.innerHTML = '...';
-
       singleLi.classList.add('minimize-list');
       minimizeItemsWrapper.classList.add('minimize-items-wrapper');
       minimizeWrapper.appendChild(toggleButton);
       minimizeWrapper.appendChild(minimizeItemsWrapper);
       minimizeWrapper.classList.add('minimize-items');
-      
       toggleButton.addEventListener('click', ()=>{
         minimizeItemsWrapper.classList.toggle('active');
       })
 
       /* item manipulate */
-      const items = [...this.querySelectorAll('li')];
-      items.forEach(item => {
+      const items = [...this.querySelectorAll('.page-link')];
+      // has arrow
+      const pageNavs = [...this.querySelectorAll('.has-arrow')];
+      let totalArrowWidth = 0;
+      const arrowFun = () => {
+        if(pageNavs.length>0){
+          pageNavs.forEach(item => {
+            if(item.classList.contains('first-page')){
+              nav.prepend(item);
+              totalArrowWidth += item.offsetWidth;
+            }
+            if(item.classList.contains('next-page')){
+              paginationList.before(item);
+              totalArrowWidth += item.offsetWidth;
+            }
+            
+            if(item.classList.contains('prev-page')){
+              paginationList.after(item);
+              totalArrowWidth += item.offsetWidth;
+            }
+            if(item.classList.contains('last-page')){
+              nav.append(item);
+              totalArrowWidth += item.offsetWidth;
+            }
+          })
+        }
+      }
+
+      items.forEach((item, key) => {
         const createItem = document.createElement('li');
         const createLink = document.createElement('a');
 
-        createItem.classList.add('breadcrumb-item');
+        createItem.classList.add('pagination-item');
         if(item.getAttribute('class')){
-          createItem.classList.add(item.getAttribute('class'));
+          createLink.classList.add(item.getAttribute('class'));
         }
+        
+        // if(items.length>1 && key == 0){
+        //   console.log(key)
+        //   createLink.innerHTML = '<i class="fa fa-facebook"><<</i>'
+        // } else if(items.length>1 && key == 1){
+        //   console.log(key)
+        //   createLink.innerHTML = '<i class="fa fa-facebook"><</i>'
+        // } else if(items.length>1 && key == 1){
+        //   console.log(key)
+        //   createLink.innerHTML = '<i class="fa fa-facebook"><</i>'
+        // }
+        
+
         createLink.setAttribute('href', item.getAttribute('href'));
-        createLink.innerHTML = item.getAttribute('value');
+        createLink.setAttribute('value', item.getAttribute('value'));
+        createLink.innerHTML = item.getAttribute('text');
         createItem.appendChild(createLink);
-        breadcrumbList.append(createItem);
+
+
+        paginationList.append(createItem);
       });
       self.innerHTML = '';
-      nav.append(breadcrumbList);
-      nav.setAttribute("aria-label", self.getAttribute('aria-label'));
+      nav.append(paginationList);
       self.append(nav);
-      self.removeAttribute("aria-label");
       /* store items */
-      const breadcrumbItems = breadcrumbList;
-      const allItems = Array.from(breadcrumbItems.children);
-
+      const paginationItems = paginationList;
+      const allItems = Array.from(paginationItems.children);
       /* minimize items */
       const minimizeItemsFun = () =>{
         if(allItems.length>0){
-          breadcrumbList.innerHTML = '';
-          const filterItems = allItems.filter((item, key) => key>0);
-          breadcrumbList.appendChild(allItems[0]);
-          breadcrumbList.appendChild(singleLi);
-          singleLi.append(minimizeWrapper);
+          paginationList.innerHTML = '';
+          const filterItems = allItems.filter((item, key) => key<allItems.length - 1);
+          singleLi.prepend(minimizeWrapper);
           
-          // nav.append(othersList);
-          for(let i = filterItems.length - 1; i >= 0; i--){
-            if(breadcrumbList.offsetWidth < nav.offsetWidth){
-              singleLi.parentNode.insertBefore(filterItems[i], singleLi.nextSibling);
+          for(let i = 0; i < filterItems.length; i++){
+            // console.log(filterItems[i])
+            if(paginationList.offsetWidth + totalArrowWidth < nav.offsetWidth){
+              // singleLi.parentNode.insertBefore(filterItems[i], singleLi.nextSibling);
+              paginationList.append(filterItems[i]);
             } else{
-              minimizeList.prepend(filterItems[i]);
+              minimizeList.append(filterItems[i]);
             }
           }
           minimizeItemsWrapper.append(minimizeList);
+          paginationList.append(singleLi);
+          paginationList.append(allItems[allItems.length - 1]);
           /* when responsive works */
           self.setAttribute('responsive', true);
         }
       }
 
-      /* init minimizeItems function */
-      if(breadcrumbList.offsetWidth > breadcrumbList.parentElement.offsetWidth){
-        minimizeItemsFun()
-      }
+      /* init arrow function */
+      arrowFun();
 
+      /* init minimizeItems function */
+      if(paginationList.offsetWidth + totalArrowWidth > paginationList.parentElement.offsetWidth){
+        minimizeItemsFun();
+      }
       /* check on reisze */
       window.addEventListener('resize', () => {
           setTimeout(() => {
-            if(breadcrumbList.offsetWidth > nav.offsetWidth){
+            if(paginationList.offsetWidth + totalArrowWidth > nav.offsetWidth){
               minimizeItemsFun()
-            } else if(breadcrumbList.offsetWidth < nav.offsetWidth){
+            } else if(paginationList.offsetWidth + totalArrowWidth < nav.offsetWidth){
               if(self.getAttribute('responsive')){
                 if(allItems.length>0){
                   const upated = Array.from(minimizeList.children);
+                  console.log(minimizeList)
                   if(upated.length != 0){
-                    for(let i = upated.length - 1; i >= 0; i--){
-                      if(breadcrumbList.offsetWidth < nav.offsetWidth){
-                        singleLi.parentNode.insertBefore(upated[i], singleLi.nextSibling);
+                    for(let i = 0; i < upated.length; i++){
+                      if(paginationList.offsetWidth + totalArrowWidth < nav.offsetWidth){
+                        paginationList.append(upated[i]);
                       }
                     }
                   }
