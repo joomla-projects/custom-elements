@@ -83,8 +83,12 @@
       "tip",
       "callout",
       "accordion",
+<<<<<<< HEAD
       "breadcrumb",
       "pagination"
+=======
+      "tooltip"
+>>>>>>> d394d56e009e2b861c10824e332aaad60f919a4f
     ],
     "browsers": "last 1 version"
   },
