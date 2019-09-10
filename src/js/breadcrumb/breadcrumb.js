@@ -35,18 +35,17 @@
 
         createItem.classList.add('breadcrumb-item');
         if(item.getAttribute('class')){
-          createItem.classList.add(item.getAttribute('class'));
+          createLink.classList.add(item.getAttribute('class'));
         }
         createLink.setAttribute('href', item.getAttribute('href'));
-        createLink.innerHTML = item.getAttribute('value');
+        createLink.setAttribute('value', item.getAttribute('value'));
+        createLink.innerHTML = item.getAttribute('text');
         createItem.appendChild(createLink);
         breadcrumbList.append(createItem);
       });
       self.innerHTML = '';
       nav.append(breadcrumbList);
-      nav.setAttribute("aria-label", self.getAttribute('aria-label'));
       self.append(nav);
-      self.removeAttribute("aria-label");
       /* store items */
       const breadcrumbItems = breadcrumbList;
       const allItems = Array.from(breadcrumbItems.children);
