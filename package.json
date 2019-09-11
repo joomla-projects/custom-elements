@@ -84,7 +84,8 @@
       "callout",
       "accordion",
       "breadcrumb",
-      "pagination"
+      "pagination",
+      "flextable"
     ],
     "browsers": "last 1 version"
   },
