@@ -11,9 +11,11 @@
 // Base styles
 //
 joomla-pagination{
+  display: block;
   nav{
     display: -ms-flexbox;
     display: flex;
+    align-items: center;
     ul{
       display: -ms-inline-flexbox;
       display: inline-flex;
@@ -27,19 +29,32 @@ joomla-pagination{
       }
     }
   }
+  .has-arrow{
+    text-decoration: none;
+    color: var(--secondary-icon-color);
+    &:hover, &:focus{
+      color: var(--icon-color);
+    }
+    &.first-page, &.next-page{
+      margin-right: 5px;
+    }
+    &.last-page, &.prev-page{
+      margin-left: 5px;
+    }
+  }
   .pagination-item{
-    margin-right: 10px;
+    margin-right: 3px;
     a{
       color: var(--secondary-color);
       text-decoration: none;
       display: block;
       line-height: 1.4rem;
-      &:hover, &:focus{
+      padding: 1px 6px;
+      border-radius: 3px;
+      &:hover, &:focus, &.active{
         color: var(--inverse-background);
-      }
-      &.active{
-        color: var(--inverse-background);
-        pointer-events: none;
+        box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.15);
+        background-color: #ffffff;
       }
     }
   }
@@ -72,10 +87,12 @@ joomla-pagination{
       .pagination-item{
         margin-right: 0;
         >a{
-          padding: 6px 18px;
+          padding: 1px 5px;
+          border-bottom: 1px solid #f4f7fc;
+          border-radius: 0px;
           &:hover, &:focus{
-            background-color: var(--button-background);
-            color: var(--inverse-background);
+            color: var(--link-color);
+
           }
           &:after{
             display: none;
