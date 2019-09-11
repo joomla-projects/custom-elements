@@ -24,10 +24,9 @@
       toggleButton.addEventListener('click', ()=>{
         minimizeItemsWrapper.classList.toggle('active');
       })
-
       /* item manipulate */
       const items = [...this.querySelectorAll('.page-link')];
-      // has arrow
+      /* has arrow */
       const pageNavs = [...this.querySelectorAll('.has-arrow')];
       let totalArrowWidth = 0;
       const arrowFun = () => {
@@ -41,7 +40,6 @@
               paginationList.before(item);
               totalArrowWidth += item.offsetWidth;
             }
-            
             if(item.classList.contains('prev-page')){
               paginationList.after(item);
               totalArrowWidth += item.offsetWidth;
@@ -53,34 +51,18 @@
           })
         }
       }
-
-      items.forEach((item, key) => {
+      /* make full pagination */
+      items.forEach((item) => {
         const createItem = document.createElement('li');
         const createLink = document.createElement('a');
-
         createItem.classList.add('pagination-item');
         if(item.getAttribute('class')){
-          createLink.classList.add(item.getAttribute('class'));
+          createLink.className = item.getAttribute('class');
         }
-        
-        // if(items.length>1 && key == 0){
-        //   console.log(key)
-        //   createLink.innerHTML = '<i class="fa fa-facebook"><<</i>'
-        // } else if(items.length>1 && key == 1){
-        //   console.log(key)
-        //   createLink.innerHTML = '<i class="fa fa-facebook"><</i>'
-        // } else if(items.length>1 && key == 1){
-        //   console.log(key)
-        //   createLink.innerHTML = '<i class="fa fa-facebook"><</i>'
-        // }
-        
-
         createLink.setAttribute('href', item.getAttribute('href'));
         createLink.setAttribute('value', item.getAttribute('value'));
         createLink.innerHTML = item.getAttribute('text');
         createItem.appendChild(createLink);
-
-
         paginationList.append(createItem);
       });
       self.innerHTML = '';
@@ -95,11 +77,8 @@
           paginationList.innerHTML = '';
           const filterItems = allItems.filter((item, key) => key<allItems.length - 1);
           singleLi.prepend(minimizeWrapper);
-          
           for(let i = 0; i < filterItems.length; i++){
-            // console.log(filterItems[i])
-            if(paginationList.offsetWidth + totalArrowWidth < nav.offsetWidth){
-              // singleLi.parentNode.insertBefore(filterItems[i], singleLi.nextSibling);
+            if(paginationList.offsetWidth + totalArrowWidth + 100 < nav.offsetWidth){
               paginationList.append(filterItems[i]);
             } else{
               minimizeList.append(filterItems[i]);
@@ -117,24 +96,27 @@
       arrowFun();
 
       /* init minimizeItems function */
-      if(paginationList.offsetWidth + totalArrowWidth > paginationList.parentElement.offsetWidth){
+      if(paginationList.offsetWidth + totalArrowWidth + 100 > paginationList.parentElement.offsetWidth){
         minimizeItemsFun();
       }
       /* check on reisze */
       window.addEventListener('resize', () => {
           setTimeout(() => {
-            if(paginationList.offsetWidth + totalArrowWidth > nav.offsetWidth){
+            if(paginationList.offsetWidth + totalArrowWidth + 100 > nav.offsetWidth){
               minimizeItemsFun()
-            } else if(paginationList.offsetWidth + totalArrowWidth < nav.offsetWidth){
+            } else if(paginationList.offsetWidth + totalArrowWidth + 100 < nav.offsetWidth){
               if(self.getAttribute('responsive')){
                 if(allItems.length>0){
                   const upated = Array.from(minimizeList.children);
-                  console.log(minimizeList)
                   if(upated.length != 0){
-                    for(let i = 0; i < upated.length; i++){
-                      if(paginationList.offsetWidth + totalArrowWidth < nav.offsetWidth){
-                        paginationList.append(upated[i]);
+                    if(paginationList.offsetWidth + totalArrowWidth + 100 < nav.offsetWidth){
+                      for(let i = 0; i < upated.length; i++){
+                        if(paginationList.offsetWidth + totalArrowWidth + 100 < nav.offsetWidth){
+                          paginationList.append(upated[i]);
+                        }
                       }
+                      paginationList.append(self.querySelector('.minimize-list'));
+                      paginationList.append(allItems[allItems.length - 1]);
                     }
                   }
                 }
