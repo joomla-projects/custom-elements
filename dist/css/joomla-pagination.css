@@ -84,10 +84,11 @@ joomla-pagination {
       joomla-pagination .minimize-items-wrapper ul .pagination-item {
         margin-right: 0; }
         joomla-pagination .minimize-items-wrapper ul .pagination-item > a {
-          padding: 6px 18px; }
+          padding: 1px 5px;
+          border-bottom: 1px solid #f4f7fc;
+          border-radius: 0px; }
           joomla-pagination .minimize-items-wrapper ul .pagination-item > a:hover, joomla-pagination .minimize-items-wrapper ul .pagination-item > a:focus {
-            background-color: var(--button-background);
-            color: var(--inverse-background); }
+            color: var(--link-color); }
           joomla-pagination .minimize-items-wrapper ul .pagination-item > a:after {
             display: none; }
   joomla-pagination .items-toggler {

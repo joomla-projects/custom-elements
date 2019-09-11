@@ -87,10 +87,12 @@ joomla-pagination{
       .pagination-item{
         margin-right: 0;
         >a{
-          padding: 6px 18px;
+          padding: 1px 5px;
+          border-bottom: 1px solid #f4f7fc;
+          border-radius: 0px;
           &:hover, &:focus{
-            background-color: var(--button-background);
-            color: var(--inverse-background);
+            color: var(--link-color);
+
           }
           &:after{
             display: none;
