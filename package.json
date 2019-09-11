@@ -83,7 +83,8 @@
       "tip",
       "callout",
       "accordion",
-      "tooltip"
+      "breadcrumb",
+      "pagination"
     ],
     "browsers": "last 1 version"
   },
