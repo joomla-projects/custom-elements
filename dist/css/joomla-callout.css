@@ -24,16 +24,16 @@ joomla-callout {
   box-shadow: 0 1.2px 3.6px -1px rgba(29, 36, 39, 0.1), 0 6.4px 14.4px -3px rgba(29, 36, 39, 0.15);
   display: none;
   position: absolute;
-  padding: 1.6rem 1.8rem .8rem 1.8rem;
+  /* padding: 1.6rem 1.8rem .8rem 1.8rem; */
   border-radius: 3px;
-  margin: 20px;
+  /* margin: 20px; */
   min-height: 50px;
   width: 300px; }
 
 joomla-callout[expanded] {
   display: block; }
 
-joomla-callout::before {
+/* joomla-callout::before {
   content: "";
   width: 0px;
   height: 0px;
@@ -41,7 +41,7 @@ joomla-callout::before {
   position: absolute;
   left: -22px;
   border-right: 0.7rem solid var(--inverse-color);
-  top: 30px; }
+  top: 30px; } */
 
 .callout-title {
   font-size: 1.143rem;
