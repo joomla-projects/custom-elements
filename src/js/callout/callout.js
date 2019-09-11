@@ -35,6 +35,16 @@
       button.setAttribute('aria-haspopup', true);
       button.setAttribute('aria-expanded', false);
 
+      window.addEventListener('scroll', (e) => {
+        e.preventDefault();
+        if (this.hasAttribute('expanded')) {
+          const buttonRect = button.getBoundingClientRect();
+          const space1 = 5;
+          const calloutRect = this.getBoundingClientRect();
+          const copyPosition = this.checkPosition(this.position, buttonRect, calloutRect);
+          this.calloutPosition(copyPosition, buttonRect, calloutRect, space1);
+        }
+      });
 
       button.addEventListener('click', (event) => {
         if (this.hasAttribute('expanded')) {
@@ -47,25 +57,7 @@
           const space = 5;
           const calloutRect = this.getBoundingClientRect();
           const copyPosition = this.checkPosition(this.position, buttonRect, calloutRect);
-
-          switch (copyPosition) {
-            case 'top':
-              this.style.top = `${Math.round(buttonRect.top + window.scrollY - (calloutRect.height + space))}px`;
-              this.style.left = `${Math.round(buttonRect.left + window.scrollX - buttonRect.width)}px`;
-              break;
-            case 'bottom':
-              this.style.top = `${Math.round(buttonRect.bottom + window.scrollY) + space}px`;
-              this.style.left = `${Math.round(buttonRect.left + window.scrollX - buttonRect.width)}px`;
-              break;
-            case 'left':
-              this.style.left = `${Math.round((buttonRect.left + window.scrollX) - (calloutRect.width + space))}px`;
-              this.style.top = `${Math.round(buttonRect.top + window.scrollY - (calloutRect.height / 2))}px`;
-              break;
-            default:
-              this.style.left = `${Math.round((buttonRect.left + window.scrollX) + (buttonRect.width + space))}px`;
-              this.style.top = `${Math.round(buttonRect.top + window.scrollY - (calloutRect.height / 2))}px`;
-              break;
-          }
+          this.calloutPosition(copyPosition, buttonRect, calloutRect, space);
         }
 
         document.addEventListener('click', (evt) => {
@@ -95,6 +87,27 @@
         return 'right';
       }
       return currentPosition;
+    }
+
+    calloutPosition(copyPosition, buttonRect, calloutRect, space) {
+      switch (copyPosition) {
+        case 'top':
+          this.style.top = `${Math.round(buttonRect.top + window.scrollY - (calloutRect.height + space))}px`;
+          this.style.left = `${Math.round(buttonRect.left + window.scrollX - buttonRect.width)}px`;
+          break;
+        case 'bottom':
+          this.style.top = `${Math.round(buttonRect.bottom + window.scrollY) + space}px`;
+          this.style.left = `${Math.round(buttonRect.left + window.scrollX - buttonRect.width)}px`;
+          break;
+        case 'left':
+          this.style.left = `${Math.round((buttonRect.left + window.scrollX) - (calloutRect.width + space))}px`;
+          this.style.top = `${Math.round(buttonRect.top + window.scrollY - (calloutRect.height / 2))}px`;
+          break;
+        default:
+          this.style.left = `${Math.round((buttonRect.left + window.scrollX) + (buttonRect.width + space))}px`;
+          this.style.top = `${Math.round(buttonRect.top + window.scrollY - (calloutRect.height / 2))}px`;
+          break;
+      }
     }
 
 
