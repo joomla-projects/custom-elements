@@ -27,9 +27,9 @@
     background-color: #ffffff;
     padding: 10px;
     margin-bottom: 10px; }
-  .flextable .flextable-parent {
+  .flextable .flextable-main-parent {
     position: relative; }
-    .flextable .flextable-parent:before {
+    .flextable .flextable-main-parent:before {
       content: "";
       position: absolute;
       top: 0;
@@ -38,12 +38,12 @@
       width: 1px;
       background-color: #ccd3d7;
       z-index: -1; }
-    .flextable .flextable-parent > .flextable-child {
+    .flextable .flextable-main-parent > .flextable-child {
       padding-left: 40px; }
-      .flextable .flextable-parent > .flextable-child .flextable-item {
+      .flextable .flextable-main-parent > .flextable-child .flextable-item {
         position: relative;
         padding: 7px 10px; }
-        .flextable .flextable-parent > .flextable-child .flextable-item:after {
+        .flextable .flextable-main-parent > .flextable-child .flextable-item:after {
           content: "";
           position: absolute;
           bottom: 20px;
@@ -52,9 +52,9 @@
           background-color: #ccd3d7;
           z-index: -1;
           height: 1px; }
-    .flextable .flextable-parent .parent-also > .flextable-child {
+    .flextable .flextable-main-parent .flextable-child-parent > .flextable-child {
       padding-left: 40px; }
-      .flextable .flextable-parent .parent-also > .flextable-child .flextable-item:before {
+      .flextable .flextable-main-parent .flextable-child-parent > .flextable-child .flextable-item:before {
         content: "";
         position: absolute;
         bottom: 20px;

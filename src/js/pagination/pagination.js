@@ -25,7 +25,7 @@
         minimizeItemsWrapper.classList.toggle('active');
       })
       /* item manipulate */
-      const items = [...this.querySelectorAll('.page-link')];
+      const items = [...this.querySelectorAll('.pagination-link')];
       /* has arrow */
       const pageNavs = [...this.querySelectorAll('.has-arrow')];
       let totalArrowWidth = 0;
@@ -59,13 +59,16 @@
         if(item.getAttribute('class')){
           createLink.className = item.getAttribute('class');
         }
+        if(item.getAttribute('activeClass')){
+          createLink.className += ' ' + item.getAttribute('activeClass');
+        }
         createLink.setAttribute('href', item.getAttribute('href'));
         createLink.setAttribute('value', item.getAttribute('value'));
         createLink.innerHTML = item.getAttribute('text');
         createItem.appendChild(createLink);
         paginationList.append(createItem);
+        item.parentNode.removeChild(item);
       });
-      self.innerHTML = '';
       nav.append(paginationList);
       self.append(nav);
       /* store items */

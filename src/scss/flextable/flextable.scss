@@ -53,7 +53,7 @@
     //   }
     // }
   }
-  .flextable-parent{
+  .flextable-main-parent{
     position: relative;
     &:before{
       content: "";
@@ -82,7 +82,7 @@
         }
       }
     }
-    .parent-also{
+    .flextable-child-parent{
       >.flextable-child{
         padding-left: 40px;
         .flextable-item{
