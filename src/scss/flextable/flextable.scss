@@ -19,40 +19,6 @@
     padding: 10px;
     margin-bottom: 10px;
   }
-  &.simple-layout{
-    // .flextable-parent{
-    //   position: relative;
-    //   &:before{
-    //     content: "";
-    //     position: absolute;
-    //     top: 0;
-    //     bottom: 20px;
-    //     left:20px;
-    //     right:0;
-    //     width: 1px;
-    //     background-color: #ccd3d7;
-    //     z-index: -1;
-    //   }
-    //   >.flextable-child{
-    //     padding-left: 40px;
-    //     .flextable-item{
-    //       position: relative;
-    //       padding: 7px 10px;
-    //       &:after{
-    //         content: "";
-    //         position: absolute;
-    //         bottom: 20px;
-    //         left: -20px;
-    //         right: 0;
-    //         width: 40px;
-    //         background-color: #ccd3d7;
-    //         z-index: -1;
-    //         height: 1px;
-    //       }
-    //     }
-    //   }
-    // }
-  }
   .flextable-main-parent{
     position: relative;
     &:before{

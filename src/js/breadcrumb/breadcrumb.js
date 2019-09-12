@@ -1,8 +1,5 @@
-(()=>{
+(() => {
   class joomlaBreadcrumb extends HTMLElement {
-    /* Attributes to monitor */
-    static get observedAttributes() {}
-
     /* Lifecycle, element appended to the DOM */
     connectedCallback() {
       const self = this;
@@ -21,18 +18,18 @@
       minimizeWrapper.appendChild(toggleButton);
       minimizeWrapper.appendChild(minimizeItemsWrapper);
       minimizeWrapper.classList.add('minimize-items');
-      toggleButton.addEventListener('click', ()=>{
+      toggleButton.addEventListener('click', () => {
         minimizeItemsWrapper.classList.toggle('active');
-      })
+      });
 
       /* item manipulate */
       const items = [...this.querySelectorAll('li')];
-      items.forEach(item => {
+      items.forEach((item) => {
         const createItem = document.createElement('li');
         const createLink = document.createElement('a');
 
         createItem.classList.add('breadcrumb-item');
-        if(item.getAttribute('class')){
+        if (item.getAttribute('class')) {
           createLink.classList.add(item.getAttribute('class'));
         }
         createLink.setAttribute('href', item.getAttribute('href'));
@@ -49,17 +46,17 @@
       const allItems = Array.from(breadcrumbItems.children);
 
       /* minimize items */
-      const minimizeItemsFun = () =>{
-        if(allItems.length>0){
+      const minimizeItemsFun = () => {
+        if (allItems.length > 0) {
           breadcrumbList.innerHTML = '';
-          const filterItems = allItems.filter((item, key) => key>0);
+          const filterItems = allItems.filter((item, key) => key > 0);
           breadcrumbList.appendChild(allItems[0]);
           breadcrumbList.appendChild(singleLi);
           singleLi.append(minimizeWrapper);
-          for(let i = filterItems.length - 1; i >= 0; i--){
-            if(breadcrumbList.offsetWidth < nav.offsetWidth){
+          for (let i = filterItems.length - 1; i >= 0; i--) {
+            if (breadcrumbList.offsetWidth < nav.offsetWidth) {
               singleLi.parentNode.insertBefore(filterItems[i], singleLi.nextSibling);
-            } else{
+            } else {
               minimizeList.prepend(filterItems[i]);
             }
           }
@@ -67,39 +64,39 @@
           /* when responsive works */
           self.setAttribute('responsive', true);
         }
-      }
+      };
       /* init minimizeItems function */
-      if(breadcrumbList.offsetWidth > breadcrumbList.parentElement.offsetWidth){
-        minimizeItemsFun()
+      if (breadcrumbList.offsetWidth > breadcrumbList.parentElement.offsetWidth) {
+        minimizeItemsFun();
       }
       /* check on reisze */
       window.addEventListener('resize', () => {
-          setTimeout(() => {
-            if(breadcrumbList.offsetWidth > nav.offsetWidth){
-              minimizeItemsFun()
-            } else if(breadcrumbList.offsetWidth < nav.offsetWidth){
-              if(self.getAttribute('responsive')){
-                if(allItems.length>0){
-                  const upated = Array.from(minimizeList.children);
-                  if(upated.length != 0){
-                    for(let i = upated.length - 1; i >= 0; i--){
-                      if(breadcrumbList.offsetWidth < nav.offsetWidth){
-                        singleLi.parentNode.insertBefore(upated[i], singleLi.nextSibling);
-                      }
+        setTimeout(() => {
+          if (breadcrumbList.offsetWidth > nav.offsetWidth) {
+            minimizeItemsFun();
+          } else if (breadcrumbList.offsetWidth < nav.offsetWidth) {
+            if (self.getAttribute('responsive')) {
+              if (allItems.length > 0) {
+                const upated = Array.from(minimizeList.children);
+                if (upated.length !== 0) {
+                  for (let i = upated.length - 1; i >= 0; i--) {
+                    if (breadcrumbList.offsetWidth < nav.offsetWidth) {
+                      singleLi.parentNode.insertBefore(upated[i], singleLi.nextSibling);
                     }
                   }
                 }
               }
             }
-            setTimeout(() => {
-              if(minimizeList.children.length == 0){
-                singleLi.remove();
-                self.setAttribute('responsive', false);
-              }
-            }, 200);
-          }, 300);
-      })
+          }
+          setTimeout(() => {
+            if (minimizeList.children.length === 0) {
+              singleLi.remove();
+              self.setAttribute('responsive', false);
+            }
+          }, 200);
+        }, 300);
+      });
     }
-  } 
+  }
   customElements.define('joomla-breadcrumb', joomlaBreadcrumb);
-})()
+})();

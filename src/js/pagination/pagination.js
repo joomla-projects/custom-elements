@@ -57,7 +57,7 @@
           createLink.className = item.getAttribute('class');
         }
         if (item.getAttribute('activeClass')) {
-          createLink.className += ' ' + item.getAttribute('activeClass');
+          createLink.className += ` ${item.getAttribute('activeClass')}`;
         }
         createLink.setAttribute('href', item.getAttribute('href'));
         createLink.setAttribute('value', item.getAttribute('value'));
