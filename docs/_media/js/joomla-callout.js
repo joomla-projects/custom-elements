@@ -2,7 +2,7 @@
   class JoomlaCalloutElement extends HTMLElement {
     /* Attributes to monitor */
     static get observedAttributes() {
-      return ['for', 'dismiss'];
+      return ['for', 'dismiss', 'position'];
     }
 
     get for() { return this.getAttribute('for'); }
@@ -11,7 +11,16 @@
 
     get dismiss() { return this.getAttribute('dismiss'); }
 
+    get position() { return this.getAttribute('position'); }
+
+    set position(value) { return this.setAttribute('position', value); }
+
+
     connectedCallback() {
+      if (!this.position || (this.position && ['top', 'bottom', 'left', 'right'].indexOf(this.position) === -1)) {
+        this.position = 'right';
+      }
+
       this.setAttribute('aria-labelledby', this.for.substring(1));
       const button = document.querySelector(this.for);
       const innerLinks = this.querySelectorAll('a');
@@ -26,6 +35,17 @@
       button.setAttribute('aria-haspopup', true);
       button.setAttribute('aria-expanded', false);
 
+      window.addEventListener('scroll', (e) => {
+        e.preventDefault();
+        if (this.hasAttribute('expanded')) {
+          const buttonRect = button.getBoundingClientRect();
+          const space1 = 5;
+          const calloutRect = this.getBoundingClientRect();
+          const copyPosition = this.checkPosition(this.position, buttonRect, calloutRect);
+          this.calloutPosition(copyPosition, buttonRect, calloutRect, space1);
+        }
+      });
+
       button.addEventListener('click', (event) => {
         if (this.hasAttribute('expanded')) {
           this.removeAttribute('expanded');
@@ -33,6 +53,11 @@
         } else {
           this.setAttribute('expanded', '');
           event.target.setAttribute('aria-expanded', true);
+          const buttonRect = button.getBoundingClientRect();
+          const space = 5;
+          const calloutRect = this.getBoundingClientRect();
+          const copyPosition = this.checkPosition(this.position, buttonRect, calloutRect);
+          this.calloutPosition(copyPosition, buttonRect, calloutRect, space);
         }
 
         document.addEventListener('click', (evt) => {
@@ -51,6 +76,41 @@
       });
     }
 
+    checkPosition(currentPosition, buttonRect, calloutRect) {
+      if (currentPosition === 'bottom' && (buttonRect.top + calloutRect.height) > window.innerHeight) {
+        return 'top';
+      } if (currentPosition === 'top' && buttonRect.top < (buttonRect.height + calloutRect.height)) {
+        return 'bottom';
+      } if (currentPosition === 'right' && (buttonRect.right + calloutRect.width) > window.innerWidth) {
+        return 'left';
+      } if (currentPosition === 'left' && (buttonRect.width + calloutRect.width) > buttonRect.right) {
+        return 'right';
+      }
+      return currentPosition;
+    }
+
+    calloutPosition(copyPosition, buttonRect, calloutRect, space) {
+      switch (copyPosition) {
+        case 'top':
+          this.style.top = `${Math.round(buttonRect.top + window.scrollY - (calloutRect.height + space))}px`;
+          this.style.left = `${Math.round(buttonRect.left + window.scrollX - buttonRect.width)}px`;
+          break;
+        case 'bottom':
+          this.style.top = `${Math.round(buttonRect.bottom + window.scrollY) + space}px`;
+          this.style.left = `${Math.round(buttonRect.left + window.scrollX - buttonRect.width)}px`;
+          break;
+        case 'left':
+          this.style.left = `${Math.round((buttonRect.left + window.scrollX) - (calloutRect.width + space))}px`;
+          this.style.top = `${Math.round(buttonRect.top + window.scrollY - (calloutRect.height / 2))}px`;
+          break;
+        default:
+          this.style.left = `${Math.round((buttonRect.left + window.scrollX) + (buttonRect.width + space))}px`;
+          this.style.top = `${Math.round(buttonRect.top + window.scrollY - (calloutRect.height / 2))}px`;
+          break;
+      }
+    }
+
+
     /*eslint-disable */
     /* Method to dispatch events */
     dispatchCustomEvent(eventName) {
@@ -60,7 +120,6 @@
       this.removeEventListener(eventName, this);
     }
 
-    adoptedCallback(oldDocument, newDocument) { }
 
     /* eslint-enable */
 

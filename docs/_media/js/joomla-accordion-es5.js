@@ -245,7 +245,7 @@ function _getPrototypeOf(o) {
       }
     }, {
       key: "activateAccordionFromButton",
-      value: function activateAccordionFromButton(accordionTitle, e) {
+      value: function activateAccordionFromButton(accordionTitle) {
         var target = accordionTitle;
         var section = target.nextSibling;
         var toggle = this.getAttribute('toggle');

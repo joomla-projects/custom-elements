@@ -10,6 +10,8 @@
  - [Panels](/panels)
  - [Tip](/tip)
  - [Callout](/callout)
+ - [Breadcrumb](/breadcrumb)
+ - [Pagination](/pagination)
 
 - Customization
  - [Theming](/styles)

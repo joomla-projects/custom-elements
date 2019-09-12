@@ -45,22 +45,6 @@ function _classCallCheck(instance, Constructor) {
   }
 }
 
-function _possibleConstructorReturn(self, call) {
-  if (call && (_typeof(call) === "object" || typeof call === "function")) {
-    return call;
-  }
-
-  return _assertThisInitialized(self);
-}
-
-function _assertThisInitialized(self) {
-  if (self === void 0) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }
-
-  return self;
-}
-
 function _defineProperties(target, props) {
   for (var i = 0; i < props.length; i++) {
     var descriptor = props[i];
@@ -75,6 +59,22 @@ function _createClass(Constructor, protoProps, staticProps) {
   if (protoProps) _defineProperties(Constructor.prototype, protoProps);
   if (staticProps) _defineProperties(Constructor, staticProps);
   return Constructor;
+}
+
+function _possibleConstructorReturn(self, call) {
+  if (call && (_typeof(call) === "object" || typeof call === "function")) {
+    return call;
+  }
+
+  return _assertThisInitialized(self);
+}
+
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
 }
 
 function _inherits(subClass, superClass) {
@@ -177,115 +177,140 @@ function _getPrototypeOf(o) {
 }
 
 (function () {
-  var JoomlaAccordionElement =
+  var joomlaBreadcrumb =
   /*#__PURE__*/
   function (_HTMLElement) {
-    _inherits(JoomlaAccordionElement, _HTMLElement);
+    _inherits(joomlaBreadcrumb, _HTMLElement);
 
-    _createClass(JoomlaAccordionElement, [{
-      key: "toggle",
-      get: function get() {
-        return this.getAttribute('toggle');
-      }
-      /* Lifecycle, element created */
+    function joomlaBreadcrumb() {
+      _classCallCheck(this, joomlaBreadcrumb);
 
-    }], [{
-      key: "observedAttributes",
-
-      /* Attributes to monitor */
-      get: function get() {
-        return ['toggle'];
-      }
-    }]);
-
-    function JoomlaAccordionElement() {
-      var _this;
-
-      _classCallCheck(this, JoomlaAccordionElement);
-
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(JoomlaAccordionElement).call(this));
-      _this.hasActive = false;
-      _this.currentActive = '';
-      _this.hasNested = false;
-      _this.isNested = false;
-      return _this;
+      return _possibleConstructorReturn(this, _getPrototypeOf(joomlaBreadcrumb).apply(this, arguments));
     }
-    /* Lifecycle, element appended to the DOM */
 
-
-    _createClass(JoomlaAccordionElement, [{
+    _createClass(joomlaBreadcrumb, [{
       key: "connectedCallback",
+
+      /* Lifecycle, element appended to the DOM */
       value: function connectedCallback() {
-        this.sections = _toConsumableArray(this.querySelectorAll('section'));
-        this.generateNavigation(this.sections);
-      }
-    }, {
-      key: "generateNavigation",
-      value: function generateNavigation(sections) {
-        var _this2 = this;
+        var self = this;
+        var nav = document.createElement('nav');
+        var breadcrumbList = document.createElement('ol');
+        var singleLi = document.createElement('li');
+        var minimizeWrapper = document.createElement('div');
+        var minimizeItemsWrapper = document.createElement('div');
+        var toggleButton = document.createElement('span');
+        var minimizeList = document.createElement('ol');
+        toggleButton.classList.add('items-toggler');
+        toggleButton.innerHTML = '...';
+        singleLi.classList.add('minimize-list');
+        minimizeItemsWrapper.classList.add('minimize-items-wrapper');
+        minimizeWrapper.appendChild(toggleButton);
+        minimizeWrapper.appendChild(minimizeItemsWrapper);
+        minimizeWrapper.classList.add('minimize-items');
+        toggleButton.addEventListener('click', function () {
+          minimizeItemsWrapper.classList.toggle('active');
+        });
+        /* item manipulate */
 
-        sections.forEach(function (section, index) {
-          var accordionTitle = document.createElement('h3');
-          accordionTitle.setAttribute('area-expanded', 'false');
-          accordionTitle.innerHTML = '<span aria-hidden="true">&gt;</span>';
-          accordionTitle.setAttribute('target', section.id);
+        var items = _toConsumableArray(this.querySelectorAll('li'));
 
-          if (section.classList.contains('show')) {
-            accordionTitle.classList.add('active');
+        items.forEach(function (item) {
+          var createItem = document.createElement('li');
+          var createLink = document.createElement('a');
+          createItem.classList.add('breadcrumb-item');
+
+          if (item.getAttribute('class')) {
+            createLink.className = item.getAttribute('class');
           }
 
-          var title = section.getAttribute('name') || "Accordion ".concat(index);
-          var navTitle = document.createTextNode(title);
-          accordionTitle.appendChild(navTitle);
+          if (item.getAttribute('activeClass')) {
+            createLink.className += " ".concat(item.getAttribute('activeClass'));
+          }
 
-          _this2.insertBefore(accordionTitle, section);
+          createLink.setAttribute('href', item.getAttribute('href'));
+          createLink.innerHTML = item.getAttribute('text');
+          createItem.appendChild(createLink);
+          breadcrumbList.append(createItem);
+          item.parentNode.removeChild(item);
+        });
+        nav.append(breadcrumbList);
+        self.append(nav);
+        /* store items */
 
-          accordionTitle.addEventListener('click', _this2.activateAccordionFromButton.bind(_this2, accordionTitle));
+        var breadcrumbItems = breadcrumbList;
+        var allItems = Array.from(breadcrumbItems.children);
+        /* minimize items */
+
+        var minimizeItemsFun = function minimizeItemsFun() {
+          if (allItems.length > 0) {
+            breadcrumbList.innerHTML = '';
+            var filterItems = allItems.filter(function (item, key) {
+              return key > 0;
+            });
+            breadcrumbList.appendChild(allItems[0]);
+            breadcrumbList.appendChild(singleLi);
+            singleLi.append(minimizeWrapper);
+
+            for (var i = filterItems.length - 1; i >= 0; i--) {
+              if (breadcrumbList.offsetWidth < nav.offsetWidth) {
+                singleLi.parentNode.insertBefore(filterItems[i], singleLi.nextSibling);
+              } else {
+                minimizeList.prepend(filterItems[i]);
+              }
+            }
+
+            minimizeItemsWrapper.append(minimizeList);
+            /* when responsive works */
+
+            self.setAttribute('responsive', true);
+          }
+        };
+        /* init minimizeItems function */
+
+
+        if (breadcrumbList.offsetWidth + 100 > breadcrumbList.parentElement.offsetWidth) {
+          minimizeItemsFun();
+        }
+        /* check on reisze */
+
+
+        window.addEventListener('resize', function () {
+          setTimeout(function () {
+            if (breadcrumbList.offsetWidth + 100 > nav.offsetWidth) {
+              minimizeItemsFun();
+            } else if (breadcrumbList.offsetWidth < nav.offsetWidth) {
+              if (self.getAttribute('responsive')) {
+                if (allItems.length > 0) {
+                  var upated = Array.from(minimizeList.children);
+
+                  if (upated.length !== 0) {
+                    for (var i = upated.length - 1; i >= 0; i--) {
+                      if (breadcrumbList.offsetWidth + 100 < nav.offsetWidth) {
+                        console.log(breadcrumbList.offsetWidth + 100, nav.offsetWidth);
+                        singleLi.parentNode.insertBefore(upated[i], singleLi.nextSibling);
+                      }
+                    }
+                  }
+                }
+              }
+            }
+
+            setTimeout(function () {
+              if (minimizeList.children.length === 0) {
+                singleLi.remove();
+                self.setAttribute('responsive', false);
+              }
+            }, 200);
+          }, 300);
         });
       }
-    }, {
-      key: "activateAccordionFromButton",
-      value: function activateAccordionFromButton(accordionTitle) {
-        var target = accordionTitle;
-        var section = target.nextSibling;
-        var toggle = this.getAttribute('toggle');
-
-        if (toggle === 'false') {
-          target.classList.toggle('active');
-
-          if (section.classList.contains('show')) {
-            section.classList.remove('show');
-            target.setAttribute('area-expanded', 'false');
-          } else {
-            section.classList.add('show');
-            target.setAttribute('area-expanded', 'true');
-          }
-        } else {
-          // eslint-disable-next-line no-lonely-if
-          if (target.classList.contains('active')) {
-            target.classList.remove('active');
-            section.classList.remove('show');
-            target.setAttribute('area-expanded', 'false');
-          } else {
-            this.sections.forEach(function (s) {
-              if (s.previousSibling.classList.contains('active')) {
-                s.previousSibling.classList.remove('active');
-              }
-
-              s.classList.remove('show');
-            });
-            target.classList.add('active');
-            section.classList.add('show');
-            target.setAttribute('area-expanded', 'true');
-          }
-        }
-      }
     }]);
 
-    return JoomlaAccordionElement;
+    return joomlaBreadcrumb;
   }(_wrapNativeSuper(HTMLElement));
 
-  customElements.define('joomla-accordion', JoomlaAccordionElement);
+  customElements.define('joomla-breadcrumb', joomlaBreadcrumb);
 })();
 
 },{}]},{},[1]);

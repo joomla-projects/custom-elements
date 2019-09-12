@@ -163,10 +163,8 @@ function _getPrototypeOf(o) {
     function JoomlaAlertElement() {
       _classCallCheck(this, JoomlaAlertElement);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(JoomlaAlertElement).call(this));
+      return _possibleConstructorReturn(this, _getPrototypeOf(JoomlaAlertElement).apply(this, arguments));
     }
-    /* Attributes to monitor */
-
 
     _createClass(JoomlaAlertElement, [{
       key: "connectedCallback",
@@ -182,7 +180,7 @@ function _getPrototypeOf(o) {
 
         if (!this.role || ['alert', 'alertdialog'].indexOf(this.role) === -1) {
           this.setAttribute('role', 'alert');
-        } //Check if its collapsable
+        } // Check if its collapsable
 
 
         if (this.hasAttribute('collapse') && this.getAttribute('collapse') !== '' && this.getAttribute('collapse') !== 'false' && !this.querySelector('.joomla-alert--collapse-header') && this.querySelector('.joomla-alert--collapse')) {
@@ -458,6 +456,8 @@ function _getPrototypeOf(o) {
       }
     }], [{
       key: "observedAttributes",
+
+      /* Attributes to monitor */
       get: function get() {
         return ['type', 'role', 'dismiss', 'acknowledge', 'href', 'collapse'];
       }

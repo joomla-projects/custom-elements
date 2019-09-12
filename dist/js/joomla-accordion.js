@@ -38,7 +38,7 @@
       });
     }
 
-    activateAccordionFromButton(accordionTitle, e) {
+    activateAccordionFromButton(accordionTitle) {
       const target = accordionTitle;
       const section = target.nextSibling;
       const toggle = this.getAttribute('toggle');

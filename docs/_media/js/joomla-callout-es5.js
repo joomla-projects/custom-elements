@@ -171,6 +171,10 @@ function _getPrototypeOf(o) {
       value: function connectedCallback() {
         var _this = this;
 
+        if (!this.position || this.position && ['top', 'bottom', 'left', 'right'].indexOf(this.position) === -1) {
+          this.position = 'right';
+        }
+
         this.setAttribute('aria-labelledby', this["for"].substring(1));
         var button = document.querySelector(this["for"]);
         var innerLinks = this.querySelectorAll('a');
@@ -185,6 +189,20 @@ function _getPrototypeOf(o) {
 
         button.setAttribute('aria-haspopup', true);
         button.setAttribute('aria-expanded', false);
+        window.addEventListener('scroll', function (e) {
+          e.preventDefault();
+
+          if (_this.hasAttribute('expanded')) {
+            var buttonRect = button.getBoundingClientRect();
+            var space1 = 5;
+
+            var calloutRect = _this.getBoundingClientRect();
+
+            var copyPosition = _this.checkPosition(_this.position, buttonRect, calloutRect);
+
+            _this.calloutPosition(copyPosition, buttonRect, calloutRect, space1);
+          }
+        });
         button.addEventListener('click', function (event) {
           if (_this.hasAttribute('expanded')) {
             _this.removeAttribute('expanded');
@@ -194,6 +212,14 @@ function _getPrototypeOf(o) {
             _this.setAttribute('expanded', '');
 
             event.target.setAttribute('aria-expanded', true);
+            var buttonRect = button.getBoundingClientRect();
+            var space = 5;
+
+            var calloutRect = _this.getBoundingClientRect();
+
+            var copyPosition = _this.checkPosition(_this.position, buttonRect, calloutRect);
+
+            _this.calloutPosition(copyPosition, buttonRect, calloutRect, space);
           }
 
           document.addEventListener('click', function (evt) {
@@ -210,6 +236,52 @@ function _getPrototypeOf(o) {
           });
         });
       }
+    }, {
+      key: "checkPosition",
+      value: function checkPosition(currentPosition, buttonRect, calloutRect) {
+        if (currentPosition === 'bottom' && buttonRect.top + calloutRect.height > window.innerHeight) {
+          return 'top';
+        }
+
+        if (currentPosition === 'top' && buttonRect.top < buttonRect.height + calloutRect.height) {
+          return 'bottom';
+        }
+
+        if (currentPosition === 'right' && buttonRect.right + calloutRect.width > window.innerWidth) {
+          return 'left';
+        }
+
+        if (currentPosition === 'left' && buttonRect.width + calloutRect.width > buttonRect.right) {
+          return 'right';
+        }
+
+        return currentPosition;
+      }
+    }, {
+      key: "calloutPosition",
+      value: function calloutPosition(copyPosition, buttonRect, calloutRect, space) {
+        switch (copyPosition) {
+          case 'top':
+            this.style.top = "".concat(Math.round(buttonRect.top + window.scrollY - (calloutRect.height + space)), "px");
+            this.style.left = "".concat(Math.round(buttonRect.left + window.scrollX - buttonRect.width), "px");
+            break;
+
+          case 'bottom':
+            this.style.top = "".concat(Math.round(buttonRect.bottom + window.scrollY) + space, "px");
+            this.style.left = "".concat(Math.round(buttonRect.left + window.scrollX - buttonRect.width), "px");
+            break;
+
+          case 'left':
+            this.style.left = "".concat(Math.round(buttonRect.left + window.scrollX - (calloutRect.width + space)), "px");
+            this.style.top = "".concat(Math.round(buttonRect.top + window.scrollY - calloutRect.height / 2), "px");
+            break;
+
+          default:
+            this.style.left = "".concat(Math.round(buttonRect.left + window.scrollX + (buttonRect.width + space)), "px");
+            this.style.top = "".concat(Math.round(buttonRect.top + window.scrollY - calloutRect.height / 2), "px");
+            break;
+        }
+      }
       /*eslint-disable */
 
       /* Method to dispatch events */
@@ -222,9 +294,6 @@ function _getPrototypeOf(o) {
         this.dispatchEvent(OriginalCustomEvent);
         this.removeEventListener(eventName, this);
       }
-    }, {
-      key: "adoptedCallback",
-      value: function adoptedCallback(oldDocument, newDocument) {}
       /* eslint-enable */
 
     }, {
@@ -295,12 +364,20 @@ function _getPrototypeOf(o) {
       get: function get() {
         return this.getAttribute('dismiss');
       }
+    }, {
+      key: "position",
+      get: function get() {
+        return this.getAttribute('position');
+      },
+      set: function set(value) {
+        return this.setAttribute('position', value);
+      }
     }], [{
       key: "observedAttributes",
 
       /* Attributes to monitor */
       get: function get() {
-        return ['for', 'dismiss'];
+        return ['for', 'dismiss', 'position'];
       }
     }]);
 

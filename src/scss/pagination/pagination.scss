@@ -73,6 +73,9 @@ joomla-pagination{
       overflow-x: hidden;
       overflow-y: auto;
       position: relative;
+      min-width: 50px;
+      padding: 0;
+      margin: 0;
       &:before{
         content: "";
         position: absolute;
