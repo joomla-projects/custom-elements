@@ -47,6 +47,7 @@
       });
 
       button.addEventListener('click', (event) => {
+        event.preventDefault();
         if (this.hasAttribute('expanded')) {
           this.removeAttribute('expanded');
           event.target.setAttribute('aria-expanded', false);
@@ -76,6 +77,7 @@
       });
     }
 
+    // eslint-disable-next-line class-methods-use-this
     checkPosition(currentPosition, buttonRect, calloutRect) {
       if (currentPosition === 'bottom' && (buttonRect.top + calloutRect.height) > window.innerHeight) {
         return 'top';
@@ -92,20 +94,20 @@
     calloutPosition(copyPosition, buttonRect, calloutRect, space) {
       switch (copyPosition) {
         case 'top':
-          this.style.top = `${Math.round(buttonRect.top + window.scrollY - (calloutRect.height + space))}px`;
-          this.style.left = `${Math.round(buttonRect.left + window.scrollX - buttonRect.width)}px`;
+          this.style.top = `${Math.round(buttonRect.top - (calloutRect.height + space))}px`;
+          this.style.left = `${Math.round(buttonRect.left - buttonRect.width)}px`;
           break;
         case 'bottom':
-          this.style.top = `${Math.round(buttonRect.bottom + window.scrollY) + space}px`;
-          this.style.left = `${Math.round(buttonRect.left + window.scrollX - buttonRect.width)}px`;
+          this.style.top = `${Math.round(buttonRect.bottom) + space}px`;
+          this.style.left = `${Math.round(buttonRect.left - buttonRect.width)}px`;
           break;
         case 'left':
-          this.style.left = `${Math.round((buttonRect.left + window.scrollX) - (calloutRect.width + space))}px`;
-          this.style.top = `${Math.round(buttonRect.top + window.scrollY - (calloutRect.height / 2))}px`;
+          this.style.left = `${Math.round((buttonRect.left) - (calloutRect.width + space))}px`;
+          this.style.top = `${Math.round(buttonRect.top - (calloutRect.height / 2))}px`;
           break;
         default:
-          this.style.left = `${Math.round((buttonRect.left + window.scrollX) + (buttonRect.width + space))}px`;
-          this.style.top = `${Math.round(buttonRect.top + window.scrollY - (calloutRect.height / 2))}px`;
+          this.style.left = `${Math.round((buttonRect.left) + (buttonRect.width + space))}px`;
+          this.style.top = `${Math.round(buttonRect.top - (calloutRect.height / 2))}px`;
           break;
       }
     }
@@ -146,7 +148,8 @@
 
       /* Add the required listener */
       if (closeButton) {
-        closeButton.addEventListener('click', () => {
+        closeButton.addEventListener('click', (e) => {
+          e.preventDefault();
           self.dispatchCustomEvent('joomla.alert.buttonClicked');
           self.close();
         });

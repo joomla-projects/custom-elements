@@ -155,11 +155,6 @@ function _getPrototypeOf(o) {
 }
 
 (function () {
-  // Keycodes
-  var KEYCODE = {
-    TAB: 9,
-    ESC: 27
-  };
   customElements.define('joomla-modal',
   /*#__PURE__*/
   function (_HTMLElement) {
@@ -171,6 +166,10 @@ function _getPrototypeOf(o) {
       _classCallCheck(this, _class);
 
       _this = _possibleConstructorReturn(this, _getPrototypeOf(_class).call(this));
+      _this.KEYCODE = {
+        tab: 9,
+        esc: 27
+      };
       _this.triggerBtn = '';
       _this.focusableElements = null;
       _this.focusableSelectors = ['a[href]', 'area[href]', 'input:not([disabled])', 'select:not([disabled])', 'textarea:not([disabled])', 'button:not([disabled])', 'iframe', 'object', 'embed', '[contenteditable]', '[tabindex]:not([tabindex^="-"])'];
@@ -297,9 +296,10 @@ function _getPrototypeOf(o) {
       }
     }, {
       key: "close",
-      value: function close() {
+      value: function close(event) {
         var _this3 = this;
 
+        event.preventDefault();
         this.removeEventListener('keydown', this.evKeypress);
         document.removeEventListener('click', this.evDocumentClose); // Is there a close button?
 
@@ -330,12 +330,12 @@ function _getPrototypeOf(o) {
       key: "keyPress",
       value: function keyPress(e) {
         // ESC key
-        if (e.keyCode === KEYCODE.ESC) {
+        if (e.keyCode === this.KEYCODE.esc) {
           this.close();
         } // TAB key
 
 
-        if (e.keyCode === KEYCODE.TAB) {
+        if (e.keyCode === this.KEYCODE.tab) {
           // this.handleTabEvent(e);
           // Get the index of the current active element within the modal
           var focusedIndex = this.focusableElements.indexOf(document.activeElement); // Handle TAB event if need to skip
