@@ -28,7 +28,7 @@
         const createItem = document.createElement('li');
         const createLink = document.createElement('a');
 
-        createItem.classList.add('breadcrumb-item');
+        createItem.classList.add('joomla-breadcrumb-item');
         if (item.getAttribute('class')) {
           createLink.className = item.getAttribute('class');
         }

@@ -34,13 +34,13 @@ joomla-breadcrumb nav {
     joomla-breadcrumb nav ol a {
       transition: .3s; }
 
-joomla-breadcrumb .breadcrumb-item {
+joomla-breadcrumb .joomla-breadcrumb-item {
   margin-right: 10px; }
-  joomla-breadcrumb .breadcrumb-item:not(:last-child) > a:after {
+  joomla-breadcrumb .joomla-breadcrumb-item:not(:last-child) > a:after {
     content: ">";
     margin-left: 8px;
     color: var(--secondary-color); }
-  joomla-breadcrumb .breadcrumb-item a {
+  joomla-breadcrumb .joomla-breadcrumb-item a {
     color: var(--secondary-color);
     text-decoration: none;
     display: block;
@@ -49,9 +49,9 @@ joomla-breadcrumb .breadcrumb-item {
     max-width: 500px;
     text-overflow: ellipsis;
     overflow: hidden; }
-    joomla-breadcrumb .breadcrumb-item a:hover, joomla-breadcrumb .breadcrumb-item a:focus {
+    joomla-breadcrumb .joomla-breadcrumb-item a:hover, joomla-breadcrumb .joomla-breadcrumb-item a:focus {
       color: var(--inverse-background); }
-    joomla-breadcrumb .breadcrumb-item a.active {
+    joomla-breadcrumb .joomla-breadcrumb-item a.active {
       color: var(--inverse-background);
       pointer-events: none; }
 
@@ -87,14 +87,14 @@ joomla-breadcrumb .minimize-items-wrapper {
     position: relative;
     padding: 0;
     margin: 0; }
-    joomla-breadcrumb .minimize-items-wrapper ol .breadcrumb-item {
+    joomla-breadcrumb .minimize-items-wrapper ol .joomla-breadcrumb-item {
       margin-right: 0; }
-      joomla-breadcrumb .minimize-items-wrapper ol .breadcrumb-item > a {
+      joomla-breadcrumb .minimize-items-wrapper ol .joomla-breadcrumb-item > a {
         padding: 6px 18px; }
-        joomla-breadcrumb .minimize-items-wrapper ol .breadcrumb-item > a:hover, joomla-breadcrumb .minimize-items-wrapper ol .breadcrumb-item > a:focus {
+        joomla-breadcrumb .minimize-items-wrapper ol .joomla-breadcrumb-item > a:hover, joomla-breadcrumb .minimize-items-wrapper ol .joomla-breadcrumb-item > a:focus {
           background-color: var(--button-background);
           color: var(--inverse-background); }
-        joomla-breadcrumb .minimize-items-wrapper ol .breadcrumb-item > a:after {
+        joomla-breadcrumb .minimize-items-wrapper ol .joomla-breadcrumb-item > a:after {
           display: none; }
 
 joomla-breadcrumb .items-toggler {
