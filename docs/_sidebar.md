@@ -2,6 +2,7 @@
  - [Quick start](/quickstart)
 
 - Components
+ - [Accordion](/accordion)
  - [Alert](/alert)
  - [Collapse](/collapse)
  - [Dropdown](/dropdown)
