@@ -83,7 +83,6 @@
                 if (upated.length !== 0) {
                   for (let i = upated.length - 1; i >= 0; i--) {
                     if (breadcrumbList.offsetWidth + 100 < nav.offsetWidth) {
-                    console.log(breadcrumbList.offsetWidth+100, nav.offsetWidth)
                       singleLi.parentNode.insertBefore(upated[i], singleLi.nextSibling);
                     }
                   }
