@@ -25,7 +25,10 @@ joomla-breadcrumb nav {
   joomla-breadcrumb nav ol {
     display: -ms-inline-flexbox;
     display: inline-flex;
+<<<<<<< HEAD
+=======
     align-items: center;
+>>>>>>> e738e56115d1871c1b259fe3db6c1086ab00565f
     list-style: none;
     font-size: 1rem;
     padding: 0;
@@ -38,18 +41,30 @@ joomla-breadcrumb .joomla-breadcrumb-item {
   margin-right: 10px; }
   joomla-breadcrumb .joomla-breadcrumb-item:not(:last-child) > a:after {
     content: ">";
+<<<<<<< HEAD
+    margin-left: 10px;
+=======
     margin-left: 8px;
+>>>>>>> e738e56115d1871c1b259fe3db6c1086ab00565f
     color: var(--secondary-color); }
   joomla-breadcrumb .joomla-breadcrumb-item a {
     color: var(--secondary-color);
     text-decoration: none;
     display: block;
+<<<<<<< HEAD
+    line-height: 1.4rem; }
+=======
     line-height: 1.4rem;
     white-space: nowrap;
     max-width: 500px;
     text-overflow: ellipsis;
     overflow: hidden; }
+<<<<<<< HEAD
     joomla-breadcrumb .joomla-breadcrumb-item a:hover, joomla-breadcrumb .joomla-breadcrumb-item a:focus {
+=======
+>>>>>>> e738e56115d1871c1b259fe3db6c1086ab00565f
+    joomla-breadcrumb .breadcrumb-item a:hover, joomla-breadcrumb .breadcrumb-item a:focus {
+>>>>>>> 6a04a88f56f555f68629e8a0b38f725e7a7c2b06
       color: var(--inverse-background); }
     joomla-breadcrumb .joomla-breadcrumb-item a.active {
       color: var(--inverse-background);
@@ -58,13 +73,19 @@ joomla-breadcrumb .joomla-breadcrumb-item {
 joomla-breadcrumb .minimize-list {
   margin-right: 12px; }
 
+<<<<<<< HEAD
+=======
 joomla-breadcrumb .minimize-items {
   position: relative; }
 
+>>>>>>> e738e56115d1871c1b259fe3db6c1086ab00565f
 joomla-breadcrumb .minimize-items-wrapper {
   background-color: #fff;
   box-shadow: 0 10px 20px -5px rgba(0, 28, 73, 0.15);
   display: none;
+<<<<<<< HEAD
+  position: absolute; }
+=======
   position: absolute;
   top: calc(100% + 10px);
   left: -10px; }
@@ -78,16 +99,35 @@ joomla-breadcrumb .minimize-items-wrapper {
     width: 0;
     height: 0;
     top: -4px; }
+>>>>>>> e738e56115d1871c1b259fe3db6c1086ab00565f
   joomla-breadcrumb .minimize-items-wrapper ol {
     -ms-flex-direction: column;
     flex-direction: column;
     max-height: 105px;
     overflow-x: hidden;
     overflow-y: auto;
+<<<<<<< HEAD
+    position: relative; }
+    joomla-breadcrumb .minimize-items-wrapper ol:before {
+      content: "";
+      position: absolute;
+      left: 15px;
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-bottom: 4px solid #fff;
+      width: 0;
+      height: 0;
+      top: -4px; }
+=======
     position: relative;
     padding: 0;
     margin: 0; }
+<<<<<<< HEAD
     joomla-breadcrumb .minimize-items-wrapper ol .joomla-breadcrumb-item {
+=======
+>>>>>>> e738e56115d1871c1b259fe3db6c1086ab00565f
+    joomla-breadcrumb .minimize-items-wrapper ol .breadcrumb-item {
+>>>>>>> 6a04a88f56f555f68629e8a0b38f725e7a7c2b06
       margin-right: 0; }
       joomla-breadcrumb .minimize-items-wrapper ol .joomla-breadcrumb-item > a {
         padding: 6px 18px; }
