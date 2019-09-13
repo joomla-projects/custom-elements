@@ -6,7 +6,7 @@
  - [Collapse](/collapse)
  - [Dropdown](/dropdown)
  - [Modal](/modal)
- - [tab](/tab)
+ - [Tab](/tab)
  - [Panels](/panels)
  - [Tip](/tip)
  - [Callout](/callout)

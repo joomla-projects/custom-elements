@@ -29,7 +29,7 @@ joomla-modal {
 	outline: 0;
 	align-items: center;
 	justify-content: center;
-	&, 
+	&,
 	*{
 		box-sizing: border-box;
 	}
@@ -51,12 +51,12 @@ joomla-modal {
     background-clip: padding-box;
     border: 1px solid rgba(0, 0, 0, .2);
     border-radius: 3px;
-		outline: 0;
-		width: 100%;
-		max-width: 600px;
-		max-height: 90%;
-		overflow: auto;
-
+	outline: 0;
+	width: 100%;
+	max-width: 600px;
+	max-height: 90%;
+	overflow-x: hidden;
+	overflow-y: auto;
     header {
       display: flex;
       align-items: center;

@@ -17,7 +17,7 @@
 
     /* Lifecycle, element appended to the DOM */
     connectedCallback() {
-      this.sections = [...this.querySelectorAll('section')];
+      this.sections = [...this.querySelectorAll('.accordion-item')];
       this.generateNavigation(this.sections);
     }
 
@@ -25,7 +25,6 @@
       sections.forEach((section, index) => {
         const accordionTitle = document.createElement('h3');
         accordionTitle.setAttribute('area-expanded', 'false');
-        accordionTitle.innerHTML = '<span aria-hidden="true">&gt;</span>';
         accordionTitle.setAttribute('target', section.id);
         if (section.classList.contains('show')) {
           accordionTitle.classList.add('active');
@@ -33,6 +32,7 @@
         const title = section.getAttribute('name') || `Accordion ${index}`;
         const navTitle = document.createTextNode(title);
         accordionTitle.appendChild(navTitle);
+        accordionTitle.innerHTML = accordionTitle.innerHTML + '<span class="joomla-accordion-icon" aria-hidden="true"></span>';
         this.insertBefore(accordionTitle, section);
         accordionTitle.addEventListener('click', this.activateAccordionFromButton.bind(this, accordionTitle));
       });
@@ -42,7 +42,7 @@
       const target = accordionTitle;
       const section = target.nextSibling;
       const toggle = this.getAttribute('toggle');
-      if (toggle === 'false') {
+      if (!toggle || toggle === 'false') {
         target.classList.toggle('active');
         if (section.classList.contains('show')) {
           section.classList.remove('show');
@@ -70,6 +70,7 @@
         }
       }
     }
+
   }
   customElements.define('joomla-accordion', JoomlaAccordionElement);
 })();
