@@ -70,7 +70,10 @@ joomla-pagination {
       max-height: 105px;
       overflow-x: hidden;
       overflow-y: auto;
-      position: relative; }
+      position: relative;
+      min-width: 50px;
+      padding: 0;
+      margin: 0; }
       joomla-pagination .minimize-items-wrapper ul:before {
         content: "";
         position: absolute;
