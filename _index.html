@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
-  <link rel="stylesheet" href="dist/css/joomla-breadcrumb.min.css">
+  <link rel="stylesheet" href="dist/css/joomla-tab.min.css">
   <style>
     .one{
       /* max-width: 500px; */
@@ -14,25 +14,21 @@
   </style>
 </head>
 <body>
-  <section class="one">
-    <joomla-breadcrumb aria-label="breadcrumb">
-      <li href="home" text="item1" value="1" class="custom tucsd sdf"></li>
-      <li href="#" text="item2"  value="2"></li>
-      <li href="#" text="item3"  value="3"></li>
-      <li href="#" text="item4"  value="4"></li>
-      <li href="#" text="item5"  value="5"></li>
-      <li href="#" text="item6"  value="6"></li>
-      <li href="#" text="item7"  value="7"></li>
-      <li href="#" text="item8"  value="8"></li>
-      <li href="#" text="item9"  value="9"></li>
-      <li href="#" text="item10"  value="10"></li>
-      <li href="#" text="item11"  value="11"></li>
-      <li href="#" text="item12"  value="12"></li>
-      <li href="#" text="item13"  value="13"></li>
-      <li href="#" text="item14" class="active"  value="14"></li>
-    </joomla-breadcrumb>
-  </section>
+  <joomla-tab>
+    <section orientation="vertical" id="tab-panel1" name="Tab panel 1">
+        <h3>Tab panel 1</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+    </section>
+    <section id="tab-panel2" name="Tab panel 2">
+        <h3>Tab panel 2</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+    </section>
+    <section id="tab-panel3" name="Tab panel 3" disabled="true">
+        <h3>Tab panel 1</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+    </section>
+  </joomla-tab>
 
-  <script src="./src/js/breadcrumb/breadcrumb.js"></script>
+  <script src="./src/js/tab/tab.js"></script>
 </body>
 </html>

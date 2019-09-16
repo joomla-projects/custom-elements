@@ -85,7 +85,8 @@
       "accordion",
       "breadcrumb",
       "pagination",
-      "flextable"
+      "flextable",
+      "accordion"
     ],
     "browsers": "last 1 version"
   },

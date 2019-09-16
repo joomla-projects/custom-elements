@@ -321,6 +321,11 @@
             nextTabItem.querySelector('a').focus();
             e.preventDefault();
             break;
+          case 9:
+            nextTabItem.querySelector('a').click();
+            nextTabItem.querySelector('a').focus();
+            e.preventDefault();
+            break;
           default:
             break;
         }

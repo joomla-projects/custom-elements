@@ -68,7 +68,7 @@ joomla-tab a[role=tab]:hover:after{
 joomla-tab a[role=tab]:focus{
 	outline: none;
 }
-joomla-tab a[role=tab]:active {
+joomla-tab a[role=tab]:focus {
 	outline: var(--primary-color) solid 2px;
 	&::after{
 		opacity: 0;

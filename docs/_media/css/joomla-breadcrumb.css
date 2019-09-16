@@ -1,0 +1,105 @@
+:root {
+  --background: #f4f7fc;
+  --inverse-background: #1d2427;
+  --color: #252732;
+  --color-rgb: 37, 39, 50;
+  --inverse-color: #ffffff;
+  --secondary-color: #5e727c;
+  --icon-color: #808f94;
+  --secondary-icon-color: #bdc5c8;
+  --button-background: #e5f2ff;
+  --cancel-button-background: #f0f3f8;
+  --disabled-button-background: #eaeaea;
+  --link-color: #0184ff;
+  --link-color-light-rgb: 229, 242, 255;
+  --primary-color: #0184ff;
+  --primary-gradient-color: #198df8;
+  --success-color: #7ac143;
+  --warning-color: #f9a541;
+  --danger-color: #f44321;
+  --overlay: rgba(23, 23, 23, 0.5); }
+
+joomla-breadcrumb nav {
+  display: -ms-flexbox;
+  display: flex; }
+  joomla-breadcrumb nav ol {
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    align-items: center;
+    list-style: none;
+    font-size: 1rem;
+    padding: 0;
+    margin: 0;
+    list-style: none; }
+    joomla-breadcrumb nav ol a {
+      transition: .3s; }
+
+joomla-breadcrumb .joomla-breadcrumb-item {
+  margin-right: 10px; }
+  joomla-breadcrumb .joomla-breadcrumb-item:not(:last-child) > a:after {
+    content: ">";
+    margin-left: 8px;
+    color: var(--secondary-color); }
+  joomla-breadcrumb .joomla-breadcrumb-item a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    display: block;
+    line-height: 1.4rem;
+    white-space: nowrap;
+    max-width: 500px;
+    text-overflow: ellipsis;
+    overflow: hidden; }
+    joomla-breadcrumb .joomla-breadcrumb-item a:hover, joomla-breadcrumb .joomla-breadcrumb-item a:focus {
+      color: var(--inverse-background); }
+    joomla-breadcrumb .joomla-breadcrumb-item a.active {
+      color: var(--inverse-background);
+      pointer-events: none; }
+
+joomla-breadcrumb .minimize-list {
+  margin-right: 12px; }
+
+joomla-breadcrumb .minimize-items {
+  position: relative; }
+
+joomla-breadcrumb .minimize-items-wrapper {
+  background-color: #fff;
+  box-shadow: 0 10px 20px -5px rgba(0, 28, 73, 0.15);
+  display: none;
+  position: absolute;
+  top: calc(100% + 10px);
+  left: -10px; }
+  joomla-breadcrumb .minimize-items-wrapper:before {
+    content: "";
+    position: absolute;
+    left: 15px;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-bottom: 4px solid #fff;
+    width: 0;
+    height: 0;
+    top: -4px; }
+  joomla-breadcrumb .minimize-items-wrapper ol {
+    -ms-flex-direction: column;
+    flex-direction: column;
+    max-height: 105px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+    padding: 0;
+    margin: 0; }
+    joomla-breadcrumb .minimize-items-wrapper ol .joomla-breadcrumb-item {
+      margin-right: 0; }
+      joomla-breadcrumb .minimize-items-wrapper ol .joomla-breadcrumb-item > a {
+        padding: 6px 18px; }
+        joomla-breadcrumb .minimize-items-wrapper ol .joomla-breadcrumb-item > a:hover, joomla-breadcrumb .minimize-items-wrapper ol .joomla-breadcrumb-item > a:focus {
+          background-color: var(--button-background);
+          color: var(--inverse-background); }
+        joomla-breadcrumb .minimize-items-wrapper ol .joomla-breadcrumb-item > a:after {
+          display: none; }
+
+joomla-breadcrumb .items-toggler {
+  color: var(--primary-gradient-color);
+  cursor: pointer; }
+
+joomla-breadcrumb .minimize-items-wrapper.active {
+  display: block; }
