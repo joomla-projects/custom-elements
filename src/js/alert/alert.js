@@ -1,17 +1,15 @@
 (() => {
   class JoomlaAlertElement extends HTMLElement {
     /* Attributes to monitor */
-    static get observedAttributes() { return ['type', 'role', 'dismiss', 'acknowledge', 'href']; }
+    static get observedAttributes() { return ['type', 'dismiss', 'auto-dismiss', 'acknowledge', 'href']; }
 
     get type() { return this.getAttribute('type'); }
 
     set type(value) { return this.setAttribute('type', value); }
 
-    get role() { return this.getAttribute('role'); }
-
-    set role(value) { return this.setAttribute('role', value); }
-
     get dismiss() { return this.getAttribute('dismiss'); }
+
+    get autodismiss() { return this.getAttribute('auto-dismiss'); }
 
     get acknowledge() { return this.getAttribute('acknowledge'); }
 
@@ -19,21 +17,22 @@
 
     /* Lifecycle, element appended to the DOM */
     connectedCallback() {
+      this.setAttribute('role', 'alertdialog');
       this.classList.add('joomla-alert--show');
 
       // Default to info
       if (!this.type || ['info', 'warning', 'danger', 'success'].indexOf(this.type) === -1) {
         this.setAttribute('type', 'info');
       }
-      // Default to alert
-      if (!this.role || ['alert', 'alertdialog'].indexOf(this.role) === -1) {
-        this.setAttribute('role', 'alert');
-      }
       // Append button
       if ((this.hasAttribute('dismiss') || this.hasAttribute('acknowledge')) || ((this.hasAttribute('href') && this.getAttribute('href') !== '')
         && !this.querySelector('button.joomla-alert--close') && !this.querySelector('button.joomla-alert-button--close'))) {
         this.appendCloseButton();
       }
+
+      if (this.hasAttribute('auto-dismiss')) {
+        this.autoDismiss();
+	  }
 
       this.dispatchCustomEvent('joomla.alert.show');
     }
@@ -57,11 +56,6 @@
             this.type = 'info';
           }
           break;
-        case 'role':
-          if (!newValue || (newValue && ['alert', 'alertdialog'].indexOf(newValue) === -1)) {
-            this.role = 'alert';
-          }
-          break;
         case 'dismiss':
         case 'acknowledge':
           if (!newValue || newValue === 'true') {
@@ -69,6 +63,9 @@
           } else {
             this.removeCloseButton();
           }
+          break;
+        case 'auto-dismiss':
+          this.autoDismiss();
           break;
         case 'href':
           if (!newValue || newValue === '') {
@@ -83,11 +80,15 @@
     }
 
     /* Method to close the alert */
-    close() {
+    close(element = null) {
       this.dispatchCustomEvent('joomla.alert.close');
       this.addEventListener('transitionend', () => {
         this.dispatchCustomEvent('joomla.alert.closed');
-        this.parentNode.removeChild(this);
+          if (element) {
+            element.remove();
+          } else {
+            this.remove();
+          }
       }, false);
       this.classList.remove('joomla-alert--show');
     }
@@ -148,17 +149,18 @@
           });
         }
       }
+    }
 
-      if (this.hasAttribute('auto-dismiss')) {
-        setTimeout(() => {
-          self.dispatchCustomEvent('joomla.alert.buttonClicked');
-          if (self.hasAttribute('data-callback')) {
-            window[self.getAttribute('data-callback')]();
-          } else {
-            self.close();
-          }
-        }, parseInt(self.getAttribute('auto-dismiss'), 10) ? self.getAttribute('auto-dismiss') : 3000);
-      }
+    autoDismiss() {
+      const self = this;
+      setTimeout(() => {
+        self.dispatchCustomEvent('joomla.alert.buttonClicked');
+        if (self.hasAttribute('data-callback')) {
+          window[self.getAttribute('data-callback')]();
+        } else {
+          self.close(self);
+        }
+      }, parseInt(self.getAttribute('auto-dismiss'), 10) ? self.getAttribute('auto-dismiss') : 3000);
     }
 
     /* Method to remove the close button */
@@ -166,7 +168,7 @@
       const button = this.querySelector('button');
       if (button) {
         button.removeEventListener('click', this);
-        button.parentNode.removeChild(button);
+        button.remove();
       }
     }
 
