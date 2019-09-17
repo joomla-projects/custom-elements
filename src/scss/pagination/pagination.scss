@@ -6,109 +6,27 @@
 
 @import "../variables";
 
-
-//
-// Base styles
-//
-joomla-pagination{
-  display: block;
-  nav{
-    display: -ms-flexbox;
+joomla-pagination {
+  display: flex;
+  list-style: none;
+  .pagination-item {
     display: flex;
+    padding: 10px;
+    border: 1px solid #eaeaea;
+    box-shadow: 1px 1px 4px 0px #eaeaea;
+    margin: 0 5px;
+    min-width: 20px;
+    justify-content: center;
     align-items: center;
-    ul{
-      display: -ms-inline-flexbox;
-      display: inline-flex;
-      list-style: none;
-      font-size: 1rem;
-      padding: 0;
-      margin: 0;
-      list-style: none;
-      a{
-        transition: .3s;
-      }
-    }
-  }
-  .has-arrow{
-    text-decoration: none;
-    color: var(--secondary-icon-color);
-    &:hover, &:focus{
-      color: var(--icon-color);
-    }
-    &.first-page, &.next-page{
-      margin-right: 5px;
-    }
-    &.last-page, &.prev-page{
-      margin-left: 5px;
-    }
-  }
-  .pagination-item{
-    margin-right: 3px;
-    a{
-      color: var(--secondary-color);
-      text-decoration: none;
-      display: block;
-      line-height: 1.4rem;
-      padding: 1px 6px;
-      border-radius: 3px;
-      &:hover, &:focus, &.active{
-        color: var(--inverse-background);
-        box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.15);
-        background-color: #ffffff;
-      }
-    }
-  }
-  .minimize-list{
-    margin-right: 12px;
-  }
-  .minimize-items-wrapper{
-    background-color: #fff;
-    box-shadow: 0 10px 20px -5px rgba(0, 28, 73, 0.15);
-    display: none;
-    position: absolute;
-    ul{
-      -ms-flex-direction: column;
-      flex-direction: column;
-      max-height: 105px;
-      overflow-x: hidden;
-      overflow-y: auto;
-      position: relative;
-      min-width: 50px;
-      padding: 0;
-      margin: 0;
-      &:before{
-        content: "";
-        position: absolute;
-        left: 15px;
-        border-left: 4px solid transparent;
-        border-right: 4px solid transparent;
-        border-bottom: 4px solid #fff;
-        width: 0;
-        height: 0;
-        top: -4px;
-      }
-      .pagination-item{
-        margin-right: 0;
-        >a{
-          padding: 1px 5px;
-          border-bottom: 1px solid #f4f7fc;
-          border-radius: 0px;
-          &:hover, &:focus{
-            color: var(--link-color);
-
-          }
-          &:after{
-            display: none;
-          }
-        }
-      }
-    }
-  }
-  .items-toggler{
-    color: var(--primary-gradient-color);
     cursor: pointer;
+    transition: all .3s ease;
+    &:not(.disabled):hover {
+      background: #0184ff;
+      color: #fff;  
+    }
   }
-  .minimize-items-wrapper.active {
-    display: block;
+  .pagination-item.active {
+    background: #0184ff;
+    color: #fff;
   }
 }
