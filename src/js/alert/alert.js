@@ -1,11 +1,15 @@
 (() => {
   class JoomlaAlertElement extends HTMLElement {
     /* Attributes to monitor */
-    static get observedAttributes() { return ['type', 'dismiss', 'auto-dismiss', 'acknowledge', 'href']; }
+    static get observedAttributes() { return ['type', 'role', 'dismiss', 'acknowledge', 'href']; }
 
     get type() { return this.getAttribute('type'); }
 
     set type(value) { return this.setAttribute('type', value); }
+
+    get role() { return this.getAttribute('role'); }
+
+    set role(value) { return this.setAttribute('role', value); }
 
     get dismiss() { return this.getAttribute('dismiss'); }
 
@@ -17,22 +21,25 @@
 
     /* Lifecycle, element appended to the DOM */
     connectedCallback() {
-      this.setAttribute('role', 'alertdialog');
       this.classList.add('joomla-alert--show');
 
       // Default to info
       if (!this.type || ['info', 'warning', 'danger', 'success'].indexOf(this.type) === -1) {
         this.setAttribute('type', 'info');
       }
+      // Default to alert
+      if (!this.role || ['alert', 'alertdialog'].indexOf(this.role) === -1) {
+        this.setAttribute('role', 'alert');
+      }
       // Append button
       if ((this.hasAttribute('dismiss') || this.hasAttribute('acknowledge')) || ((this.hasAttribute('href') && this.getAttribute('href') !== '')
         && !this.querySelector('button.joomla-alert--close') && !this.querySelector('button.joomla-alert-button--close'))) {
         this.appendCloseButton();
       }
-
+      
       if (this.hasAttribute('auto-dismiss')) {
         this.autoDismiss();
-	  }
+      }
 
       this.dispatchCustomEvent('joomla.alert.show');
     }
@@ -54,6 +61,11 @@
         case 'type':
           if (!newValue || (newValue && ['info', 'warning', 'danger', 'success'].indexOf(newValue) === -1)) {
             this.type = 'info';
+          }
+          break;
+        case 'role':
+          if (!newValue || (newValue && ['alert', 'alertdialog'].indexOf(newValue) === -1)) {
+            this.role = 'alert';
           }
           break;
         case 'dismiss':
@@ -151,6 +163,7 @@
       }
     }
 
+    /* Method to auto-dismiss */
     autoDismiss() {
       const self = this;
       setTimeout(() => {
