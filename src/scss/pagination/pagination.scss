@@ -7,26 +7,60 @@
 @import "../variables";
 
 joomla-pagination {
-  display: flex;
-  list-style: none;
-  .pagination-item {
-    display: flex;
-    padding: 10px;
-    border: 1px solid #eaeaea;
-    box-shadow: 1px 1px 4px 0px #eaeaea;
-    margin: 0 5px;
-    min-width: 20px;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: all .3s ease;
-    &:not(.disabled):hover {
-      background: #0184ff;
-      color: #fff;  
+  display: block;
+  nav {  
+    outline: none;
+    .pagination-list {
+      display: flex;
+      list-style: none;
+      .pagination-item {
+        display: flex;
+        padding: 10px;
+        border: 1px solid #eaeaea;
+        box-shadow: 1px 1px 4px 0px #eaeaea;
+        margin: 0 5px;
+        min-width: 20px;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: all .3s ease;
+        &:not(.disabled):hover {
+          background: #0184ff;
+          color: #fff;  
+        }
+      }
+      .pagination-item.active {
+        background: #0184ff;
+        color: #fff;
+      }
     }
   }
-  .pagination-item.active {
-    background: #0184ff;
-    color: #fff;
+
+  .dot-item-list {
+    display: inline-flex;
+    list-style: none;
+    flex-direction: column;
+    box-shadow: 1px 1px 4px 0px #eaeaea;
+    padding: 0;
+    margin: 0;
+    position: fixed;
+    max-height: 300px;
+    overflow-y: auto;
+
+    .pagination-item {
+      display: flex;
+      padding: 10px;
+      border: 1px solid #eaeaea;
+      min-width: 20px;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: all .3s ease;
+      &:hover {
+        background: #0184ff;
+        color: #fff;  
+      }
+    }
+
   }
 }

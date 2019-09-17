@@ -26,6 +26,7 @@
       };
 
       this.resizeTimer = null;
+      this.dotItems = [];
 
       this.disableNext = false;
       this.disableLast = false;
@@ -198,20 +199,65 @@
 
       const visibleLength = (this.options.totalVisible > this.pageCount ? this.pageCount : this.options.totalVisible) || this.pageCount;
       const paginationArray = this.generatePaginationList(this.currentItemIndex + 1, this.rawItems.length, visibleLength);
+      this.dotItems = [];
       if (paginationArray.length > 0) {
-        paginationArray.forEach((itemIndex) => {
+        paginationArray.forEach((itemIndex, index) => {
           if (itemIndex !== '...') {
             if (itemIndex - 1 !== this.currentItemIndex) {
               this.rawItems[itemIndex - 1].setAttribute('aria-label', `Go to page ${itemIndex}`);
             }
             this.pageUl.appendChild(this.rawItems[itemIndex - 1]);
           } else {
-            this.pageUl.appendChild(this.createDOMElement('li', { class: 'pagination-item dot-item disabled' }, '...'));
+            const dotItem = this.createDOMElement('li', { class: 'pagination-item dot-item disabled' }, '...');
+            const dotItemObject = {
+              item: dotItem,
+              left: paginationArray[index - 1],
+              right: paginationArray[index + 1],
+            };
+            this.dotItems.push(dotItemObject);
+            this.pageUl.appendChild(dotItem);
           }
         });
         this.setAsActiveElement(current);
         this.createNavigationButtons();
         this.setFormValue();
+      }
+
+      this.getDotItemsHiddenList();
+      
+    };
+
+    getDotItemsHiddenList = () => {
+      if (this.dotItems.length) {
+        this.dotItems.forEach((item) => {
+          item.item.addEventListener('click', (event) => this.handleDotItemClick(event, item.left, item.right), false);
+        });
+      }
+    };
+
+    handleDotItemClick = (event, start, end) => {
+      event.preventDefault();
+      
+      
+      const dotElements = document.querySelector(`.dot-item-${start}`);
+      this.clearDropdown();
+      if (dotElements) {
+        return;
+      }
+      
+      const list = this.createRange(start + 1, end - 1);
+      
+      const clientRect = event.target.getBoundingClientRect();
+      const style = `left: ${clientRect.left}px; top: ${clientRect.top + clientRect.height}px`;
+      
+      if (list.length > 0) {
+        const dotItemsUl = this.createDOMElement('ul', {class: `dot-item-list dot-item-${start}`, style});
+        list.forEach((item) => {
+          dotItemsUl.appendChild(this.rawItems[item-1]);
+        });
+        this.appendChild(dotItemsUl);
+      } else {
+        return;
       }
     };
 
@@ -251,6 +297,7 @@
       this.clickHandlers();
 
       window.addEventListener('resize', this.resizeWindow, false);
+      document.querySelector('html,body').addEventListener('click', this.closeDropdown, false);
     }
 
     // lifecycle hook
@@ -260,6 +307,8 @@
       this.firstBtn.removeEventListener('click', this.goToFirstPage);
       this.lastBtn.removeEventListener('click', this.goToLastPage);
       if (this.resizeTimer) clearTimeout(this.resizeTimer);
+
+      if (this.dotItems) this.dotItems.forEach((elem) => {elem.removeEventListener('click', this)});
     }
 
     /**
@@ -355,6 +404,18 @@
       return navBtnText;
     };
 
+    clearDropdown = () => {
+      document.querySelectorAll('.dot-item-list').forEach((elem) => {
+        elem.parentNode.removeChild(elem);
+      });
+    };
+
+    closeDropdown = (event) => {
+      event.preventDefault();
+      if (event.target.classList.contains('dot-item') === false) {
+        this.clearDropdown();
+      }
+    };
 
     clickHandlers = () => {
       if (this.listItems) {
@@ -368,30 +429,35 @@
       event.preventDefault();
       if (this.currentItemIndex < this.rawItems.length - 1) this.currentItemIndex += 1;
       this.renderPagination(this.currentItemIndex, this.rawItems.length);
+      this.clearDropdown();
     };
 
     prevPage = (event) => {
       event.preventDefault();
       if (this.currentItemIndex > 0) this.currentItemIndex -= 1;
       this.renderPagination(this.currentItemIndex, this.rawItems.length);
+      this.clearDropdown();
     };
 
     goToLastPage = (event) => {
       event.preventDefault();
       this.currentItemIndex = this.rawItems.length - 1;
       this.renderPagination(this.currentItemIndex, this.rawItems.length);
+      this.clearDropdown();
     };
 
     goToFirstPage = (event) => {
       event.preventDefault();
       this.currentItemIndex = 0;
       this.renderPagination(this.currentItemIndex, this.rawItems.length);
+      this.clearDropdown();
     };
 
     goToPage = (event, pageIndex) => {
       event.preventDefault();
       this.currentItemIndex = pageIndex;
       this.renderPagination(this.currentItemIndex, this.rawItems.length);
+      this.clearDropdown();
     };
   });
 })();
