@@ -157,7 +157,7 @@
           } else {
             self.close();
           }
-        }, parseInt(self.getAttribute('auto-dismiss'), 10) ? self.getAttribute('auto-dismiss') : 3000);
+        }, self.getAttribute('auto-dismiss') ? parseInt(self.getAttribute('auto-dismiss'), 10) : 3000);
       }
     }
 
