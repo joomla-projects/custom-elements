@@ -307,8 +307,8 @@
       this.firstBtn.removeEventListener('click', this.goToFirstPage);
       this.lastBtn.removeEventListener('click', this.goToLastPage);
       if (this.resizeTimer) clearTimeout(this.resizeTimer);
-
       if (this.dotItems) this.dotItems.forEach((elem) => {elem.removeEventListener('click', this)});
+      document.querySelector('html,body').removeEventListener('click', this.closeDropdown);
     }
 
     /**
