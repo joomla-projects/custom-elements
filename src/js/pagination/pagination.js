@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-return */
 /* eslint-disable max-len */
 (() => {
   customElements.define('joomla-pagination', class extends HTMLElement {
@@ -81,8 +82,10 @@
 
 
     preparePaginationContainer = () => {
-      this.pageNav = this.createDOMElement('nav', {class: 'pagination-navigation', role: 'navigation', 'aria-label': 'Pagination', tabindex: '-1'});
-      this.pageUl = this.createDOMElement('ul', {class: 'pagination-list'});
+      this.pageNav = this.createDOMElement('nav', {
+        class: 'pagination-navigation', role: 'navigation', 'aria-label': 'Pagination', tabindex: '-1',
+      });
+      this.pageUl = this.createDOMElement('ul', { class: 'pagination-list' });
       this.pageNav.appendChild(this.pageUl);
       this.appendChild(this.pageNav);
     };
@@ -224,7 +227,6 @@
       }
 
       this.getDotItemsHiddenList();
-      
     };
 
     getDotItemsHiddenList = () => {
@@ -237,23 +239,22 @@
 
     handleDotItemClick = (event, start, end) => {
       event.preventDefault();
-      
-      
+
       const dotElements = document.querySelector(`.dot-item-${start}`);
       this.clearDropdown();
       if (dotElements) {
         return;
       }
-      
+
       const list = this.createRange(start + 1, end - 1);
-      
+
       const clientRect = event.target.getBoundingClientRect();
       const style = `left: ${clientRect.left}px; top: ${clientRect.top + clientRect.height}px`;
-      
+
       if (list.length > 0) {
-        const dotItemsUl = this.createDOMElement('ul', {class: `dot-item-list dot-item-${start}`, style});
+        const dotItemsUl = this.createDOMElement('ul', { class: `dot-item-list dot-item-${start}`, style });
         list.forEach((item) => {
-          dotItemsUl.appendChild(this.rawItems[item-1]);
+          dotItemsUl.appendChild(this.rawItems[item - 1]);
         });
         this.appendChild(dotItemsUl);
       } else {
@@ -307,7 +308,7 @@
       this.firstBtn.removeEventListener('click', this.goToFirstPage);
       this.lastBtn.removeEventListener('click', this.goToLastPage);
       if (this.resizeTimer) clearTimeout(this.resizeTimer);
-      if (this.dotItems) this.dotItems.forEach((elem) => {elem.removeEventListener('click', this)});
+      if (this.dotItems) this.dotItems.forEach((elem) => { elem.removeEventListener('click', this); });
       document.querySelector('html,body').removeEventListener('click', this.closeDropdown);
     }
 
