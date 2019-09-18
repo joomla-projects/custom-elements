@@ -36,7 +36,7 @@
         && !this.querySelector('button.joomla-alert--close') && !this.querySelector('button.joomla-alert-button--close'))) {
         this.appendCloseButton();
       }
-      
+
       if (this.hasAttribute('auto-dismiss')) {
         this.autoDismiss();
       }
@@ -96,11 +96,11 @@
       this.dispatchCustomEvent('joomla.alert.close');
       this.addEventListener('transitionend', () => {
         this.dispatchCustomEvent('joomla.alert.closed');
-          if (element) {
-            element.remove();
-          } else {
-            this.remove();
-          }
+        if (element) {
+          element.remove();
+        } else {
+          this.remove();
+        }
       }, false);
       this.classList.remove('joomla-alert--show');
     }
