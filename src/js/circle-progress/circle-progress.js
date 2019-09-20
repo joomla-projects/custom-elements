@@ -29,22 +29,21 @@ class JoomlaProgressCircle extends HTMLElement {
         return this.getAttribute('empty-fill') || '#F0F3F8';
     }
 
-
     connectedCallback(){
-        this.querySelector('svg').style.transform = "rotate(-90deg)"
-        this.style.display = "inline-flex"
+        this.querySelector('svg').style.transform = 'rotate(-90deg)';
+        this.style.display = "inline-flex";
         this.calculateProgress();
     }
 
-    attributeChangedCallback(name, oldValue, newValue) {
+    attributeChangedCallback() {
         this.calculateProgress();
     }
 
     render() {
-
-        this.size = this.radius * 2 - this.stroke
-        this.normalizedRadius = this.radius - this.stroke
-        this.cxy = this.radius - ( this.stroke / 2 )
+        this.size = this.radius * 2 - this.stroke;
+        this.normalizedRadius = this.radius - this.stroke;
+        this.cxy = this.radius - ( this.stroke / 2 );
+        this.defaultDashOffset = (this.radius - this.stroke) * Math.PI * 2;
 
         this.innerHTML = `
             <svg xmlns="http://www.w3.org/2000/svg" width="${this.size}" height="${this.size}">
@@ -62,7 +61,7 @@ class JoomlaProgressCircle extends HTMLElement {
                         cy="${this.cxy}" 
                         r="${this.normalizedRadius}" 
                         stroke="${this.fill}"
-                        style="stroke-dashoffset: ${this.defaultDash}"
+                        stroke-dashoffset="${this.defaultDashOffset}"
                     />
                 </g>
             </svg>
@@ -70,13 +69,13 @@ class JoomlaProgressCircle extends HTMLElement {
     }
 
     calculateProgress(){
-        const circleFg = this.querySelector('#circleFg')
+        const circleFg = this.querySelector('#circleFg');
         this.dashSize = circleFg.getTotalLength();
-        this.dashParcent = this.dashSize / 100 * this.progress
-        circleFg.style.strokeLinecap = 'round'
-        circleFg.style.transition = '300ms'
-        circleFg.style.strokeDasharray = this.dashSize
-        circleFg.style.strokeDashoffset = this.dashSize - this.dashParcent
+        this.dashParcent = this.dashSize - this.progress / 100 * this.dashSize;
+        circleFg.style.strokeLinecap = 'round';
+        circleFg.style.transition = '600ms';
+        circleFg.style.strokeDasharray = this.dashSize + ' ' + this.dashSize;
+        circleFg.style.strokeDashoffset = this.dashParcent;
     }
 
   }
