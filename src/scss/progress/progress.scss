@@ -1,0 +1,11 @@
+joomla-progress{
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  .progress-inner-text{
+    position: absolute;
+    width: 100%;
+    text-align: center;
+  }
+}

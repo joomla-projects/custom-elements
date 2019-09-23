@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
-  <!-- <link rel="stylesheet" href="dist/css/circle-progress.min.css"> -->
+  <link rel="stylesheet" href="dist/css/joomla-progress.min.css">
   <style>
   </style>
 </head>
@@ -13,9 +13,17 @@
   
 <h1>Hello</h1>
 
-<joomla-progress-circle progress="25"></joomla-progress-circle>
-<joomla-progress-circle stroke="10" radius="100" progress="45" fill="#ff0000"></joomla-progress-circle>
+<joomla-progress progress="25">
+  <h3 class="counter"></h3>
+</joomla-progress>
+<joomla-progress radius="80" progress="50">
+  <h3 class="counter"></h3>
+</joomla-progress>
+<joomla-progress stroke="10" radius="100" progress="45" fill="#ff0000" duration="2000">
+  <h3 class="counter"></h3>
+  <span>Updated</span>
+</joomla-progress>
 
-  <script src="./src/js/circle-progress/circle-progress.js"></script>
+  <script src="./src/js/progress/progress.js"></script>
 </body>
 </html>
