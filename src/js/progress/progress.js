@@ -2,8 +2,14 @@
   class JoomlaProgress extends HTMLElement {
     constructor() {
       super();
+      this.size = (this.radius * 2) - this.stroke;
+      this.normalizedRadius = this.radius - this.stroke;
+      this.cxy = this.radius - (this.stroke / 2);
+      this.defaultDashOffset = (this.radius - this.stroke) * Math.PI * 2;
+
       this.isRendered = false;
       this.renderInViewPort = this.renderInViewPort.bind(this);
+      this.setDefaultHeight();
     }
 
     static get observedAttributes() {
@@ -39,14 +45,22 @@
       this.renderInViewPort();
     }
 
+    setDefaultHeight() {
+      this.style.height = `${this.size}px`;
+      this.style.width = `${this.size}px`;
+      this.style.opacity = '0';
+    }
+
     renderInViewPort() {
+      // render if item in viewport
       if (!this.isRendered && this.isInViewport(this)) {
         this.render();
         this.isRendered = true;
         this.querySelector('svg').style.transform = 'rotate(-90deg)';
-        this.style.display = 'inline-flex';
         this.calculateProgress();
       }
+
+      // remove scroll event if already rendered
       if (this.isRendered) {
         window.removeEventListener('scroll', this.renderInViewPort, true);
       }
@@ -67,7 +81,7 @@
       circleFg.style.transition = `${this.duration}ms`;
       circleFg.style.strokeDasharray = `${this.dashSize} ${this.dashSize}`;
       circleFg.style.strokeDashoffset = this.dashParcent;
-      this.animateValue(this.querySelector('.counter'), 0, this.progress, this.duration);
+      this.animateValue(this.querySelector('[data-counter="true"]'), 0, this.progress, this.duration);
     }
 
     animateValue(elem, start, end, duration) {
@@ -114,12 +128,8 @@
       );
     }
 
-
     render() {
-      this.size = this.radius * 2 - this.stroke;
-      this.normalizedRadius = this.radius - this.stroke;
-      this.cxy = this.radius - (this.stroke / 2);
-      this.defaultDashOffset = (this.radius - this.stroke) * Math.PI * 2;
+      this.style.opacity = '';
       this.innerHTML = this.innerHTML.trim() !== '' ? `<div class="progress-inner-text">${this.innerHTML}</div>` : '';
       this.innerHTML += `
         <svg xmlns="http://www.w3.org/2000/svg" width="${this.size}" height="${this.size}">
