@@ -2,7 +2,8 @@
   class JoomlaProgress extends HTMLElement {
     constructor() {
       super();
-      this.render();
+      this.isRendered = false;
+      this.renderInViewPort = this.renderInViewPort.bind(this);
     }
 
     static get observedAttributes() {
@@ -34,13 +35,26 @@
     }
 
     connectedCallback() {
-      this.querySelector('svg').style.transform = 'rotate(-90deg)';
-      this.style.display = 'inline-flex';
-      this.calculateProgress();
+      window.addEventListener('scroll', this.renderInViewPort, true)
     }
 
-    attributeChangedCallback() {
-      this.calculateProgress();
+    renderInViewPort() {
+      if(!this.isRendered && this.isInViewport(this)) {
+        this.render();
+        this.isRendered = true;
+        this.querySelector('svg').style.transform = 'rotate(-90deg)';
+        this.style.display = 'inline-flex';
+        this.calculateProgress();
+      }
+      if(this.isRendered) {
+        window.removeEventListener('scroll', this.renderInViewPort, true)
+      }
+    }
+
+    attributeChangedCallback(name, oldValue, newValue) {
+      if(oldValue !== null && oldValue) {
+        this.calculateProgress();
+      }
     }
 
     calculateProgress() {
@@ -96,6 +110,7 @@
           bounding.right <= (window.innerWidth || document.documentElement.clientWidth)
       );
     }
+
 
 
     render() {
