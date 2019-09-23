@@ -31,28 +31,30 @@
     }
 
     get duration() {
-      return parseInt(this.getAttribute('duration')) || 600;
+      return Number(this.getAttribute('duration')) || 600;
     }
 
     connectedCallback() {
-      window.addEventListener('scroll', this.renderInViewPort, true)
+      window.addEventListener('scroll', this.renderInViewPort, true);
+      this.renderInViewPort();
     }
 
     renderInViewPort() {
-      if(!this.isRendered && this.isInViewport(this)) {
+      if (!this.isRendered && this.isInViewport(this)) {
         this.render();
         this.isRendered = true;
         this.querySelector('svg').style.transform = 'rotate(-90deg)';
         this.style.display = 'inline-flex';
         this.calculateProgress();
       }
-      if(this.isRendered) {
-        window.removeEventListener('scroll', this.renderInViewPort, true)
+      if (this.isRendered) {
+        window.removeEventListener('scroll', this.renderInViewPort, true);
       }
     }
 
+    // eslint-disable-next-line no-unused-vars
     attributeChangedCallback(name, oldValue, newValue) {
-      if(oldValue !== null && oldValue) {
+      if (oldValue !== null && oldValue) {
         this.calculateProgress();
       }
     }
@@ -70,7 +72,8 @@
 
     animateValue(elem, start, end, duration) {
       // assumes integer values for start and end
-      if(!elem){
+      const element = elem;
+      if (!element) {
         return;
       }
       const range = end - start;
@@ -78,39 +81,38 @@
       const minTimer = 50;
       // calc step time to show all interediate values
       let stepTime = Math.abs(Math.floor(duration / range));
-      
+
       // never go below minTimer
       stepTime = Math.max(stepTime, minTimer);
-      
+
       // get current time and calculate desired end time
       const startTime = new Date().getTime();
       const endTime = startTime + duration;
       let timer;
-    
-      function run() {
-          const now = new Date().getTime();
-          const remaining = Math.max((endTime - now) / duration, 0);
-          const value = Math.round(end - (remaining * range));
-          elem.innerHTML = value;
-          if (value >= Math.floor(end)) {
-              clearInterval(timer);
-          }
-      }
-      
-      timer = setInterval(run, stepTime);
-      run();
+
+      const startAnimation = () => {
+        const now = new Date().getTime();
+        const remaining = Math.max((endTime - now) / duration, 0);
+        const value = Math.round(end - (remaining * range));
+        element.innerHTML = value;
+        if (value >= Math.floor(end)) {
+          clearInterval(timer);
+        }
+      };
+
+      timer = setInterval(startAnimation, stepTime);
+      startAnimation();
     }
 
     isInViewport(elem) {
       const bounding = elem.getBoundingClientRect();
       return (
-          bounding.top >= 0 &&
-          bounding.left >= 0 &&
-          bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-          bounding.right <= (window.innerWidth || document.documentElement.clientWidth)
+        bounding.top >= 0
+          && bounding.left >= 0
+          && bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+          && bounding.right <= (window.innerWidth || document.documentElement.clientWidth)
       );
     }
-
 
 
     render() {
@@ -119,7 +121,6 @@
       this.cxy = this.radius - (this.stroke / 2);
       this.defaultDashOffset = (this.radius - this.stroke) * Math.PI * 2;
       this.innerHTML = this.innerHTML.trim() !== '' ? `<div class="progress-inner-text">${this.innerHTML}</div>` : '';
-
       this.innerHTML += `
         <svg xmlns="http://www.w3.org/2000/svg" width="${this.size}" height="${this.size}">
             <g fill="none" fill-rule="evenodd" stroke-width="${this.stroke}">
@@ -142,7 +143,6 @@
         </svg>
       `;
     }
-
   }
   customElements.define('joomla-progress', JoomlaProgress);
 })();
