@@ -13,6 +13,8 @@
 
     get dismiss() { return this.getAttribute('dismiss'); }
 
+    get autodismiss() { return this.getAttribute('auto-dismiss'); }
+
     get acknowledge() { return this.getAttribute('acknowledge'); }
 
     get href() { return this.getAttribute('href'); }
@@ -33,6 +35,10 @@
       if ((this.hasAttribute('dismiss') || this.hasAttribute('acknowledge')) || ((this.hasAttribute('href') && this.getAttribute('href') !== '')
         && !this.querySelector('button.joomla-alert--close') && !this.querySelector('button.joomla-alert-button--close'))) {
         this.appendCloseButton();
+      }
+
+      if (this.hasAttribute('auto-dismiss')) {
+        this.autoDismiss();
       }
 
       this.dispatchCustomEvent('joomla.alert.show');
@@ -70,6 +76,9 @@
             this.removeCloseButton();
           }
           break;
+        case 'auto-dismiss':
+          this.autoDismiss();
+          break;
         case 'href':
           if (!newValue || newValue === '') {
             this.removeCloseButton();
@@ -83,11 +92,15 @@
     }
 
     /* Method to close the alert */
-    close() {
+    close(element = null) {
       this.dispatchCustomEvent('joomla.alert.close');
       this.addEventListener('transitionend', () => {
         this.dispatchCustomEvent('joomla.alert.closed');
-        this.parentNode.removeChild(this);
+        if (element) {
+          element.remove();
+        } else {
+          this.remove();
+        }
       }, false);
       this.classList.remove('joomla-alert--show');
     }
@@ -148,17 +161,19 @@
           });
         }
       }
+    }
 
-      if (this.hasAttribute('auto-dismiss')) {
-        setTimeout(() => {
-          self.dispatchCustomEvent('joomla.alert.buttonClicked');
-          if (self.hasAttribute('data-callback')) {
-            window[self.getAttribute('data-callback')]();
-          } else {
-            self.close();
-          }
-        }, self.getAttribute('auto-dismiss') ? parseInt(self.getAttribute('auto-dismiss'), 10) : 3000);
-      }
+    /* Method to auto-dismiss */
+    autoDismiss() {
+      const self = this;
+      setTimeout(() => {
+        self.dispatchCustomEvent('joomla.alert.buttonClicked');
+        if (self.hasAttribute('data-callback')) {
+          window[self.getAttribute('data-callback')]();
+        } else {
+          self.close(self);
+        }
+      }, parseInt(self.getAttribute('auto-dismiss'), 10) ? self.getAttribute('auto-dismiss') : 3000);
     }
 
     /* Method to remove the close button */
@@ -166,7 +181,7 @@
       const button = this.querySelector('button');
       if (button) {
         button.removeEventListener('click', this);
-        button.parentNode.removeChild(button);
+        button.remove();
       }
     }
 
