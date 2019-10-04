@@ -187,6 +187,10 @@ function _getPrototypeOf(o) {
           this.appendCloseButton();
         }
 
+        if (this.hasAttribute('auto-dismiss')) {
+          this.autoDismiss();
+        }
+
         this.dispatchCustomEvent('joomla.alert.show');
       }
       /* Lifecycle, element removed from the DOM */
@@ -232,6 +236,10 @@ function _getPrototypeOf(o) {
 
             break;
 
+          case 'auto-dismiss':
+            this.autoDismiss();
+            break;
+
           case 'href':
             if (!newValue || newValue === '') {
               this.removeCloseButton();
@@ -252,11 +260,16 @@ function _getPrototypeOf(o) {
       value: function close() {
         var _this = this;
 
+        var element = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
         this.dispatchCustomEvent('joomla.alert.close');
         this.addEventListener('transitionend', function () {
           _this.dispatchCustomEvent('joomla.alert.closed');
 
-          _this.parentNode.removeChild(_this);
+          if (element) {
+            element.remove();
+          } else {
+            _this.remove();
+          }
         }, false);
         this.classList.remove('joomla-alert--show');
       }
@@ -324,18 +337,22 @@ function _getPrototypeOf(o) {
             });
           }
         }
+      }
+      /* Method to auto-dismiss */
 
-        if (this.hasAttribute('auto-dismiss')) {
-          setTimeout(function () {
-            self.dispatchCustomEvent('joomla.alert.buttonClicked');
+    }, {
+      key: "autoDismiss",
+      value: function autoDismiss() {
+        var self = this;
+        setTimeout(function () {
+          self.dispatchCustomEvent('joomla.alert.buttonClicked');
 
-            if (self.hasAttribute('data-callback')) {
-              window[self.getAttribute('data-callback')]();
-            } else {
-              self.close();
-            }
-          }, parseInt(self.getAttribute('auto-dismiss'), 10) ? self.getAttribute('auto-dismiss') : 3000);
-        }
+          if (self.hasAttribute('data-callback')) {
+            window[self.getAttribute('data-callback')]();
+          } else {
+            self.close(self);
+          }
+        }, parseInt(self.getAttribute('auto-dismiss'), 10) ? self.getAttribute('auto-dismiss') : 3000);
       }
       /* Method to remove the close button */
 
@@ -346,7 +363,7 @@ function _getPrototypeOf(o) {
 
         if (button) {
           button.removeEventListener('click', this);
-          button.parentNode.removeChild(button);
+          button.remove();
         }
       }
       /* Method to get the translated text */
@@ -379,6 +396,11 @@ function _getPrototypeOf(o) {
       key: "dismiss",
       get: function get() {
         return this.getAttribute('dismiss');
+      }
+    }, {
+      key: "autodismiss",
+      get: function get() {
+        return this.getAttribute('auto-dismiss');
       }
     }, {
       key: "acknowledge",
