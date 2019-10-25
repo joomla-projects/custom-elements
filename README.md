@@ -1,4 +1,4 @@
-# Joomla UI custom elements
+# Joomla! UI custom elements
 
 Build Status
 ---------------------

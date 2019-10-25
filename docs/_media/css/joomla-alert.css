@@ -47,7 +47,8 @@ joomla-alert {
 joomla-alert[type="success"] {
   color: #234423;
   background-color: #d9e6d9;
-  border-color: #cadcca; }
+  border-color: #cadcca;
+  text-align: center; }
   joomla-alert[type="success"] hr {
     border-top-color: #bbd2bb; }
   joomla-alert[type="success"] .alert-link {
