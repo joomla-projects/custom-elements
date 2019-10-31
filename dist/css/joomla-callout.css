@@ -2,6 +2,7 @@
   --background: #f4f7fc;
   --inverse-background: #1d2427;
   --color: #252732;
+  --white: #ffffff;
   --color-rgb: 37, 39, 50;
   --inverse-color: #ffffff;
   --secondary-color: #5e727c;
@@ -27,7 +28,24 @@ joomla-callout {
   padding: 1.6rem 1.8rem .8rem 1.8rem;
   border-radius: 3px;
   min-height: 50px;
-  width: 300px; }
+  width: 300px;
+  z-index: 999999999; }
+  joomla-callout[position="top"]::before {
+    bottom: -20px;
+    top: auto;
+    transform: rotate(-90deg);
+    right: 0;
+    left: 0; }
+  joomla-callout[position="bottom"]::before {
+    top: -20px;
+    transform: rotate(90deg);
+    right: 0;
+    left: 0;
+    bottom: auto; }
+  joomla-callout[position="left"]::before {
+    transform: rotate(180deg);
+    right: -20px;
+    left: auto; }
 
 joomla-callout[expanded] {
   display: block; }
@@ -38,28 +56,28 @@ joomla-callout::before {
   height: 0px;
   border: .7rem solid transparent;
   position: absolute;
-  left: -22px;
-  border-right: 0.7rem solid var(--inverse-color);
+  left: -20px;
+  border-right: 0.7rem solid var(--white);
   top: 0;
   margin: auto;
   bottom: 0; }
 
 .callout-title {
   font-size: 1.143rem;
-  color: var(--color);
+  color: var(--primary-text-color);
   margin-bottom: .8rem; }
 
 .callout-content {
   font-size: 1rem;
   line-height: 1.61;
-  color: var(--secondary-color); }
+  color: var(--secondary-text-color); }
 
 .callout-link {
   display: inline-block;
   font-size: 1rem;
   font-weight: 500;
   line-height: 1.61;
-  color: var(--link-color);
+  color: var(--primary-color);
   text-decoration: none;
   margin-top: .65rem; }
 

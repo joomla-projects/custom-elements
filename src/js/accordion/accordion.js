@@ -29,6 +29,14 @@
         if (section.classList.contains('show')) {
           accordionTitle.classList.add('active');
         }
+        // accordion icon
+        if (section.hasAttribute('icon')) {
+          const iconClass = section.getAttribute('icon');
+          const icon = `<span class="${iconClass}"></span>`;
+          accordionTitle.insertAdjacentHTML('afterbegin', icon);
+        }
+
+        // accordion title
         const title = section.getAttribute('name') || `Accordion ${index}`;
         const navTitle = document.createTextNode(title);
         accordionTitle.appendChild(navTitle);

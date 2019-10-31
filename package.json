@@ -85,11 +85,11 @@
       "panels",
       "tip",
       "callout",
-      "accordion",
       "breadcrumb",
       "pagination",
       "flextable",
-      "accordion"
+      "accordion",
+      "progress"
     ],
     "browsers": "last 1 version"
   },

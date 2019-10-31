@@ -22,7 +22,7 @@
       this.classList.add('joomla-alert--show');
 
       // Default to info
-      if (!this.type || ['info', 'warning', 'danger', 'success'].indexOf(this.type) === -1) {
+      if (!this.type || ['info', 'warning', 'danger', 'success', 'default'].indexOf(this.type) === -1) {
         this.setAttribute('type', 'info');
       }
       // Default to alert
@@ -31,12 +31,12 @@
       }
       // Check if its collapsable
       if (this.hasAttribute('collapse') && this.getAttribute('collapse') !== '' && this.getAttribute('collapse') !== 'false'
-        && !this.querySelector('.joomla-alert--collapse-header') && this.querySelector('.joomla-alert--collapse')) {
+          && !this.querySelector('.joomla-alert--collapse-header') && this.querySelector('.joomla-alert--collapse')) {
         this.appendCollapseContainer();
       }
       // Append button
       if ((this.hasAttribute('dismiss') || this.hasAttribute('acknowledge')) || ((this.hasAttribute('href') && this.getAttribute('href') !== '')
-        && !this.querySelector('button.joomla-alert--close') && !this.querySelector('button.joomla-alert-button--close'))) {
+          && !this.querySelector('button.joomla-alert--close') && !this.querySelector('button.joomla-alert-button--close'))) {
         this.appendCloseButton();
       }
 
@@ -59,7 +59,7 @@
     attributeChangedCallback(attr, oldValue, newValue) {
       switch (attr) {
         case 'type':
-          if (!newValue || (newValue && ['info', 'warning', 'danger', 'success'].indexOf(newValue) === -1)) {
+          if (!newValue || (newValue && ['info', 'warning', 'danger', 'success', 'default'].indexOf(newValue) === -1)) {
             this.type = 'info';
           }
           break;
@@ -97,12 +97,14 @@
 
     /* Method to close the alert */
     close() {
-      this.dispatchCustomEvent('joomla.alert.close');
-      this.addEventListener('transitionend', () => {
+      this.style.animation = 'fadeOutUp .3s';
+      this.style.opacity = 0;
+      setTimeout(() => {
+        this.dispatchCustomEvent('joomla.alert.close');
         this.dispatchCustomEvent('joomla.alert.closed');
         this.parentNode.removeChild(this);
-      }, false);
-      this.classList.remove('joomla-alert--show');
+        this.classList.remove('joomla-alert--show');
+      }, 500);
     }
 
     /* Method to dispatch events */
@@ -118,13 +120,12 @@
       if (this.querySelector('button.joomla-alert--close') || this.querySelector('button.joomla-alert-button--close')) {
         return;
       }
-
       const self = this;
       const closeButton = document.createElement('button');
 
       if (this.hasAttribute('dismiss')) {
         closeButton.classList.add('joomla-alert--close');
-        closeButton.innerHTML = '<span aria-hidden="true">&times;</span>';
+        closeButton.innerHTML = '<span class="icon-times" aria-hidden="true"></span>';
         closeButton.setAttribute('aria-label', this.getText('JCLOSE', 'Close'));
       } else {
         closeButton.classList.add('joomla-alert-button--close');
@@ -235,6 +236,7 @@
     }
 
     /* Method to get the translated text */
+    // eslint-disable-next-line class-methods-use-this
     getText(str, fallback) {
       // TODO: Remove coupling to Joomla CMS Core JS here
       /* eslint-disable-next-line no-undef */

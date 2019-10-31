@@ -19,7 +19,7 @@ The simplified version of the custom elements
 
 ### Tip demo:
 
-<joomla-tip label="more info" tip="This clarifies whatever needs clarifying" text="isdfsdf" position="top">
+<joomla-tip label="more info" tip="This clarifies whatever needs clarifying" text="i" position="top">
 </joomla-tip>
 ​<hr>
 <joomla-tip mode="light" label="more info" tip="This clarifies whatever needs clarifying" text="i" position="left">

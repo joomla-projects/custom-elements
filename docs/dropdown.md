@@ -8,40 +8,83 @@ In order to use the dropdown custom element you need to import the element in th
 
 The simplified version of the custom elements
 ```html
-<div class="joomla-dropdown-container">
-	<button class="btn btn-secondary" id="dropdownList">Dropdown with list</button>
 
-	<joomla-dropdown for="#dropdownList">
-		<a class="dropdown-item" href="#">Item 1</a>
-		<a class="dropdown-item" href="#">Item 2</a>
-		<a class="dropdown-item" href="#">Item 3</a>
-	</joomla-dropdown>
+<div class="joomla-dropdown-container">
+    <button class="btn btn-secondary" data-target="dropdownId">Dropdown with text</button>
+    <joomla-dropdown for="dropdownId">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    </joomla-dropdown>
+</div>
+```
+<div class="joomla-dropdown-container">
+    <button class="btn btn-secondary" data-target="dropdownId">Dropdown with text</button>
+    <joomla-dropdown for="dropdownId">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    </joomla-dropdown>
 </div>
 
-<div class="joomla-dropdown-container">
-	<button class="btn btn-secondary" id="dropdownText">Dropdown with text</button>
+### Dropdown and sub-menu demo:
 
-	<joomla-dropdown for="#dropdownText">
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+```html
+<div class="joomla-dropdown-container">
+	<a href="#" class="btn btn-secondary" data-target="dropdownList1">Dropdown with list</a>
+	<joomla-dropdown for="dropdownList1">
+		<ul>
+			<li class="has-submenu" data-action="click">
+				<a class="dropdown-item" >Item 1(click)</a>
+				<ul class='submenu'>
+					<li><a class="dropdown-item" href="#" title="Sub Menu">Sub Menu 1</a></li>
+					<li><a class="dropdown-item" href="#" title="Sub Menu">Sub Menu 2</a></li>
+					<li><a class="dropdown-item" href="#" title="Sub Menu">Sub Menu 3</a></li>
+					<li><a class="dropdown-item" href="#" title="Sub Menu">Sub Menu 4</a></li>
+				</ul>
+			</li>
+			<li class="has-submenu">
+				<a class="dropdown-item" >Item 2(hover)</a>
+				<ul class='submenu'>
+					<li><a class="dropdown-item" href="#" title="Sub Menu">Sub Menu 1</a></li>
+					<li><a class="dropdown-item" href="#" title="Sub Menu">Sub Menu 2</a></li>
+					<li><a class="dropdown-item" href="#" title="Sub Menu">Sub Menu 3</a></li>
+					<li><a class="dropdown-item" href="#" title="Sub Menu">Sub Menu 4</a></li>
+				</ul>
+			</li>
+			<li><a class="dropdown-item" href="#">Item 3</a></li>
+		</ul>
 	</joomla-dropdown>
 </div>
 ```
 
-### Dropdown demo:
-
-<div class="mermaid">
-	<div class="joomla-dropdown-container">
-		<button class="btn btn-secondary" id="dropdownList">Dropdown with list</button>
-		<joomla-dropdown for="#dropdownList">
-			<a class="dropdown-item" href="#">Item 1</a>
-			<a class="dropdown-item" href="#">Item 2</a>
-			<a class="dropdown-item" href="#">Item 3</a>
-		</joomla-dropdown>
-	</div>
-	<div class="joomla-dropdown-container">
-		<button class="btn btn-secondary" id="dropdownText">Dropdown with text</button>
-		<joomla-dropdown for="#dropdownText">
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-		</joomla-dropdown>
-	</div>
+<div class="joomla-dropdown-container">
+	<button class="btn btn-secondary" data-target="dropdownList1">Dropdown with list</button>
+	<joomla-dropdown for="dropdownList1">
+		<ul>
+			<li class="has-submenu" data-action="click">
+				<a class="dropdown-item" >Item 1(click)</a>
+				<ul class='submenu'>
+					<li><a class="dropdown-item" href="#" title="Sub Menu">Sub Menu 1</a></li>
+					<li><a class="dropdown-item" href="#" title="Sub Menu">Sub Menu 2</a></li>
+					<li><a class="dropdown-item" href="#" title="Sub Menu">Sub Menu 3</a></li>
+					<li><a class="dropdown-item" href="#" title="Sub Menu">Sub Menu 4</a></li>
+				</ul>
+			</li>
+			<li class="has-submenu">
+				<a class="dropdown-item" >Item 2(hover)</a>
+				<ul class='submenu'>
+					<li><a class="dropdown-item" href="#" title="Sub Menu">Sub Menu 1</a></li>
+					<li><a class="dropdown-item" href="#" title="Sub Menu">Sub Menu 2</a></li>
+					<li><a class="dropdown-item" href="#" title="Sub Menu">Sub Menu 3</a></li>
+					<li><a class="dropdown-item" href="#" title="Sub Menu">Sub Menu 4</a></li>
+				</ul>
+			</li>
+			<li><a class="dropdown-item" href="#">Item 3</a></li>
+		</ul>
+	</joomla-dropdown>
 </div>
+
+## Dropdown Attributes
+
+|Attribute|Value|Descriptoin|
+|:-------|:--------|:----|
+|position|left/right|Default is `right`, you can use `left` also, TODO: CONTENT REVIEW|
+|data-action|click/hover| Default is `hover` Note: data-action must be no `list item`|
+

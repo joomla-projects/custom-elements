@@ -16,84 +16,26 @@ In order to use the pagination custom element you need to import the element in 
 ```
 
 ```html
-<joomla-pagination>
-	<a class="has-arrow first-page" href=""><<</a>
-	<a class="has-arrow next-page" href=""><</a>
-	<li class="pagination-link" href="#" value="1" text="1"></li>
-	<li class="pagination-link" href="#" value="2" text="2"></li>
-	<li class="pagination-link" href="#" value="3" text="3"></li>
-	<li class="pagination-link" activeClass="active" href="#" value="4" text="4"></li>
-	<li class="pagination-link" href="#" value="5" text="5"></li>
-	<li class="pagination-link" href="#" value="5" text="6"></li>
-	<li class="pagination-link" href="#" value="5" text="7"></li>
-	<li class="pagination-link" href="#" value="5" text="8"></li>
-	<li class="pagination-link" href="#" value="5" text="9"></li>
-	<li class="pagination-link" href="#" value="5" text="10"></li>
-	<a class="has-arrow prev-page" href="">></a>
-	<a class="has-arrow last-page" href="">>></a>
+<joomla-pagination class="j-pagination" total-visible="7" next-icon="icon-chevron-right" prev-icon="icon-chevron-left"
+    first-icon="icon-first" last-icon="icon-last" navbtns-state="icon" disable-btns="" input-selector="#limitstart"
+    pagination="true" limit="20" result-msg="Showing results 1-20 of 68">
+    <nav class="pagination-navigation" role="navigation" aria-label="Pagination" tabindex="-1"><span class="pagination-label d-none d-sm-block">Showing results 1-20 of 68</span> <ul class="pagination-list">
+            <li class="pagination-item is-first-btn disabled"><span class="icon-first"></span></li>
+            <li class="pagination-item is-prev-btn disabled"><span class="icon-chevron-left"></span></li>
+            <li class="pagination-item active" value="1" aria-current="true" aria-label="Page 1">1</li>
+            <li class="pagination-item " value="2" aria-label="Go to page 2">2</li>
+            <li class="pagination-item " value="3" aria-label="Go to page 3">3</li>
+            <li class="pagination-item " value="4" aria-label="Go to page 4">4</li>
+            <li class="pagination-item is-next-btn "><span class="icon-chevron-right"></span></li>
+            <li class="pagination-item is-last-btn "><span class="icon-last"></span></li>
+        </ul>
+    </nav>
 </joomla-pagination>
 ```
 
 ### pagination Demo:
 
-<joomla-pagination>
-	<a class="has-arrow first-page" href="" title="First page"><<</a>
-	<a class="has-arrow next-page" href="" title="Next page"><</a>
-	<li class="pagination-link" href="#" value="1" text="1"></li>
-	<li class="pagination-link" href="#" value="2" text="2"></li>
-	<li class="pagination-link" href="#" value="3" text="3"></li>
-	<li class="pagination-link" activeClass="active" href="#" value="4" text="4"></li>
-	<li class="pagination-link" href="#" value="5" text="5"></li>
-	<li class="pagination-link" href="#" value="5" text="6"></li>
-	<li class="pagination-link" href="#" value="5" text="7"></li>
-	<li class="pagination-link" href="#" value="5" text="8"></li>
-	<li class="pagination-link" href="#" value="5" text="9"></li>
-	<li class="pagination-link" href="#" value="5" text="10"></li>
-	<a class="has-arrow prev-page" href="" title="Prev page">></a>
-	<a class="has-arrow last-page" href="" title="Last page">>></a>
-</joomla-pagination>
-
-### Responsive Breadcrumb Demo:
-
-<section class="res-demo-area">
-	<joomla-pagination>
-	<a class="has-arrow first-page" href="" title="First page"><<</a>
-	<a class="has-arrow next-page" href="" title="Next page"><</a>
-	<li class="pagination-link" href="#" value="1" text="1"></li>
-	<li class="pagination-link" href="#" value="2" text="2"></li>
-	<li class="pagination-link" href="#" value="3" text="3"></li>
-	<li class="pagination-link" activeClass="active" href="#" value="4" text="4"></li>
-	<li class="pagination-link" href="#" value="5" text="5"></li>
-	<li class="pagination-link" href="#" value="5" text="6"></li>
-	<li class="pagination-link" href="#" value="5" text="7"></li>
-	<li class="pagination-link" href="#" value="5" text="8"></li>
-	<li class="pagination-link" href="#" value="5" text="9"></li>
-	<li class="pagination-link" href="#" value="5" text="10"></li>
-	<li class="pagination-link" href="#" value="5" text="11"></li>
-	<li class="pagination-link" href="#" value="5" text="12"></li>
-	<li class="pagination-link" href="#" value="5" text="13"></li>
-	<li class="pagination-link" href="#" value="5" text="14"></li>
-	<li class="pagination-link" href="#" value="5" text="15"></li>
-	<li class="pagination-link" href="#" value="5" text="16"></li>
-	<li class="pagination-link" href="#" value="5" text="17"></li>
-	<li class="pagination-link" href="#" value="5" text="18"></li>
-	<li class="pagination-link" href="#" value="5" text="19"></li>
-	<li class="pagination-link" href="#" value="5" text="20"></li>
-	<li class="pagination-link" href="#" value="5" text="21"></li>
-	<li class="pagination-link" href="#" value="5" text="22"></li>
-	<li class="pagination-link" href="#" value="5" text="23"></li>
-	<li class="pagination-link" href="#" value="5" text="24"></li>
-	<li class="pagination-link" href="#" value="5" text="25"></li>
-	<li class="pagination-link" href="#" value="5" text="26"></li>
-	<li class="pagination-link" href="#" value="5" text="27"></li>
-	<li class="pagination-link" href="#" value="5" text="28"></li>
-	<li class="pagination-link" href="#" value="5" text="29"></li>
-	<li class="pagination-link" href="#" value="5" text="30"></li>
-	<li class="pagination-link" href="#" value="5" text="31"></li>
-	<a class="has-arrow prev-page" href="" title="Prev page">></a>
-	<a class="has-arrow last-page" href="" title="Last page">>></a>
-</joomla-pagination>
-</section>
+<joomla-pagination class="j-pagination" total-visible="7" next-icon="icon-chevron-right" prev-icon="icon-chevron-left" first-icon="icon-first" last-icon="icon-last" navbtns-state="icon" disable-btns="" input-selector="#limitstart" pagination="true" limit="20" result-msg="Showing results 1-20 of 68"><nav class="pagination-navigation" role="navigation" aria-label="Pagination" tabindex="-1"><span class="pagination-label d-none d-sm-block">Showing results 1-20 of 68</span><ul class="pagination-list"><li class="pagination-item is-first-btn disabled"><span class="icon-first"></span></li><li class="pagination-item is-prev-btn disabled"><span class="icon-chevron-left"></span></li><li class="pagination-item active" value="1" aria-current="true" aria-label="Page 1">1</li><li class="pagination-item " value="2" aria-label="Go to page 2">2</li><li class="pagination-item " value="3" aria-label="Go to page 3">3</li><li class="pagination-item " value="4" aria-label="Go to page 4">4</li><li class="pagination-item is-next-btn "><span class="icon-chevron-right"></span></li><li class="pagination-item is-last-btn "><span class="icon-last"></span></li></ul></nav></joomla-pagination>
 
 
 ## li Attributes
