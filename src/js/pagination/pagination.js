@@ -130,8 +130,13 @@
       while (this.firstChild) this.removeChild(this.firstChild);
     }
 
+<<<<<<< HEAD
     static clearChildren(element) {
       while (element.firstChild) { element.removeChild(element.firstChild); }
+=======
+    clearChildren(element) {
+      while (element.firstChild) element.removeChild(element.firstChild);
+>>>>>>> 3469fc7fe7e9e97f4d48b0a2b52ae626ff749545
     }
 
     removeActiveElement() {
@@ -149,6 +154,7 @@
       this.rawItems[index].setAttribute('aria-current', true);
       this.rawItems[index].setAttribute('aria-label', `Page ${index + 1}`);
     }
+<<<<<<< HEAD
 
     submitLimitForm() {
       this.inputField.value = this.rawItems[this.currentItemIndex].value;
@@ -162,6 +168,14 @@
     }
 
     static createRange(start, end) {
+=======
+
+    setFormValue() {
+      this.inputField.value = parseInt(this.options.limit, 10) * parseInt(this.currentItemIndex + 1, 10);
+    }
+
+    createRange(start, end) {
+>>>>>>> 3469fc7fe7e9e97f4d48b0a2b52ae626ff749545
       const arr = [];
       if (start > end) return arr;
 
@@ -171,7 +185,11 @@
       return arr;
     }
 
+<<<<<<< HEAD
     static generatePaginationList(current, total, visibleLength) {
+=======
+    generatePaginationList(current, total, visibleLength) {
+>>>>>>> 3469fc7fe7e9e97f4d48b0a2b52ae626ff749545
       const flag = visibleLength % 2 === 0 ? 1 : 0;
       const head = Math.floor(visibleLength / 2);
       const tail = total - head + 1;
@@ -298,7 +316,12 @@
       }
     }
 
+<<<<<<< HEAD
     resizeWindow() {
+=======
+    resizeWindow(event) {
+      event.preventDefault();
+>>>>>>> 3469fc7fe7e9e97f4d48b0a2b52ae626ff749545
       this.resizeTimer = setTimeout(() => {
         if (window.innerHeight !== this.windowHeight) return;
         let elWidth = window.innerWidth;
@@ -355,6 +378,7 @@
     }
 
     /**
+<<<<<<< HEAD
        * Create a HTMLElement
        * @param {string} tagName      - e.g. div, strong, span etc.
        * @param {object} attr         - element attribute object
@@ -363,6 +387,16 @@
        * @return {HTMLElement}
        */
     static createDOMElement(tag, attributes = {}, text = '') {
+=======
+     * Create a HTMLElement
+     * @param {string} tagName      - e.g. div, strong, span etc.
+     * @param {object} attr         - element attribute object
+     * @param {string} innerHTML    - text to elements innerHTML
+     *
+     * @return {HTMLElement}
+     */
+    createDOMElement(tag, attributes = {}, text = '') {
+>>>>>>> 3469fc7fe7e9e97f4d48b0a2b52ae626ff749545
       const tagName = typeof (tag) === 'string' && tag.length > 0 ? tag : 'div';
       const attr = typeof (attributes) === 'object' && Object.keys(attributes).length ? attributes : false;
       const innerHTML = typeof (text) === 'string' && text.length > 0 ? text : false;
@@ -453,7 +487,12 @@
       });
     }
 
+<<<<<<< HEAD
     static closeDropdown(event) {
+=======
+    closeDropdown(event) {
+      event.preventDefault();
+>>>>>>> 3469fc7fe7e9e97f4d48b0a2b52ae626ff749545
       if (event.target.classList.contains('dot-item') === false) {
         JoomlaPagination.clearDropdown();
       }
@@ -471,46 +510,68 @@
       event.preventDefault();
       if (this.currentItemIndex < this.rawItems.length - 1) this.currentItemIndex += 1;
       this.renderPagination(this.currentItemIndex, this.rawItems.length);
+<<<<<<< HEAD
       JoomlaPagination.clearDropdown();
       if (this.options.pagination) this.submitPaginationForm();
       else this.submitLimitForm();
+=======
+      this.clearDropdown();
+>>>>>>> 3469fc7fe7e9e97f4d48b0a2b52ae626ff749545
     }
 
     prevPage(event) {
       event.preventDefault();
       if (this.currentItemIndex > 0) this.currentItemIndex -= 1;
       this.renderPagination(this.currentItemIndex, this.rawItems.length);
+<<<<<<< HEAD
       JoomlaPagination.clearDropdown();
       if (this.options.pagination) this.submitPaginationForm();
       else this.submitLimitForm();
+=======
+      this.clearDropdown();
+>>>>>>> 3469fc7fe7e9e97f4d48b0a2b52ae626ff749545
     }
 
     goToLastPage(event) {
       event.preventDefault();
       this.currentItemIndex = this.rawItems.length - 1;
       this.renderPagination(this.currentItemIndex, this.rawItems.length);
+<<<<<<< HEAD
       JoomlaPagination.clearDropdown();
       if (this.options.pagination) this.submitPaginationForm();
       else this.submitLimitForm();
+=======
+      this.clearDropdown();
+>>>>>>> 3469fc7fe7e9e97f4d48b0a2b52ae626ff749545
     }
 
     goToFirstPage(event) {
       event.preventDefault();
       this.currentItemIndex = 0;
       this.renderPagination(this.currentItemIndex, this.rawItems.length);
+<<<<<<< HEAD
       JoomlaPagination.clearDropdown();
       if (this.options.pagination) this.submitPaginationForm();
       else this.submitLimitForm();
+=======
+      this.clearDropdown();
+>>>>>>> 3469fc7fe7e9e97f4d48b0a2b52ae626ff749545
     }
 
     goToPage(event, pageIndex) {
       event.preventDefault();
       this.currentItemIndex = pageIndex;
       this.renderPagination(this.currentItemIndex, this.rawItems.length);
+<<<<<<< HEAD
       JoomlaPagination.clearDropdown();
       if (this.options.pagination) this.submitPaginationForm();
       else this.submitLimitForm();
     }
   }
   customElements.define('joomla-pagination', JoomlaPagination);
+=======
+      this.clearDropdown();
+    }
+  });
+>>>>>>> 3469fc7fe7e9e97f4d48b0a2b52ae626ff749545
 })();
