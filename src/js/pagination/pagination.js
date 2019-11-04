@@ -503,5 +503,6 @@
       this.renderPagination(this.currentItemIndex, this.rawItems.length);
       this.clearDropdown();
     }
-  });
+  }
+  customElements.define('joomla-pagination', JoomlaPagination);
 })();
