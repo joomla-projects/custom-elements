@@ -12,7 +12,6 @@
  - [Tip](/tip)
  - [Callout](/callout)
  - [Breadcrumb](/breadcrumb)
- - [Pagination](/pagination)
  - [Progress](/progress)
 
 - Customization
