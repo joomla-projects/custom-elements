@@ -16,7 +16,7 @@ The simplified version of the custom elements
         Message body is optional. If help documentation is available, consider adding a link to learn more
     </div>
     <div class="callout-footer">
-        <a href="#" class="callout-link" target="blank">Learn more</a>
+        <a href="#" class="callout-link" target="_blank">Learn more</a>
     </div>
 </joomla-callout>
 ```
@@ -32,7 +32,7 @@ The simplified version of the custom elements
         Message body is optional. If help documentation is available, consider adding a link to learn more
     </div>
     <div class="callout-footer">
-        <a href="#" class="callout-link" target="blank">Learn more</a>
+        <a href="#" class="callout-link" target="_blank">Learn more</a>
     </div>
 </joomla-callout>
 <!-- Collout top -->
@@ -42,7 +42,7 @@ The simplified version of the custom elements
         Message body is optional. If help documentation is available, consider adding a link to learn more
     </div>
     <div class="callout-footer">
-        <a href="#" class="callout-link" target="blank">Learn more</a>
+        <a href="#" class="callout-link" target="_blank">Learn more</a>
     </div>
 </joomla-callout>
 <!-- Collout left -->
@@ -52,7 +52,7 @@ The simplified version of the custom elements
         Message body is optional. If help documentation is available, consider adding a link to learn more
     </div>
     <div class="callout-footer">
-        <a href="#" class="callout-link" target="blank">Learn more</a>
+        <a href="#" class="callout-link" target="_blank">Learn more</a>
     </div>
 </joomla-callout>
 <!-- Collout right -->
@@ -62,7 +62,7 @@ The simplified version of the custom elements
         Message body is optional. If help documentation is available, consider adding a link to learn more
     </div>
     <div class="callout-footer">
-        <a href="#" class="callout-link" target="blank">Learn more</a>
+        <a href="#" class="callout-link" target="_blank">Learn more</a>
     </div>
 </joomla-callout>
 
