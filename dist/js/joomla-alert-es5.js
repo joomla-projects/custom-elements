@@ -266,7 +266,7 @@ function _getPrototypeOf(o) {
           _this.dispatchCustomEvent('joomla.alert.closed');
 
           if (element) {
-            element.remove();
+            element.parentNode.removeChild(element);
           } else {
             _this.remove();
           }
@@ -363,7 +363,7 @@ function _getPrototypeOf(o) {
 
         if (button) {
           button.removeEventListener('click', this);
-          button.remove();
+          button.parentNode.removeChild(button);
         }
       }
       /* Method to get the translated text */
