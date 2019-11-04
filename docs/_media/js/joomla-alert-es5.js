@@ -173,13 +173,18 @@ function _getPrototypeOf(o) {
       value: function connectedCallback() {
         this.classList.add('joomla-alert--show'); // Default to info
 
-        if (!this.type || ['info', 'warning', 'danger', 'success'].indexOf(this.type) === -1) {
+        if (!this.type || ['info', 'warning', 'danger', 'success', 'default'].indexOf(this.type) === -1) {
           this.setAttribute('type', 'info');
         } // Default to alert
 
 
         if (!this.role || ['alert', 'alertdialog'].indexOf(this.role) === -1) {
           this.setAttribute('role', 'alert');
+        } // Check if its collapsable
+
+
+        if (this.hasAttribute('collapse') && this.getAttribute('collapse') !== '' && this.getAttribute('collapse') !== 'false' && !this.querySelector('.joomla-alert--collapse-header') && this.querySelector('.joomla-alert--collapse')) {
+          this.appendCollapseContainer();
         } // Append button
 
 
@@ -213,7 +218,7 @@ function _getPrototypeOf(o) {
       value: function attributeChangedCallback(attr, oldValue, newValue) {
         switch (attr) {
           case 'type':
-            if (!newValue || newValue && ['info', 'warning', 'danger', 'success'].indexOf(newValue) === -1) {
+            if (!newValue || newValue && ['info', 'warning', 'danger', 'success', 'default'].indexOf(newValue) === -1) {
               this.type = 'info';
             }
 
@@ -222,6 +227,15 @@ function _getPrototypeOf(o) {
           case 'role':
             if (!newValue || newValue && ['alert', 'alertdialog'].indexOf(newValue) === -1) {
               this.role = 'alert';
+            }
+
+            break;
+
+          case 'collapse':
+            if (!newValue || newValue === 'true') {
+              this.appendCollapseContainer();
+            } else {
+              this.removeCollapseContainer();
             }
 
             break;
@@ -297,7 +311,7 @@ function _getPrototypeOf(o) {
 
         if (this.hasAttribute('dismiss')) {
           closeButton.classList.add('joomla-alert--close');
-          closeButton.innerHTML = '<span aria-hidden="true">&times;</span>';
+          closeButton.innerHTML = '<span class="icon-times" aria-hidden="true"></span>';
           closeButton.setAttribute('aria-label', this.getText('JCLOSE', 'Close'));
         } else {
           closeButton.classList.add('joomla-alert-button--close');
@@ -359,14 +373,65 @@ function _getPrototypeOf(o) {
     }, {
       key: "removeCloseButton",
       value: function removeCloseButton() {
-        var button = this.querySelector('button');
+        var button = this.querySelector('button.joomla-alert-button--close');
+
+        if (button === null) {
+          button = this.querySelector('button.joomla-alert--close');
+        }
 
         if (button) {
           button.removeEventListener('click', this);
           button.remove();
         }
       }
+    }, {
+      key: "appendCollapseContainer",
+      value: function appendCollapseContainer() {
+        if (this.querySelector('.joomla-alert--collapse') === null || this.querySelector('.joomla-alert--collapse-header') !== null) {
+          return;
+        }
+
+        var collapseBox = this.querySelector('.joomla-alert--collapse');
+        var collapseContainer = document.createElement('div');
+        collapseContainer.classList.add('joomla-alert--collapse-container');
+        collapseBox.parentNode.insertBefore(collapseContainer, collapseBox);
+        collapseContainer.append(this.querySelector('.joomla-alert--collapse'));
+        var collapseHeader = document.createElement('div');
+        collapseHeader.classList.add('joomla-alert--collapse-header');
+        collapseHeader.setAttribute('area-expanded', 'false');
+        var collapseHeaderTitle = this.getAttribute('collapse-title') === null ? this.getAttribute('type') : this.getAttribute('collapse-title');
+        collapseHeader.innerHTML = collapseHeaderTitle;
+        var chevronIcon = document.createElement('button');
+        chevronIcon.classList.add('joomla-alert--collapse-icon');
+        chevronIcon.innerHTML = '&#94;';
+        collapseHeader.append(chevronIcon);
+        collapseContainer.prepend(collapseHeader);
+        chevronIcon.addEventListener('click', function () {
+          if (collapseBox.classList.contains('show')) {
+            collapseBox.classList.remove('show');
+            collapseHeader.setAttribute('area-expanded', 'false');
+          } else {
+            collapseBox.classList.add('show');
+            collapseHeader.setAttribute('area-expanded', 'true');
+          }
+        });
+      }
+    }, {
+      key: "removeCollapseContainer",
+      value: function removeCollapseContainer() {
+        if (this.querySelector('.joomla-alert--collapse-container') === null) {
+          return;
+        }
+
+        var collapseContainer = this.querySelector('.joomla-alert--collapse-container');
+        var collapseBox = collapseContainer.querySelector('.joomla-alert--collapse');
+        collapseContainer.removeChild(collapseContainer.querySelector('.joomla-alert--collapse-header'));
+        collapseContainer.parentNode.insertBefore(collapseBox, collapseContainer);
+        this.removeChild(collapseContainer);
+        collapseBox.classList.remove('joomla-alert--collapse');
+      }
       /* Method to get the translated text */
+      // eslint-disable-next-line class-methods-use-this
 
     }, {
       key: "getText",
@@ -417,7 +482,7 @@ function _getPrototypeOf(o) {
 
       /* Attributes to monitor */
       get: function get() {
-        return ['type', 'role', 'dismiss', 'acknowledge', 'href'];
+        return ['type', 'role', 'dismiss', 'acknowledge', 'href', 'collapse'];
       }
     }]);
 

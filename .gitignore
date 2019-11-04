@@ -7,7 +7,11 @@
 .idea
 .vscode
 .log
+index*.html
+package-lock.json
 
 node_modules/
 bower_components/
 !dist/
+/docs/_media/
+/dist/

@@ -1,0 +1,112 @@
+// Callout
+
+//
+// Variables
+//
+
+@import "../variables";
+
+
+//
+// Base styles
+//
+joomla-breadcrumb{
+  nav{
+    display: -ms-flexbox;
+    display: flex;
+    ol{
+      display: -ms-inline-flexbox;
+      display: inline-flex;
+      align-items: center;
+      list-style: none;
+      font-size: 1rem;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      a{
+        transition: .3s;
+      }
+    }
+  }
+  .joomla-breadcrumb-item{
+    margin-right: 10px;
+    &:not(:last-child)>a:after {
+      content: ">";
+      margin-left: 8px;
+      color: var(--secondary-color);
+    }
+    a{
+      color: var(--secondary-color);
+      text-decoration: none;
+      display: block;
+      line-height: 1.4rem;
+      white-space: nowrap;
+      max-width: 500px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      &:hover, &:focus{
+        color: var(--inverse-background);
+      }
+      &.active{
+        color: var(--inverse-background);
+        pointer-events: none;
+      }
+    }
+  }
+  .minimize-list{
+    margin-right: 12px;
+  }
+  .minimize-items{
+    position: relative;
+  }
+  .minimize-items-wrapper{
+    background-color: #fff;
+    box-shadow: 0 10px 20px -5px rgba(0, 28, 73, 0.15);
+    display: none;
+    position: absolute;
+    top: calc(100% + 10px);
+    left: -10px;
+    
+    &:before{
+      content: "";
+      position: absolute;
+      left: 15px;
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-bottom: 4px solid #fff;
+      width: 0;
+      height: 0;
+      top: -4px;
+    }
+    ol{
+      -ms-flex-direction: column;
+      flex-direction: column;
+      max-height: 105px;
+      overflow-x: hidden;
+      overflow-y: auto;
+      position: relative;
+      padding: 0;
+      margin: 0;
+      .joomla-breadcrumb-item{
+        margin-right: 0;
+        >a{
+          padding: 6px 18px;
+          &:hover, &:focus{
+            background-color: var(--button-background);
+            color: var(--inverse-background);
+          }
+          &:after{
+            display: none;
+          }
+        }
+      }
+    }
+  }
+  .items-toggler{
+    color: var(--primary-gradient-color);
+    cursor: pointer;
+  }
+  .minimize-items-wrapper.active {
+    display: block;
+  }
+}

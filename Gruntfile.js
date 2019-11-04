@@ -13,6 +13,7 @@ module.exports = (grunt) => {
   grunt.loadNpmTasks('grunt-contrib-uglify-es');
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   const fs = require('fs');
   const deleteFolderRecursive = (path) => {
@@ -316,5 +317,14 @@ module.exports = (grunt) => {
 
     // Create the polyfills
     grunt.task.run('polyfillsDist');
+  });
+  
+  grunt.initConfig({
+    watch: {
+      src: {
+        files: ['src/**/*.js', 'src/scss/**/*.scss'],
+        tasks: ['compile'],
+      }
+    },
   });
 };

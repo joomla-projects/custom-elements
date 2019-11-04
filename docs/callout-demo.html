@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../dist/css/joomla-callout.css">
+</head>
+<body style="background: #ccc;">
+    <button id="showCollout"> Show Callout </button>
+    <joomla-callout for="#showCollout" dismiss="true">
+        <div class="callout-title">Title</div>
+        <div class="callout-content">
+            Message body is optional.  If help documentation is available, consider adding a link to learn more
+        </div>
+        <div class="callout-footer">
+            <a href="#" class="callout-link" target="blank">Learn more</a>
+        </div>
+    </joomla-callout>
+    <script src="../src/js/callout/callout.js"></script>
+</body>
+</html>

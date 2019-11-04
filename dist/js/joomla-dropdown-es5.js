@@ -153,6 +153,8 @@ function _getPrototypeOf(o) {
   };
   return _getPrototypeOf(o);
 }
+/* eslint-disable no-cond-assign */
+
 
 (function () {
   var JoomlaDropdownElement =
@@ -161,55 +163,199 @@ function _getPrototypeOf(o) {
     _inherits(JoomlaDropdownElement, _HTMLElement);
 
     function JoomlaDropdownElement() {
+      var _this;
+
       _classCallCheck(this, JoomlaDropdownElement);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(JoomlaDropdownElement).apply(this, arguments));
+      _this = _possibleConstructorReturn(this, _getPrototypeOf(JoomlaDropdownElement).call(this));
+      _this.position = 'right';
+      _this.checkSubmenu = _this.checkSubmenu.bind(_assertThisInitialized(_this));
+      _this.clickOutside = _this.clickOutside.bind(_assertThisInitialized(_this));
+      _this.toggleMenu = _this.toggleMenu.bind(_assertThisInitialized(_this));
+      return _this;
     }
+    /* Attributes to monitor */
+
 
     _createClass(JoomlaDropdownElement, [{
       key: "connectedCallback",
       value: function connectedCallback() {
-        var _this = this;
+        var _this2 = this;
 
         this.setAttribute('aria-labelledby', this["for"].substring(1));
-        var button = document.querySelector(this["for"]);
+        this.button = document.querySelector("[data-target=".concat(this["for"], "]"));
         var innerLinks = this.querySelectorAll('a');
 
-        if (!button.id) {
+        if (!this.button.hasAttribute('data-target')) {
           return;
-        } // var children = [].slice.call( menu[getElementsByTagName]('*'));
-        // this.classList.add('dropdown');
+        }
 
+        this.position = this.getAttribute('position') ? this.getAttribute('position') : this.position; // set the position for submenu items
 
-        button.setAttribute('aria-haspopup', true);
-        button.setAttribute('aria-expanded', false);
-        button.addEventListener('click', function (event) {
-          if (_this.hasAttribute('expanded')) {
-            _this.removeAttribute('expanded');
-
-            event.target.setAttribute('aria-expanded', false);
-          } else {
-            _this.setAttribute('expanded', '');
-
-            event.target.setAttribute('aria-expanded', true);
+        innerLinks.forEach(function (link) {
+          if (link.parentElement.classList.contains('has-submenu')) {
+            link.parentElement.classList.add(_this2.position);
           }
+        });
+        this.button.setAttribute('aria-haspopup', true);
+        this.button.setAttribute('aria-expanded', false);
+        this.button.addEventListener('click', this.toggleMenu, true);
+      }
+    }, {
+      key: "disconnectedCallback",
+      value: function disconnectedCallback() {
+        this.button.removeEventListener('click', this.toggleMenu, true);
+      }
+      /**
+       * Hide or Show menu when click on target element
+       * @param {Object} event
+       */
 
-          document.addEventListener('click', function (evt) {
-            if (evt.target !== button) {
-              if (!_this.findAncestor(evt.target, 'joomla-dropdown')) {
-                _this.close();
-              }
-            }
-          });
-          innerLinks.forEach(function (innerLink) {
-            innerLink.addEventListener('click', function () {
-              _this.close();
-            });
-          });
+    }, {
+      key: "toggleMenu",
+      value: function toggleMenu(event) {
+        var _this3 = this;
+
+        if (event.target.tagName === 'A') {
+          event.preventDefault();
+        }
+
+        if (this.hasAttribute('expanded')) {
+          this.removeAttribute('expanded');
+          event.target.setAttribute('aria-expanded', false);
+        } else {
+          this.setAttribute('expanded', '');
+          event.target.setAttribute('aria-expanded', true);
+        }
+
+        this.setPosition();
+        document.addEventListener('click', this.clickOutside, true);
+        var innerLinks = this.querySelectorAll('a');
+        innerLinks.forEach(function (innerLink) {
+          innerLink.addEventListener('click', _this3.checkSubmenu, true);
+        }); // toggle dropdown onhover
+
+        var lists = this.querySelectorAll('li.has-submenu');
+        lists.forEach(function (list) {
+          if (list.getAttribute('data-action') !== 'click' && document.body.getBoundingClientRect().width > 1024) {
+            list.addEventListener('mouseenter', _this3.showSubmenu, true);
+            list.addEventListener('mouseleave', _this3.hideSubmenu, true);
+          }
         });
       }
-      /*eslint-disable */
+      /**
+       * Show sub-menu when trigger on parent link
+       * @param {Object} event
+       */
 
+    }, {
+      key: "showSubmenu",
+      value: function showSubmenu(event) {
+        event.preventDefault();
+
+        if (document.body.getBoundingClientRect().width > 1024) {
+          if (event.target.classList.contains('has-submenu')) {
+            event.target.toggleAttribute('open');
+          }
+        }
+      }
+      /**
+       * Hide sub-menu
+       * @param {Obejct} event
+       */
+
+    }, {
+      key: "hideSubmenu",
+      value: function hideSubmenu(event) {
+        event.preventDefault();
+
+        if (document.body.getBoundingClientRect().width > 1024) {
+          if (event.target.classList.contains('has-submenu') && event.target.hasAttribute('open')) {
+            event.target.toggleAttribute('open');
+          }
+        }
+      }
+      /**
+       * Check if click outside of dropdown
+       * If click outside then close dropdown
+       * @param {Object} event
+       */
+
+    }, {
+      key: "clickOutside",
+      value: function clickOutside(event) {
+        if (this.button.contains(event.target) === false && event.target !== this.button) {
+          if (!this.findAncestor(event.target, 'joomla-dropdown')) {
+            this.close();
+          }
+        }
+      }
+      /**
+       * Check if dropdown has sub-menu
+       * @param {Object} event
+       */
+
+    }, {
+      key: "checkSubmenu",
+      value: function checkSubmenu(event) {
+        // check for drop-down items
+        var hasSubmenu = event.target.parentElement.classList.contains('has-submenu');
+        var clickable = event.target.parentElement.getAttribute('data-action') === 'click';
+
+        if (hasSubmenu && (clickable || document.body.getBoundingClientRect().width <= 1024)) {
+          var allDropdowns = this.querySelectorAll('.has-submenu');
+          allDropdowns.forEach(function (dropdown) {
+            if (dropdown.hasAttribute('open') && dropdown !== event.target.parentElement) {
+              dropdown.toggleAttribute('open');
+            }
+          });
+          event.target.parentElement.toggleAttribute('open');
+        } else {
+          this.close();
+        }
+      }
+      /**
+       * Check if the attribute changed
+       * If position change then update the position
+       * @param {String} attr
+       * @param {String} oldValue
+       * @param {String} newValue
+       */
+
+    }, {
+      key: "attributeChangedCallback",
+      value: function attributeChangedCallback(attr, oldValue, newValue) {
+        switch (attr) {
+          case 'position':
+            if (!newValue || newValue === '') {
+              this.position = newValue;
+              this.setPosition();
+            }
+
+            break;
+
+          default:
+            break;
+        }
+      }
+      /**
+       * Check dropdown position only for left and right
+       * If current position not satisfied then move it to oposite
+       */
+
+    }, {
+      key: "setPosition",
+      value: function setPosition() {
+        var dropdownRect = this.getBoundingClientRect();
+        var button = document.querySelector("[data-target=".concat(this["for"], "]"));
+        var buttonRect = button.getBoundingClientRect();
+
+        if (this.position === 'left' && dropdownRect.width + buttonRect.width > dropdownRect.right) {
+          this.setAttribute('position', 'left');
+        } else if (this.position === 'right' && buttonRect.right + dropdownRect.width > window.innerWidth) {
+          this.setAttribute('position', 'right');
+        }
+      }
       /* Method to dispatch events */
 
     }, {
@@ -220,36 +366,37 @@ function _getPrototypeOf(o) {
         this.dispatchEvent(OriginalCustomEvent);
         this.removeEventListener(eventName, this);
       }
-    }, {
-      key: "adoptedCallback",
-      value: function adoptedCallback(oldDocument, newDocument) {}
-    }, {
-      key: "attributeChangedCallback",
-      value: function attributeChangedCallback(attr, oldValue, newValue) {
-        switch (attr) {}
-      }
-      /* eslint-enable */
+      /**
+       * Close the dropdown
+       */
 
     }, {
       key: "close",
       value: function close() {
-        var button = document.querySelector("#".concat(this.getAttribute('aria-labelledby')));
+        // removing 'open' attribute of dropdown items
+        var dropdownItems = document.querySelectorAll('.has-submenu');
+        dropdownItems.forEach(function (item) {
+          if (item.hasAttribute('open')) {
+            item.toggleAttribute('open');
+          }
+        });
+        var button = document.querySelector("[data-target=".concat(this.getAttribute('aria-labelledby'), "]"));
         this.removeAttribute('expanded');
-        button.setAttribute('aria-expanded', false);
-      }
-      /* eslint-disable */
+        if (button) button.setAttribute('aria-expanded', false); // remove unnecessary events when dropdown closed
 
+        window.removeEventListener('click', this.checkSubmenu, true);
+        document.removeEventListener('click', this.clickOutside, true);
+      }
     }, {
       key: "findAncestor",
       value: function findAncestor(el, tagName) {
+        // eslint-disable-next-line no-param-reassign
         while ((el = el.parentElement) && el.nodeName.toLowerCase() !== tagName) {
           ;
         }
 
         return el;
       }
-      /* eslint-enable */
-
     }, {
       key: "for",
       get: function get() {
@@ -260,10 +407,8 @@ function _getPrototypeOf(o) {
       }
     }], [{
       key: "observedAttributes",
-
-      /* Attributes to monitor */
       get: function get() {
-        return ['for'];
+        return ['for', 'position'];
       }
     }]);
 

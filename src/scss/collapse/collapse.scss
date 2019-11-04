@@ -6,7 +6,6 @@
 
 @import "../variables";
 
-
 //
 // Base styles
 //
@@ -19,6 +18,55 @@ joomla-collapse {
 
   &[state="open"] {
     display: block;
+    .accordion-panel-body{
+      border-bottom: 1px solid #ccd3d7;
+    }
   }
 
+}
+.accordion{
+  >div:first-child{
+    border-top: 1px solid #ccd3d7;
+  }
+  &.disabled{
+    pointer-events: none;
+    opacity: 0.5;
+    color: #6c757d;
+    a{
+      color: #6c757d;
+    }
+  }
+}
+.accordion-panel-title{
+  border-bottom: 1px solid #ccd3d7;
+  text-decoration: none;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: .3s;
+  color: var(--secondary-color);
+  .accordion-arrow{
+    pointer-events: none;
+    font-size: 50%;
+    margin-left: 5px;
+    transition: .3s;
+    transform: rotate(0deg);
+  }
+  &[aria-expanded="true"]{
+    color: var(--color);
+    .accordion-arrow{
+      transform: rotate(180deg);
+    }
+  }
+  &:hover{
+    background-color: #edf4fa;
+  }
+  &:focus{
+    box-shadow: 0px 0px 0px 2px #198df8;
+    outline: none;
+  }
+}
+.accordion-panel-body{
+  padding: 15px;
 }

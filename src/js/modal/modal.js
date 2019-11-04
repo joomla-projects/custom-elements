@@ -1,14 +1,8 @@
 (() => {
-  // Keycodes
-  const KEYCODE = {
-    TAB: 9,
-    ESC: 27,
-  };
-
   customElements.define('joomla-modal', class extends HTMLElement {
     constructor() {
       super();
-
+      this.KEYCODE = { tab: 9, esc: 27 };
       this.triggerBtn = '';
       this.focusableElements = null;
       this.focusableSelectors = ['a[href]', 'area[href]', 'input:not([disabled])', 'select:not([disabled])', 'textarea:not([disabled])', 'button:not([disabled])', 'iframe', 'object', 'embed', '[contenteditable]', '[tabindex]:not([tabindex^="-"])'];
@@ -70,7 +64,6 @@
       this.header = this.container.querySelector('header');
       this.body = this.container.querySelector('section');
       this.footer = this.container.querySelector('footer');
-
       this.triggerBtn = document.querySelector(`[data-href="#${this.id}"]`);
       if (this.triggerBtn) {
         this.triggerBtn.addEventListener('click', this.open.bind(this));
@@ -139,7 +132,8 @@
       });
     }
 
-    close() {
+    close(event) {
+      event.preventDefault();
       this.removeEventListener('keydown', this.evKeypress);
       document.removeEventListener('click', this.evDocumentClose);
 
@@ -154,7 +148,10 @@
       if (dropShadow) document.body.removeChild(dropShadow);
       this.setAttribute('aria-hidden', 'true');
       this.classList.remove('show');
-      this.main.innerHTML = '';
+      // this.main.innerHTML = '';
+      if (this.main.querySelector('iframe')) {
+        this.main.removeChild(this.main.querySelector('iframe'));
+      }
       this.triggerBtn.focus();
     }
 
@@ -166,11 +163,11 @@
 
     keyPress(e) {
       // ESC key
-      if (e.keyCode === KEYCODE.ESC) {
+      if (e.keyCode === this.KEYCODE.esc) {
         this.close();
       }
       // TAB key
-      if (e.keyCode === KEYCODE.TAB) {
+      if (e.keyCode === this.KEYCODE.tab) {
         // this.handleTabEvent(e);
         // Get the index of the current active element within the modal
         const focusedIndex = this.focusableElements.indexOf(document.activeElement);

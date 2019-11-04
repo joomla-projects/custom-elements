@@ -1,0 +1,117 @@
+@import "../variables";
+
+
+
+/* Style the accordion panel. Note: hidden by default */
+joomla-accordion > .accordion-item {
+    padding: 0 18px;
+    background-color: white;
+    display: none;
+    overflow: hidden;
+}
+joomla-accordion>h3.active ~ section.show {
+    display: block;
+}
+
+
+joomla-accordion {
+    display: block;
+    margin-top: 1px;
+    > h3 {
+        font-size: 1rem;
+        line-height: 1.614rem;
+        font-weight: 400;
+        color: var(--secondary-color);
+        border-top: 1px solid var(--background);
+        border-bottom: 1px solid var(--background);
+        margin: -1px 0 0;
+        padding: 0.643rem 1.143rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        transition: 300ms;
+        &:hover{
+            background: var(--button-background);
+        }
+        &.active{
+            color: var(--color);
+            border-bottom-color: transparent;
+        }
+        > span{
+            height: 12px;
+            width: 12px;
+            background-size: contain;
+            background-image: url("data:image/svg+xml,%3Csvg width='12' height='7' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6.707 6.283a1 1 0 0 1-1.414 0L.7 1.69A.99.99 0 0 1 2.1.29L6 4.19 9.9.29a.99.99 0 0 1 1.4 1.4L6.707 6.283z' fill='%23C1C7D0' fill-rule='nonzero'/%3E%3C/svg%3E");
+            display: inline-block;
+            background-position: center center;
+            background-repeat: no-repeat;
+            transition: 300ms;
+        }
+        &.active > span{
+            transform: rotate(180deg);
+        }
+        &:focus{
+            outline: 1px solid var(--link-color);
+        }
+    }
+    
+    
+    &[state="closed"] {
+      display: none;
+    }
+  
+    &[state="open"] {
+      display: block;
+      .accordion-panel-body{
+        border-bottom: 1px solid #ccd3d7;
+      }
+    }
+    &.accordion{
+        >div:first-child{
+          border-top: 1px solid #ccd3d7;
+        }
+        &.disabled{
+          pointer-events: none;
+          opacity: 0.5;
+          color: #6c757d;
+          a{
+            color: #6c757d;
+          }
+        }
+        .accordion-panel-title{
+            border-bottom: 1px solid #ccd3d7;
+            text-decoration: none;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: .3s;
+            color: var(--secondary-color);
+            .accordion-arrow{
+              pointer-events: none;
+              font-size: 50%;
+              margin-left: 5px;
+              transition: .3s;
+              transform: rotate(0deg);
+            }
+            &[aria-expanded="true"]{
+              color: var(--color);
+              .accordion-arrow{
+                transform: rotate(180deg);
+              }
+            }
+            &:hover{
+              background-color: #edf4fa;
+            }
+            &:focus{
+              box-shadow: 0px 0px 0px 2px #198df8;
+              outline: none;
+            }
+          }
+          .accordion-panel-body{
+            padding: 15px;
+          }
+      }
+  }
+  
