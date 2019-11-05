@@ -23,8 +23,9 @@
 
     generateNavigation(sections) {
       sections.forEach((section, index) => {
-        const accordionTitle = document.createElement('h3');
+        const accordionTitle = document.createElement('div');
         accordionTitle.setAttribute('area-expanded', 'false');
+        accordionTitle.classList.add('joomla-accordion-title');
         accordionTitle.setAttribute('target', section.id);
         if (section.classList.contains('show')) {
           accordionTitle.classList.add('active');

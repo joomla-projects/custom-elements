@@ -109,7 +109,7 @@
       this.addEventListener('transitionend', () => {
         this.dispatchCustomEvent('joomla.alert.closed');
         if (element) {
-          element.parentNode.removeChild(element)
+          element.parentNode.removeChild(element);
         } else {
           this.remove();
         }
@@ -195,7 +195,7 @@
       }
       if (button) {
         button.removeEventListener('click', this);
-        button.parentNode.removeChild(button)
+        button.parentNode.removeChild(button);
       }
     }
 

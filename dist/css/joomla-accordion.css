@@ -27,13 +27,13 @@ joomla-accordion > .accordion-item {
   display: none;
   overflow: hidden; }
 
-joomla-accordion > h3.active ~ section.show {
+joomla-accordion > .joomla-accordion-title.active ~ section.show {
   display: block; }
 
 joomla-accordion {
   display: block;
   margin-top: 1px; }
-  joomla-accordion > h3 {
+  joomla-accordion > .joomla-accordion-title {
     font-size: 1rem;
     line-height: 1.614rem;
     font-weight: 400;
@@ -47,12 +47,12 @@ joomla-accordion {
     align-items: center;
     justify-content: space-between;
     transition: 300ms; }
-    joomla-accordion > h3:hover {
+    joomla-accordion > .joomla-accordion-title:hover {
       background: var(--button-background); }
-    joomla-accordion > h3.active {
+    joomla-accordion > .joomla-accordion-title.active {
       color: var(--color);
       border-bottom-color: transparent; }
-    joomla-accordion > h3 > span {
+    joomla-accordion > .joomla-accordion-title > span {
       height: 12px;
       width: 12px;
       background-size: contain;
@@ -61,9 +61,9 @@ joomla-accordion {
       background-position: center center;
       background-repeat: no-repeat;
       transition: 300ms; }
-    joomla-accordion > h3.active > span {
+    joomla-accordion > .joomla-accordion-title.active > span {
       transform: rotate(180deg); }
-    joomla-accordion > h3:focus {
+    joomla-accordion > .joomla-accordion-title:focus {
       outline: 1px solid var(--link-color); }
   joomla-accordion[state="closed"] {
     display: none; }

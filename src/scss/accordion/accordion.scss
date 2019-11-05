@@ -9,7 +9,7 @@ joomla-accordion > .accordion-item {
     display: none;
     overflow: hidden;
 }
-joomla-accordion>h3.active ~ section.show {
+joomla-accordion>.joomla-accordion-title.active ~ section.show {
     display: block;
 }
 
@@ -17,8 +17,8 @@ joomla-accordion>h3.active ~ section.show {
 joomla-accordion {
     display: block;
     margin-top: 1px;
-    > h3 {
-        font-size: 1rem;
+    > .joomla-accordion-title {
+        font-size: 1.5rem;
         line-height: 1.614rem;
         font-weight: 400;
         color: var(--secondary-color);
