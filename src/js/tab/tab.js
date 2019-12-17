@@ -273,7 +273,7 @@
     }
 
     showTab(tab) {
-      const tabLink = document.querySelector(`#tab-${tab.id}`);
+      const tabLink = document.querySelector(`#${tab.id}`);
       tabLink.click();
     }
 
