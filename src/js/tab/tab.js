@@ -76,6 +76,7 @@
 
             if (this.isNested) {
               const parentTab = currentTabSet.closest('section');
+
               if (parentTab) {
                 tabLinkHash.push(`#tab-${parentTab.id}`);
               }
