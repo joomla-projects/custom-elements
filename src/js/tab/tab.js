@@ -41,7 +41,7 @@
         return;
       }
 
-      if (this.findAncestor(this, 'joomla-tab')) {
+      if (this.closest('joomla-tab')) {
         this.isNested = true;
       }
 
@@ -72,11 +72,11 @@
 
           // Add the parent tab to the array for activation
           if (element) {
-            const currentTabSet = this.findAncestor(element, 'joomla-tab');
-            const parentTabSet = this.findAncestor(currentTabSet, 'joomla-tab');
+            const currentTabSet = element.closest('joomla-tab');
+            const parentTabSet = currentTabSet.closest('joomla-tab');
 
             if (parentTabSet) {
-              const parentTab = this.findAncestor(currentTabSet, 'section');
+              const parentTab = currentTabSet.closest('section');
               if (parentTab) {
                 tabLinkHash.push(`#tab-${parentTab.id}`);
               }
@@ -151,11 +151,11 @@
 
         if (element) {
           // Activate any parent tabs (nested tables)
-          const currentTabSet = this.findAncestor(element, 'joomla-tab');
-          const parentTabSet = this.findAncestor(currentTabSet, 'joomla-tab');
+          const currentTabSet = element.closest('joomla-tab');
+          const parentTabSet = currentTabSet.closest('joomla-tab');
 
           if (parentTabSet) {
-            const parentTab = this.findAncestor(currentTabSet, 'section');
+            const parentTab = currentTabSet.closest('section');
             parentTabSet.showTab(parentTab);
             // Now activate the given tab
             this.show(element);
@@ -381,18 +381,6 @@
           });
         }
       }
-    }
-
-    findAncestor(el, tagName) {
-      let element = el;
-      while (element.nodeName.toLowerCase() !== tagName) {
-        // Ensure we haven't reached the top of the dom tree
-        if (element.parentElement === null) {
-          return false;
-        }
-        element = element.parentElement;
-      }
-      return element;
     }
 
     /* Method to dispatch events */
