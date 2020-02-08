@@ -41,7 +41,7 @@
         return;
       }
 
-      if (this.closest('joomla-tab')) {
+      if (this.parentNode.closest('joomla-tab')) {
         this.isNested = true;
       }
 
@@ -73,9 +73,8 @@
           // Add the parent tab to the array for activation
           if (element) {
             const currentTabSet = element.closest('joomla-tab');
-            const parentTabSet = currentTabSet.closest('joomla-tab');
 
-            if (parentTabSet) {
+            if (this.isNested) {
               const parentTab = currentTabSet.closest('section');
               if (parentTab) {
                 tabLinkHash.push(`#tab-${parentTab.id}`);
@@ -152,9 +151,9 @@
         if (element) {
           // Activate any parent tabs (nested tables)
           const currentTabSet = element.closest('joomla-tab');
-          const parentTabSet = currentTabSet.closest('joomla-tab');
 
-          if (parentTabSet) {
+          if (this.isNested) {
+            const parentTabSet = currentTabSet.closest('joomla-tab');
             const parentTab = currentTabSet.closest('section');
             parentTabSet.showTab(parentTab);
             // Now activate the given tab
