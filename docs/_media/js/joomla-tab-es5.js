@@ -227,7 +227,7 @@ function _getPrototypeOf(o) {
           return;
         }
 
-        if (this.findAncestor(this, 'joomla-tab')) {
+        if (this.parentNode.closest('joomla-tab')) {
           this.isNested = true;
         }
 
@@ -259,11 +259,10 @@ function _getPrototypeOf(o) {
             var element = this.querySelector("#".concat(hash)); // Add the parent tab to the array for activation
 
             if (element) {
-              var currentTabSet = this.findAncestor(element, 'joomla-tab');
-              var parentTabSet = this.findAncestor(currentTabSet, 'joomla-tab');
+              var currentTabSet = element.closest('joomla-tab');
 
-              if (parentTabSet) {
-                var parentTab = this.findAncestor(currentTabSet, 'section');
+              if (this.isNested) {
+                var parentTab = currentTabSet.closest('section');
 
                 if (parentTab) {
                   tabLinkHash.push("#tab-".concat(parentTab.id));
@@ -344,15 +343,14 @@ function _getPrototypeOf(o) {
 
           if (_element) {
             // Activate any parent tabs (nested tables)
-            var _currentTabSet = this.findAncestor(_element, 'joomla-tab');
+            var _currentTabSet = _element.closest('joomla-tab');
 
-            var _parentTabSet = this.findAncestor(_currentTabSet, 'joomla-tab');
+            if (this.isNested) {
+              var parentTabSet = _currentTabSet.closest('joomla-tab');
 
-            if (_parentTabSet) {
-              var _parentTab = this.findAncestor(_currentTabSet, 'section');
+              var _parentTab = _currentTabSet.closest('section');
 
-              _parentTabSet.showTab(_parentTab); // Now activate the given tab
-
+              parentTabSet.showTab(_parentTab); // Now activate the given tab
 
               this.show(_element);
             } else {
@@ -596,22 +594,6 @@ function _getPrototypeOf(o) {
             });
           }
         }
-      }
-    }, {
-      key: "findAncestor",
-      value: function findAncestor(el, tagName) {
-        var element = el;
-
-        while (element.nodeName.toLowerCase() !== tagName) {
-          // Ensure we haven't reached the top of the dom tree
-          if (element.parentElement === null) {
-            return false;
-          }
-
-          element = element.parentElement;
-        }
-
-        return element;
       }
       /* Method to dispatch events */
 
