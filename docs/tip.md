@@ -8,28 +8,27 @@ In order to use the tip custom element you need to import the element in the doc
 
 The simplified version of the custom elements
 ```html
-<joomla-tip label="more info" tip="This clarifies whatever needs clarifying" text="i" position="top">
-</joomla-tip>
-
-<joomla-tip label="more info" tip="This clarifies whatever needs clarifying" text="i" position="left">
-</joomla-tip>
-
-<joomla-tip label="more info" tip="This clarifies whatever needs clarifying" text="i" position="right">
-</joomla-tip>
-
-<joomla-tip label="more info" tip="This clarifies whatever needs clarifying" text="i" position="bottom">
-</joomla-tip>
+<joomla-tip label="more info" tip="This clarifies whatever needs clarifying" text="i" position="top"></joomla-tip>
+​<hr>
+<joomla-tip mode="light" label="more info" tip="This clarifies whatever needs clarifying" text="i" position="left"></joomla-tip>
+​​<hr>
+<joomla-tip label="more info" tip="This clarifies whatever needs clarifying" text="i" position="right"></joomla-tip>
+​​<hr>
+<joomla-tip label="more info" tip="This clarifies whatever needs clarifying" text="i" position="bottom"></joomla-tip>
 ```
 
-### tip demo:
+### Tip demo:
+
 <joomla-tip label="more info" tip="This clarifies whatever needs clarifying" text="i" position="top">
 </joomla-tip>
-<hr>
-<joomla-tip label="more info" tip="This clarifies whatever needs clarifying" text="i" position="left">
+​<hr>
+<joomla-tip mode="light" label="more info" tip="This clarifies whatever needs clarifying" text="i" position="left">
 </joomla-tip>
-<hr>
+​​<hr>
 <joomla-tip label="more info" tip="This clarifies whatever needs clarifying" text="i" position="right">
 </joomla-tip>
-<hr>
+​​<hr>
 <joomla-tip label="more info" tip="This clarifies whatever needs clarifying" text="i" position="bottom">
 </joomla-tip>
+
+<hr>

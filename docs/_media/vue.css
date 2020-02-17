@@ -727,12 +727,12 @@ section.cover.has-mask .mask {
 .markdown-section h1, .markdown-section h2, .markdown-section h3,
 .markdown-section h4, .markdown-section strong {
   font-weight: 600;
-  color: #2c3e50
+  /* color: #2c3e50 */
 }
 
 .markdown-section a {
-  color: #42b983;
-  color: var(--theme-color, #42b983);
+  /* color: #42b983;
+  color: var(--theme-color, #42b983); */
   font-weight: 600
 }
 
@@ -777,7 +777,13 @@ section.cover.has-mask .mask {
 .markdown-section ol, .markdown-section ul {
   padding-left: 1.5em
 }
-
+.markdown-section nav ul{
+  padding-left: 0;
+}
+.res-demo-area{
+  padding: 30px;
+  background-color: #f0f3f8;
+}
 .markdown-section blockquote {
   color: #858585;
   border-left: 4px solid #42b983;

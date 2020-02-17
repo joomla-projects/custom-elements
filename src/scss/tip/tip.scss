@@ -14,7 +14,34 @@
 joomla-tip {
   position: relative;
   display: inline-block;
-
+  
+  &[mode=light]{
+    .toggletip-bubble {
+      background: #fff;
+      color: #222;
+      &.top {
+        &::after {
+          border-color: #fff transparent transparent;
+        }
+      }
+      &.left {
+        &::after {
+          border-color: transparent transparent transparent #fff;
+        }
+      }
+      &.right {
+        &::after {
+          border-color: transparent #fff transparent transparent;
+        }
+      }
+      &.bottom {
+        &::after {
+          border-color: transparent transparent #fff;
+        }
+      }
+    }
+  }
+  
   button {
     width: 1.6rem;
     height: 1.6rem;
@@ -27,7 +54,7 @@ joomla-tip {
     border: 0;
     border-radius: 50%;
   }
-
+  
   .toggletip-bubble {
     position: absolute;
     z-index: 1040;
@@ -42,7 +69,7 @@ joomla-tip {
     box-shadow: 0 0 5px rgba(0,0,0,.4);
     transition: all ease-in;
     animation-duration: .3s;
-
+    
     &::after {
       position: absolute;
       top: .6rem;
@@ -52,14 +79,14 @@ joomla-tip {
       content: "";
       border-style: solid;
     }
-
+    
     &.top {
       bottom: 100%;
       left: 50%;
       margin-bottom: .6rem;
       transform: translate(-50%, 0);
       animation-name: toggletip-fadeInTop;
-
+      
       &::after {
         top: 100%;
         bottom: auto;
@@ -68,16 +95,16 @@ joomla-tip {
         border-width: 6px 6px 0;
         transform: translateX(-50%);
       }
-
+      
     }
-
+    
     &.left {
       top: 50%;
       right: 100%;
       margin-right: .6rem;
       transform: translate(0, -50%);
       animation-name: toggletip-fadeInLeft;
-
+      
       &::after {
         top: 50%;
         bottom: auto;
@@ -86,16 +113,16 @@ joomla-tip {
         border-width: 6px 0 6px 6px;
         transform: translateY(-50%);
       }
-
+      
     }
-
+    
     &.right {
       top: 50%;
       left: 100%;
       margin-left: .6rem;
       transform: translate(0, -50%);
       animation-name: toggletip-fadeInRight;
-
+      
       &::after {
         top: 50%;
         right: 100%;
@@ -104,16 +131,16 @@ joomla-tip {
         border-width: 6px 6px 6px 0;
         transform: translateY(-50%);
       }
-
+      
     }
-
+    
     &.bottom {
       top: 100%;
       left: 50%;
       margin-top: .6rem;
       transform: translate(-50%, 0);
       animation-name: toggletip-fadeInBottom;
-
+      
       &::after {
         top: -6px;
         left: 50%;
@@ -121,11 +148,11 @@ joomla-tip {
         border-width: 0 6px 6px;
         transform: translateX(-50%);
       }
-
+      
     }
-
+    
   }
-
+  
 }
 
 @keyframes toggletip-fadeInRight {

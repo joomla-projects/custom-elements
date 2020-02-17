@@ -196,7 +196,8 @@
       /** Activate Tab */
       const activateTabFromLink = (e) => {
         e.preventDefault();
-
+        const isDisable = e.target.getAttribute('disabled');
+        if (isDisable === 'true') return;
         if (this.hasActive) {
           this.hideCurrent();
         }
@@ -225,7 +226,8 @@
         const active = tab.hasAttribute('active');
         const liElement = document.createElement('li');
         const aElement = document.createElement('a');
-
+        let isDisable = tab.getAttribute('disabled');
+        isDisable = isDisable !== null && isDisable === 'true';
         liElement.setAttribute('role', 'presentation');
         aElement.setAttribute('role', 'tab');
         aElement.setAttribute('aria-controls', tab.id);
@@ -237,6 +239,10 @@
 
         if (active) {
           aElement.setAttribute('active', '');
+        }
+
+        if (isDisable) {
+          aElement.setAttribute('disabled', 'true');
         }
 
         aElement.addEventListener('click', activateTabFromLink);
@@ -311,6 +317,11 @@
             break;
           case 39:
           case 40:
+            nextTabItem.querySelector('a').click();
+            nextTabItem.querySelector('a').focus();
+            e.preventDefault();
+            break;
+          case 9:
             nextTabItem.querySelector('a').click();
             nextTabItem.querySelector('a').focus();
             e.preventDefault();

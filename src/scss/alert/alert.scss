@@ -1,63 +1,10 @@
 // Alerts
 
 //
-// Functions
-//
-
-// Retrieve color Sass maps
-@function color($key: "blue") {
-  @return map-get($colors, $key);
-}
-
-@function theme-color($key: "primary") {
-  @return map-get($theme-colors, $key);
-}
-
-@function gray($key: "100") {
-  @return map-get($grays, $key);
-}
-
-// Request a theme color level
-@function theme-color-level($color-name: "primary", $level: 0) {
-  $color: theme-color($color-name);
-  $color-base: if($level > 0, $black, $white);
-  $level: abs($level);
-
-  @return mix($color-base, $color, $level * $theme-color-interval);
-}
-
-
-//
-// Mixins
-//
-
-@mixin hover-focus {
-  &:hover,
-  &:focus {
-    @content;
-  }
-}
-
-@mixin alert-variant($background, $border, $color) {
-  color: $color;
-  background-color: $background;
-  border-color: $border;
-
-  hr {
-    border-top-color: darken($border, 5%);
-  }
-
-  .alert-link {
-    color: darken($color, 10%);
-  }
-}
-
-//
 // Variables
 //
 
 @import "../variables";
-
 
 //
 // Base styles
@@ -66,83 +13,212 @@
 joomla-alert {
   display: block;
   min-width: 250px;
-  padding: $alert-padding-y $alert-padding-x;
-  margin-bottom: $alert-margin-bottom;
-  border: $alert-border-width solid transparent;
+  padding: 1.143rem 1.500rem;
+  margin-bottom: 1.143rem;
+  border: 1px solid transparent;
   opacity: 0;
-  border-radius: $alert-border-radius;
-  transition: $transition-fade;
-
+  border-radius: 3px;
+	transition: 300ms;
+	box-shadow: 0 8px 16px -4px rgba(9, 30, 66, 0.25), 0 0 1px 0 rgba(9, 30, 66, 0.31);
+	color: var(--color);
+	position: relative;
+	line-height: 1.643rem;
+	a{
+		color: var(--primary-color)
+	}
   @media screen and (prefers-reduced-motion: reduce) {
     transition: none;
-  }
+	}
+	
+	&[type='danger']{
+		background-color: var(--danger-color);
+		color: var(--inverse-color);
+	}
+	
+	&[type='warning']{
+		background-color: var(--warning-color);
+	}
+
+	&[type='success']{
+		background-color: var(--success-color);
+		color: var(--inverse-color);
+	}
+
 
   &.joomla-alert--show {
-    display: block;
-    opacity: 1;
-  }
+    display: flex;
+		opacity: 1;
+	}
 
-  .joomla-alert--close, .joomla-alert-button--close {
-    position: relative;
-    top: -$alert-padding-y;
-    right: -$alert-padding-x;
-    padding: .2rem 1rem;
-    color: inherit;
-  }
+	.joomla-alert--collapse-container,
+	.joomla-alert-content{
+		flex-grow: 1;
+	}
 
-  .joomla-alert--close {
-    font-size: $close-font-size;
-    font-weight: $close-font-weight;
-    line-height: 1;
-    text-shadow: $close-text-shadow;
-  }
+	.joomla-alert--icon{
+		padding-right: 1.357rem;
+		margin-top: 0.286rem;
+	}
 
-  .joomla-alert--close, .joomla-alert-button--close {
-    float: right;
-    color: $close-color;
-    background: transparent;
-    border: 0;
-    opacity: .5;
+	.joomla-alert--collapse-header{
+		display: flex;
+		position: relative;
+		justify-content: space-between;
+		&[area-expanded='true']{
+			margin-bottom: 0.786rem;
+		}
+		.joomla-alert--collapse-icon{
+			width: 14px;
+			height: 14px;
+			background-image: url("data:image/svg+xml,%3Csvg width='12' height='7' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M5.293 6.697L.7 2.104a.99.99 0 0 1 1.4-1.4l3.9 3.9 3.9-3.9a.99.99 0 1 1 1.4 1.4L6.707 6.697a1 1 0 0 1-1.414 0z' fill='%23FFF'/%3E%3Cpath d='M-1-4h14v14H-1z'/%3E%3C/g%3E%3C/svg%3E");
+			background-position: center center;
+			background-repeat: no-repeat;
+			text-indent: 9999px;
+			display: inline-block;
+			border:none;
+			background-color: transparent;
+			cursor: pointer;
+			overflow: hidden;
+		}
+	}
 
-    @include hover-focus {
-      color: $close-color;
-      text-decoration: none;
-      cursor: pointer;
-      opacity: .75;
-    }
-  }
+	&[type="info"] .joomla-alert--collapse-header .joomla-alert--collapse-icon{
+		background-image: url("data:image/svg+xml,%3Csvg width='12' height='7' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6.707 6.283a1 1 0 0 1-1.414 0L.7 1.69A.99.99 0 0 1 2.1.29L6 4.19 9.9.29a.99.99 0 0 1 1.4 1.4L6.707 6.283z' fill='%23C1C7D0' fill-rule='nonzero'/%3E%3C/svg%3E");
+	}
 
-  // Additional properties for button version
-  // iOS requires the button element instead of an anchor tag.
-  // If you want the anchor version, it requires `href="#"`.
-  // See https://developer.mozilla.org/en-US/docs/Web/Events/click#Safari_Mobile
+	.joomla-alert--collapse{
+		display: none;
+		&.show{
+			display: block;
+		}
+	}
 
-  // scss-lint:disable QualifyingElement
-  button.joomla-alert-button--close {
-    padding-top: .75rem;
-    font-size: 100%;
-    line-height: 1.15;
-    cursor: pointer;
-    background: transparent;
-    border: 0;
-    -webkit-appearance: none;
-  }
+	.joomla-alert--close{
+		position: absolute;
+		width: 14px;
+		height: 14px;
+		background-image: url("data:image/svg+xml,%3Csvg width='14' height='14' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M.293.293a1 1 0 0 1 1.414 0L7 5.585 12.293.293a1 1 0 0 1 1.32-.083l.094.083a1 1 0 0 1 0 1.414L8.415 7l5.292 5.293a1 1 0 0 1 .083 1.32l-.083.094a1 1 0 0 1-1.414 0L7 8.415l-5.293 5.292a1 1 0 0 1-1.32.083l-.094-.083a1 1 0 0 1 0-1.414L5.585 7 .293 1.707A1 1 0 0 1 .21.387z' fill='%23FFF' fill-rule='nonzero'/%3E%3Cpath d='M-5-5h24v24H-5z'/%3E%3C/g%3E%3C/svg%3E");
+		background-position: center center;
+		background-repeat: no-repeat;
+		text-indent: 9999px;
+		display: inline-block;
+		border:none;
+		background-color: transparent;
+		right: 1.500rem;
+		top: 1.286rem;
+		cursor: pointer;
+			overflow: hidden;
+		span{
+			display: none;
+		}
+	}
 
-}
+	&[type='info'] .joomla-alert--close{
+		background-image: url("data:image/svg+xml,%3Csvg width='14' height='14' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M.293.293a1 1 0 0 1 1.414 0L7 5.585 12.293.293a1 1 0 0 1 1.32-.083l.094.083a1 1 0 0 1 0 1.414L8.415 7l5.292 5.293a1 1 0 0 1 .083 1.32l-.083.094a1 1 0 0 1-1.414 0L7 8.415l-5.293 5.292a1 1 0 0 1-1.32.083l-.094-.083a1 1 0 0 1 0-1.414L5.585 7 .293 1.707A1 1 0 0 1 .21.387z' fill='%23C1C7D0' fill-rule='nonzero'/%3E%3Cpath d='M-5-5h24v24H-5z'/%3E%3C/g%3E%3C/svg%3E");
+	}
 
-// Alternate styles
-@each $color, $value in $alert-colors {
-  joomla-alert[type="#{$color}"] {
-    @include alert-variant(theme-color-level($color, -10), theme-color-level($color, -9), theme-color-level($color, 6));
-  }
+	&[dismiss='false'] .joomla-alert--close{
+		display: none;
+	}
+	&[collapse='true'][dismiss='true'] .joomla-alert--collapse-header{
+		padding-right: 1.5rem;
+	}
+
+	.joomla-alert-button-group{
+		padding-top: 1.214rem;
+	}
+
+	.joomla-alert-button-group a,
+	button{
+		padding: 0 0.857rem;
+		line-height: 1.643rem;
+		border: none;
+		background: rgba($color: #000000, $alpha: 0.07);
+		border-radius: 3px;
+		display: inline-block;
+		cursor: pointer;
+		transition: 300ms;
+		color: inherit;
+	}
+
+
+	.joomla-alert-button-group a,
+	.joomla-alert-button-group button{
+		margin-right: 4px;
+		&:hover{
+			background: rgba($color: #000000, $alpha: 0.13);
+		}
+	}
+
+	.joomla-alert-link-group{
+		padding-top: 0.714rem;
+		a{
+			margin-right: 8px;
+			display: inline-block;
+			position: relative;
+			padding-right: 12px;
+			&::after{
+				content: '';
+				position: absolute;
+				right: 0;
+				top: 50%;
+				margin-top: -2px;
+				height: 4px;
+				width: 4px;
+				border-radius: 50%;
+				background: var(--primary-color);
+			}
+			&:last-child{
+				margin-right: 0;
+				padding-right: 0;
+				&::after{
+					display: none;
+				}
+			}
+		}
+	}
+
 }
 
 // RTL overrides
 html[dir=rtl] joomla-alert {
-  .joomla-alert--close,
-  .joomla-alert-button--close {
-    right: auto;
-    left: -1.25rem;
-    float: left;
-  }
+	.joomla-alert--icon{
+		padding-right: 0;
+		padding-left: 1.357rem;
+	}
+	.joomla-alert--close{
+		right: auto;
+		left: 1.5000rem;
+	}
+	&[collapse='true'][dismiss='true'] .joomla-alert--collapse-header{
+		padding-right: 0;
+		padding-left: 1.5rem;
+	}
+	.joomla-alert-button-group a,
+	.joomla-alert-button-group button{
+		margin-right: 0;
+		margin-left: 4px;
+		&:hover{
+			background: rgba($color: #000000, $alpha: 0.13);
+		}
+	}
+
+
+	.joomla-alert-link-group{
+		a{
+			margin-right: 0;
+			padding-right: 0;
+			margin-left: 8px;
+			padding-left: 12px;
+			&::after{
+				right: auto;
+				left: 0;
+			}
+			&:last-child{
+				margin-left: 0;
+				padding-left: 0;
+			}
+		}
+	}
+
 }

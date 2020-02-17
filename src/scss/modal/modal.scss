@@ -13,116 +13,81 @@
 
 joomla-modal {
   position: fixed;
+  display: flex;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   z-index: 1050;
   box-sizing: inherit;
-  display: none;
-  max-width: 500px;
+  opacity: 0;
+  visibility: hidden;
+	width: 100%;
+	height: 100%;
   margin: 10px auto;
-  overflow: hidden;
   border-radius: 5px;
-  outline: 0;
-
-  &.jviewport-width10 {
-    width: 10vw;
-    margin-left: -5vw;
-  }
-  &.jviewport-width20 {
-    width: 20vw;
-    margin-left: -10vw;
-  }
-  &.jviewport-width30 {
-    width: 30vw;
-    margin-left: -15vw;
-  }
-  &.jviewport-width40 {
-    width: 40vw;
-    margin-left: -20vw;
-  }
-  &.jviewport-width50 {
-    width: 50vw;
-    margin-left: -25vw;
-  }
-  &.jviewport-width60 {
-    width: 60vw;
-    margin-left: -30vw;
-  }
-  &.jviewport-width70 {
-    width: 70vw;
-    margin-left: -35vw;
-  }
-  &.jviewport-width80 {
-    width: 80vw;
-    margin-left: -40vw;
-  }
-  &.jviewport-width90 {
-    width: 90vw;
-    margin-left: -45vw;
-  }
-  &.jviewport-width100 {
-    width: 100vw;
-    margin-left: -50vw;
-  }
-
+	outline: 0;
+	align-items: center;
+	justify-content: center;
+	&,
+	*{
+		box-sizing: border-box;
+	}
   &.show {
-    display: block;
-  }
-
+    opacity: 1;
+    visibility: visible;
+	}
+	
+	&.fade {
+		opacity: 0;
+		transition: .3s;
+	}
+	&.fade.show {
+		opacity: 1;
+	}
   .joomla-modal-dialog {
     position: relative;
-    display: flex;
-    flex-direction: column;
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid rgba(0, 0, 0, .2);
-    border-radius: .3rem;
-    outline: 0;
-
-    &.fade {
-      opacity: 0;
-      transition: opacity .15s linear;
-    }
-
-    &.fade.show {
-      opacity: 1;
-    }
-
+    border-radius: 3px;
+	outline: 0;
+	width: 100%;
+	max-width: 600px;
+	max-height: 90%;
+	overflow-x: hidden;
+	overflow-y: auto;
     header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 15px;
-      border-bottom: 1px solid #e9ecef;
-
+      padding: 1.714rem 1.714rem 0.929rem 1.714rem;
+			h5{
+				margin: 0;
+				font-size: 1.714rem;
+				line-height: 1.3rem;
+			}
       button {
-        float: right;
-        padding: 0;
-        font-size: 1.5rem;
-        font-weight: 700;
-        line-height: 1;
-        color: #000;
-        text-shadow: 0 1px 0 #fff;
-        cursor: pointer;
-        background: 0 0;
-        border: 0;
-        opacity: .5;
-        -webkit-appearance: none;
+				width: 14px;
+				height: 14px;
+				background-image: url("data:image/svg+xml,%3Csvg width='14' height='14' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M.293.293a1 1 0 0 1 1.414 0L7 5.585 12.293.293a1 1 0 0 1 1.32-.083l.094.083a1 1 0 0 1 0 1.414L8.415 7l5.292 5.293a1 1 0 0 1 .083 1.32l-.083.094a1 1 0 0 1-1.414 0L7 8.415l-5.293 5.292a1 1 0 0 1-1.32.083l-.094-.083a1 1 0 0 1 0-1.414L5.585 7 .293 1.707A1 1 0 0 1 .21.387z' fill='%23C1C7D0' fill-rule='nonzero'/%3E%3Cpath d='M-5-5h24v24H-5z'/%3E%3C/g%3E%3C/svg%3E");
+				background-position: center center;
+				background-repeat: no-repeat;
+				text-indent: 9999px;
+				display: inline-block;
+				border:none;
+				background-color: transparent;
+				cursor: pointer;
+				transition: 300ms;
+				&:hover{
+					filter: contrast(0);
+				}
       }
-
-      h5 {
-        margin-bottom: 0;
-        font-size: 1.25rem;
-        line-height: 1.5;
-      }
-    }
-
+		}
     section {
       position: relative;
       flex: 1 1 auto;
-      padding: 15px;
+      padding: 0 1.714rem;
 
       &.jviewport-height10 {
         height: 10vh;
@@ -168,18 +133,80 @@ joomla-modal {
       align-items: center;
       -ms-flex-pack: end;
       justify-content: flex-end;
-      padding: 15px;
-      border-top: 1px solid #e9ecef;
-
+      padding:  0.929rem 1.714rem 1.714rem 1.714rem;
+			.modal-footer-left-text{
+				flex-grow: 1;
+				text-align: left;
+				color: var(--secondary-color);
+			}
       .btn {
         margin-left: 10px;
       }
     }
+	}
+
+		&.bordered header{
+			border-bottom: 2px solid #ecedf0;
+			padding-bottom: 1.714rem;
+		}
+		
+		&.bordered footer{
+			border-top: 2px solid #ecedf0;
+			padding-top: 1.714rem;
+		}
+
+		&.bordered .joomla-modal-dialog section{
+			padding-top: 1.143rem;
+			padding-bottom: 1.143rem;
+		}
+	
+	&.scrollable .joomla-modal-dialog section{
+		max-height: 320px;
+		overflow: auto;
+	}
+
+  &.jviewport-width10 .joomla-modal-dialog {
+    max-width: 10vw;
   }
+  &.jviewport-width20 .joomla-modal-dialog {
+    max-width: 20vw;
+  }
+  &.jviewport-width30 .joomla-modal-dialog {
+    max-width: 30vw;
+  }
+  &.jviewport-width40 .joomla-modal-dialog {
+    max-width: 40vw;
+  }
+  &.jviewport-width50 .joomla-modal-dialog {
+    max-width: 50vw;
+  }
+  &.jviewport-width60 .joomla-modal-dialog {
+    max-width: 60vw;
+  }
+  &.jviewport-width70 .joomla-modal-dialog {
+    max-width: 70vw;
+  }
+  &.jviewport-width80 .joomla-modal-dialog {
+    max-width: 80vw;
+  }
+  &.jviewport-width90 .joomla-modal-dialog {
+    max-width: 90vw;
+  }
+  &.jviewport-width100 .joomla-modal-dialog {
+    max-width: 100vw;
+  }
+
 }
 
 .modal-backdrop.show {
-  opacity: .5;
+  opacity: 1;
+	&.fade {
+		opacity: 0;
+		transition: .3s;
+	}
+	&.fade.show {
+		opacity: 1;
+	}
 }
 .modal-backdrop {
   position: fixed;
@@ -188,5 +215,5 @@ joomla-modal {
   bottom: 0;
   left: 0;
   z-index: 1040;
-  background-color: #000;
+	background-color:var(--overlay);
 }

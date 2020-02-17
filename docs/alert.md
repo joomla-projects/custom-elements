@@ -19,44 +19,100 @@ In order to use the alert custom element you need to import the element in the d
 
 The simplified version of the custom elements
 ```html
-<joomla-alert>No params passed</joomla-alert>
+<!-- no params -->
+<joomla-alert>
+	Click open to go to joomla.org Click open to go to joomla.org Click open to go to
+	joomla.org
+</joomla-alert>
 
+<!-- Alert with icon & content -->
 <joomla-alert dismiss="true">
-    <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
+	<div class="joomla-alert--icon">
+		<img src="./smile.svg" alt="">
+	</div>
+	<div class="joomla-alert-content">
+		Alert with icon & content
+		<div class="joomla-alert-link-group">
+			<a href="#">Link1</a>
+			<a href="#">Link2</a>
+		</div>
+	</div>
 </joomla-alert>
 
-<joomla-alert type="success" acknowledge="true">
-    <strong>Well done!</strong> You successfully read this important alert message.
+<!-- collapse & collapse title -->
+<joomla-alert collapse-title="Collapsible allert with icon" collapse="true">
+	<div class="joomla-alert--icon">
+		<img src="./smile.svg" alt="">
+	</div>
+	<div class="joomla-alert--collapse">
+		Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates odit consequatur illum?
+			<div class="joomla-alert-button-group">
+				<button>Sure!</button>
+				<button>Noooo!</button>
+			</div>
+	</div>
 </joomla-alert>
 
-<joomla-alert type="warning" dismiss="true" auto-dismiss="10000">
-    <strong>Warning!</strong> This one will self distruct in 10secs.
+<!-- Alert type: success, danger, warning. Alert dismiss: true -->
+<joomla-alert type="success" dismiss="true">
+	Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates odit consequatur illum?
 </joomla-alert>
-
-<joomla-alert type="danger" href="https://www.joomla.org">
-    <strong>Oh snap!</strong> Click open to go to joomla.org
+<joomla-alert type="warning" dismiss="true">
+	Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates odit consequatur illum?
+</joomla-alert>
+<joomla-alert type="danger" dismiss="true" auto-dismiss="2000">
+	Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates odit consequatur illum?
 </joomla-alert>
 ```
 
 ### Alerts demo:
-<joomla-alert>No params passed</joomla-alert>
-<joomla-alert type="info" dismiss="true">
-    <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
-</joomla-alert>
-<joomla-alert type="success" acknowledge="true">
-    <strong>Well done!</strong> You successfully read this important alert message.
-</joomla-alert>
-<joomla-alert type="warning" dismiss="true" auto-dismiss="10000">
-    <strong>Warning!</strong> This one will self distruct in 10secs.
-</joomla-alert>
-<joomla-alert type="danger" href="https://www.joomla.org">
-    <strong>Oh snap!</strong> Click open to go to joomla.org
-</joomla-alert>
-<p>
-<button role="button" id="insertNewFloated" class="btn btn-success">Create a floated alert</button>
-</p>
 
+<!-- no params -->
+<joomla-alert>
+	Click open to go to joomla.org Click open to go to joomla.org Click open to go to
+	joomla.org
+</joomla-alert>
+
+<!-- Alert with icon & content -->
+<joomla-alert dismiss="true">
+	<div class="joomla-alert--icon">
+		<img src="./smile.svg" alt="">
+	</div>
+	<div class="joomla-alert-content">
+		Alert with icon & content
+		<div class="joomla-alert-link-group">
+			<a href="#">Link1</a>
+			<a href="#">Link2</a>
+		</div>
+	</div>
+</joomla-alert>
+
+<!-- collapse & collapse title -->
+<joomla-alert collapse-title="Collapsible allert with icon" collapse="true">
+	<div class="joomla-alert--icon">
+		<img src="./smile.svg" alt="">
+	</div>
+	<div class="joomla-alert--collapse">
+		Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates odit consequatur illum?
+			<div class="joomla-alert-button-group">
+				<button>Sure!</button>
+				<button>Noooo!</button>
+			</div>
+	</div>
+</joomla-alert>
+
+<!-- Alert type: success, danger, warning. Alert dismiss: true -->
+<joomla-alert type="success" dismiss="true">
+	Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates odit consequatur illum?
+</joomla-alert>
+<joomla-alert type="warning" dismiss="true">
+	Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates odit consequatur illum?
+</joomla-alert>
+<joomla-alert type="danger" dismiss="true">
+	Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates odit consequatur illum?
+</joomla-alert>
 ## Attibutes
+
 Control the design and functionality of the custom element through attributes.
 
 
