@@ -137,6 +137,7 @@
       // Fallback if no active tab
       if (!this.hasActive) {
         tabsEl[0].setAttribute('active', '');
+        tabsEl[0].removeAttribute('aria-hidden');
         this.hasActive = true;
         this.currentActive = tabsEl[0].id;
         this.querySelector(`#tab-${tabsEl[0].id}`).setAttribute('aria-selected', 'true');
