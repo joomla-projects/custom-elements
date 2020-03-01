@@ -69,8 +69,8 @@ joomla-alert {
   padding: $alert-padding-y $alert-padding-x;
   margin-bottom: $alert-margin-bottom;
   border: $alert-border-width solid transparent;
-  opacity: 0;
   border-radius: $alert-border-radius;
+  opacity: 0;
   transition: $transition-fade;
 
   @media screen and (prefers-reduced-motion: reduce) {
