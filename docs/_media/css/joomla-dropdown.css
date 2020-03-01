@@ -3,8 +3,8 @@ joomla-dropdown {
   top: 30px;
   left: 0;
   z-index: 1000;
-  display: none;
   box-sizing: border-box;
+  display: none;
   min-width: 10rem;
   margin-top: .5rem;
   font-size: 1rem;
