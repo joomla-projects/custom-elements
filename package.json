@@ -46,7 +46,7 @@
     "@lodder/grunt-postcss": "latest",
     "grunt-sass": "^3.0.2",
     "grunt-shell": "latest",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.0",
     "wct-browser-legacy": "latest",
     "web-component-tester": "latest"
   },
