@@ -171,11 +171,15 @@ function _getPrototypeOf(o) {
 
       /* Lifecycle, element appended to the DOM */
       value: function connectedCallback() {
-        this.setAttribute('role', 'alert');
         this.classList.add('joomla-alert--show'); // Default to info
 
         if (!this.type || ['info', 'warning', 'danger', 'success'].indexOf(this.type) === -1) {
           this.setAttribute('type', 'info');
+        } // Default to alert
+
+
+        if (!this.role || ['alert', 'alertdialog'].indexOf(this.role) === -1) {
+          this.setAttribute('role', 'alert');
         } // Append button
 
 
@@ -183,12 +187,11 @@ function _getPrototypeOf(o) {
           this.appendCloseButton();
         }
 
-        this.dispatchCustomEvent('joomla.alert.show');
-        var closeButton = this.querySelector('button.joomla-alert--close') || this.querySelector('button.joomla-alert-button--close');
-
-        if (closeButton) {
-          closeButton.focus();
+        if (this.hasAttribute('auto-dismiss')) {
+          this.autoDismiss();
         }
+
+        this.dispatchCustomEvent('joomla.alert.show');
       }
       /* Lifecycle, element removed from the DOM */
 
@@ -216,6 +219,13 @@ function _getPrototypeOf(o) {
 
             break;
 
+          case 'role':
+            if (!newValue || newValue && ['alert', 'alertdialog'].indexOf(newValue) === -1) {
+              this.role = 'alert';
+            }
+
+            break;
+
           case 'dismiss':
           case 'acknowledge':
             if (!newValue || newValue === 'true') {
@@ -224,6 +234,10 @@ function _getPrototypeOf(o) {
               this.removeCloseButton();
             }
 
+            break;
+
+          case 'auto-dismiss':
+            this.autoDismiss();
             break;
 
           case 'href':
@@ -246,11 +260,16 @@ function _getPrototypeOf(o) {
       value: function close() {
         var _this = this;
 
+        var element = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
         this.dispatchCustomEvent('joomla.alert.close');
         this.addEventListener('transitionend', function () {
           _this.dispatchCustomEvent('joomla.alert.closed');
 
-          _this.parentNode.removeChild(_this);
+          if (element) {
+            element.parentNode.removeChild(element);
+          } else {
+            _this.remove();
+          }
         }, false);
         this.classList.remove('joomla-alert--show');
       }
@@ -318,18 +337,22 @@ function _getPrototypeOf(o) {
             });
           }
         }
+      }
+      /* Method to auto-dismiss */
 
-        if (this.hasAttribute('auto-dismiss')) {
-          setTimeout(function () {
-            self.dispatchCustomEvent('joomla.alert.buttonClicked');
+    }, {
+      key: "autoDismiss",
+      value: function autoDismiss() {
+        var self = this;
+        setTimeout(function () {
+          self.dispatchCustomEvent('joomla.alert.buttonClicked');
 
-            if (self.hasAttribute('data-callback')) {
-              window[self.getAttribute('data-callback')]();
-            } else {
-              self.close();
-            }
-          }, parseInt(self.getAttribute('auto-dismiss'), 10) ? self.getAttribute('auto-dismiss') : 3000);
-        }
+          if (self.hasAttribute('data-callback')) {
+            window[self.getAttribute('data-callback')]();
+          } else {
+            self.close(self);
+          }
+        }, parseInt(self.getAttribute('auto-dismiss'), 10) ? self.getAttribute('auto-dismiss') : 3000);
       }
       /* Method to remove the close button */
 
@@ -362,9 +385,22 @@ function _getPrototypeOf(o) {
         return this.setAttribute('type', value);
       }
     }, {
+      key: "role",
+      get: function get() {
+        return this.getAttribute('role');
+      },
+      set: function set(value) {
+        return this.setAttribute('role', value);
+      }
+    }, {
       key: "dismiss",
       get: function get() {
         return this.getAttribute('dismiss');
+      }
+    }, {
+      key: "autodismiss",
+      get: function get() {
+        return this.getAttribute('auto-dismiss');
       }
     }, {
       key: "acknowledge",
@@ -381,7 +417,7 @@ function _getPrototypeOf(o) {
 
       /* Attributes to monitor */
       get: function get() {
-        return ['type', 'dismiss', 'acknowledge', 'href'];
+        return ['type', 'role', 'dismiss', 'acknowledge', 'href'];
       }
     }]);
 

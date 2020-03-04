@@ -155,57 +155,71 @@ function _getPrototypeOf(o) {
 }
 
 (function () {
-  customElements.define('joomla-dropdown',
+  var JoomlaDropdownElement =
   /*#__PURE__*/
   function (_HTMLElement) {
-    _inherits(_class, _HTMLElement);
+    _inherits(JoomlaDropdownElement, _HTMLElement);
 
-    function _class() {
-      _classCallCheck(this, _class);
+    function JoomlaDropdownElement() {
+      _classCallCheck(this, JoomlaDropdownElement);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(_class).apply(this, arguments));
+      return _possibleConstructorReturn(this, _getPrototypeOf(JoomlaDropdownElement).apply(this, arguments));
     }
 
-    _createClass(_class, [{
+    _createClass(JoomlaDropdownElement, [{
       key: "connectedCallback",
       value: function connectedCallback() {
-        this.setAttribute('aria-labelledby', this.for.substring(1));
-        var button = document.querySelector(this.for);
+        var _this = this;
+
+        this.setAttribute('aria-labelledby', this["for"].substring(1));
+        var button = document.querySelector(this["for"]);
         var innerLinks = this.querySelectorAll('a');
-        var self = this;
-        if (!button.id) return; // var children = [].slice.call( menu[getElementsByTagName]('*'));
+
+        if (!button.id) {
+          return;
+        } // var children = [].slice.call( menu[getElementsByTagName]('*'));
         // this.classList.add('dropdown');
 
-        button.setAttribute('aria-haspopup', 'true');
-        button.setAttribute('aria-expanded', 'false');
-        button.addEventListener('click', function (ev) {
-          if (self.hasAttribute('expanded')) {
-            self.removeAttribute('expanded');
-            ev.target.setAttribute('aria-expanded', 'false');
+
+        button.setAttribute('aria-haspopup', true);
+        button.setAttribute('aria-expanded', false);
+        button.addEventListener('click', function (event) {
+          if (_this.hasAttribute('expanded')) {
+            _this.removeAttribute('expanded');
+
+            event.target.setAttribute('aria-expanded', false);
           } else {
-            self.setAttribute('expanded', '');
-            ev.target.setAttribute('aria-expanded', 'true');
+            _this.setAttribute('expanded', '');
+
+            event.target.setAttribute('aria-expanded', true);
           }
 
           document.addEventListener('click', function (evt) {
             if (evt.target !== button) {
-              if (!self.findAncestor(evt.target, 'joomla-dropdown')) {
-                self.close();
+              if (!_this.findAncestor(evt.target, 'joomla-dropdown')) {
+                _this.close();
               }
             }
           });
           innerLinks.forEach(function (innerLink) {
             innerLink.addEventListener('click', function () {
-              self.close();
+              _this.close();
             });
           });
         });
       }
       /*eslint-disable */
 
+      /* Method to dispatch events */
+
     }, {
-      key: "disconnectedCallback",
-      value: function disconnectedCallback() {}
+      key: "dispatchCustomEvent",
+      value: function dispatchCustomEvent(eventName) {
+        var OriginalCustomEvent = new CustomEvent(eventName);
+        OriginalCustomEvent.relatedTarget = this;
+        this.dispatchEvent(OriginalCustomEvent);
+        this.removeEventListener(eventName, this);
+      }
     }, {
       key: "adoptedCallback",
       value: function adoptedCallback(oldDocument, newDocument) {}
@@ -221,7 +235,7 @@ function _getPrototypeOf(o) {
       value: function close() {
         var button = document.querySelector("#".concat(this.getAttribute('aria-labelledby')));
         this.removeAttribute('expanded');
-        button.setAttribute('aria-expanded', 'false');
+        button.setAttribute('aria-expanded', false);
       }
       /* eslint-disable */
 
@@ -246,13 +260,17 @@ function _getPrototypeOf(o) {
       }
     }], [{
       key: "observedAttributes",
+
+      /* Attributes to monitor */
       get: function get() {
         return ['for'];
       }
     }]);
 
-    return _class;
-  }(_wrapNativeSuper(HTMLElement)));
+    return JoomlaDropdownElement;
+  }(_wrapNativeSuper(HTMLElement));
+
+  customElements.define('joomla-dropdown', JoomlaDropdownElement);
 })();
 
 },{}]},{},[1]);

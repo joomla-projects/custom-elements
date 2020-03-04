@@ -41,7 +41,7 @@
         return;
       }
 
-      if (this.findAncestor(this, 'joomla-tab')) {
+      if (this.parentNode.closest('joomla-tab')) {
         this.isNested = true;
       }
 
@@ -72,11 +72,11 @@
 
           // Add the parent tab to the array for activation
           if (element) {
-            const currentTabSet = this.findAncestor(element, 'joomla-tab');
-            const parentTabSet = this.findAncestor(currentTabSet, 'joomla-tab');
+            const currentTabSet = element.closest('joomla-tab');
 
-            if (parentTabSet) {
-              const parentTab = this.findAncestor(currentTabSet, 'section');
+            if (this.isNested) {
+              const parentTab = currentTabSet.closest('section');
+
               if (parentTab) {
                 tabLinkHash.push(`#tab-${parentTab.id}`);
               }
@@ -137,6 +137,7 @@
       // Fallback if no active tab
       if (!this.hasActive) {
         tabsEl[0].setAttribute('active', '');
+        tabsEl[0].removeAttribute('aria-hidden');
         this.hasActive = true;
         this.currentActive = tabsEl[0].id;
         this.querySelector(`#tab-${tabsEl[0].id}`).setAttribute('aria-selected', 'true');
@@ -151,11 +152,11 @@
 
         if (element) {
           // Activate any parent tabs (nested tables)
-          const currentTabSet = this.findAncestor(element, 'joomla-tab');
-          const parentTabSet = this.findAncestor(currentTabSet, 'joomla-tab');
+          const currentTabSet = element.closest('joomla-tab');
 
-          if (parentTabSet) {
-            const parentTab = this.findAncestor(currentTabSet, 'section');
+          if (this.isNested) {
+            const parentTabSet = currentTabSet.closest('joomla-tab');
+            const parentTab = currentTabSet.closest('section');
             parentTabSet.showTab(parentTab);
             // Now activate the given tab
             this.show(element);
@@ -167,6 +168,7 @@
       }
 
       // Convert tabs to accordian
+      self.checkView(self);
       window.addEventListener('resize', () => {
         self.checkView(self);
       });
@@ -380,14 +382,6 @@
           });
         }
       }
-    }
-
-    findAncestor(el, tagName) {
-      let element = el;
-      while (element.nodeName.toLowerCase() !== tagName) {
-        element = element.parentElement;
-      }
-      return element;
     }
 
     /* Method to dispatch events */

@@ -1,5 +1,6 @@
 (() => {
-  customElements.define('joomla-dropdown', class extends HTMLElement {
+  class JoomlaDropdownElement extends HTMLElement {
+    /* Attributes to monitor */
     static get observedAttributes() {
       return ['for'];
     }
@@ -12,42 +13,49 @@
       this.setAttribute('aria-labelledby', this.for.substring(1));
       const button = document.querySelector(this.for);
       const innerLinks = this.querySelectorAll('a');
-      const self = this;
 
-      if (!button.id) return;
+      if (!button.id) {
+        return;
+      }
       // var children = [].slice.call( menu[getElementsByTagName]('*'));
       // this.classList.add('dropdown');
 
-      button.setAttribute('aria-haspopup', 'true');
-      button.setAttribute('aria-expanded', 'false');
+      button.setAttribute('aria-haspopup', true);
+      button.setAttribute('aria-expanded', false);
 
-      button.addEventListener('click', (ev) => {
-        if (self.hasAttribute('expanded')) {
-          self.removeAttribute('expanded');
-          ev.target.setAttribute('aria-expanded', 'false');
+      button.addEventListener('click', (event) => {
+        if (this.hasAttribute('expanded')) {
+          this.removeAttribute('expanded');
+          event.target.setAttribute('aria-expanded', false);
         } else {
-          self.setAttribute('expanded', '');
-          ev.target.setAttribute('aria-expanded', 'true');
+          this.setAttribute('expanded', '');
+          event.target.setAttribute('aria-expanded', true);
         }
 
         document.addEventListener('click', (evt) => {
           if (evt.target !== button) {
-            if (!self.findAncestor(evt.target, 'joomla-dropdown')) {
-              self.close();
+            if (!this.findAncestor(evt.target, 'joomla-dropdown')) {
+              this.close();
             }
           }
         });
 
         innerLinks.forEach((innerLink) => {
           innerLink.addEventListener('click', () => {
-            self.close();
+            this.close();
           });
         });
       });
     }
 
     /*eslint-disable */
-    disconnectedCallback() { }
+    /* Method to dispatch events */
+    dispatchCustomEvent(eventName) {
+      const OriginalCustomEvent = new CustomEvent(eventName);
+      OriginalCustomEvent.relatedTarget = this;
+      this.dispatchEvent(OriginalCustomEvent);
+      this.removeEventListener(eventName, this);
+    }
 
     adoptedCallback(oldDocument, newDocument) { }
 
@@ -64,7 +72,7 @@
     close() {
       const button = document.querySelector(`#${this.getAttribute('aria-labelledby')}`);
       this.removeAttribute('expanded');
-      button.setAttribute('aria-expanded', 'false');
+      button.setAttribute('aria-expanded', false);
     }
 
     /* eslint-disable */
@@ -73,5 +81,7 @@
       return el;
     }
     /* eslint-enable */
-  });
+  }
+
+  customElements.define('joomla-dropdown', JoomlaDropdownElement);
 })();

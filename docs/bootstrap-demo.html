@@ -56,16 +56,17 @@
 		<h2>Dropdown</h2>
 
 
-		<button class="btn btn-secondary" id="dropdownMenuButton">
-			Dropdown button
-		</button>
+		<div class="joomla-dropdown-container">
+			<button class="btn btn-secondary" id="dropdownMenuButton">
+				Dropdown button
+			</button>
 
-
-		<joomla-dropdown for="#dropdownMenuButton">
-			<a class="dropdown-item" href="#">Action</a>
-			<a class="dropdown-item" href="#">Another action</a>
-			<a class="dropdown-item" href="#">Something else here</a>
-		</joomla-dropdown>
+			<joomla-dropdown for="#dropdownMenuButton">
+				<a class="dropdown-item" href="#">Action</a>
+				<a class="dropdown-item" href="#">Another action</a>
+				<a class="dropdown-item" href="#">Something else here</a>
+			</joomla-dropdown>
+		</div>
 
 		<hr>
 		<h2>Modal</h2>
@@ -78,7 +79,7 @@
 					<h4>I'm a Modal</h4>
 				</section>
 				<footer>
-					<button class="btn btn-secondary" data-dismiss>Close</button>
+					<button class="btn btn-danger" data-dismiss>Close</button>
 					<button class="btn btn-primary">Save changes</button>
 				</footer>
 			</joomla-modal>
