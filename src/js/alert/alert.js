@@ -91,17 +91,26 @@
       }
     }
 
-    /* Method to close the alert */
-    close(element = null) {
-      this.dispatchCustomEvent('joomla.alert.close');
-      this.addEventListener('transitionend', () => {
+    markAlertClosed() {
         this.dispatchCustomEvent('joomla.alert.closed');
         if (element) {
           element.parentNode.removeChild(element);
         } else {
           this.remove();
         }
-      }, false);
+    }
+
+    /* Method to close the alert */
+    close(element = null) {
+      this.dispatchCustomEvent('joomla.alert.close');
+      if (window.matchMedia('(prefers-reduced-motion)').matches)
+      {
+        this.addEventListener('transitionend', () => markAlertClosed, false);
+      }
+      else
+      {
+        markAlertClosed()
+      }
       this.classList.remove('joomla-alert--show');
     }
 
