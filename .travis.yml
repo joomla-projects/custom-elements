@@ -13,7 +13,7 @@ before_script:
 - bower install
 script:
 - eslint src
-- if [[ ! -z ${SAUCE_USERNAME} ]]; then wct --configFile saucelabs.conf.json --plugin sauce; fi
+- if [[ ! -z ${SAUCE_ACCESS_KEY} ]]; then wct --configFile saucelabs.conf.json --plugin sauce; fi
 notifications:
   email: false
 addons:
