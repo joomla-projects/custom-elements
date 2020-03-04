@@ -91,13 +91,13 @@
       }
     }
 
-    markAlertClosed() {
-        this.dispatchCustomEvent('joomla.alert.closed');
-        if (element) {
-          element.parentNode.removeChild(element);
-        } else {
-          this.remove();
-        }
+    markAlertClosed(element) {
+      this.dispatchCustomEvent('joomla.alert.closed');
+      if (element) {
+        element.parentNode.removeChild(element);
+      } else {
+        this.remove();
+      }
     }
 
     /* Method to close the alert */
@@ -105,11 +105,11 @@
       this.dispatchCustomEvent('joomla.alert.close');
       if (window.matchMedia('(prefers-reduced-motion)').matches)
       {
-        this.addEventListener('transitionend', () => markAlertClosed, false);
+        markAlertClosed(element);
       }
       else
       {
-        markAlertClosed()
+        this.addEventListener('transitionend', () => markAlertClosed(element), false);
       }
       this.classList.remove('joomla-alert--show');
     }
