@@ -91,17 +91,23 @@
       }
     }
 
+    markAlertClosed(element) {
+      this.dispatchCustomEvent('joomla.alert.closed');
+      if (element) {
+        element.parentNode.removeChild(element);
+      } else {
+        this.remove();
+      }
+    }
+
     /* Method to close the alert */
     close(element = null) {
       this.dispatchCustomEvent('joomla.alert.close');
-      this.addEventListener('transitionend', () => {
-        this.dispatchCustomEvent('joomla.alert.closed');
-        if (element) {
-          element.parentNode.removeChild(element);
-        } else {
-          this.remove();
-        }
-      }, false);
+      if (window.matchMedia('(prefers-reduced-motion)').matches) {
+        this.markAlertClosed(element);
+      } else {
+        this.addEventListener('transitionend', () => this.markAlertClosed(element), false);
+      }
       this.classList.remove('joomla-alert--show');
     }
 
