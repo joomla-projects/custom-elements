@@ -103,13 +103,10 @@
     /* Method to close the alert */
     close(element = null) {
       this.dispatchCustomEvent('joomla.alert.close');
-      if (window.matchMedia('(prefers-reduced-motion)').matches)
-      {
-        markAlertClosed(element);
-      }
-      else
-      {
-        this.addEventListener('transitionend', () => markAlertClosed(element), false);
+      if (window.matchMedia('(prefers-reduced-motion)').matches) {
+        this.markAlertClosed(element);
+      } else {
+        this.addEventListener('transitionend', () => this.markAlertClosed(element), false);
       }
       this.classList.remove('joomla-alert--show');
     }
