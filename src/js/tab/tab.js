@@ -198,8 +198,16 @@
       const activateTabFromLink = (e) => {
         e.preventDefault();
 
+        // Doing toggle for accordion
+        const justHide = this.view === 'accordion' && e.target.hasAttribute('active');
+
         if (this.hasActive) {
           this.hideCurrent();
+
+          if (justHide) {
+            this.hasActive = false;
+            return;
+          }
         }
 
         const currentTabLink = this.currentActive;
@@ -216,6 +224,7 @@
         // Emit shown event
         this.dispatchCustomEvent('joomla.tab.shown', e.target, this.querySelector(`#tab-${currentTabLink}`));
         this.saveState(`#tab-${e.target.hash.substring(1)}`);
+        this.hasActive = true;
       };
 
       tabs.forEach((tab) => {
