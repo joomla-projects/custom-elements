@@ -3,9 +3,9 @@ sudo: false
 dist: trusty
 language: node_js
 node_js:
-- '8'
+- '12'
 before_install:
-- if [[ `npm -v` != 5* ]]; then npm install --unsafe-perm --verbose -g npm@5; fi
+- if [[ `npm -v` != 6* ]]; then npm install --unsafe-perm --verbose -g npm@6; fi
 install:
 - npm install
 before_script:
