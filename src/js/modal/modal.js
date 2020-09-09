@@ -77,7 +77,6 @@
       }
     }
 
-
     disconnectedCallback() {
       if (this.triggerBtn) {
         this.triggerBtn.removeEventListener('click', this.open);
