@@ -18,6 +18,7 @@ joomla-tab {
 
 joomla-tab > ul {
   display: flex;
+  flex-flow: nowrap;
   padding: 0;
   margin: 0;
   overflow-x: auto;
