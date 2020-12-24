@@ -16,7 +16,7 @@
 	<body>
 
 		<!-- You can use the document as a place to set up your fixtures. -->
-		<test-fixture id="alert-element-basic">
+		<test-fixture id="alertElementBasic">
 			<template>
 				<joomla-alert type="info">
 					<p id="text">Has some text</p>
@@ -24,7 +24,7 @@
 			</template>
 		</test-fixture>
 
-		<test-fixture id="alert-element-dismiss">
+		<test-fixture id="alertElementDismiss">
 			<template>
 				<joomla-alert type="info" dismiss="true">
 					<p id="text">Has some text</p>
@@ -32,7 +32,7 @@
 			</template>
 		</test-fixture>
 
-		<test-fixture id="alert-element-acknowledge">
+		<test-fixture id="alertElementAcknowledge">
 			<template>
 				<joomla-alert type="info" acknowledge="true">
 					<p id="text">Has some text</p>
@@ -46,7 +46,7 @@
 				let myEl;
 
 				setup(() => {
-					myEl = fixture('alert-element-basic');
+					myEl = fixture('alertElementBasic');
 				});
 
 				test('Custom Element script is loaded', () => {
@@ -88,7 +88,7 @@
 				let myEl;
 
 				setup(() => {
-					myEl = fixture('alert-element-dismiss');
+					myEl = fixture('alertElementDismiss');
 				});
 
 				test('Has close button', function () {
@@ -111,7 +111,7 @@
 
 				test('Method close removes the alert', () => {
 					myEl.close();
-					assert.equal(fixture('alert-element-basic').length, undefined);
+					assert.equal(fixture('alertElementBasic').length, undefined);
 				});
 
 			});
@@ -121,7 +121,7 @@
 				let myEl;
 
 				setup(() => {
-					myEl = fixture('alert-element-acknowledge');
+					myEl = fixture('alertElementAcknowledge');
 				});
 
 				test('Has close button', function () {
@@ -144,7 +144,7 @@
 
 				test('Method close removes the alert', () => {
 					myEl.close();
-					assert.equal(fixture('alert-element-basic').length, undefined);
+					assert.equal(fixture('alertElementBasic').length, undefined);
 				});
 
 			});
