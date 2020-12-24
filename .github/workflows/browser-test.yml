@@ -23,9 +23,6 @@ jobs:
             ${{ runner.OS }}-
       - run: npm ci
       - run: npm run lint
-      # Currently we use bower's version of the testing matrix - we should transition this to NPM ASAP
-      - run: npm install --unsafe-perm --verbose -g bower
-      - run: bower install
       - name: Run tests in Sauce
         run: npm run ci-test
         env:
