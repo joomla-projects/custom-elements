@@ -4,6 +4,7 @@
    "persistent":"false",
    "skipCleanup":"true",
    "compile":"never",
+   "npm": true,
    "plugins":{
       "local":{
          "browsers":[
