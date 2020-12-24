@@ -1,16 +1,16 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 "use strict";
 
-function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof2 = function _typeof2(obj) { return typeof obj; }; } else { _typeof2 = function _typeof2(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof2(obj); }
-
 function _typeof(obj) {
-  if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
     _typeof = function _typeof(obj) {
-      return _typeof2(obj);
+      return typeof obj;
     };
   } else {
     _typeof = function _typeof(obj) {
-      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof2(obj);
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
     };
   }
 
@@ -21,22 +21,6 @@ function _classCallCheck(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
   }
-}
-
-function _possibleConstructorReturn(self, call) {
-  if (call && (_typeof(call) === "object" || typeof call === "function")) {
-    return call;
-  }
-
-  return _assertThisInitialized(self);
-}
-
-function _assertThisInitialized(self) {
-  if (self === void 0) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }
-
-  return self;
 }
 
 function _defineProperties(target, props) {
@@ -68,6 +52,41 @@ function _inherits(subClass, superClass) {
     }
   });
   if (superClass) _setPrototypeOf(subClass, superClass);
+}
+
+function _createSuper(Derived) {
+  var hasNativeReflectConstruct = _isNativeReflectConstruct();
+
+  return function _createSuperInternal() {
+    var Super = _getPrototypeOf(Derived),
+        result;
+
+    if (hasNativeReflectConstruct) {
+      var NewTarget = _getPrototypeOf(this).constructor;
+
+      result = Reflect.construct(Super, arguments, NewTarget);
+    } else {
+      result = Super.apply(this, arguments);
+    }
+
+    return _possibleConstructorReturn(this, result);
+  };
+}
+
+function _possibleConstructorReturn(self, call) {
+  if (call && (_typeof(call) === "object" || typeof call === "function")) {
+    return call;
+  }
+
+  return _assertThisInitialized(self);
+}
+
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
 }
 
 function _wrapNativeSuper(Class) {
@@ -104,21 +123,8 @@ function _wrapNativeSuper(Class) {
   return _wrapNativeSuper(Class);
 }
 
-function isNativeReflectConstruct() {
-  if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-  if (Reflect.construct.sham) return false;
-  if (typeof Proxy === "function") return true;
-
-  try {
-    Date.prototype.toString.call(Reflect.construct(Date, [], function () {}));
-    return true;
-  } catch (e) {
-    return false;
-  }
-}
-
 function _construct(Parent, args, Class) {
-  if (isNativeReflectConstruct()) {
+  if (_isNativeReflectConstruct()) {
     _construct = Reflect.construct;
   } else {
     _construct = function _construct(Parent, args, Class) {
@@ -132,6 +138,19 @@ function _construct(Parent, args, Class) {
   }
 
   return _construct.apply(null, arguments);
+}
+
+function _isNativeReflectConstruct() {
+  if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+  if (Reflect.construct.sham) return false;
+  if (typeof Proxy === "function") return true;
+
+  try {
+    Date.prototype.toString.call(Reflect.construct(Date, [], function () {}));
+    return true;
+  } catch (e) {
+    return false;
+  }
 }
 
 function _isNativeFunction(fn) {
@@ -155,10 +174,10 @@ function _getPrototypeOf(o) {
 }
 
 (function () {
-  customElements.define('joomla-tab',
-  /*#__PURE__*/
-  function (_HTMLElement) {
+  customElements.define('joomla-tab', /*#__PURE__*/function (_HTMLElement) {
     _inherits(_class, _HTMLElement);
+
+    var _super = _createSuper(_class);
 
     _createClass(_class, [{
       key: "recall",
@@ -197,7 +216,7 @@ function _getPrototypeOf(o) {
 
       _classCallCheck(this, _class);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(_class).call(this));
+      _this = _super.call(this);
       _this.hasActive = false;
       _this.currentActive = '';
       _this.hasNested = false;
@@ -397,10 +416,17 @@ function _getPrototypeOf(o) {
         /** Activate Tab */
 
         var activateTabFromLink = function activateTabFromLink(e) {
-          e.preventDefault();
+          e.preventDefault(); // Doing toggle for accordion
+
+          var justHide = _this4.view === 'accordion' && e.target.hasAttribute('active');
 
           if (_this4.hasActive) {
             _this4.hideCurrent();
+
+            if (justHide) {
+              _this4.hasActive = false;
+              return;
+            }
           }
 
           var currentTabLink = _this4.currentActive; // Set the selected tab as active
@@ -421,6 +447,8 @@ function _getPrototypeOf(o) {
           _this4.dispatchCustomEvent('joomla.tab.shown', e.target, _this4.querySelector("#tab-".concat(currentTabLink)));
 
           _this4.saveState("#tab-".concat(e.target.hash.substring(1)));
+
+          _this4.hasActive = true;
         };
 
         tabs.forEach(function (tab) {
@@ -612,7 +640,7 @@ function _getPrototypeOf(o) {
     }]);
 
     return _class;
-  }(_wrapNativeSuper(HTMLElement)));
+  }( /*#__PURE__*/_wrapNativeSuper(HTMLElement)));
 })();
 
 },{}]},{},[1]);
