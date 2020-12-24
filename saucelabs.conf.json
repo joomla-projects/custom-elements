@@ -1,6 +1,7 @@
 {
     "verbose": "true",
     "compile": "always",
+    "npm": true,
     "plugins": {
         "sauce": {
             "disabled": true,
