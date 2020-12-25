@@ -29,4 +29,4 @@ jobs:
         with:
           username: ${{ secrets.SAUCE_USERNAME }}
           accessKey: ${{ secrets.SAUCE_ACCESS_KEY }}
-      - run: wct --configFile saucelabs.conf.json --plugin sauce
+      - run: npm run ci-test

@@ -54,7 +54,8 @@
   "scripts": {
     "build": "grunt",
     "lint": "eslint src",
-    "lint-fix": "eslint src --fix"
+    "lint-fix": "eslint src --fix",
+    "ci-test": "wct --configFile saucelabs.conf.json --plugin sauce"
   },
   "browserify": {
     "transform": [
