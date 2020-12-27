@@ -40,6 +40,7 @@
     "eslint-plugin-import": "latest",
     "eslint-plugin-jsx-a11y": "latest",
     "eslint-plugin-react": "latest",
+    "foundation-sites": "^6.6.3",
     "grunt": "latest",
     "grunt-babel": "latest",
     "grunt-browserify": "latest",
@@ -50,6 +51,7 @@
     "grunt-shell": "latest",
     "node-sass": "^4.14.1",
     "postcss": "^8.2.1",
+    "uikit": "^3.6.5",
     "wct-browser-legacy": "latest",
     "web-component-tester": "latest"
   },

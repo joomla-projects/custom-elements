@@ -77,7 +77,7 @@ module.exports = (grunt) => {
   });
 
   // Create the Custom Elements
-  grunt.registerTask('createElements', 'Create the Custom Elemets', () => {
+  grunt.registerTask('createElements', 'Create the Custom Elements', () => {
     // Create the custom element
     const createElement = (element, settings) => {
       let tmpJs = '';
@@ -172,13 +172,9 @@ module.exports = (grunt) => {
   });
 
   // Cleanup process
-  grunt.registerTask('clearFiles', 'Clean up', () => {
-
-    // Remove the minified/non minified css
-    // deleteFolderRecursive('dist/css');
-
+  grunt.registerTask('clearTempFiles', 'Clean up', () => {
     grunt.settings.elements.forEach((element) => {
-      // Remove the extracripts
+      // Remove the extra scripts
       if (grunt.file.exists('src/js/' + element + '/' + element + '_es6.js')) {
         grunt.file.delete('src/js/' + element + '/' + element + '_es6.js');
       }
@@ -187,23 +183,45 @@ module.exports = (grunt) => {
 
   // Copy files to the docs and demo foders
   grunt.registerTask('copyDist', 'Copy the distribution files to docs and demo', () => {
+    // Clean out CSS Assets for generation of new files
+    deleteFolderRecursive('docs/_media/css');
+
     // Copy our assets to the docs folder + a copy of CSS files from major CSS providers
-    grunt.config.set('copy.docscss.files', [{
+    grunt.config.set('copy.docscss.files', [
+        {
+        expand: true,
+        filter: 'isFile',
+        cwd: 'dist/css/',
+        src: ['*'],
+        dest: 'docs/_media/css/'
+      },
+      {
+        expand: true,
+        filter: 'isFile',
+        cwd: 'node_modules/bootstrap/dist/css/',
+        src: ['bootstrap.min.css', 'bootstrap.min.css.map'],
+        dest: 'docs/_media/css/'
+      },
+      {
+        expand: true,
+        filter: 'isFile',
+        cwd: 'node_modules/foundation-sites/dist/css/',
+        src: ['foundation.min.css', 'foundation.min.css.map'],
+        dest: 'docs/_media/css/'
+      },
+      {
       expand: true,
-      filter: 'isFile',
-      cwd: 'dist/css/',
-      src: ['*'],
-      dest: 'docs/_media/css/'
-    },
-    {
-      expand: true,
-      filter: 'isFile',
-      cwd: 'node_modules/bootstrap/dist/css/',
-      src: ['bootstrap.min.css', 'bootstrap.min.css.map'],
-      dest: 'docs/_media/css/'
-    }]);
+        filter: 'isFile',
+        cwd: 'node_modules/uikit/dist/css/',
+        src: ['uikit.min.css'],
+        dest: 'docs/_media/css/'
+      }
+    ]);
 
     grunt.task.run('copy:docscss');
+
+    // Clean out JS Assets for generation of new files
+    deleteFolderRecursive('docs/_media/js');
 
     // Put a copy in the docs folder
     grunt.config.set('copy.docsjs.files', [{
@@ -218,6 +236,7 @@ module.exports = (grunt) => {
   });
 
   grunt.registerTask('elements', () => {
+    // Clean the dist folders out for generation of new assets
     deleteFolderRecursive('dist/css')
     deleteFolderRecursive('dist/js');
 
@@ -228,7 +247,7 @@ module.exports = (grunt) => {
     grunt.task.run('createElements');
 
     // Do the clean up
-    grunt.task.run('clearFiles');
+    grunt.task.run('clearTempFiles');
 
     // Copy files to docs and demo
     grunt.task.run('copyDist');
