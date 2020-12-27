@@ -8,7 +8,7 @@
             "browsers": [
                 {
                     "browserName": "safari",
-                    "platform": "OS X 10.15",
+                    "platform": "OS X 10.11",
                     "version": "latest"
                 },
                 {
