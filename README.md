@@ -3,9 +3,9 @@
 Build Status
 ---------------------
 
-| Travis-CI  | GreenKeeper | Webcomponents.org |
+| GitHub Actions  | GreenKeeper | Webcomponents.org |
 | ------------- | ------------- | ------------- |
-| [![Build Status](https://travis-ci.org/joomla-projects/custom-elements.svg?branch=master)](https://travis-ci.org/joomla-projects/custom-elements) | [![Greenkeeper badge](https://badges.greenkeeper.io/joomla-projects/custom-elements.svg)](https://greenkeeper.io/) | [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/joomla-projects/custom-elements) |
+| ![Browser Test Status](https://github.com/joomla-projects/custom-elements/workflows/Browser%20Testing/badge.svg) | [![Greenkeeper badge](https://badges.greenkeeper.io/joomla-projects/custom-elements.svg)](https://greenkeeper.io/) | [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/joomla-projects/custom-elements) |
 
 | Sauce Labs |
 | ------------- |
