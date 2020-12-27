@@ -23,7 +23,7 @@ The simplified version of the custom elements
 ```
 
 ### Modal demo:
-
+```html
 <div class="mermaid">
 <button type="button" class="btn btn-primary" data-href="#exampleModal1">Launch demo modal</button>
 <joomla-modal id="exampleModal1" title="Modal title" close-button-title="Close" width="100%" height="400px">
@@ -47,3 +47,4 @@ The simplified version of the custom elements
 </footer>
 </joomla-modal>
 </div>
+```
