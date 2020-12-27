@@ -193,12 +193,12 @@ module.exports = (grunt) => {
   grunt.registerTask('polyfillsDist', 'Create a copy of the polyfills', () => {
     // Copy polyfills in dist and demo folders
     if (grunt.file.exists('node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js')) {
-      let polyfills = ['webcomponents-hi-ce', 'webcomponents-hi-sd-ce', 'webcomponents-hi', 'webcomponents-lite', 'webcomponents-loader', 'webcomponents-sd-ce'];
+      let polyfills = ['webcomponents-ce', 'webcomponents-sd', 'webcomponents-sd-ce', 'webcomponents-sd-ce-pf'];
 
       polyfills.forEach((polyfill) => {
         // Put a copy of webcomponentjs polyfills in the dist folder
         grunt.config.set('copy.' + polyfill + '.files', [{
-          src: 'node_modules/@webcomponents/webcomponentsjs/' + polyfill + '.js',
+          src: 'node_modules/@webcomponents/webcomponentsjs/bundles/' + polyfill + '.js',
           dest: 'dist/polyfills/' + polyfill + '.js'
         }]);
 
