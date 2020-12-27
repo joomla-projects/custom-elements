@@ -196,38 +196,41 @@ module.exports = (grunt) => {
       let polyfills = ['webcomponents-ce', 'webcomponents-sd', 'webcomponents-sd-ce', 'webcomponents-sd-ce-pf'];
 
       polyfills.forEach((polyfill) => {
-        // Put a copy of webcomponentjs polyfills in the dist folder
+        // Put a copy of webcomponentjs polyfills (and their maps) in the dist folder
         grunt.config.set('copy.' + polyfill + '.files', [{
           src: 'node_modules/@webcomponents/webcomponentsjs/bundles/' + polyfill + '.js',
           dest: 'dist/polyfills/' + polyfill + '.js'
-        }]);
-
-        grunt.task.run('copy:' + polyfill);
-
-        // Put a copy of webcomponentjs polyfills maps in the dist folder
-        grunt.config.set('copy.' + polyfill + '-map.files', [{
-          src: 'node_modules/@webcomponents/webcomponentsjs/' + polyfill + '.js.map',
+        },
+        {
+          src: 'node_modules/@webcomponents/webcomponentsjs/bundles/' + polyfill + '.js.map',
           dest: 'dist/polyfills/' + polyfill + '.js.map'
         }]);
 
-        grunt.task.run('copy:' + polyfill + '-map');
+        grunt.task.run('copy:' + polyfill);
       });
 
-      // Copy the Custom Elements polyfill
+      // Copy the full bundle polyfill for testing
+      grunt.config.set('copy.full-bundle.files', [{
+        src: 'node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js',
+        dest: 'dist/polyfills/webcomponents-bundle.js'
+      },
+      {
+        src: 'node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js.map',
+        dest: 'dist/polyfills/webcomponents-bundle.js.map'
+      }]);
+      grunt.task.run('copy:full-bundle');
+
+      // Copy the Custom Elements polyfill and it's map
       grunt.config.set('copy.ce.files', [{
         src: 'node_modules/@webcomponents/custom-elements/custom-elements.min.js',
         dest: 'dist/polyfills/webcomponents-ce.js'
-      }]);
-
-      grunt.task.run('copy:ce');
-
-      // Copy the Custom Elements polyfill map
-      grunt.config.set('copy.ce-map.files', [{
+      },
+      {
         src: 'node_modules/@webcomponents/custom-elements/custom-elements.min.js.map',
         dest: 'dist/polyfills/webcomponents-ce.js.map'
       }]);
 
-      grunt.task.run('copy:ce-map');
+      grunt.task.run('copy:ce');
 
       grunt.task.run('patchCE');
     }
