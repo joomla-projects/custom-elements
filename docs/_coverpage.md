@@ -16,4 +16,4 @@
 [Get Started](/quickstart)
 
 <!-- background color -->
-![color](rgb(55, 101, 78))
+<!-- ![color](rgb(55, 101, 78)) -->
