@@ -79,7 +79,7 @@ module.exports = (grunt) => {
 
       grunt.task.run('postcss:' + element);
 
-      // Autoprefix the CSS files
+      // Minify the CSS files
       grunt.config.set('cssmin.' + element + '.files', [{
         src: 'dist/css/' + grunt.settings.prefix + '-' + element + '.css',
         dest: 'dist/css/' + grunt.settings.prefix + '-' + element + '.min.css'
@@ -107,7 +107,7 @@ module.exports = (grunt) => {
         if (grunt.file.exists('src/scss/css/' + element + '.min.css')) {
           tmpCss = grunt.file.read('src/scss/css/' + element + '.min.css');
         }
-  
+
         tmpJs = grunt.file.read('src/js/' + element + '/' + element + '.js');
         tmpJs = tmpJs.replace(/joomla-/g, settings.prefix + '-');
         tmpJs = tmpJs.replace(/'{{stylesheet}}'/g, "`" + tmpCss + "`");
