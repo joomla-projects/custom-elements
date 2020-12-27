@@ -47,9 +47,9 @@ Every element has its own `.scss` file and there is a global `variables.scss` th
 Check these collections of custom elements running quite happily with the most popular CSS frameworks:
 
 ----
-<a href="/bootstrap-demo.html">Bootstrap</a>
+<a href="bootstrap-demo.html">Bootstrap</a>
 -----
-<a href="/foundation-demo.html">Foundation</a>
+<a href="foundation-demo.html">Foundation</a>
 -----
-<a href="/uikit-demo.html">UiKit</a>
+<a href="uikit-demo.html">UiKit</a>
 -----
