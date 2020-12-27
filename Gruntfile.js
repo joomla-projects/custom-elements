@@ -266,12 +266,19 @@ module.exports = (grunt) => {
 
   // Copy files to the docs and demo foders
   grunt.registerTask('copyDist', 'Copy the distribution files to docs and demo', () => {
-    // Put a copy in the docs folder
+    // Copy our assets to the docs folder + a copy of CSS files from major CSS providers
     grunt.config.set('copy.docscss.files', [{
       expand: true,
       filter: 'isFile',
       cwd: 'dist/css/',
       src: ['*'],
+      dest: 'docs/_media/css/'
+    },
+    {
+      expand: true,
+      filter: 'isFile',
+      cwd: 'node_modules/bootstrap/dist/css/',
+      src: ['bootstrap.min.css', 'bootstrap.min.css.map'],
       dest: 'docs/_media/css/'
     }]);
 

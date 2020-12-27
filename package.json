@@ -21,6 +21,7 @@
   ],
   "author": "Dimitrios Grammatikogiannis",
   "devDependencies": {
+    "@babel/core": "latest",
     "@babel/preset-env": "latest",
     "@lodder/grunt-postcss": "latest",
     "@polymer/test-fixture": "latest",
@@ -31,6 +32,7 @@
     "babel-minify": "latest",
     "babel-plugin-static-fs": "latest",
     "babelify": "latest",
+    "bootstrap": "^4.5.3",
     "browserify": "^17.0.0",
     "eslint": "latest",
     "eslint-config-airbnb": "latest",
@@ -84,9 +86,5 @@
       "tip"
     ],
     "browsers": "last 1 version"
-  },
-  "dependencies": {
-    "@babel/core": "latest",
-    "bootstrap": "^4.5.3"
   }
 }

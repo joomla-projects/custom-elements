@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 - Moved tests from Travis to GitHub Actions
+- Moved last dependencies to be devDependencies
+- Documentation cleanup
 
 ## 0.0.40
 0.0.39 still had the compiled assets from 0.0.38. This fixes that distribution issue.
