@@ -10,7 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Moved last dependencies to be devDependencies
 - Documentation cleanup
 - Remove dependencies on Bower
-- Update polyfills shipped to Web Components Version 2
+- No longer ship with Web Component Polyfills in the dist folder. These were a clone of existing polyfills that
+  can be found [here](https://github.com/webcomponents/polyfills/) and we recommend you pick a version of the polyfills
+  appropriate for your minimum browser requirements and load it async using the loader tool.
 
 ## 0.0.40
 0.0.39 still had the compiled assets from 0.0.38. This fixes that distribution issue.

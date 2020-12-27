@@ -19,10 +19,12 @@ $ grunt
 
 ## Using the elements
 
-Due to compatibility issues due to browsers support you need to have a polyfill, so your page will render as expected. The code for this is:
+Due to compatibility issues due to browsers support you need to have a polyfill, so your page will render as expected.
+The code for this is available from the Polyfills repo on GitHub. Click [here](https://github.com/webcomponents/polyfills)
+for full information:
 - A shim so ES5 code can run flawlessly into ES6 Browsers
 ```html
-<script src="webcomponents-loader.js"></script>
+<script src="custom-elements-es5-adapter.js"></script>
 ```
 - A polyfill so custom elements can be used in older Browsers
 ```html
