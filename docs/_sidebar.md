@@ -7,6 +7,7 @@
  - [Dropdown](/dropdown)
  - [Modal](/modal)
  - [Panels](/panels)
+ - [Tab](/tab)
  - [Tip](/tip)
 
 - Customization
