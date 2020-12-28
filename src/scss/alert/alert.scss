@@ -1,33 +1,6 @@
 // Alerts
 
 //
-// Functions
-//
-
-// Retrieve color Sass maps
-@function color($key: "blue") {
-  @return map-get($colors, $key);
-}
-
-@function theme-color($key: "primary") {
-  @return map-get($theme-colors, $key);
-}
-
-@function gray($key: "100") {
-  @return map-get($grays, $key);
-}
-
-// Request a theme color level
-@function theme-color-level($color-name: "primary", $level: 0) {
-  $color: theme-color($color-name);
-  $color-base: if($level > 0, $black, $white);
-  $level: abs($level);
-
-  @return mix($color-base, $color, $level * $theme-color-interval);
-}
-
-
-//
 // Mixins
 //
 
@@ -57,6 +30,18 @@
 //
 
 @import "../variables";
+
+//
+// Functions
+//
+
+// Request a theme color level
+@function color-level($color, $level: 0) {
+  $color-base: if($level > 0, $black, $white);
+  $level: abs($level);
+
+  @return mix($color-base, $color, $level * $theme-color-interval);
+}
 
 
 //
@@ -133,7 +118,7 @@ joomla-alert {
 // Alternate styles
 @each $color, $value in $alert-colors {
   joomla-alert[type="#{$color}"] {
-    @include alert-variant(theme-color-level($color, -10), theme-color-level($color, -9), theme-color-level($color, 6));
+    @include alert-variant(color-level($value, -10), color-level($value, -9), color-level($value, 6));
   }
 }
 
