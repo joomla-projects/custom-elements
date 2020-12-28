@@ -55,7 +55,7 @@ The simplified version of the a simple tab:
 	</section>
 </joomla-panels>
 ```
-### Tab demo:
+### Panels demo:
 
 <div class="mermaid">
 <joomla-panels view="accordion" recall="false">
