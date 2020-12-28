@@ -84,3 +84,22 @@ Accessible tabs specification is defined in WAI-ARIA Authoring Practices 1.1.
 
 https://www.w3.org/TR/wai-aria-practices-1.1/#tabpanel
 See: [WAI ARIA Practices - 3.22 Tabs](https://www.w3.org/TR/wai-aria-practices-1.1/).
+
+## Events
+The custom element exposes a few events for hooking into tabs functionality.
+
+|Event			|Description								     			|
+|-----------------------|-----------------------------------------------------------------------------------------------|
+|joomla.tab.show		|This event fires immediately when the tab is shown in the dom.				|
+|joomla.tab.shown		|This event fires after the tab is shown in the UI.				|
+|joomla.tab.hide		|This event fires immediately when the active tab is hidden in the dom.|
+|joomla.tab.hidden		|This event fires after the tab has been hidden in the UI.|
+
+
+Example:
+Add some functionality when the tab is being shown:
+```js
+el.addEventListener('joomla.tab.show', function() {
+  alert('Impressed!')
+})
+```
