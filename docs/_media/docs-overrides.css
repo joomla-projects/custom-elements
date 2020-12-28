@@ -1,0 +1,4 @@
+/** Ensure joomla tab element doesn't get any padding from the docs stylesheet */
+.markdown-section joomla-tab ul {
+  padding-left: 0;
+}
