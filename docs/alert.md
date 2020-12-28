@@ -56,7 +56,7 @@ The simplified version of the custom elements
 <button role="button" id="insertNewFloated" class="btn btn-success">Create a floated alert</button>
 </p>
 
-## Attibutes
+## Attributes
 Control the design and functionality of the custom element through attributes.
 
 
@@ -214,7 +214,7 @@ el.close();
 
 Accessible alert specification is defined in WAI-ARIA Authoring Practices 1.1.
 
-See: [WAI ARIA Practices - 2.3 Alert](https://www.w3.org/TR/wai-aria-practices-1.1/).
+See: [WAI ARIA Practices - 3.2 Alert](https://www.w3.org/TR/wai-aria-practices-1.1/).
 
 ### Keyboard Interaction
 
