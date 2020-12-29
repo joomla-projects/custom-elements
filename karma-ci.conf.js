@@ -1,5 +1,10 @@
 // Karma configuration
 module.exports = function (config) {
+  if (!process.env.SAUCE_USERNAME || !process.env.SAUCE_ACCESS_KEY) {
+    console.log('Make sure the SAUCE_USERNAME and SAUCE_ACCESS_KEY environment variables are set.')
+    process.exit(1)
+  }
+
     // Browsers to run on Sauce Labs
   const customLaunchers = {
     sl_chrome: {
@@ -66,7 +71,7 @@ module.exports = function (config) {
     port: 9876,
     colors: true,
     sauceLabs: {
-      testName: 'Karma and Sauce Labs demo',
+      testName: 'Custom Elements Tests',
       recordScreenshots: false,
       connectOptions: {
         logfile: 'sauce_connect.log'
