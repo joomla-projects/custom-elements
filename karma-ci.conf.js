@@ -57,13 +57,10 @@ module.exports = function (config) {
     ],
 
     plugins: [
-      require('karma-chrome-launcher'),
       'karma-jasmine',
       'karma-fixture',
       'karma-html2js-preprocessor',
     ],
-
-    reporters: ['dots'],
 
     // web server port
     port: 9899,
@@ -76,21 +73,12 @@ module.exports = function (config) {
 
     sauceLabs: {
       testName: 'Custom Elements Tests',
-      username: process.env.SAUCE_USERNAME,
-      accessKey: process.env.SAUCE_ACCESS_KEY,
-      startConnect: true,
-      connectOptions: {
-        port: 5757,
-        logfile: 'sauce_connect.log'
-      }
     },
 
     captureTimeout: 120000,
     customLaunchers: customLaunchers,
-
-    // start these browsers
-    // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
     browsers: Object.keys(customLaunchers),
+    reporters: ['dots', 'saucelabs'],
     singleRun: true
   });
 };
