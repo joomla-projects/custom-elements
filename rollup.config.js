@@ -74,53 +74,53 @@ const buildSettings = async () => {
 
   scssFiles.forEach((scssFile) => {
     const el = scssFile.replace('src/scss/', '').replace('/index.scss', '')
-    console.log(el)
-    finalSettings.push({
-    input: `src/scss/${el}/index.scss`,
-    plugins: [
-      sass({
-        output: false,
-        processor: css => postcss([autoprefixer])
-          .process(css)
-          .then(async (result) => {
-            const path1 = `dist/css/joomla-${el}.css`;
-            const path2 = `docs/_media/css/joomla-${el}.css`;
-            if (!existsSync(dirname(path1))) {
-              await mkdir(dirname(path1), {recursive: true})
-            }
-            await writeFile(path1, result.css, {encoding: 'utf8'});
-            if (!existsSync(dirname(path2))) {
-              await mkdir(dirname(path2), {recursive: true})
-            }
-            await writeFile(path2, result.css, {encoding: 'utf8'});
 
-          })
-      }),
-    ],
+    finalSettings.push({
+      input: `src/scss/${el}/index.scss`,
+      plugins: [
+        sass({
+          output: false,
+          processor: css => postcss([autoprefixer])
+            .process(css)
+            .then(async (result) => {
+              const path1 = `dist/css/joomla-${el}.css`;
+              const path2 = `docs/_media/css/joomla-${el}.css`;
+              if (!existsSync(dirname(path1))) {
+                await mkdir(dirname(path1), {recursive: true})
+              }
+              await writeFile(path1, result.css, {encoding: 'utf8'});
+              if (!existsSync(dirname(path2))) {
+                await mkdir(dirname(path2), {recursive: true})
+              }
+              await writeFile(path2, result.css, {encoding: 'utf8'});
+
+            })
+        }),
+      ],
     });
 
     finalSettings.push({
-    input: `src/scss/${el}/index.scss`,
-    plugins: [
-      sass({
-        output: false,
-        processor: css => postcss([autoprefixer, cssnano])
-          .process(css)
-          .then(async (result) => {
-            const path1 = `dist/css/joomla-${el}.min.css`;
-            const path2 = `docs/_media/css/joomla-${el}.min.css`;
-            if (!existsSync(dirname(path1))) {
-              await mkdir(dirname(path1), {recursive: true})
-            }
-            await writeFile(path1, result.css, {encoding: 'utf8'});
-            if (!existsSync(dirname(path2))) {
-              await mkdir(dirname(path2), {recursive: true})
-            }
-            await writeFile(path2, result.css, {encoding: 'utf8'});
+      input: `src/scss/${el}/index.scss`,
+      plugins: [
+        sass({
+          output: false,
+          processor: css => postcss([autoprefixer, cssnano])
+            .process(css)
+            .then(async (result) => {
+              const path1 = `dist/css/joomla-${el}.min.css`;
+              const path2 = `docs/_media/css/joomla-${el}.min.css`;
+              if (!existsSync(dirname(path1))) {
+                await mkdir(dirname(path1), {recursive: true})
+              }
+              await writeFile(path1, result.css, {encoding: 'utf8'});
+              if (!existsSync(dirname(path2))) {
+                await mkdir(dirname(path2), {recursive: true})
+              }
+              await writeFile(path2, result.css, {encoding: 'utf8'});
 
-          })
-      }),
-    ],
+            })
+        }),
+      ],
     });
   })
 
