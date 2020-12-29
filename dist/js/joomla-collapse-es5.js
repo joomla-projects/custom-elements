@@ -155,119 +155,99 @@ function _createSuper(Derived) {
 }
 
 (function () {
-  var JoomlaDropdownElement = /*#__PURE__*/function (_HTMLElement) {
-    _inherits(JoomlaDropdownElement, _HTMLElement);
+  customElements.define('joomla-collapse', /*#__PURE__*/function (_HTMLElement) {
+    _inherits(_class, _HTMLElement);
 
-    var _super = _createSuper(JoomlaDropdownElement);
+    var _super = _createSuper(_class);
 
-    function JoomlaDropdownElement() {
-      _classCallCheck(this, JoomlaDropdownElement);
+    function _class() {
+      _classCallCheck(this, _class);
 
       return _super.apply(this, arguments);
     }
 
-    _createClass(JoomlaDropdownElement, [{
+    _createClass(_class, [{
       key: "connectedCallback",
       value: function connectedCallback() {
-        var _this = this;
+        var self = this; // id is required
 
-        this.setAttribute('aria-labelledby', this.for.substring(1));
-        var button = document.querySelector(this.for);
-        var innerLinks = this.querySelectorAll('a');
-
-        if (!button.id) {
-          return;
-        } // var children = [].slice.call( menu[getElementsByTagName]('*'));
-        // this.classList.add('dropdown');
-
-
-        button.setAttribute('aria-haspopup', true);
-        button.setAttribute('aria-expanded', false);
-        button.addEventListener('click', function (event) {
-          if (_this.hasAttribute('expanded')) {
-            _this.removeAttribute('expanded');
-
-            event.target.setAttribute('aria-expanded', false);
+        if (!this.id) return;
+        var linked = [].slice.call(document.querySelectorAll("[href=\"#".concat(this.id, "\"],[data-target=\"#").concat(this.id, "\"]")));
+        linked.forEach(function (element) {
+          if (!self.state || self.state && self.state === 'closed') {
+            self.state = 'closed';
+            element.setAttribute('aria-expanded', 'false');
+            element.setAttribute('aria-controls', self.id);
           } else {
-            _this.setAttribute('expanded', '');
-
-            event.target.setAttribute('aria-expanded', true);
+            element.setAttribute('aria-expanded', 'true');
+            element.setAttribute('aria-controls', self.id);
           }
 
-          document.addEventListener('click', function (evt) {
-            if (evt.target !== button) {
-              if (!_this.findAncestor(evt.target, 'joomla-dropdown')) {
-                _this.close();
-              }
-            }
-          });
-          innerLinks.forEach(function (innerLink) {
-            innerLink.addEventListener('click', function () {
-              _this.close();
-            });
+          element.addEventListener('click', function (event) {
+            var colId = '';
+            if (!event.target.hasAttribute('data-target')) colId = event.target.getAttribute('href').replace('#', '');
+            if (!event.target.hasAttribute('href')) colId = event.target.getAttribute('data-target').replace('#', '');
+            event.preventDefault();
+            event.stopPropagation();
+            document.getElementById(colId).toggle();
           });
         });
       }
-      /*eslint-disable */
-
-      /* Method to dispatch events */
-
     }, {
-      key: "dispatchCustomEvent",
-      value: function dispatchCustomEvent(eventName) {
-        var OriginalCustomEvent = new CustomEvent(eventName);
-        OriginalCustomEvent.relatedTarget = this;
-        this.dispatchEvent(OriginalCustomEvent);
-        this.removeEventListener(eventName, this);
+      key: "disconnectedCallback",
+      value: function disconnectedCallback() {
+        var linked = document.querySelector("[href=\"#".concat(this.id, "\"]"));
+        if (!linked) linked = document.querySelector("[data-target=\"#".concat(this.id, "\"]"));
+
+        if (linked) {
+          linked.removeEventListener('click', this);
+        }
       }
-    }, {
-      key: "adoptedCallback",
-      value: function adoptedCallback(oldDocument, newDocument) {}
     }, {
       key: "attributeChangedCallback",
       value: function attributeChangedCallback(attr, oldValue, newValue) {
-      }
-      /* eslint-enable */
+        var linked = document.querySelector("[href=\"#".concat(this.id, "\"]"));
 
-    }, {
-      key: "close",
-      value: function close() {
-        var button = document.querySelector("#".concat(this.getAttribute('aria-labelledby')));
-        this.removeAttribute('expanded');
-        button.setAttribute('aria-expanded', false);
-      }
-      /* eslint-disable */
+        switch (attr) {
+          case 'state':
+            if (newValue === 'closed') {
+              linked.setAttribute('aria-expanded', 'false');
+            } else if (newValue === 'open') {
+              linked.setAttribute('aria-expanded', 'true');
+            }
 
-    }, {
-      key: "findAncestor",
-      value: function findAncestor(el, tagName) {
-        while ((el = el.parentElement) && el.nodeName.toLowerCase() !== tagName) {
+            break;
         }
-
-        return el;
       }
-      /* eslint-enable */
-
     }, {
-      key: "for",
+      key: "toggle",
+      value: function toggle() {
+        var linked = document.querySelector("[href=\"#".concat(this.id, "\"]"));
+        if (!linked) linked = document.querySelector("[data-target=\"#".concat(this.id, "\"]"));
+
+        if (this.state === 'closed') {
+          this.state = 'open';
+          linked.setAttribute('aria-expanded', 'true');
+        } else {
+          this.state = 'closed';
+          linked.setAttribute('aria-expanded', 'false');
+        }
+      }
+    }, {
+      key: "state",
       get: function get() {
-        return this.getAttribute('for');
+        return this.getAttribute('state');
       },
       set: function set(value) {
-        return this.setAttribute('for', value);
+        return this.setAttribute('state', value);
       }
     }], [{
       key: "observedAttributes",
-
-      /* Attributes to monitor */
       get: function get() {
-        return ['for'];
+        return ['state'];
       }
     }]);
 
-    return JoomlaDropdownElement;
-  }( /*#__PURE__*/_wrapNativeSuper(HTMLElement));
-
-  customElements.define('joomla-dropdown', JoomlaDropdownElement);
+    return _class;
+  }( /*#__PURE__*/_wrapNativeSuper(HTMLElement)));
 })();
-//# sourceMappingURL=joomla-dropdown-es5.js.map

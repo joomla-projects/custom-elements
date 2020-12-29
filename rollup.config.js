@@ -1,9 +1,6 @@
 import { terser } from "rollup-plugin-terser";
 import { babel } from '@rollup/plugin-babel';
 const pack = require('./package.json');
-const { deleteFolderRecursive } = require('./build/helpers')
-
-deleteFolderRecursive('dist/js')
 
 async function main() {
     const buildType = typeof process.env.ROLLUP_BUILD_TYPE !== "undefined" ? process.env.ROLLUP_BUILD_TYPE : "modern";
@@ -28,9 +25,9 @@ async function main() {
             ]
         }
 
-        if (buildType === 'modern') {
+        if (buildType === 'legacy' && minifiedBuild) {
             currentObject.output.push({
-              file: 'docs/_media/js/' + settings.prefix + '-' + pkg + (buildType === 'legacy' ? '-es5' : '') + (minifiedBuild ? '.min' : '') + '.js',
+              file: 'docs/_media/js/' + settings.prefix + '-' + pkg + '-es5.min.js',
               sourcemap: true
             });
         }

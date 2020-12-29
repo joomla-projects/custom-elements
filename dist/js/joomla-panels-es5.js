@@ -665,4 +665,3 @@ function _createSuper(Derived) {
     return _class;
   }( /*#__PURE__*/_wrapNativeSuper(HTMLElement)));
 })();
-//# sourceMappingURL=joomla-panels-es5.js.map

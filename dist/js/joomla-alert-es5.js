@@ -434,4 +434,3 @@ function _createSuper(Derived) {
 
   customElements.define('joomla-alert', JoomlaAlertElement);
 })();
-//# sourceMappingURL=joomla-alert-es5.js.map

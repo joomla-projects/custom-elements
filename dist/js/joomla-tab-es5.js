@@ -620,4 +620,3 @@ function _createSuper(Derived) {
     return _class;
   }( /*#__PURE__*/_wrapNativeSuper(HTMLElement)));
 })();
-//# sourceMappingURL=joomla-tab-es5.js.map
