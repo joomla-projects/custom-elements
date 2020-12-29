@@ -3,3 +3,10 @@
 /dist/**
 /docs/**
 /test/**
+packages/alert/dist
+packages/dropdown/dist
+packages/collapse/dist
+packages/modal/dist
+packages/panels/dist
+packages/tab/dist
+packages/tip/dist
