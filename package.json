@@ -48,8 +48,8 @@
     "build": "node cleanup.js && node ./node_modules/rollup/dist/bin/rollup -c rollup.config.js",
     "lint": "node ./node_modules/eslint/bin/eslint.js src",
     "lint-fix": "node ./node_modules/eslint/bin/eslint.js src --fix",
-    "test": "",
-    "ci-test": "wct --configFile saucelabs.conf.json --plugin sauce"
+    "test": "node node_modules/karma/bin/karma start karma.conf.js --single-run",
+    "ci-test": "node node_modules/karma/bin/karma start karma-ci.conf.js --single-run"
   },
   "settings": {
     "prefix": "joomla",
