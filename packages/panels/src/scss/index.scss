@@ -1,0 +1,188 @@
+// Tab
+
+//
+// Functions
+//
+
+// Retrieve color Sass maps
+@function color($key: "blue") {
+  @return map-get($colors, $key);
+}
+
+@function theme-color($key: "primary") {
+  @return map-get($theme-colors, $key);
+}
+
+@function gray($key: "100") {
+  @return map-get($grays, $key);
+}
+
+// Request a theme color level
+@function theme-color-level($color-name: "primary", $level: 0) {
+  $color: theme-color($color-name);
+  $color-base: if($level > 0, $black, $white);
+  $level: abs($level);
+
+  @return mix($color-base, $color, $level * $theme-color-interval);
+}
+
+
+//
+// Variables
+//
+
+@import "variables";
+
+
+//
+// Base styles
+//
+
+joomla-panels {
+  display: flex;
+  flex-direction: column;
+
+  > ul {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    list-style: outside none none;
+    background-color: $tab-ul-bg;
+
+    &[role="tablist"] {
+      padding: 0;
+      margin: 0;
+    }
+
+  }
+
+  a[role="tab"] {
+    position: relative;
+    display: block;
+    padding: $tab-link-padding;
+    color: $tab-link-colour;
+    text-decoration: none;
+
+    &[active] {
+      background-color: $tab-link-bg-colour-active;
+
+      &::after {
+        position: absolute;
+        right: 0;
+        bottom: -1px;
+        left: 0;
+        height: $tab-link-width-active;
+        content: "";
+        background-color: darken($tab-link-bg-colour-active, 25%);
+        opacity: .8;
+      }
+
+    }
+
+  }
+
+  > section {
+    display: none;
+    padding: $tab-content-padding;
+    background-color: $tab-content-bg;
+
+    &[active] {
+      display: block;
+    }
+
+  }
+
+  &[orientation="vertical"] {
+    flex-direction: row;
+    align-items: flex-start;
+
+    > ul {
+      flex-direction: column;
+      min-width: 30%;
+      height: auto;
+      overflow: hidden;
+    }
+
+    li:last-of-type a {
+      border-bottom: 0;
+    }
+
+    a {
+      position: relative;
+      display: block;
+      padding: $tab-link-padding;
+      color: $tab-link-colour;
+      text-decoration: none;
+
+      &[active] {
+        background-color: $white;
+        background-image: none;
+        border-right: 0 none;
+        border-left: 0 none;
+        box-shadow: none;
+      }
+
+      &[active]::after {
+        top: 0;
+        bottom: 0;
+        left: -1px;
+        width: $tab-link-width-active;
+        height: auto;
+      }
+
+    }
+
+    > section {
+      padding: $tab-content-padding;
+      border: 0 none;
+      box-shadow: none;
+    }
+
+  }
+
+  &[view="accordion"] {
+
+    > ul {
+      flex-direction: column;
+      white-space: normal;
+    }
+
+    section {
+      display: none;
+      padding: $tab-content-padding;
+    }
+
+    section[active] {
+      display: block;
+    }
+
+    [active] {
+      background-color: $white;
+    }
+
+    a[role="tab"] {
+
+      &[active]::after {
+        top: 0;
+        left: 0;
+        width: $tab-link-width-active;
+        height: 100%;
+      }
+
+    }
+
+  }
+
+}
+
+// Alternate styles
+@each $color, $value in $theme-colors {
+  joomla-panels[type="#{$color}"] a[role="tab"] {
+    &[active]::after {
+      background-color: theme-color-level($color);
+    }
+  }
+}

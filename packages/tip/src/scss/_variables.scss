@@ -1,0 +1,136 @@
+//
+// Variables
+//
+
+// Color system
+$white:    #fff;
+$gray-100: #f8f9fa;
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #6c757d;
+$gray-700: #495057;
+$gray-800: #343a40;
+$gray-900: #212529;
+$black:    #000;
+
+$blue:     #006898;
+$indigo:   #6610f2;
+$purple:   #6f42c1;
+$pink:     #e83e8c;
+$red:      #d9534f;
+$orange:   #fd7e14;
+$yellow:   #f0ad4e;
+$green:    #438243;
+$teal:     #20c997;
+$cyan:     #17a2b8;
+
+$colors: (
+  blue: $blue,
+  indigo: $indigo,
+  purple: $purple,
+  pink: $pink,
+  red: $red,
+  orange: $orange,
+  yellow: $yellow,
+  green: $green,
+  teal: $teal,
+  cyan: $cyan,
+  white: $white,
+  gray: $gray-600,
+  gray-dark: $gray-800
+);
+
+$theme-colors: (
+  primary: $blue,
+  secondary: $gray-600,
+  success: $green,
+  info: $cyan,
+  warning: $yellow,
+  danger: $red,
+  light: $gray-100,
+  dark: $gray-800
+);
+
+$alert-colors: (
+  success: $green,
+  info: $cyan,
+  warning: $yellow,
+  danger: $red
+);
+
+$theme-color-interval:        8%;
+
+// Components
+$border-width:                1px;
+$border-color:                $gray-300;
+
+$border-radius:               .25rem;
+$border-radius-lg:            .3rem;
+$border-radius-sm:            .2rem;
+
+$transition-base:             all .2s ease-in-out;
+$transition-fade:             opacity .15s linear;
+$transition-collapse:         height .35s ease;
+
+// Fonts
+$font-size-base:              1rem;
+
+$font-weight-light:           300;
+$font-weight-normal:          400;
+$font-weight-bold:            700;
+
+
+
+// Alerts
+$alert-padding-y:                   .5rem;
+$alert-padding-x:                   1.25rem;
+$alert-margin-bottom:               1rem;
+$alert-border-radius:               $border-radius;
+$alert-link-font-weight:            $font-weight-bold;
+$alert-border-width:                $border-width;
+
+$alert-bg-level:                    -10;
+$alert-border-level:                -9;
+$alert-color-level:                 6;
+
+// Close
+$close-font-size:                   $font-size-base * 1.5;
+$close-font-weight:                 $font-weight-bold;
+$close-color:                       $black;
+$close-text-shadow:                 0 1px 0 $white;
+
+
+
+// Tabs
+$tab-border-radius:               .25rem;
+
+$tab-ul-bg:                       #3073bb;
+
+$tab-link-padding:                .75rem 1rem .85rem;
+$tab-link-colour:                 $white;
+
+$tab-link-width-active:           5px;
+$tab-link-bg-colour-active:       rgba(0, 0, 0, .2);
+
+$tab-content-padding:             15px 0;
+$tab-content-bg:                  #fefefe;
+
+$tab-accordion-link-border:       1px solid #ddd;
+
+$tab-vertical-ul-border:          1px solid #ccc;
+
+
+
+// Dropdown
+$dropdown-bg:                     $white;
+$dropdown-border-width:           1px;
+$dropdown-border-style:           solid;
+$dropdown-border-colour:          $black;
+$dropdown-border-opacity:         .15;
+
+$dropdown-item-padding:           .5rem .75rem;
+$dropdown-item-bg-hover:          $gray-700;
+$dropdown-item-color:             $gray-900;
+$dropdown-item-color-hover:       $white;

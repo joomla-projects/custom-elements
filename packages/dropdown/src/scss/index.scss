@@ -1,0 +1,67 @@
+// Dropdown
+
+//
+// Variables
+//
+
+@import "variables";
+
+
+//
+// Base styles
+//
+
+
+joomla-dropdown {
+  position: absolute;
+  top: 30px;
+  left: 0;
+  z-index: 1000;
+  box-sizing: border-box;
+  display: none;
+  min-width: 10rem;
+  margin-top: .5rem;
+  font-size: 1rem;
+  text-align: left;
+  list-style: none;
+  background-color: $dropdown-bg;
+  background-clip: padding-box;
+  border: $dropdown-border-width $dropdown-border-style rgba($dropdown-border-colour, $dropdown-border-opacity);
+
+  &[expanded] {
+    display: block;
+  }
+
+  .dropdown-item {
+    display: block;
+    padding: $dropdown-item-padding;
+    clear: both;
+    font-weight: $font-weight-normal;
+    color: $dropdown-item-color;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+
+    &:hover,
+    &:focus {
+      color: $dropdown-item-color-hover;
+      text-decoration: none;
+      cursor: pointer;
+      background: $dropdown-item-bg-hover;
+    }
+  }
+
+}
+
+.joomla-dropdown-container {
+  position: relative;
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+// RTL overrides
+html[dir=rtl] joomla-dropdown {
+  right: 0;
+  left: auto;
+}

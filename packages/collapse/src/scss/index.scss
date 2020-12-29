@@ -1,0 +1,24 @@
+// Collapse
+
+//
+// Variables
+//
+
+@import "variables";
+
+
+//
+// Base styles
+//
+
+joomla-collapse {
+
+  &[state="closed"] {
+    display: none;
+  }
+
+  &[state="open"] {
+    display: block;
+  }
+
+}

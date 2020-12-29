@@ -10,80 +10,80 @@ import {mkdir, writeFile} from 'fs/promises';
 import {dirname} from 'path';
 
 const jsFiles = [
-  'src/js/alert/index.js',
-  'src/js/collapse/index.js',
-  'src/js/dropdown/index.js',
-  'src/js/modal/index.js',
-  'src/js/panels/index.js',
-  'src/js/tab/index.js',
-  'src/js/tip/index.js',
+  'packages/alert/src/js/index.js',
+  'packages/collapse/src/js/index.js',
+  'packages/dropdown/src/js/index.js',
+  'packages/modal/src/js/index.js',
+  'packages/panels/src/js/index.js',
+  'packages/tab/src/js/index.js',
+  'packages/tip/src/js/index.js',
 ];
 
 const scssFiles = [
-  'src/scss/alert/index.scss',
-  'src/scss/collapse/index.scss',
-  'src/scss/dropdown/index.scss',
-  'src/scss/modal/index.scss',
-  'src/scss/panels/index.scss',
-  'src/scss/tab/index.scss',
-  'src/scss/tip/index.scss',
+  'packages/alert/src/scss/index.scss',
+  'packages/collapse/src/scss/index.scss',
+  'packages/dropdown/src/scss/index.scss',
+  'packages/modal/src/scss/index.scss',
+  'packages/panels/src/scss/index.scss',
+  'packages/tab/src/scss/index.scss',
+  'packages/tip/src/scss/index.scss',
 ]
 
 const buildSettings = async () => {
   const finalSettings = [];
 
   jsFiles.forEach((file) => {
-    const el = file.replace('src/js/', '').replace('/index.js', '')
+    const el = file.replace('packages/', '').replace('/src/js/index.js', '');
 
     finalSettings.push({
-      input: `src/js/${el}/index.js`,
+      input: `packages/${el}/src/js/index.js`,
       plugins: [nodeResolve()],
       output: [
-        { file: `dist/js/joomla-${el}.js`, format: 'esm' },
+        { file: `packages/${el}/dist/js/joomla-${el}.js`, format: 'esm' },
         { file: `docs/_media/js/joomla-${el}.js`, format: 'esm' },
       ],
     });
 
     finalSettings.push({
-      input: `src/js/${el}/index.js`,
+      input: `packages/${el}/src/js/index.js`,
       plugins: [nodeResolve(), terser()],
       output: [
-        { file: `dist/js/joomla-${el}.min.js`, format: 'esm' },
+        { file: `packages/${el}/dist/js/joomla-${el}.min.js`, format: 'esm' },
         { file: `docs/_media/js/joomla-${el}.min.js`, format: 'esm' },
       ],
     });
 
     finalSettings.push({
-      input: `src/js/${el}/index.js`,
+      input: `packages/${el}/src/js/index.js`,
       plugins: [nodeResolve(), getBabelOutputPlugin({ presets: ['@babel/preset-env'] })],
       output: [
-        { file: `dist/js/joomla-${el}-es5.js`, format: 'esm' },
+        { file: `packages/${el}/dist/js/joomla-${el}-es5.js`, format: 'esm' },
         { file: `docs/_media/js/joomla-${el}-es5.js`, format: 'esm' },
       ],
     });
 
     finalSettings.push({
-      input: `src/js/${el}/index.js`,
+      input: `packages/${el}/src/js/index.js`,
       plugins: [nodeResolve(), getBabelOutputPlugin({ presets: ['@babel/preset-env'] }), terser()],
       output: [
-        { file: `dist/js/joomla-${el}-es5.min.js`, format: 'esm' },
+        { file: `packages/${el}/dist/js/joomla-${el}-es5.min.js`, format: 'esm' },
         { file: `docs/_media/js/joomla-${el}-es5.min.js`, format: 'esm' },
       ],
     });
   });
 
   scssFiles.forEach((scssFile) => {
-    const el = scssFile.replace('src/scss/', '').replace('/index.scss', '')
+    const el = scssFile.replace('packages/', '').replace('/src/scss/index.scss', '');
 
     finalSettings.push({
-      input: `src/scss/${el}/index.scss`,
+      input: `packages/${el}/src/scss/index.scss`,
       plugins: [
         sass({
           output: false,
           processor: css => postcss([autoprefixer])
             .process(css)
             .then(async (result) => {
-              const path1 = `dist/css/joomla-${el}.css`;
+              const path1 = `packages/${el}/dist/css/joomla-${el}.css`;
               const path2 = `docs/_media/css/joomla-${el}.css`;
               if (!existsSync(dirname(path1))) {
                 await mkdir(dirname(path1), {recursive: true})
@@ -100,14 +100,14 @@ const buildSettings = async () => {
     });
 
     finalSettings.push({
-      input: `src/scss/${el}/index.scss`,
+      input: `packages/${el}/src/scss/index.scss`,
       plugins: [
         sass({
           output: false,
           processor: css => postcss([autoprefixer, cssnano])
             .process(css)
             .then(async (result) => {
-              const path1 = `dist/css/joomla-${el}.min.css`;
+              const path1 = `packages/${el}/dist/css/joomla-${el}.min.css`;
               const path2 = `docs/_media/css/joomla-${el}.min.css`;
               if (!existsSync(dirname(path1))) {
                 await mkdir(dirname(path1), {recursive: true})
