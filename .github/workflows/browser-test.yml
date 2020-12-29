@@ -1,8 +1,6 @@
 name: Browser Testing
 
-on:
-  pull_request:
-    types: [reopened, opened, synchronize, edited]
+on: [push, pull_request]
 
 jobs:
   test:
