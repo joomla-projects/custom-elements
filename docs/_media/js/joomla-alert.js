@@ -86,8 +86,6 @@
             this.appendCloseButton();
           }
           break;
-        default:
-          break;
       }
     }
 
@@ -201,3 +199,4 @@
 
   customElements.define('joomla-alert', JoomlaAlertElement);
 })();
+//# sourceMappingURL=joomla-alert.js.map

@@ -107,9 +107,7 @@
       }
 
       // Check if there is a hash in the URI
-      if (window.location.href.match(/#tab-/)) {
-        // this.activateUriHash();
-      }
+      if (window.location.href.match(/#tab-/)) ;
 
       if (this.view === 'accordion') {
         this.toAccordion.bind(this)();
@@ -274,8 +272,6 @@
           nextTabItem.querySelector('a').click();
           nextTabItem.querySelector('a').focus();
           break;
-        default:
-          break;
       }
     }
 
@@ -374,7 +370,7 @@
 
       if (this.panels.length) {
         this.panels.forEach((panel) => {
-          const link = self.querySelector('a[aria-controls="' + panel.id + '"]')
+          const link = self.querySelector('a[aria-controls="' + panel.id + '"]');
           // if (link.parentNode.parentNode === self.firstElementChild)
           link.parentNode.appendChild(panel);
         });
@@ -389,14 +385,14 @@
         }
         // convert to tabs
         this.toTabs.bind(this);
-        this.view = 'tabs'
+        this.view = 'tabs';
       } else {
         if (this.view === 'accordion') {
           return;
         }
         // convert to accordion
         this.toAccordion.bind(this);
-        this.view = 'accordion'
+        this.view = 'accordion';
       }
     }
 

@@ -54,8 +54,6 @@
             linked.setAttribute('aria-expanded', 'true');
           }
           break;
-        default:
-          break;
       }
     }
 
@@ -72,3 +70,4 @@
     }
   });
 })();
+//# sourceMappingURL=joomla-collapse.js.map

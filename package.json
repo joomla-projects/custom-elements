@@ -23,8 +23,10 @@
   "devDependencies": {
     "@babel/core": "latest",
     "@babel/preset-env": "latest",
-    "@lodder/grunt-postcss": "latest",
     "@polymer/test-fixture": "latest",
+    "@rollup/plugin-babel": "^5.2.2",
+    "@rollup/plugin-multi-entry": "^4.0.0",
+    "@rollup/plugin-node-resolve": "^11.0.1",
     "@webcomponents/custom-elements": "latest",
     "@webcomponents/webcomponentsjs": "latest",
     "autoprefixer": "latest",
@@ -33,60 +35,51 @@
     "babel-plugin-static-fs": "latest",
     "babelify": "latest",
     "bootstrap": "^4.5.3",
-    "browserify": "^17.0.0",
+    "clean-css": "^4.2.3",
+    "cross-env": "^7.0.3",
     "eslint": "latest",
     "eslint-config-airbnb": "latest",
     "eslint-config-airbnb-base": "latest",
     "eslint-plugin-import": "latest",
     "eslint-plugin-jsx-a11y": "latest",
     "eslint-plugin-react": "latest",
+    "fibers": "^5.0.0",
     "foundation-sites": "^6.6.3",
-    "grunt": "latest",
-    "grunt-babel": "latest",
-    "grunt-browserify": "latest",
-    "grunt-contrib-copy": "latest",
-    "grunt-contrib-cssmin": "latest",
-    "grunt-contrib-uglify-es": "git://github.com/gruntjs/grunt-contrib-uglify.git#harmony",
-    "grunt-sass": "^3.0.2",
-    "grunt-shell": "latest",
-    "node-sass": "^4.14.1",
+    "fs-extra": "^9.0.1",
+    "npm-run-all": "^4.1.5",
     "postcss": "^8.2.1",
+    "rollup": "^2.35.1",
+    "rollup-plugin-terser": "^7.0.2",
+    "sass": "^1.30.0",
     "uikit": "^3.6.5",
     "wct-browser-legacy": "latest",
     "web-component-tester": "latest"
   },
   "scripts": {
-    "build": "grunt",
+    "build": "npm-run-all --parallel \"build:*\"",
+    "build:legacy-minified": "cross-env ROLLUP_BUILD_TYPE=\"legacy\" cross-env ROLLUP_MINIFIED_BUILD=true rollup -c rollup.config.js",
+    "build:legacy": "cross-env ROLLUP_BUILD_TYPE=\"legacy\" cross-env rollup -c rollup.config.js",
+    "build:modern-minified": "cross-env ROLLUP_BUILD_TYPE=\"modern\" cross-env ROLLUP_MINIFIED_BUILD=true rollup -c rollup.config.js",
+    "build:modern": "cross-env ROLLUP_BUILD_TYPE=\"modern\" rollup -c rollup.config.js",
+    "build:scss": "node build/sass.js",
+    "build:docs": "node build/docs.js",
     "lint": "eslint src",
     "lint-fix": "eslint src --fix",
     "ci-test": "wct --configFile saucelabs.conf.json --plugin sauce"
-  },
-  "browserify": {
-    "transform": [
-      [
-        "babelify",
-        {
-          "presets": [
-            "@babel/preset-env"
-          ],
-          "plugins": [
-            "static-fs"
-          ]
-        }
-      ]
-    ]
   },
   "settings": {
     "prefix": "joomla",
     "elements": [
       "alert",
-      "tab",
-      "dropdown",
       "collapse",
+      "dropdown",
       "modal",
       "panels",
+      "tab",
       "tip"
-    ],
-    "browsers": "last 1 version"
-  }
+    ]
+  },
+  "browserslist": [
+    "last 1 version"
+  ]
 }

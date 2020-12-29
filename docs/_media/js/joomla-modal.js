@@ -236,3 +236,4 @@
     /* eslint-enable */
   });
 })();
+//# sourceMappingURL=joomla-modal.js.map

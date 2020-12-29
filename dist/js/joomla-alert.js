@@ -86,8 +86,6 @@
             this.appendCloseButton();
           }
           break;
-        default:
-          break;
       }
     }
 

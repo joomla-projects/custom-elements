@@ -325,8 +325,6 @@
             nextTabItem.querySelector('a').focus();
             e.preventDefault();
             break;
-          default:
-            break;
         }
       };
       this.querySelector('ul').addEventListener('keyup', keyBehaviour);

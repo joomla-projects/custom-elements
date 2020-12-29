@@ -54,8 +54,6 @@
             linked.setAttribute('aria-expanded', 'true');
           }
           break;
-        default:
-          break;
       }
     }
 

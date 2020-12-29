@@ -81,3 +81,4 @@
     }
   });
 })();
+//# sourceMappingURL=joomla-tip.js.map

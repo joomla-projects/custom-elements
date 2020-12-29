@@ -61,11 +61,6 @@
 
 
     attributeChangedCallback(attr, oldValue, newValue) {
-      switch (attr) {
-        // case 'name':
-        // console.log(newValue);
-        // break;
-      }
     }
     /* eslint-enable */
 
