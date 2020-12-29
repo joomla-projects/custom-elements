@@ -1,9 +1,6 @@
 name: Browser Testing
 
-on:
-  push:
-    branches:
-      - master
+on: [push]
 
 jobs:
   test:
@@ -24,7 +21,7 @@ jobs:
           restore-keys: |
             ${{ runner.OS }}-node-
             ${{ runner.OS }}-
-      - run: npm i
+      - run: npm ci
       - run: npm run lint
       - name: Run tests in Sauce
         run: npm run ci-test
