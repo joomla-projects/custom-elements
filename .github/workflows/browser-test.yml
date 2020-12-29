@@ -21,7 +21,7 @@ jobs:
           restore-keys: |
             ${{ runner.OS }}-node-
             ${{ runner.OS }}-
-      - run: npm ci
+      - run: npm i
       - run: npm run lint
       - name: Run tests in Sauce
         run: npm run ci-test
