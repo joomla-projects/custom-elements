@@ -6,9 +6,37 @@
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>UIKit</title>
-	<link rel="stylesheet" href="_media/css/uikit.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.6.5/dist/css/uikit.css"
+		integrity="sha256-eOwjCyOsWRTTbl3NFKEwlTch9y7JBLjXvS5mYY7ZFvM=" crossorigin="anonymous">
 
-	<script src="_media/ce-loader.js"></script>
+	<link rel="stylesheet" href="_media/css/joomla-alert.min.css">
+	<link rel="stylesheet" href="_media/css/joomla-collapse.min.css">
+	<link rel="stylesheet" href="_media/css/joomla-dropdown.min.css">
+	<link rel="stylesheet" href="_media/css/joomla-modal.min.css">
+	<link rel="stylesheet" href="_media/css/joomla-panels.min.css">
+	<link rel="stylesheet" href="_media/css/joomla-tab.min.css">
+	<link rel="stylesheet" href="_media/css/joomla-tip.min.css">
+
+	<script>
+		if (!self.customElements)
+			document.write('<script src="//unpkg.com/@webreflection/custom-elements-no-builtin"><\x2fscript>');
+	</script>
+	<script src="_media/js/joomla-alert.min.js" type="module"></script>
+	<script src="_media/js/joomla-alert-es5.min.js" nomodule defer></script>
+	<script src="_media/js/joomla-collapse.min.js" type="module"></script>
+	<script src="_media/js/joomla-collapse-es5.min.js" nomodule defer></script>
+	<script src="_media/js/joomla-collapse.min.js" type="module"></script>
+	<script src="_media/js/joomla-collapse-es5.min.js" nomodule defer></script>
+	<script src="_media/js/joomla-dropdown.min.js" type="module"></script>
+	<script src="_media/js/joomla-dropdown-es5.min.js" nomodule defer></script>
+	<script src="_media/js/joomla-modal.min.js" type="module"></script>
+	<script src="_media/js/joomla-modal-es5.min.js" nomodule defer></script>
+	<script src="_media/js/joomla-panels.min.js" type="module"></script>
+	<script src="_media/js/joomla-panels-es5.min.js" nomodule defer></script>
+	<script src="_media/js/joomla-tab.min.js" type="module"></script>
+	<script src="_media/js/joomla-tab-es5.min.js" nomodule defer></script>
+	<script src="_media/js/joomla-tip.min.js" type="module"></script>
+	<script src="_media/js/joomla-tip-es5.min.js" nomodule defer></script>
 </head>
 
 <body>
@@ -186,43 +214,6 @@
 		</joomla-tip>
 		<hr>
 	</div>
-
-	<script>
-		// Asynchronously load CSS/JS
-		(function() {
-			var styleSrc = [
-				'_media/css/joomla-alert.min.css',
-				'_media/css/joomla-collapse.min.css',
-				'_media/css/joomla-dropdown.min.css',
-				'_media/css/joomla-modal.min.css',
-				'_media/css/joomla-panels.min.css',
-				'_media/css/joomla-tip.min.css',
-			];
-
-			var scriptSrc = [
-				'_media/js/joomla-alert-es5.min.js',
-				'_media/js/joomla-collapse-es5.min.js',
-				'_media/js/joomla-dropdown-es5.min.js',
-				'_media/js/joomla-modal-es5.min.js',
-				'_media/js/joomla-panels-es5.min.js',
-				'_media/js/joomla-tip-es5.min.js',
-			];
-
-			for (var i = 0; i < styleSrc.length; i++) {
-				var index = styleSrc[i];
-				var link = document.body.appendChild(document.createElement('link'));
-				link.href = index;
-				link.rel = 'stylesheet';
-			}
-
-			for (var i_2 = 0; i_2 < scriptSrc.length; i_2++) {
-				var index = scriptSrc[i_2];
-				var script = document.body.appendChild(document.createElement('script'));
-				script.async = false;
-				script.src = index;
-			}
-		})();
-	</script>
 </body>
 
 </html>

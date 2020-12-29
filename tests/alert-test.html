@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+		<script src="../../web-component-tester/node_modules/@webcomponents/webcomponentsjs/webcomponents-lite.js"></script>
+		<script src="../../web-component-tester/browser.js"></script>
+
+		<!-- Step 1: import the element to test -->
+		<script src="../dist/js/joomla-alert.min.js"></script>
+	</head>
+
+	<body>
+
+		<!-- You can use the document as a place to set up your fixtures. -->
+		<test-fixture id="alert-element-basic">
+			<template>
+				<joomla-alert type="info">
+					<p id="text">Has some text</p>
+				</joomla-alert>
+			</template>
+		</test-fixture>
+
+		<test-fixture id="alert-element-dismiss">
+			<template>
+				<joomla-alert type="info" dismiss="true">
+					<p id="text">Has some text</p>
+				</joomla-alert>
+			</template>
+		</test-fixture>
+
+		<test-fixture id="alert-element-acknowledge">
+			<template>
+				<joomla-alert type="info" acknowledge="true">
+					<p id="text">Has some text</p>
+				</joomla-alert>
+			</template>
+		</test-fixture>
+
+		<script>
+
+		</script>
+
+	</body>
+</html>

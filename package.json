@@ -11,7 +11,7 @@
     "url": "https://github.com/joomla-projects/custom-elements/issues"
   },
   "homepage": "https://github.com/joomla-projects/custom-elements#readme",
-  "main": "Gruntfile.js",
+  "main": "src/index.js",
   "keywords": [
     "Joomla",
     "web-components",
@@ -23,58 +23,33 @@
   "devDependencies": {
     "@babel/core": "latest",
     "@babel/preset-env": "latest",
-    "@lodder/grunt-postcss": "latest",
-    "@polymer/test-fixture": "latest",
-    "@webcomponents/custom-elements": "latest",
-    "@webcomponents/webcomponentsjs": "latest",
+    "@rollup/plugin-babel": "^5.2.2",
+    "@rollup/plugin-node-resolve": "^11.0.1",
     "autoprefixer": "latest",
-    "babel-eslint": "latest",
-    "babel-minify": "latest",
-    "babel-plugin-static-fs": "latest",
-    "babelify": "latest",
-    "bootstrap": "^4.5.3",
-    "browserify": "^17.0.0",
+    "cssnano": "^4.1.10",
     "eslint": "latest",
     "eslint-config-airbnb": "latest",
     "eslint-config-airbnb-base": "latest",
     "eslint-plugin-import": "latest",
-    "eslint-plugin-jsx-a11y": "latest",
-    "eslint-plugin-react": "latest",
-    "foundation-sites": "^6.6.3",
-    "grunt": "latest",
-    "grunt-babel": "latest",
-    "grunt-browserify": "latest",
-    "grunt-contrib-copy": "latest",
-    "grunt-contrib-cssmin": "latest",
-    "grunt-contrib-uglify-es": "git://github.com/gruntjs/grunt-contrib-uglify.git#harmony",
-    "grunt-sass": "^3.0.2",
-    "grunt-shell": "latest",
+    "karma": "^5.2.3",
+    "karma-chrome-launcher": "^3.1.0",
+    "karma-fixture": "^0.2.6",
+    "karma-html2js-preprocessor": "^1.1.0",
+    "karma-jasmine": "^4.0.1",
+    "karma-sauce-launcher": "^4.3.4",
     "node-sass": "^4.14.1",
     "postcss": "^8.2.1",
-    "uikit": "^3.6.5",
-    "wct-browser-legacy": "latest",
-    "web-component-tester": "latest"
+    "rimraf": "^2.7.1",
+    "rollup": "^2.35.1",
+    "rollup-plugin-sass": "^1.2.2",
+    "rollup-plugin-terser": "^7.0.2"
   },
   "scripts": {
-    "build": "grunt",
-    "lint": "eslint src",
-    "lint-fix": "eslint src --fix",
+    "build": "node cleanup.js && node ./node_modules/rollup/dist/bin/rollup -c rollup.config.js",
+    "lint": "node ./node_modules/eslint/bin/eslint.js src",
+    "lint-fix": "node ./node_modules/eslint/bin/eslint.js src --fix",
+    "test": "",
     "ci-test": "wct --configFile saucelabs.conf.json --plugin sauce"
-  },
-  "browserify": {
-    "transform": [
-      [
-        "babelify",
-        {
-          "presets": [
-            "@babel/preset-env"
-          ],
-          "plugins": [
-            "static-fs"
-          ]
-        }
-      ]
-    ]
   },
   "settings": {
     "prefix": "joomla",

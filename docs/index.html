@@ -11,7 +11,41 @@
 	<link rel="stylesheet" href="_media/vue.css" title="vue">
 	<link rel="stylesheet" href="_media/docs-overrides.css">
 
-	<script src="_media/ce-loader.js"></script>
+	<script src="https://unpkg.com/docsify/lib/docsify.min.js" defer></script>
+	<script src="https://unpkg.com/docsify/lib/plugins/search.min.js" defer></script>
+	<script src="https://unpkg.com/prismjs/components/prism-bash.min.js" defer></script>
+	<script src="https://unpkg.com/prismjs/components/prism-markdown.min.js" defer></script>
+	<script src="https://unpkg.com/prismjs/components/prism-nginx.min.js" defer></script>
+	<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js" defer></script>
+
+	<link rel="stylesheet" href="_media/css/joomla-alert.min.css">
+	<link rel="stylesheet" href="_media/css/joomla-collapse.min.css">
+	<link rel="stylesheet" href="_media/css/joomla-dropdown.min.css">
+	<link rel="stylesheet" href="_media/css/joomla-modal.min.css">
+	<link rel="stylesheet" href="_media/css/joomla-panels.min.css">
+	<link rel="stylesheet" href="_media/css/joomla-tab.min.css">
+	<link rel="stylesheet" href="_media/css/joomla-tip.min.css">
+
+	<script>
+		if (!self.customElements)
+			document.write('<script src="//unpkg.com/@webreflection/custom-elements-no-builtin"><\x2fscript>');
+	</script>
+	<script src="_media/js/joomla-alert.min.js" type="module"></script>
+	<script src="_media/js/joomla-alert-es5.min.js" nomodule defer></script>
+	<script src="_media/js/joomla-collapse.min.js" type="module"></script>
+	<script src="_media/js/joomla-collapse-es5.min.js" nomodule defer></script>
+	<script src="_media/js/joomla-collapse.min.js" type="module"></script>
+	<script src="_media/js/joomla-collapse-es5.min.js" nomodule defer></script>
+	<script src="_media/js/joomla-dropdown.min.js" type="module"></script>
+	<script src="_media/js/joomla-dropdown-es5.min.js" nomodule defer></script>
+	<script src="_media/js/joomla-modal.min.js" type="module"></script>
+	<script src="_media/js/joomla-modal-es5.min.js" nomodule defer></script>
+	<script src="_media/js/joomla-panels.min.js" type="module"></script>
+	<script src="_media/js/joomla-panels-es5.min.js" nomodule defer></script>
+	<script src="_media/js/joomla-tab.min.js" type="module"></script>
+	<script src="_media/js/joomla-tab-es5.min.js" nomodule defer></script>
+	<script src="_media/js/joomla-tip.min.js" type="module"></script>
+	<script src="_media/js/joomla-tip-es5.min.js" nomodule defer></script>
 </head>
 <body>
 	<nav data-cloak>
@@ -41,53 +75,9 @@
 			}
 		}
 
-		if (typeof navigator.serviceWorker !== 'undefined') {
-			navigator.serviceWorker.register('sw.js')
-		}
-
-		// Asynchronously load CSS/JS
-		(function() {
-			var styleSrc = [
-				'_media/css/joomla-alert.min.css',
-				'_media/css/joomla-collapse.min.css',
-				'_media/css/joomla-dropdown.min.css',
-				'_media/css/joomla-modal.min.css',
-				'_media/css/joomla-panels.min.css',
-				'_media/css/joomla-tab.min.css',
-				'_media/css/joomla-tip.min.css',
-			];
-
-			var scriptSrc = [
-				'https://unpkg.com/docsify/lib/docsify.min.js',
-				'https://unpkg.com/docsify/lib/plugins/search.min.js',
-				'https://unpkg.com/prismjs/components/prism-bash.min.js',
-				'https://unpkg.com/prismjs/components/prism-markdown.min.js',
-				'https://unpkg.com/prismjs/components/prism-nginx.min.js',
-				'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js',
-
-				'_media/js/joomla-alert-es5.min.js',
-				'_media/js/joomla-collapse-es5.min.js',
-				'_media/js/joomla-dropdown-es5.min.js',
-				'_media/js/joomla-modal-es5.min.js',
-				'_media/js/joomla-panels-es5.min.js',
-				'_media/js/joomla-tab-es5.min.js',
-				'_media/js/joomla-tip-es5.min.js',
-			];
-
-			for (var i = 0; i < styleSrc.length; i++) {
-				var index = styleSrc[i];
-				var link = document.body.appendChild(document.createElement('link'));
-				link.href = index;
-				link.rel = 'stylesheet';
-			}
-
-			for (var i_2 = 0; i_2 < scriptSrc.length; i_2++) {
-				var index = scriptSrc[i_2];
-				var script = document.body.appendChild(document.createElement('script'));
-				script.async = false;
-				script.src = index;
-			}
-		})();
+		// if (typeof navigator.serviceWorker !== 'undefined') {
+		// 	navigator.serviceWorker.register('sw.js')
+		// }
 	</script>
 </body>
 </html>
