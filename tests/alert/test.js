@@ -119,21 +119,6 @@ describe('<joomla-alert-acknowledge>', function(){
     fixture.cleanup();
   });
 
-
-
-
-//   test('Respects button attribute change, any other value', () => {
-//     myEl.setAttribute('acknowledge', '');
-//     assert.equal(myEl.getAttribute('acknowledge'), '');
-//     assert.equal(myEl.querySelectorAll('button.joomla-alert-button--close').length, 1);
-//     assert.equal(myEl.querySelector('button').tagName.toLowerCase(), 'button');
-//   });
-
-//   test('Method close removes the alert', () => {
-//     myEl.close();
-//     assert.equal(fixture('alert-element-basic').length, undefined);
-//   });
-
   it('Has close button', function() {
     const type = this.result[0].hasAttribute('acknowledge')
 
