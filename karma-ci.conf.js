@@ -35,7 +35,7 @@ module.exports = function (config) {
     // list of files / patterns to load in the browser
     files: [
       // polyfill
-      {pattern: 'mode_modules/@webreflection/custom-elements-no-builtin/min.js', served: true, nocache: true },
+      {pattern: 'node_modules/@webreflection/custom-elements-no-builtin/min.js', served: true, nocache: true },
       // modules
       {pattern: 'dist/js/joomla-alert.js', type: 'module' },
       {pattern: 'dist/js/joomla-collapse.js', type: 'module' },
