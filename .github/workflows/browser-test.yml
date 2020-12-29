@@ -27,7 +27,7 @@ jobs:
       - run: npm run lint
       - name: Run tests in Sauce
         run: npm run ci-test
-        ref: ${{ github.head_ref }}
+        # ref: ${{ github.head_ref }}
         env:
           BRANCH_NAME: ${{ github.head_ref }}
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
