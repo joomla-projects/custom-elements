@@ -52,18 +52,5 @@
     "lint-fix": "node ./node_modules/eslint/bin/eslint.js packages --fix",
     "test": "node node_modules/karma/bin/karma start karma.conf.js --single-run",
     "ci-test": "node node_modules/karma/bin/karma start karma-ci.conf.js --single-run"
-  },
-  "settings": {
-    "prefix": "joomla",
-    "elements": [
-      "alert",
-      "tab",
-      "dropdown",
-      "collapse",
-      "modal",
-      "panels",
-      "tip"
-    ],
-    "browsers": "last 1 version"
   }
 }
