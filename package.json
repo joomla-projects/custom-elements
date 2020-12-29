@@ -25,6 +25,7 @@
     "@babel/preset-env": "latest",
     "@rollup/plugin-babel": "^5.2.2",
     "@rollup/plugin-node-resolve": "^11.0.1",
+    "@webreflection/custom-elements-no-builtin": "^0.1.15",
     "autoprefixer": "latest",
     "cssnano": "^4.1.10",
     "eslint": "latest",
