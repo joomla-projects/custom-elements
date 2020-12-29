@@ -62,23 +62,21 @@ module.exports = function (config) {
       'karma-html2js-preprocessor',
     ],
 
-    // web server port
-    port: 9899,
-
+    reporters: ['progress', 'saucelabs'],
+    port: 9876,
     colors: true,
-
-    // level of logging
-    // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-    logLevel: config.LOG_DEBUG,
-
     sauceLabs: {
-      testName: 'Custom Elements Tests',
+      testName: 'Karma and Sauce Labs demo',
+      recordScreenshots: false,
+      connectOptions: {
+        logfile: 'sauce_connect.log'
+      },
+      public: 'public'
     },
-
+    // Increase timeout in case connection in CI is slow
     captureTimeout: 120000,
     customLaunchers: customLaunchers,
     browsers: Object.keys(customLaunchers),
-    reporters: ['dots', 'saucelabs'],
     singleRun: true
   });
 };
