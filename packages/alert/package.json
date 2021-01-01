@@ -1,5 +1,5 @@
 {
-  "name": "@joomla-ui-custom-elements/alert",
+  "name": "alert",
   "version": "0.1.0",
   "description": "",
   "main": "index.js",
