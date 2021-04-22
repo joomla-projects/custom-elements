@@ -47,13 +47,13 @@ class JoomlaAlertElement extends HTMLElement {
       this.autoDismiss();
     }
 
-    this.dispatchCustomEvent('joomla.alert.show');
+    this.dispatchEvent(new CustomEvent('joomla.alert.show'));
   }
 
   /* Lifecycle, element removed from the DOM */
   disconnectedCallback() {
     if (this.firstElementChild && this.firstElementChild.tagName.toLowerCase() === 'button') {
-      this.firstElementChild.removeEventListener('click', this.close);
+      this.removeCloseButton();
     }
   }
 
@@ -87,13 +87,13 @@ class JoomlaAlertElement extends HTMLElement {
   }
 
   markAlertClosed() {
-    this.dispatchCustomEvent('joomla.alert.closed');
+    this.dispatchEvent(new CustomEvent('joomla.alert.closed'));
     this.parentNode.removeChild(this);
   }
 
   /* Method to close the alert */
   close() {
-    this.dispatchCustomEvent('joomla.alert.close');
+    this.dispatchEvent(new CustomEvent('joomla.alert.close'));
     if (window.matchMedia('(prefers-reduced-motion)').matches) {
       this.markAlertClosed();
     } else {
@@ -104,13 +104,6 @@ class JoomlaAlertElement extends HTMLElement {
       }, false);
     }
     this.classList.remove('joomla-alert--show');
-  }
-
-  /* Method to dispatch events */
-  dispatchCustomEvent(eventName) {
-    const OriginalCustomEvent = new CustomEvent(eventName);
-    this.dispatchEvent(OriginalCustomEvent);
-    this.removeEventListener(eventName, this);
   }
 
   /* Method to create the close button */
@@ -137,23 +130,15 @@ class JoomlaAlertElement extends HTMLElement {
 
   /* Method to auto-dismiss */
   autoDismiss() {
-    const self = this;
-    const timer = parseInt(self.getAttribute('auto-dismiss'), 10);
-    setTimeout(() => {
-      self.dispatchCustomEvent('joomla.alert.buttonClicked');
-      if (self.hasAttribute('data-callback')) {
-        window[self.getAttribute('data-callback')]();
-      } else {
-        self.close(self);
-      }
-    }, timer >= 10 ? timer : 3000);
+    const timer = parseInt(this.getAttribute('auto-dismiss'), 10);
+    setTimeout(this.close, timer >= 10 ? timer : 3000);
   }
 
   /* Method to remove the close button */
   removeCloseButton() {
     const button = this.querySelector('button');
     if (button) {
-      button.removeEventListener('click', this);
+      button.removeEventListener('click', this.close);
       button.parentNode.removeChild(button);
     }
   }
