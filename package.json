@@ -40,7 +40,7 @@
     "karma-sauce-launcher": "^4.3.4",
     "lerna": "^3.22.1",
     "node-sass": "^4.14.1",
-    "postcss": "^8.2.1",
+    "postcss": "^8.3.5",
     "rimraf": "^2.7.1",
     "rollup": "^2.35.1",
     "rollup-plugin-sass": "^1.2.2",
