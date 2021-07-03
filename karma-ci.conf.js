@@ -30,13 +30,6 @@ module.exports = (config) => {
   }
 
   config.set({
-    // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: '',
-
-    // frameworks to use
-    // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine', 'fixture'],
-
     // list of files / patterns to load in the browser
     files: [
       // polyfill
@@ -66,20 +59,16 @@ module.exports = (config) => {
       'karma-fixture',
       'karma-html2js-preprocessor',
     ],
-
+    // frameworks to use
+    frameworks: ['jasmine', 'fixture'],
+    // base path that will be used to resolve all patterns (eg. files, exclude)
+    basePath: '',
     runnerPort: 9100,
     colors: true,
     port: 9876,
     autoWatch: false,
     singleRun: true,
     logLevel: config.LOG_INFO,
-
-    reporters: [
-      'dots',
-      // 'saucelabs',
-    ],
-
-    browsers: Object.keys(customLaunchers),
 
     // Adjuste these ones with your own settings.
     concurrency: 1,
@@ -88,14 +77,16 @@ module.exports = (config) => {
     browserDisconnectTimeout: 20000,
     browserDisconnectTolerance: 1,
 
-    // Add SauceLabs browsers
-    customLaunchers: customLaunchers,
-
     // SauceLabs Configuration
     sauceLabs: {
+      testName: 'Web App Unit Tests',
       build: `GITHUB #${process.env.GITHUB_RUN_ID} (${process.env.GITHUB_RUN_NUMBER})`,
       startConnect: false,
       tunnelIdentifier: `github-action-tunnel-custom-elements-${process.env.GITHUB_RUN_ID}`,
     },
+    customLaunchers: customLaunchers,
+    browsers: Object.keys(customLaunchers),
+    reporters: ['dots', 'saucelabs'],
+    singleRun: true
   });
 };
