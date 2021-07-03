@@ -1,36 +1,35 @@
-// Karma configuration
-module.exports = function (config) {
+// Browsers to run on Sauce Labs
+const customLaunchers = {
+  sl_chrome: {
+    base: 'SauceLabs',
+    browserName: 'chrome',
+    platform: 'Windows 10',
+  },
+  sl_firefox: {
+    base: 'SauceLabs',
+    browserName: 'firefox',
+    version: 'latest'
+  },
+sl_safari: {
+    base: 'SauceLabs',
+    browserName: 'safari',
+    version: "latest"
+  },
+  sl_ie_11: {
+    base: 'SauceLabs',
+    browserName: 'internet explorer',
+    platform: 'Windows 8.1',
+  },
+};
+
+module.exports = (config) => {
   if (!process.env.SAUCE_USERNAME || !process.env.SAUCE_ACCESS_KEY) {
     console.log('Make sure the SAUCE_USERNAME and SAUCE_ACCESS_KEY environment variables are set.')
     process.exit(1)
   }
 
-    // Browsers to run on Sauce Labs
-  const customLaunchers = {
-    sl_chrome: {
-      base: 'SauceLabs',
-      browserName: 'chrome',
-      platform: 'Windows 10',
-    },
-    sl_firefox: {
-      base: 'SauceLabs',
-      browserName: 'firefox',
-      version: 'latest'
-    },
-  sl_safari: {
-      base: 'SauceLabs',
-      browserName: 'safari',
-      version: "latest"
-    },
-    sl_ie_11: {
-      base: 'SauceLabs',
-      browserName: 'internet explorer',
-      platform: 'Windows 8.1',
-    },
-  };
-
   config.set({
-    // base path that will be used to resolve all patterns (eg. files, exclude)
+      // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
 
     // frameworks to use
@@ -67,21 +66,34 @@ module.exports = function (config) {
       'karma-html2js-preprocessor',
     ],
 
-    reporters: ['progress', 'saucelabs'],
-    port: 9876,
+    runnerPort: 9100,
     colors: true,
-    sauceLabs: {
-      testName: 'Custom Elements Tests',
-      recordScreenshots: false,
-      connectOptions: {
-        logfile: 'sauce_connect.log'
-      },
-      public: 'public'
-    },
-    // Increase timeout in case connection in CI is slow
-    captureTimeout: 120000,
-    customLaunchers: customLaunchers,
+    port: 9876,
+    autoWatch: false,
+    singleRun: true,
+
+    reporters: [
+      'dots',
+      'saucelabs',
+    ],
+
     browsers: Object.keys(customLaunchers),
-    singleRun: true
+
+    // Adjuste these ones with your own settings.
+    concurrency: 1,
+    captureTimeout: 120000,
+    browserNoActivityTimeout: 60000,
+    browserDisconnectTimeout: 20000,
+    browserDisconnectTolerance: 1,
+
+    // Add SauceLabs browsers
+    customLaunchers: browsers,
+
+    // SauceLabs Configuration
+    sauceLabs: {
+      build: `GITHUB #${process.env.GITHUB_RUN_ID} (${process.env.GITHUB_RUN_NUMBER})`,
+      startConnect: false,
+      tunnelIdentifier: 'github-action-tunnel',
+    },
   });
 };
