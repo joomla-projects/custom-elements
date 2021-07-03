@@ -55,6 +55,7 @@ module.exports = (config) => {
     ],
 
     plugins: [
+      'karma-sauce-launcher',
       'karma-jasmine',
       'karma-fixture',
       'karma-html2js-preprocessor',
