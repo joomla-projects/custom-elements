@@ -75,7 +75,7 @@ module.exports = (config) => {
 
     reporters: [
       'dots',
-      'saucelabs',
+      // 'saucelabs',
     ],
 
     browsers: Object.keys(customLaunchers),
