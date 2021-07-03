@@ -95,7 +95,7 @@ module.exports = (config) => {
     sauceLabs: {
       build: `GITHUB #${process.env.GITHUB_RUN_ID} (${process.env.GITHUB_RUN_NUMBER})`,
       startConnect: false,
-      tunnelIdentifier: 'github-action-tunnel',
+      tunnelIdentifier: `github-action-tunnel-custom-elements-${process.env.GITHUB_RUN_ID}`,
     },
   });
 };
