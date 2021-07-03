@@ -29,7 +29,7 @@ module.exports = (config) => {
   }
 
   config.set({
-      // base path that will be used to resolve all patterns (eg. files, exclude)
+    // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
 
     // frameworks to use
@@ -71,6 +71,7 @@ module.exports = (config) => {
     port: 9876,
     autoWatch: false,
     singleRun: true,
+    logLevel: config.LOG_INFO,
 
     reporters: [
       'dots',

@@ -22,11 +22,11 @@ jobs:
           node-version: ${{ matrix.node }}
       - name: Install
         run: npm install
-      - uses: saucelabs/sauce-connect-action@main
+      - uses: saucelabs/sauce-connect-action@v1
         with:
           username: ${{ secrets.SAUCE_USERNAME }}
           accessKey: ${{ secrets.SAUCE_ACCESS_KEY }}
-          scVersion: 4.6.2
+          scVersion: 4.6.4
           tunnelIdentifier: github-action-tunnel
       - name: Test
         env:
