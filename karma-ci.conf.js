@@ -78,7 +78,7 @@ module.exports = (config) => {
       'saucelabs',
     ],
 
-    browsers: Object.keys(customLaunchers),
+    // browsers: Object.keys(customLaunchers),
 
     // Adjuste these ones with your own settings.
     concurrency: 1,
@@ -88,7 +88,7 @@ module.exports = (config) => {
     browserDisconnectTolerance: 1,
 
     // Add SauceLabs browsers
-    customLaunchers: browsers,
+    customLaunchers: Object.keys(customLaunchers),
 
     // SauceLabs Configuration
     sauceLabs: {
