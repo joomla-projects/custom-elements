@@ -1,21 +1,22 @@
 // Browsers to run on Sauce Labs
 const customLaunchers = {
-  sl_chrome: {
+  SL_chrome: {
     base: 'SauceLabs',
     browserName: 'chrome',
     platform: 'Windows 10',
+    version: 'latest',
   },
-  sl_firefox: {
+  SL_firefox: {
     base: 'SauceLabs',
     browserName: 'firefox',
-    version: 'latest'
+    version: 'latest',
   },
-sl_safari: {
+  SL_safari: {
     base: 'SauceLabs',
     browserName: 'safari',
-    version: "latest"
+    version: 'latest',
   },
-  sl_ie_11: {
+  SL_ie_11: {
     base: 'SauceLabs',
     browserName: 'internet explorer',
     platform: 'Windows 8.1',
