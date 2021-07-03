@@ -29,12 +29,14 @@ jobs:
             ${{ runner.OS }}-
       - run: npm ci
       - run: npm run lint
-      - name: Run tests in Sauce
-        # ref: ${{ github.head_ref }}
+      - shell: bash
         env:
           BRANCH_NAME: ${{ github.head_ref }}
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
-        run: npm run ci-test
+      # - name: Run tests in Sauce
+      #   # ref: ${{ github.head_ref }}
+      - run: |
+          npm run ci-test "$SAUCE_USERNAME" "$SAUCE_ACCESS_KEY"
 
 
