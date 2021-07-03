@@ -36,7 +36,7 @@ jobs:
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
       # - name: Run tests in Sauce
       #   # ref: ${{ github.head_ref }}
-      - run: |
+        run: |
           npm run ci-test "$SAUCE_USERNAME" "$SAUCE_ACCESS_KEY"
 
 
