@@ -78,9 +78,9 @@ describe('<joomla-alert-dismiss>', function(){
   it('Respects button attribute change, false', function() {
     const el = this.result[0];
     el.setAttribute('dismiss', 'false');
-    const type = this.result[0].getAttribute('dismiss')
-    const closeBtn = this.result[0].querySelectorAll('button.joomla-alert--close').length
-    const close = this.result[0].querySelectorAll('button').length
+    const type = el.getAttribute('dismiss')
+    const closeBtn = el.querySelectorAll('button.joomla-alert--close').length
+    const close = el.querySelectorAll('button').length
     expect(type).toBe('false');
     expect(closeBtn).toBe(0);
     expect(close).toBe(0);
@@ -89,9 +89,9 @@ describe('<joomla-alert-dismiss>', function(){
   it('Respects button attribute change, any other value', function() {
     const el = this.result[0];
     el.setAttribute('dismiss', 'true');
-    const type = this.result[0].getAttribute('dismiss')
-    const closeBtn = this.result[0].querySelectorAll('button.joomla-alert--close').length
-    const close = this.result[0].querySelectorAll('button').length
+    const type = el.getAttribute('dismiss')
+    const closeBtn = el.querySelectorAll('button.joomla-alert--close').length
+    const close = el.querySelectorAll('button').length
     expect(type).toBe('true');
     expect(closeBtn).toBe(1);
     expect(close).toBe(1);
@@ -100,7 +100,7 @@ describe('<joomla-alert-dismiss>', function(){
   it('Method close removes the alert', function() {
     const el = this.result[0];
     el.close();
-    const type = this.result[0].querySelector('joomla-alert ')
+    const type = el.querySelector('joomla-alert ')
 
     expect(type).toBe(null);
   });
@@ -120,37 +120,28 @@ describe('<joomla-alert-acknowledge>', function(){
   });
 
   it('Has close button', function() {
-    const type = this.result[0].hasAttribute('acknowledge')
-
-    expect(type).toBeTrue;
+    const el = this.result[0];
+    expect(el.querySelector('button') instanceof HTMLElement).toBe(true);
   });
 
   it('Respects button attribute change, false', function() {
     const el = this.result[0];
-    el.setAttribute('acknowledge', 'false');
-    const type = this.result[0].getAttribute('acknowledge')
-    const closeBtn = this.result[0].querySelectorAll('button.joomla-alert--close').length
-    const close = this.result[0].querySelectorAll('button').length
-    expect(type).toBe('false');
-    expect(closeBtn).toBe(0);
-    expect(close).toBe(0);
+    el.removeAttribute('dismiss')
+    setTimeout(() => {
+      expect(el.querySelector('button')).toEqual(undefined);
+    }, 500);
   });
 
   it('Respects button attribute change, any other value', function() {
     const el = this.result[0];
-    el.setAttribute('acknowledge', '');
-    const type = this.result[0].getAttribute('acknowledge')
-    const closeBtn = this.result[0].querySelectorAll('button.joomla-alert--close').length
-    const close = this.result[0].querySelectorAll('button').length
-    expect(type).toBe('');
-    expect(closeBtn).toBe(1);
-    expect(close).toBe(1);
+    const close = el.querySelector('button')
+    expect(close instanceof HTMLElement).toBe(true);
   });
 
   it('Method close removes the alert', function() {
     const el = this.result[0];
     el.close();
-    const type = this.result[0].querySelector('joomla-alert ')
+    const type = el.querySelector('joomla-alert ')
 
     expect(type).toBe(null);
   });
