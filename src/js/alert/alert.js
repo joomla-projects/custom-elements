@@ -126,6 +126,7 @@ class JoomlaAlertElement extends HTMLElement {
 
     const self = this;
     const closeButton = document.createElement('button');
+    closeButton.setAttribute('type', 'button');
 
     if (this.hasAttribute('dismiss')) {
       closeButton.classList.add('joomla-alert--close');
