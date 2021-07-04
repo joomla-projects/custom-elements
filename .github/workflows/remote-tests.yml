@@ -1,0 +1,52 @@
+name: SauceLabs Browser Testing
+
+on:
+  pull_request_target:
+    branches:
+    - master
+    types: [labeled]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    if: "contains(github.event.pull_request.labels.*.name, 'safe to test')"
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: actions/setup-node@v1
+      name: Set up NodeJS
+      with:
+        node-version: 14
+
+    - name: Install
+      run: npm install
+
+    # Sause Labs part
+    - uses: saucelabs/sauce-connect-action@v1.1.3
+      with:
+        username: ${{ secrets.SAUCE_USERNAME }}
+        accesskey: ${{ secrets.SAUCE_ACCESS_KEY }}
+        scVersion: 4.6.4
+        tunnelIdentifier: github-action-tunnel-custom-elements-${{ github.run_id }}
+        # github-action-tunnel-custom-elements-${process.env.GITHUB_RUN_ID}
+
+    # Run the tests
+    # - name: Test
+    #   env:
+    #     SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
+    #     SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
+    #   run: npm run ci-test
+
+    # Old WCT tests
+    - name: Run tests in Sauce
+      run: npm run ci-test
+      env:
+        SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
+        SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
+
+    # Remove the label
+    - uses: actions-ecosystem/action-remove-labels@v1
+      with:
+        labels: |
+          safe to test
