@@ -16,12 +16,12 @@ const customLaunchers = {
     browserName: 'safari',
     version: 'latest',
   },
-  SL_ie_11: {
-    base: 'SauceLabs',
-    browserName: 'internet explorer',
-    browserVersion: '11.285',
-    platformName: 'Windows 10',
-  },
+  // SL_ie_11: {
+  //   base: 'SauceLabs',
+  //   browserName: 'internet explorer',
+  //   browserVersion: '11.285',
+  //   platformName: 'Windows 10',
+  // },
 };
 
 module.exports = (config) => {
