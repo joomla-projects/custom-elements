@@ -1,4 +1,5 @@
 class JoomlaAlertElement extends HTMLElement {
+
   /* Attributes to monitor */
   static get observedAttributes() { return ['type', 'role', 'dismiss', 'acknowledge', 'href']; }
 
