@@ -29,7 +29,8 @@ module.exports = function (config) {
       {pattern: 'packages/tab/dist/js/joomla-tab-es5.js', nomodule: '' },
       {pattern: 'packages/tip/dist/js/joomla-tip-es5.js', nomodule: '' },
 
-      'tests/*/*.js'
+      { pattern: './tests/**/*.js' },
+      { pattern: './tests/**/*.html' },
     ],
 
     // test results reporter to use
@@ -44,6 +45,10 @@ module.exports = function (config) {
       'karma-html2js-preprocessor',
     ],
 
+    preprocessors: {
+      // 'packags/src/**/js/*.js': ['coverage'],
+      'tests/**/*.html': ['html2js'],
+    },
     // web server port
     port: 9876,
 

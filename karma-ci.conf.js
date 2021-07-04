@@ -16,11 +16,11 @@ const customLaunchers = {
     browserName: 'safari',
     version: 'latest',
   },
-  // SL_ie_11: {
-  //   base: 'SauceLabs',
-  //   browserName: 'internet explorer',
-  //   platform: 'Windows 8.1',
-  // },
+  SL_ie_11: {
+    base: 'SauceLabs',
+    browserName: 'internet explorer',
+    platform: 'Windows 8.1',
+  },
 };
 
 module.exports = (config) => {
@@ -51,9 +51,14 @@ module.exports = (config) => {
       {pattern: 'packages/tab/dist/js/joomla-tab-es5.js', nomodule: '' },
       {pattern: 'packages/tip/dist/js/joomla-tip-es5.js', nomodule: '' },
 
-      'tests/*/*.js'
+      { pattern: './tests/**/*.js' },
+      { pattern: './tests/**/*.html' },
     ],
 
+    preprocessors: {
+      // 'packags/src/**/js/*.js': ['coverage'],
+      'tests/**/*.html': ['html2js'],
+    },
     plugins: [
       'karma-sauce-launcher',
       'karma-jasmine',

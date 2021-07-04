@@ -18,7 +18,7 @@ function _wrapNativeSuper(Class) { var _cache = typeof Map === "function" ? new 
 
 function _construct(Parent, args, Class) { if (_isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
 
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _isNativeFunction(fn) { return Function.toString.call(fn).indexOf("[native code]") !== -1; }
 
@@ -30,6 +30,23 @@ var JoomlaTabElement = /*#__PURE__*/function (_HTMLElement) {
   _inherits(JoomlaTabElement, _HTMLElement);
 
   var _super = _createSuper(JoomlaTabElement);
+
+  /* Lifecycle, element created */
+  function JoomlaTabElement() {
+    var _this;
+
+    _classCallCheck(this, JoomlaTabElement);
+
+    _this = _super.call(this);
+    _this.hasActive = false;
+    _this.currentActive = '';
+    _this.hasNested = false;
+    _this.isNested = false;
+    _this.tabs = [];
+    return _this;
+  }
+  /* Lifecycle, element appended to the DOM */
+
 
   _createClass(JoomlaTabElement, [{
     key: "recall",
@@ -52,34 +69,7 @@ var JoomlaTabElement = /*#__PURE__*/function (_HTMLElement) {
     set: function set(value) {
       this.setAttribute('orientation', value);
     }
-    /* Lifecycle, element created */
-
-  }], [{
-    key: "observedAttributes",
-
-    /* Attributes to monitor */
-    get: function get() {
-      return ['recall', 'orientation', 'view'];
-    }
-  }]);
-
-  function JoomlaTabElement() {
-    var _this;
-
-    _classCallCheck(this, JoomlaTabElement);
-
-    _this = _super.call(this);
-    _this.hasActive = false;
-    _this.currentActive = '';
-    _this.hasNested = false;
-    _this.isNested = false;
-    _this.tabs = [];
-    return _this;
-  }
-  /* Lifecycle, element appended to the DOM */
-
-
-  _createClass(JoomlaTabElement, [{
+  }, {
     key: "connectedCallback",
     value: function connectedCallback() {
       var _this2 = this;
@@ -485,6 +475,13 @@ var JoomlaTabElement = /*#__PURE__*/function (_HTMLElement) {
       OriginalCustomEvent.relatedTarget = related;
       element.dispatchEvent(OriginalCustomEvent);
       element.removeEventListener(eventName, element);
+    }
+  }], [{
+    key: "observedAttributes",
+    get:
+    /* Attributes to monitor */
+    function get() {
+      return ['recall', 'orientation', 'view'];
     }
   }]);
 

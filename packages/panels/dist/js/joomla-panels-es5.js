@@ -18,7 +18,7 @@ function _wrapNativeSuper(Class) { var _cache = typeof Map === "function" ? new 
 
 function _construct(Parent, args, Class) { if (_isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
 
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _isNativeFunction(fn) { return Function.toString.call(fn).indexOf("[native code]") !== -1; }
 
@@ -30,6 +30,27 @@ var JoomlaPanelsElement = /*#__PURE__*/function (_HTMLElement) {
   _inherits(JoomlaPanelsElement, _HTMLElement);
 
   var _super = _createSuper(JoomlaPanelsElement);
+
+  /* Lifecycle, element created */
+  function JoomlaPanelsElement() {
+    var _this;
+
+    _classCallCheck(this, JoomlaPanelsElement);
+
+    _this = _super.call(this); // Setup configuration
+
+    _this.hasActive = false;
+    _this.currentActive = '';
+    _this.hasNested = false;
+    _this.isNested = false;
+    _this.tabs = [];
+    _this.tabsLinks = [];
+    _this.panels = [];
+    _this.tabLinkHash = [];
+    return _this;
+  }
+  /* Lifecycle, element appended to the DOM */
+
 
   _createClass(JoomlaPanelsElement, [{
     key: "recall",
@@ -71,38 +92,7 @@ var JoomlaPanelsElement = /*#__PURE__*/function (_HTMLElement) {
     set: function set(value) {
       this.setAttribute('collapse-width', value);
     }
-    /* Lifecycle, element created */
-
-  }], [{
-    key: "observedAttributes",
-
-    /* Attributes to monitor */
-    get: function get() {
-      return ['recall', 'orientation', 'view', 'responsive', 'collapse-width'];
-    }
-  }]);
-
-  function JoomlaPanelsElement() {
-    var _this;
-
-    _classCallCheck(this, JoomlaPanelsElement);
-
-    _this = _super.call(this); // Setup configuration
-
-    _this.hasActive = false;
-    _this.currentActive = '';
-    _this.hasNested = false;
-    _this.isNested = false;
-    _this.tabs = [];
-    _this.tabsLinks = [];
-    _this.panels = [];
-    _this.tabLinkHash = [];
-    return _this;
-  }
-  /* Lifecycle, element appended to the DOM */
-
-
-  _createClass(JoomlaPanelsElement, [{
+  }, {
     key: "connectedCallback",
     value: function connectedCallback() {
       var _this2 = this;
@@ -531,6 +521,13 @@ var JoomlaPanelsElement = /*#__PURE__*/function (_HTMLElement) {
 
       element.dispatchEvent(OriginalCustomEvent);
       element.removeEventListener(eventName, element);
+    }
+  }], [{
+    key: "observedAttributes",
+    get:
+    /* Attributes to monitor */
+    function get() {
+      return ['recall', 'orientation', 'view', 'responsive', 'collapse-width'];
     }
   }]);
 

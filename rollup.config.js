@@ -5,9 +5,9 @@ import sass from 'rollup-plugin-sass';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 import postcss from 'postcss';
-import {existsSync} from 'fs';
-import {mkdir, writeFile} from 'fs/promises';
-import {dirname} from 'path';
+import { existsSync } from 'fs';
+import { mkdir, writeFile } from 'fs/promises';
+import { dirname } from 'path';
 
 const jsFiles = [
   'packages/alert/src/js/index.js',
@@ -41,15 +41,8 @@ const buildSettings = async () => {
       output: [
         { file: `packages/${el}/dist/js/joomla-${el}.js`, format: 'esm' },
         { file: `docs/_media/js/joomla-${el}.js`, format: 'esm' },
-      ],
-    });
-
-    finalSettings.push({
-      input: `packages/${el}/src/js/index.js`,
-      plugins: [nodeResolve(), terser()],
-      output: [
-        { file: `packages/${el}/dist/js/joomla-${el}.min.js`, format: 'esm' },
-        { file: `docs/_media/js/joomla-${el}.min.js`, format: 'esm' },
+        { file: `packages/${el}/dist/js/joomla-${el}.min.js`, format: 'esm', plugins: [terser()] },
+        { file: `docs/_media/js/joomla-${el}.min.js`, format: 'esm', plugins: [terser()] },
       ],
     });
 
@@ -59,15 +52,8 @@ const buildSettings = async () => {
       output: [
         { file: `packages/${el}/dist/js/joomla-${el}-es5.js`, format: 'esm' },
         { file: `docs/_media/js/joomla-${el}-es5.js`, format: 'esm' },
-      ],
-    });
-
-    finalSettings.push({
-      input: `packages/${el}/src/js/index.js`,
-      plugins: [nodeResolve(), getBabelOutputPlugin({ presets: ['@babel/preset-env'] }), terser()],
-      output: [
-        { file: `packages/${el}/dist/js/joomla-${el}-es5.min.js`, format: 'esm' },
-        { file: `docs/_media/js/joomla-${el}-es5.min.js`, format: 'esm' },
+        { file: `packages/${el}/dist/js/joomla-${el}-es5.min.js`, format: 'esm', plugins: [getBabelOutputPlugin({ presets: ['@babel/preset-env'] }), terser()] },
+        { file: `docs/_media/js/joomla-${el}-es5.min.js`, format: 'esm', plugins: [getBabelOutputPlugin({ presets: ['@babel/preset-env'] }), terser()] },
       ],
     });
   });
@@ -94,30 +80,21 @@ const buildSettings = async () => {
               }
               await writeFile(path2, result.css, {encoding: 'utf8'});
 
-            })
-        }),
-      ],
-    });
+              postcss([autoprefixer, cssnano])
+              .process(result.css)
+              .then(async (result) => {
+                const path1 = `packages/${el}/dist/css/joomla-${el}.min.css`;
+                const path2 = `docs/_media/css/joomla-${el}.min.css`;
+                if (!existsSync(dirname(path1))) {
+                  await mkdir(dirname(path1), {recursive: true})
+                }
+                await writeFile(path1, result.css, {encoding: 'utf8'});
+                if (!existsSync(dirname(path2))) {
+                  await mkdir(dirname(path2), {recursive: true})
+                }
+                await writeFile(path2, result.css, {encoding: 'utf8'});
 
-    finalSettings.push({
-      input: `packages/${el}/src/scss/index.scss`,
-      plugins: [
-        sass({
-          output: false,
-          processor: css => postcss([autoprefixer, cssnano])
-            .process(css)
-            .then(async (result) => {
-              const path1 = `packages/${el}/dist/css/joomla-${el}.min.css`;
-              const path2 = `docs/_media/css/joomla-${el}.min.css`;
-              if (!existsSync(dirname(path1))) {
-                await mkdir(dirname(path1), {recursive: true})
-              }
-              await writeFile(path1, result.css, {encoding: 'utf8'});
-              if (!existsSync(dirname(path2))) {
-                await mkdir(dirname(path2), {recursive: true})
-              }
-              await writeFile(path2, result.css, {encoding: 'utf8'});
-
+              });
             })
         }),
       ],

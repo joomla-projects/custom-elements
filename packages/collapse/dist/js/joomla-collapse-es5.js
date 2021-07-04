@@ -18,7 +18,7 @@ function _wrapNativeSuper(Class) { var _cache = typeof Map === "function" ? new 
 
 function _construct(Parent, args, Class) { if (_isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
 
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _isNativeFunction(fn) { return Function.toString.call(fn).indexOf("[native code]") !== -1; }
 
@@ -38,6 +38,14 @@ var JoomlaCollapseElement = /*#__PURE__*/function (_HTMLElement) {
   }
 
   _createClass(JoomlaCollapseElement, [{
+    key: "state",
+    get: function get() {
+      return this.getAttribute('state');
+    },
+    set: function set(value) {
+      return this.setAttribute('state', value);
+    }
+  }, {
     key: "connectedCallback",
     value: function connectedCallback() {
       var self = this; // id is required
@@ -103,14 +111,6 @@ var JoomlaCollapseElement = /*#__PURE__*/function (_HTMLElement) {
         this.state = 'closed';
         linked.setAttribute('aria-expanded', 'false');
       }
-    }
-  }, {
-    key: "state",
-    get: function get() {
-      return this.getAttribute('state');
-    },
-    set: function set(value) {
-      return this.setAttribute('state', value);
     }
   }], [{
     key: "observedAttributes",

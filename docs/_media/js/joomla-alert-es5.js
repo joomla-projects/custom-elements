@@ -18,7 +18,7 @@ function _wrapNativeSuper(Class) { var _cache = typeof Map === "function" ? new 
 
 function _construct(Parent, args, Class) { if (_isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
 
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _isNativeFunction(fn) { return Function.toString.call(fn).indexOf("[native code]") !== -1; }
 
@@ -38,9 +38,45 @@ var JoomlaAlertElement = /*#__PURE__*/function (_HTMLElement) {
   }
 
   _createClass(JoomlaAlertElement, [{
-    key: "connectedCallback",
-
+    key: "type",
+    get: function get() {
+      return this.getAttribute('type');
+    },
+    set: function set(value) {
+      return this.setAttribute('type', value);
+    }
+  }, {
+    key: "role",
+    get: function get() {
+      return this.getAttribute('role');
+    },
+    set: function set(value) {
+      return this.setAttribute('role', value);
+    }
+  }, {
+    key: "dismiss",
+    get: function get() {
+      return this.getAttribute('dismiss');
+    }
+  }, {
+    key: "autodismiss",
+    get: function get() {
+      return this.getAttribute('auto-dismiss');
+    }
+  }, {
+    key: "acknowledge",
+    get: function get() {
+      return this.getAttribute('acknowledge');
+    }
+  }, {
+    key: "href",
+    get: function get() {
+      return this.getAttribute('href');
+    }
     /* Lifecycle, element appended to the DOM */
+
+  }, {
+    key: "connectedCallback",
     value: function connectedCallback() {
       this.classList.add('joomla-alert--show'); // Default to info
 
@@ -255,47 +291,11 @@ var JoomlaAlertElement = /*#__PURE__*/function (_HTMLElement) {
       /* eslint-disable-next-line no-undef */
       return window.Joomla && Joomla.JText && Joomla.JText._ && typeof Joomla.JText._ === 'function' && Joomla.JText._(str) ? Joomla.JText._(str) : fallback;
     }
-  }, {
-    key: "type",
-    get: function get() {
-      return this.getAttribute('type');
-    },
-    set: function set(value) {
-      return this.setAttribute('type', value);
-    }
-  }, {
-    key: "role",
-    get: function get() {
-      return this.getAttribute('role');
-    },
-    set: function set(value) {
-      return this.setAttribute('role', value);
-    }
-  }, {
-    key: "dismiss",
-    get: function get() {
-      return this.getAttribute('dismiss');
-    }
-  }, {
-    key: "autodismiss",
-    get: function get() {
-      return this.getAttribute('auto-dismiss');
-    }
-  }, {
-    key: "acknowledge",
-    get: function get() {
-      return this.getAttribute('acknowledge');
-    }
-  }, {
-    key: "href",
-    get: function get() {
-      return this.getAttribute('href');
-    }
   }], [{
     key: "observedAttributes",
-
+    get:
     /* Attributes to monitor */
-    get: function get() {
+    function get() {
       return ['type', 'role', 'dismiss', 'acknowledge', 'href'];
     }
   }]);

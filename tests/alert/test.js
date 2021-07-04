@@ -1,18 +1,14 @@
 describe('<joomla-alert-levels>', function(){
   beforeEach(function() {
-    fixture.set(`
-<joomla-alert type="info">
-  <p id="text">Has some text</p>
-</joomla-alert>
-  `,
-    true);
+    fixture.setBase('tests/alert')
+    fixture.load('alert.html', true);
   });
   afterEach(function() {
     fixture.cleanup();
   });
 
   it('Custom Element script is loaded', function(){
-    expect(typeof customElements.get('joomla-alert') === 'function').toBeTrue;
+    expect(customElements.get('joomla-alert')).toBeTrue;
   });
 
   it('Has type info', function() {
@@ -58,25 +54,21 @@ describe('<joomla-alert-levels>', function(){
 
 describe('<joomla-alert-dismiss>', function(){
   beforeEach(function() {
-    this.result = fixture.set(`
-<joomla-alert type="info" dismiss="true">
-  <p id="text">Has some text</p>
-</joomla-alert>
-  `,
-    true);
+    fixture.setBase('tests/alert')
+    fixture.load('alert.html', true);
   });
   afterEach(function() {
     fixture.cleanup();
   });
 
   it('Has close button', function() {
-    const type = this.result[0].hasAttribute('dismiss')
+    const type = fixture.el.firstElementChild.hasAttribute('dismiss')
 
     expect(type).toBeTrue;
   });
 
   it('Respects button attribute change, false', function() {
-    const el = this.result[0];
+    const el = fixture.el.firstElementChild;
     el.setAttribute('dismiss', 'false');
     const type = el.getAttribute('dismiss')
     const closeBtn = el.querySelectorAll('button.joomla-alert--close').length
@@ -87,7 +79,7 @@ describe('<joomla-alert-dismiss>', function(){
   });
 
   it('Respects button attribute change, any other value', function() {
-    const el = this.result[0];
+    const el = fixture.el.firstElementChild;
     el.setAttribute('dismiss', 'true');
     const type = el.getAttribute('dismiss')
     const closeBtn = el.querySelectorAll('button.joomla-alert--close').length
@@ -98,9 +90,9 @@ describe('<joomla-alert-dismiss>', function(){
   });
 
   it('Method close removes the alert', function() {
-    const el = this.result[0];
+    const el = fixture.el.firstElementChild;
     el.close();
-    const type = el.querySelector('joomla-alert ')
+    const type = el.querySelector('joomla-alert')
 
     expect(type).toBe(null);
   });
@@ -108,24 +100,20 @@ describe('<joomla-alert-dismiss>', function(){
 
 describe('<joomla-alert-acknowledge>', function(){
   beforeEach(function() {
-    this.result = fixture.set(`
-<joomla-alert type="info" dismiss="true">
-  <p id="text">Has some text</p>
-</joomla-alert>
-  `,
-    true);
+    fixture.setBase('tests/alert')
+    fixture.load('alert2.html', true);
   });
   afterEach(function() {
     fixture.cleanup();
   });
 
   it('Has close button', function() {
-    const el = this.result[0];
+    const el = fixture.el;
     expect(el.querySelector('button') instanceof HTMLElement).toBe(true);
   });
 
   it('Respects button attribute change, false', function() {
-    const el = this.result[0];
+    const el = fixture.el;
     el.removeAttribute('dismiss')
     setTimeout(() => {
       expect(el.querySelector('button')).toEqual(undefined);
@@ -133,16 +121,18 @@ describe('<joomla-alert-acknowledge>', function(){
   });
 
   it('Respects button attribute change, any other value', function() {
-    const el = this.result[0];
+    const el = fixture.el;
     const close = el.querySelector('button')
     expect(close instanceof HTMLElement).toBe(true);
   });
 
   it('Method close removes the alert', function() {
-    const el = this.result[0];
-    el.close();
-    const type = el.querySelector('joomla-alert ')
+    const el = fixture.el.firstElementChild;
+    const close = el.querySelector('button');
+    close.click();
 
-    expect(type).toBe(null);
+    setTimeout(() => {
+      expect(fixture.el.querySelector('joomla-alert')).toBeNull();
+    }, 500);
   });
 });
