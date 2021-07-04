@@ -58,3 +58,4 @@ Fully documented [here](https://joomla-projects.github.io/custom-elements/)
 ### License
 
 The library is released under the [GPL license](LICENSE)
+
