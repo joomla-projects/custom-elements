@@ -93,6 +93,8 @@ joomla-modal .joomla-modal-dialog header button {
   border: 0;
   opacity: 0.5;
   -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
 }
 joomla-modal .joomla-modal-dialog header h5 {
   margin-bottom: 0;
@@ -140,8 +142,6 @@ joomla-modal .joomla-modal-dialog section[class*=jviewport-height] {
 }
 joomla-modal .joomla-modal-dialog footer {
   display: flex;
-  -ms-flex-align: center;
-  -ms-flex-pack: end;
   align-items: center;
   justify-content: flex-end;
   padding: 15px;

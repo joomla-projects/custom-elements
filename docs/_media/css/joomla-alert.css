@@ -51,6 +51,8 @@ joomla-alert button.joomla-alert-button--close {
   background: transparent;
   border: 0;
   -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
 }
 
 joomla-alert[type=success] {

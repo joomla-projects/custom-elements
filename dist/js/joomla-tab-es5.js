@@ -260,7 +260,7 @@ customElements.define('joomla-tab', /*#__PURE__*/function (_HTMLElement) {
       var activateTabFromLink = function activateTabFromLink(e) {
         e.preventDefault(); // Doing toggle for accordion
 
-        var justHide = _this4.view === 'accordion' && e.target.hasAttribute('active');
+        var justHide = _this4.view === 'accordion' && e.currentTarget.hasAttribute('active');
 
         if (_this4.hasActive) {
           _this4.hideCurrent();
@@ -274,21 +274,21 @@ customElements.define('joomla-tab', /*#__PURE__*/function (_HTMLElement) {
         var currentTabLink = _this4.currentActive; // Set the selected tab as active
         // Emit show event
 
-        _this4.dispatchCustomEvent('joomla.tab.show', e.target, _this4.querySelector("#tab-".concat(currentTabLink)));
+        _this4.dispatchCustomEvent('joomla.tab.show', e.currentTarget, _this4.querySelector("#tab-".concat(currentTabLink)));
 
-        e.target.setAttribute('active', '');
-        e.target.setAttribute('aria-selected', 'true');
-        e.target.setAttribute('tabindex', '0');
+        e.currentTarget.setAttribute('active', '');
+        e.currentTarget.setAttribute('aria-selected', 'true');
+        e.currentTarget.setAttribute('tabindex', '0');
 
-        _this4.querySelector(e.target.hash).setAttribute('active', '');
+        _this4.querySelector(e.currentTarget.hash).setAttribute('active', '');
 
-        _this4.querySelector(e.target.hash).removeAttribute('aria-hidden');
+        _this4.querySelector(e.currentTarget.hash).removeAttribute('aria-hidden');
 
-        _this4.currentActive = e.target.hash.substring(1); // Emit shown event
+        _this4.currentActive = e.currentTarget.hash.substring(1); // Emit shown event
 
-        _this4.dispatchCustomEvent('joomla.tab.shown', e.target, _this4.querySelector("#tab-".concat(currentTabLink)));
+        _this4.dispatchCustomEvent('joomla.tab.shown', e.currentTarget, _this4.querySelector("#tab-".concat(currentTabLink)));
 
-        _this4.saveState("#tab-".concat(e.target.hash.substring(1)));
+        _this4.saveState("#tab-".concat(e.currentTarget.hash.substring(1)));
 
         _this4.hasActive = true;
       };
