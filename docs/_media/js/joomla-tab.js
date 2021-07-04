@@ -1,5 +1,4 @@
-(() => {
-  customElements.define('joomla-tab', class extends HTMLElement {
+customElements.define('joomla-tab', class extends HTMLElement {
     /* Attributes to monitor */
     static get observedAttributes() { return ['recall', 'orientation', 'view']; }
 
@@ -325,8 +324,6 @@
             nextTabItem.querySelector('a').focus();
             e.preventDefault();
             break;
-          default:
-            break;
         }
       };
       this.querySelector('ul').addEventListener('keyup', keyBehaviour);
@@ -400,5 +397,4 @@
       element.dispatchEvent(OriginalCustomEvent);
       element.removeEventListener(eventName, element);
     }
-  });
-})();
+});

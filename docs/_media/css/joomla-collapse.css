@@ -1,5 +1,6 @@
-joomla-collapse[state="closed"] {
-  display: none; }
-
-joomla-collapse[state="open"] {
-  display: block; }
+joomla-collapse[state=closed] {
+  display: none;
+}
+joomla-collapse[state=open] {
+  display: block;
+}

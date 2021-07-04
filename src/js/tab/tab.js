@@ -1,5 +1,4 @@
-(() => {
-  customElements.define('joomla-tab', class extends HTMLElement {
+customElements.define('joomla-tab', class extends HTMLElement {
     /* Attributes to monitor */
     static get observedAttributes() { return ['recall', 'orientation', 'view']; }
 
@@ -400,5 +399,4 @@
       element.dispatchEvent(OriginalCustomEvent);
       element.removeEventListener(eventName, element);
     }
-  });
-})();
+});
