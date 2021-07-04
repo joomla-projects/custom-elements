@@ -109,7 +109,7 @@ joomla-modal {
         background: 0 0;
         border: 0;
         opacity: .5;
-        -webkit-appearance: none;
+        appearance: none;
       }
 
       h5 {
@@ -162,10 +162,7 @@ joomla-modal {
     }
 
     footer {
-      display: -ms-flexbox;
       display: flex;
-      -ms-flex-align: center;
-      -ms-flex-pack: end;
       align-items: center;
       justify-content: flex-end;
       padding: 15px;

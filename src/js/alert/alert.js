@@ -120,6 +120,7 @@ class JoomlaAlertElement extends HTMLElement {
         button.innerHTML = '<span aria-hidden="true">&times;</span>';
         button.setAttribute('aria-label', this.closeText);
       }
+    }
 
       this.insertAdjacentElement('afterbegin', button);
 
