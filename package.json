@@ -49,7 +49,7 @@
     "grunt-contrib-uglify-es": "git://github.com/gruntjs/grunt-contrib-uglify.git#harmony",
     "grunt-sass": "^3.0.2",
     "grunt-shell": "latest",
-    "node-sass": "^4.14.1",
+    "node-sass": "^6.0",
     "postcss": "^8.2.1",
     "uikit": "^3.6.5",
     "wct-browser-legacy": "latest",

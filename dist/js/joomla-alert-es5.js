@@ -146,7 +146,7 @@ function _isNativeReflectConstruct() {
   if (typeof Proxy === "function") return true;
 
   try {
-    Date.prototype.toString.call(Reflect.construct(Date, [], function () {}));
+    Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
     return true;
   } catch (e) {
     return false;
@@ -186,9 +186,45 @@ function _getPrototypeOf(o) {
     }
 
     _createClass(JoomlaAlertElement, [{
-      key: "connectedCallback",
-
+      key: "type",
+      get: function get() {
+        return this.getAttribute('type');
+      },
+      set: function set(value) {
+        return this.setAttribute('type', value);
+      }
+    }, {
+      key: "role",
+      get: function get() {
+        return this.getAttribute('role');
+      },
+      set: function set(value) {
+        return this.setAttribute('role', value);
+      }
+    }, {
+      key: "dismiss",
+      get: function get() {
+        return this.getAttribute('dismiss');
+      }
+    }, {
+      key: "autodismiss",
+      get: function get() {
+        return this.getAttribute('auto-dismiss');
+      }
+    }, {
+      key: "acknowledge",
+      get: function get() {
+        return this.getAttribute('acknowledge');
+      }
+    }, {
+      key: "href",
+      get: function get() {
+        return this.getAttribute('href');
+      }
       /* Lifecycle, element appended to the DOM */
+
+    }, {
+      key: "connectedCallback",
       value: function connectedCallback() {
         this.classList.add('joomla-alert--show'); // Default to info
 
@@ -406,47 +442,11 @@ function _getPrototypeOf(o) {
         /* eslint-disable-next-line no-undef */
         return window.Joomla && Joomla.JText && Joomla.JText._ && typeof Joomla.JText._ === 'function' && Joomla.JText._(str) ? Joomla.JText._(str) : fallback;
       }
-    }, {
-      key: "type",
-      get: function get() {
-        return this.getAttribute('type');
-      },
-      set: function set(value) {
-        return this.setAttribute('type', value);
-      }
-    }, {
-      key: "role",
-      get: function get() {
-        return this.getAttribute('role');
-      },
-      set: function set(value) {
-        return this.setAttribute('role', value);
-      }
-    }, {
-      key: "dismiss",
-      get: function get() {
-        return this.getAttribute('dismiss');
-      }
-    }, {
-      key: "autodismiss",
-      get: function get() {
-        return this.getAttribute('auto-dismiss');
-      }
-    }, {
-      key: "acknowledge",
-      get: function get() {
-        return this.getAttribute('acknowledge');
-      }
-    }, {
-      key: "href",
-      get: function get() {
-        return this.getAttribute('href');
-      }
     }], [{
       key: "observedAttributes",
-
+      get:
       /* Attributes to monitor */
-      get: function get() {
+      function get() {
         return ['type', 'role', 'dismiss', 'acknowledge', 'href'];
       }
     }]);

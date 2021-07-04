@@ -199,7 +199,7 @@
         e.preventDefault();
 
         // Doing toggle for accordion
-        const justHide = this.view === 'accordion' && e.target.hasAttribute('active');
+        const justHide = this.view === 'accordion' && e.currentTarget.hasAttribute('active');
 
         if (this.hasActive) {
           this.hideCurrent();
@@ -214,16 +214,16 @@
 
         // Set the selected tab as active
         // Emit show event
-        this.dispatchCustomEvent('joomla.tab.show', e.target, this.querySelector(`#tab-${currentTabLink}`));
-        e.target.setAttribute('active', '');
-        e.target.setAttribute('aria-selected', 'true');
-        e.target.setAttribute('tabindex', '0');
-        this.querySelector(e.target.hash).setAttribute('active', '');
-        this.querySelector(e.target.hash).removeAttribute('aria-hidden');
-        this.currentActive = e.target.hash.substring(1);
+        this.dispatchCustomEvent('joomla.tab.show', e.currentTarget, this.querySelector(`#tab-${currentTabLink}`));
+        e.currentTarget.setAttribute('active', '');
+        e.currentTarget.setAttribute('aria-selected', 'true');
+        e.currentTarget.setAttribute('tabindex', '0');
+        this.querySelector(e.currentTarget.hash).setAttribute('active', '');
+        this.querySelector(e.currentTarget.hash).removeAttribute('aria-hidden');
+        this.currentActive = e.currentTarget.hash.substring(1);
         // Emit shown event
-        this.dispatchCustomEvent('joomla.tab.shown', e.target, this.querySelector(`#tab-${currentTabLink}`));
-        this.saveState(`#tab-${e.target.hash.substring(1)}`);
+        this.dispatchCustomEvent('joomla.tab.shown', e.currentTarget, this.querySelector(`#tab-${currentTabLink}`));
+        this.saveState(`#tab-${e.currentTarget.hash.substring(1)}`);
         this.hasActive = true;
       };
 

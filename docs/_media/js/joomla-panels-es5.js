@@ -146,7 +146,7 @@ function _isNativeReflectConstruct() {
   if (typeof Proxy === "function") return true;
 
   try {
-    Date.prototype.toString.call(Reflect.construct(Date, [], function () {}));
+    Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
     return true;
   } catch (e) {
     return false;
@@ -178,6 +178,28 @@ function _getPrototypeOf(o) {
     _inherits(_class, _HTMLElement);
 
     var _super = _createSuper(_class);
+    /* Lifecycle, element created */
+
+
+    function _class() {
+      var _this;
+
+      _classCallCheck(this, _class);
+
+      _this = _super.call(this); // Setup configuration
+
+      _this.hasActive = false;
+      _this.currentActive = '';
+      _this.hasNested = false;
+      _this.isNested = false;
+      _this.tabs = [];
+      _this.tabsLinks = [];
+      _this.panels = [];
+      _this.tabLinkHash = [];
+      return _this;
+    }
+    /* Lifecycle, element appended to the DOM */
+
 
     _createClass(_class, [{
       key: "recall",
@@ -219,38 +241,7 @@ function _getPrototypeOf(o) {
       set: function set(value) {
         this.setAttribute('collapse-width', value);
       }
-      /* Lifecycle, element created */
-
-    }], [{
-      key: "observedAttributes",
-
-      /* Attributes to monitor */
-      get: function get() {
-        return ['recall', 'orientation', 'view', 'responsive', 'collapse-width'];
-      }
-    }]);
-
-    function _class() {
-      var _this;
-
-      _classCallCheck(this, _class);
-
-      _this = _super.call(this); // Setup configuration
-
-      _this.hasActive = false;
-      _this.currentActive = '';
-      _this.hasNested = false;
-      _this.isNested = false;
-      _this.tabs = [];
-      _this.tabsLinks = [];
-      _this.panels = [];
-      _this.tabLinkHash = [];
-      return _this;
-    }
-    /* Lifecycle, element appended to the DOM */
-
-
-    _createClass(_class, [{
+    }, {
       key: "connectedCallback",
       value: function connectedCallback() {
         var _this2 = this;
@@ -683,6 +674,13 @@ function _getPrototypeOf(o) {
 
         element.dispatchEvent(OriginalCustomEvent);
         element.removeEventListener(eventName, element);
+      }
+    }], [{
+      key: "observedAttributes",
+      get:
+      /* Attributes to monitor */
+      function get() {
+        return ['recall', 'orientation', 'view', 'responsive', 'collapse-width'];
       }
     }]);
 

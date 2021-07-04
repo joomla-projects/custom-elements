@@ -146,7 +146,7 @@ function _isNativeReflectConstruct() {
   if (typeof Proxy === "function") return true;
 
   try {
-    Date.prototype.toString.call(Reflect.construct(Date, [], function () {}));
+    Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
     return true;
   } catch (e) {
     return false;
@@ -186,9 +186,49 @@ function _getPrototypeOf(o) {
     }
 
     _createClass(_class, [{
-      key: "connectedCallback",
-
+      key: "type",
+      get: function get() {
+        return this.getAttribute('type');
+      },
+      set: function set(value) {
+        return this.setAttribute('type', value);
+      }
+    }, {
+      key: "label",
+      get: function get() {
+        return this.getAttribute('label');
+      },
+      set: function set(value) {
+        return this.setAttribute('label', value);
+      }
+    }, {
+      key: "tip",
+      get: function get() {
+        return this.getAttribute('tip');
+      },
+      set: function set(value) {
+        return this.setAttribute('tip', value);
+      }
+    }, {
+      key: "position",
+      get: function get() {
+        return this.getAttribute('position');
+      },
+      set: function set(value) {
+        return this.setAttribute('position', value);
+      }
+    }, {
+      key: "text",
+      get: function get() {
+        return this.getAttribute('text');
+      },
+      set: function set(value) {
+        return this.getAttribute('text', value);
+      }
       /* Lifecycle, element appended to the DOM */
+
+    }, {
+      key: "connectedCallback",
       value: function connectedCallback() {
         if (!this.position || this.position && ['top', 'bottom', 'left', 'right'].indexOf(this.position) === -1) {
           this.position = 'top';
@@ -248,51 +288,11 @@ function _getPrototypeOf(o) {
         this.dispatchEvent(OriginalCustomEvent);
         this.removeEventListener(eventName, this);
       }
-    }, {
-      key: "type",
-      get: function get() {
-        return this.getAttribute('type');
-      },
-      set: function set(value) {
-        return this.setAttribute('type', value);
-      }
-    }, {
-      key: "label",
-      get: function get() {
-        return this.getAttribute('label');
-      },
-      set: function set(value) {
-        return this.setAttribute('label', value);
-      }
-    }, {
-      key: "tip",
-      get: function get() {
-        return this.getAttribute('tip');
-      },
-      set: function set(value) {
-        return this.setAttribute('tip', value);
-      }
-    }, {
-      key: "position",
-      get: function get() {
-        return this.getAttribute('position');
-      },
-      set: function set(value) {
-        return this.setAttribute('position', value);
-      }
-    }, {
-      key: "text",
-      get: function get() {
-        return this.getAttribute('text');
-      },
-      set: function set(value) {
-        return this.getAttribute('text', value);
-      }
     }], [{
       key: "observedAttributes",
-
+      get:
       /* Attributes to monitor */
-      get: function get() {
+      function get() {
         return ['type', 'label', 'tip', 'text', 'position'];
       }
     }]);
