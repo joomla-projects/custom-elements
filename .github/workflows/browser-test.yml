@@ -1,29 +1,51 @@
 name: Browser Testing
 
 on:
-  pull_request_target:
-    types: [opened, edited, reopened, synchronize, ready_for_review]
-    branches:
-      - master
+  workflow_run:
+    workflows: ["Receive PR"]
+    types:
+      - completed
 
 jobs:
   test:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ ubuntu-latest ]
-        node: [ 14 ]
+    runs-on: ubuntu-latest
+    if: >
+      ${{ github.event.workflow_run.event == 'pull_request' &&
+      github.event.workflow_run.conclusion == 'success' }}
     name: Sauce Labs
+
     steps:
-      - uses: actions/checkout@v2
-
-      - uses: actions/setup-node@v1
-        name: Set up NodeJS
+      - name: 'Download artifact'
+        uses: actions/github-script@v3.1.0
         with:
-          node-version: ${{ matrix.node }}
+          script: |
+            var artifacts = await github.actions.listWorkflowRunArtifacts({
+               owner: context.repo.owner,
+               repo: context.repo.repo,
+               run_id: ${{github.event.workflow_run.id }},
+            });
+            var matchArtifact = artifacts.data.artifacts.filter((artifact) => {
+              return artifact.name == "pr"
+            })[0];
+            var download = await github.actions.downloadArtifact({
+               owner: context.repo.owner,
+               repo: context.repo.repo,
+               artifact_id: matchArtifact.id,
+               archive_format: 'zip',
+            });
+            var fs = require('fs');
+            fs.writeFileSync('${{github.workspace}}/pr.zip', Buffer.from(download.data));
+      - run: unzip pr.zip
 
-      - name: Install
-        run: npm install
+      # - uses: actions/checkout@v2
+
+      # - uses: actions/setup-node@v1
+      #   name: Set up NodeJS
+      #   with:
+      #     node-version: [ 14 ]
+
+      # - name: Install
+      #   run: npm install
 
       # Sause Labs part
       - uses: saucelabs/sauce-connect-action@v1.1.3
