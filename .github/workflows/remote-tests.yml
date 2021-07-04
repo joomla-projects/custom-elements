@@ -39,7 +39,9 @@ jobs:
         SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
 
     # Remove the label
-    - uses: actions-ecosystem/action-remove-labels@v1
+    - name: removelabel
+      uses: buildsville/add-remove-label@v1
       with:
-        labels: |
-          runTests
+        token: ${{secrets.GITHUB_TOKEN}}
+        label: runTests
+        type: remove
