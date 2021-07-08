@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Refactor build tools to rollup from Grunt
 - Refactor tests to use karma from WCT Tester
 - Add type="button" to the alert close button
+- Refactor of the alert element
+  - Removed `acknowledge` attribute
+  - Removed `href` attribute
+  - Added `close-text` attribute. This should be used to load the close button with multilingual text
 
 ## 0.0.41/0.0.42
 *Note 0.0.41 was released with the dist folder still from 0.0.40. Please do not use the release and instead use 0.0.42*
