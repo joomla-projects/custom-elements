@@ -55,8 +55,13 @@ joomla-alert {
   margin-bottom: $alert-margin-bottom;
   border: $alert-border-width solid transparent;
   border-radius: $alert-border-radius;
+  opacity: 0;
   animation: jui-alert-fade-in linear .5s;
   // animation: jui-alert-fade-out linear .5s;
+
+  @media screen and (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
 
   .joomla-alert--close, .joomla-alert-button--close {
     position: relative;
