@@ -5,9 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 0.0.43/0.0.44
-*Note 0.0.43 was released with the dist folder still from 0.0.42. Please do not use the release and instead use 0.0.44*
-
+## [Unreleased]
 - Refactor build tools to rollup from Grunt
 - Refactor tests to use karma from WCT Tester
 - Add type="button" to the alert close button
@@ -15,7 +13,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Removed `acknowledge` attribute
   - Removed `href` attribute
   - Added `close-text` attribute. This should be used to load the close button with multilingual text
-  - Removed `joomla.alert.closed` event from the element
 
 ## 0.0.41/0.0.42
 *Note 0.0.41 was released with the dist folder still from 0.0.40. Please do not use the release and instead use 0.0.42*
