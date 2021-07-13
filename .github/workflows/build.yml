@@ -2,11 +2,7 @@
 
 name: Distribution
 
-on:
-  pull_request:
-    types: [opened, synchronize, reopened, labeled, unlabeled]
-    branches:
-      - master
+on: [push, pull_request, pull_request_target]
 
 jobs:
   changelog:
