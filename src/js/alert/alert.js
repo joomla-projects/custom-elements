@@ -117,12 +117,10 @@ class AlertElement extends HTMLElement {
           } else if (!this.button && this.hasAttribute('dismiss')) {
             this.createCloseButton();
           }
-        } else {
-          if (this.button && newValue === 'false') {
-            this.destroyCloseButton();
-          } else if (!this.button && newValue !== 'false') {
-            this.createCloseButton();
-          }
+        } else if (this.button && newValue === 'false') {
+          this.destroyCloseButton();
+        } else if (!this.button && newValue !== 'false') {
+          this.createCloseButton();
         }
         break;
       case 'close-text':
@@ -142,6 +140,7 @@ class AlertElement extends HTMLElement {
 
   /* Observe added elements */
   onMutation(mutationsList) {
+    // eslint-disable-next-line no-restricted-syntax
     for (const mutation of mutationsList) {
       if (mutation.type === 'childList') {
         if (mutation.addedNodes.length) {
