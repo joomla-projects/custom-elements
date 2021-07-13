@@ -2,8 +2,14 @@ class JoomlaAlertElement extends HTMLElement {
   constructor() {
     super();
 
+    // Bindings
     this.close = this.close.bind(this);
-    this.markAlertClosed = this.markAlertClosed.bind(this);
+    this.destroyCloseButton = this.destroyCloseButton.bind(this);
+    this.createCloseButton = this.createCloseButton.bind(this);
+    this.onMutation = this.onMutation.bind(this);
+
+    this.observer = new MutationObserver(this.onMutation);
+    this.observer.observe(this, { attributes: false, childList: true, subtree: true });
   }
 
   /* Attributes to monitor */
@@ -27,8 +33,6 @@ class JoomlaAlertElement extends HTMLElement {
 
   /* Lifecycle, element appended to the DOM */
   connectedCallback() {
-    this.classList.add('joomla-alert--show');
-
     // Default to info
     if (!this.type || !['info', 'warning', 'danger', 'success'].includes(this.type)) {
       this.setAttribute('type', 'info');
@@ -37,10 +41,24 @@ class JoomlaAlertElement extends HTMLElement {
     if (!this.role || !['alert', 'alertdialog'].includes(this.role)) {
       this.setAttribute('role', 'alert');
     }
+
+    // Hydrate the button
+    if (this.firstElementChild && this.firstElementChild.tagName === 'BUTTON') {
+      this.button = this.firstElementChild;
+      if (this.button.classList.contains('joomla-alert--close')) {
+        this.button.classList.add('joomla-alert--close');
+      }
+      if (this.button.innerHTML === '') {
+        this.button.innerHTML = '<span aria-hidden="true">&times;</span>';
+      }
+      if (!this.button.hasAttribute('aria-label')) {
+        this.button.setAttribute('aria-label', this.closeText);
+      }
+    }
+
     // Append button
-    if (this.hasAttribute('dismiss')
-      && !this.querySelector('button.joomla-alert--close')) {
-      this.appendCloseButton();
+    if (this.hasAttribute('dismiss') && !this.button) {
+      this.createCloseButton();
     }
 
     if (this.hasAttribute('auto-dismiss')) {
@@ -52,9 +70,10 @@ class JoomlaAlertElement extends HTMLElement {
 
   /* Lifecycle, element removed from the DOM */
   disconnectedCallback() {
-    if (this.firstElementChild && this.firstElementChild.tagName.toLowerCase() === 'button') {
-      this.removeCloseButton();
+    if (this.button) {
+      this.button.removeEventListener('click', this.close);
     }
+    this.observer.disconnect();
   }
 
   /* Respond to attribute changes */
@@ -71,11 +90,19 @@ class JoomlaAlertElement extends HTMLElement {
         }
         break;
       case 'dismiss':
+        if ((!newValue || newValue === '') && (!oldValue || oldValue === '')) {
+          if (this.button && !this.hasAttribute('dismiss')) {
+            this.destroyCloseButton();
+          } else if (!this.button && this.hasAttribute('dismiss')) {
+            this.createCloseButton();
+          }
+        }
+        break;
       case 'close-text':
-        if (!newValue || newValue === 'true') {
-          this.appendCloseButton();
-        } else {
-          this.removeCloseButton();
+        if (!newValue || newValue !== oldValue) {
+          if (this.button) {
+            this.button.innerText = newValue;
+          }
         }
         break;
       case 'auto-dismiss':
@@ -86,45 +113,44 @@ class JoomlaAlertElement extends HTMLElement {
     }
   }
 
-  markAlertClosed() {
-    this.dispatchEvent(new CustomEvent('joomla.alert.closed'));
-    this.parentNode.removeChild(this);
+  /* Observe added elements */
+  onMutation(mutationsList) {
+    for (const mutation of mutationsList) {
+      if (mutation.type === 'childList') {
+        if (mutation.addedNodes.length) {
+          // Make sure that the button is always the first element
+          if (this.button && this.firstElementChild !== this.button) {
+            this.prepend(this.button);
+          }
+        }
+      }
+    }
   }
 
   /* Method to close the alert */
   close() {
     this.dispatchEvent(new CustomEvent('joomla.alert.close'));
-    if (window.matchMedia('(prefers-reduced-motion)').matches) {
-      this.markAlertClosed();
-    } else {
-      this.addEventListener('transitionend', (event) => {
-        if (event.target === this) {
-          this.markAlertClosed();
-        }
-      }, false);
-    }
-    this.classList.remove('joomla-alert--show');
+    this.remove();
   }
 
   /* Method to create the close button */
-  appendCloseButton() {
-    let button = this.querySelector('button.joomla-alert--close');
+  createCloseButton() {
+    this.button = document.createElement('button');
+    this.button.classList.add('joomla-alert--close');
+    this.button.innerHTML = '<span aria-hidden="true">&times;</span>';
+    this.button.setAttribute('aria-label', this.closeText);
+    this.insertAdjacentElement('afterbegin', this.button);
 
-    if (button) {
-      button.setAttribute('aria-label', this.closeText);
-    } else {
-      button = document.createElement('button');
+    /* Add the required listener */
+    this.button.addEventListener('click', this.close);
+  }
 
-      if (this.hasAttribute('dismiss')) {
-        button.classList.add('joomla-alert--close');
-        button.innerHTML = '<span aria-hidden="true">&times;</span>';
-        button.setAttribute('aria-label', this.closeText);
-      }
-
-      this.insertAdjacentElement('afterbegin', button);
-
-      /* Add the required listener */
-      button.addEventListener('click', this.close);
+  /* Method to remove the close button */
+  destroyCloseButton() {
+    if (this.button) {
+      this.button.removeEventListener('click', this.close);
+      this.button.parentNode.removeChild(this.button);
+      this.button = null;
     }
   }
 
@@ -132,15 +158,6 @@ class JoomlaAlertElement extends HTMLElement {
   autoDismiss() {
     const timer = parseInt(this.getAttribute('auto-dismiss'), 10);
     setTimeout(this.close, timer >= 10 ? timer : 3000);
-  }
-
-  /* Method to remove the close button */
-  removeCloseButton() {
-    const button = this.querySelector('button');
-    if (button) {
-      button.removeEventListener('click', this.close);
-      button.parentNode.removeChild(button);
-    }
   }
 }
 
