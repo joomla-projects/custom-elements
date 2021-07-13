@@ -203,7 +203,7 @@ var AlertElement = /*#__PURE__*/function (_HTMLElement) {
           } else {
             if (this.button && newValue === 'false') {
               this.destroyCloseButton();
-            } else if (!this.button && newValue === 'true') {
+            } else if (!this.button && newValue !== 'false') {
               this.createCloseButton();
             }
           }

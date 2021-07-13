@@ -120,7 +120,7 @@ class AlertElement extends HTMLElement {
         } else {
           if (this.button && newValue === 'false') {
             this.destroyCloseButton();
-          } else if (!this.button && newValue === 'true') {
+          } else if (!this.button && newValue !== 'false') {
             this.createCloseButton();
           }
         }
