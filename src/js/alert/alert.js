@@ -156,6 +156,7 @@ class AlertElement extends HTMLElement {
   createCloseButton() {
     this.button = document.createElement('button');
     this.button.classList.add('joomla-alert--close');
+    this.button.setAttribute('type', 'button');
     this.button.innerHTML = '<span aria-hidden="true">&times;</span>';
     this.button.setAttribute('aria-label', this.closeText);
     this.insertAdjacentElement('afterbegin', this.button);
