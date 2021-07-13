@@ -25,15 +25,15 @@ joomla-alert {
   --jui-alert-danger-border-color: #f4cfce;
   --jui-alert-danger-link-color: #4c1d1b;
   display: block;
-  min-width: var(--jui-alert-min-width);
-  padding: var(--jui-alert-padding);
-  margin: var(--jui-alert-margin);
-  border: var(--jui-alert-border);
-  border-radius: var(--jui-alert-border-radius);
-  -webkit-animation-duration: var(--jui-alert-animation-duration);
-          animation-duration: var(--jui-alert-animation-duration);
-  -webkit-animation-timing-function: var(--jui-alert-animation-timing-function);
-          animation-timing-function: var(--jui-alert-animation-timing-function);
+  min-width: var(--jui-alert-min-width, 250px);
+  padding: var(--jui-alert-padding, 0.5rem 1.25rem);
+  margin: var(--jui-alert-margin, 0 0 1rem 0);
+  border: var(--jui-alert-border, 1px solid transparent);
+  border-radius: var(--jui-alert-border-radius, 0.25rem);
+  -webkit-animation-duration: var(--jui-alert-animation-duration, 0.5s);
+          animation-duration: var(--jui-alert-animation-duration, 0.5s);
+  -webkit-animation-timing-function: var(--jui-alert-animation-timing-function, ease-in-out);
+          animation-timing-function: var(--jui-alert-animation-timing-function, ease-in-out);
 }
 
 joomla-alert .joomla-alert--close {
@@ -45,8 +45,8 @@ joomla-alert .joomla-alert--close {
   font-size: 1.5rem;
   font-weight: 700;
   line-height: 1;
-  color: var(--jui-alert-button-color-dark);
-  text-shadow: 0 1px 0 var(--jui-alert-button-color-light);
+  color: var(--jui-alert-button-color-dark, #000);
+  text-shadow: 0 1px 0 var(--jui-alert-button-color-light, #fff);
   background: transparent;
   border: 0;
   opacity: 0.5;
@@ -54,66 +54,66 @@ joomla-alert .joomla-alert--close {
 
 joomla-alert .joomla-alert--close:hover,
 joomla-alert .joomla-alert--close:focus {
-  color: var(--jui-alert-button-color);
+  color: var(--jui-alert-button-color-dark, #000);
   text-decoration: none;
   cursor: pointer;
   opacity: 0.75;
 }
 
 joomla-alert[type=success] {
-  color: var(--jui-alert-success-color);
-  background-color: var(--jui-alert-success-background-color);
-  border-color: var(--jui-alert-success-border-color);
+  color: var(--jui-alert-success-color, #234423);
+  background-color: var(--jui-alert-success-background-color, #d9e6d9);
+  border-color: var(--jui-alert-success-border-color, #cadcca);
 }
 
 joomla-alert[type=success] hr {
-  border-top-color: var(--jui-alert-success-border-color);
+  border-top-color: var(--jui-alert-success-border-color, #cadcca);
 }
 
 joomla-alert[type=success] .alert-link {
-  color: var(--jui-alert-success-link-color);
+  color: var(--jui-alert-success-link-color, #122212);
 }
 
 joomla-alert[type=info] {
-  color: var(--jui-alert-info-color);
-  background-color: var(--jui-alert-info-background-color);
-  border-color: var(--jui-alert-info-border-color);
+  color: var(--jui-alert-info-color, #0c5460);
+  background-color: var(--jui-alert-info-background-color, #d1ecf1);
+  border-color: var(--jui-alert-info-border-color, #bee5eb);
 }
 
 joomla-alert[type=info] hr {
-  border-top-color: var(--jui-alert-info-border-color);
+  border-top-color: var(--jui-alert-info-border-color, #bee5eb);
 }
 
 joomla-alert[type=info] .alert-link {
-  color: var(--jui-alert-info-link-color);
+  color: var(--jui-alert-info-link-color, #062c33);
 }
 
 joomla-alert[type=warning] {
-  color: var(--jui-alert-warning-color);
-  background-color: var(--jui-alert-warning-background-color);
-  border-color: var(--jui-alert-warning-border-color);
+  color: var(--jui-alert-warning-color, #7d5a29);
+  background-color: var(--jui-alert-warning-background-color, #fcefdc);
+  border-color: var(--jui-alert-warning-border-color, #fbe8cd);
 }
 
 joomla-alert[type=warning] hr {
-  border-top-color: var(--jui-alert-warning-border-color);
+  border-top-color: var(--jui-alert-warning-border-color, #fbe8cd);
 }
 
 joomla-alert[type=warning] .alert-link {
-  color: var(--jui-alert-warning-link-color);
+  color: var(--jui-alert-warning-link-color, #573e1c);
 }
 
 joomla-alert[type=danger] {
-  color: var(--jui-alert-danger-color);
-  background-color: var(--jui-alert-danger-background-color);
-  border-color: var(--jui-alert-danger-border-color);
+  color: var(--jui-alert-danger-color, #712b29);
+  background-color: var(--jui-alert-danger-background-color, #f7dddc);
+  border-color: var(--jui-alert-danger-border-color, #f4cfce);
 }
 
 joomla-alert[type=danger] hr {
-  border-top-color: var(--jui-alert-danger-border-color);
+  border-top-color: var(--jui-alert-danger-border-color, #f4cfce);
 }
 
 joomla-alert[type=danger] .alert-link {
-  color: var(--jui-alert-danger-link-color);
+  color: var(--jui-alert-danger-link-color, #4c1d1b);
 }
 
 html[dir=rtl] joomla-alert .joomla-alert--close,

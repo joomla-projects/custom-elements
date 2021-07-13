@@ -63,17 +63,16 @@ Control the design and functionality of the custom element through attributes.
 |Attribute		|Description|
 |---------------|-----------------------------------------------------------------------------------------------|
 |type			|This attribute is responsible for the looks.|
-|dismiss		|Appends the x button. True is the only value.|
-|acknowledge	|Appends a generic button with a title `Ok`. True is the only value.|
+|dismiss		|Appends or not the x button. Boolean no value needed|
 |auto-dismiss	|Controls the auto close functionality of the alert. Values (integers) represent milliseconds|
-|href			|if is set a redirect button is created. Value must be an actual url|
-|position		|Adjust the alerts's position to different corners. Possible values: `top-left`, `top-center` and `top-right`|
+
+|close-text 	|The text for the x button (for aria-label).|
 
 
 ## Dismissing
 No need for extra javascript, it's possible to dismiss any alert inline. Here’s how:
 
-Add a `dismiss` or an `acknowledge` attribute.
+Add a `dismiss` attribute.
 That's it!
 Now clicking the x button will close the alert!
 
@@ -93,8 +92,6 @@ el.setAttribute('type', 'warning')
 Remove or add the close button:
 ```js
 el.removeAttribute('dismiss'); // Will remove the attribute
-el.setAttribute('acknowledge', true);
-el.setAttribute('url', 'https://www.joomla.org');
 el.setAttribute('auto-dismiss', '5000');
 ```
 
@@ -104,10 +101,10 @@ The custom element exposes a few events for hooking into alert functionality.
 
 |Event			|Description								     			|
 |-----------------------|-----------------------------------------------------------------------------------------------|
-|joomla.alert.show		|This event fires immediately when the element is appended in the DOM.				|
+|joomla.alert.show		|This event fires immediately before the element is appended in the DOM.				|
+|joomla.alert.shown		|This event fires immediately after the element was appended in the DOM.				|
 |joomla.alert.close		|This event fires immediately when the close instance method is called.				|
 |joomla.alert.closed	|This event is fired when the alert has been closed (will wait for CSS transitions to complete).|
-|joomla.alert.buttonClicked	|This event is fired when the alert button has been clicked.|
 
 
 Example:
@@ -186,7 +183,7 @@ el.close();
 
 
 ### Demo
-<joomla-alert id="close-me-with-a-btn" type="danger" acknowledge="true">
+<joomla-alert id="close-me-with-a-btn" type="danger" dismiss>
 <strong>Alert:</strong> Close me with javascript
 </joomla-alert>
 <p>
@@ -268,7 +265,7 @@ Dynamically rendered alerts are automatically announced by most screen readers, 
 var addNew = function() {
     var tempElement = document.createElement('joomla-alert');
     tempElement.setAttribute('type', 'success');
-    tempElement.setAttribute('dismiss', true);
+    tempElement.setAttribute('dismiss', '');
     tempElement.innerHTML = 'Wow it works!';
     document.getElementById('insert-new-alert').appendChild(tempElement);
 };
@@ -276,9 +273,8 @@ var addNew = function() {
 var addNewFloated = function() {
     var tempElement = document.createElement('joomla-alert');
     tempElement.setAttribute('type', 'warning');
-    tempElement.setAttribute('dismiss', true);
-	tempElement.setAttribute('position', 'top-center');
-    tempElement.innerHTML = "I'm a floated alert! You can position me to the top left or right too!";
+    tempElement.setAttribute('dismiss', '');
+    tempElement.innerHTML = "Hello from this Alert!";
     document.body.appendChild(tempElement);
 };
 
