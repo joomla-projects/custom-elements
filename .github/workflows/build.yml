@@ -1,6 +1,6 @@
 # This action will run the build script and merge back the distribution files
 
-name: changelog
+name: Distribution
 
 on:
   pull_request:
