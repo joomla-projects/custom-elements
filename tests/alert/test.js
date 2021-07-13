@@ -96,8 +96,8 @@ describe('<joomla-alert-dismiss>', function(){
     const closeBtn = el.querySelectorAll('button.joomla-alert--close').length
     const close = el.querySelectorAll('button').length
     expect(type).toBe('unsupported');
-    expect(closeBtn).toBe(1);
-    expect(close).toBe(1);
+    expect(closeBtn).toBe(0);
+    expect(close).toBe(0);
   });
 
   it('Method close removes the alert', function() {
