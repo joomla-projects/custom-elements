@@ -133,3 +133,9 @@ html[dir=rtl] joomla-alert {
   0% { opacity: 1; }
   100% { opacity: 0; }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  joomla-alert {
+    animation-duration: 1ms !important;
+  }
+}

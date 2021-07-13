@@ -150,3 +150,9 @@ html[dir=rtl] joomla-alert .joomla-alert-button--close {
     opacity: 0;
   }
 }
+@media (prefers-reduced-motion: reduce) {
+  joomla-alert {
+    -webkit-animation-duration: 1ms !important;
+            animation-duration: 1ms !important;
+  }
+}
