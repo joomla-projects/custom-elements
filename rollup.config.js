@@ -15,7 +15,7 @@ const Elements = [
   'dropdown',
   'modal',
   'panels',
-  'tab',
+  'tabs',
   'tip',
 ];
 

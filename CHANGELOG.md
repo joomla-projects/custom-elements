@@ -16,6 +16,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Removed `href` attribute
   - Added `close-text` attribute. This should be used to load the close button with multilingual text
   - Removed `joomla.alert.closed` event from the element
+- Refactor of the tabs element
+  - Logic rewritten so the tabs won't be reappended (no more moving elements)
+  - Added `breakpoint` attribute for controling the transition from tabs/accordion
+  - Added tests
 
 ## 0.0.41/0.0.42
 *Note 0.0.41 was released with the dist folder still from 0.0.40. Please do not use the release and instead use 0.0.42*
