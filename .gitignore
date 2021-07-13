@@ -9,6 +9,6 @@
 .log
 
 node_modules/
-dist/
-docs/_media/css
-docs/_media/js
+!dist/
+!docs/_media/css
+!docs/_media/js
