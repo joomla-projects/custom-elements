@@ -111,10 +111,18 @@ class AlertElement extends HTMLElement {
         }
         break;
       case 'dismiss':
-        if (this.button && !this.hasAttribute('dismiss')) {
-          this.destroyCloseButton();
-        } else if (!this.button && this.hasAttribute('dismiss')) {
-          this.createCloseButton();
+        if ((!newValue || newValue === '') && (!oldValue || oldValue === '')) {
+          if (this.button && !this.hasAttribute('dismiss')) {
+            this.destroyCloseButton();
+          } else if (!this.button && this.hasAttribute('dismiss')) {
+            this.createCloseButton();
+          }
+        } else {
+          if (this.button && newValue === 'false') {
+            this.destroyCloseButton();
+          } else if (!this.button && newValue === 'true') {
+            this.createCloseButton();
+          }
         }
         break;
       case 'close-text':

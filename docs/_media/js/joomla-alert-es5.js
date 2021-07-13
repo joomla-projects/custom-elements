@@ -194,10 +194,18 @@ var AlertElement = /*#__PURE__*/function (_HTMLElement) {
           break;
 
         case 'dismiss':
-          if (this.button && !this.hasAttribute('dismiss')) {
-            this.destroyCloseButton();
-          } else if (!this.button && this.hasAttribute('dismiss')) {
-            this.createCloseButton();
+          if ((!newValue || newValue === '') && (!oldValue || oldValue === '')) {
+            if (this.button && !this.hasAttribute('dismiss')) {
+              this.destroyCloseButton();
+            } else if (!this.button && this.hasAttribute('dismiss')) {
+              this.createCloseButton();
+            }
+          } else {
+            if (this.button && newValue === 'false') {
+              this.destroyCloseButton();
+            } else if (!this.button && newValue === 'true') {
+              this.createCloseButton();
+            }
           }
 
           break;
@@ -257,8 +265,8 @@ var AlertElement = /*#__PURE__*/function (_HTMLElement) {
     key: "createCloseButton",
     value: function createCloseButton() {
       this.button = document.createElement('button');
-      this.button.classList.add('joomla-alert--close');
       this.button.setAttribute('type', 'button');
+      this.button.classList.add('joomla-alert--close');
       this.button.innerHTML = '<span aria-hidden="true">&times;</span>';
       this.button.setAttribute('aria-label', this.closeText);
       this.insertAdjacentElement('afterbegin', this.button);
