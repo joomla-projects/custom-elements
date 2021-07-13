@@ -39,6 +39,7 @@ The simplified version of the custom elements
 ```
 
 ### Alerts demo:
+<p class="demo-000">
 <joomla-alert>No params passed</joomla-alert>
 <joomla-alert type="info" dismiss="true">
     <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
@@ -52,8 +53,8 @@ The simplified version of the custom elements
 <joomla-alert type="danger" href="https://www.joomla.org">
     <strong>Oh snap!</strong> Click open to go to joomla.org
 </joomla-alert>
-<p>
-<button role="button" id="insertNewFloated" class="btn btn-success">Create a floated alert</button>
+
+<button role="button" id="insertNewFloated" class="btn btn-success">Create a new alert</button>
 </p>
 
 ## Attributes
@@ -261,31 +262,31 @@ Dynamically rendered alerts are automatically announced by most screen readers, 
 * **[4.1.2 Name, Role, Value](https://www.w3.org/WAI/WCAG20/quickref/#ensure-compat-rsv)** (Level A): For all user interface components, the name and role can be programmatically determined; states, properties, and values that can be set by the user can be programmatically set; and notification of changes to these items is available to user agents, including assistive technologies.
 
 
-<script markdown="0">
-var addNew = function() {
-    var tempElement = document.createElement('joomla-alert');
+<script type="module" markdown="0">
+const addNew = function() {
+    const tempElement = document.createElement('joomla-alert');
     tempElement.setAttribute('type', 'success');
     tempElement.setAttribute('dismiss', '');
     tempElement.innerHTML = 'Wow it works!';
     document.getElementById('insert-new-alert').appendChild(tempElement);
 };
 
-var addNewFloated = function() {
-    var tempElement = document.createElement('joomla-alert');
+const addNewFloated = function() {
+    const tempElement = document.createElement('joomla-alert');
     tempElement.setAttribute('type', 'warning');
     tempElement.setAttribute('dismiss', '');
     tempElement.innerHTML = "Hello from this Alert!";
-    document.body.appendChild(tempElement);
+    document.querySelector('.demo-000').appendChild(tempElement);
 };
 
-var changeAlert = function(dataAttr, value) {
-    var tempElement = document.getElementById('change-me');
-	tempElement.setAttribute(dataAttr, value);
+const changeAlert = function(dataAttr, value) {
+    const tempElement = document.getElementById('change-me');
+    tempElement.setAttribute(dataAttr, value);
 };
-var addNewButton = document.getElementById('insertNew'),
-    changeButtons = document.querySelectorAll('#replaceble > button');
 
-var addNewButtonFloated = document.getElementById('insertNewFloated');
+const addNewButton = document.getElementById('insertNew');
+const changeButtons = Array.from(document.querySelectorAll('#replaceble > button'));
+const addNewButtonFloated = document.getElementById('insertNewFloated');
 
 addNewButton.addEventListener('click', addNew);
 addNewButtonFloated.addEventListener('click', addNewFloated);
@@ -294,11 +295,23 @@ document.getElementById('change-me').addEventListener('joomla.alert.closed', fun
     document.getElementById('replaceble').innerHTML = '<h4>Oops the alert has been destroyed. This text was initiated using the event "joomla.alert.closed" (the popup used the event "joomla.alert.close"</h4>';
  });
 
-for (var i = 0, l = changeButtons.length; i < l; i++) {
-        changeButtons[i].addEventListener('click', function() { changeAlert(this.getAttribute('data-opt1'), this.getAttribute('value')) });
-}
+changeButtons
+    .map((el) => el.addEventListener('click', (event) => {
+        const dataOpt1 = event.currentTarget.getAttribute('data-opt1');
+        const value = event.currentTarget.getAttribute('value');
+        if (dataOpt1 === 'dismiss') {
+            if (value === 'true') {
+                document.getElementById('change-me').setAttribute('dismiss', '')
+            } else {
+                document.getElementById('change-me').removeAttribute('dismiss')
+            }
+        } else {
+            changeAlert(dataOpt1, value);
+        }
+    })
+);
 
-document.getElementById('i-will-close-that-alert').addEventListener('click', function(event) { var a = document.getElementById('close-me-with-a-btn');
+document.getElementById('i-will-close-that-alert').addEventListener('click', function(event) { const a = document.getElementById('close-me-with-a-btn');
 if (a) a.close(); event.target.setAttribute('disabled', true); event.target.removeEventListener('click', arguments.callee); });
 
 </script>
