@@ -89,17 +89,6 @@ describe('<joomla-alert-dismiss>', function(){
     expect(close).toBe(1);
   });
 
-  it('Respects button attribute change, any other value', function() {
-    const el = fixture.el.firstElementChild;
-    el.setAttribute('dismiss', 'unsupported');
-    const type = el.getAttribute('dismiss')
-    const closeBtn = el.querySelectorAll('button.joomla-alert--close').length
-    const close = el.querySelectorAll('button').length
-    expect(type).toBe('unsupported');
-    expect(closeBtn).toBe(1);
-    expect(close).toBe(1);
-  });
-
   it('Method close removes the alert', function() {
     const el = fixture.el.firstElementChild;
     el.close();
