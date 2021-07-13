@@ -18,6 +18,7 @@ class AlertElement extends HTMLElement {
         this.style.removeProperty('animationName');
       }
     });
+
     // Handle the fade out animation
     this.addEventListener('animationend', (event) => {
       if (event.animationName === 'joomla-alert-fade-out' && event.target === this) {
@@ -28,32 +29,33 @@ class AlertElement extends HTMLElement {
   }
 
   /* Attributes to monitor */
-  static get observedAttributes() { return ['type', 'role', 'dismiss', 'close-text']; }
+  static get observedAttributes() { return ['type', 'role', 'dismiss', 'auto-dismiss', 'close-text']; }
 
   get type() { return this.getAttribute('type'); }
 
-  set type(value) { return this.setAttribute('type', value); }
+  set type(value) { this.setAttribute('type', value); }
 
   get role() { return this.getAttribute('role'); }
 
-  set role(value) { return this.setAttribute('role', value); }
+  set role(value) { this.setAttribute('role', value); }
 
   get closeText() { return this.getAttribute('close-text'); }
 
-  set closeText(value) { return this.setAttribute('close-text', value); }
+  set closeText(value) { this.setAttribute('close-text', value); }
 
   get dismiss() { return this.getAttribute('dismiss'); }
 
-  set dismiss(value) { return this.setAttribute('dismiss', value); }
+  set dismiss(value) { this.setAttribute('dismiss', value); }
 
   get autodismiss() { return this.getAttribute('auto-dismiss'); }
 
-  set autodismiss(value) { return this.setAttribute('auto-dismiss', value); }
+  set autodismiss(value) { this.setAttribute('auto-dismiss', value); }
 
   /* Lifecycle, element appended to the DOM */
   connectedCallback() {
-    this.style.animationName = 'joomla-alert-fade-in';
     this.dispatchEvent(new CustomEvent('joomla.alert.show'));
+    this.style.animationName = 'joomla-alert-fade-in';
+
     // Default to info
     if (!this.type || !['info', 'warning', 'danger', 'success'].includes(this.type)) {
       this.setAttribute('type', 'info');
@@ -151,6 +153,7 @@ class AlertElement extends HTMLElement {
   /* Method to create the close button */
   createCloseButton() {
     this.button = document.createElement('button');
+    this.button.setAttribute('type', 'button');
     this.button.classList.add('joomla-alert--close');
     this.button.innerHTML = '<span aria-hidden="true">&times;</span>';
     this.button.setAttribute('aria-label', this.closeText);

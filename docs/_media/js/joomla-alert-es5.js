@@ -85,7 +85,7 @@ var AlertElement = /*#__PURE__*/function (_HTMLElement) {
       return this.getAttribute('type');
     },
     set: function set(value) {
-      return this.setAttribute('type', value);
+      this.setAttribute('type', value);
     }
   }, {
     key: "role",
@@ -93,7 +93,7 @@ var AlertElement = /*#__PURE__*/function (_HTMLElement) {
       return this.getAttribute('role');
     },
     set: function set(value) {
-      return this.setAttribute('role', value);
+      this.setAttribute('role', value);
     }
   }, {
     key: "closeText",
@@ -101,7 +101,7 @@ var AlertElement = /*#__PURE__*/function (_HTMLElement) {
       return this.getAttribute('close-text');
     },
     set: function set(value) {
-      return this.setAttribute('close-text', value);
+      this.setAttribute('close-text', value);
     }
   }, {
     key: "dismiss",
@@ -109,7 +109,7 @@ var AlertElement = /*#__PURE__*/function (_HTMLElement) {
       return this.getAttribute('dismiss');
     },
     set: function set(value) {
-      return this.setAttribute('dismiss', value);
+      this.setAttribute('dismiss', value);
     }
   }, {
     key: "autodismiss",
@@ -117,15 +117,15 @@ var AlertElement = /*#__PURE__*/function (_HTMLElement) {
       return this.getAttribute('auto-dismiss');
     },
     set: function set(value) {
-      return this.setAttribute('auto-dismiss', value);
+      this.setAttribute('auto-dismiss', value);
     }
     /* Lifecycle, element appended to the DOM */
 
   }, {
     key: "connectedCallback",
     value: function connectedCallback() {
-      this.style.animationName = 'joomla-alert-fade-in';
-      this.dispatchEvent(new CustomEvent('joomla.alert.show')); // Default to info
+      this.dispatchEvent(new CustomEvent('joomla.alert.show'));
+      this.style.animationName = 'joomla-alert-fade-in'; // Default to info
 
       if (!this.type || !['info', 'warning', 'danger', 'success'].includes(this.type)) {
         this.setAttribute('type', 'info');
@@ -257,6 +257,7 @@ var AlertElement = /*#__PURE__*/function (_HTMLElement) {
     key: "createCloseButton",
     value: function createCloseButton() {
       this.button = document.createElement('button');
+      this.button.setAttribute('type', 'button');
       this.button.classList.add('joomla-alert--close');
       this.button.innerHTML = '<span aria-hidden="true">&times;</span>';
       this.button.setAttribute('aria-label', this.closeText);
@@ -287,7 +288,7 @@ var AlertElement = /*#__PURE__*/function (_HTMLElement) {
   }], [{
     key: "observedAttributes",
     get: function get() {
-      return ['type', 'role', 'dismiss', 'close-text'];
+      return ['type', 'role', 'dismiss', 'auto-dismiss', 'close-text'];
     }
   }]);
 

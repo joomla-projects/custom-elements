@@ -18,6 +18,7 @@ class AlertElement extends HTMLElement {
         this.style.removeProperty('animationName');
       }
     });
+
     // Handle the fade out animation
     this.addEventListener('animationend', (event) => {
       if (event.animationName === 'joomla-alert-fade-out' && event.target === this) {
@@ -52,8 +53,9 @@ class AlertElement extends HTMLElement {
 
   /* Lifecycle, element appended to the DOM */
   connectedCallback() {
-    this.style.animationName = 'joomla-alert-fade-in';
     this.dispatchEvent(new CustomEvent('joomla.alert.show'));
+    this.style.animationName = 'joomla-alert-fade-in';
+
     // Default to info
     if (!this.type || !['info', 'warning', 'danger', 'success'].includes(this.type)) {
       this.setAttribute('type', 'info');
