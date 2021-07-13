@@ -1,4 +1,4 @@
-class JoomlaAlertElement extends HTMLElement {
+class AlertElement extends HTMLElement {
   constructor() {
     super();
 
@@ -10,6 +10,21 @@ class JoomlaAlertElement extends HTMLElement {
 
     this.observer = new MutationObserver(this.onMutation);
     this.observer.observe(this, { attributes: false, childList: true, subtree: true });
+
+    // Handle the fade in animation
+    this.addEventListener('animationend', (event) => {
+      if (event.animationName === 'joomla-alert-fade-in' && event.target === this) {
+        this.dispatchEvent(new CustomEvent('joomla.alert.shown'));
+        this.style.removeProperty('animationName');
+      }
+    });
+    // Handle the fade out animation
+    this.addEventListener('animationend', (event) => {
+      if (event.animationName === 'joomla-alert-fade-out' && event.target === this) {
+        this.dispatchEvent(new CustomEvent('joomla.alert.closed'));
+        this.remove();
+      }
+    });
   }
 
   /* Attributes to monitor */
@@ -29,10 +44,16 @@ class JoomlaAlertElement extends HTMLElement {
 
   get dismiss() { return this.getAttribute('dismiss'); }
 
+  set dismiss(value) { return this.setAttribute('dismiss', value); }
+
   get autodismiss() { return this.getAttribute('auto-dismiss'); }
+
+  set autodismiss(value) { return this.setAttribute('auto-dismiss', value); }
 
   /* Lifecycle, element appended to the DOM */
   connectedCallback() {
+    this.style.animationName = 'joomla-alert-fade-in';
+    this.dispatchEvent(new CustomEvent('joomla.alert.show'));
     // Default to info
     if (!this.type || !['info', 'warning', 'danger', 'success'].includes(this.type)) {
       this.setAttribute('type', 'info');
@@ -64,8 +85,6 @@ class JoomlaAlertElement extends HTMLElement {
     if (this.hasAttribute('auto-dismiss')) {
       this.autoDismiss();
     }
-
-    this.dispatchEvent(new CustomEvent('joomla.alert.show'));
   }
 
   /* Lifecycle, element removed from the DOM */
@@ -90,12 +109,10 @@ class JoomlaAlertElement extends HTMLElement {
         }
         break;
       case 'dismiss':
-        if ((!newValue || newValue === '') && (!oldValue || oldValue === '')) {
-          if (this.button && !this.hasAttribute('dismiss')) {
-            this.destroyCloseButton();
-          } else if (!this.button && this.hasAttribute('dismiss')) {
-            this.createCloseButton();
-          }
+        if (this.button && !this.hasAttribute('dismiss')) {
+          this.destroyCloseButton();
+        } else if (!this.button && this.hasAttribute('dismiss')) {
+          this.createCloseButton();
         }
         break;
       case 'close-text':
@@ -128,13 +145,12 @@ class JoomlaAlertElement extends HTMLElement {
   /* Method to close the alert */
   close() {
     this.dispatchEvent(new CustomEvent('joomla.alert.close'));
-    this.remove();
+    this.style.animationName = 'joomla-alert-fade-out';
   }
 
   /* Method to create the close button */
   createCloseButton() {
     this.button = document.createElement('button');
-    this.button.setAttribute('type', 'button');
     this.button.classList.add('joomla-alert--close');
     this.button.innerHTML = '<span aria-hidden="true">&times;</span>';
     this.button.setAttribute('aria-label', this.closeText);
@@ -161,5 +177,5 @@ class JoomlaAlertElement extends HTMLElement {
 }
 
 if (!customElements.get('joomla-alert')) {
-  customElements.define('joomla-alert', JoomlaAlertElement);
+  customElements.define('joomla-alert', AlertElement);
 }

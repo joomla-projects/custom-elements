@@ -5,15 +5,10 @@ joomla-alert {
   margin-bottom: 1rem;
   border: 1px solid transparent;
   border-radius: 0.25rem;
-  opacity: 0;
-  -webkit-animation: jui-alert-fade-in linear 0.5s;
-          animation: jui-alert-fade-in linear 0.5s;
-}
-@media screen and (prefers-reduced-motion: reduce) {
-  joomla-alert {
-    -webkit-animation: none;
-            animation: none;
-  }
+  -webkit-animation-duration: 0.5s;
+          animation-duration: 0.5s;
+  -webkit-animation-timing-function: ease-in-out;
+          animation-timing-function: ease-in-out;
 }
 joomla-alert .joomla-alert--close, joomla-alert .joomla-alert-button--close {
   position: relative;
@@ -108,24 +103,18 @@ html[dir=rtl] joomla-alert .joomla-alert-button--close {
   float: left;
 }
 
-@-webkit-keyframes jui-alert-fade-in {
+@-webkit-keyframes joomla-alert-fade-in {
   0% {
     opacity: 0;
-  }
-  100% {
-    opacity: 1;
   }
 }
 
-@keyframes jui-alert-fade-in {
+@keyframes joomla-alert-fade-in {
   0% {
     opacity: 0;
   }
-  100% {
-    opacity: 1;
-  }
 }
-@-webkit-keyframes jui-alert-fade-out {
+@-webkit-keyframes joomla-alert-fade-out {
   0% {
     opacity: 1;
   }
@@ -133,7 +122,7 @@ html[dir=rtl] joomla-alert .joomla-alert-button--close {
     opacity: 0;
   }
 }
-@keyframes jui-alert-fade-out {
+@keyframes joomla-alert-fade-out {
   0% {
     opacity: 1;
   }

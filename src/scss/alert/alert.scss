@@ -55,8 +55,8 @@ joomla-alert {
   margin-bottom: $alert-margin-bottom;
   border: $alert-border-width solid transparent;
   border-radius: $alert-border-radius;
-  animation: jui-alert-fade-in linear .5s;
-  // animation: jui-alert-fade-out linear .5s;
+  animation-duration: .5s;
+  animation-timing-function: ease-in-out;
 
   .joomla-alert--close, .joomla-alert-button--close {
     position: relative;
@@ -123,11 +123,10 @@ html[dir=rtl] joomla-alert {
   }
 }
 
-@keyframes jui-alert-fade-in{
+@keyframes joomla-alert-fade-in {
   0% {opacity:0;}
-  100% {opacity:1;}
 }
-@keyframes jui-alert-fade-out{
-  0% {opacity:1;}
+@keyframes joomla-alert-fade-out {
+  0% { opacity:1; }
   100% {opacity:0;}
 }

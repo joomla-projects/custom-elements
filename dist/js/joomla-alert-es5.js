@@ -32,15 +32,15 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-var JoomlaAlertElement = /*#__PURE__*/function (_HTMLElement) {
-  _inherits(JoomlaAlertElement, _HTMLElement);
+var AlertElement = /*#__PURE__*/function (_HTMLElement) {
+  _inherits(AlertElement, _HTMLElement);
 
-  var _super = _createSuper(JoomlaAlertElement);
+  var _super = _createSuper(AlertElement);
 
-  function JoomlaAlertElement() {
+  function AlertElement() {
     var _this;
 
-    _classCallCheck(this, JoomlaAlertElement);
+    _classCallCheck(this, AlertElement);
 
     _this = _super.call(this); // Bindings
 
@@ -54,6 +54,24 @@ var JoomlaAlertElement = /*#__PURE__*/function (_HTMLElement) {
       attributes: false,
       childList: true,
       subtree: true
+    }); // Handle the fade in animation
+
+
+    _this.addEventListener('animationend', function (event) {
+      if (event.animationName === 'joomla-alert-fade-in' && event.target === _assertThisInitialized(_this)) {
+        _this.dispatchEvent(new CustomEvent('joomla.alert.shown'));
+
+        _this.style.removeProperty('animationName');
+      }
+    }); // Handle the fade out animation
+
+
+    _this.addEventListener('animationend', function (event) {
+      if (event.animationName === 'joomla-alert-fade-out' && event.target === _assertThisInitialized(_this)) {
+        _this.dispatchEvent(new CustomEvent('joomla.alert.closed'));
+
+        _this.remove();
+      }
     });
 
     return _this;
@@ -61,7 +79,7 @@ var JoomlaAlertElement = /*#__PURE__*/function (_HTMLElement) {
   /* Attributes to monitor */
 
 
-  _createClass(JoomlaAlertElement, [{
+  _createClass(AlertElement, [{
     key: "type",
     get: function get() {
       return this.getAttribute('type');
@@ -89,18 +107,26 @@ var JoomlaAlertElement = /*#__PURE__*/function (_HTMLElement) {
     key: "dismiss",
     get: function get() {
       return this.getAttribute('dismiss');
+    },
+    set: function set(value) {
+      return this.setAttribute('dismiss', value);
     }
   }, {
     key: "autodismiss",
     get: function get() {
       return this.getAttribute('auto-dismiss');
+    },
+    set: function set(value) {
+      return this.setAttribute('auto-dismiss', value);
     }
     /* Lifecycle, element appended to the DOM */
 
   }, {
     key: "connectedCallback",
     value: function connectedCallback() {
-      // Default to info
+      this.style.animationName = 'joomla-alert-fade-in';
+      this.dispatchEvent(new CustomEvent('joomla.alert.show')); // Default to info
+
       if (!this.type || !['info', 'warning', 'danger', 'success'].includes(this.type)) {
         this.setAttribute('type', 'info');
       } // Default to alert
@@ -135,8 +161,6 @@ var JoomlaAlertElement = /*#__PURE__*/function (_HTMLElement) {
       if (this.hasAttribute('auto-dismiss')) {
         this.autoDismiss();
       }
-
-      this.dispatchEvent(new CustomEvent('joomla.alert.show'));
     }
     /* Lifecycle, element removed from the DOM */
 
@@ -170,12 +194,10 @@ var JoomlaAlertElement = /*#__PURE__*/function (_HTMLElement) {
           break;
 
         case 'dismiss':
-          if ((!newValue || newValue === '') && (!oldValue || oldValue === '')) {
-            if (this.button && !this.hasAttribute('dismiss')) {
-              this.destroyCloseButton();
-            } else if (!this.button && this.hasAttribute('dismiss')) {
-              this.createCloseButton();
-            }
+          if (this.button && !this.hasAttribute('dismiss')) {
+            this.destroyCloseButton();
+          } else if (!this.button && this.hasAttribute('dismiss')) {
+            this.createCloseButton();
           }
 
           break;
@@ -227,7 +249,7 @@ var JoomlaAlertElement = /*#__PURE__*/function (_HTMLElement) {
     key: "close",
     value: function close() {
       this.dispatchEvent(new CustomEvent('joomla.alert.close'));
-      this.remove();
+      this.style.animationName = 'joomla-alert-fade-out';
     }
     /* Method to create the close button */
 
@@ -235,7 +257,6 @@ var JoomlaAlertElement = /*#__PURE__*/function (_HTMLElement) {
     key: "createCloseButton",
     value: function createCloseButton() {
       this.button = document.createElement('button');
-      this.button.setAttribute('type', 'button');
       this.button.classList.add('joomla-alert--close');
       this.button.innerHTML = '<span aria-hidden="true">&times;</span>';
       this.button.setAttribute('aria-label', this.closeText);
@@ -270,9 +291,9 @@ var JoomlaAlertElement = /*#__PURE__*/function (_HTMLElement) {
     }
   }]);
 
-  return JoomlaAlertElement;
+  return AlertElement;
 }( /*#__PURE__*/_wrapNativeSuper(HTMLElement));
 
 if (!customElements.get('joomla-alert')) {
-  customElements.define('joomla-alert', JoomlaAlertElement);
+  customElements.define('joomla-alert', AlertElement);
 }
