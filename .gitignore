@@ -9,4 +9,6 @@
 .log
 
 node_modules/
-!dist/
+dist/
+docs/_media/css
+docs/_media/js
