@@ -34,15 +34,15 @@ module.exports = (config) => {
     // list of files / patterns to load in the browser
     files: [
       // polyfill
-      {pattern: 'node_modules/@webreflection/custom-elements-no-builtin/min.js', served: true, nocache: true },
+      // {pattern: 'node_modules/@webreflection/custom-elements-no-builtin/min.js', served: true, nocache: true },
       // modules
       {pattern: 'dist/js/joomla-alert.js', type: 'module' },
-      {pattern: 'dist/js/joomla-collapse.js', type: 'module' },
-      {pattern: 'dist/js/joomla-dropdown.js', type: 'module' },
-      {pattern: 'dist/js/joomla-modal.js', type: 'module' },
-      {pattern: 'dist/js/joomla-panels.js', type: 'module' },
-      {pattern: 'dist/js/joomla-tab.js', type: 'module' },
-      {pattern: 'dist/js//joomla-tip.js', type: 'module' },
+      // {pattern: 'dist/js/joomla-collapse.js', type: 'module' },
+      // {pattern: 'dist/js/joomla-dropdown.js', type: 'module' },
+      // {pattern: 'dist/js/joomla-modal.js', type: 'module' },
+      // {pattern: 'dist/js/joomla-panels.js', type: 'module' },
+      // {pattern: 'dist/js/joomla-tab.js', type: 'module' },
+      // {pattern: 'dist/js//joomla-tip.js', type: 'module' },
       // ES5
       // {pattern: 'dist/js/joomla-alert-es5.js', nomodule: '' },
       // {pattern: 'dist/js/joomla-collapse-es5.js', nomodule: '' },
@@ -68,21 +68,6 @@ module.exports = (config) => {
     ],
     // frameworks to use
     frameworks: ['jasmine', 'fixture'],
-    // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: '',
-    runnerPort: 9100,
-    colors: true,
-    port: 9876,
-    autoWatch: false,
-    singleRun: true,
-    logLevel: config.LOG_INFO,
-
-    // Adjuste these ones with your own settings.
-    concurrency: 1,
-    captureTimeout: 120000,
-    browserNoActivityTimeout: 60000,
-    browserDisconnectTimeout: 20000,
-    browserDisconnectTolerance: 1,
 
     // SauceLabs Configuration
     sauceLabs: {
@@ -91,9 +76,24 @@ module.exports = (config) => {
       startConnect: false,
       tunnelIdentifier: `github-action-tunnel-custom-elements-${process.env.GITHUB_RUN_ID}`,
     },
+
+    reporters: ['dots', 'saucelabs'],
+
+    // base path that will be used to resolve all patterns (eg. files, exclude)
+    basePath: process.cwd(),
+    runnerPort: 9100,
+    colors: true,
+    port: 9876,
+    autoWatch: false,
+    logLevel: config.LOG_INFO,
+    singleRun: true,
+    concurrency: 1,
+    captureTimeout: 120000,
+    browserNoActivityTimeout: 60000,
+    browserDisconnectTimeout: 20000,
+    browserDisconnectTolerance: 1,
+
     customLaunchers: customLaunchers,
     browsers: Object.keys(customLaunchers),
-    reporters: ['dots', 'saucelabs'],
-    singleRun: true
   });
 };

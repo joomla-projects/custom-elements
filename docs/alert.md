@@ -39,6 +39,7 @@ The simplified version of the custom elements
 ```
 
 ### Alerts demo:
+<p class="demo-000">
 <joomla-alert>No params passed</joomla-alert>
 <joomla-alert type="info" dismiss="true">
     <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
@@ -52,8 +53,8 @@ The simplified version of the custom elements
 <joomla-alert type="danger" href="https://www.joomla.org">
     <strong>Oh snap!</strong> Click open to go to joomla.org
 </joomla-alert>
-<p>
-<button role="button" id="insertNewFloated" class="btn btn-success">Create a floated alert</button>
+
+<button role="button" id="insertNewFloated" class="btn btn-success">Create a new alert</button>
 </p>
 
 ## Attributes
@@ -63,17 +64,16 @@ Control the design and functionality of the custom element through attributes.
 |Attribute		|Description|
 |---------------|-----------------------------------------------------------------------------------------------|
 |type			|This attribute is responsible for the looks.|
-|dismiss		|Appends the x button. True is the only value.|
-|acknowledge	|Appends a generic button with a title `Ok`. True is the only value.|
+|dismiss		|Appends or not the x button. Boolean no value needed|
 |auto-dismiss	|Controls the auto close functionality of the alert. Values (integers) represent milliseconds|
-|href			|if is set a redirect button is created. Value must be an actual url|
-|position		|Adjust the alerts's position to different corners. Possible values: `top-left`, `top-center` and `top-right`|
+
+|close-text 	|The text for the x button (for aria-label).|
 
 
 ## Dismissing
 No need for extra javascript, it's possible to dismiss any alert inline. Here’s how:
 
-Add a `dismiss` or an `acknowledge` attribute.
+Add a `dismiss` attribute.
 That's it!
 Now clicking the x button will close the alert!
 
@@ -93,8 +93,6 @@ el.setAttribute('type', 'warning')
 Remove or add the close button:
 ```js
 el.removeAttribute('dismiss'); // Will remove the attribute
-el.setAttribute('acknowledge', true);
-el.setAttribute('url', 'https://www.joomla.org');
 el.setAttribute('auto-dismiss', '5000');
 ```
 
@@ -104,10 +102,10 @@ The custom element exposes a few events for hooking into alert functionality.
 
 |Event			|Description								     			|
 |-----------------------|-----------------------------------------------------------------------------------------------|
-|joomla.alert.show		|This event fires immediately when the element is appended in the DOM.				|
+|joomla.alert.show		|This event fires immediately before the element is appended in the DOM.				|
+|joomla.alert.shown		|This event fires immediately after the element was appended in the DOM.				|
 |joomla.alert.close		|This event fires immediately when the close instance method is called.				|
 |joomla.alert.closed	|This event is fired when the alert has been closed (will wait for CSS transitions to complete).|
-|joomla.alert.buttonClicked	|This event is fired when the alert button has been clicked.|
 
 
 Example:
@@ -186,7 +184,7 @@ el.close();
 
 
 ### Demo
-<joomla-alert id="close-me-with-a-btn" type="danger" acknowledge="true">
+<joomla-alert id="close-me-with-a-btn" type="danger" dismiss>
 <strong>Alert:</strong> Close me with javascript
 </joomla-alert>
 <p>
@@ -264,32 +262,31 @@ Dynamically rendered alerts are automatically announced by most screen readers, 
 * **[4.1.2 Name, Role, Value](https://www.w3.org/WAI/WCAG20/quickref/#ensure-compat-rsv)** (Level A): For all user interface components, the name and role can be programmatically determined; states, properties, and values that can be set by the user can be programmatically set; and notification of changes to these items is available to user agents, including assistive technologies.
 
 
-<script markdown="0">
-var addNew = function() {
-    var tempElement = document.createElement('joomla-alert');
+<script type="module" markdown="0">
+const addNew = function() {
+    const tempElement = document.createElement('joomla-alert');
     tempElement.setAttribute('type', 'success');
-    tempElement.setAttribute('dismiss', true);
+    tempElement.setAttribute('dismiss', '');
     tempElement.innerHTML = 'Wow it works!';
     document.getElementById('insert-new-alert').appendChild(tempElement);
 };
 
-var addNewFloated = function() {
-    var tempElement = document.createElement('joomla-alert');
+const addNewFloated = function() {
+    const tempElement = document.createElement('joomla-alert');
     tempElement.setAttribute('type', 'warning');
-    tempElement.setAttribute('dismiss', true);
-	tempElement.setAttribute('position', 'top-center');
-    tempElement.innerHTML = "I'm a floated alert! You can position me to the top left or right too!";
-    document.body.appendChild(tempElement);
+    tempElement.setAttribute('dismiss', '');
+    tempElement.innerHTML = "Hello from this Alert!";
+    document.querySelector('.demo-000').appendChild(tempElement);
 };
 
-var changeAlert = function(dataAttr, value) {
-    var tempElement = document.getElementById('change-me');
-	tempElement.setAttribute(dataAttr, value);
+const changeAlert = function(dataAttr, value) {
+    const tempElement = document.getElementById('change-me');
+    tempElement.setAttribute(dataAttr, value);
 };
-var addNewButton = document.getElementById('insertNew'),
-    changeButtons = document.querySelectorAll('#replaceble > button');
 
-var addNewButtonFloated = document.getElementById('insertNewFloated');
+const addNewButton = document.getElementById('insertNew');
+const changeButtons = Array.from(document.querySelectorAll('#replaceble > button'));
+const addNewButtonFloated = document.getElementById('insertNewFloated');
 
 addNewButton.addEventListener('click', addNew);
 addNewButtonFloated.addEventListener('click', addNewFloated);
@@ -298,11 +295,23 @@ document.getElementById('change-me').addEventListener('joomla.alert.closed', fun
     document.getElementById('replaceble').innerHTML = '<h4>Oops the alert has been destroyed. This text was initiated using the event "joomla.alert.closed" (the popup used the event "joomla.alert.close"</h4>';
  });
 
-for (var i = 0, l = changeButtons.length; i < l; i++) {
-        changeButtons[i].addEventListener('click', function() { changeAlert(this.getAttribute('data-opt1'), this.getAttribute('value')) });
-}
+changeButtons
+    .map((el) => el.addEventListener('click', (event) => {
+        const dataOpt1 = event.currentTarget.getAttribute('data-opt1');
+        const value = event.currentTarget.getAttribute('value');
+        if (dataOpt1 === 'dismiss') {
+            if (value === 'true') {
+                document.getElementById('change-me').setAttribute('dismiss', '')
+            } else {
+                document.getElementById('change-me').removeAttribute('dismiss')
+            }
+        } else {
+            changeAlert(dataOpt1, value);
+        }
+    })
+);
 
-document.getElementById('i-will-close-that-alert').addEventListener('click', function(event) { var a = document.getElementById('close-me-with-a-btn');
+document.getElementById('i-will-close-that-alert').addEventListener('click', function(event) { const a = document.getElementById('close-me-with-a-btn');
 if (a) a.close(); event.target.setAttribute('disabled', true); event.target.removeEventListener('click', arguments.callee); });
 
 </script>

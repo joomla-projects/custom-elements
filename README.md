@@ -5,7 +5,7 @@ Build Status
 
 | GitHub Actions  | GreenKeeper | Webcomponents.org |
 | ------------- | ------------- | ------------- |
-| ![Browser Test Status](https://github.com/joomla-projects/custom-elements/workflows/Browser%20Testing/badge.svg) | [![Greenkeeper badge](https://badges.greenkeeper.io/joomla-projects/custom-elements.svg)](https://greenkeeper.io/) | [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/joomla-projects/custom-elements) |
+| [![Build Status](https://app.saucelabs.com/buildstatus/joomla)](https://app.saucelabs.com/u/joomla) | [![Greenkeeper badge](https://badges.greenkeeper.io/joomla-projects/custom-elements.svg)](https://greenkeeper.io/) | [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/joomla-projects/custom-elements) |
 
 | Sauce Labs |
 | ------------- |

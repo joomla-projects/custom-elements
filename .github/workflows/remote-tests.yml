@@ -1,10 +1,7 @@
 name: SauceLabs Browser Testing
 
 on:
-  pull_request_target:
-    branches:
-    - master
-    types: [labeled]
+  push
 
 jobs:
   test:
