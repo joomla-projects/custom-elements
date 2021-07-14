@@ -126,7 +126,7 @@ class AlertElement extends HTMLElement {
       case 'close-text':
         if (!newValue || newValue !== oldValue) {
           if (this.button) {
-            this.button.innerText = newValue;
+            this.button.setAttribute('aria-label', newValue);
           }
         }
         break;
