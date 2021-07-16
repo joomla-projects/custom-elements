@@ -256,6 +256,8 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
   }, {
     key: "onMutation",
     value: function onMutation(mutationsList) {
+      var _this5 = this;
+
       // eslint-disable-next-line no-restricted-syntax
       var _iterator = _createForOfIteratorHelper(mutationsList),
           _step;
@@ -265,8 +267,18 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
           var mutation = _step.value;
 
           if (mutation.type === 'childList') {
-            if (mutation.addedNodes.length) ;
-            if (mutation.removedNodes.length) ;
+            if (mutation.addedNodes.length) {
+              [].slice.call(mutation.addedNodes).map(function (inserted) {
+                return _this5.createNavs(inserted);
+              }); // Add the tab buttons
+            }
+
+            if (mutation.removedNodes.length) {
+              // Remove the tab buttons
+              [].slice.call(mutation.addedNodes).map(function (inserted) {
+                return _this5.removeNavs(inserted);
+              });
+            }
           }
         }
       } catch (err) {
@@ -337,7 +349,7 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
   }, {
     key: "deactivateTabs",
     value: function deactivateTabs() {
-      var _this5 = this;
+      var _this6 = this;
 
       this.tabs.map(function (tabObj) {
         tabObj.accordionButton.removeAttribute('aria-disabled');
@@ -348,7 +360,7 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
           tabObj.tab.removeAttribute('active');
           tabObj.tab.setAttribute('tabindex', '-1'); // Emit hidden event
 
-          _this5.dispatchCustomEvent('joomla.tab.hidden', _this5.view === 'tabs' ? tabObj.tabButton : tabObj.accordionButton, tabObj.tab);
+          _this6.dispatchCustomEvent('joomla.tab.hidden', _this6.view === 'tabs' ? tabObj.tabButton : tabObj.accordionButton, tabObj.tab);
         }
 
         return tabObj;
@@ -357,14 +369,14 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
   }, {
     key: "activateTab",
     value: function activateTab(input) {
-      var _this6 = this;
+      var _this7 = this;
 
       var state = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
       var currentTrigger;
 
       if (input.currentTarget) {
         currentTrigger = this.tabs.find(function (tab) {
-          return (_this6.view === 'tabs' ? tab.tabButton : tab.accordionButton) === input.currentTarget;
+          return (_this7.view === 'tabs' ? tab.tabButton : tab.accordionButton) === input.currentTarget;
         });
       } else if (input instanceof HTMLElement) {
         currentTrigger = this.tabs.find(function (tab) {
@@ -401,6 +413,66 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
         if (state) this.saveState(currentTrigger.tab.id);
       }
     }
+  }, {
+    key: "createNavs",
+    value: function createNavs(tab) {
+      if (!tab.getAttribute('name') || !tab.getAttribute('id')) return;
+      var tabs = [].slice.call(this.children).filter(function (el) {
+        return el.tagName.toLowerCase() === 'joomla-tab';
+      });
+      var index = tabs.findIndex(function (tb) {
+        return tb === tab;
+      }); // Create Accordion button
+
+      var accordionButton = document.createElement('button');
+      accordionButton.setAttribute('aria-expanded', !!tab.hasAttribute('active'));
+      accordionButton.setAttribute('aria-controls', tab.id);
+      accordionButton.innerHTML = "<span class=\"accordion-title\">".concat(tab.getAttribute('name'), "<span class=\"accordion-icon\"></span></span>");
+      tab.insertAdjacentElement('beforebegin', accordionButton);
+
+      if (this.view === 'tabs') {
+        accordionButton.setAttribute('hidden', '');
+      }
+
+      accordionButton.addEventListener('click', this.activateTab); // Create tab button
+
+      var tabButton = document.createElement('button');
+      tabButton.setAttribute('aria-expanded', !!tab.hasAttribute('active'));
+      tabButton.setAttribute('aria-controls', tab.id);
+      tabButton.setAttribute('role', 'tab');
+      tabButton.innerHTML = "".concat(tab.getAttribute('name'));
+
+      if (tabs.length - 1 === index) {
+        // last
+        this.tabButtonContainer.appendChild(tabButton);
+        this.tabs.push({
+          tab: tab,
+          tabButton: tabButton,
+          accordionButton: accordionButton
+        });
+      } else if (index === 0) {
+        // first
+        this.tabButtonContainer.insertAdjacentElement('afterbegin', tabButton);
+        this.tabs.slice(0, 0, {
+          tab: tab,
+          tabButton: tabButton,
+          accordionButton: accordionButton
+        });
+      } else {
+        // Middle
+        this.tabs[index - 1].tabButton.insertAdjacentElement('afterend', tabButton);
+        this.tabs.slice(index - 1, 0, {
+          tab: tab,
+          tabButton: tabButton,
+          accordionButton: accordionButton
+        });
+      }
+
+      tabButton.addEventListener('click', this.activateTab);
+    }
+  }, {
+    key: "removeNavs",
+    value: function removeNavs(tab) {}
     /** Method to convert tabs to accordion and vice versa depending on screen size */
 
   }, {
@@ -455,7 +527,7 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
   }, {
     key: "activateFromState",
     value: function activateFromState() {
-      var _this7 = this;
+      var _this8 = this;
 
       // Use the sessionStorage state!
       var href = sessionStorage.getItem(this.getStorageKey());
@@ -473,7 +545,7 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
 
           if (childTabs) {
             [].slice.call(this.querySelectorAll('joomla-tab')).forEach(function (xtab) {
-              if (xtab.parentNode !== _this7) {
+              if (xtab.parentNode !== _this8) {
                 xtab.removeAttribute('active');
 
                 if (xtab.id === href) {

@@ -155,8 +155,14 @@ class TabsElement extends HTMLElement {
     // eslint-disable-next-line no-restricted-syntax
     for (const mutation of mutationsList) {
       if (mutation.type === 'childList') {
-        if (mutation.addedNodes.length) ;
-        if (mutation.removedNodes.length) ;
+        if (mutation.addedNodes.length) {
+          [].slice.call(mutation.addedNodes).map((inserted) => this.createNavs(inserted));
+          // Add the tab buttons
+        }
+        if (mutation.removedNodes.length) {
+          // Remove the tab buttons
+          [].slice.call(mutation.addedNodes).map((inserted) => this.removeNavs(inserted));
+        }
       }
     }
   }
@@ -261,6 +267,62 @@ class TabsElement extends HTMLElement {
     }
   }
 
+  createNavs(tab) {
+    if (!tab.getAttribute('name') || !tab.getAttribute('id')) return;
+    const tabs = [].slice.call(this.children).filter((el) => el.tagName.toLowerCase() === 'joomla-tab');
+    const index = tabs.findIndex((tb) => tb === tab);
+
+    // Create Accordion button
+    const accordionButton = document.createElement('button');
+    accordionButton.setAttribute('aria-expanded', !!tab.hasAttribute('active'));
+    accordionButton.setAttribute('aria-controls', tab.id);
+    accordionButton.innerHTML = `<span class="accordion-title">${tab.getAttribute('name')}<span class="accordion-icon"></span></span>`;
+    tab.insertAdjacentElement('beforebegin', accordionButton);
+
+    if (this.view === 'tabs') {
+      accordionButton.setAttribute('hidden', '');
+    }
+
+    accordionButton.addEventListener('click', this.activateTab);
+
+    // Create tab button
+    const tabButton = document.createElement('button');
+    tabButton.setAttribute('aria-expanded', !!tab.hasAttribute('active'));
+    tabButton.setAttribute('aria-controls', tab.id);
+    tabButton.setAttribute('role', 'tab');
+    tabButton.innerHTML = `${tab.getAttribute('name')}`;
+    if (tabs.length - 1 === index) {
+      // last
+      this.tabButtonContainer.appendChild(tabButton);
+      this.tabs.push({
+        tab,
+        tabButton,
+        accordionButton
+      });
+    } else if (index === 0) {
+      // first
+      this.tabButtonContainer.insertAdjacentElement('afterbegin', tabButton);
+      this.tabs.slice(0, 0, {
+        tab,
+        tabButton,
+        accordionButton
+      });
+    } else {
+      // Middle
+      this.tabs[index - 1].tabButton.insertAdjacentElement('afterend', tabButton);
+      this.tabs.slice(index - 1, 0, {
+        tab,
+        tabButton,
+        accordionButton
+      });
+    }
+
+    tabButton.addEventListener('click', this.activateTab);
+  }
+
+  removeNavs(tab) {
+
+  }
   /** Method to convert tabs to accordion and vice versa depending on screen size */
   checkView() {
     if (!this.breakpoint) {

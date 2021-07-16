@@ -158,10 +158,12 @@ class TabsElement extends HTMLElement {
     for (const mutation of mutationsList) {
       if (mutation.type === 'childList') {
         if (mutation.addedNodes.length) {
+          [].slice.call(mutation.addedNodes).map((inserted) => this.createNavs(inserted))
           // Add the tab buttons
         }
         if (mutation.removedNodes.length) {
           // Remove the tab buttons
+          [].slice.call(mutation.addedNodes).map((inserted) => this.removeNavs(inserted))
         }
       }
     }
@@ -269,6 +271,82 @@ class TabsElement extends HTMLElement {
     }
   }
 
+  // Create navigation elements for inserted tabs
+  createNavs(tab) {
+    if (!tab.getAttribute('name') || !tab.getAttribute('id')) return;
+    const tabs = [].slice.call(this.children).filter((el) => el.tagName.toLowerCase() === 'joomla-tab');
+    const index = tabs.findIndex((tb) => tb === tab);
+
+    // Create Accordion button
+    const accordionButton = document.createElement('button');
+    accordionButton.setAttribute('aria-expanded', !!tab.hasAttribute('active'));
+    accordionButton.setAttribute('aria-controls', tab.id);
+    accordionButton.innerHTML = `<span class="accordion-title">${tab.getAttribute('name')}<span class="accordion-icon"></span></span>`;
+    tab.insertAdjacentElement('beforebegin', accordionButton);
+
+    if (this.view === 'tabs') {
+      accordionButton.setAttribute('hidden', '');
+    }
+
+    accordionButton.addEventListener('click', this.activateTab);
+
+    // Create tab button
+    const tabButton = document.createElement('button');
+    tabButton.setAttribute('aria-expanded', !!tab.hasAttribute('active'));
+    tabButton.setAttribute('aria-controls', tab.id);
+    tabButton.setAttribute('role', 'tab');
+    tabButton.innerHTML = `${tab.getAttribute('name')}`;
+    if (tabs.length - 1 === index) {
+      // last
+      this.tabButtonContainer.appendChild(tabButton);
+      this.tabs.push({
+        tab,
+        tabButton,
+        accordionButton
+      });
+    } else if (index === 0) {
+      // first
+      this.tabButtonContainer.insertAdjacentElement('afterbegin', tabButton);
+      this.tabs.slice(0, 0, {
+        tab,
+        tabButton,
+        accordionButton
+      });
+    } else {
+      // Middle
+      this.tabs[index - 1].tabButton.insertAdjacentElement('afterend', tabButton);
+      this.tabs.slice(index - 1, 0, {
+        tab,
+        tabButton,
+        accordionButton
+      });
+    }
+
+    tabButton.addEventListener('click', this.activateTab);
+  }
+
+  // Remove navigation elements for removed tabs
+  removeNavs(tab) {
+    if (!tab.getAttribute('name') || !tab.getAttribute('id')) return;
+    const accordionButton = tab.previousSilbingElement;
+    if (accordionButton && accordionButton.tagName.toLowerCase() === 'button') {
+      accordionButton.removeEventListener('click', this.keyBehaviour);
+      accordionButton.parentNode.removeChild(accordionButton);
+    }
+    const tabButton = this.tabButtonContainer.querySelector(`[aria-controls=${accordionButton.id}]`);
+    if (tabButton) {
+      tabButton.removeEventListener('click', this.keyBehaviour);
+      tabButton.parentNode.removeChild(tabButton);
+    }
+    const index = this.tabs.findIndex((tb) => tb.tabs === tab);
+    if (index - 1 === 0) {
+      this.tabs.shift();
+    } else if (index - 1 === this.tabs.length) {
+      this.tabs.pop();
+    } else {
+      this.tabs.splice(index -1, 1);
+    }
+  }
   /** Method to convert tabs to accordion and vice versa depending on screen size */
   checkView() {
     if (!this.breakpoint) {
