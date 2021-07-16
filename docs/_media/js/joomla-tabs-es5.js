@@ -54,7 +54,7 @@ var TabElement = /*#__PURE__*/function (_HTMLElement) {
   return TabElement;
 }( /*#__PURE__*/_wrapNativeSuper(HTMLElement));
 
-customElements.define('joomla-tab', TabElement);
+customElements.define('joomla-tab-element', TabElement);
 
 var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
   _inherits(TabsElement, _HTMLElement2);
@@ -135,7 +135,7 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
 
 
       this.tabsElements = [].slice.call(this.children).filter(function (el) {
-        return el.tagName.toLowerCase() === 'joomla-tab';
+        return el.tagName.toLowerCase() === 'joomla-tab-element';
       }); // Sanity checks
 
       if (!this.tabsElements.length) {
@@ -355,6 +355,8 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
         tabObj.accordionButton.removeAttribute('aria-disabled');
 
         if (tabObj.tab.hasAttribute('active')) {
+          _this6.dispatchCustomEvent('joomla.tab.hidde', _this6.view === 'tabs' ? tabObj.tabButton : tabObj.accordionButton, tabObj.tab);
+
           tabObj.tabButton.removeAttribute('aria-expanded');
           tabObj.accordionButton.setAttribute('aria-expanded', false);
           tabObj.tab.removeAttribute('active');
@@ -403,6 +405,7 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
         currentTrigger.accordionButton.setAttribute('aria-disabled', true);
         currentTrigger.tab.setAttribute('active', '');
         currentTrigger.tabButton.removeAttribute('tabindex');
+        this.dispatchCustomEvent('joomla.tab.show', this.view === 'tabs' ? currentTrigger.tabButton : currentTrigger.accordionButton, currentTrigger.tab);
 
         if (this.view === 'tabs') {
           currentTrigger.tabButton.focus();
@@ -411,14 +414,16 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
         }
 
         if (state) this.saveState(currentTrigger.tab.id);
+        this.dispatchCustomEvent('joomla.tab.shown', this.view === 'tabs' ? currentTrigger.tabButton : currentTrigger.accordionButton, currentTrigger.tab);
       }
-    }
+    } // Create navigation elements for inserted tabs
+
   }, {
     key: "createNavs",
     value: function createNavs(tab) {
       if (!tab.getAttribute('name') || !tab.getAttribute('id')) return;
       var tabs = [].slice.call(this.children).filter(function (el) {
-        return el.tagName.toLowerCase() === 'joomla-tab';
+        return el.tagName.toLowerCase() === 'joomla-tab-element';
       });
       var index = tabs.findIndex(function (tb) {
         return tb === tab;
@@ -469,10 +474,38 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
       }
 
       tabButton.addEventListener('click', this.activateTab);
-    }
+    } // Remove navigation elements for removed tabs
+
   }, {
     key: "removeNavs",
-    value: function removeNavs(tab) {}
+    value: function removeNavs(tab) {
+      if (!tab.getAttribute('name') || !tab.getAttribute('id')) return;
+      var accordionButton = tab.previousSilbingElement;
+
+      if (accordionButton && accordionButton.tagName.toLowerCase() === 'button') {
+        accordionButton.removeEventListener('click', this.keyBehaviour);
+        accordionButton.parentNode.removeChild(accordionButton);
+      }
+
+      var tabButton = this.tabButtonContainer.querySelector("[aria-controls=".concat(accordionButton.id, "]"));
+
+      if (tabButton) {
+        tabButton.removeEventListener('click', this.keyBehaviour);
+        tabButton.parentNode.removeChild(tabButton);
+      }
+
+      var index = this.tabs.findIndex(function (tb) {
+        return tb.tabs === tab;
+      });
+
+      if (index - 1 === 0) {
+        this.tabs.shift();
+      } else if (index - 1 === this.tabs.length) {
+        this.tabs.pop();
+      } else {
+        this.tabs.splice(index - 1, 1);
+      }
+    }
     /** Method to convert tabs to accordion and vice versa depending on screen size */
 
   }, {
@@ -544,7 +577,7 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
           var childTabs = this.querySelector('joomla-tabs');
 
           if (childTabs) {
-            [].slice.call(this.querySelectorAll('joomla-tab')).forEach(function (xtab) {
+            [].slice.call(this.querySelectorAll('joomla-tab-element')).forEach(function (xtab) {
               if (xtab.parentNode !== _this8) {
                 xtab.removeAttribute('active');
 
@@ -554,7 +587,7 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
                 }
               }
             });
-            var curTab = currentDeepertab.parentNode.closest('joomla-tab');
+            var curTab = currentDeepertab.parentNode.closest('joomla-tab-element');
             this.activateTab(curTab, false);
           }
         }
@@ -584,4 +617,4 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
   return TabsElement;
 }( /*#__PURE__*/_wrapNativeSuper(HTMLElement));
 
-customElements.define('joomla-tabs', TabsElement);
+customElements.define('joomla-tab', TabsElement);

@@ -9,7 +9,7 @@ describe('<joomla-tabs>', function(){
 
   it('Custom Element script is loaded', function(){
     expect(customElements.get('joomla-tabs')).toBeTrue;
-    expect(customElements.get('joomla-tab')).toBeTrue;
+    expect(customElements.get('joomla-tab-element')).toBeTrue;
   });
 
   it('Has type view', function() {
@@ -78,7 +78,7 @@ describe('<joomla-tabs>', function(){
     expect(tabs.querySelector('button[aria-expanded=true]').innerText).toEqual('First tab');
     expect(tabs.querySelector('[active]').innerText).toEqual('First tab content');
 
-    const newTab = document.createElement('joomla-tab');
+    const newTab = document.createElement('joomla-tab-element');
     newTab.setAttribute('name', 'New one');
     newTab.innerText = 'New one Content';
     newTab.setAttribute('id', 'new-one');
@@ -100,7 +100,7 @@ describe('<joomla-tabs>', function(){
     expect(tabs.querySelector('button[aria-expanded=true]').innerText).toEqual('First tab');
     expect(tabs.querySelector('[active]').innerText).toEqual('First tab content');
 
-    const newTab = document.createElement('joomla-tab');
+    const newTab = document.createElement('joomla-tab-element');
     newTab.setAttribute('name', 'New one');
     newTab.innerText = 'New one Content';
     newTab.setAttribute('id', 'new-one');
@@ -122,7 +122,7 @@ describe('<joomla-tabs>', function(){
     expect(tabs.querySelector('button[aria-expanded=true]').innerText).toEqual('First tab');
     expect(tabs.querySelector('[active]').innerText).toEqual('First tab content');
 
-    const newTab = document.createElement('joomla-tab');
+    const newTab = document.createElement('joomla-tab-element');
     newTab.setAttribute('name', 'New one');
     newTab.innerText = 'New one Content';
     newTab.setAttribute('id', 'new-one');
@@ -143,7 +143,7 @@ describe('<joomla-tabs>', function(){
     expect(tabs.querySelector('button[aria-expanded=true]').innerText).toEqual('First tab');
     expect(tabs.querySelector('[active]').innerText).toEqual('First tab content');
 
-    const tabElems = [].slice.call(tabs.children).filter((tab) => tab.tagName.toLowerCase() === 'joomla-tab');
+    const tabElems = [].slice.call(tabs.children).filter((tab) => tab.tagName.toLowerCase() === 'joomla-tab-element');
 
     tabs.removeChild(tabElems[2]);
 
@@ -155,7 +155,7 @@ describe('<joomla-tabs>', function(){
 
   it('Removes th first tab', function() {
     const tabs = fixture.el.firstElementChild; //.setAttribute('type', 'warning');
-    const tabElems = [].slice.call(tabs.children).filter((tab) => tab.tagName.toLowerCase() === 'joomla-tab');
+    const tabElems = [].slice.call(tabs.children).filter((tab) => tab.tagName.toLowerCase() === 'joomla-tab-element');
 
     tabs.activateTab(tabElems[1]);
 
@@ -172,7 +172,7 @@ describe('<joomla-tabs>', function(){
 
   it('Removes a tab in the middle', function() {
     const tabs = fixture.el.firstElementChild; //.setAttribute('type', 'warning');
-    const tabElems = [].slice.call(tabs.children).filter((tab) => tab.tagName.toLowerCase() === 'joomla-tab');
+    const tabElems = [].slice.call(tabs.children).filter((tab) => tab.tagName.toLowerCase() === 'joomla-tab-element');
 
     tabs.activateTab(tabElems[2]);
 

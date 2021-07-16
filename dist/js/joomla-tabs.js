@@ -1,6 +1,6 @@
 class TabElement extends HTMLElement {}
 
-customElements.define('joomla-tab', TabElement);
+customElements.define('joomla-tab-element', TabElement);
 
 class TabsElement extends HTMLElement {
   /* Attributes to monitor */
@@ -49,7 +49,7 @@ class TabsElement extends HTMLElement {
     }
 
     // get tab elements
-    this.tabsElements = [].slice.call(this.children).filter((el) => el.tagName.toLowerCase() === 'joomla-tab');
+    this.tabsElements = [].slice.call(this.children).filter((el) => el.tagName.toLowerCase() === 'joomla-tab-element');
 
     // Sanity checks
     if (!this.tabsElements.length) {
@@ -222,6 +222,7 @@ class TabsElement extends HTMLElement {
     this.tabs.map((tabObj) => {
       tabObj.accordionButton.removeAttribute('aria-disabled');
       if (tabObj.tab.hasAttribute('active')) {
+        this.dispatchCustomEvent('joomla.tab.hidde', this.view === 'tabs' ? tabObj.tabButton : tabObj.accordionButton, tabObj.tab);
         tabObj.tabButton.removeAttribute('aria-expanded');
         tabObj.accordionButton.setAttribute('aria-expanded', false);
         tabObj.tab.removeAttribute('active');
@@ -258,18 +259,21 @@ class TabsElement extends HTMLElement {
       currentTrigger.accordionButton.setAttribute('aria-disabled', true);
       currentTrigger.tab.setAttribute('active', '');
       currentTrigger.tabButton.removeAttribute('tabindex');
+      this.dispatchCustomEvent('joomla.tab.show', this.view === 'tabs' ? currentTrigger.tabButton : currentTrigger.accordionButton, currentTrigger.tab);
       if (this.view === 'tabs') {
         currentTrigger.tabButton.focus();
       } else {
         currentTrigger.accordionButton.focus();
       }
       if (state) this.saveState(currentTrigger.tab.id);
+      this.dispatchCustomEvent('joomla.tab.shown', this.view === 'tabs' ? currentTrigger.tabButton : currentTrigger.accordionButton, currentTrigger.tab);
     }
   }
 
+  // Create navigation elements for inserted tabs
   createNavs(tab) {
     if (!tab.getAttribute('name') || !tab.getAttribute('id')) return;
-    const tabs = [].slice.call(this.children).filter((el) => el.tagName.toLowerCase() === 'joomla-tab');
+    const tabs = [].slice.call(this.children).filter((el) => el.tagName.toLowerCase() === 'joomla-tab-element');
     const index = tabs.findIndex((tb) => tb === tab);
 
     // Create Accordion button
@@ -320,8 +324,27 @@ class TabsElement extends HTMLElement {
     tabButton.addEventListener('click', this.activateTab);
   }
 
+  // Remove navigation elements for removed tabs
   removeNavs(tab) {
-
+    if (!tab.getAttribute('name') || !tab.getAttribute('id')) return;
+    const accordionButton = tab.previousSilbingElement;
+    if (accordionButton && accordionButton.tagName.toLowerCase() === 'button') {
+      accordionButton.removeEventListener('click', this.keyBehaviour);
+      accordionButton.parentNode.removeChild(accordionButton);
+    }
+    const tabButton = this.tabButtonContainer.querySelector(`[aria-controls=${accordionButton.id}]`);
+    if (tabButton) {
+      tabButton.removeEventListener('click', this.keyBehaviour);
+      tabButton.parentNode.removeChild(tabButton);
+    }
+    const index = this.tabs.findIndex((tb) => tb.tabs === tab);
+    if (index - 1 === 0) {
+      this.tabs.shift();
+    } else if (index - 1 === this.tabs.length) {
+      this.tabs.pop();
+    } else {
+      this.tabs.splice(index -1, 1);
+    }
   }
   /** Method to convert tabs to accordion and vice versa depending on screen size */
   checkView() {
@@ -378,7 +401,7 @@ class TabsElement extends HTMLElement {
         let currentDeepertab;
         const childTabs = this.querySelector('joomla-tabs');
         if (childTabs) {
-          [].slice.call(this.querySelectorAll('joomla-tab'))
+          [].slice.call(this.querySelectorAll('joomla-tab-element'))
             .forEach((xtab) => {
               if (xtab.parentNode !== this) {
                 xtab.removeAttribute('active');
@@ -389,7 +412,7 @@ class TabsElement extends HTMLElement {
               }
             });
 
-          const curTab = currentDeepertab.parentNode.closest('joomla-tab');
+          const curTab = currentDeepertab.parentNode.closest('joomla-tab-element');
           this.activateTab(curTab, false);
         }
       }
@@ -404,4 +427,4 @@ class TabsElement extends HTMLElement {
   }
 }
 
-customElements.define('joomla-tabs', TabsElement);
+customElements.define('joomla-tab', TabsElement);

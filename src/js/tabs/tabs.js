@@ -1,6 +1,6 @@
 import { TabElement } from './tab.js';
 
-customElements.define('joomla-tab', TabElement);
+customElements.define('joomla-tab-element', TabElement);
 
 class TabsElement extends HTMLElement {
   /* Attributes to monitor */
@@ -49,7 +49,7 @@ class TabsElement extends HTMLElement {
     }
 
     // get tab elements
-    this.tabsElements = [].slice.call(this.children).filter((el) => el.tagName.toLowerCase() === 'joomla-tab');
+    this.tabsElements = [].slice.call(this.children).filter((el) => el.tagName.toLowerCase() === 'joomla-tab-element');
 
     // Sanity checks
     if (!this.tabsElements.length) {
@@ -277,7 +277,7 @@ class TabsElement extends HTMLElement {
   // Create navigation elements for inserted tabs
   createNavs(tab) {
     if (!tab.getAttribute('name') || !tab.getAttribute('id')) return;
-    const tabs = [].slice.call(this.children).filter((el) => el.tagName.toLowerCase() === 'joomla-tab');
+    const tabs = [].slice.call(this.children).filter((el) => el.tagName.toLowerCase() === 'joomla-tab-element');
     const index = tabs.findIndex((tb) => tb === tab);
 
     // Create Accordion button
@@ -405,7 +405,7 @@ class TabsElement extends HTMLElement {
         let currentDeepertab;
         const childTabs = this.querySelector('joomla-tabs');
         if (childTabs) {
-          [].slice.call(this.querySelectorAll('joomla-tab'))
+          [].slice.call(this.querySelectorAll('joomla-tab-element'))
             .forEach((xtab) => {
               if (xtab.parentNode !== this) {
                 xtab.removeAttribute('active');
@@ -416,7 +416,7 @@ class TabsElement extends HTMLElement {
               }
             });
 
-          const curTab = currentDeepertab.parentNode.closest('joomla-tab');
+          const curTab = currentDeepertab.parentNode.closest('joomla-tab-element');
           this.activateTab(curTab, false);
         }
       }
@@ -431,4 +431,4 @@ class TabsElement extends HTMLElement {
   }
 }
 
-customElements.define('joomla-tabs', TabsElement);
+customElements.define('joomla-tab', TabsElement);
