@@ -226,6 +226,7 @@ class TabsElement extends HTMLElement {
     this.tabs.map((tabObj) => {
       tabObj.accordionButton.removeAttribute('aria-disabled');
       if (tabObj.tab.hasAttribute('active')) {
+        this.dispatchCustomEvent('joomla.tab.hidde', this.view === 'tabs' ? tabObj.tabButton : tabObj.accordionButton, tabObj.tab);
         tabObj.tabButton.removeAttribute('aria-expanded');
         tabObj.accordionButton.setAttribute('aria-expanded', false);
         tabObj.tab.removeAttribute('active');
@@ -262,12 +263,14 @@ class TabsElement extends HTMLElement {
       currentTrigger.accordionButton.setAttribute('aria-disabled', true);
       currentTrigger.tab.setAttribute('active', '');
       currentTrigger.tabButton.removeAttribute('tabindex');
+      this.dispatchCustomEvent('joomla.tab.show', this.view === 'tabs' ? currentTrigger.tabButton : currentTrigger.accordionButton, currentTrigger.tab);
       if (this.view === 'tabs') {
         currentTrigger.tabButton.focus();
       } else {
         currentTrigger.accordionButton.focus();
       }
       if (state) this.saveState(currentTrigger.tab.id);
+      this.dispatchCustomEvent('joomla.tab.shown', this.view === 'tabs' ? currentTrigger.tabButton : currentTrigger.accordionButton, currentTrigger.tab);
     }
   }
 
