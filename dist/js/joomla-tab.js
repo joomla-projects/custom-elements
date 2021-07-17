@@ -115,6 +115,7 @@ class TabsElement extends HTMLElement {
       const accordionButton = document.createElement('button');
       accordionButton.setAttribute('aria-expanded', !!tab.hasAttribute('active'));
       accordionButton.setAttribute('aria-controls', tab.id);
+      accordionButton.setAttribute('type', 'button');
       accordionButton.innerHTML = `<span class="accordion-title">${tab.getAttribute('name')}<span class="accordion-icon"></span></span>`;
       tab.insertAdjacentElement('beforebegin', accordionButton);
 
@@ -129,6 +130,7 @@ class TabsElement extends HTMLElement {
       tabButton.setAttribute('aria-expanded', !!tab.hasAttribute('active'));
       tabButton.setAttribute('aria-controls', tab.id);
       tabButton.setAttribute('role', 'tab');
+      tabButton.setAttribute('type', 'button');
       tabButton.innerHTML = `${tab.getAttribute('name')}`;
       this.tabButtonContainer.appendChild(tabButton);
 
@@ -280,6 +282,7 @@ class TabsElement extends HTMLElement {
     const accordionButton = document.createElement('button');
     accordionButton.setAttribute('aria-expanded', !!tab.hasAttribute('active'));
     accordionButton.setAttribute('aria-controls', tab.id);
+    accordionButton.setAttribute('type', 'button');
     accordionButton.innerHTML = `<span class="accordion-title">${tab.getAttribute('name')}<span class="accordion-icon"></span></span>`;
     tab.insertAdjacentElement('beforebegin', accordionButton);
 
@@ -294,6 +297,7 @@ class TabsElement extends HTMLElement {
     tabButton.setAttribute('aria-expanded', !!tab.hasAttribute('active'));
     tabButton.setAttribute('aria-controls', tab.id);
     tabButton.setAttribute('role', 'tab');
+    tabButton.setAttribute('type', 'button');
     tabButton.innerHTML = `${tab.getAttribute('name')}`;
     if (tabs.length - 1 === index) {
       // last

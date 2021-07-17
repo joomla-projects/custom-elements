@@ -217,6 +217,7 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
         var accordionButton = document.createElement('button');
         accordionButton.setAttribute('aria-expanded', !!tab.hasAttribute('active'));
         accordionButton.setAttribute('aria-controls', tab.id);
+        accordionButton.setAttribute('type', 'button');
         accordionButton.innerHTML = "<span class=\"accordion-title\">".concat(tab.getAttribute('name'), "<span class=\"accordion-icon\"></span></span>");
         tab.insertAdjacentElement('beforebegin', accordionButton);
 
@@ -230,6 +231,7 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
         tabButton.setAttribute('aria-expanded', !!tab.hasAttribute('active'));
         tabButton.setAttribute('aria-controls', tab.id);
         tabButton.setAttribute('role', 'tab');
+        tabButton.setAttribute('type', 'button');
         tabButton.innerHTML = "".concat(tab.getAttribute('name'));
 
         _this4.tabButtonContainer.appendChild(tabButton);
@@ -434,6 +436,7 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
       var accordionButton = document.createElement('button');
       accordionButton.setAttribute('aria-expanded', !!tab.hasAttribute('active'));
       accordionButton.setAttribute('aria-controls', tab.id);
+      accordionButton.setAttribute('type', 'button');
       accordionButton.innerHTML = "<span class=\"accordion-title\">".concat(tab.getAttribute('name'), "<span class=\"accordion-icon\"></span></span>");
       tab.insertAdjacentElement('beforebegin', accordionButton);
 
@@ -447,6 +450,7 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
       tabButton.setAttribute('aria-expanded', !!tab.hasAttribute('active'));
       tabButton.setAttribute('aria-controls', tab.id);
       tabButton.setAttribute('role', 'tab');
+      tabButton.setAttribute('type', 'button');
       tabButton.innerHTML = "".concat(tab.getAttribute('name'));
 
       if (tabs.length - 1 === index) {
