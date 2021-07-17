@@ -37,12 +37,11 @@ module.exports = (config) => {
       {pattern: 'node_modules/@webreflection/custom-elements-no-builtin/min.js', served: true, nocache: true },
       // modules
       {pattern: 'dist/js/joomla-alert.js', type: 'module' },
-      {pattern: 'dist/js/joomla-collapse.js', type: 'module' },
-      {pattern: 'dist/js/joomla-dropdown.js', type: 'module' },
-      {pattern: 'dist/js/joomla-modal.js', type: 'module' },
-      {pattern: 'dist/js/joomla-panels.js', type: 'module' },
+      // {pattern: 'dist/js/joomla-collapse.js', type: 'module' },
+      // {pattern: 'dist/js/joomla-dropdown.js', type: 'module' },
+      // {pattern: 'dist/js/joomla-modal.js', type: 'module' },
       {pattern: 'dist/js/joomla-tab.js', type: 'module' },
-      {pattern: 'dist/js//joomla-tip.js', type: 'module' },
+      // {pattern: 'dist/js//joomla-tip.js', type: 'module' },
       // ES5
       // {pattern: 'dist/js/joomla-alert-es5.js', nomodule: '' },
       // {pattern: 'dist/js/joomla-collapse-es5.js', nomodule: '' },
@@ -51,6 +50,10 @@ module.exports = (config) => {
       // {pattern: 'dist/js/joomla-panels-es5.js', nomodule: '' },
       // {pattern: 'dist/js/joomla-tab-es5.js', nomodule: '' },
       // {pattern: 'dist/js/joomla-tip-es5.js', nomodule: '' },
+
+      // CSS
+      'dist/css/joomla-alert.css',
+      'dist/css/joomla-tab.css',
 
       { pattern: './tests/**/*.js' },
       { pattern: './tests/**/*.html' },

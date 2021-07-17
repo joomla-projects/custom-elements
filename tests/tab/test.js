@@ -1,14 +1,14 @@
 describe('<joomla-tabs>', function(){
   beforeEach(function() {
-    fixture.setBase('tests/tabs')
-    fixture.load('tabs.html', true);
+    fixture.setBase('tests/tab')
+    fixture.load('tab.html', true);
   });
   afterEach(function() {
     fixture.cleanup();
   });
 
   it('Custom Element script is loaded', function(){
-    expect(customElements.get('joomla-tabs')).toBeTrue;
+    expect(customElements.get('joomla-tab')).toBeTrue;
     expect(customElements.get('joomla-tab-element')).toBeTrue;
   });
 

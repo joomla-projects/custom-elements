@@ -18,7 +18,7 @@ module.exports = function (config) {
       // {pattern: 'dist/js/joomla-dropdown.js', type: 'module' },
       // {pattern: 'dist/js/joomla-modal.js', type: 'module' },
       // {pattern: 'dist/js/joomla-panels.js', type: 'module' },
-      {pattern: 'dist/js/joomla-tabs.js', type: 'module' },
+      {pattern: 'dist/js/joomla-tab.js', type: 'module' },
       // {pattern: 'dist/js//joomla-tip.js', type: 'module' },
       // ES5
       // {pattern: 'dist/js/joomla-alert-es5.js', nomodule: '' },
@@ -30,7 +30,7 @@ module.exports = function (config) {
       // {pattern: 'dist/js/joomla-tip-es5.js', nomodule: '' },
 
       'dist/css/joomla-alert.css',
-      'dist/css/joomla-tabs.css',
+      'dist/css/joomla-tab.css',
 
       { pattern: './tests/**/*.js' },
       { pattern: './tests/**/*.html' },
