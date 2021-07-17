@@ -15,93 +15,93 @@ In order to use the tab custom element you need to import the element in the doc
 The simplified version of the tabs:
 ```html
 <joomla-tab>
-	<section id="panel1" name="Tab panel 1">
+	<joomla-tab-element id="panel1" name="Tab panel 1">
 		<h3>Tab panel 1</h3>
 		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 			Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
 			irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-	</section>
-	<section id="panel2" name="Tab panel 2">
+	</joomla-tab-element>
+	<joomla-tab-element id="panel2" name="Tab panel 2">
 		<h3>Tab panel 2</h3>
 		<p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Duis aute
 			irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
 			cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-	</section>
-	<section id="panel3" name="Tab panel 3">
+	</joomla-tab-element>
+	<joomla-tab-element id="panel3" name="Tab panel 3">
 		<h3>Tab panel 1</h3>
 		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
 			aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 			Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-	</section>
+	</joomla-tab-element>
 </joomla-tab>
 
 <joomla-tab view="accordion">
-    <section id="panel4" name="Tab panel 1">
+    <joomla-tab-element id="panel4" name="Tab panel 1">
         <h3>Tab panel 1</h3>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
             irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-    </section>
-    <section id="panel5" name="Tab panel 2">
+    </joomla-tab-element>
+    <joomla-tab-element id="panel5" name="Tab panel 2">
         <h3>Tab panel 2</h3>
         <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Duis aute
             irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
             cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-    </section>
-    <section id="panel6" name="Tab panel 3">
+    </joomla-tab-element>
+    <joomla-tab-element id="panel6" name="Tab panel 3">
         <h3>Tab panel 1</h3>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
             aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-    </section>
+    </joomla-tab-element>
 </joomla-tab>
 ```
 
 ### Tabs Demo
 
-<div class="mermaid">
+<div>
 <joomla-tab>
-	<section id="panel1" name="Tab panel 1">
+	<joomla-tab-element active id="panel1" name="Tab panel 1">
 		<h3>Tab panel 1</h3>
 		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 			Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
 			irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-	</section>
-	<section id="panel2" name="Tab panel 2">
+	</joomla-tab-element>
+	<joomla-tab-element id="panel2" name="Tab panel 2">
 		<h3>Tab panel 2</h3>
 		<p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Duis aute
 			irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
 			cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-	</section>
-	<section id="panel3" name="Tab panel 3">
+	</joomla-tab-element>
+	<joomla-tab-element id="panel3" name="Tab panel 3">
 		<h3>Tab panel 1</h3>
 		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
 			aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 			Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-	</section>
+	</joomla-tab-element>
 </joomla-tab>
 
 <hr>
 
 <joomla-tab view="accordion">
-    <section id="panel4" name="Tab panel 1">
+    <joomla-tab-element id="panel4" name="Tab panel 1">
         <h3>Tab panel 1</h3>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
             irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-    </section>
-    <section id="panel5" name="Tab panel 2">
+    </joomla-tab-element>
+    <joomla-tab-element active id="panel5" name="Tab panel 2">
         <h3>Tab panel 2</h3>
         <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Duis aute
             irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
             cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-    </section>
-    <section id="panel6" name="Tab panel 3">
+    </joomla-tab-element>
+    <joomla-tab-element id="panel6" name="Tab panel 3">
         <h3>Tab panel 1</h3>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
             aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-    </section>
+    </joomla-tab-element>
 </joomla-tab>
 </div>
 
@@ -113,6 +113,7 @@ Control the design and functionality of the custom element through attributes.
 |recall			|Open the previously open tab on new page loads. True is the only value.|
 |orientation	|Sets orientation. Either 'horizontal' or 'vertical'.|
 |view       	|Sets the default active view. Either 'tabs' or 'accordion'.|
+|breakpoint     |Sets the breakpoint for tabs->accordion an vice versa.|
 
 ## Accessibility
 
