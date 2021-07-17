@@ -435,7 +435,7 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
   }, {
     key: "createNavs",
     value: function createNavs(tab) {
-      if (tab.tagName.toLowerCase() !== 'joomla-tab-element' || ![].some.call(this.children, function (el) {
+      if (tab instanceof Element && tab.tagName.toLowerCase() !== 'joomla-tab-element' || ![].some.call(this.children, function (el) {
         return el === tab;
       }) || !tab.getAttribute('name') || !tab.getAttribute('id')) return;
       var tabs = [].slice.call(this.children).filter(function (el) {
@@ -497,7 +497,7 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
   }, {
     key: "removeNavs",
     value: function removeNavs(tab) {
-      if (tab.tagName.toLowerCase() !== 'joomla-tab-element' || !this.tabs.filter(function (el) {
+      if (tab instanceof Element && tab.tagName.toLowerCase() !== 'joomla-tab-element' || !this.tabs.filter(function (el) {
         return el.tab === tab;
       }) || !tab.getAttribute('name') || !tab.getAttribute('id')) return;
       var accordionButton = tab.previousSilbingElement;
