@@ -60,6 +60,10 @@ class TabsElement extends HTMLElement {
     if (this.hasAttribute('recall')) {
       this.activateFromState();
     }
+    // If no active tab activate the first one
+    if (!this.tabs.filter((tab) => tab.tab.hasAttribute('active'))) {
+      this.tabs[0].tabButton.click();
+    }
 
     this.addEventListener('keyup', this.keyBehaviour);
 

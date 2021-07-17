@@ -146,6 +146,13 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
 
       if (this.hasAttribute('recall')) {
         this.activateFromState();
+      } // If no active tab activate the first one
+
+
+      if (!this.tabs.filter(function (tab) {
+        return tab.tab.hasAttribute('active');
+      })) {
+        this.tabs[0].tabButton.click();
       }
 
       this.addEventListener('keyup', this.keyBehaviour);
