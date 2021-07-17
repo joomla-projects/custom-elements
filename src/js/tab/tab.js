@@ -61,7 +61,7 @@ class TabsElement extends HTMLElement {
       this.activateFromState();
     }
     // If no active tab activate the first one
-    if (!this.tabs.filter((tab) => tab.tab.hasAttribute('active'))) {
+    if (!this.tabs.filter((tab) => tab.tab.hasAttribute('active')).length) {
       this.tabs[0].tabButton.click();
     }
 

@@ -61,7 +61,7 @@ The simplified version of the tabs:
 
 <div>
 <joomla-tab>
-	<joomla-tab-element active id="panel1" name="Tab panel 1">
+	<joomla-tab-element id="panel1" name="Tab panel 1">
 		<h3>Tab panel 1</h3>
 		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 			Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute

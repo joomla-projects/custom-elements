@@ -151,7 +151,7 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
 
       if (!this.tabs.filter(function (tab) {
         return tab.tab.hasAttribute('active');
-      })) {
+      }).length) {
         this.tabs[0].tabButton.click();
       }
 
