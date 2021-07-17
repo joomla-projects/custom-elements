@@ -362,12 +362,12 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
 
       this.tabs.map(function (tabObj) {
         tabObj.accordionButton.removeAttribute('aria-disabled');
+        tabObj.tabButton.removeAttribute('aria-expanded');
+        tabObj.accordionButton.setAttribute('aria-expanded', false);
 
         if (tabObj.tab.hasAttribute('active')) {
           _this6.dispatchCustomEvent('joomla.tab.hidde', _this6.view === 'tabs' ? tabObj.tabButton : tabObj.accordionButton, tabObj.tab);
 
-          tabObj.tabButton.removeAttribute('aria-expanded');
-          tabObj.accordionButton.setAttribute('aria-expanded', false);
           tabObj.tab.removeAttribute('active');
           tabObj.tab.setAttribute('tabindex', '-1'); // Emit hidden event
 
@@ -400,9 +400,14 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
       if (currentTrigger) {
         // Accordion can close the active panel
         if (this.view === 'accordion' && this.tabs.find(function (tab) {
-          return tab.tab.hasAttribute('active');
+          return tab.accordionButton.getAttribute('aria-expanded') === 'true';
         }) === currentTrigger) {
-          currentTrigger.tab.removeAttribute('active');
+          if (currentTrigger.tab.hasAttribute('active')) {
+            currentTrigger.tab.removeAttribute('active');
+            return;
+          }
+
+          currentTrigger.tab.setAttribute('active', '');
           return;
         } // Remove current active
 
@@ -540,7 +545,7 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
           tab.accordionButton.setAttribute('hidden', '');
           tab.accordionButton.setAttribute('role', 'tabpanel');
 
-          if (tab.tabButton.getAttribute('aria-selected') === 'true') {
+          if (tab.accordionButton.getAttribute('aria-expanded') === 'true') {
             tab.tab.setAttribute('active', '');
           }
 
