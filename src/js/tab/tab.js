@@ -1,4 +1,4 @@
-import { TabElement } from './tab.js';
+import { TabElement } from './tab-element.js';
 
 customElements.define('joomla-tab-element', TabElement);
 
