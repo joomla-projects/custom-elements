@@ -142,9 +142,10 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
         return;
       }
 
+      this.isNested = this.parentNode.closest('joomla-tab') instanceof HTMLElement;
       this.hydrate();
 
-      if (this.hasAttribute('recall')) {
+      if (this.hasAttribute('recall') && !this.isNested) {
         this.activateFromState();
       } // If no active tab activate the first one
 
@@ -437,7 +438,7 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
     value: function createNavs(tab) {
       if (tab instanceof Element && tab.tagName.toLowerCase() !== 'joomla-tab-element' || ![].some.call(this.children, function (el) {
         return el === tab;
-      }) || !tab.getAttribute('name') || !tab.getAttribute('id')) return;
+      }).length || !tab.getAttribute('name') || !tab.getAttribute('id')) return;
       var tabs = [].slice.call(this.children).filter(function (el) {
         return el.tagName.toLowerCase() === 'joomla-tab-element';
       });
@@ -497,9 +498,9 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
   }, {
     key: "removeNavs",
     value: function removeNavs(tab) {
-      if (tab instanceof Element && tab.tagName.toLowerCase() !== 'joomla-tab-element' || !this.tabs.filter(function (el) {
-        return el.tab === tab;
-      }) || !tab.getAttribute('name') || !tab.getAttribute('id')) return;
+      if (tab instanceof Element && tab.tagName.toLowerCase() !== 'joomla-tab-element' || ![].some.call(this.children, function (el) {
+        return el === tab;
+      }).length || !tab.getAttribute('name') || !tab.getAttribute('id')) return;
       var accordionButton = tab.previousSilbingElement;
 
       if (accordionButton && accordionButton.tagName.toLowerCase() === 'button') {
@@ -582,7 +583,8 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
     value: function activateFromState() {
       var _this8 = this;
 
-      // Use the sessionStorage state!
+      this.hasNested = this.querySelector('joomla-tab') instanceof HTMLElement; // Use the sessionStorage state!
+
       var href = sessionStorage.getItem(this.getStorageKey());
 
       if (href) {
@@ -592,23 +594,54 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
 
         if (currentTabIndex >= 0) {
           this.activateTab(currentTabIndex, false);
-        } else {
-          var currentDeepertab;
-          var childTabs = this.querySelector('joomla-tabs');
+        } else if (this.hasNested) {
+          var childTabs = this.querySelector('joomla-tab');
 
           if (childTabs) {
-            [].slice.call(this.querySelectorAll('joomla-tab-element')).forEach(function (xtab) {
-              if (xtab.parentNode !== _this8) {
-                xtab.removeAttribute('active');
-
-                if (xtab.id === href) {
-                  xtab.setAttribute('active', '');
-                  currentDeepertab = xtab;
-                }
-              }
+            var activeTabs = [].slice.call(this.querySelectorAll('joomla-tab-element')).reverse().filter(function (activeTabEl) {
+              return activeTabEl.id === href;
             });
-            var curTab = currentDeepertab.parentNode.closest('joomla-tab-element');
-            this.activateTab(curTab, false);
+
+            if (activeTabs.length) {
+              // Activate the deepest tab
+              var activeTab = activeTabs[0].closest('joomla-tab');
+              [].slice.call(activeTab.querySelectorAll('joomla-tab-element')).forEach(function (tabEl) {
+                tabEl.removeAttribute('active');
+
+                if (tabEl.id === href) {
+                  tabEl.setAttribute('active', '');
+                }
+              }); // Activate all parent tabs
+
+              var _loop = function _loop() {
+                var parentTabContainer = activeTab.closest('joomla-tab');
+                var parentTabEl = activeTab.parentNode.closest('joomla-tab-element');
+                [].slice.call(parentTabContainer.querySelectorAll('joomla-tab-element')) // eslint-disable-next-line no-loop-func
+                .forEach(function (tabEl) {
+                  tabEl.removeAttribute('active');
+
+                  if (parentTabEl === tabEl) {
+                    tabEl.setAttribute('active', '');
+                    activeTab = parentTabEl;
+                  }
+                });
+              };
+
+              while (activeTab.parentNode.closest('joomla-tab') !== this) {
+                _loop();
+              }
+
+              [].slice.call(this.children).filter(function (el) {
+                return el.tagName.toLowerCase() === 'joomla-tab-element';
+              }).forEach(function (tabEl) {
+                tabEl.removeAttribute('active');
+                var isActiveChild = tabEl.querySelector('joomla-tab-element[active]');
+
+                if (isActiveChild) {
+                  _this8.activateTab(tabEl, false);
+                }
+              });
+            }
           }
         }
       }
