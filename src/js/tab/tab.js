@@ -64,7 +64,7 @@ class TabsElement extends HTMLElement {
     }
     // If no active tab activate the first one
     if (!this.tabs.filter((tab) => tab.tab.hasAttribute('active')).length) {
-      this.tabs[0].tabButton.click();
+      this.activateTab(this.tabs[0].tab, false);
     }
 
     this.addEventListener('keyup', this.keyBehaviour);
@@ -277,10 +277,12 @@ class TabsElement extends HTMLElement {
       currentTrigger.tab.setAttribute('active', '');
       currentTrigger.tabButton.removeAttribute('tabindex');
       this.dispatchCustomEvent('joomla.tab.show', this.view === 'tabs' ? currentTrigger.tabButton : currentTrigger.accordionButton, currentTrigger.tab);
-      if (this.view === 'tabs') {
-        currentTrigger.tabButton.focus();
-      } else {
-        currentTrigger.accordionButton.focus();
+      if (state) {
+        if (this.view === 'tabs') {
+          currentTrigger.tabButton.focus();
+        } else {
+          currentTrigger.accordionButton.focus();
+        }
       }
       if (state) this.saveState(currentTrigger.tab.id);
       this.dispatchCustomEvent('joomla.tab.shown', this.view === 'tabs' ? currentTrigger.tabButton : currentTrigger.accordionButton, currentTrigger.tab);

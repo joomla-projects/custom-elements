@@ -153,7 +153,7 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
       if (!this.tabs.filter(function (tab) {
         return tab.tab.hasAttribute('active');
       }).length) {
-        this.tabs[0].tabButton.click();
+        this.activateTab(this.tabs[0].tab, false);
       }
 
       this.addEventListener('keyup', this.keyBehaviour);
@@ -422,10 +422,12 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
         currentTrigger.tabButton.removeAttribute('tabindex');
         this.dispatchCustomEvent('joomla.tab.show', this.view === 'tabs' ? currentTrigger.tabButton : currentTrigger.accordionButton, currentTrigger.tab);
 
-        if (this.view === 'tabs') {
-          currentTrigger.tabButton.focus();
-        } else {
-          currentTrigger.accordionButton.focus();
+        if (state) {
+          if (this.view === 'tabs') {
+            currentTrigger.tabButton.focus();
+          } else {
+            currentTrigger.accordionButton.focus();
+          }
         }
 
         if (state) this.saveState(currentTrigger.tab.id);
