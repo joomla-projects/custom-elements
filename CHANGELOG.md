@@ -5,7 +5,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 0.0.45
+## [Unreleased]
+
+## 0.1.0
 - Rewrote the scss to use CSS custom properties than preprocessed SCSS variables
 - Added animations for entry/exit of the element
 
