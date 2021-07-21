@@ -1,6 +1,3 @@
-**/*.min.js
 /demo/**
 /dist/**
 /docs/**
-/test/**
-Gruntfile.js
