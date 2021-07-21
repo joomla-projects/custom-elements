@@ -15,7 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Removed `acknowledge` attribute
   - Removed `href` attribute
   - Added `close-text` attribute. This should be used to load the close button with multilingual text
-  - Removed `joomla.alert.closed` event from the element
+  - Rewrote the scss to use CSS custom properties than preprocessed SCSS variables
+  - Added animations for entry/exit of the element
 - Refactor of the tabs element
   - Logic rewritten so the tabs won't be reappended (no more moving elements)
   - Added `breakpoint` attribute for controling the transition from tabs/accordion

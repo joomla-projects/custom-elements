@@ -1,4 +1,4 @@
-class JoomlaAlertElement extends HTMLElement {
+class AlertElement extends HTMLElement {
   constructor() {
     super();
 
@@ -10,29 +10,52 @@ class JoomlaAlertElement extends HTMLElement {
 
     this.observer = new MutationObserver(this.onMutation);
     this.observer.observe(this, { attributes: false, childList: true, subtree: true });
+
+    // Handle the fade in animation
+    this.addEventListener('animationend', (event) => {
+      if (event.animationName === 'joomla-alert-fade-in' && event.target === this) {
+        this.dispatchEvent(new CustomEvent('joomla.alert.shown'));
+        this.style.removeProperty('animationName');
+      }
+    });
+
+    // Handle the fade out animation
+    this.addEventListener('animationend', (event) => {
+      if (event.animationName === 'joomla-alert-fade-out' && event.target === this) {
+        this.dispatchEvent(new CustomEvent('joomla.alert.closed'));
+        this.remove();
+      }
+    });
   }
 
   /* Attributes to monitor */
-  static get observedAttributes() { return ['type', 'role', 'dismiss', 'close-text']; }
+  static get observedAttributes() { return ['type', 'role', 'dismiss', 'auto-dismiss', 'close-text']; }
 
   get type() { return this.getAttribute('type'); }
 
-  set type(value) { return this.setAttribute('type', value); }
+  set type(value) { this.setAttribute('type', value); }
 
   get role() { return this.getAttribute('role'); }
 
-  set role(value) { return this.setAttribute('role', value); }
+  set role(value) { this.setAttribute('role', value); }
 
   get closeText() { return this.getAttribute('close-text'); }
 
-  set closeText(value) { return this.setAttribute('close-text', value); }
+  set closeText(value) { this.setAttribute('close-text', value); }
 
   get dismiss() { return this.getAttribute('dismiss'); }
 
+  set dismiss(value) { this.setAttribute('dismiss', value); }
+
   get autodismiss() { return this.getAttribute('auto-dismiss'); }
+
+  set autodismiss(value) { this.setAttribute('auto-dismiss', value); }
 
   /* Lifecycle, element appended to the DOM */
   connectedCallback() {
+    this.dispatchEvent(new CustomEvent('joomla.alert.show'));
+    this.style.animationName = 'joomla-alert-fade-in';
+
     // Default to info
     if (!this.type || !['info', 'warning', 'danger', 'success'].includes(this.type)) {
       this.setAttribute('type', 'info');
@@ -64,8 +87,6 @@ class JoomlaAlertElement extends HTMLElement {
     if (this.hasAttribute('auto-dismiss')) {
       this.autoDismiss();
     }
-
-    this.dispatchEvent(new CustomEvent('joomla.alert.show'));
   }
 
   /* Lifecycle, element removed from the DOM */
@@ -96,12 +117,16 @@ class JoomlaAlertElement extends HTMLElement {
           } else if (!this.button && this.hasAttribute('dismiss')) {
             this.createCloseButton();
           }
+        } else if (this.button && newValue === 'false') {
+          this.destroyCloseButton();
+        } else if (!this.button && newValue !== 'false') {
+          this.createCloseButton();
         }
         break;
       case 'close-text':
         if (!newValue || newValue !== oldValue) {
           if (this.button) {
-            this.button.innerText = newValue;
+            this.button.setAttribute('aria-label', newValue);
           }
         }
         break;
@@ -115,6 +140,7 @@ class JoomlaAlertElement extends HTMLElement {
 
   /* Observe added elements */
   onMutation(mutationsList) {
+    // eslint-disable-next-line no-restricted-syntax
     for (const mutation of mutationsList) {
       if (mutation.type === 'childList') {
         if (mutation.addedNodes.length) {
@@ -130,7 +156,7 @@ class JoomlaAlertElement extends HTMLElement {
   /* Method to close the alert */
   close() {
     this.dispatchEvent(new CustomEvent('joomla.alert.close'));
-    this.remove();
+    this.style.animationName = 'joomla-alert-fade-out';
   }
 
   /* Method to create the close button */
@@ -163,5 +189,5 @@ class JoomlaAlertElement extends HTMLElement {
 }
 
 if (!customElements.get('joomla-alert')) {
-  customElements.define('joomla-alert', JoomlaAlertElement);
+  customElements.define('joomla-alert', AlertElement);
 }

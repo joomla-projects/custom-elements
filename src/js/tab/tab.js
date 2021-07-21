@@ -130,6 +130,18 @@ class TabsElement extends HTMLElement {
       if (this.view === 'tabs') {
         accordionButton.setAttribute('hidden', '');
       }
+    });
+
+    // Fallback if no active tab
+    if (!this.hasActive) {
+      tabsEl[0].setAttribute('active', '');
+      tabsEl[0].removeAttribute('aria-hidden');
+      this.hasActive = true;
+      this.currentActive = tabsEl[0].id;
+      this.querySelector(`#tab-${tabsEl[0].id}`).setAttribute('aria-selected', 'true');
+      this.querySelector(`#tab-${tabsEl[0].id}`).setAttribute('tabindex', '0');
+      this.querySelector(`#tab-${tabsEl[0].id}`).setAttribute('active', '');
+    }
 
       accordionButton.addEventListener('click', this.activateTab);
 
@@ -174,6 +186,27 @@ class TabsElement extends HTMLElement {
           [].slice.call(mutation.addedNodes).map((inserted) => this.removeNavs(inserted));
         }
       }
+    });
+
+    this.insertAdjacentElement('afterbegin', nav);
+
+    // Keyboard access
+    this.addKeyListeners();
+  }
+
+  hideCurrent() {
+    // Unset the current active tab
+    if (this.currentActive) {
+      // Emit hide event
+      const el = this.querySelector(`a[aria-controls="${this.currentActive}"]`);
+      this.dispatchCustomEvent('joomla.tab.hide', el, this.querySelector(`#tab-${this.currentActive}`));
+      el.removeAttribute('active');
+      el.setAttribute('tabindex', '-1');
+      this.querySelector(`#${this.currentActive}`).removeAttribute('active');
+      this.querySelector(`#${this.currentActive}`).setAttribute('aria-hidden', 'true');
+      el.removeAttribute('aria-selected');
+      // Emit hidden event
+      this.dispatchCustomEvent('joomla.tab.hidden', el, this.querySelector(`#tab-${this.currentActive}`));
     }
   }
 
