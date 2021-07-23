@@ -148,6 +148,20 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
 
       if (this.hasAttribute('recall') && !this.isNested) {
         this.activateFromState();
+      } // Activate tab from the URL hash
+
+
+      if (window.location.hash) {
+        console.log('hash', window.location.hash);
+        var hash = window.location.hash.substr(1);
+        var tabToactivate = this.tabs.filter(function (tab) {
+          return tab.tab.id === hash;
+        });
+        console.log(tabToactivate);
+
+        if (tabToactivate.length) {
+          this.activateTab(tabToactivate[0].tab);
+        }
       } // If no active tab activate the first one
 
 

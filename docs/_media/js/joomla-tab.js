@@ -63,6 +63,18 @@ class TabsElement extends HTMLElement {
     if (this.hasAttribute('recall') && !this.isNested) {
       this.activateFromState();
     }
+
+    // Activate tab from the URL hash
+    if (window.location.hash) {
+      console.log('hash', window.location.hash);
+      const hash = window.location.hash.substr(1);
+      const tabToactivate = this.tabs.filter((tab) => tab.tab.id === hash);
+      console.log(tabToactivate);
+      if (tabToactivate.length) {
+        this.activateTab(tabToactivate[0].tab);
+      }
+    }
+
     // If no active tab activate the first one
     if (!this.tabs.filter((tab) => tab.tab.hasAttribute('active')).length) {
       this.activateTab(this.tabs[0].tab, false);
