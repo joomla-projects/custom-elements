@@ -66,10 +66,8 @@ class TabsElement extends HTMLElement {
 
     // Activate tab from the URL hash
     if (window.location.hash) {
-      console.log('hash', window.location.hash);
       const hash = window.location.hash.substr(1);
       const tabToactivate = this.tabs.filter((tab) => tab.tab.id === hash);
-      console.log(tabToactivate)
       if (tabToactivate.length) {
         this.activateTab(tabToactivate[0].tab);
       }
