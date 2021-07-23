@@ -27,6 +27,7 @@ class TabsElement extends HTMLElement {
     super();
     this.tabs = [];
     this.tabsElements = [];
+    this.previousActive = null;
 
     this.onMutation = this.onMutation.bind(this);
     this.keyBehaviour = this.keyBehaviour.bind(this);
@@ -270,11 +271,12 @@ class TabsElement extends HTMLElement {
       tabObj.accordionButton.setAttribute('aria-expanded', false);
 
       if (tabObj.tab.hasAttribute('active')) {
-        this.dispatchCustomEvent('joomla.tab.hidde', this.view === 'tabs' ? tabObj.tabButton : tabObj.accordionButton, tabObj.tab);
+        this.dispatchCustomEvent('joomla.tab.hide', this.view === 'tabs' ? tabObj.tabButton : tabObj.accordionButton, this.previousActive);
         tabObj.tab.removeAttribute('active');
         tabObj.tab.setAttribute('tabindex', '-1');
         // Emit hidden event
-        this.dispatchCustomEvent('joomla.tab.hidden', this.view === 'tabs' ? tabObj.tabButton : tabObj.accordionButton, tabObj.tab);
+        this.dispatchCustomEvent('joomla.tab.hidden', this.view === 'tabs' ? tabObj.tabButton : tabObj.accordionButton, this.previousActive);
+        this.previousActive = this.view === 'tabs' ? tabObj.tabButton : tabObj.accordionButton;
       }
       return tabObj;
     });
@@ -309,7 +311,7 @@ class TabsElement extends HTMLElement {
       currentTrigger.accordionButton.setAttribute('aria-disabled', true);
       currentTrigger.tab.setAttribute('active', '');
       currentTrigger.tabButton.removeAttribute('tabindex');
-      this.dispatchCustomEvent('joomla.tab.show', this.view === 'tabs' ? currentTrigger.tabButton : currentTrigger.accordionButton, currentTrigger.tab);
+      this.dispatchCustomEvent('joomla.tab.show', this.view === 'tabs' ? currentTrigger.tabButton : currentTrigger.accordionButton, this.previousActive);
       if (state) {
         if (this.view === 'tabs') {
           currentTrigger.tabButton.focus();
@@ -318,7 +320,7 @@ class TabsElement extends HTMLElement {
         }
       }
       if (state) this.saveState(currentTrigger.tab.id);
-      this.dispatchCustomEvent('joomla.tab.shown', this.view === 'tabs' ? currentTrigger.tabButton : currentTrigger.accordionButton, currentTrigger.tab);
+      this.dispatchCustomEvent('joomla.tab.shown', this.view === 'tabs' ? currentTrigger.tabButton : currentTrigger.accordionButton, this.previousActive);
     }
   }
 
