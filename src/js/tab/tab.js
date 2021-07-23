@@ -69,7 +69,7 @@ class TabsElement extends HTMLElement {
       const hash = window.location.hash.substr(1);
       const tabToactivate = this.tabs.filter((tab) => tab.tab.id === hash);
       if (tabToactivate.length) {
-        this.activateTab(tabToactivate[0].tab);
+        this.activateTab(tabToactivate[0].tab, false);
       }
     }
 

@@ -158,7 +158,7 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
         });
 
         if (tabToactivate.length) {
-          this.activateTab(tabToactivate[0].tab);
+          this.activateTab(tabToactivate[0].tab, false);
         }
       } // If no active tab activate the first one
 
