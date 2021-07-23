@@ -200,12 +200,10 @@ var AlertElement = /*#__PURE__*/function (_HTMLElement) {
             } else if (!this.button && this.hasAttribute('dismiss')) {
               this.createCloseButton();
             }
-          } else {
-            if (this.button && newValue === 'false') {
-              this.destroyCloseButton();
-            } else if (!this.button && newValue !== 'false') {
-              this.createCloseButton();
-            }
+          } else if (this.button && newValue === 'false') {
+            this.destroyCloseButton();
+          } else if (!this.button && newValue !== 'false') {
+            this.createCloseButton();
           }
 
           break;
@@ -213,7 +211,7 @@ var AlertElement = /*#__PURE__*/function (_HTMLElement) {
         case 'close-text':
           if (!newValue || newValue !== oldValue) {
             if (this.button) {
-              this.button.innerText = newValue;
+              this.button.setAttribute('aria-label', newValue);
             }
           }
 
@@ -229,6 +227,7 @@ var AlertElement = /*#__PURE__*/function (_HTMLElement) {
   }, {
     key: "onMutation",
     value: function onMutation(mutationsList) {
+      // eslint-disable-next-line no-restricted-syntax
       var _iterator = _createForOfIteratorHelper(mutationsList),
           _step;
 
