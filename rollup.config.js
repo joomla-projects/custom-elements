@@ -14,7 +14,6 @@ const Elements = [
   'collapse',
   'dropdown',
   'modal',
-  'panels',
   'tab',
   'tip',
 ];

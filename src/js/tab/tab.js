@@ -1,8 +1,14 @@
-customElements.define('joomla-tab', class extends HTMLElement {
+import { TabElement } from './tab-element.js';
+
+customElements.define('joomla-tab-element', TabElement);
+
+class TabsElement extends HTMLElement {
   /* Attributes to monitor */
-  static get observedAttributes() { return ['recall', 'orientation', 'view']; }
+  static get observedAttributes() { return ['recall', 'orientation', 'view', 'breakpoint']; }
 
   get recall() { return this.getAttribute('recall'); }
+
+  set recall(value) { this.setAttribute('recall', value); }
 
   get view() { return this.getAttribute('view'); }
 
@@ -12,323 +18,400 @@ customElements.define('joomla-tab', class extends HTMLElement {
 
   set orientation(value) { this.setAttribute('orientation', value); }
 
+  get breakpoint() { return parseInt(this.getAttribute('breakpoint'), 10); }
+
+  set breakpoint(value) { this.setAttribute('breakpoint', value); }
+
   /* Lifecycle, element created */
   constructor() {
     super();
-
-    this.hasActive = false;
-    this.currentActive = '';
-    this.hasNested = false;
-    this.isNested = false;
     this.tabs = [];
+    this.tabsElements = [];
+    this.previousActive = null;
+
+    this.onMutation = this.onMutation.bind(this);
+    this.keyBehaviour = this.keyBehaviour.bind(this);
+    this.activateTab = this.activateTab.bind(this);
+    this.deactivateTabs = this.deactivateTabs.bind(this);
+    this.checkView = this.checkView.bind(this);
+
+    this.observer = new MutationObserver(this.onMutation);
+    this.observer.observe(this, { attributes: false, childList: true, subtree: true });
   }
 
   /* Lifecycle, element appended to the DOM */
   connectedCallback() {
-    if (!this.orientation || (this.orientation && ['horizontal', 'vertical'].indexOf(this.orientation) === -1)) {
+    if (!this.orientation || (this.orientation && !['horizontal', 'vertical'].includes(this.orientation))) {
       this.orientation = 'horizontal';
     }
 
-    // get tab elements
-    const self = this;
-    const tabs = [].slice.call(this.querySelectorAll('section'));
-    let tabsEl = [];
-    const tabLinkHash = [];
+    if (!this.view || (this.view && !['tabs', 'accordion'].includes(this.view))) {
+      this.view = 'tabs';
+    }
 
-    // Sanity check
-    if (!tabs) {
+    // get tab elements
+    this.tabsElements = [].slice.call(this.children).filter((el) => el.tagName.toLowerCase() === 'joomla-tab-element');
+
+    // Sanity checks
+    if (!this.tabsElements.length) {
       return;
     }
 
-    if (this.parentNode.closest('joomla-tab')) {
-      this.isNested = true;
+    this.isNested = this.parentNode.closest('joomla-tab') instanceof HTMLElement;
+
+    this.hydrate();
+    if (this.hasAttribute('recall') && !this.isNested) {
+      this.activateFromState();
     }
 
-    if (this.querySelector('joomla-tab')) {
-      this.hasNested = true;
-    }
-
-    // Use the sessionStorage state!
-    if (this.hasAttribute('recall')) {
-      const href = sessionStorage.getItem(this.getStorageKey());
-      if (href) {
-        tabLinkHash.push(href);
+    // Activate tab from the URL hash
+    if (window.location.hash) {
+      const hash = window.location.hash.substr(1);
+      const tabToactivate = this.tabs.filter((tab) => tab.tab.id === hash);
+      if (tabToactivate.length) {
+        this.activateTab(tabToactivate[0].tab, false);
       }
     }
 
-    if (this.hasNested) {
-      // @todo use the recall attribute
-      const href = sessionStorage.getItem(this.getStorageKey());
-      if (href) {
-        tabLinkHash.push(href);
-      }
-      // @todo end
+    // If no active tab activate the first one
+    if (!this.tabs.filter((tab) => tab.tab.hasAttribute('active')).length) {
+      this.activateTab(this.tabs[0].tab, false);
+    }
 
-      // Add possible parent tab to the aray for activation
-      if (tabLinkHash.length && tabLinkHash[0] !== '') {
-        const hash = tabLinkHash[0].substring(5);
-        const element = this.querySelector(`#${hash}`);
+    this.addEventListener('keyup', this.keyBehaviour);
 
-        // Add the parent tab to the array for activation
-        if (element) {
-          const currentTabSet = element.closest('joomla-tab');
-
-          if (this.isNested) {
-            const parentTab = currentTabSet.closest('section');
-
-            if (parentTab) {
-              tabLinkHash.push(`#tab-${parentTab.id}`);
-            }
-          }
-        }
-      }
-
-      // remove the cascaded tabs and activate the right tab
-      tabs.forEach((tab) => {
-        if (tabLinkHash.length) {
-          const theId = `#tab-${tab.id}`;
-
-          if (tabLinkHash.indexOf(theId) === -1) {
-            tab.removeAttribute('active');
-          } else {
-            tab.setAttribute('active', '');
-          }
-        }
-
-        if (tab.parentNode === self) {
-          tabsEl.push(tab);
-        }
+    if (this.breakpoint) {
+      // Convert tabs to accordian
+      this.checkView();
+      window.addEventListener('resize', () => {
+        this.checkView();
       });
-    } else {
-      // Activate the correct tab
-      tabs.forEach((tab) => {
-        if (tabLinkHash.length) {
-          const theId = `#tab-${tab.id}`;
-          if (tabLinkHash.indexOf(theId) === -1) {
-            tab.removeAttribute('active');
-          } else {
-            tab.setAttribute('active', '');
-          }
-        }
-      });
-
-      tabsEl = tabs;
     }
-
-    // Create the navigation
-    if (this.view !== 'accordion') {
-      this.createNavigation(tabsEl);
-    }
-
-    // Add missing role
-    tabsEl.forEach((tab) => {
-      tab.setAttribute('role', 'tabpanel');
-      this.tabs.push(`#tab-${tab.id}`);
-      if (tab.hasAttribute('active')) {
-        this.hasActive = true;
-        this.currentActive = tab.id;
-        this.querySelector(`#tab-${tab.id}`).setAttribute('aria-selected', 'true');
-        this.querySelector(`#tab-${tab.id}`).setAttribute('active', '');
-        this.querySelector(`#tab-${tab.id}`).setAttribute('tabindex', '0');
-      }
-    });
-
-    // Fallback if no active tab
-    if (!this.hasActive) {
-      tabsEl[0].setAttribute('active', '');
-      tabsEl[0].removeAttribute('aria-hidden');
-      this.hasActive = true;
-      this.currentActive = tabsEl[0].id;
-      this.querySelector(`#tab-${tabsEl[0].id}`).setAttribute('aria-selected', 'true');
-      this.querySelector(`#tab-${tabsEl[0].id}`).setAttribute('tabindex', '0');
-      this.querySelector(`#tab-${tabsEl[0].id}`).setAttribute('active', '');
-    }
-
-    // Check if there is a hash in the URI
-    if (window.location.href.match(/#\S[^&]*/)) {
-      const hash = window.location.href.match(/#\S[^&]*/);
-      const element = this.querySelector(hash[0]);
-
-      if (element) {
-        // Activate any parent tabs (nested tables)
-        const currentTabSet = element.closest('joomla-tab');
-
-        if (this.isNested) {
-          const parentTabSet = currentTabSet.closest('joomla-tab');
-          const parentTab = currentTabSet.closest('section');
-          parentTabSet.showTab(parentTab);
-          // Now activate the given tab
-          this.show(element);
-        } else {
-          // Now activate the given tab
-          this.showTab(element);
-        }
-      }
-    }
-
-    // Convert tabs to accordian
-    self.checkView(self);
-    window.addEventListener('resize', () => {
-      self.checkView(self);
-    });
   }
 
   /* Lifecycle, element removed from the DOM */
   disconnectedCallback() {
-    const ulEl = this.querySelector('ul');
-    const navigation = [].slice.call(ulEl.querySelectorAll('a'));
-
-    navigation.forEach((link) => {
-      link.removeEventListener('click', this);
+    this.tabs.map((tab) => {
+      tab.tabButton.removeEventListener('click', this.activateTab);
+      tab.accordionButton.removeEventListener('click', this.activateTab);
+      return tab;
     });
-    ulEl.removeEventListener('keydown', this);
+    this.removeEventListener('keyup', this.keyBehaviour);
   }
 
-  /* Method to create the tabs navigation */
-  createNavigation(tabs) {
-    if (this.firstElementChild.nodeName.toLowerCase() === 'ul') {
+  /* Respond to attribute changes */
+  attributeChangedCallback(attr, oldValue, newValue) {
+    switch (attr) {
+      case 'view':
+        if (!newValue || (newValue && !['tabs', 'accordion'].includes(newValue))) {
+          this.view = 'tabs';
+        }
+        if (newValue === 'tabs' && newValue !== oldValue) {
+          if (this.tabButtonContainer) this.tabButtonContainer.removeAttribute('hidden');
+          this.tabs.map((tab) => tab.accordionButton.setAttribute('hidden', ''));
+        } else if (newValue === 'accordion' && newValue !== oldValue) {
+          if (this.tabButtonContainer) this.tabButtonContainer.setAttribute('hidden', '');
+          this.tabs.map((tab) => tab.accordionButton.removeAttribute('hidden'));
+        }
+        break;
+      default:
+        break;
+    }
+  }
+
+  hydrate() {
+    // Ensure the tab links container exists
+    this.tabButtonContainer = document.createElement('div');
+    this.tabButtonContainer.setAttribute('role', 'tablist');
+    this.insertAdjacentElement('afterbegin', this.tabButtonContainer);
+
+    if (this.view === 'accordion') {
+      this.tabButtonContainer.setAttribute('hidden', '');
+    }
+
+    this.tabsElements.map((tab) => {
+      // Create Accordion button
+      const accordionButton = document.createElement('button');
+      accordionButton.setAttribute('aria-expanded', !!tab.hasAttribute('active'));
+      accordionButton.setAttribute('aria-controls', tab.id);
+      accordionButton.setAttribute('type', 'button');
+      accordionButton.innerHTML = `<span class="accordion-title">${tab.getAttribute('name')}<span class="accordion-icon"></span></span>`;
+      tab.insertAdjacentElement('beforebegin', accordionButton);
+
+      if (this.view === 'tabs') {
+        accordionButton.setAttribute('hidden', '');
+      }
+
+      accordionButton.addEventListener('click', this.activateTab);
+
+      // Create tab button
+      const tabButton = document.createElement('button');
+      tabButton.setAttribute('aria-expanded', !!tab.hasAttribute('active'));
+      tabButton.setAttribute('aria-controls', tab.id);
+      tabButton.setAttribute('role', 'tab');
+      tabButton.setAttribute('type', 'button');
+      tabButton.innerHTML = `${tab.getAttribute('name')}`;
+      this.tabButtonContainer.appendChild(tabButton);
+
+      tabButton.addEventListener('click', this.activateTab);
+
+      if (this.view === 'tabs') {
+        tab.setAttribute('role', 'tabpanel');
+      } else {
+        tab.setAttribute('role', 'region');
+      }
+
+      this.tabs.push({
+        tab,
+        tabButton,
+        accordionButton,
+      });
+
+      return tab;
+    });
+  }
+
+  /* Update on mutation */
+  onMutation(mutationsList) {
+    // eslint-disable-next-line no-restricted-syntax
+    for (const mutation of mutationsList) {
+      if (mutation.type === 'childList') {
+        if (mutation.addedNodes.length) {
+          [].slice.call(mutation.addedNodes).map((inserted) => this.createNavs(inserted));
+          // Add the tab buttons
+        }
+        if (mutation.removedNodes.length) {
+          // Remove the tab buttons
+          [].slice.call(mutation.addedNodes).map((inserted) => this.removeNavs(inserted));
+        }
+      }
+    }
+  }
+
+  keyBehaviour(e) {
+    // Only the tabs/accordion buttons, no ⌘ or Alt modifier
+    if (![...this.tabs.map((el) => el.tabButton), ...this.tabs.map((el) => el.accordionButton)]
+      .includes(document.activeElement)
+      || e.metaKey
+      || e.altKey) {
       return;
     }
 
-    const nav = document.createElement('ul');
-    nav.setAttribute('role', 'tablist');
+    let previousTabItem;
+    let nextTabItem;
+    if (this.view === 'tabs') {
+      const currentTabIndex = this.tabs.findIndex((tab) => tab.tab.hasAttribute('active'));
+      previousTabItem = currentTabIndex - 1 >= 0
+        ? this.tabs[currentTabIndex - 1] : this.tabs[this.tabs.length - 1];
+      nextTabItem = currentTabIndex + 1 <= this.tabs.length - 1
+        ? this.tabs[currentTabIndex + 1] : this.tabs[0];
+    } else {
+      const currentTabIndex = this.tabs.map((el) => el.accordionButton)
+        .findIndex((tab) => tab === document.activeElement);
+      previousTabItem = currentTabIndex - 1 >= 0
+        ? this.tabs[currentTabIndex - 1] : this.tabs[this.tabs.length - 1];
+      nextTabItem = currentTabIndex + 1 <= this.tabs.length - 1
+        ? this.tabs[currentTabIndex + 1] : this.tabs[0];
+    }
 
-    /** Activate Tab */
-    const activateTabFromLink = (e) => {
-      e.preventDefault();
-
-      // Doing toggle for accordion
-      const justHide = this.view === 'accordion' && e.currentTarget.hasAttribute('active');
-
-      if (this.hasActive) {
-        this.hideCurrent();
-
-        if (justHide) {
-          this.hasActive = false;
-          return;
+    // catch left/right and up/down arrow key events
+    switch (e.keyCode) {
+      case 37:
+      case 38:
+        if (this.view === 'tabs') {
+          previousTabItem.tabButton.click();
+          previousTabItem.tabButton.focus();
+        } else {
+          previousTabItem.accordionButton.focus();
         }
-      }
-
-      const currentTabLink = this.currentActive;
-
-      // Set the selected tab as active
-      // Emit show event
-      this.dispatchCustomEvent('joomla.tab.show', e.currentTarget, this.querySelector(`#tab-${currentTabLink}`));
-      e.currentTarget.setAttribute('active', '');
-      e.currentTarget.setAttribute('aria-selected', 'true');
-      e.currentTarget.setAttribute('tabindex', '0');
-      this.querySelector(e.currentTarget.hash).setAttribute('active', '');
-      this.querySelector(e.currentTarget.hash).removeAttribute('aria-hidden');
-      this.currentActive = e.currentTarget.hash.substring(1);
-      // Emit shown event
-      this.dispatchCustomEvent('joomla.tab.shown', e.currentTarget, this.querySelector(`#tab-${currentTabLink}`));
-      this.saveState(`#tab-${e.currentTarget.hash.substring(1)}`);
-      this.hasActive = true;
-    };
-
-    tabs.forEach((tab) => {
-      if (!tab.id) {
-        return;
-      }
-
-      const active = tab.hasAttribute('active');
-      const liElement = document.createElement('li');
-      const aElement = document.createElement('a');
-
-      liElement.setAttribute('role', 'presentation');
-      aElement.setAttribute('role', 'tab');
-      aElement.setAttribute('aria-controls', tab.id);
-      aElement.setAttribute('aria-selected', active ? 'true' : 'false');
-      aElement.setAttribute('tabindex', active ? '0' : '-1');
-      aElement.setAttribute('href', `#${tab.id}`);
-      aElement.setAttribute('id', `tab-${tab.id}`);
-      aElement.innerHTML = tab.getAttribute('name');
-
-      if (active) {
-        aElement.setAttribute('active', '');
-      }
-
-      aElement.addEventListener('click', activateTabFromLink);
-
-      liElement.appendChild(aElement);
-      nav.appendChild(liElement);
-
-      tab.setAttribute('aria-labelledby', `tab-${tab.id}`);
-      if (!active) {
-        tab.setAttribute('aria-hidden', 'true');
-      }
-    });
-
-    this.insertAdjacentElement('afterbegin', nav);
-
-    // Keyboard access
-    this.addKeyListeners();
-  }
-
-  hideCurrent() {
-    // Unset the current active tab
-    if (this.currentActive) {
-      // Emit hide event
-      const el = this.querySelector(`a[aria-controls="${this.currentActive}"]`);
-      this.dispatchCustomEvent('joomla.tab.hide', el, this.querySelector(`#tab-${this.currentActive}`));
-      el.removeAttribute('active');
-      el.setAttribute('tabindex', '-1');
-      this.querySelector(`#${this.currentActive}`).removeAttribute('active');
-      this.querySelector(`#${this.currentActive}`).setAttribute('aria-hidden', 'true');
-      el.removeAttribute('aria-selected');
-      // Emit hidden event
-      this.dispatchCustomEvent('joomla.tab.hidden', el, this.querySelector(`#tab-${this.currentActive}`));
+        e.preventDefault();
+        break;
+      case 39:
+      case 40:
+        if (this.view === 'tabs') {
+          nextTabItem.tabButton.click();
+          nextTabItem.tabButton.focus();
+        } else {
+          nextTabItem.accordionButton.focus();
+        }
+        e.preventDefault();
+        break;
+      default:
+        break;
     }
   }
 
-  showTab(tab) {
-    const tabLink = document.querySelector(`#tab-${tab.id}`);
-    tabLink.click();
+  deactivateTabs() {
+    this.tabs.map((tabObj) => {
+      tabObj.accordionButton.removeAttribute('aria-disabled');
+      tabObj.tabButton.removeAttribute('aria-expanded');
+      tabObj.accordionButton.setAttribute('aria-expanded', false);
+
+      if (tabObj.tab.hasAttribute('active')) {
+        this.dispatchCustomEvent('joomla.tab.hide', this.view === 'tabs' ? tabObj.tabButton : tabObj.accordionButton, this.previousActive);
+        tabObj.tab.removeAttribute('active');
+        tabObj.tab.setAttribute('tabindex', '-1');
+        // Emit hidden event
+        this.dispatchCustomEvent('joomla.tab.hidden', this.view === 'tabs' ? tabObj.tabButton : tabObj.accordionButton, this.previousActive);
+        this.previousActive = this.view === 'tabs' ? tabObj.tabButton : tabObj.accordionButton;
+      }
+      return tabObj;
+    });
   }
 
-  show(ulLink) {
-    ulLink.click();
-  }
+  activateTab(input, state = true) {
+    let currentTrigger;
+    if (input.currentTarget) {
+      currentTrigger = this.tabs.find((tab) => ((this.view === 'tabs' ? tab.tabButton : tab.accordionButton) === input.currentTarget));
+    } else if (input instanceof HTMLElement) {
+      currentTrigger = this.tabs.find((tab) => tab.tab === input);
+    } else if (Number.isInteger(input)) {
+      currentTrigger = this.tabs[input];
+    }
 
-  addKeyListeners() {
-    const keyBehaviour = (e) => {
-      // collect tab targets, and their parents' prev/next (or first/last)
-      const currentTab = this.querySelector(`#tab-${this.currentActive}`);
-      // const tablist = [].slice.call(this.querySelector('ul').querySelectorAll('a'));
-
-      const previousTabItem = currentTab.parentNode.previousElementSibling
-          || currentTab.parentNode.parentNode.lastElementChild;
-      const nextTabItem = currentTab.parentNode.nextElementSibling
-          || currentTab.parentNode.parentNode.firstElementChild;
-
-      // don't catch key events when ⌘ or Alt modifier is present
-      if (e.metaKey || e.altKey) {
+    if (currentTrigger) {
+      // Accordion can close the active panel
+      if (this.view === 'accordion' && this.tabs.find((tab) => tab.accordionButton.getAttribute('aria-expanded') === 'true') === currentTrigger) {
+        if (currentTrigger.tab.hasAttribute('active')) {
+          currentTrigger.tab.removeAttribute('active');
+          return;
+        }
+        currentTrigger.tab.setAttribute('active', '');
         return;
       }
 
-      if (this.tabs.indexOf(`#${document.activeElement.id}`) === -1) {
+      // Remove current active
+      this.deactivateTabs();
+      // Set new active
+      currentTrigger.tabButton.setAttribute('aria-expanded', true);
+      currentTrigger.accordionButton.setAttribute('aria-expanded', true);
+      currentTrigger.accordionButton.setAttribute('aria-disabled', true);
+      currentTrigger.tab.setAttribute('active', '');
+      currentTrigger.tabButton.removeAttribute('tabindex');
+      this.dispatchCustomEvent('joomla.tab.show', this.view === 'tabs' ? currentTrigger.tabButton : currentTrigger.accordionButton, this.previousActive);
+      if (state) {
+        if (this.view === 'tabs') {
+          currentTrigger.tabButton.focus();
+        } else {
+          currentTrigger.accordionButton.focus();
+        }
+      }
+      if (state) this.saveState(currentTrigger.tab.id);
+      this.dispatchCustomEvent('joomla.tab.shown', this.view === 'tabs' ? currentTrigger.tabButton : currentTrigger.accordionButton, this.previousActive);
+    }
+  }
+
+  // Create navigation elements for inserted tabs
+  createNavs(tab) {
+    if ((tab instanceof Element && tab.tagName.toLowerCase() !== 'joomla-tab-element') || ![].some.call(this.children, (el) => el === tab).length || !tab.getAttribute('name') || !tab.getAttribute('id')) return;
+    const tabs = [].slice.call(this.children).filter((el) => el.tagName.toLowerCase() === 'joomla-tab-element');
+    const index = tabs.findIndex((tb) => tb === tab);
+
+    // Create Accordion button
+    const accordionButton = document.createElement('button');
+    accordionButton.setAttribute('aria-expanded', !!tab.hasAttribute('active'));
+    accordionButton.setAttribute('aria-controls', tab.id);
+    accordionButton.setAttribute('type', 'button');
+    accordionButton.innerHTML = `<span class="accordion-title">${tab.getAttribute('name')}<span class="accordion-icon"></span></span>`;
+    tab.insertAdjacentElement('beforebegin', accordionButton);
+
+    if (this.view === 'tabs') {
+      accordionButton.setAttribute('hidden', '');
+    }
+
+    accordionButton.addEventListener('click', this.activateTab);
+
+    // Create tab button
+    const tabButton = document.createElement('button');
+    tabButton.setAttribute('aria-expanded', !!tab.hasAttribute('active'));
+    tabButton.setAttribute('aria-controls', tab.id);
+    tabButton.setAttribute('role', 'tab');
+    tabButton.setAttribute('type', 'button');
+    tabButton.innerHTML = `${tab.getAttribute('name')}`;
+    if (tabs.length - 1 === index) {
+      // last
+      this.tabButtonContainer.appendChild(tabButton);
+      this.tabs.push({
+        tab,
+        tabButton,
+        accordionButton,
+      });
+    } else if (index === 0) {
+      // first
+      this.tabButtonContainer.insertAdjacentElement('afterbegin', tabButton);
+      this.tabs.slice(0, 0, {
+        tab,
+        tabButton,
+        accordionButton,
+      });
+    } else {
+      // Middle
+      this.tabs[index - 1].tabButton.insertAdjacentElement('afterend', tabButton);
+      this.tabs.slice(index - 1, 0, {
+        tab,
+        tabButton,
+        accordionButton,
+      });
+    }
+
+    tabButton.addEventListener('click', this.activateTab);
+  }
+
+  // Remove navigation elements for removed tabs
+  removeNavs(tab) {
+    if ((tab instanceof Element && tab.tagName.toLowerCase() !== 'joomla-tab-element') || ![].some.call(this.children, (el) => el === tab).length || !tab.getAttribute('name') || !tab.getAttribute('id')) return;
+    const accordionButton = tab.previousSilbingElement;
+    if (accordionButton && accordionButton.tagName.toLowerCase() === 'button') {
+      accordionButton.removeEventListener('click', this.keyBehaviour);
+      accordionButton.parentNode.removeChild(accordionButton);
+    }
+    const tabButton = this.tabButtonContainer.querySelector(`[aria-controls=${accordionButton.id}]`);
+    if (tabButton) {
+      tabButton.removeEventListener('click', this.keyBehaviour);
+      tabButton.parentNode.removeChild(tabButton);
+    }
+    const index = this.tabs.findIndex((tb) => tb.tabs === tab);
+    if (index - 1 === 0) {
+      this.tabs.shift();
+    } else if (index - 1 === this.tabs.length) {
+      this.tabs.pop();
+    } else {
+      this.tabs.splice(index - 1, 1);
+    }
+  }
+
+  /** Method to convert tabs to accordion and vice versa depending on screen size */
+  checkView() {
+    if (!this.breakpoint) {
+      return;
+    }
+
+    if (document.body.getBoundingClientRect().width > this.breakpoint) {
+      if (this.view === 'tabs') {
         return;
       }
-
-      // catch left/right and up/down arrow key events
-      switch (e.keyCode) {
-        case 37:
-        case 38:
-          previousTabItem.querySelector('a').click();
-          previousTabItem.querySelector('a').focus();
-          e.preventDefault();
-          break;
-        case 39:
-        case 40:
-          nextTabItem.querySelector('a').click();
-          nextTabItem.querySelector('a').focus();
-          e.preventDefault();
-          break;
-        default:
-          break;
+      this.tabButtonContainer.removeAttribute('hidden');
+      this.tabs.map((tab) => {
+        tab.accordionButton.setAttribute('hidden', '');
+        tab.accordionButton.setAttribute('role', 'tabpanel');
+        if (tab.accordionButton.getAttribute('aria-expanded') === 'true') {
+          tab.tab.setAttribute('active', '');
+        }
+        return tab;
+      });
+      this.setAttribute('view', 'tabs');
+    } else {
+      if (this.view === 'accordion') {
+        return;
       }
-    };
-    this.querySelector('ul').addEventListener('keyup', keyBehaviour);
+      this.tabButtonContainer.setAttribute('hidden', '');
+      this.tabs.map((tab) => {
+        tab.accordionButton.removeAttribute('hidden');
+        tab.accordionButton.setAttribute('role', 'region');
+        return tab;
+      });
+      this.setAttribute('view', 'accordion');
+    }
   }
 
   getStorageKey() {
@@ -340,54 +423,59 @@ customElements.define('joomla-tab', class extends HTMLElement {
     sessionStorage.setItem(storageKey, value);
   }
 
-  /** Method to convert tabs to accordion and vice versa depending on screen size */
-  checkView(element) {
-    const el = element;
-    const nav = el.querySelector('ul');
-    const tabsEl = [];
-    if (document.body.getBoundingClientRect().width > 920) {
-      if (this.view === 'tabs') {
-        return;
-      }
-      el.view = 'tabs';
-      // convert to tabs
-      const panels = [].slice.call(nav.querySelectorAll('section'));
+  activateFromState() {
+    this.hasNested = this.querySelector('joomla-tab') instanceof HTMLElement;
+    // Use the sessionStorage state!
+    const href = sessionStorage.getItem(this.getStorageKey());
+    if (href) {
+      const currentTabIndex = this.tabs.findIndex((tab) => tab.tab.id === href);
 
-      // remove the cascaded tabs
-      for (let i = 0, l = panels.length; i < l; ++i) {
-        if (panels[i].parentNode.parentNode.parentNode === el) {
-          tabsEl.push(panels[i]);
-        }
-      }
+      if (currentTabIndex >= 0) {
+        this.activateTab(currentTabIndex, false);
+      } else if (this.hasNested) {
+        const childTabs = this.querySelector('joomla-tab');
+        if (childTabs) {
+          const activeTabs = [].slice.call(this.querySelectorAll('joomla-tab-element'))
+            .reverse()
+            .filter((activeTabEl) => activeTabEl.id === href);
+          if (activeTabs.length) {
+            // Activate the deepest tab
+            let activeTab = activeTabs[0].closest('joomla-tab');
+            [].slice.call(activeTab.querySelectorAll('joomla-tab-element'))
+              .forEach((tabEl) => {
+                tabEl.removeAttribute('active');
+                if (tabEl.id === href) {
+                  tabEl.setAttribute('active', '');
+                }
+              });
 
-      if (tabsEl.length) {
-        tabsEl.forEach((panel) => {
-          el.appendChild(panel);
-        });
-      }
-    } else {
-      if (this.view === 'accordion') {
-        return;
-      }
-      el.view = 'accordion';
+            // Activate all parent tabs
+            while (activeTab.parentNode.closest('joomla-tab') !== this) {
+              const parentTabContainer = activeTab.closest('joomla-tab');
+              const parentTabEl = activeTab.parentNode.closest('joomla-tab-element');
+              [].slice.call(parentTabContainer.querySelectorAll('joomla-tab-element'))
+                // eslint-disable-next-line no-loop-func
+                .forEach((tabEl) => {
+                  tabEl.removeAttribute('active');
+                  if (parentTabEl === tabEl) {
+                    tabEl.setAttribute('active', '');
+                    activeTab = parentTabEl;
+                  }
+                });
+            }
 
-      // convert to accordion
-      const panels = [].slice.call(el.querySelectorAll('section'));
+            [].slice.call(this.children)
+              .filter((el) => el.tagName.toLowerCase() === 'joomla-tab-element')
+              .forEach((tabEl) => {
+                tabEl.removeAttribute('active');
+                const isActiveChild = tabEl.querySelector('joomla-tab-element[active]');
 
-      // remove the cascaded tabs
-      for (let i = 0, l = panels.length; i < l; ++i) {
-        if (panels[i].parentNode === el) {
-          tabsEl.push(panels[i]);
-        }
-      }
-
-      if (tabsEl.length) {
-        tabsEl.forEach((panel) => {
-          const link = el.querySelector(`a[aria-controls="${panel.id}"]`);
-          if (link.parentNode.parentNode === el.firstElementChild) {
-            link.parentNode.appendChild(panel);
+                if (isActiveChild) {
+                  this.activateTab(tabEl, false);
+                }
+              });
           }
-        });
+        }
       }
     }
   }
@@ -397,6 +485,7 @@ customElements.define('joomla-tab', class extends HTMLElement {
     const OriginalCustomEvent = new CustomEvent(eventName, { bubbles: true, cancelable: true });
     OriginalCustomEvent.relatedTarget = related;
     element.dispatchEvent(OriginalCustomEvent);
-    element.removeEventListener(eventName, element);
   }
-});
+}
+
+customElements.define('joomla-tab', TabsElement);

@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+- Refactor of the tabs element
+  - Logic rewritten so the tabs won't be reappended (no more moving elements)
+  - Added `breakpoint` attribute for controling the transition from tabs/accordion
+  - Added tests
 
 ## 0.1.0
 - Rewrote the scss to use CSS custom properties than preprocessed SCSS variables
