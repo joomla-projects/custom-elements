@@ -67,7 +67,6 @@ customElements.define('joomla-tip', class extends HTMLElement {
       }
     });
 
-    this.spanElement.innerHTML = '';
     this.spanElement.innerHTML = `<span class="toggletip-bubble ${this.position}">${this.tip}</span>`;
   }
 
