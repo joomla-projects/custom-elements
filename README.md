@@ -5,11 +5,11 @@ Build Status
 
 | SauceLabs tests | GreenKeeper | Webcomponents.org |
 | ------------- | ------------- | ------------- |
-| [[![Build Status](https://app.saucelabs.com/buildstatus/joomla)](https://app.saucelabs.com/u/joomla) | [![Greenkeeper badge](https://badges.greenkeeper.io/joomla-projects/custom-elements.svg)](https://greenkeeper.io/) | [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/joomla-projects/custom-elements) |
+| [![Sauce Test Status](https://app.saucelabs.com/buildstatus/joomla-custom-elements)](https://app.saucelabs.com/u/joomla-custom-elements) | [![Greenkeeper badge](https://badges.greenkeeper.io/joomla-projects/custom-elements.svg)](https://greenkeeper.io/) | [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/joomla-projects/custom-elements) |
 
 | Sauce Labs |
 | ------------- |
-| [![Build Status](https://saucelabs.com/browser-matrix/joomla-custom-elements.svg)](https://saucelabs.com/beta/builds/ea93394ca1344c6aa388509849383c6e) |
+| [![Browser Matrix](https://app.saucelabs.com/browser-matrix/joomla-custom-elements.svg)](https://app.saucelabs.com/u/joomla-custom-elements) |
 
 ### UI components using modern technologies
 
