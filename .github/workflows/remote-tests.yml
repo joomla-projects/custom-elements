@@ -1,10 +1,6 @@
 name: SauceLabs Browser Testing
 
-on:
-  pull_request:
-    branches:
-      - master
-    types: [closed]
+on: [push, pull_request]
 
 jobs:
   test:
