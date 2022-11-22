@@ -7,9 +7,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
-    - uses: actions/setup-node@v1
+    - uses: actions/setup-node@v3
       name: Set up NodeJS
       with:
         node-version: 18
@@ -34,7 +34,7 @@ jobs:
 
     # Remove the label
     - name: removelabel
-      uses: buildsville/add-remove-label@v1
+      uses: buildsville/add-remove-label@v2
       with:
         token: ${{secrets.GITHUB_TOKEN}}
         label: runTests
