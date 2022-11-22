@@ -1,4 +1,4 @@
-customElements.define('joomla-tip', class extends HTMLElement {
+class TipElement extends HTMLElement {
   /* Attributes to monitor */
   static get observedAttributes() { return ['type', 'label', 'tip', 'text', 'position']; }
 
@@ -77,4 +77,5 @@ customElements.define('joomla-tip', class extends HTMLElement {
     this.dispatchEvent(OriginalCustomEvent);
     this.removeEventListener(eventName, this);
   }
-});
+}
+customElements.define('joomla-tip', TipElement);
