@@ -5,7 +5,7 @@ defaults:
   timeout: 15m
 sauce:
   region: us-west-1
-  concurrency: 10 # Controls how many suites are executed at the same time.
+  concurrency: 1 # Controls how many suites are executed at the same time.
   metadata:
     tags:
       - custom elements
