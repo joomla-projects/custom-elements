@@ -1,4 +1,3 @@
-// @ts-check
 const { devices, PlaywrightTestConfig } = require('@playwright/test');
 
 /**
@@ -15,9 +14,8 @@ const { devices, PlaywrightTestConfig } = require('@playwright/test');
 const config = {
   webServer: {
     command: 'npm run start',
-    url: 'http://localhost:3000/',
-    timeout: 120 * 1000,
-    reuseExistingServer: !process.env.CI,
+    port: 3000,
+    // reuseExistingServer: !process.env.CI,
   },
   testDir: './tests',
   /* Maximum time one test can run for. */
@@ -42,11 +40,11 @@ const config = {
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     baseURL: 'http://localhost:3000/',
-    headless: false,
-    viewport: { width: 1280, height: 720 },
-    ignoreHTTPSErrors: true,
-    video: 'on-first-retry',
-    actionTimeout: 0,
+    headless: !process.env.CI,
+    // viewport: { width: 1280, height: 720 },
+    // ignoreHTTPSErrors: true,
+    // video: 'on-first-retry',
+    // actionTimeout: 0,
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
   },
