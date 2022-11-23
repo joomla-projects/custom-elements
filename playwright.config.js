@@ -15,7 +15,7 @@ const config = {
   webServer: {
     command: 'npm run start',
     port: 3000,
-    // reuseExistingServer: !process.env.CI,
+    reuseExistingServer: true,
   },
   testDir: './tests',
   /* Maximum time one test can run for. */
