@@ -34,6 +34,7 @@ class TabsElement extends HTMLElement {
     this.activateTab = this.activateTab.bind(this);
     this.deactivateTabs = this.deactivateTabs.bind(this);
     this.checkView = this.checkView.bind(this);
+    this.ensureStruct = this.ensureStruct.bind(this);
 
     this.observer = new MutationObserver(this.onMutation);
     this.observer.observe(this, { attributes: false, childList: true, subtree: true });
@@ -51,15 +52,10 @@ class TabsElement extends HTMLElement {
 
     // get tab elements
     this.tabsElements = [].slice.call(this.children).filter((el) => el.tagName.toLowerCase() === 'joomla-tab-element');
-
-    // Sanity checks
-    if (!this.tabsElements.length) {
-      return;
-    }
-
     this.isNested = this.parentNode.closest('joomla-tab') instanceof HTMLElement;
 
     this.hydrate();
+
     if (this.hasAttribute('recall') && !this.isNested) {
       this.activateFromState();
     }
@@ -74,7 +70,7 @@ class TabsElement extends HTMLElement {
     }
 
     // If no active tab activate the first one
-    if (!this.tabs.filter((tab) => tab.tab.hasAttribute('active')).length) {
+    if (this.tabs.length && !this.tabs.filter((tab) => tab.tab.hasAttribute('active')).length) {
       this.activateTab(this.tabs[0].tab, false);
     }
 
@@ -83,18 +79,15 @@ class TabsElement extends HTMLElement {
     if (this.breakpoint) {
       // Convert tabs to accordian
       this.checkView();
-      window.addEventListener('resize', () => {
-        this.checkView();
-      });
+      window.addEventListener('resize', this.checkView);
     }
   }
 
   /* Lifecycle, element removed from the DOM */
   disconnectedCallback() {
-    this.tabs.map((tab) => {
+    this.tabs.forEach((tab) => {
       tab.tabButton.removeEventListener('click', this.activateTab);
       tab.accordionButton.removeEventListener('click', this.activateTab);
-      return tab;
     });
     this.removeEventListener('keyup', this.keyBehaviour);
   }
@@ -120,14 +113,7 @@ class TabsElement extends HTMLElement {
   }
 
   hydrate() {
-    // Ensure the tab links container exists
-    this.tabButtonContainer = document.createElement('div');
-    this.tabButtonContainer.setAttribute('role', 'tablist');
-    this.insertAdjacentElement('afterbegin', this.tabButtonContainer);
-
-    if (this.view === 'accordion') {
-      this.tabButtonContainer.setAttribute('hidden', '');
-    }
+    this.ensureStruct();
 
     this.tabsElements.map((tab) => {
       // Create Accordion button
@@ -303,7 +289,11 @@ class TabsElement extends HTMLElement {
 
   // Create navigation elements for inserted tabs
   createNavs(tab) {
-    if ((tab instanceof Element && tab.tagName.toLowerCase() !== 'joomla-tab-element') || ![].some.call(this.children, (el) => el === tab).length || !tab.getAttribute('name') || !tab.getAttribute('id')) return;
+    if (!(tab instanceof HTMLElement) || (tab.tagName && tab.tagName.toLowerCase() !== 'joomla-tab-element') ) return;
+    if (!tab.getAttribute('name') || !tab.getAttribute('id')) return;
+    // if ((tab instanceof Element && tab.tagName.toLowerCase() !== 'joomla-tab-element') || ![].some.call(this.children, (el) => el === tab).length || !tab.getAttribute('name') || !tab.getAttribute('id')) return;
+
+    this.ensureStruct();
     const tabs = [].slice.call(this.children).filter((el) => el.tagName.toLowerCase() === 'joomla-tab-element');
     const index = tabs.findIndex((tb) => tb === tab);
 
@@ -480,6 +470,18 @@ class TabsElement extends HTMLElement {
     }
   }
 
+  ensureStruct() {
+    if(this.tabButtonContainer) return;
+
+    // Ensure the tab links container exists
+    this.tabButtonContainer = document.createElement('div');
+    this.tabButtonContainer.setAttribute('role', 'tablist');
+    this.insertAdjacentElement('afterbegin', this.tabButtonContainer);
+
+    if (this.view === 'accordion') {
+      this.tabButtonContainer.setAttribute('hidden', '');
+    }
+  }
   /* Method to dispatch events */
   dispatchCustomEvent(eventName, element, related) {
     const OriginalCustomEvent = new CustomEvent(eventName, { bubbles: true, cancelable: true });

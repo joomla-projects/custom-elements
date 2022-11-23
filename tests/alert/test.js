@@ -1,99 +1,93 @@
-describe('<joomla-alert-levels>', function(){
-  beforeEach(function() {
-    fixture.setBase('tests/alert');
-    fixture.load('alert.html', true);
-  });
-  afterEach(function() {
-    fixture.cleanup();
-  });
+import { expect, test } from '@playwright/test';
 
-  it('Custom Element script is loaded', function(){
-    expect(customElements.get('joomla-alert')).toBeTrue;
+const url = 'http://localhost:3000/tests/alert/alert.html';
+
+test.describe('<joomla-alert-levels>', () => {
+  test('Custom Element script is loaded', async ({ page }) => {
+    await page.goto(url);
+    await expect(page.locator('joomla-alert.levels')).toBeDefined();
   });
 
-  it('Has type info', function() {
-    const type = fixture.el.firstElementChild.getAttribute('type')
-
-    expect(type).toEqual('info');
+  test('Has type info', async ({ page }) => {
+    await page.goto(url);
+    await expect(page.locator('joomla-alert.levels')).toHaveAttribute('type', 'info');
   });
 
-  it('Respects type attribute change, any unsupported value', function() {
-    fixture.el.firstElementChild.setAttribute('type', 'unknown');
-    const type = fixture.el.firstElementChild.getAttribute('type');
-
-    expect(type).toEqual('info');
+  test('Respects type attribute change, any unsupported value', async ({ page }) => {
+    await page.goto(url);
+    const element = await page.locator('joomla-alert.levels');
+    await element.evaluate(node => node.setAttribute('type', 'unknown'));
+    await expect(element).toHaveAttribute('type', 'info');
   });
 
-  it('Respects type attribute change, warning', function() {
-    fixture.el.firstElementChild.setAttribute('type', 'warning');
-    const type = fixture.el.firstElementChild.getAttribute('type');
-
-    expect(type).toEqual('warning');
+  test('Respects type attribute change, warning', async ({ page }) => {
+    await page.goto(url);
+    const element = page.locator('joomla-alert.levels');
+    await element.evaluate(node => node.setAttribute('type', 'warning'));
+    await expect(element).toHaveAttribute('type', 'warning');
   });
 
-  it('Respects type attribute change, danger', function() {
-    fixture.el.firstElementChild.setAttribute('type', 'danger');
-    const type = fixture.el.firstElementChild.getAttribute('type');
-
-    expect(type).toEqual('danger');
+  test('Respects type attribute change, danger', async ({ page }) => {
+    await page.goto(url);
+    const element = page.locator('joomla-alert.levels');
+    await element.evaluate(node => node.setAttribute('type', 'danger'));
+    await expect(element).toHaveAttribute('type', 'danger');
   });
 
-  it('Respects type attribute change, success', function() {
-    fixture.el.firstElementChild.setAttribute('type', 'success');
-    const type = fixture.el.firstElementChild.getAttribute('type');
-
-    expect(type).toEqual('success');
+  test('Respects type attribute change, success', async ({ page }) => {
+    await page.goto(url);
+    const element = page.locator('joomla-alert.levels');
+    await element.evaluate(node => node.setAttribute('type', 'success'));
+    await expect(element).toHaveAttribute('type', 'success');
   });
 
-  it('Has the right text', function() {
-    const type = fixture.el.firstElementChild.querySelector('#text').innerText;
-
-    expect(type).toEqual('Has some text');
+  test('Has the right text', async ({ page }) => {
+    await page.goto(url);
+    const element = page.locator('joomla-alert.levels p');
+    const text = await element.evaluate(node => node.innerText)
+    await expect(text).toEqual('Has some text');
   });
 });
 
-describe('<joomla-alert-dismiss>', function(){
-  beforeEach(function() {
-    fixture.setBase('tests/alert');
-    fixture.load('alert.html', true);
-  });
-  afterEach(function() {
-    fixture.cleanup();
-  });
+test.describe('<joomla-alert-dismiss>', () => {
 
-  it('Has close button', function() {
-    const type = fixture.el.firstElementChild.hasAttribute('dismiss');
-
-    expect(type).toBeTrue;
+  test('Has a close button', async ({ page }) => {
+    await page.goto(url);
+    const element = await page.locator('joomla-alert.dismiss');
+    const dismiss = await element.evaluate(node => node.hasAttribute('dismiss'));
+    await expect(dismiss).toBeTruthy();
   });
 
-  it('Respects button attribute change, false', function() {
-    const el = fixture.el.firstElementChild;
-    el.setAttribute('dismiss', 'false');
-    const type = el.getAttribute('dismiss');
-    const closeBtn = el.querySelectorAll('.joomla-alert--close');
-    const close = el.querySelectorAll('button');
-    expect(type).toBe('false');
-    expect(closeBtn.length === 0).toBeTrue;
-    expect(close.length === 0).toBeTrue();
+  test('Respects button attribute change, false', async ({ page }) => {
+    await page.goto(url);
+    const element = await page.locator('joomla-alert.dismiss');
+    await element.evaluate(node => node.setAttribute('dismiss', 'false'));
+    const dismiss = await element.evaluate(node => node.getAttribute('dismiss'));
+    const button = await page.locator('joomla-alert.dismiss .joomla-alert--close');
+    const buttons = await page.locator('joomla-alert.dismiss > button');
+    await expect(dismiss).toEqual('false');
+    await expect(buttons).toBeUndefined;
+    await expect(button).toBeUndefined;
   });
 
-  it('Respects button attribute change, true', function() {
-    const el = fixture.el.firstElementChild;
-    el.setAttribute('dismiss', 'true');
-    const type = el.getAttribute('dismiss');
-    const closeBtn = el.querySelectorAll('.joomla-alert--close');
-    const close = el.querySelectorAll('button');
-    expect(type).toBe('true');
-    expect(closeBtn.length === 1).toBeTrue;
-    expect(close.length === 1).toBeTrue();
+  test('Respects button attribute change, true', async ({ page }) => {
+    await page.goto(url);
+    const element = await page.locator('joomla-alert.dismiss');
+    await element.evaluate(node => node.setAttribute('dismiss', 'true'));
+    const dismiss = await element.evaluate(node => node.getAttribute('dismiss'));
+    const button = await page.locator('joomla-alert.dismiss > button');
+    const isBtn = await button.evaluate(node => node instanceof HTMLButtonElement);
+    await expect(dismiss).toEqual('true');
+    await expect(isBtn).toBeTruthy();
   });
 
-  it('Method close removes the alert', function() {
-    const el = fixture.el.firstElementChild;
-    el.close();
-    const type = el.querySelector('joomla-alert');
-
-    expect(type).toBe(null);
+  test('Method close removes the alert', async ({ page }) => {
+    let ex;
+    await page.goto(url);
+    const element = await page.locator('joomla-alert.dismiss');
+    page.waitForTimeout(1050)
+    await element.evaluate(node => node.close());
+    await (await page.locator('body')).evaluate(node => { ex = node.querySelector('joomla-alert.dismiss')});
+    await expect(ex).toBeUndefined();
   });
 });

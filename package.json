@@ -23,6 +23,7 @@
   "devDependencies": {
     "@babel/core": "7.20.2",
     "@babel/preset-env": "7.20.2",
+    "@playwright/test": "^1.28.0",
     "@rollup/plugin-babel": "6.0.2",
     "@rollup/plugin-node-resolve": "15.0.1",
     "@rollup/plugin-terser": "0.1.0",
@@ -33,13 +34,7 @@
     "eslint-config-airbnb": "19.0.4",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-plugin-import": "2.26.0",
-    "karma": "6.4.1",
-    "karma-chrome-launcher": "3.1.1",
-    "karma-fixture": "0.2.6",
-    "karma-html2js-preprocessor": "1.1.0",
-    "karma-jasmine": "5.1.0",
-    "karma-sauce-launcher": "4.1.4",
-    "lerna": "6.0.3",
+    "playwright": "^1.28.0",
     "postcss": "8.4.19",
     "postcss-scss": "^4.0.5",
     "rimraf": "3.0.2",
@@ -47,6 +42,8 @@
     "rollup-plugin-sass": "1.12.16",
     "rollup-plugin-scss": "4.0.0",
     "sass": "1.56.1",
+    "saucectl": "^0.113.6",
+    "serve": "^14.1.2",
     "stylelint": "14.15.0",
     "stylelint-config-standard": "29.0.0",
     "stylelint-order": "5.0.0",
@@ -57,8 +54,9 @@
     "lint:js": "node ./node_modules/eslint/bin/eslint.js src",
     "lint:css": "stylelint --config .stylelintrc.json \"src/scss/**/*.scss\"",
     "lint": "npm run lint:css && npm run lint:js",
-    "test": "node node_modules/karma/bin/karma start --single-run --browsers ChromeHeadless karma.conf.js",
-    "ci-test": "node node_modules/karma/bin/karma start karma-ci.conf.js --single-run",
-    "browserlist:update": "npx browserslist@latest --update-db"
+    "tests": "npx playwright test ",
+    "ci-tests": "saucectl run",
+    "browserlist:update": "npx browserslist@latest --update-db",
+    "start": "serve"
   }
 }

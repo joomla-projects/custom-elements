@@ -45,6 +45,7 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
     _this.activateTab = _this.activateTab.bind(_assertThisInitialized(_this));
     _this.deactivateTabs = _this.deactivateTabs.bind(_assertThisInitialized(_this));
     _this.checkView = _this.checkView.bind(_assertThisInitialized(_this));
+    _this.ensureStruct = _this.ensureStruct.bind(_assertThisInitialized(_this));
     _this.observer = new MutationObserver(_this.onMutation);
     _this.observer.observe(_assertThisInitialized(_this), {
       attributes: false,
@@ -90,7 +91,6 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
   }, {
     key: "connectedCallback",
     value: function connectedCallback() {
-      var _this2 = this;
       if (!this.orientation || this.orientation && !['horizontal', 'vertical'].includes(this.orientation)) {
         this.orientation = 'horizontal';
       }
@@ -102,11 +102,6 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
       this.tabsElements = [].slice.call(this.children).filter(function (el) {
         return el.tagName.toLowerCase() === 'joomla-tab-element';
       });
-
-      // Sanity checks
-      if (!this.tabsElements.length) {
-        return;
-      }
       this.isNested = this.parentNode.closest('joomla-tab') instanceof HTMLElement;
       this.hydrate();
       if (this.hasAttribute('recall') && !this.isNested) {
@@ -125,7 +120,7 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
       }
 
       // If no active tab activate the first one
-      if (!this.tabs.filter(function (tab) {
+      if (this.tabs.length && !this.tabs.filter(function (tab) {
         return tab.tab.hasAttribute('active');
       }).length) {
         this.activateTab(this.tabs[0].tab, false);
@@ -134,9 +129,7 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
       if (this.breakpoint) {
         // Convert tabs to accordian
         this.checkView();
-        window.addEventListener('resize', function () {
-          _this2.checkView();
-        });
+        window.addEventListener('resize', this.checkView);
       }
     }
 
@@ -144,11 +137,10 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
   }, {
     key: "disconnectedCallback",
     value: function disconnectedCallback() {
-      var _this3 = this;
-      this.tabs.map(function (tab) {
-        tab.tabButton.removeEventListener('click', _this3.activateTab);
-        tab.accordionButton.removeEventListener('click', _this3.activateTab);
-        return tab;
+      var _this2 = this;
+      this.tabs.forEach(function (tab) {
+        tab.tabButton.removeEventListener('click', _this2.activateTab);
+        tab.accordionButton.removeEventListener('click', _this2.activateTab);
       });
       this.removeEventListener('keyup', this.keyBehaviour);
     }
@@ -179,14 +171,8 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
   }, {
     key: "hydrate",
     value: function hydrate() {
-      var _this4 = this;
-      // Ensure the tab links container exists
-      this.tabButtonContainer = document.createElement('div');
-      this.tabButtonContainer.setAttribute('role', 'tablist');
-      this.insertAdjacentElement('afterbegin', this.tabButtonContainer);
-      if (this.view === 'accordion') {
-        this.tabButtonContainer.setAttribute('hidden', '');
-      }
+      var _this3 = this;
+      this.ensureStruct();
       this.tabsElements.map(function (tab) {
         // Create Accordion button
         var accordionButton = document.createElement('button');
@@ -195,10 +181,10 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
         accordionButton.setAttribute('type', 'button');
         accordionButton.innerHTML = "<span class=\"accordion-title\">".concat(tab.getAttribute('name'), "<span class=\"accordion-icon\"></span></span>");
         tab.insertAdjacentElement('beforebegin', accordionButton);
-        if (_this4.view === 'tabs') {
+        if (_this3.view === 'tabs') {
           accordionButton.setAttribute('hidden', '');
         }
-        accordionButton.addEventListener('click', _this4.activateTab);
+        accordionButton.addEventListener('click', _this3.activateTab);
 
         // Create tab button
         var tabButton = document.createElement('button');
@@ -207,14 +193,14 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
         tabButton.setAttribute('role', 'tab');
         tabButton.setAttribute('type', 'button');
         tabButton.innerHTML = "".concat(tab.getAttribute('name'));
-        _this4.tabButtonContainer.appendChild(tabButton);
-        tabButton.addEventListener('click', _this4.activateTab);
-        if (_this4.view === 'tabs') {
+        _this3.tabButtonContainer.appendChild(tabButton);
+        tabButton.addEventListener('click', _this3.activateTab);
+        if (_this3.view === 'tabs') {
           tab.setAttribute('role', 'tabpanel');
         } else {
           tab.setAttribute('role', 'region');
         }
-        _this4.tabs.push({
+        _this3.tabs.push({
           tab: tab,
           tabButton: tabButton,
           accordionButton: accordionButton
@@ -227,7 +213,7 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
   }, {
     key: "onMutation",
     value: function onMutation(mutationsList) {
-      var _this5 = this;
+      var _this4 = this;
       // eslint-disable-next-line no-restricted-syntax
       var _iterator = _createForOfIteratorHelper(mutationsList),
         _step;
@@ -237,7 +223,7 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
           if (mutation.type === 'childList') {
             if (mutation.addedNodes.length) {
               [].slice.call(mutation.addedNodes).map(function (inserted) {
-                return _this5.createNavs(inserted);
+                return _this4.createNavs(inserted);
               });
               // Add the tab buttons
             }
@@ -245,7 +231,7 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
             if (mutation.removedNodes.length) {
               // Remove the tab buttons
               [].slice.call(mutation.addedNodes).map(function (inserted) {
-                return _this5.removeNavs(inserted);
+                return _this4.removeNavs(inserted);
               });
             }
           }
@@ -312,18 +298,18 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
   }, {
     key: "deactivateTabs",
     value: function deactivateTabs() {
-      var _this6 = this;
+      var _this5 = this;
       this.tabs.map(function (tabObj) {
         tabObj.accordionButton.removeAttribute('aria-disabled');
         tabObj.tabButton.removeAttribute('aria-expanded');
         tabObj.accordionButton.setAttribute('aria-expanded', false);
         if (tabObj.tab.hasAttribute('active')) {
-          _this6.dispatchCustomEvent('joomla.tab.hide', _this6.view === 'tabs' ? tabObj.tabButton : tabObj.accordionButton, _this6.previousActive);
+          _this5.dispatchCustomEvent('joomla.tab.hide', _this5.view === 'tabs' ? tabObj.tabButton : tabObj.accordionButton, _this5.previousActive);
           tabObj.tab.removeAttribute('active');
           tabObj.tab.setAttribute('tabindex', '-1');
           // Emit hidden event
-          _this6.dispatchCustomEvent('joomla.tab.hidden', _this6.view === 'tabs' ? tabObj.tabButton : tabObj.accordionButton, _this6.previousActive);
-          _this6.previousActive = _this6.view === 'tabs' ? tabObj.tabButton : tabObj.accordionButton;
+          _this5.dispatchCustomEvent('joomla.tab.hidden', _this5.view === 'tabs' ? tabObj.tabButton : tabObj.accordionButton, _this5.previousActive);
+          _this5.previousActive = _this5.view === 'tabs' ? tabObj.tabButton : tabObj.accordionButton;
         }
         return tabObj;
       });
@@ -331,12 +317,12 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
   }, {
     key: "activateTab",
     value: function activateTab(input) {
-      var _this7 = this;
+      var _this6 = this;
       var state = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
       var currentTrigger;
       if (input.currentTarget) {
         currentTrigger = this.tabs.find(function (tab) {
-          return (_this7.view === 'tabs' ? tab.tabButton : tab.accordionButton) === input.currentTarget;
+          return (_this6.view === 'tabs' ? tab.tabButton : tab.accordionButton) === input.currentTarget;
         });
       } else if (input instanceof HTMLElement) {
         currentTrigger = this.tabs.find(function (tab) {
@@ -383,9 +369,11 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
   }, {
     key: "createNavs",
     value: function createNavs(tab) {
-      if (tab instanceof Element && tab.tagName.toLowerCase() !== 'joomla-tab-element' || ![].some.call(this.children, function (el) {
-        return el === tab;
-      }).length || !tab.getAttribute('name') || !tab.getAttribute('id')) return;
+      if (!(tab instanceof HTMLElement) || tab.tagName && tab.tagName.toLowerCase() !== 'joomla-tab-element') return;
+      if (!tab.getAttribute('name') || !tab.getAttribute('id')) return;
+      // if ((tab instanceof Element && tab.tagName.toLowerCase() !== 'joomla-tab-element') || ![].some.call(this.children, (el) => el === tab).length || !tab.getAttribute('name') || !tab.getAttribute('id')) return;
+
+      this.ensureStruct();
       var tabs = [].slice.call(this.children).filter(function (el) {
         return el.tagName.toLowerCase() === 'joomla-tab-element';
       });
@@ -517,7 +505,7 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
   }, {
     key: "activateFromState",
     value: function activateFromState() {
-      var _this8 = this;
+      var _this7 = this;
       this.hasNested = this.querySelector('joomla-tab') instanceof HTMLElement;
       // Use the sessionStorage state!
       var href = sessionStorage.getItem(this.getStorageKey());
@@ -566,7 +554,7 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
                 tabEl.removeAttribute('active');
                 var isActiveChild = tabEl.querySelector('joomla-tab-element[active]');
                 if (isActiveChild) {
-                  _this8.activateTab(tabEl, false);
+                  _this7.activateTab(tabEl, false);
                 }
               });
             }
@@ -574,7 +562,19 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
         }
       }
     }
+  }, {
+    key: "ensureStruct",
+    value: function ensureStruct() {
+      if (this.tabButtonContainer) return;
 
+      // Ensure the tab links container exists
+      this.tabButtonContainer = document.createElement('div');
+      this.tabButtonContainer.setAttribute('role', 'tablist');
+      this.insertAdjacentElement('afterbegin', this.tabButtonContainer);
+      if (this.view === 'accordion') {
+        this.tabButtonContainer.setAttribute('hidden', '');
+      }
+    }
     /* Method to dispatch events */
   }, {
     key: "dispatchCustomEvent",
