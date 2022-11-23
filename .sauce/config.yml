@@ -2,6 +2,7 @@ apiVersion: v1alpha
 kind: playwright
 defaults:
   mode: sauce
+  timeout: 15m
 sauce:
   region: us-west-1
   concurrency: 10 # Controls how many suites are executed at the same time.
