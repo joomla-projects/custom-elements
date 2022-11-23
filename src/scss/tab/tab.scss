@@ -38,15 +38,15 @@ joomla-tab[view=accordion] > div[role=tablist] {
 }
 
 joomla-tab button[role=tab] {
-  appearance: none;
   position: relative;
   display: block;
   padding: .75em 1em;
   color: #0d1321;
-  background-color: transparent;
   text-decoration: none;
-  box-shadow: 1px 0 0 rgba(0, 0, 0, .05);
+  background-color: transparent;
   border: unset;
+  box-shadow: 1px 0 0 rgba(0, 0, 0, .05);
+  appearance: none;
 }
 
 joomla-tab button[role=tab][aria-expanded="true"] {
@@ -104,15 +104,15 @@ joomla-tab[orientation=vertical] > div[role=tablist] button:last-of-type {
 }
 
 joomla-tab[orientation=vertical] > div[role=tablist] button {
-  appearance: none;
   position: relative;
   display: block;
   padding: .75em 1em;
   color: #0d1321;
-  background-color: transparent;
   text-decoration: none;
+  background-color: transparent;
   border-bottom: 1px solid #ddd;
   box-shadow: none;
+  appearance: none;
 }
 
 joomla-tab[orientation=vertical] > div[role=tablist] button[aria-expanded="true"] {
@@ -144,15 +144,15 @@ joomla-tab[view=accordion] {
   box-shadow: 0 1px #fff inset, 0 0 3px rgba(0, 0, 0, .04);
 
   > button {
-    appearance: none;
     position: relative;
     display: block;
     padding: .75em 1em;
     color: #0d1321;
-    background-color: #f5f5f5;
     text-decoration: none;
-    box-shadow: 1px 0 0 rgba(0, 0, 0, .05);
+    background-color: #f5f5f5;
     border: unset;
+    box-shadow: 1px 0 0 rgba(0, 0, 0, .05);
+    appearance: none;
 
     &[aria-expanded=true],
     &:focus {

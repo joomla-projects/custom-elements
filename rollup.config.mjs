@@ -1,5 +1,5 @@
 import { nodeResolve } from '@rollup/plugin-node-resolve';
-import { terser } from "rollup-plugin-terser";
+import terser from "@rollup/plugin-terser";
 import { getBabelOutputPlugin } from '@rollup/plugin-babel';
 import sass from 'rollup-plugin-sass';
 import autoprefixer from 'autoprefixer';
@@ -52,7 +52,7 @@ const buildSettings = async () => {
         sass({
           output: false,
           processor: css => postcss([autoprefixer])
-            .process(css)
+            .process(css, { from: undefined })
             .then(async (result) => {
               const path1 = `dist/css/joomla-${scssFile}.css`;
               const path2 = `docs/_media/css/joomla-${scssFile}.css`;
@@ -66,7 +66,7 @@ const buildSettings = async () => {
               await writeFile(path2, result.css, {encoding: 'utf8'});
 
               postcss([autoprefixer, cssnano])
-              .process(result.css)
+              .process(result.css, { from: undefined })
               .then(async (result) => {
                 const path1 = `dist/css/joomla-${scssFile}.min.css`;
                 const path2 = `docs/_media/css/joomla-${scssFile}.min.css`;
