@@ -54,7 +54,7 @@
     "lint:js": "node ./node_modules/eslint/bin/eslint.js src",
     "lint:css": "stylelint --config .stylelintrc.json \"src/scss/**/*.scss\"",
     "lint": "npm run lint:css && npm run lint:js",
-    "tests": "npx playwright test ",
+    "tests": "npx playwright install && ./node_modules/.bin/playwright test",
     "ci-tests": "saucectl run",
     "browserlist:update": "npx browserslist@latest --update-db",
     "start": "serve"
