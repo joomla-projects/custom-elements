@@ -64,7 +64,7 @@ module.exports = (config) => {
       'tests/**/*.html': ['html2js'],
     },
     plugins: [
-      'karma-sauce-launcher',
+      '@dgrammatiko/karma-sauce-launcher',
       'karma-jasmine',
       'karma-fixture',
       'karma-html2js-preprocessor',
