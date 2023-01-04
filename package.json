@@ -37,7 +37,7 @@
     "karma-fixture": "^0.2.6",
     "karma-html2js-preprocessor": "^1.1.0",
     "karma-jasmine": "^4.0.1",
-    "karma-sauce-launcher": "^4.3.6",
+    "@dgrammatiko/karma-sauce-launcher": "3.0.1",
     "lerna": "^6.0.3",
     "postcss": "^8.3.5",
     "rimraf": "^3.0.2",
