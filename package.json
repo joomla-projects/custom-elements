@@ -58,5 +58,8 @@
     "test": "node node_modules/karma/bin/karma start --single-run --browsers ChromeHeadless karma.conf.js",
     "lint": "npm run lint:css && npm run lint:js",
     "ci-test": "node node_modules/karma/bin/karma start karma-ci.conf.js --single-run"
+  },
+  "overrides": {
+    "webdriverio": "^7.19.5"
   }
 }
