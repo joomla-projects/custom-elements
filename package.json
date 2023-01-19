@@ -23,6 +23,7 @@
   "devDependencies": {
     "@babel/core": "7.20.2",
     "@babel/preset-env": "7.20.2",
+    "karma-sauce-launcher": "4.3.6",
     "@rollup/plugin-babel": "6.0.2",
     "@rollup/plugin-node-resolve": "15.0.1",
     "@rollup/plugin-terser": "0.1.0",
@@ -38,7 +39,6 @@
     "karma-fixture": "0.2.6",
     "karma-html2js-preprocessor": "1.1.0",
     "karma-jasmine": "5.1.0",
-    "@dgrammatiko/karma-sauce-launcher": "3.0.1",
     "lerna": "6.0.3",
     "postcss": "8.4.19",
     "postcss-scss": "^4.0.5",
@@ -60,5 +60,8 @@
     "test": "node node_modules/karma/bin/karma start --single-run --browsers ChromeHeadless karma.conf.js",
     "ci-test": "node node_modules/karma/bin/karma start karma-ci.conf.js --single-run",
     "browserlist:update": "npx browserslist@latest --update-db"
+  },
+  "overrides": {
+    "webdriverio": "^7.19.5"
   }
 }
