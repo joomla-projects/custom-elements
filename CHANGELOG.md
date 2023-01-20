@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 - Various build tool and github workflow version bumps
+  - Update all npm packages
+  - Fix scss lint issues
+  - Fix javascript lint issues
 
 ## 0.2.0
 - Refactor of the tabs element

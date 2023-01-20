@@ -27,8 +27,7 @@ joomla-tip .toggletip-bubble {
   border-radius: 0.25rem;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
   transition: all ease-in;
-  -webkit-animation-duration: 0.3s;
-          animation-duration: 0.3s;
+  animation-duration: 0.3s;
 }
 joomla-tip .toggletip-bubble::after {
   position: absolute;
@@ -44,8 +43,7 @@ joomla-tip .toggletip-bubble.top {
   left: 50%;
   margin-bottom: 0.6rem;
   transform: translate(-50%, 0);
-  -webkit-animation-name: toggletip-fadeInTop;
-          animation-name: toggletip-fadeInTop;
+  animation-name: toggletip-fadeInTop;
 }
 joomla-tip .toggletip-bubble.top::after {
   top: 100%;
@@ -60,8 +58,7 @@ joomla-tip .toggletip-bubble.left {
   right: 100%;
   margin-right: 0.6rem;
   transform: translate(0, -50%);
-  -webkit-animation-name: toggletip-fadeInLeft;
-          animation-name: toggletip-fadeInLeft;
+  animation-name: toggletip-fadeInLeft;
 }
 joomla-tip .toggletip-bubble.left::after {
   top: 50%;
@@ -76,8 +73,7 @@ joomla-tip .toggletip-bubble.right {
   left: 100%;
   margin-left: 0.6rem;
   transform: translate(0, -50%);
-  -webkit-animation-name: toggletip-fadeInRight;
-          animation-name: toggletip-fadeInRight;
+  animation-name: toggletip-fadeInRight;
 }
 joomla-tip .toggletip-bubble.right::after {
   top: 50%;
@@ -92,8 +88,7 @@ joomla-tip .toggletip-bubble.bottom {
   left: 50%;
   margin-top: 0.6rem;
   transform: translate(-50%, 0);
-  -webkit-animation-name: toggletip-fadeInBottom;
-          animation-name: toggletip-fadeInBottom;
+  animation-name: toggletip-fadeInBottom;
 }
 joomla-tip .toggletip-bubble.bottom::after {
   top: -6px;
@@ -103,31 +98,10 @@ joomla-tip .toggletip-bubble.bottom::after {
   transform: translateX(-50%);
 }
 
-@-webkit-keyframes toggletip-fadeInRight {
-  from {
-    opacity: 0;
-    transform: translate(-10px, -50%);
-  }
-  to {
-    opacity: 1;
-    transform: translate(0, -50%);
-  }
-}
-
 @keyframes toggletip-fadeInRight {
   from {
     opacity: 0;
     transform: translate(-10px, -50%);
-  }
-  to {
-    opacity: 1;
-    transform: translate(0, -50%);
-  }
-}
-@-webkit-keyframes toggletip-fadeInLeft {
-  from {
-    opacity: 0;
-    transform: translate(10px, -50%);
   }
   to {
     opacity: 1;
@@ -144,30 +118,10 @@ joomla-tip .toggletip-bubble.bottom::after {
     transform: translate(0, -50%);
   }
 }
-@-webkit-keyframes toggletip-fadeInTop {
-  from {
-    opacity: 0;
-    transform: translate(-50%, 10px);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, 0);
-  }
-}
 @keyframes toggletip-fadeInTop {
   from {
     opacity: 0;
     transform: translate(-50%, 10px);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, 0);
-  }
-}
-@-webkit-keyframes toggletip-fadeInBottom {
-  from {
-    opacity: 0;
-    transform: translate(-50%, -10px);
   }
   to {
     opacity: 1;
