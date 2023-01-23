@@ -23,6 +23,7 @@ jobs:
       with:
         username: ${{ secrets.SAUCE_USERNAME }}
         accessKey: ${{ secrets.SAUCE_ACCESS_KEY }}
+        scVersion: 4.8.2
         tunnelIdentifier: github-action-tunnel-custom-elements-${{ github.run_number }}
         # github-action-tunnel-custom-elements-${process.env.GITHUB_RUN_ID}
 
