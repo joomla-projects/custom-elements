@@ -1,6 +1,6 @@
 name: SauceLabs Browser Testing
 
-on: [push, pull_request]
+on: [pull_request]
 
 jobs:
   test:
