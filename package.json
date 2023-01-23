@@ -61,6 +61,6 @@
     "browserlist:update": "npx browserslist@latest --update-db"
   },
   "overrides": {
-    "webdriverio": "^7.19.5"
+    "webdriverio": "^7.29.1"
   }
 }
