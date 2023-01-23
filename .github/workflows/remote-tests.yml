@@ -9,7 +9,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
+    # if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
 
     steps:
     - uses: actions/checkout@v3
@@ -27,7 +27,8 @@ jobs:
       with:
         username: ${{ secrets.SAUCE_USERNAME }}
         accesskey: ${{ secrets.SAUCE_ACCESS_KEY }}
-        tunnelIdentifier: github-action-tunnel-custom-elements-${{ github.run_id }}
+        tunnelName: github-action-tunnel
+        # tunnelIdentifier: github-action-tunnel-custom-elements-${{ github.run_id }}
         # github-action-tunnel-custom-elements-${process.env.GITHUB_RUN_ID}
 
     # Run the tests
