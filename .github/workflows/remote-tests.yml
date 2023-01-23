@@ -22,7 +22,7 @@ jobs:
     - uses: saucelabs/sauce-connect-action@v2.3.1
       with:
         username: ${{ secrets.SAUCE_USERNAME }}
-        accesskey: ${{ secrets.SAUCE_ACCESS_KEY }}
+        accessKey: ${{ secrets.SAUCE_ACCESS_KEY }}
         tunnelIdentifier: github-action-tunnel-custom-elements-${{ github.run_number }}
         # github-action-tunnel-custom-elements-${process.env.GITHUB_RUN_ID}
 
