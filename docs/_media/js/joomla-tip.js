@@ -1,26 +1,26 @@
-customElements.define('joomla-tip', class extends HTMLElement {
+class TipElement extends HTMLElement {
   /* Attributes to monitor */
   static get observedAttributes() { return ['type', 'label', 'tip', 'text', 'position']; }
 
   get type() { return this.getAttribute('type'); }
 
-  set type(value) { return this.setAttribute('type', value); }
+  set type(value) { this.setAttribute('type', value); }
 
   get label() { return this.getAttribute('label'); }
 
-  set label(value) { return this.setAttribute('label', value); }
+  set label(value) { this.setAttribute('label', value); }
 
   get tip() { return this.getAttribute('tip'); }
 
-  set tip(value) { return this.setAttribute('tip', value); }
+  set tip(value) { this.setAttribute('tip', value); }
 
   get position() { return this.getAttribute('position'); }
 
-  set position(value) { return this.setAttribute('position', value); }
+  set position(value) { this.setAttribute('position', value); }
 
   get text() { return this.getAttribute('text'); }
 
-  set text(value) { return this.getAttribute('text', value); }
+  set text(value) { this.getAttribute('text', value); }
 
   /* Lifecycle, element appended to the DOM */
   connectedCallback() {
@@ -67,7 +67,6 @@ customElements.define('joomla-tip', class extends HTMLElement {
       }
     });
 
-    this.spanElement.innerHTML = '';
     this.spanElement.innerHTML = `<span class="toggletip-bubble ${this.position}">${this.tip}</span>`;
   }
 
@@ -78,4 +77,5 @@ customElements.define('joomla-tip', class extends HTMLElement {
     this.dispatchEvent(OriginalCustomEvent);
     this.removeEventListener(eventName, this);
   }
-});
+}
+customElements.define('joomla-tip', TipElement);

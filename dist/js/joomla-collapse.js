@@ -5,7 +5,7 @@ customElements.define('joomla-collapse', class extends HTMLElement {
 
   get state() { return this.getAttribute('state'); }
 
-  set state(value) { return this.setAttribute('state', value); }
+  set state(value) { this.setAttribute('state', value); }
 
   connectedCallback() {
     const self = this;
