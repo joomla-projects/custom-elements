@@ -3,13 +3,12 @@ const customLaunchers = {
   SL_chrome: {
     base: 'SauceLabs',
     browserName: 'chrome',
-    platform: 'Windows 11',
+    platform: 'Windows 10',
     version: 'latest',
   },
   SL_firefox: {
     base: 'SauceLabs',
     browserName: 'firefox',
-    platform: 'Windows 11',
     version: 'latest',
   },
   SL_safari: {
@@ -35,13 +34,13 @@ module.exports = (config) => {
     // list of files / patterns to load in the browser
     files: [
       // polyfill
-      { pattern: 'node_modules/@webreflection/custom-elements-no-builtin/min.js', served: true, nocache: true },
+      // {pattern: 'node_modules/@webreflection/custom-elements-no-builtin/min.js', served: true, nocache: true },
       // modules
-      { pattern: 'dist/js/joomla-alert.js', type: 'module' },
+      {pattern: 'dist/js/joomla-alert.js', type: 'module' },
       // {pattern: 'dist/js/joomla-collapse.js', type: 'module' },
       // {pattern: 'dist/js/joomla-dropdown.js', type: 'module' },
       // {pattern: 'dist/js/joomla-modal.js', type: 'module' },
-      { pattern: 'dist/js/joomla-tab.js', type: 'module' },
+      {pattern: 'dist/js/joomla-tab.js', type: 'module' },
       // {pattern: 'dist/js//joomla-tip.js', type: 'module' },
       // ES5
       // {pattern: 'dist/js/joomla-alert-es5.js', nomodule: '' },
@@ -77,7 +76,7 @@ module.exports = (config) => {
     sauceLabs: {
       testName: 'Web App Unit Tests',
       build: `GITHUB #${process.env.GITHUB_RUN_ID} (${process.env.GITHUB_RUN_NUMBER})`,
-      startConnect: true,
+      startConnect: false,
       tunnelIdentifier: `github-action-tunnel-custom-elements-${process.env.GITHUB_RUN_ID}`,
     },
 
