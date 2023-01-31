@@ -33,7 +33,7 @@
     "eslint-config-airbnb": "19.0.4",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-plugin-import": "2.26.0",
-    "karma": "6.3.4",
+    "karma": "6.4.1",
     "karma-chrome-launcher": "3.1.1",
     "karma-fixture": "0.2.6",
     "karma-html2js-preprocessor": "1.1.0",
@@ -60,6 +60,6 @@
     "browserlist:update": "npx browserslist@latest --update-db"
   },
   "overrides": {
-    "webdriverio": "^7.28.0"
+    "webdriverio": "^7.20.0"
   }
 }
