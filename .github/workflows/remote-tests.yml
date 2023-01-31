@@ -1,15 +1,15 @@
 name: SauceLabs Browser Testing
 
-on:
-  pull_request:
-    branches:
-      - master
-    types: [closed]
+on: [pull_request]
+  # pull_request:
+  #   branches:
+  #     - master
+  #   types: [closed]
 
 jobs:
   test:
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
+    # if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
 
     steps:
     - uses: actions/checkout@v3
@@ -37,10 +37,3 @@ jobs:
         SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
         SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
 
-    # Remove the label
-    - name: removelabel
-      uses: buildsville/add-remove-label@v2.0.0
-      with:
-        token: ${{secrets.GITHUB_TOKEN}}
-        label: runTests
-        type: remove
