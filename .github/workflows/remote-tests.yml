@@ -27,8 +27,7 @@ jobs:
       with:
         username: ${{ secrets.SAUCE_USERNAME }}
         accesskey: ${{ secrets.SAUCE_ACCESS_KEY }}
-        tunnelIdentifier: github-action-tunnel-custom-elements-${{ github.run_id }}
-        # github-action-tunnel-custom-elements-${process.env.GITHUB_RUN_ID}
+        tunnelIdentifier: github-action-tunnel-custom-elements-${process.env.GITHUB_RUN_ID}
 
     # Run the tests
     - name: Run tests in Sauce
