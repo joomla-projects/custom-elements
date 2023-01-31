@@ -1,6 +1,6 @@
 name: SauceLabs Browser Testing
 
-on: [pull_request]
+on: [push, pull_request]
   # pull_request:
   #   branches:
   #     - master
