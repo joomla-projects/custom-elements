@@ -91,7 +91,7 @@ module.exports = (config) => {
     autoWatch: false,
     logLevel: config.LOG_INFO,
     singleRun: true,
-    concurrency: 5,
+    concurrency: 1,
     captureTimeout: 120000,
     browserNoActivityTimeout: 60000,
     browserDisconnectTimeout: 20000,
