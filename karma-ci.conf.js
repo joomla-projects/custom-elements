@@ -26,21 +26,21 @@ const customLaunchers = {
 
 module.exports = (config) => {
   if (!process.env.SAUCE_USERNAME || !process.env.SAUCE_ACCESS_KEY) {
-    console.log('Make sure the SAUCE_USERNAME and SAUCE_ACCESS_KEY environment variables are set.')
-    process.exit(1)
+    console.log('Make sure the SAUCE_USERNAME and SAUCE_ACCESS_KEY environment variables are set.');
+    process.exit(1);
   }
 
   config.set({
     // list of files / patterns to load in the browser
     files: [
       // polyfill
-      // {pattern: 'node_modules/@webreflection/custom-elements-no-builtin/min.js', served: true, nocache: true },
+      // { pattern: 'node_modules/@webreflection/custom-elements-no-builtin/min.js', served: true, nocache: true },
       // modules
-      {pattern: 'dist/js/joomla-alert.js', type: 'module' },
+      { pattern: 'dist/js/joomla-alert.js', type: 'module' },
       // {pattern: 'dist/js/joomla-collapse.js', type: 'module' },
       // {pattern: 'dist/js/joomla-dropdown.js', type: 'module' },
       // {pattern: 'dist/js/joomla-modal.js', type: 'module' },
-      {pattern: 'dist/js/joomla-tab.js', type: 'module' },
+      { pattern: 'dist/js/joomla-tab.js', type: 'module' },
       // {pattern: 'dist/js//joomla-tip.js', type: 'module' },
       // ES5
       // {pattern: 'dist/js/joomla-alert-es5.js', nomodule: '' },
