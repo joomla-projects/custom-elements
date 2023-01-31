@@ -77,7 +77,7 @@ module.exports = (config) => {
     sauceLabs: {
       testName: 'Web App Unit Tests',
       build: `GITHUB #${process.env.GITHUB_RUN_ID} (${process.env.GITHUB_RUN_NUMBER})`,
-      startConnect: false,
+      startConnect: true,
       tunnelIdentifier: `github-action-tunnel-custom-elements-${process.env.GITHUB_RUN_ID}`,
     },
 
