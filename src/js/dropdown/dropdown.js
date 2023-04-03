@@ -33,7 +33,7 @@ class JoomlaDropdownElement extends HTMLElement {
 
       document.addEventListener('click', (evt) => {
         if (evt.target !== button) {
-          if (!this.findAncestor(evt.target, 'joomla-dropdown')) {
+          if (!this.closest(evt.target, 'joomla-dropdown')) {
             this.close();
           }
         }
@@ -75,7 +75,7 @@ class JoomlaDropdownElement extends HTMLElement {
   }
 
   /* eslint-disable */
-  findAncestor(el, tagName) {
+  closest(el, tagName) {
     while ((el = el.parentElement) && el.nodeName.toLowerCase() !== tagName);
     return el;
   }
