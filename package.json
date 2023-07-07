@@ -46,7 +46,7 @@
     "rollup-plugin-sass": "1.12.16",
     "rollup-plugin-scss": "4.0.0",
     "sass": "1.56.1",
-    "stylelint": "14.15.0",
+    "stylelint": "15.10.1",
     "stylelint-config-standard": "29.0.0",
     "stylelint-order": "5.0.0",
     "stylelint-scss": "4.3.0"
