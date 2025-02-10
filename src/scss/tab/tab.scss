@@ -49,7 +49,8 @@ joomla-tab button[role=tab] {
   appearance: none;
 }
 
-joomla-tab button[role=tab][aria-expanded="true"] {
+joomla-tab button[role=tab][aria-expanded="true"],
+joomla-tab button[role=tab][aria-selected="true"] {
   background-color: rgba(0, 0, 0, .03);
   background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, .05) 100%);
   border-right: 0 none;
@@ -59,7 +60,9 @@ joomla-tab button[role=tab][aria-expanded="true"] {
   box-shadow: 2px 0 1px -1px rgba(0, 0, 0, .08) inset, -2px 0 1px -1px rgba(0, 0, 0, .08) inset, 0 1px 0 rgba(0, 0, 0, .02) inset;
 }
 
-joomla-tab button[aria-expanded="true"]::after {
+joomla-tab button[aria-expanded="true"]::after,
+joomla-tab button[aria-selected="true"]::after
+{
   position: absolute;
   right: 0;
   bottom: -1px;
