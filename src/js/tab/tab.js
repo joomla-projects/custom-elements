@@ -150,8 +150,14 @@ class TabsElement extends HTMLElement {
       tabButton.setAttribute('aria-controls', tab.id);
       tabButton.setAttribute('role', 'tab');
       tabButton.setAttribute('type', 'button');
-      tabButton.setAttribute('tabindex', 0);
+      tabButton.setAttribute('tabindex', -1);
       tabButton.innerHTML = `${tab.getAttribute('name')}`;
+        if(tab.hasAttribute('active'))
+      {
+        tabButton.setAttribute('tabindex', 0);
+
+      }
+
       this.tabButtonContainer.appendChild(tabButton);
 
       tabButton.addEventListener('click', this.activateTab);
