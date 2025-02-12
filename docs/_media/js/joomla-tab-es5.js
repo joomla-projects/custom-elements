@@ -202,10 +202,11 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
 
         // Create tab button
         var tabButton = document.createElement('button');
-        tabButton.setAttribute('aria-expanded', !!tab.hasAttribute('active'));
+        tabButton.setAttribute('aria-selected', !!tab.hasAttribute('active'));
         tabButton.setAttribute('aria-controls', tab.id);
         tabButton.setAttribute('role', 'tab');
         tabButton.setAttribute('type', 'button');
+        tabButton.setAttribute('tabindex', 0);
         tabButton.innerHTML = "".concat(tab.getAttribute('name'));
         _this4.tabButtonContainer.appendChild(tabButton);
         tabButton.addEventListener('click', _this4.activateTab);
@@ -314,7 +315,8 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
       var _this6 = this;
       this.tabs.map(function (tabObj) {
         tabObj.accordionButton.removeAttribute('aria-disabled');
-        tabObj.tabButton.removeAttribute('aria-expanded');
+        tabObj.tabButton.setAttribute('aria-selected', false);
+        tabObj.tabButton.setAttribute('tabindex', -1);
         tabObj.accordionButton.setAttribute('aria-expanded', false);
         if (tabObj.tab.hasAttribute('active')) {
           _this6.dispatchCustomEvent('joomla.tab.hide', _this6.view === 'tabs' ? tabObj.tabButton : tabObj.accordionButton, _this6.previousActive);
@@ -360,7 +362,7 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
         // Remove current active
         this.deactivateTabs();
         // Set new active
-        currentTrigger.tabButton.setAttribute('aria-expanded', true);
+        currentTrigger.tabButton.setAttribute('aria-selected', true);
         currentTrigger.accordionButton.setAttribute('aria-expanded', true);
         currentTrigger.accordionButton.setAttribute('aria-disabled', true);
         currentTrigger.tab.setAttribute('active', '');
