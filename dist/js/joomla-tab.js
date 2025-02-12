@@ -144,10 +144,11 @@ class TabsElement extends HTMLElement {
 
       // Create tab button
       const tabButton = document.createElement('button');
-      tabButton.setAttribute('aria-expanded', !!tab.hasAttribute('active'));
+      tabButton.setAttribute('aria-selected', !!tab.hasAttribute('active'));
       tabButton.setAttribute('aria-controls', tab.id);
       tabButton.setAttribute('role', 'tab');
       tabButton.setAttribute('type', 'button');
+      tabButton.setAttribute('tabindex', 0);
       tabButton.innerHTML = `${tab.getAttribute('name')}`;
       this.tabButtonContainer.appendChild(tabButton);
 
@@ -240,7 +241,8 @@ class TabsElement extends HTMLElement {
   deactivateTabs() {
     this.tabs.map((tabObj) => {
       tabObj.accordionButton.removeAttribute('aria-disabled');
-      tabObj.tabButton.removeAttribute('aria-expanded');
+      tabObj.tabButton.setAttribute('aria-selected', false);
+      tabObj.tabButton.setAttribute('tabindex', -1);
       tabObj.accordionButton.setAttribute('aria-expanded', false);
 
       if (tabObj.tab.hasAttribute('active')) {
@@ -279,7 +281,7 @@ class TabsElement extends HTMLElement {
       // Remove current active
       this.deactivateTabs();
       // Set new active
-      currentTrigger.tabButton.setAttribute('aria-expanded', true);
+      currentTrigger.tabButton.setAttribute('aria-selected', true);
       currentTrigger.accordionButton.setAttribute('aria-expanded', true);
       currentTrigger.accordionButton.setAttribute('aria-disabled', true);
       currentTrigger.tab.setAttribute('active', '');

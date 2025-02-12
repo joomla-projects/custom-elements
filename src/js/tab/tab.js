@@ -152,6 +152,7 @@ class TabsElement extends HTMLElement {
       tabButton.setAttribute('type', 'button');
       tabButton.setAttribute('tabindex', -1);
       tabButton.innerHTML = `${tab.getAttribute('name')}`;
+
       if (tab.hasAttribute('active')) {
         tabButton.setAttribute('tabindex', 0);
       }
