@@ -310,7 +310,7 @@ class TabsElement extends HTMLElement {
 
   // Create navigation elements for inserted tabs
   createNavs(tab) {
-    if ((tab instanceof Element && tab.tagName.toLowerCase() !== 'joomla-tab-element') || ![].some.call(this.children, (el) => el === tab).length || !tab.getAttribute('name') || !tab.getAttribute('id')) return;
+    if ((tab instanceof Element && tab.tagName.toLowerCase() !== 'joomla-tab-element') || ![].some.call(this.children, (el) => el === tab) || !tab.getAttribute('name') || !tab.getAttribute('id')) return;
     const tabs = [].slice.call(this.children).filter((el) => el.tagName.toLowerCase() === 'joomla-tab-element');
     const index = tabs.findIndex((tb) => tb === tab);
 
@@ -366,7 +366,7 @@ class TabsElement extends HTMLElement {
 
   // Remove navigation elements for removed tabs
   removeNavs(tab) {
-    if ((tab instanceof Element && tab.tagName.toLowerCase() !== 'joomla-tab-element') || ![].some.call(this.children, (el) => el === tab).length || !tab.getAttribute('name') || !tab.getAttribute('id')) return;
+    if ((tab instanceof Element && tab.tagName.toLowerCase() !== 'joomla-tab-element') || ![].some.call(this.children, (el) => el === tab) || !tab.getAttribute('name') || !tab.getAttribute('id')) return;
     const accordionButton = tab.previousSilbingElement;
     if (accordionButton && accordionButton.tagName.toLowerCase() === 'button') {
       accordionButton.removeEventListener('click', this.keyBehaviour);
