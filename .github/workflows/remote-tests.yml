@@ -12,7 +12,7 @@ jobs:
     if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - uses: actions/setup-node@v3
       name: Set up NodeJS
@@ -23,7 +23,7 @@ jobs:
       run: npm install
 
     # Sause Labs part
-    - uses: saucelabs/sauce-connect-action@v2.3.1
+    - uses: saucelabs/sauce-connect-action@v2.3.4
       with:
         username: ${{ secrets.SAUCE_USERNAME }}
         accesskey: ${{ secrets.SAUCE_ACCESS_KEY }}
