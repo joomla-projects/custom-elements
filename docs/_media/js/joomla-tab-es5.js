@@ -206,8 +206,11 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
         tabButton.setAttribute('aria-controls', tab.id);
         tabButton.setAttribute('role', 'tab');
         tabButton.setAttribute('type', 'button');
-        tabButton.setAttribute('tabindex', 0);
+        tabButton.setAttribute('tabindex', -1);
         tabButton.innerHTML = "".concat(tab.getAttribute('name'));
+        if (tab.hasAttribute('active')) {
+          tabButton.setAttribute('tabindex', 0);
+        }
         _this4.tabButtonContainer.appendChild(tabButton);
         tabButton.addEventListener('click', _this4.activateTab);
         if (_this4.view === 'tabs') {
@@ -386,7 +389,7 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
     value: function createNavs(tab) {
       if (tab instanceof Element && tab.tagName.toLowerCase() !== 'joomla-tab-element' || ![].some.call(this.children, function (el) {
         return el === tab;
-      }).length || !tab.getAttribute('name') || !tab.getAttribute('id')) return;
+      }) || !tab.getAttribute('name') || !tab.getAttribute('id')) return;
       var tabs = [].slice.call(this.children).filter(function (el) {
         return el.tagName.toLowerCase() === 'joomla-tab-element';
       });
@@ -447,7 +450,7 @@ var TabsElement = /*#__PURE__*/function (_HTMLElement2) {
     value: function removeNavs(tab) {
       if (tab instanceof Element && tab.tagName.toLowerCase() !== 'joomla-tab-element' || ![].some.call(this.children, function (el) {
         return el === tab;
-      }).length || !tab.getAttribute('name') || !tab.getAttribute('id')) return;
+      }) || !tab.getAttribute('name') || !tab.getAttribute('id')) return;
       var accordionButton = tab.previousSilbingElement;
       if (accordionButton && accordionButton.tagName.toLowerCase() === 'button') {
         accordionButton.removeEventListener('click', this.keyBehaviour);
