@@ -42,7 +42,7 @@
     "postcss": "8.4.47",
     "postcss-scss": "^4.0.9",
     "rimraf": "6.0.1",
-    "rollup": "4.22.4",
+    "rollup": "4.59.0",
     "rollup-plugin-sass": "1.13.2",
     "rollup-plugin-scss": "4.0.0",
     "sass": "1.79.3",
