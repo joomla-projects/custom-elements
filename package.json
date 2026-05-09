@@ -25,7 +25,7 @@
     "@babel/preset-env": "7.25.4",
     "@rollup/plugin-babel": "6.0.4",
     "@rollup/plugin-node-resolve": "15.3.0",
-    "@rollup/plugin-terser": "0.4.4",
+    "@rollup/plugin-terser": "1.0.0",
     "@webreflection/custom-elements-no-builtin": "0.3.0",
     "autoprefixer": "10.4.20",
     "cssnano": "7.0.6",
